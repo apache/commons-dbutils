@@ -40,6 +40,12 @@ The <action> type attribute can be add,update,fix,remove.
 
     <release version="1.1-dev" date="in CVS">
       <action dev="dgraham" type="add">
+        Added a protected QueryRunner.prepareConnection() method to
+        allow subclasses to customize the Connections retrieved from
+        the DataSource before they're used.
+        PR# 30032
+      </action>
+      <action dev="dgraham" type="add">
         Refactored bean handling from BasicRowProcessor into new 
         BeanProcessor class.  This also fixes the common problem with
         Oracle NUMERIC fields not being set into bean properties.

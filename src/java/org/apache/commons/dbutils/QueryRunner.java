@@ -107,7 +107,7 @@ public class QueryRunner {
      * @since DbUtils 1.1
      */
     public int[] batch(String sql, Object[][] params) throws SQLException {
-        Connection conn = this.ds.getConnection();
+        Connection conn = this.prepareConnection();
 
         try {
             return this.batch(conn, sql, params);
@@ -166,24 +166,40 @@ public class QueryRunner {
             
         return conn.prepareStatement(sql);
     }
+    
+    /**
+     * Factory method that creates and initializes a 
+     * <code>Connection</code> object.  <code>QueryRunner</code> methods 
+     * always call this method to retrieve connections from its DataSource.  
+     * Subclasses can override this method to provide 
+     * special <code>Connection</code> configuration if needed.  This 
+     * implementation simply calls <code>ds.getConnection()</code>.
+     * 
+     * @return An initialized <code>Connection</code>.
+     * @throws SQLException
+     * @since DbUtils 1.1
+     */
+    protected Connection prepareConnection() throws SQLException {
+        return this.ds.getConnection();
+    }
 
     /**
-     * Execute an SQL SELECT query with a single replacement parameter.  The
+     * Execute an SQL SELECT query with a single replacement parameter. The
      * caller is responsible for closing the connection.
      * 
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param param The replacement parameter.
-     * @param rsh The handler that converts the results into an object.
+     * @param conn
+     *            The connection to execute the query in.
+     * @param sql
+     *            The query to execute.
+     * @param param
+     *            The replacement parameter.
+     * @param rsh
+     *            The handler that converts the results into an object.
      * @return The object returned by the handler.
      * @throws SQLException
      */
-    public Object query(
-        Connection conn,
-        String sql,
-        Object param,
-        ResultSetHandler rsh)
-        throws SQLException {
+    public Object query(Connection conn, String sql, Object param,
+            ResultSetHandler rsh) throws SQLException {
 
         return this.query(conn, sql, new Object[] { param }, rsh);
     }
@@ -199,12 +215,8 @@ public class QueryRunner {
      * @return The object returned by the handler.
      * @throws SQLException
      */
-    public Object query(
-        Connection conn,
-        String sql,
-        Object[] params,
-        ResultSetHandler rsh)
-        throws SQLException {
+    public Object query(Connection conn, String sql, Object[] params,
+            ResultSetHandler rsh) throws SQLException {
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -285,7 +297,7 @@ public class QueryRunner {
     public Object query(String sql, Object[] params, ResultSetHandler rsh)
         throws SQLException {
 
-        Connection conn = this.ds.getConnection();
+        Connection conn = this.prepareConnection();
 
         try {
             return this.query(conn, sql, params, rsh);
@@ -461,7 +473,7 @@ public class QueryRunner {
      * @return The number of rows updated.
      */
     public int update(String sql, Object[] params) throws SQLException {
-        Connection conn = this.ds.getConnection();
+        Connection conn = this.prepareConnection();
 
         try {
             return this.update(conn, sql, params);
@@ -499,6 +511,7 @@ public class QueryRunner {
      * Close a <code>Connection</code>.  This implementation avoids closing if 
      * null and does <strong>not</strong> suppress any exceptions.  Subclasses
      * can override to provide special handling like logging.
+     * @throws SQLException
      * @since DbUtils 1.1
      */
     protected void close(Connection conn) throws SQLException {
@@ -509,6 +522,7 @@ public class QueryRunner {
      * Close a <code>Statement</code>.  This implementation avoids closing if 
      * null and does <strong>not</strong> suppress any exceptions.  Subclasses
      * can override to provide special handling like logging.
+     * @throws SQLException
      * @since DbUtils 1.1
      */
     protected void close(Statement stmt) throws SQLException {
@@ -519,6 +533,7 @@ public class QueryRunner {
      * Close a <code>ResultSet</code>.  This implementation avoids closing if 
      * null and does <strong>not</strong> suppress any exceptions.  Subclasses
      * can override to provide special handling like logging.
+     * @throws SQLException
      * @since DbUtils 1.1
      */
     protected void close(ResultSet rs) throws SQLException {
