@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2004 The Apache Software Foundation
+ * Copyright 2002-2005 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.dbutils;
 
 import java.sql.ResultSet;
@@ -63,10 +64,15 @@ public class ResultSetIterator implements Iterator {
         this.convert = convert;
     }
 
+    /**
+     * Returns true if there are more rows in the ResultSet.
+     * @throws RuntimeException if an SQLException occurs.
+     */
     public boolean hasNext() {
         try {
             return !rs.isLast();
         } catch (SQLException e) {
+            rethrow(e);
             return false;
         }
     }
@@ -76,12 +82,14 @@ public class ResultSetIterator implements Iterator {
      * @return An <code>Object[]</code> with the same number of elements as
      * columns in the <code>ResultSet</code>. 
      * @see java.util.Iterator#next()
+     * @throws RuntimeException if an SQLException occurs.
      */
     public Object next() {
         try {
             rs.next();
             return this.convert.toArray(rs);
         } catch (SQLException e) {
+            rethrow(e);
             return null;
         }
     }
@@ -89,12 +97,23 @@ public class ResultSetIterator implements Iterator {
     /**
      * Deletes the current row from the <code>ResultSet</code>.
      * @see java.util.Iterator#remove()
+     * @throws RuntimeException if an SQLException occurs.
      */
     public void remove() {
         try {
             this.rs.deleteRow();
         } catch (SQLException e) {
+            rethrow(e);
         }
+    }
+
+    /**
+     * Rethrow the SQLException as a RuntimeException.  This implementation
+     * creates a new RuntimeException with the SQLException's error message.
+     * @since DbUtils 1.1
+     */
+    protected void rethrow(SQLException e) {
+        throw new RuntimeException(e.getMessage());
     }
 
 }

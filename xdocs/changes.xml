@@ -39,6 +39,10 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-dev" date="in CVS">
+      <action dev="dgraham" type="add">
+        Added protected ResultSetIterator.rethrow() method to wrap SQLExceptions in 
+        RuntimeExceptions.  PR: 32120
+      </action>
       <action dev="dgraham" type="update">
         Added SQLState and error code to rethrown SQLExceptions.  PR: 33614
       </action>
