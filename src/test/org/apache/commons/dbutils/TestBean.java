@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.3 2003/11/09 04:50:46 dgraham Exp $
- * $Revision: 1.3 $
- * $Date: 2003/11/09 04:50:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.4 2003/11/28 21:11:33 dgraham Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/28 21:11:33 $
  * 
  * ====================================================================
  *
@@ -98,6 +98,13 @@ public class TestBean {
      * a Date will be returned but the property is a String.
      */
     private String notDate = "not a date";
+    
+    /**
+     * The ResultSet will have a BigDecimal in this column and the 
+     * BasicColumnProcessor should convert that to a double and store the value
+     * in this property.
+     */
+    private double columnProcessorDoubleTest = -1;
 
     /**
      * Constructor for TestBean.
@@ -176,6 +183,14 @@ public class TestBean {
 
     public void setNotDate(String string) {
         notDate = string;
+    }
+
+    public double getColumnProcessorDoubleTest() {
+        return columnProcessorDoubleTest;
+    }
+
+    public void setColumnProcessorDoubleTest(double d) {
+        columnProcessorDoubleTest = d;
     }
 
 }

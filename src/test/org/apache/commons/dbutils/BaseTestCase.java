@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BaseTestCase.java,v 1.3 2003/11/09 04:50:46 dgraham Exp $
- * $Revision: 1.3 $
- * $Date: 2003/11/09 04:50:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BaseTestCase.java,v 1.4 2003/11/28 21:11:33 dgraham Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/28 21:11:33 $
  * 
  * ====================================================================
  *
@@ -61,6 +61,7 @@
 
 package org.apache.commons.dbutils;
 
+import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Date;
@@ -97,7 +98,8 @@ public class BaseTestCase extends TestCase {
             "integerTest",
             "nullObjectTest",
             "nullPrimitiveTest",
-            "notDate" };
+            "notDate",
+            "columnProcessorDoubleTest" };
 
     /**
      * The number of columns in the MockResultSet.
@@ -117,7 +119,8 @@ public class BaseTestCase extends TestCase {
             new Integer(2),
             null,
             null,
-            new Date()};
+            new Date(),
+            BigInteger.valueOf(13)};
 
     private static final Object[] row2 =
         new Object[] {
@@ -129,7 +132,8 @@ public class BaseTestCase extends TestCase {
             new Integer(4),
             null,
             null,
-            new Date()};
+            new Date(),
+            BigInteger.valueOf(13)};
 
     private static final Object[][] rows = new Object[][] { row1, row2 };
 
@@ -181,6 +185,7 @@ public class BaseTestCase extends TestCase {
         TestSuite suite = new TestSuite("All DbUtils Tests");
 
         suite.addTestSuite(BasicRowProcessorTest.class);
+        suite.addTestSuite(BasicColumnProcessorTest.class);
         suite.addTestSuite(ProxyFactoryTest.class);
         suite.addTestSuite(ResultSetIteratorTest.class);
         suite.addTestSuite(QueryLoaderTest.class);
