@@ -28,15 +28,15 @@
   <url>http://jakarta.apache.org/commons/dbutils/</url>
   <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
   <siteAddress>jakarta.apache.org</siteAddress>
-  <siteDirectory>/www/jakarta.apache.org/commons/sandbox/dbutils/</siteDirectory>
-  <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons-sandbox/dbutils/</distributionDirectory>
+  <siteDirectory>/www/jakarta.apache.org/commons/dbutils/</siteDirectory>
+  <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons/dbutils/</distributionDirectory>
 
   <repository>
     <connection>
-      scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-commons-sandbox/dbutils
+      scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-commons/dbutils
     </connection>
     <url>
-      http://cvs.apache.org/viewcvs.cgi/jakarta-commons-sandbox/dbutils/
+      http://cvs.apache.org/viewcvs.cgi/jakarta-commons/dbutils/
     </url>
   </repository>
 
