@@ -60,7 +60,7 @@ public final class DbUtils {
     public static void closeQuietly(Connection conn) {
         try {
             close(conn);
-        } catch (SQLException sqle) {
+        } catch (SQLException e) {
             // quiet
         }
     }
@@ -107,8 +107,11 @@ public final class DbUtils {
      */
     public static void commitAndClose(Connection conn) throws SQLException {
         if (conn != null) {
-            conn.commit();
-            conn.close();
+            try {
+                conn.commit();
+            } finally {
+                conn.close();
+            }
         }
     }
 
