@@ -70,24 +70,22 @@ public final class DbUtils {
      * <code>ResultSet</code>.  Avoid closing if null and hide any 
      * SQLExceptions that occur.
      */
-    public static void closeQuietly(
-        Connection conn,
-        Statement stmt,
-        ResultSet rs) {
-            
+    public static void closeQuietly(Connection conn, Statement stmt,
+            ResultSet rs) {
+
         closeQuietly(rs);
         closeQuietly(stmt);
         closeQuietly(conn);
     }
 
     /**
-     * Close a <code>ResultSet</code>, avoid closing if null and hide
-     * any SQLExceptions that occur.
+     * Close a <code>ResultSet</code>, avoid closing if null and hide any
+     * SQLExceptions that occur.
      */
     public static void closeQuietly(ResultSet rs) {
         try {
             close(rs);
-        } catch (SQLException sqle) {
+        } catch (SQLException e) {
             // quiet
         }
     }
@@ -99,7 +97,7 @@ public final class DbUtils {
     public static void closeQuietly(Statement stmt) {
         try {
             close(stmt);
-        } catch (SQLException sqle) {
+        } catch (SQLException e) {
             // quiet
         }
     }
@@ -121,7 +119,7 @@ public final class DbUtils {
     public static void commitAndCloseQuietly(Connection conn) {
         try {
             commitAndClose(conn);
-        } catch (SQLException sqle) {
+        } catch (SQLException e) {
             // quiet
         }
     }
@@ -136,34 +134,27 @@ public final class DbUtils {
             return true;
 
         } catch (ClassNotFoundException e) {
-            // TODO Logging?
-            //e.printStackTrace();
             return false;
 
         } catch (IllegalAccessException e) {
-            // TODO Logging?
-            //e.printStackTrace();
-
             // Constructor is private, OK for DriverManager contract
             return true;
 
         } catch (InstantiationException e) {
-            // TODO Logging?
-            //e.printStackTrace();
             return false;
 
-        } catch (Throwable t) {
+        } catch (Throwable e) {
             return false;
         }
     }
 
-    public static void printStackTrace(SQLException sqle) {
-        printStackTrace(sqle, new PrintWriter(System.err));
+    public static void printStackTrace(SQLException e) {
+        printStackTrace(e, new PrintWriter(System.err));
     }
 
-    public static void printStackTrace(SQLException sqle, PrintWriter pw) {
+    public static void printStackTrace(SQLException e, PrintWriter pw) {
 
-        SQLException next = sqle;
+        SQLException next = e;
         while (next != null) {
             next.printStackTrace(pw);
             next = next.getNextException();
@@ -173,16 +164,16 @@ public final class DbUtils {
         }
     }
 
-    public static void printWarnings(Connection connection) {
-        printWarnings(connection, new PrintWriter(System.err));
+    public static void printWarnings(Connection conn) {
+        printWarnings(conn, new PrintWriter(System.err));
     }
 
     public static void printWarnings(Connection conn, PrintWriter pw) {
         if (conn != null) {
             try {
                 printStackTrace(conn.getWarnings(), pw);
-            } catch (SQLException sqle) {
-                printStackTrace(sqle, pw);
+            } catch (SQLException e) {
+                printStackTrace(e, pw);
             }
         }
     }
