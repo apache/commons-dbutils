@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/DbUtils.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/DbUtils.java,v 1.2 2003/11/03 00:22:57 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/03 00:22:57 $
  * 
  * ====================================================================
  *
@@ -106,7 +106,7 @@ public final class DbUtils {
 
     /**
      * Close a <code>Connection</code>, avoid closing if null and hide
-     * any exceptions that occur.
+     * any SQLExceptions that occur.
      */
     public static void closeQuietly(Connection conn) {
         try {
@@ -119,12 +119,13 @@ public final class DbUtils {
     /**
      * Close a <code>Connection</code>, <code>Statement</code> and 
      * <code>ResultSet</code>.  Avoid closing if null and hide any 
-     * exceptions that occur.
+     * SQLExceptions that occur.
      */
     public static void closeQuietly(
         Connection conn,
         Statement stmt,
         ResultSet rs) {
+            
         closeQuietly(rs);
         closeQuietly(stmt);
         closeQuietly(conn);
@@ -132,7 +133,7 @@ public final class DbUtils {
 
     /**
      * Close a <code>ResultSet</code>, avoid closing if null and hide
-     * any exceptions that occur.
+     * any SQLExceptions that occur.
      */
     public static void closeQuietly(ResultSet rs) {
         try {
@@ -144,7 +145,7 @@ public final class DbUtils {
 
     /**
      * Close a <code>Statement</code>, avoid closing if null and hide
-     * any exceptions that occur.
+     * any SQLExceptions that occur.
      */
     public static void closeQuietly(Statement stmt) {
         try {
@@ -166,7 +167,7 @@ public final class DbUtils {
 
     /**
      * Commits a <code>Connection</code> then closes it, avoid closing if null 
-     * and hide any exceptions that occur.
+     * and hide any SQLExceptions that occur.
      */
     public static void commitAndCloseQuietly(Connection conn) {
         try {
