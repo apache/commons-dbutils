@@ -1,7 +1,7 @@
 /* 
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/wrappers/SqlNullCheckedResultSet.java,v 1.2 2003/11/05 00:40:43 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/05 00:40:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/wrappers/SqlNullCheckedResultSet.java,v 1.3 2003/11/09 18:18:04 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/11/09 18:18:04 $
  * 
  * ====================================================================
  * 
@@ -65,6 +65,7 @@ import java.io.Reader;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Date;
@@ -112,7 +113,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  *
  * @author  <a href="stevencaswell@apache.org">Steven Caswell</a>
  * @author David Graham
- * @version $Id: SqlNullCheckedResultSet.java,v 1.2 2003/11/05 00:40:43 dgraham Exp $
+ * @version $Id: SqlNullCheckedResultSet.java,v 1.3 2003/11/09 18:18:04 dgraham Exp $
  */
 public class SqlNullCheckedResultSet implements InvocationHandler {
 
@@ -127,10 +128,8 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
         for (int i = 0; i < methods.length; i++) {
             String methodName = methods[i].getName();
 
-            if (methodName.indexOf("getNull") == 0) {
-                String normalName =
-                    methodName.substring(0, 3) + methodName.substring(7);
-
+            if (methodName.startsWith("getNull")) {
+                String normalName = "get" + methodName.substring(7);
                 nullMethods.put(normalName, methods[i]);
             }
         }
@@ -174,6 +173,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     private String nullString = null;
     private Time nullTime = null;
     private Timestamp nullTimestamp = null;
+    private URL nullURL = null;
 
     /**
      * The wrapped result. 
@@ -391,6 +391,16 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     }
 
     /**
+     * Returns the value when a SQL null is encountered as the result of
+     * invoking a <code>getURL</code> method.
+     *
+     * @return the value
+     */
+    public URL getNullURL() {
+        return this.nullURL;
+    }
+
+    /**
      * Intercepts calls to <code>get*</code> methods and calls the appropriate
      * <code>getNull*</code> method if the <code>ResultSet</code> returned
      * <code>null</code>.
@@ -405,7 +415,9 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
         Method nullMethod = (Method) nullMethods.get(method.getName());
 
-        return (this.rs.wasNull() && nullMethod != null)
+        // Check nullMethod != null first so that we don't call wasNull()
+        // before a true getter method was invoked on the ResultSet.
+        return (nullMethod != null && this.rs.wasNull())
             ? nullMethod.invoke(this, null)
             : result;
     }
@@ -608,6 +620,16 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      */
     public void setNullTimestamp(Timestamp nullTimestamp) {
         this.nullTimestamp = nullTimestamp;
+    }
+
+    /**
+     * Sets the value to return when a SQL null is encountered as the result of
+     * invoking a <code>getURL</code> method.
+     *
+     * @param nullURL the value
+     */
+    public void setNullURL(URL nullURL) {
+        this.nullURL = nullURL;
     }
 
 }

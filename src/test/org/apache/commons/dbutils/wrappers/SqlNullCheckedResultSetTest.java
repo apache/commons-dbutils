@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/wrappers/SqlNullCheckedResultSetTest.java,v 1.1 2003/11/02 19:15:24 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/wrappers/SqlNullCheckedResultSetTest.java,v 1.2 2003/11/09 18:18:04 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/09 18:18:04 $
  * 
  * ====================================================================
  *
@@ -70,6 +70,8 @@ import java.io.Writer;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Ref;
@@ -88,7 +90,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  *
  * @author  <a href="stevencaswell@apache.org">Steven Caswell</a>
  * @author David Graham
- * @version $Id: SqlNullCheckedResultSetTest.java,v 1.1 2003/11/02 19:15:24 dgraham Exp $
+ * @version $Id: SqlNullCheckedResultSetTest.java,v 1.2 2003/11/09 18:18:04 dgraham Exp $
  */
 public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
@@ -445,14 +447,12 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         rs2.setNullShort(s);
         assertEquals(s, rs.getShort(1));
         assertEquals(s, rs.getShort("column"));
-
     }
 
     /**
      * Tests the getString implementation.
      */
     public void testGetString() throws SQLException {
-
         assertEquals(null, rs.getString(1));
         assertTrue(rs.wasNull());
         assertEquals(null, rs.getString("column"));
@@ -462,7 +462,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         rs2.setNullString(s);
         assertEquals(s, rs.getString(1));
         assertEquals(s, rs.getString("column"));
-
     }
 
     /**
@@ -516,7 +515,21 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(ts, rs.getTimestamp(1, Calendar.getInstance()));
         assertNotNull(rs.getTimestamp("column", Calendar.getInstance()));
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
-
+    }
+    
+    /**
+     * Tests the getURL implementation.
+     */
+    public void testGetURL() throws SQLException, MalformedURLException {
+        assertEquals(null, rs.getURL(1));
+        assertTrue(rs.wasNull());
+        assertEquals(null, rs.getURL("column"));
+        assertTrue(rs.wasNull());
+        // Set what gets returned to something other than the default
+        URL u = new URL("http://www.apache.org");
+        rs2.setNullURL(u);
+        assertEquals(u, rs.getURL(1));
+        assertEquals(u, rs.getURL("column"));
     }
 
     /**
@@ -779,21 +792,18 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullString implementation.
      */
     public void testSetNullString() throws SQLException {
-
         assertEquals(null, rs2.getNullString());
         // Set what gets returned to something other than the default
         String s = "hello, world";
         rs2.setNullString(s);
         assertEquals(s, rs.getString(1));
         assertEquals(s, rs.getString("column"));
-
     }
 
     /**
      * Tests the setNullRef implementation.
      */
     public void testSetNullRef() throws SQLException {
-
         assertNull(rs2.getNullRef());
         // Set what gets returned to something other than the default
         Ref ref = new SqlNullCheckedResultSetMockRef();
@@ -802,14 +812,12 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(ref, rs.getRef(1));
         assertNotNull(rs.getRef("column"));
         assertEquals(ref, rs.getRef("column"));
-
     }
 
     /**
      * Tests the setNullTime implementation.
      */
     public void testSetNullTime() throws SQLException {
-
         assertEquals(null, rs2.getNullTime());
         // Set what gets returned to something other than the default
         Time time = new Time(new java.util.Date().getTime());
@@ -822,14 +830,12 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(time, rs.getTime(1, Calendar.getInstance()));
         assertNotNull(rs.getTime("column", Calendar.getInstance()));
         assertEquals(time, rs.getTime("column", Calendar.getInstance()));
-
     }
 
     /**
      * Tests the setNullTimestamp implementation.
      */
     public void testSetNullTimestamp() throws SQLException {
-
         assertEquals(null, rs2.getNullTimestamp());
         // Set what gets returned to something other than the default
         Timestamp ts = new Timestamp(new java.util.Date().getTime());
@@ -842,7 +848,18 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(ts, rs.getTimestamp(1, Calendar.getInstance()));
         assertNotNull(rs.getTimestamp("column", Calendar.getInstance()));
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
-
+    }
+    
+    /**
+     * Tests the setNullString implementation.
+     */
+    public void testSetNullURL() throws SQLException, MalformedURLException {
+        assertEquals(null, rs2.getNullURL());
+        // Set what gets returned to something other than the default
+        URL u = new URL("http://jakarta.apache.org");
+        rs2.setNullURL(u);
+        assertEquals(u, rs.getURL(1));
+        assertEquals(u, rs.getURL("column"));
     }
 }
 
