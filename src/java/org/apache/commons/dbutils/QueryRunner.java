@@ -135,7 +135,10 @@ public class QueryRunner {
             if (params[i] != null) {
                 stmt.setObject(i + 1, params[i]);
             } else {
-                stmt.setNull(i + 1, Types.OTHER);
+                // VARCHAR works with many drivers regardless
+                // of the actual column type.  Oddly, NULL and 
+                // OTHER don't work with Oracle's drivers.
+                stmt.setNull(i + 1, Types.VARCHAR);
             }
         }
     }
