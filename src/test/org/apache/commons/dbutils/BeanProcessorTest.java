@@ -18,17 +18,10 @@ package org.apache.commons.dbutils;
 
 import java.sql.SQLException;
 
-/**
- * BeanProcessorTest
- */
 public class BeanProcessorTest extends BaseTestCase {
 
     private static final BeanProcessor beanProc = new BeanProcessor();
 
-    /**
-     * Constructor for BasicColumnProcessorTest.
-     * @param name
-     */
     public BeanProcessorTest(String name) {
         super(name);
     }
