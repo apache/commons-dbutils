@@ -109,8 +109,11 @@ Please see <a href="examples.html">Examples Page</a>.
 </p>
 </section>
 
-<section name="Interaction With Other Packages">
-    <p>DbUtils relies on these packages:</p> 
+<section name="Dependencies">
+    <p>
+    DbUtils is intentionally a single jar distribution and relies only on 
+    standard JREs:
+    </p> 
     <ul>
         <li>Java 1.3 (or later)</li>
         <li>JDBC 2.0 (or later)</li>
