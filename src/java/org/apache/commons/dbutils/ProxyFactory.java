@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/ProxyFactory.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/ProxyFactory.java,v 1.2 2003/11/05 00:40:43 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/05 00:40:43 $
  * 
  * ====================================================================
  *
@@ -72,7 +72,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 /**
- * Creates proxy implementations of JDBC classes.  This avoids 
+ * Creates proxy implementations of JDBC interfaces.  This avoids 
  * incompatibilities between the JDBC 2 and JDBC 3 interfaces.  This class is 
  * thread safe.
  * 

@@ -1,7 +1,7 @@
 /* 
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/wrappers/SqlNullCheckedResultSet.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/wrappers/SqlNullCheckedResultSet.java,v 1.2 2003/11/05 00:40:43 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/05 00:40:43 $
  * 
  * ====================================================================
  * 
@@ -89,15 +89,17 @@ import org.apache.commons.dbutils.ProxyFactory;
  * Usage example:
  * <blockquote>
  * <pre>
- * Connection conn = getConnection(); // somehow get a connection
+ * Connection conn = // somehow get a connection
  * Statement stmt = conn.createStatement();
- * ResultSet rs1 = stmt.executeQuery("SELECT col1, col2, FROM table1");
+ * ResultSet rs = stmt.executeQuery("SELECT col1, col2 FROM table1");
  * 
  * // Wrap the result set for SQL NULL checking
- * SqlNullCheckedResultSet rs = new SqlNullCheckedResultSet(rs1);
- * rs.setNullString("---N/A---"); // Set null string
- * rs.setNullInt(-999); // Set null integer
- * while(rs.next) {
+ * SqlNullCheckedResultSet wrapper = new SqlNullCheckedResultSet(rs);
+ * wrapper.setNullString("---N/A---"); // Set null string
+ * wrapper.setNullInt(-999); // Set null integer
+ * rs = ProxyFactory.instance().createResultSet(wrapper);
+ * 
+ * while (rs.next()) {
  *     // If col1 is SQL NULL, value returned will be "---N/A---"
  *     String col1 = rs.getString("col1");
  *     // If col2 is SQL NULL, value returned will be -999
@@ -110,7 +112,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  *
  * @author  <a href="stevencaswell@apache.org">Steven Caswell</a>
  * @author David Graham
- * @version $Id: SqlNullCheckedResultSet.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
+ * @version $Id: SqlNullCheckedResultSet.java,v 1.2 2003/11/05 00:40:43 dgraham Exp $
  */
 public class SqlNullCheckedResultSet implements InvocationHandler {
 
