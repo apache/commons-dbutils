@@ -104,7 +104,18 @@
       </roles>
     </developer>
   </developers>
-
+  
+  <contributors>
+    <contributor>
+      <name>Corby Page</name>
+      <id></id>
+      <email></email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+  </contributors>
 
   <dependencies>
 
