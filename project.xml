@@ -145,6 +145,15 @@
       </roles>
     </contributor>
     <contributor>
+      <name>Piotr Lakomy</name>
+      <id></id>
+      <email>piotrl@cft-inc.net</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
       <name>Corby Page</name>
       <id></id>
       <email></email>
@@ -157,6 +166,15 @@
       <name>Michael Schuerig</name>
       <id></id>
       <email>michael@schuerig.de</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Norris Shelton</name>
+      <id></id>
+      <email>norrisshelton@yahoo.com</email>
       <organization></organization>
       <roles>
         <role>Java Developer</role>

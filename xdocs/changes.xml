@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-dev" date="in CVS">
+      <action dev="dgraham" type="add">
+        Added KeyedHandler to create a Map of Maps from a ResultSet. PR: 31446
+      </action>
       <action dev="dgraham" type="update">
         Use current class' ClassLoader instead of QueryLoader's ClassLoader
         in loadQueries().  PR: 31169
