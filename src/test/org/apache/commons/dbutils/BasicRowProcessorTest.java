@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -34,7 +35,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
      * Sun Mar 14 15:19:15 MST 2004
      */ 
     private static final DateFormat datef =
-        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
     /**
      * Constructor for BasicRowProcessorTest.
