@@ -115,12 +115,9 @@ public class BeanProcessor {
         PropertyDescriptor[] props = this.propertyDescriptors(type);
 
         ResultSetMetaData rsmd = rs.getMetaData();
-
         int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
 
-        int cols = rsmd.getColumnCount();
-
-        return this.createBean(rs, type, props, columnToProperty, cols);
+        return this.createBean(rs, type, props, columnToProperty);
     }
     
     /**
@@ -160,14 +157,10 @@ public class BeanProcessor {
 
         PropertyDescriptor[] props = this.propertyDescriptors(type);
         ResultSetMetaData rsmd = rs.getMetaData();
-        
         int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
-            
-        int cols = rsmd.getColumnCount();
 
         do {
-            results.add(this.createBean(rs, type, props, columnToProperty, cols));
-
+            results.add(this.createBean(rs, type, props, columnToProperty));
         } while (rs.next());
 
         return results;
@@ -176,21 +169,20 @@ public class BeanProcessor {
     /**
      * Creates a new object and initializes its fields from the ResultSet.
      *
-     * @param rs The result set
-     * @param type The bean type (the return type of the object)
-     * @param props The property descriptors
-     * @param columnToProperty The column indices in the result set
-     * @param cols The number of columns
+     * @param rs The result set.
+     * @param type The bean type (the return type of the object).
+     * @param props The property descriptors.
+     * @param columnToProperty The column indices in the result set.
      * @return An initialized object.
-     * @throws SQLException If a database error occurs
+     * @throws SQLException If a database error occurs.
      */
     private Object createBean(ResultSet rs, Class type,
-            PropertyDescriptor[] props, int[] columnToProperty, int cols)
+            PropertyDescriptor[] props, int[] columnToProperty)
             throws SQLException {
 
         Object bean = this.newInstance(type);
 
-        for (int i = 1; i <= cols; i++) {
+        for (int i = 1; i < columnToProperty.length; i++) {
 
             if (columnToProperty[i] == PROPERTY_NOT_FOUND) {
                 continue;
