@@ -401,7 +401,7 @@ public class BeanProcessor {
      * 
      * @param index The current column index being processed.
      * 
-     * @param propertyType The bean property type that this column needs to be
+     * @param propType The bean property type that this column needs to be
      * converted into.
      * 
      * @return The object from the <code>ResultSet</code> at the given column
