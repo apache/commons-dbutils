@@ -47,6 +47,12 @@ update data.
     	code clearly expresses your intention without being cluttered 
     	with resource cleanup.
 	</li>
+	<li>
+	    Automatically populate JavaBean properties from ResultSets.  You
+	    don't need to manually copy column values into bean instances
+	    by calling setter methods.  Each row of the ResultSet can be
+	    represented by one fully populated bean instance.
+	</li>
 </ul>
 
 </section>
