@@ -45,9 +45,8 @@ public class TestBean {
     private Object nullObjectTest = "overwrite";
 
     /**
-     * The property should not be set when the object returned from the 
-     * ResultSet does not match the type of the bean property.  In this case, 
-     * a Date will be returned but the property is a String.
+     * A Date will be returned from the ResultSet but the property is a String.
+     * BeanProcessor should create a String from the Date and set this property.
      */
     private String notDate = "not a date";
     

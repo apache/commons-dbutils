@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
 package org.apache.commons.dbutils;
 
 import java.sql.SQLException;
 
 /**
- * BasicColumnProcessorTest
+ * BeanProcessorTest
  */
-public class BasicColumnProcessorTest extends BaseTestCase {
+public class BeanProcessorTest extends BaseTestCase {
 
-    private static final RowProcessor rowProc =
-        new BasicRowProcessor(new BasicColumnProcessor());
+    private static final BeanProcessor beanProc = new BeanProcessor();
 
     /**
      * Constructor for BasicColumnProcessorTest.
      * @param name
      */
-    public BasicColumnProcessorTest(String name) {
+    public BeanProcessorTest(String name) {
         super(name);
     }
 
@@ -37,7 +37,7 @@ public class BasicColumnProcessorTest extends BaseTestCase {
         int rowCount = 0;
         TestBean b = null;
         while (this.rs.next()) {
-            b = (TestBean) rowProc.toBean(this.rs, TestBean.class);
+            b = (TestBean) beanProc.toBean(this.rs, TestBean.class);
             assertNotNull(b);
             rowCount++;
         }

@@ -16,6 +16,9 @@
 package org.apache.commons.dbutils;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,13 @@ import java.util.Map;
 public class BasicRowProcessorTest extends BaseTestCase {
 
     private static final RowProcessor processor = new BasicRowProcessor();
+    
+    /**
+     * Format that matches Date.toString().
+     * Sun Mar 14 15:19:15 MST 2004
+     */ 
+    private static final DateFormat datef =
+        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
     /**
      * Constructor for BasicRowProcessorTest.
@@ -50,7 +60,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("6", a[2]);
     }
 
-    public void testToBean() throws SQLException {
+    public void testToBean() throws SQLException, ParseException {
 
         int rowCount = 0;
         TestBean b = null;
@@ -69,10 +79,13 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(new Integer(4), b.getIntegerTest());
         assertEquals(null, b.getNullObjectTest());
         assertEquals(0, b.getNullPrimitiveTest());
-        assertEquals("not a date", b.getNotDate());
+        // test date -> string handling
+        assertNotNull(b.getNotDate());
+        assertTrue(!"not a date".equals(b.getNotDate()));
+        datef.parse(b.getNotDate());
     }
 
-    public void testToBeanList() throws SQLException {
+    public void testToBeanList() throws SQLException, ParseException {
 
         List list = processor.toBeanList(this.rs, TestBean.class);
         assertNotNull(list);
@@ -88,7 +101,10 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(new Integer(4), b.getIntegerTest());
         assertEquals(null, b.getNullObjectTest());
         assertEquals(0, b.getNullPrimitiveTest());
-        assertEquals("not a date", b.getNotDate());
+        // test date -> string handling
+        assertNotNull(b.getNotDate());
+        assertTrue(!"not a date".equals(b.getNotDate()));
+        datef.parse(b.getNotDate());
     }
 
     public void testToMap() throws SQLException {

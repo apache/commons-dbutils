@@ -139,7 +139,7 @@ public class BaseTestCase extends TestCase {
         TestSuite suite = new TestSuite("All DbUtils Tests");
 
         suite.addTestSuite(BasicRowProcessorTest.class);
-        suite.addTestSuite(BasicColumnProcessorTest.class);
+        suite.addTestSuite(BeanProcessorTest.class);
         suite.addTestSuite(ProxyFactoryTest.class);
         suite.addTestSuite(ResultSetIteratorTest.class);
         suite.addTestSuite(QueryLoaderTest.class);
