@@ -292,13 +292,16 @@ public class BeanProcessor {
     }
 
     /**
-     * Returns a new instance of the given Class.
+     * Factory method that returns a new instance of the given Class.  This
+     * is called at the start of the bean creation process and may be 
+     * overridden to provide custom behavior like returning a cached bean
+     * instance.
      *
      * @param c The Class to create an object from.
      * @return A newly created object of the Class.
      * @throws SQLException if creation failed.
      */
-    private Object newInstance(Class c) throws SQLException {
+    protected Object newInstance(Class c) throws SQLException {
         try {
             return c.newInstance();
 
