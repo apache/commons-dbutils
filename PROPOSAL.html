@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Proposal for Commons DBUtils Package</title>
+</head>
+<body>
+
+<div align="center">
+<h1>Proposal for <em>DBUtils</em> Package</h1>
+</div>
+
+<h3>(0) Rationale</h3>
+
+<p>
+Correct JDBC coding is time consuming and error prone.  Many
+JDBC coding tasks can be simplified with a small helper library
+that factors out the mundane resource cleanup steps.  DbUtils
+is focused on providing such a library without any heavyweight 
+framework surrounding it.
+</p>
+
+
+<h3>(1) Scope of the Package</h3>
+
+<p>
+This proposal is to create a package of Java utility classes for
+various types of JDBC related activity.  DbUtils will
+not be an OO representation of database objects nor will
+it be an Object/Relational framework.  It will be
+a lightweight JDBC library that helps developers write
+correct database code.
+</p>
+
+
+<h3>(1.5) Interaction With Other Packages</h3>
+
+<p><em>DBUtils</em> relies only on standard Java 1.2 (or later) APIs for
+production deployment.  It utilizes the JUnit testing framework for
+developing and executing unit tests, but this is of interest only to
+developers of the component. Being dependent on Java 1.2 means that 
+this code is expected to be of JDBC 2.0 level. 
+</p>
+
+<p>
+No external configuration files are utilized.
+</p>
+
+
+<h3>(2) Initial Source of the Package</h3>
+
+<p>
+Potential source code for this package will come from the initial 
+committers' personal libraries.
+</p>
+
+<p>
+The proposed package name for the new component is
+<code>org.apache.commons.dbutils</code>.
+</p>
+
+
+<h3>(3)  Required Jakarta-Commons Resources</h3>
+
+<ul>
+<li>CVS Repository - New directory <code>dbutils</code> in the
+    <code>jakarta-commons</code> CVS repository.</li>
+<li>Mailing List - Discussions will take place on the general
+    <em>commons-dev@jakarta.apache.org</em> mailing list.  To help
+    list subscribers identify messages of interest, it is suggested that
+    the message subject of messages about this component be prefixed with
+    [dbutils].</li>
+<li>Bugzilla - New component "DBUtils" under the "Commons" product
+    category, with appropriate version identifiers as needed.</li>
+</ul>
+
+
+<h3>(4) Initial Committers</h3>
+
+<p>The initial committers on the DBUtils component shall be:</p>
+<ul>
+  <li>Henri Yandell</li>
+  <li>Steven Caswell</li>
+  <li>Juozas Baliuka</li>
+  <li>David Graham</li>
+</ul>
+
+</body>
+</html>

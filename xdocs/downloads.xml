@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<document>
+   <properties>
+      <title>Downloads</title>
+      <author email="commons-dev@jakarta.apache.org">Commons Documentation Team</author>
+      <revision>$Id: downloads.xml,v 1.1 2003/11/02 19:15:24 dgraham Exp $</revision>
+   </properties>
+
+   <body>
+      <section name="Releases">
+         <!--
+         <p><strong>Latest Release</strong></p>
+         <ul>
+           <li><a href="http://jakarta.apache.org/site/binindex.cgi#commons-dbutils">1.0 Binary</a></li>
+           <li><a href="http://jakarta.apache.org/site/sourceindex.cgi#commons-dbutils">1.0 Source</a></li>
+         </ul>
+         
+         <br/>
+         
+         <p>
+            <strong>Archived Releases</strong>
+            <br/>
+            Older releases are retained by the Apache Software Foundation but are 
+            moved into a
+            <a href="http://archive.apache.org/dist/jakarta/commons/dbutils/">
+            special archive area</a>.
+         </p>
+         
+         <br/>
+         -->
+         <p><strong>Nightly Builds</strong></p>
+         <ul>
+            <li><a href="http://cvs.apache.org/builds/jakarta-commons/nightly/commons-dbutils/">Binary/Source</a></li>
+         </ul>
+
+      </section>
+
+   </body>
+</document>

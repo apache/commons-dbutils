@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<project>
+  
+  <version>3</version>
+  <name>commons-dbutils</name>
+  <id>commons-dbutils</id>
+  <currentVersion>1.0-dev</currentVersion>
+
+  <organization>
+    <name>Apache Software Foundation</name>
+    <url>http://www.apache.org/</url>
+    <logo>http://jakarta.apache.org/images/jakarta-logo-blue.gif</logo>
+  </organization>
+
+  <inceptionYear>2002</inceptionYear>
+  <package>org.apache.commons.dbutils</package>
+
+  <shortDescription>Java Common Database Components</shortDescription>
+
+  <!-- Gump integration -->
+  <gumpRepositoryId>jakarta-dbutils</gumpRepositoryId>
+
+  <description>
+    Commons DbUtils is a package of Java utility classes for easing
+    JDBC development tasks.
+  </description>
+
+  <url>http://jakarta.apache.org/commons/dbutils/</url>
+  <issueTrackingUrl>http://issues.apache.org/bugzilla/</issueTrackingUrl>
+  <siteAddress>jakarta.apache.org</siteAddress>
+  <siteDirectory>/www/jakarta.apache.org/commons/sandbox/dbutils/</siteDirectory>
+  <distributionDirectory>/www/jakarta.apache.org/builds/jakarta-commons-sandbox/dbutils/</distributionDirectory>
+
+  <repository>
+    <connection>
+      scm:cvs:pserver:anoncvs@cvs.apache.org:/home/cvspublic:jakarta-commons-sandbox/dbutils
+    </connection>
+    <url>
+      http://cvs.apache.org/viewcvs.cgi/jakarta-commons-sandbox/dbutils/
+    </url>
+  </repository>
+
+  <mailingLists>
+    <mailingList>
+      <name>Commons User List</name>
+      <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
+      <archive>http://nagoya.apache.org:8080/eyebrowse/SummarizeList?listName=commons-user@jakarta.apache.org</archive>
+    </mailingList>
+    <mailingList>
+      <name>Commons Developer List</name>
+      <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
+      <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
+      <archive>http://nagoya.apache.org:8080/eyebrowse/SummarizeList?listName=commons-dev@jakarta.apache.org</archive>
+    </mailingList>
+  </mailingLists>
+
+  <developers>
+    <developer>
+      <name>Henri Yandell</name>
+      <id>bayard</id>
+      <email>bayard@generationjava.com</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Juozas Baliuka</name>
+      <id>baliuka</id>
+      <email>baliuka@apache.org</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Steven Caswell</name>
+      <id>scaswell</id>
+      <email>steven@caswell.name</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>David Graham</name>
+      <id>dgraham</id>
+      <email>dgraham@apache.org</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+
+  <!-- Need to mark these as compile-time/run-time -->
+
+  <dependencies>
+
+    <dependency>
+      <id>junit</id>
+      <version>3.8.1</version>
+    </dependency>
+
+    <!--
+    <dependency>
+      <id>jdbc</id>
+      <version>2.0</version>
+    </dependency>
+    -->
+    
+  </dependencies>
+
+	
+	
+  <build>
+
+    <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
+    <sourceDirectory>src/java</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+    <integrationUnitTestSourceDirectory/>
+    <aspectSourceDirectory/>
+
+    <!-- Unit test classes -->
+    <unitTest>
+      <includes>
+        <include>**/BaseTestCase.java</include>
+      </includes>
+    </unitTest>
+
+    
+    <!-- Integration unit test classes -->
+    <integrationUnitTestPatterns></integrationUnitTestPatterns>
+
+    <!-- J A R  R E S O U R C E S -->
+    <!-- Resources that are packaged up inside the JAR file -->
+    <resources>
+      <includes>
+        <include>**/*.properties</include>
+      </includes>
+    </resources>
+  </build>
+</project>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<document>
+  <properties>
+    <title>TODO</title>
+    <author email="dgraham@apache.org">David Graham</author>
+  </properties>
+
+  <body>
+    <section name="TODO"> 
+      <p>
+        The following is a list of items that need to be completed in
+        DbUtils.  Contributions are welcome!.
+      </p>
+      
+<table border="1">
+
+  <tr>
+    <th>Action Item</th>
+    <th>Volunteer</th>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Documentation</strong> - Provide more examples and site info.
+    </td>
+    <td align="center"></td>
+  </tr>
+  <tr>
+    <td>
+        Dynamic wrappers for JDBC interfaces.
+    </td>
+    <td align="center"></td>
+  </tr>
+  <tr>
+    <td>
+        More test cases.
+    </td>
+    <td align="center"></td>
+  </tr>
+
+</table>
+
+    </section>
+  </body>
+</document>
+
