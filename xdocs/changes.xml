@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-dev" date="in CVS">
+      <action dev="dgraham" type="add">
+        Added DbUtils.rollbackAndClose() and DbUtils.rollbackAndCloseQuietly().
+      </action>
       <action dev="dgraham" type="update">
         Call ResultSet.getTimestamp() in BeanProcessor.processColumn() if 
         the bean property is a java.sql.Timestamp.  Oracle's getObject() 

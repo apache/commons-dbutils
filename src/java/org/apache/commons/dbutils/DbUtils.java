@@ -198,5 +198,33 @@ public final class DbUtils {
             conn.rollback();
         }
     }
+    
+    /**
+     * Performs a rollback on the <code>Connection</code> then closes it, 
+     * avoid closing if null.
+     * @since DbUtils 1.1
+     */
+    public static void rollbackAndClose(Connection conn) throws SQLException {
+        if (conn != null) {
+            try {
+                conn.rollback();
+            } finally {
+                conn.close();
+            }
+        }
+    }
+
+    /**
+     * Performs a rollback on the <code>Connection</code> then closes it, 
+     * avoid closing if null and hide any SQLExceptions that occur.
+     * @since DbUtils 1.1
+     */
+    public static void rollbackAndCloseQuietly(Connection conn) {
+        try {
+            rollbackAndClose(conn);
+        } catch (SQLException e) {
+            // quiet
+        }
+    }
 
 }
