@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/ProxyFactory.java,v 1.2 2003/11/05 00:40:43 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/05 00:40:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/ProxyFactory.java,v 1.3 2003/11/09 04:54:32 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/11/09 04:54:32 $
  * 
  * ====================================================================
  *
@@ -147,7 +147,7 @@ public class ProxyFactory {
      * Creates a new proxy <code>CallableStatement</code> object.
      * @param handler The handler that intercepts/overrides method calls.
      */
-    public PreparedStatement createCallableStatement(InvocationHandler handler) {
+    public CallableStatement createCallableStatement(InvocationHandler handler) {
         return (CallableStatement) Proxy.newProxyInstance(
             handler.getClass().getClassLoader(),
             callableStatementClass,
