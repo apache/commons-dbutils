@@ -40,6 +40,10 @@ The <action> type attribute can be add,update,fix,remove.
 
     <release version="1.1-dev" date="in CVS">
       <action dev="dgraham" type="update">
+        Made QueryLoader.loadQueries() protected so subclasses can use query
+        repositories other than properties files.  PR: 31460        
+      </action>
+      <action dev="dgraham" type="update">
         QueryRunner now calls getDataSource() internally any time it needs access
         to its DataSource object to allow subclasses to provide different behavior.
       </action>

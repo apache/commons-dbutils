@@ -22,10 +22,10 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <code>QueryLoader</code> loads properties files filled with query name to 
- * SQL mappings.  It acts as a registry for sets of queries so that multiple 
- * copies of the same queries aren't loaded into memory.  This class is thread
- * safe.
+ * <code>QueryLoader</code> is a registry for sets of queries so 
+ * that multiple copies of the same queries aren't loaded into memory.
+ * This implementation loads properties files filled with query name to 
+ * SQL mappings.  This class is thread safe.
  */
 public class QueryLoader {
 
@@ -80,11 +80,15 @@ public class QueryLoader {
     }
 
     /**
-     * Loads a properties file into a Map object.
+     * Loads a set of named queries into a Map object.  This implementation
+     * reads a properties file at the given path.
      * @param path The path that the ClassLoader will use to find the file.
      * @throws IOException
+     * @throws IllegalArgumentException if the ClassLoader can't find a file at
+     * the given path.
+     * @since DbUtils 1.1
      */
-    private Map loadQueries(String path) throws IOException {
+    protected Map loadQueries(String path) throws IOException {
         InputStream in = QueryLoader.class.getResourceAsStream(path);
 
         if (in == null) {
