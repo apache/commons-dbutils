@@ -27,6 +27,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -363,6 +364,7 @@ public class BeanProcessor {
 
         int cols = rsmd.getColumnCount();
         int columnToProperty[] = new int[cols + 1];
+        Arrays.fill(columnToProperty, PROPERTY_NOT_FOUND);
 
         for (int col = 1; col <= cols; col++) {
             String columnName = rsmd.getColumnName(col);
@@ -371,9 +373,6 @@ public class BeanProcessor {
                 if (columnName.equalsIgnoreCase(props[i].getName())) {
                     columnToProperty[col] = i;
                     break;
-
-                } else {
-                    columnToProperty[col] = PROPERTY_NOT_FOUND;
                 }
             }
         }
