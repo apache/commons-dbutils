@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.Arrays;
 
@@ -86,7 +87,7 @@ public class QueryRunner {
         } catch (SQLException e) {
             this.rethrow(e, sql, params);
         } finally {
-            DbUtils.close(stmt);
+            close(stmt);
         }
 
         return rows;
@@ -111,7 +112,7 @@ public class QueryRunner {
         try {
             return this.batch(conn, sql, params);
         } finally {
-            DbUtils.close(conn);
+            close(conn);
         }
     }
 
@@ -222,9 +223,9 @@ public class QueryRunner {
 
         } finally {
             try {
-                DbUtils.close(rs);
+                close(rs);
             } finally {
-                DbUtils.close(stmt);
+                close(stmt);
             }
         }
 
@@ -290,7 +291,7 @@ public class QueryRunner {
             return this.query(conn, sql, params, rsh);
 
         } finally {
-            DbUtils.close(conn);
+            close(conn);
         }
     }
 
@@ -410,7 +411,7 @@ public class QueryRunner {
             this.rethrow(e, sql, params);
 
         } finally {
-            DbUtils.close(stmt);
+            close(stmt);
         }
 
         return rows;
@@ -465,7 +466,7 @@ public class QueryRunner {
         try {
             return this.update(conn, sql, params);
         } finally {
-            DbUtils.close(conn);
+            close(conn);
         }
     }
     
@@ -492,6 +493,36 @@ public class QueryRunner {
      */
     protected ResultSet wrap(ResultSet rs) {
         return rs;
+    }
+    
+    /**
+     * Close a <code>Connection</code>.  This implementation avoids closing if 
+     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
+     * can override to provide special handling like logging.
+     * @since DbUtils 1.1
+     */
+    protected void close(Connection conn) throws SQLException {
+        DbUtils.close(conn);
+    }
+    
+    /**
+     * Close a <code>Statement</code>.  This implementation avoids closing if 
+     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
+     * can override to provide special handling like logging.
+     * @since DbUtils 1.1
+     */
+    protected void close(Statement stmt) throws SQLException {
+        DbUtils.close(stmt);
+    }
+
+    /**
+     * Close a <code>ResultSet</code>.  This implementation avoids closing if 
+     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
+     * can override to provide special handling like logging.
+     * @since DbUtils 1.1
+     */
+    protected void close(ResultSet rs) throws SQLException {
+        DbUtils.close(rs);
     }
 
 }
