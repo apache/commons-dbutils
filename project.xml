@@ -21,7 +21,6 @@
   <currentVersion>1.1-dev</currentVersion>
 
   <inceptionYear>2002</inceptionYear>
-  <logo>/images/dbutils-logo-blue.png</logo>
   <shortDescription>Commons DbUtils</shortDescription>
   <description>A package of Java utility classes for easing JDBC development</description>
 
