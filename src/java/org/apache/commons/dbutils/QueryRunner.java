@@ -330,7 +330,7 @@ public class QueryRunner {
      * 
      * @param sql The query that was executing when the exception happened.
      * 
-     * @param params The query replacement paramaters; <code>null</code> is a 
+     * @param params The query replacement parameters; <code>null</code> is a 
      * valid value to pass in.
      * 
      * @throws SQLException
@@ -350,7 +350,8 @@ public class QueryRunner {
             msg.append(Arrays.asList(params));
         }
 
-        SQLException e = new SQLException(msg.toString());
+        SQLException e = new SQLException(msg.toString(), cause.getSQLState(),
+                cause.getErrorCode());
         e.setNextException(cause);
 
         throw e;

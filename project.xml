@@ -115,7 +115,7 @@
       </roles>
     </developer>
   </developers>
-  
+
   <contributors>
     <contributor>
       <name>Péter Bagyinszki</name>
@@ -142,6 +142,15 @@
       <organization></organization>
       <roles>
         <role>Documentation</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Uli Kleeberger</name>
+      <id></id>
+      <email>ukleeberger@web.de</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
