@@ -144,21 +144,26 @@
         <role>Java Developer</role>
       </roles>
     </contributor>
+    <contributor>
+      <name>Michael Schuerig</name>
+      <id></id>
+      <email>michael@schuerig.de</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
   </contributors>
 
   <dependencies>
-
     <dependency>
       <id>junit</id>
       <version>3.8.1</version>
       <url>http://www.junit.org/</url>
     </dependency>
-    
   </dependencies>
 	
-	
   <build>
-
     <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
     <sourceDirectory>src/java</sourceDirectory>
     <unitTestSourceDirectory>src/test</unitTestSourceDirectory>

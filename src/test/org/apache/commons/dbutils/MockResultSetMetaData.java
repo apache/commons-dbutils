@@ -63,6 +63,15 @@ public class MockResultSetMetaData implements InvocationHandler {
             int col = ((Integer) args[0]).intValue() - 1;
             return this.columnNames[col];
 
+        } else if (methodName.equals("hashCode")) {
+            return new Integer(System.identityHashCode(proxy));
+
+        } else if (methodName.equals("toString")) {
+            return "MockResultSetMetaData " + System.identityHashCode(proxy);
+
+        } else if (methodName.equals("equals")) { 
+            return Boolean.valueOf(proxy == args[0]); 
+
             // stub out other methods for now
         } else {
             Class returnType = method.getReturnType();

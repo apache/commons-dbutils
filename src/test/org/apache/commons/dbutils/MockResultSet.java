@@ -37,12 +37,9 @@ public class MockResultSet implements InvocationHandler {
      * 
      * @param metaData
      * @param rows A null value indicates an empty <code>ResultSet</code>.
-     * @return
      */
-    public static ResultSet create(
-        ResultSetMetaData metaData,
-        Object[][] rows) {
-
+    public static ResultSet create(ResultSetMetaData metaData, 
+            Object[][] rows) {
         return ProxyFactory.instance().createResultSet(
             new MockResultSet(metaData, rows));
     }
@@ -63,8 +60,7 @@ public class MockResultSet implements InvocationHandler {
     public MockResultSet(ResultSetMetaData metaData, Object[][] rows) {
         super();
         this.metaData = metaData;
-        this.iter =
-            (rows == null)
+        this.iter = (rows == null)
                 ? Collections.EMPTY_LIST.iterator()
                 : Arrays.asList(rows).iterator();
     }
@@ -308,6 +304,15 @@ public class MockResultSet implements InvocationHandler {
 
         } else if (methodName.equals("isLast")) {
             return this.isLast();
+        
+        } else if (methodName.equals("hashCode")) {
+            return new Integer(System.identityHashCode(proxy));
+        
+        } else if (methodName.equals("toString")) {
+            return "MockResultSet " + System.identityHashCode(proxy);
+
+        } else if (methodName.equals("equals")) { 
+            return Boolean.valueOf(proxy == args[0]); 
         }
 
         return null;
