@@ -112,12 +112,8 @@ Please see <a href="examples.html">Examples Page</a>.
 <section name="Dependencies">
     <p>
     DbUtils is intentionally a single jar distribution and relies only on 
-    standard JREs:
+    a standard Java 1.3 or later JRE.
     </p> 
-    <ul>
-        <li>Java 1.3 (or later)</li>
-        <li>JDBC 2.0 (or later)</li>
-    </ul>
 </section>
 
 </body>
