@@ -1,23 +1,30 @@
-$Id: RELEASE-NOTES.txt,v 1.1 2003/11/02 19:15:23 dgraham Exp $
+$Id: RELEASE-NOTES.txt,v 1.2 2003/11/09 19:07:53 dgraham Exp $
 
-			 Commons DBUtils Package
-			   Version 1.0-dev
+			 Commons DbUtils Package
+			   Version 1.0-RC1
 			    Release Notes
 
 
 INTRODUCTION:
 
-This document contains the release notes for this version of the Commons
-DBUtils package, and highlights changes since the previous version.  The
-current release adds new features and bug fixes, and is being done now to
-follow the release early/release often mentality.
+This is the first release of the Commons DbUtils package.  DbUtils
+is a small set of classes designed to make working with JDBC easier.  More 
+information can be found at http://jakarta.apache.org/commons/dbutils/.
 
+FEATURES:
 
-NEW FEATURES:
+* QueryRunner class with ResultSetHandler interface allow you to easily query or
+update a database and handle the ResultSet.  Several useful implementations
+of the ResultSetHandler interface are located in the 
+org.apache.commons.dbutils.handlers.* package.
 
-* 
+* ResultSet wrappers that decorate ResultSets with specialized behavior.  See
+the classes in the org.apache.commons.dbutils.wrappers.* package for details.
 
+* Dynamic JDBC API interface implementations via the standard 
+java.lang.reflect.Proxy class.  This allows you to implement JDBC interfaces
+such as ResultSet at runtime to avoid API version incompatibilities.  See 
+org.apache.commons.dbutils.ProxyFactory for details.
 
-BUG FIXES:
 
 
