@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.3 2003/11/09 18:52:18 dgraham Exp $
- * $Revision: 1.3 $
- * $Date: 2003/11/09 18:52:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.4 2003/11/10 16:16:32 yoavs Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/10 16:16:32 $
  * 
  * ====================================================================
  *
@@ -85,6 +85,7 @@ import java.util.Map;
  * @author Henri Yandell
  * @author Juozas Baliuka
  * @author David Graham
+ * @author Yoav Shapira
  */
 public class BasicRowProcessor implements RowProcessor {
 
@@ -93,17 +94,17 @@ public class BasicRowProcessor implements RowProcessor {
      * is returned.  These are the same as the defaults that ResultSet get* 
      * methods return in the event of a NULL column.
      */
-    private static final Map primitveDefaults = new HashMap();
+    private static final Map primitiveDefaults = new HashMap();
 
     static {
-        primitveDefaults.put(Integer.TYPE, new Integer(0));
-        primitveDefaults.put(Short.TYPE, new Short((short) 0));
-        primitveDefaults.put(Byte.TYPE, new Byte((byte) 0));
-        primitveDefaults.put(Float.TYPE, new Float(0));
-        primitveDefaults.put(Double.TYPE, new Double(0));
-        primitveDefaults.put(Long.TYPE, new Long(0));
-        primitveDefaults.put(Boolean.TYPE, Boolean.FALSE);
-        primitveDefaults.put(Character.TYPE, new Character('\u0000'));
+        primitiveDefaults.put(Integer.TYPE, new Integer(0));
+        primitiveDefaults.put(Short.TYPE, new Short((short) 0));
+        primitiveDefaults.put(Byte.TYPE, new Byte((byte) 0));
+        primitiveDefaults.put(Float.TYPE, new Float(0));
+        primitiveDefaults.put(Double.TYPE, new Double(0));
+        primitiveDefaults.put(Long.TYPE, new Long(0));
+        primitiveDefaults.put(Boolean.TYPE, Boolean.FALSE);
+        primitiveDefaults.put(Character.TYPE, new Character('\u0000'));
     }
 
     /**
@@ -119,6 +120,8 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * Returns the Singleton instance of this class.
+     *
+     * @return The single instance of this class.
      */
     public static BasicRowProcessor instance() {
         return instance;
@@ -135,7 +138,8 @@ public class BasicRowProcessor implements RowProcessor {
      * Convert a <code>ResultSet</code> row into an <code>Object[]</code>.
      * This implementation copies column values into the array in the same 
      * order they're returned from the <code>ResultSet</code>.  Array elements
-     * will be set to <code>null</code> if the column was SQL NULL. 
+     * will be set to <code>null</code> if the column was SQL NULL.
+     *
      * @see org.apache.commons.dbutils.RowProcessor#toArray(java.sql.ResultSet)
      */
     public Object[] toArray(ResultSet rs) throws SQLException {
@@ -241,13 +245,14 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * Creates a new object and initializes its fields from the ResultSet.
-     * @param rs
-     * @param type
-     * @param props
-     * @param columnToProperty
-     * @param cols
+     *
+     * @param rs The result set
+     * @param type The bean type (the return type of the object)
+     * @param props The property descriptors
+     * @param columnToProperty The column indices in the result set
+     * @param cols The number of columns
      * @return An initialized object.
-     * @throws SQLException
+     * @throws SQLException If a database error occurs
      */
     private Object createBean(
         ResultSet rs,
@@ -271,7 +276,7 @@ public class BasicRowProcessor implements RowProcessor {
             Class propType = prop.getPropertyType();
 
             if (propType != null && value == null && propType.isPrimitive()) {
-                value = primitveDefaults.get(propType);
+                value = primitiveDefaults.get(propType);
             }
 
             this.callSetter(bean, prop, value);
@@ -286,10 +291,12 @@ public class BasicRowProcessor implements RowProcessor {
      * for the bean property that matches the column name.  If no bean property
      * was found for a column, the position is set to PROPERTY_NOT_FOUND.
      * 
+     * @param rsmd The result set meta data containing column information
+     * @param props The bean property descriptors
      * @return An int[] with column index to property index mappings.  The 0th 
      * element is meaningless as column indexing starts at 1.
      * 
-     * @throws SQLException
+     * @throws SQLException If a database error occurs
      */
     private int[] mapColumnsToProperties(
         ResultSetMetaData rsmd,
@@ -385,6 +392,7 @@ public class BasicRowProcessor implements RowProcessor {
      * 
      * @param value The value to be passed into the setter method.
      * @param type The setter's parameter type.
+     * @return boolean True if the value is compatible.
      */
     private boolean isCompatibleType(Object value, Class type) {
         // Do object check first, then primitives
@@ -427,6 +435,7 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * Returns a new instance of the given Class.
+     *
      * @param c The Class to create an object from.
      * @return A newly created object of the Class.
      * @throws SQLException if creation failed.
@@ -447,6 +456,7 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * Returns a PropertyDescriptor[] for the given Class.
+     *
      * @param c The Class to retrieve PropertyDescriptors for.
      * @return A PropertyDescriptor[] describing the Class.
      * @throws SQLException if introspection failed.
@@ -472,19 +482,30 @@ public class BasicRowProcessor implements RowProcessor {
      * databases don't consistenly handle the casing of column names. 
      */
     private static class CaseInsensitiveHashMap extends HashMap {
-
+	/**
+	 * @see java.util.Map#containsKey(java.lang.Object)
+	 */
         public boolean containsKey(Object key) {
             return super.containsKey(key.toString().toLowerCase());
         }
 
+	/**
+	 * @see java.util.Map#get(java.lang.Object)
+	 */
         public Object get(Object key) {
             return super.get(key.toString().toLowerCase());
         }
 
+	/**
+	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+	 */
         public Object put(Object key, Object value) {
             return super.put(key.toString().toLowerCase(), value);
         }
 
+	/**
+	 * @see java.util.Map#putAll(java.util.Map)
+	 */
         public void putAll(Map m) {
             Iterator iter = m.keySet().iterator();
             while (iter.hasNext()) {
@@ -494,9 +515,13 @@ public class BasicRowProcessor implements RowProcessor {
             }
         }
 
+	/**
+	 * @see java.util.Map#remove(java.lang.ObjecT)
+	 */
         public Object remove(Object key) {
             return super.remove(key.toString().toLowerCase());
         }
     }
-
 }
+
+// End of class: BasicRowProcessor.java
