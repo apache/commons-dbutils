@@ -31,10 +31,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <p>
  * <code>BeanProcessor</code> matches column names to bean property names 
  * and converts <code>ResultSet</code> columns into objects for those bean 
  * properties.  Subclasses should override the methods in the processing chain
  * to customize behavior.
+ * </p>
+ * 
+ * <p>
+ * This class is thread-safe.
+ * </p>
  * 
  * @see BasicRowProcessor
  * 
