@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.5 2003/11/11 00:53:19 dgraham Exp $
- * $Revision: 1.5 $
- * $Date: 2003/11/11 00:53:19 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.6 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
  *
@@ -122,16 +122,46 @@ public class BasicRowProcessor implements RowProcessor {
      * Returns the Singleton instance of this class.
      *
      * @return The single instance of this class.
+     * @deprecated Create instances with the constructors instead.  This will 
+     * be removed after DbUtils 1.1.
      */
     public static BasicRowProcessor instance() {
         return instance;
     }
+    
+    /**
+     * A basic ColumnProcessor implementation to use when client doesn't pass
+     * one into the constructor.
+     */
+    private static final ColumnProcessor defaultProcessor =
+        new ColumnProcessor() {
+        public Object process(ResultSet rs, int index, Class propType)
+            throws SQLException {
+            return rs.getObject(index);
+        }
+    };
 
     /**
-     * Protected constructor for BasicRowProcessor subclasses only.
+     * Use this processor to convert columns to bean properties.
      */
-    protected BasicRowProcessor() {
+    private ColumnProcessor convert = defaultProcessor; 
+
+    /**
+     * BasicRowProcessor constructor.
+     */
+    public BasicRowProcessor() {
         super();
+    }
+    
+    /**
+     * BasicRowProcessor constructor.
+     * @param convert The ColumnProcessor to use when converting columns to 
+     * bean properties.
+     * @since DbUtils 1.1
+     */
+    public BasicRowProcessor(ColumnProcessor convert) {
+        super();
+        this.convert = convert;
     }
 
     /**
@@ -270,10 +300,10 @@ public class BasicRowProcessor implements RowProcessor {
                 continue;
             }
             
-            Object value = rs.getObject(i);
-
             PropertyDescriptor prop = props[columnToProperty[i]];
             Class propType = prop.getPropertyType();
+
+            Object value = this.convert.process(rs, i, propType);
 
             if (propType != null && value == null && propType.isPrimitive()) {
                 value = primitiveDefaults.get(propType);
@@ -517,7 +547,7 @@ public class BasicRowProcessor implements RowProcessor {
         }
 
         /**
-         * @see java.util.Map#remove(java.lang.ObjecT)
+         * @see java.util.Map#remove(java.lang.Object)
          */
         public Object remove(Object key) {
             return super.remove(key.toString().toLowerCase());

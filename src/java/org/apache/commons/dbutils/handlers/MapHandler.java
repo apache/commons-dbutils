@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/MapHandler.java,v 1.1 2003/11/02 19:15:24 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/MapHandler.java,v 1.2 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
  *
@@ -64,7 +64,6 @@ package org.apache.commons.dbutils.handlers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
@@ -83,7 +82,7 @@ public class MapHandler implements ResultSetHandler {
      * The RowProcessor implementation to use when converting rows 
      * into Maps.
      */
-    private RowProcessor convert = BasicRowProcessor.instance();
+    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
 
     /** 
      * Creates a new instance of MapHandler using a 

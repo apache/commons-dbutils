@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/MapListHandler.java,v 1.1 2003/11/02 19:15:24 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/MapListHandler.java,v 1.2 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
  *
@@ -66,7 +66,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
@@ -85,7 +84,7 @@ public class MapListHandler implements ResultSetHandler {
      * The RowProcessor implementation to use when converting rows 
      * into Maps.
      */
-    private RowProcessor convert = BasicRowProcessor.instance();
+    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
 
     /** 
      * Creates a new instance of MapListHandler using a 

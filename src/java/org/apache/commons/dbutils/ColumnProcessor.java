@@ -1,6 +1,6 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/BeanListHandler.java,v 1.2 2003/11/28 19:32:10 dgraham Exp $
- * $Revision: 1.2 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/ColumnProcessor.java,v 1.1 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.1 $
  * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
@@ -59,72 +59,46 @@
  *
  */
 
-package org.apache.commons.dbutils.handlers;
+package org.apache.commons.dbutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.RowProcessor;
-
 /**
- * <code>ResultSetHandler</code> implementation that converts a
- * <code>ResultSet</code> into a <code>List</code> of beans. This class is 
- * thread safe.
- * 
- * @see ResultSetHandler
- * 
- * @author Juozas Baliuka
+ * <code>ColumnProcessor</code> implementations convert 
+ * <code>ResultSet</code> columns into objects.  The processor is invoked when
+ * creating a JavaBean from a <code>ResultSet</code>.   
+ *
+ * @author Corby Page
  * @author David Graham
+ * 
+ * @see BasicRowProcessor
+ * 
+ * @since DbUtils 1.1
  */
-public class BeanListHandler implements ResultSetHandler {
+public interface ColumnProcessor {
 
     /**
-     * The Class of beans produced by this handler.
-     */
-    private Class type = null;
-
-    /**
-     * The RowProcessor implementation to use when converting rows 
-     * into beans.
-     */
-    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
-
-    /** 
-     * Creates a new instance of BeanListHandler.
+     * Convert a <code>ResultSet</code> column into an object.  Simple 
+     * implementations could just call <code>rs.getObject(index)</code> while
+     * more complex implementations could perform type manipulation to match 
+     * the column's type to the bean property type.
      * 
-     * @param type The Class that objects returned from <code>handle()</code>
-     * are created from.
-     */
-    public BeanListHandler(Class type) {
-        this.type = type;
-    }
-
-    /** 
-     * Creates a new instance of BeanListHandler.
+     * @param rs The <code>ResultSet</code> currently being processed.  It is
+     * positioned on a valid row before being passed into this method.
      * 
-     * @param type The Class that objects returned from <code>handle()</code>
-     * are created from.
-     * @param convert The <code>RowProcessor</code> implementation 
-     * to use when converting rows into beans.
-     */
-    public BeanListHandler(Class type, RowProcessor convert) {
-        this.type = type;
-        this.convert = convert;
-    }
-
-    /**
-     * Convert the <code>ResultSet</code> rows into a <code>List</code> of 
-     * beans with the <code>Class</code> given in the constructor.
+     * @param index The current column index being processed.
      * 
-     * @return A <code>List</code> of beans (one for each row), never 
-     * <code>null</code>.
+     * @param propertyType The bean property type that this column needs to be
+     * converted into.
+     * 
+     * @return The object from the <code>ResultSet</code> at the given column
+     * index after optional type processing or <code>null</code> if the column
+     * value was SQL NULL.
      * 
      * @throws SQLException
-     * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
-        return this.convert.toBeanList(rs, type);
-    }
+    public Object process(ResultSet rs, int index, Class propertyType)
+        throws SQLException;
 
 }

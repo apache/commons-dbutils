@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BasicRowProcessorTest.java,v 1.3 2003/11/09 04:50:46 dgraham Exp $
- * $Revision: 1.3 $
- * $Date: 2003/11/09 04:50:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BasicRowProcessorTest.java,v 1.4 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
  *
@@ -72,7 +72,7 @@ import java.util.Map;
  */
 public class BasicRowProcessorTest extends BaseTestCase {
 
-    private static final RowProcessor processor = BasicRowProcessor.instance();
+    private static final RowProcessor processor = new BasicRowProcessor();
 
     /**
      * Constructor for BasicRowProcessorTest.

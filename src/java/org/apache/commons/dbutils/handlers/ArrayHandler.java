@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/ArrayHandler.java,v 1.1 2003/11/02 19:15:24 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/ArrayHandler.java,v 1.2 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
  *
@@ -81,10 +81,17 @@ import org.apache.commons.dbutils.RowProcessor;
 public class ArrayHandler implements ResultSetHandler {
 
     /**
+     * Singleton processor instance that handlers share to save memory.  Notice
+     * the default scoping to allow only classes in this package to use this
+     * instance.
+     */
+    static final RowProcessor ROW_PROCESSOR = new BasicRowProcessor();
+
+    /**
      * The RowProcessor implementation to use when converting rows 
      * into arrays.
      */
-    private RowProcessor convert = BasicRowProcessor.instance();
+    private RowProcessor convert = ROW_PROCESSOR;
 
     /** 
      * Creates a new instance of ArrayHandler using a 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/ResultSetIterator.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/ResultSetIterator.java,v 1.2 2003/11/28 19:32:10 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/28 19:32:10 $
  * 
  * ====================================================================
  *
@@ -90,7 +90,7 @@ public class ResultSetIterator implements Iterator {
     /**
      * The processor to use when converting a row into an Object[].
      */
-    private RowProcessor convert = BasicRowProcessor.instance();
+    private RowProcessor convert = new BasicRowProcessor();
 
     /**
      * Constructor for ResultSetIterator.
