@@ -187,14 +187,10 @@ public class QueryRunner {
      * Execute an SQL SELECT query with a single replacement parameter. The
      * caller is responsible for closing the connection.
      * 
-     * @param conn
-     *            The connection to execute the query in.
-     * @param sql
-     *            The query to execute.
-     * @param param
-     *            The replacement parameter.
-     * @param rsh
-     *            The handler that converts the results into an object.
+     * @param conn The connection to execute the query in.
+     * @param sql The query to execute.
+     * @param param The replacement parameter.
+     * @param rsh The handler that converts the results into an object.
      * @return The object returned by the handler.
      * @throws SQLException
      */
