@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.2 2003/11/03 00:38:21 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/03 00:38:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.3 2003/11/11 00:49:44 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/11/11 00:49:44 $
  * 
  * ====================================================================
  *
@@ -442,7 +442,7 @@ public class QueryRunner {
      * set in the constructor.
      * 
      * @param sql The SQL statement to execute.
-     * @param params Initializes the PreparedStatement's IN (ie. '?') 
+     * @param params Initializes the PreparedStatement's IN (i.e. '?') 
      * parameters.
      * @throws SQLException
      * @return The number of rows updated.
@@ -479,7 +479,7 @@ public class QueryRunner {
      * </p>
      * <pre> 
      * QueryRunner run = new QueryRunner() {
-     *     protected void wrap(ResultSet rs) {
+     *     protected ResultSet wrap(ResultSet rs) {
      *         return StringTrimmedResultSet.wrap(rs);
      *     }
      * };
