@@ -20,47 +20,37 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
 
-/**
- * ScalarHandlerTest
- */
 public class ScalarHandlerTest extends BaseTestCase {
 
-	/**
-	 * Constructor for ScalarHandlerTest.
-	 */
-	public ScalarHandlerTest(String name) {
-		super(name);
-	}
+    public ScalarHandlerTest(String name) {
+        super(name);
+    }
 
-	public void testHandle() throws SQLException {
-		ResultSetHandler h = new ScalarHandler();
-		Object results = (Object) h.handle(this.rs);
+    public void testHandle() throws SQLException {
+        ResultSetHandler h = new ScalarHandler();
+        Object results = h.handle(this.rs);
+        assertNotNull(results);
+        assertEquals("1", results);
+    }
 
-		assertNotNull(results);
-		assertEquals("1", results);
-	}
+    public void testColumnIndexHandle() throws SQLException {
+        ResultSetHandler h = new ScalarHandler(2);
+        Object results = h.handle(this.rs);
+        assertNotNull(results);
+        assertEquals("2", results);
+    }
 
-	public void testColumnIndexHandle() throws SQLException {
-		ResultSetHandler h = new ScalarHandler(2);
-		Object results = (Object) h.handle(this.rs);
+    public void testColumnNameHandle() throws SQLException {
+        ResultSetHandler h = new ScalarHandler("THree");
+        Object results = h.handle(this.rs);
+        assertNotNull(results);
+        assertEquals("3", results);
+    }
 
-		assertNotNull(results);
-		assertEquals("2", results);
-	}
-
-	public void testColumnNameHandle() throws SQLException {
-		ResultSetHandler h = new ScalarHandler("THree");
-		Object results = (Object) h.handle(this.rs);
-
-		assertNotNull(results);
-		assertEquals("3", results);
-	}
-
-	public void testEmptyResultSetHandle() throws SQLException {
-		ResultSetHandler h = new ScalarHandler();
-		Object results = (Object) h.handle(this.emptyResultSet);
-
-		assertNull(results);
-	}
+    public void testEmptyResultSetHandle() throws SQLException {
+        ResultSetHandler h = new ScalarHandler();
+        Object results = h.handle(this.emptyResultSet);
+        assertNull(results);
+    }
 
 }
