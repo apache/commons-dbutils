@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.5 2003/11/11 03:24:27 dgraham Exp $
- * $Revision: 1.5 $
- * $Date: 2003/11/11 03:24:27 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.6 2003/11/12 01:00:55 dgraham Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/11/12 01:00:55 $
  * 
  * ====================================================================
  *
@@ -275,16 +275,12 @@ public class QueryRunner {
 
         Connection conn = this.ds.getConnection();
 
-        Object result = null;
-
         try {
-            result = this.query(conn, sql, params, rsh);
+            return this.query(conn, sql, params, rsh);
 
         } finally {
             DbUtils.close(conn);
         }
-
-        return result;
     }
 
     /**
@@ -310,6 +306,7 @@ public class QueryRunner {
      * exception when it's rethrown. 
      * 
      * @param sql The query that was executing when the exception happened.
+     * 
      * @param params The query replacement paramaters; <code>null</code> is a 
      * valid value to pass in.
      * 
@@ -318,17 +315,22 @@ public class QueryRunner {
     protected void rethrow(SQLException cause, String sql, Object[] params)
         throws SQLException {
 
-        StringBuffer msg =
-            new StringBuffer(cause.getMessage() + " in query " + sql);
-            
-        if (params != null) {
-            msg.append(Arrays.asList(params).toString());
+        StringBuffer msg = new StringBuffer(cause.getMessage());
+
+        msg.append(" Query: ");
+        msg.append(sql);
+        msg.append(" Parameters: ");
+
+        if (params == null) {
+            msg.append("[]");
+        } else {
+            msg.append(Arrays.asList(params));
         }
 
-        SQLException newsqle = new SQLException(msg.toString());
-        newsqle.setNextException(cause);
+        SQLException e = new SQLException(msg.toString());
+        e.setNextException(cause);
 
-        throw newsqle;
+        throw e;
     }
 
     /**
