@@ -2,7 +2,7 @@
 <project>
   
   <version>3</version>
-  <name>commons-dbutils</name>
+  <name>DbUtils</name>
   <id>commons-dbutils</id>
   <currentVersion>1.1-dev</currentVersion>
 
@@ -11,11 +11,13 @@
     <url>http://www.apache.org/</url>
     <logo>http://jakarta.apache.org/images/jakarta-logo-blue.gif</logo>
   </organization>
+  
+  <logo>/images/dbutils-logo-blue.png</logo>
 
   <inceptionYear>2002</inceptionYear>
   <package>org.apache.commons.dbutils</package>
 
-  <shortDescription>Java Common Database Components</shortDescription>
+  <shortDescription>Common Java Database Components</shortDescription>
 
   <!-- Gump integration -->
   <gumpRepositoryId>jakarta-dbutils</gumpRepositoryId>
