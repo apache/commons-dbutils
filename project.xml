@@ -30,15 +30,6 @@
 
   <developers>
     <developer>
-      <name>Henri Yandell</name>
-      <id>bayard</id>
-      <email>bayard@generationjava.com</email>
-      <organization></organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
       <name>Juozas Baliuka</name>
       <id>baliuka</id>
       <email>baliuka@apache.org</email>
@@ -74,9 +65,27 @@
         <role>Java Developer</role>
       </roles>
     </developer>
+    <developer>
+      <name>Henri Yandell</name>
+      <id>bayard</id>
+      <email>bayard@generationjava.com</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
   </developers>
   
   <contributors>
+    <contributor>
+      <name>Péter Bagyinszki</name>
+      <id></id>
+      <email></email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
     <contributor>
       <name>Corby Page</name>
       <id></id>

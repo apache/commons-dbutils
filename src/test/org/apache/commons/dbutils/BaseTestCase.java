@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
 package org.apache.commons.dbutils;
 
 import java.math.BigInteger;
@@ -28,6 +29,7 @@ import org.apache.commons.dbutils.handlers.ArrayHandlerTest;
 import org.apache.commons.dbutils.handlers.ArrayListHandlerTest;
 import org.apache.commons.dbutils.handlers.BeanHandlerTest;
 import org.apache.commons.dbutils.handlers.BeanListHandlerTest;
+import org.apache.commons.dbutils.handlers.ColumnListHandlerTest;
 import org.apache.commons.dbutils.handlers.MapHandlerTest;
 import org.apache.commons.dbutils.handlers.MapListHandlerTest;
 import org.apache.commons.dbutils.handlers.ScalarHandlerTest;
@@ -150,6 +152,7 @@ public class BaseTestCase extends TestCase {
         suite.addTestSuite(MapHandlerTest.class);
         suite.addTestSuite(MapListHandlerTest.class);
         suite.addTestSuite(ScalarHandlerTest.class);
+        suite.addTestSuite(ColumnListHandlerTest.class);
 
         suite.addTestSuite(StringTrimmedResultSetTest.class);
         suite.addTestSuite(SqlNullCheckedResultSetTest.class);
