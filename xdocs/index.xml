@@ -24,9 +24,8 @@
 
 <body>
 
-<section name="DbUtils: JDBC Utility Component">
+<section name="Commons DbUtils: JDBC Utility Component">
 
-<section name="Purpose">
 <p>
 DbUtils is a small set of classes designed to make working with 
 <a href="http://java.sun.com/products/jdbc/">JDBC</a> easier.  JDBC 
@@ -111,8 +110,6 @@ Please see <a href="examples.html">Examples Page</a>.
         <li>Java 1.2 (or later)</li>
         <li>JDBC 2.0 (or later)</li>
     </ul>
-</section>
-
 </section>
 
 </body>

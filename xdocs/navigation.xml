@@ -14,16 +14,39 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<project name="Commons DbUtils">
 
-  <title>Commons DbUtils</title>
+<!DOCTYPE project [
+<!ENTITY commons-nav SYSTEM "../../commons-build/incl_nav.xml">
+]>
+
+<project name="DbUtils">
+
+  <title>DbUtils</title>
+  <organizationLogo href="/images/jakarta-logo-blue.gif">
+   Jakarta
+  </organizationLogo>
 
   <body>
-    <menu name="DbUtils">
+    <links>
+      <item name="Jakarta Commons"                   
+            href="http://jakarta.apache.org/commons/"/>
+    </links>
+
+    <menu name="Commons DbUtils">
       <item name="Overview" href="/index.html"/>
-      <item name="Examples" href="/examples.html" />
+      <!--item name="Users guide" href="/userguide.html"/-->
+      <item name="Examples" href="/examples.html"/>
+      <!--item name="Javadoc (3.0 release)" href="apidocs-COLLECTIONS_3_0/index.html"/-->
+      <item name="Javadoc" href="apidocs/index.html"/>
+      <item name="Mailing lists" href="/mail-lists.html"/>
+      <item name="Team" href="/team-list.html"/>
+      <item name="Tasks" href="/todo.html"/>
+      <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/dbutils/"/>
+      <!--item name="Javadoc (CVS latest)" href="apidocs/index.html"/-->
       <item name="Downloads" href="/downloads.html"/>
-      <item name="To Do List" href="/todo.html"/>
     </menu>
+    
+    &commons-nav;
+
   </body>
 </project>
