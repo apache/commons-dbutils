@@ -6,6 +6,7 @@
   <body>
     <menu name="DbUtils">
       <item name="Overview" href="/index.html"/>
+      <item name="Examples" href="/examples.html" />
       <item name="Downloads" href="/downloads.html"/>
       <item name="To Do List" href="/todo.html"/>
     </menu>
