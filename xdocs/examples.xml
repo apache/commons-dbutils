@@ -19,8 +19,6 @@
 
  <properties>
   <title>JDBC Utility Component -- Examples</title>
-  <author email="yoavs@apache.org">Yoav Shapira</author>
-  <author email="dgraham@apache.org">David Graham</author>
  </properties>
 
 <body>
@@ -150,13 +148,13 @@ method to handle custom database datatype issues.
 </p>
 </section>
 
-<section name="Custom ColumnProcessor">
+<section name="Custom BeanProcessor">
 <p>
-<code>BasicRowProcessor</code> uses a <a href="apidocs/org/apache/commons/dbutils/ColumnProcessor.html">ColumnProcessor</a>
-to convert <code>ResultSet</code> columns into JavaBean properties.  You can implement this interface
-to handle datatype mapping specific to your application.  By default <code>BasicRowProcessor</code> uses a
-<a href="apidocs/org/apache/commons/dbutils/BasicColumnProcessor.html">BasicColumnProcessor</a>
-instance which may be sufficient for your application.
+<code>BasicRowProcessor</code> uses a <a href="apidocs/org/apache/commons/dbutils/BeanProcessor.html">BeanProcessor</a>
+to convert <code>ResultSet</code> columns into JavaBean properties.  You can 
+subclass and override processing steps to handle datatype mapping specific to 
+your application.  The provided implementation delegates datatype conversion to 
+the JDBC driver.
 </p>
 </section>
 
