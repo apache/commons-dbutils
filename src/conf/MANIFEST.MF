@@ -1,6 +1,0 @@
-Extension-Name: @package@
-Specification-Vendor: Apache Software Foundation
-Specification-Version: 1.0
-Implementation-Vendor: Apache Software Foundation
-Implementation-Title: commons-dbutils
-Implementation-Version: @version@
