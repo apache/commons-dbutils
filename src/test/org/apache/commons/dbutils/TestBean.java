@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.4 2003/11/28 21:11:33 dgraham Exp $
- * $Revision: 1.4 $
- * $Date: 2003/11/28 21:11:33 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.5 2004/01/11 22:30:39 dgraham Exp $
+ * $Revision: 1.5 $
+ * $Date: 2004/01/11 22:30:39 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,8 +63,6 @@ package org.apache.commons.dbutils;
 
 /**
  * A bean to use in testing toBean() and toBeanList().
- * 
- * @author David Graham
  */
 public class TestBean {
 

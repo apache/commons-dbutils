@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/wrappers/StringTrimmedResultSetTest.java,v 1.1 2003/11/02 19:15:24 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/wrappers/StringTrimmedResultSetTest.java,v 1.2 2004/01/11 22:30:39 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2004/01/11 22:30:39 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,8 +70,6 @@ import org.apache.commons.dbutils.ProxyFactory;
 
 /**
  * StringTrimmedResultSetTest
- *
- * @author David Graham
  */
 public class StringTrimmedResultSetTest extends BaseTestCase {
 

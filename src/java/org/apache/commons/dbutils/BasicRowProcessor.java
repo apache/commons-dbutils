@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.7 2003/12/07 17:25:01 dgraham Exp $
- * $Revision: 1.7 $
- * $Date: 2003/12/07 17:25:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.8 2004/01/11 22:30:38 dgraham Exp $
+ * $Revision: 1.8 $
+ * $Date: 2004/01/11 22:30:38 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2002-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2002-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -85,11 +85,6 @@ import java.util.Map;
  * 
  * @see RowProcessor
  * @see ColumnProcessor
- * 
- * @author Henri Yandell
- * @author Juozas Baliuka
- * @author David Graham
- * @author Yoav Shapira
  */
 public class BasicRowProcessor implements RowProcessor {
 

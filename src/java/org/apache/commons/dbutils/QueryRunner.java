@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.6 2003/11/12 01:00:55 dgraham Exp $
- * $Revision: 1.6 $
- * $Date: 2003/11/12 01:00:55 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.7 2004/01/11 22:30:38 dgraham Exp $
+ * $Revision: 1.7 $
+ * $Date: 2004/01/11 22:30:38 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2002-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2002-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,11 +75,6 @@ import javax.sql.DataSource;
  * <code>ResultSet</code>s.  This class is thread safe.
  * 
  * @see ResultSetHandler
- * 
- * @author Henri Yandell
- * @author Juozas Baliuka
- * @author Steven Caswell
- * @author David Graham
  */
 public class QueryRunner {
 

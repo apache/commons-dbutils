@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BaseTestCase.java,v 1.4 2003/11/28 21:11:33 dgraham Exp $
- * $Revision: 1.4 $
- * $Date: 2003/11/28 21:11:33 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BaseTestCase.java,v 1.5 2004/01/11 22:30:38 dgraham Exp $
+ * $Revision: 1.5 $
+ * $Date: 2004/01/11 22:30:38 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -83,8 +83,6 @@ import org.apache.commons.dbutils.wrappers.StringTrimmedResultSetTest;
 /**
  * BaseTestCase is the base class for all test cases as well as the "all tests"
  * runner.
- * 
- * @author David Graham
  */
 public class BaseTestCase extends TestCase {
 

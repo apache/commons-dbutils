@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/MapListHandler.java,v 1.2 2003/11/28 19:32:10 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/28 19:32:10 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/handlers/MapListHandler.java,v 1.3 2004/01/11 22:30:38 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/01/11 22:30:38 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,8 +75,6 @@ import org.apache.commons.dbutils.RowProcessor;
  * This class is thread safe.
  * 
  * @see ResultSetHandler
- * 
- * @author David Graham
  */
 public class MapListHandler implements ResultSetHandler {
 

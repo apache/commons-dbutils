@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/QueryLoaderTest.java,v 1.2 2003/11/09 19:03:54 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/09 19:03:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/QueryLoaderTest.java,v 1.3 2004/01/11 22:30:39 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2004/01/11 22:30:39 $
  * 
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -66,8 +66,6 @@ import java.util.Map;
 
 /**
  * QueryLoaderTest
- * 
- * @author David Graham
  */
 public class QueryLoaderTest extends BaseTestCase {
 
