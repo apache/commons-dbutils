@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.7 2004/01/11 22:30:38 dgraham Exp $
- * $Revision: 1.7 $
- * $Date: 2004/01/11 22:30:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.8 2004/02/01 00:16:35 dgraham Exp $
+ * $Revision: 1.8 $
+ * $Date: 2004/02/01 00:16:35 $
  * 
  * ====================================================================
  *
@@ -208,8 +208,11 @@ public class QueryRunner {
             this.rethrow(e, sql, params);
 
         } finally {
-            DbUtils.close(rs);
-            DbUtils.close(stmt);
+            try {
+                DbUtils.close(rs);
+            } finally {
+                DbUtils.close(stmt);
+            }
         }
 
         return result;
@@ -430,7 +433,8 @@ public class QueryRunner {
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The 
      * <code>Connection</code> is retrieved from the <code>DataSource</code> 
-     * set in the constructor.
+     * set in the constructor.  This <code>Connection</code> must be in 
+     * auto-commit mode or the update will not be saved. 
      * 
      * @param sql The SQL statement to execute.
      * @param params Initializes the PreparedStatement's IN (i.e. '?') 
