@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/QueryLoaderTest.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/QueryLoaderTest.java,v 1.2 2003/11/09 19:03:54 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/09 19:03:54 $
  * 
  * ====================================================================
  *
@@ -85,11 +85,13 @@ public class QueryLoaderTest extends BaseTestCase {
         try {
             QueryLoader loader = QueryLoader.instance();
             Map q = loader.load(QUERIES);
+            Map q2 = loader.load(QUERIES);
+            assertTrue(q == q2); // pointer comparison should return true
             assertEquals("SELECT * FROM SomeTable", q.get("test.query"));
 
             loader.unload(QUERIES);
-            Map q2 = loader.load(QUERIES);
-            assertTrue(q != q2); // pointer comparison should return false
+            Map q3 = loader.load(QUERIES);
+            assertTrue(q != q3); // pointer comparison should return false
 
         } catch (IllegalArgumentException e) {
             // TODO Figure out why the Maven build can't find the properties 
