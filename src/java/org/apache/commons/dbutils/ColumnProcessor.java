@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/ColumnProcessor.java,v 1.1 2003/11/28 19:32:10 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/28 19:32:10 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/ColumnProcessor.java,v 1.2 2003/12/07 17:25:01 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/12/07 17:25:01 $
  * 
  * ====================================================================
  *
@@ -61,13 +61,17 @@
 
 package org.apache.commons.dbutils;
 
+import java.beans.PropertyDescriptor;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
- * <code>ColumnProcessor</code> implementations convert 
- * <code>ResultSet</code> columns into objects.  The processor is invoked when
- * creating a JavaBean from a <code>ResultSet</code>.   
+ * <code>ColumnProcessor</code> implementations match 
+ * column names to bean property names and convert 
+ * <code>ResultSet</code> columns into objects for those bean properties.  
+ * The processor is invoked when creating a JavaBean from a 
+ * <code>ResultSet</code>.   
  *
  * @author Corby Page
  * @author David Graham
@@ -77,6 +81,35 @@ import java.sql.SQLException;
  * @since DbUtils 1.1
  */
 public interface ColumnProcessor {
+
+    /**
+     * Special array index used by <code>mapColumnsToProperties</code> that 
+     * indicates there is no bean property that matches a column from a 
+     * <code>ResultSet</code>.
+     */
+    public static final int PROPERTY_NOT_FOUND = -1;
+
+    /**
+     * The positions in the returned array represent column numbers.  The 
+     * values stored at each position represent the index in the 
+     * <code>PropertyDescriptor[]</code> for the bean property that matches 
+     * the column name.  If no bean property was found for a column, the 
+     * position is set to <code>PROPERTY_NOT_FOUND</code>.
+     * 
+     * @param rsmd The <code>ResultSetMetaData</code> containing column 
+     * information.
+     * 
+     * @param props The bean property descriptors.
+     * 
+     * @return An int[] with column index to property index mappings.  The 0th 
+     * element is meaningless because JDBC column indexing starts at 1.
+     * 
+     * @throws SQLException
+     */
+    public int[] mapColumnsToProperties(
+        ResultSetMetaData rsmd,
+        PropertyDescriptor[] props)
+        throws SQLException;
 
     /**
      * Convert a <code>ResultSet</code> column into an object.  Simple 

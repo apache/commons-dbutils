@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.6 2003/11/28 19:32:10 dgraham Exp $
- * $Revision: 1.6 $
- * $Date: 2003/11/28 19:32:10 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.7 2003/12/07 17:25:01 dgraham Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/12/07 17:25:01 $
  * 
  * ====================================================================
  *
@@ -78,9 +78,13 @@ import java.util.Map;
 
 /**
  * Basic implementation of the <code>RowProcessor</code> interface.
- * This class is a thread-safe Singleton.
+ * 
+ * <p>
+ * This class is thread-safe.
+ * </p>
  * 
  * @see RowProcessor
+ * @see ColumnProcessor
  * 
  * @author Henri Yandell
  * @author Juozas Baliuka
@@ -108,12 +112,6 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Special array index that indicates there is no bean property that
-     * matches a column from a ResultSet.
-     */
-    private static final int PROPERTY_NOT_FOUND = -1;
-
-    /**
      * The Singleton instance of this class.
      */
     private static final BasicRowProcessor instance = new BasicRowProcessor();
@@ -135,9 +133,22 @@ public class BasicRowProcessor implements RowProcessor {
      */
     private static final ColumnProcessor defaultProcessor =
         new ColumnProcessor() {
+
+        private final ColumnProcessor p = new BasicColumnProcessor();
+
         public Object process(ResultSet rs, int index, Class propType)
             throws SQLException {
             return rs.getObject(index);
+        }
+
+        public int[] mapColumnsToProperties(
+            ResultSetMetaData rsmd,
+            PropertyDescriptor[] props)
+            throws SQLException {
+
+            // TODO Compose the default behavior from BasicColumnProcessor.  
+            // Maybe the default should just be a BasicColumnProcessor?                
+            return p.mapColumnsToProperties(rsmd, props);
         }
     };
 
@@ -218,7 +229,8 @@ public class BasicRowProcessor implements RowProcessor {
 
         ResultSetMetaData rsmd = rs.getMetaData();
 
-        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+        int[] columnToProperty =
+            this.convert.mapColumnsToProperties(rsmd, props);
 
         int cols = rsmd.getColumnCount();
 
@@ -262,7 +274,10 @@ public class BasicRowProcessor implements RowProcessor {
 
         PropertyDescriptor[] props = this.propertyDescriptors(type);
         ResultSetMetaData rsmd = rs.getMetaData();
-        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+        
+        int[] columnToProperty =
+            this.convert.mapColumnsToProperties(rsmd, props);
+            
         int cols = rsmd.getColumnCount();
 
         do {
@@ -296,7 +311,7 @@ public class BasicRowProcessor implements RowProcessor {
 
         for (int i = 1; i <= cols; i++) {
 
-            if (columnToProperty[i] == PROPERTY_NOT_FOUND) {
+            if (columnToProperty[i] == ColumnProcessor.PROPERTY_NOT_FOUND) {
                 continue;
             }
             
@@ -313,44 +328,6 @@ public class BasicRowProcessor implements RowProcessor {
         }
 
         return bean;
-    }
-
-    /**
-     * The positions in the returned array represent column numbers.  The values
-     * stored at each position represent the index in the PropertyDescriptor[] 
-     * for the bean property that matches the column name.  If no bean property
-     * was found for a column, the position is set to PROPERTY_NOT_FOUND.
-     * 
-     * @param rsmd The result set meta data containing column information
-     * @param props The bean property descriptors
-     * @return An int[] with column index to property index mappings.  The 0th 
-     * element is meaningless as column indexing starts at 1.
-     * 
-     * @throws SQLException If a database error occurs
-     */
-    private int[] mapColumnsToProperties(
-        ResultSetMetaData rsmd,
-        PropertyDescriptor[] props)
-        throws SQLException {
-
-        int cols = rsmd.getColumnCount();
-        int columnToProperty[] = new int[cols + 1];
-
-        for (int col = 1; col <= cols; col++) {
-            String columnName = rsmd.getColumnName(col);
-            for (int i = 0; i < props.length; i++) {
-
-                if (columnName.equalsIgnoreCase(props[i].getName())) {
-                    columnToProperty[col] = i;
-                    break;
-
-                } else {
-                    columnToProperty[col] = PROPERTY_NOT_FOUND;
-                }
-            }
-        }
-
-        return columnToProperty;
     }
 
     /**
