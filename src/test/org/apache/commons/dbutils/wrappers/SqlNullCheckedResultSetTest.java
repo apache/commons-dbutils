@@ -290,24 +290,21 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getFloat implementation.
      */
     public void testGetFloat() throws SQLException {
-
-        assertEquals((float) 0, rs.getFloat(1), 0.0);
+        assertEquals(0, rs.getFloat(1), 0.0);
         assertTrue(rs.wasNull());
-        assertEquals((float) 0, rs.getFloat("column"), 0.0);
+        assertEquals(0, rs.getFloat("column"), 0.0);
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        float f = (float) 10.0;
+        float f = 10;
         rs2.setNullFloat(f);
         assertEquals(f, rs.getFloat(1), 0.0);
         assertEquals(f, rs.getFloat("column"), 0.0);
-
     }
 
     /**
      * Tests the getInt implementation.
      */
     public void testGetInt() throws SQLException {
-
         assertEquals(0, rs.getInt(1));
         assertTrue(rs.wasNull());
         assertEquals(0, rs.getInt("column"));
@@ -317,24 +314,21 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         rs2.setNullInt(i);
         assertEquals(i, rs.getInt(1));
         assertEquals(i, rs.getInt("column"));
-
     }
 
     /**
      * Tests the getLong implementation.
      */
     public void testGetLong() throws SQLException {
-
-        assertEquals((long) 0, rs.getLong(1));
+        assertEquals(0, rs.getLong(1));
         assertTrue(rs.wasNull());
-        assertEquals((long) 0, rs.getLong("column"));
+        assertEquals(0, rs.getLong("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        long l = (long) 10;
+        long l = 10;
         rs2.setNullLong(l);
         assertEquals(l, rs.getLong(1));
         assertEquals(l, rs.getLong("column"));
-
     }
 
     /**
@@ -648,67 +642,58 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullDouble implementation.
      */
     public void testSetNullDouble() throws SQLException {
-
-        assertEquals((double) 0.0, rs2.getNullDouble(), 0.0);
+        assertEquals(0.0, rs2.getNullDouble(), 0.0);
         // Set what gets returned to something other than the default
-        double d = (double) 10.0;
+        double d = 10.0;
         rs2.setNullDouble(d);
         assertEquals(d, rs.getDouble(1), 0.0);
         assertEquals(d, rs.getDouble("column"), 0.0);
-
     }
 
     /**
      * Tests the setNullFloat implementation.
      */
     public void testSetNullFloat() throws SQLException {
-
         assertEquals((float) 0.0, rs2.getNullFloat(), 0.0);
         // Set what gets returned to something other than the default
         float f = (float) 10.0;
         rs2.setNullFloat(f);
         assertEquals(f, rs.getFloat(1), 0.0);
         assertEquals(f, rs.getFloat("column"), 0.0);
-
     }
 
     /**
      * Tests the setNullInt implementation.
      */
     public void testSetNullInt() throws SQLException {
-
         assertEquals(0, rs2.getNullInt());
-        assertEquals((int) 0, rs.getInt(1));
+        assertEquals(0, rs.getInt(1));
         assertTrue(rs.wasNull());
-        assertEquals((int) 0, rs.getInt("column"));
+        assertEquals(0, rs.getInt("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        int i = (int) 10;
+        int i = 10;
         rs2.setNullInt(i);
         assertEquals(i, rs.getInt(1));
         assertEquals(i, rs.getInt("column"));
-
     }
 
     /**
      * Tests the setNullLong implementation.
      */
     public void testSetNullLong() throws SQLException {
-
-        assertEquals((long) 0, rs2.getNullLong());
+        assertEquals(0, rs2.getNullLong());
         // Set what gets returned to something other than the default
-        long l = (long) 10;
+        long l = 10;
         rs2.setNullLong(l);
         assertEquals(l, rs.getLong(1));
         assertEquals(l, rs.getLong("column"));
-
     }
 
     /**
      * Tests the setNullObject implementation.
      */
     public void testSetNullObject() throws SQLException {
-
         assertNull(rs2.getNullObject());
         // Set what gets returned to something other than the default
         Object o = new Object();
@@ -721,7 +706,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(o, rs.getObject(1, (Map) null));
         assertNotNull(rs.getObject("column", (Map) null));
         assertEquals(o, rs.getObject("column", (Map) null));
-
     }
 
     /**
