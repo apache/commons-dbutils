@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BasicRowProcessorTest.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/09 04:30:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BasicRowProcessorTest.java,v 1.3 2003/11/09 04:50:46 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/11/09 04:50:46 $
  * 
  * ====================================================================
  *
@@ -117,7 +117,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(new Integer(4), b.getIntegerTest());
         assertEquals(null, b.getNullObjectTest());
         assertEquals(0, b.getNullPrimitiveTest());
-        assertEquals("not a date", b.getNotADate());
+        assertEquals("not a date", b.getNotDate());
     }
 
     public void testToBeanList() throws SQLException {
@@ -136,7 +136,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(new Integer(4), b.getIntegerTest());
         assertEquals(null, b.getNullObjectTest());
         assertEquals(0, b.getNullPrimitiveTest());
-        assertEquals("not a date", b.getNotADate());
+        assertEquals("not a date", b.getNotDate());
     }
 
     public void testToMap() throws SQLException {

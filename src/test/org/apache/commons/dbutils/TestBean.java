@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/09 04:30:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.3 2003/11/09 04:50:46 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/11/09 04:50:46 $
  * 
  * ====================================================================
  *
@@ -97,7 +97,7 @@ public class TestBean {
      * ResultSet does not match the type of the bean property.  In this case, 
      * a Date will be returned but the property is a String.
      */
-    private String notADate = "not a date";
+    private String notDate = "not a date";
 
     /**
      * Constructor for TestBean.
@@ -170,12 +170,12 @@ public class TestBean {
         nullPrimitiveTest = i;
     }
 
-    public String getNotADate() {
-        return notADate;
+    public String getNotDate() {
+        return notDate;
     }
 
-    public void setNotADate(String string) {
-        notADate = string;
+    public void setNotDate(String string) {
+        notDate = string;
     }
 
 }
