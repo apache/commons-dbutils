@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.4 2003/11/10 16:16:32 yoavs Exp $
- * $Revision: 1.4 $
- * $Date: 2003/11/10 16:16:32 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.5 2003/11/11 00:53:19 dgraham Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/11/11 00:53:19 $
  * 
  * ====================================================================
  *
@@ -482,30 +482,31 @@ public class BasicRowProcessor implements RowProcessor {
      * databases don't consistenly handle the casing of column names. 
      */
     private static class CaseInsensitiveHashMap extends HashMap {
-	/**
-	 * @see java.util.Map#containsKey(java.lang.Object)
-	 */
+
+        /**
+         * @see java.util.Map#containsKey(java.lang.Object)
+         */
         public boolean containsKey(Object key) {
             return super.containsKey(key.toString().toLowerCase());
         }
 
-	/**
-	 * @see java.util.Map#get(java.lang.Object)
-	 */
+        /**
+         * @see java.util.Map#get(java.lang.Object)
+         */
         public Object get(Object key) {
             return super.get(key.toString().toLowerCase());
         }
 
-	/**
-	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
-	 */
+        /**
+         * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+         */
         public Object put(Object key, Object value) {
             return super.put(key.toString().toLowerCase(), value);
         }
 
-	/**
-	 * @see java.util.Map#putAll(java.util.Map)
-	 */
+        /**
+         * @see java.util.Map#putAll(java.util.Map)
+         */
         public void putAll(Map m) {
             Iterator iter = m.keySet().iterator();
             while (iter.hasNext()) {
@@ -515,13 +516,12 @@ public class BasicRowProcessor implements RowProcessor {
             }
         }
 
-	/**
-	 * @see java.util.Map#remove(java.lang.ObjecT)
-	 */
+        /**
+         * @see java.util.Map#remove(java.lang.ObjecT)
+         */
         public Object remove(Object key) {
             return super.remove(key.toString().toLowerCase());
         }
     }
+    
 }
-
-// End of class: BasicRowProcessor.java
