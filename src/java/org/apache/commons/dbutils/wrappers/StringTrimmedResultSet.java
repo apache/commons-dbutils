@@ -39,7 +39,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  * rs = StringTrimmedResultSet.wrap(rs);
  * 
  * // Pass wrapped ResultSet to processor
- * List list = BasicRowProcessor.instance().toBeanList(rs);
+ * List list = new BasicRowProcessor().toBeanList(rs);
  * </pre>
  */
 public class StringTrimmedResultSet implements InvocationHandler {
