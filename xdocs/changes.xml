@@ -39,6 +39,14 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-dev" date="in CVS">
+      <action dev="dgraham" type="update">
+        Changed QueryRunner.fillStatement() null handling 
+        to use Types.VARCHAR instead of Types.OTHER.  This works for the 
+        following tested drivers: Firebird 1.5/firebirdsql 1.5RC3,
+        Oracle 9/ Thin driver, MySQL 4.0/Msql Connecttor 3.0 and mm.mysql 
+        2.0.4 MaxDB 7.5, HSQLDB 1.7.1, and MS Access/ODBC Bridge.
+        PR# 29212
+      </action>
       <action dev="dgraham" type="add">
         Added a protected QueryRunner.prepareConnection() method to
         allow subclasses to customize the Connections retrieved from
