@@ -73,9 +73,16 @@ public final class DbUtils {
     public static void closeQuietly(Connection conn, Statement stmt,
             ResultSet rs) {
 
-        closeQuietly(rs);
-        closeQuietly(stmt);
-        closeQuietly(conn);
+        try {
+            closeQuietly(rs);
+        } finally {
+            try {
+                closeQuietly(stmt);
+            } finally {
+                closeQuietly(conn);
+            }
+        }
+
     }
 
     /**
