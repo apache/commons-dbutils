@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/MockResultSet.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/MockResultSet.java,v 1.2 2003/11/28 21:07:38 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/28 21:07:38 $
  * 
  * ====================================================================
  *
@@ -77,158 +77,312 @@ import java.util.Iterator;
  */
 public class MockResultSet implements InvocationHandler {
 
-	private ResultSetMetaData metaData = null;
+    /**
+     * Create a <code>MockResultSet</code> proxy object.  This is equivalent to:
+     * <pre>
+     * ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
+     * </pre>
+     * 
+     * @param metaData
+     * @param rows A null value indicates an empty <code>ResultSet</code>.
+     * @return
+     */
+    public static ResultSet create(
+        ResultSetMetaData metaData,
+        Object[][] rows) {
 
-	private Iterator iter = null;
+        return ProxyFactory.instance().createResultSet(
+            new MockResultSet(metaData, rows));
+    }
 
-	private Object[] currentRow = null;
+    private Object[] currentRow = null;
 
-	private Boolean wasNull = Boolean.FALSE;
+    private Iterator iter = null;
 
-	/**
-	 * Create a <code>MockResultSet</code> proxy object.  This is equivalent to:
-	 * <pre>
-	 * ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
-	 * </pre>
-	 * 
-	 * @param metaData
-	 * @param rows A null value indicates an empty <code>ResultSet</code>.
-	 * @return
-	 */
-	public static ResultSet create(
-		ResultSetMetaData metaData,
-		Object[][] rows) {
+    private ResultSetMetaData metaData = null;
 
-		return ProxyFactory.instance().createResultSet(
-			new MockResultSet(metaData, rows));
-	}
+    private Boolean wasNull = Boolean.FALSE;
 
-	/**
-	 * MockResultSet constructor.
-	 * @param metaData
-	 * @param rows A null value indicates an empty <code>ResultSet</code>.
-	 */
-	public MockResultSet(ResultSetMetaData metaData, Object[][] rows) {
-		super();
-		this.metaData = metaData;
-		this.iter =
-			(rows == null)
-				? Collections.EMPTY_LIST.iterator()
-				: Arrays.asList(rows).iterator();
-	}
+    /**
+     * MockResultSet constructor.
+     * @param metaData
+     * @param rows A null value indicates an empty <code>ResultSet</code>.
+     */
+    public MockResultSet(ResultSetMetaData metaData, Object[][] rows) {
+        super();
+        this.metaData = metaData;
+        this.iter =
+            (rows == null)
+                ? Collections.EMPTY_LIST.iterator()
+                : Arrays.asList(rows).iterator();
+    }
 
-	public Object invoke(Object proxy, Method method, Object[] args)
-		throws Throwable {
+    /**
+     * The get* methods can have an int column index or a String column name as
+     * the parameter.  This method handles both cases and returns the column
+     * index that the client is trying to get at.
+     * @param args
+     * @return A column index.
+     * @throws SQLException
+     */
+    private int columnIndex(Object[] args) throws SQLException {
 
-		String methodName = method.getName();
+        if (args[0] instanceof Integer) {
+            return ((Integer) args[0]).intValue();
 
-		if (methodName.equals("getMetaData")) {
-			return this.getMetaData();
+        } else if (args[0] instanceof String) {
+            return this.columnNameToIndex((String) args[0]);
 
-		} else if (methodName.equals("next")) {
-			return this.next();
+        } else {
+            throw new SQLException(args[0] + " must be Integer or String");
+        }
+    }
 
-		} else if (methodName.equals("previous")) {
+    /**
+     * Returns the column index for the given column name.
+     * @return A 1 based index
+     * @throws SQLException if the column name is invalid
+     */
+    private int columnNameToIndex(String columnName) throws SQLException {
+        for (int i = 0; i < this.currentRow.length; i++) {
+            int c = i + 1;
+            if (this.metaData.getColumnName(c).equalsIgnoreCase(columnName)) {
+                return c;
+            }
+        }
 
-		} else if (methodName.equals("close")) {
+        throw new SQLException(columnName + " is not a valid column name.");
+    }
 
-		} else if (methodName.equals("getObject")) {
+    /**
+     * Gets the boolean value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getBoolean(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
 
-			if (args[0] instanceof Integer) {
-				int col = ((Integer) args[0]).intValue();
-				return this.getObject(col);
+        try {
+            return (obj == null)
+                ? Boolean.FALSE
+                : Boolean.valueOf(obj.toString());
 
-			} else if (args[0] instanceof String) {
-				return this.getObject((String) args[0]);
-			}
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
-		} else if (methodName.equals("getString")) {
+    /**
+     * Gets the byte value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getByte(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
 
-			if (args[0] instanceof Integer) {
-				int col = ((Integer) args[0]).intValue();
-				return this.getString(col);
+        try {
+            return (obj == null)
+                ? new Byte((byte) 0)
+                : Byte.valueOf(obj.toString());
 
-			} else if (args[0] instanceof String) {
-				return this.getString((String) args[0]);
-			}
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
-		} else if (methodName.equals("wasNull")) {
-			return this.wasNull();
+    /**
+     * Gets the double value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getDouble(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
 
-		} else if (methodName.equals("isLast")) {
-			return this.isLast();
-		}
+        try {
+            return (obj == null)
+                ? new Double(0)
+                : Double.valueOf(obj.toString());
 
-		return null;
-	}
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
-	protected Boolean isLast() throws SQLException {
-		return this.iter.hasNext() ? Boolean.FALSE : Boolean.TRUE;
-	}
+    /**
+     * Gets the float value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getFloat(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
 
-	/**
-	 * Gets the object at the given column index.
-	 * @param columnIndex A 1 based index.
-	 * @throws SQLException
-	 */
-	protected Object getObject(int columnIndex) throws SQLException {
-		Object obj = this.currentRow[columnIndex - 1];
-		if (obj == null) {
-			this.wasNull = (obj == null) ? Boolean.TRUE : Boolean.FALSE;
-		}
+        try {
+            return (obj == null) ? new Float(0) : Float.valueOf(obj.toString());
 
-		return obj;
-	}
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
-	protected Object getObject(String columnName) throws SQLException {
-		return this.getObject(this.findColumnIndex(columnName));
-	}
+    /**
+     * Gets the int value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getInt(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
 
-	/**
-	 * Returns the column index for the given column name.
-	 * @return A 1 based index
-	 * @throws SQLException if the column name is invalid
-	 */
-	private int findColumnIndex(String columnName) throws SQLException {
-		for (int i = 0; i < this.currentRow.length; i++) {
-			int c = i + 1;
-			if (this.metaData.getColumnName(c).equalsIgnoreCase(columnName)) {
-				return c;
-			}
-		}
+        try {
+            return (obj == null)
+                ? new Integer(0)
+                : Integer.valueOf(obj.toString());
 
-		throw new SQLException(columnName + " is not a valid column name.");
-	}
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
-	/**
-	 * Gets the String at the given column index.
-	 * @param columnIndex A 1 based index.
-	 * @throws SQLException
-	 */
-	protected String getString(int columnIndex) throws SQLException {
-		Object obj = this.getObject(columnIndex);
-		return (obj == null) ? null : obj.toString();
-	}
+    /**
+     * Gets the long value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getLong(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
 
-	protected String getString(String columnName) throws SQLException {
-		Object obj = this.getObject(this.findColumnIndex(columnName));
-		return (obj == null) ? null : obj.toString();
-	}
+        try {
+            return (obj == null) ? new Long(0) : Long.valueOf(obj.toString());
 
-	protected Boolean next() throws SQLException {
-		if (!this.iter.hasNext()) {
-			return Boolean.FALSE;
-		} else {
-			this.currentRow = (Object[]) iter.next();
-			return Boolean.TRUE;
-		}
-	}
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
 
-	protected ResultSetMetaData getMetaData() throws SQLException {
-		return this.metaData;
-	}
+    protected ResultSetMetaData getMetaData() throws SQLException {
+        return this.metaData;
+    }
 
-	protected Boolean wasNull() throws SQLException {
-		return this.wasNull;
-	}
+    /**
+     * Gets the object at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getObject(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
+        return obj;
+    }
+
+    /**
+     * Gets the short value at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected Object getShort(int columnIndex) throws SQLException {
+        Object obj = this.currentRow[columnIndex - 1];
+        this.setWasNull(obj);
+
+        try {
+            return (obj == null)
+                ? new Short((short) 0)
+                : Short.valueOf(obj.toString());
+
+        } catch (NumberFormatException e) {
+            throw new SQLException(e.getMessage());
+        }
+    }
+
+    /**
+     * Gets the String at the given column index.
+     * @param columnIndex A 1 based index.
+     * @throws SQLException
+     */
+    protected String getString(int columnIndex) throws SQLException {
+        Object obj = this.getObject(columnIndex);
+        this.setWasNull(obj);
+        return (obj == null) ? null : obj.toString();
+    }
+
+    public Object invoke(Object proxy, Method method, Object[] args)
+        throws Throwable {
+
+        String methodName = method.getName();
+
+        if (methodName.equals("getMetaData")) {
+            return this.getMetaData();
+
+        } else if (methodName.equals("next")) {
+            return this.next();
+
+        } else if (methodName.equals("previous")) {
+
+        } else if (methodName.equals("close")) {
+
+        } else if (methodName.equals("getBoolean")) {
+            return this.getBoolean(columnIndex(args));
+
+        } else if (methodName.equals("getByte")) {
+            return this.getByte(columnIndex(args));
+
+        } else if (methodName.equals("getDouble")) {
+            return this.getDouble(columnIndex(args));
+
+        } else if (methodName.equals("getFloat")) {
+            return this.getFloat(columnIndex(args));
+
+        } else if (methodName.equals("getInt")) {
+            return this.getInt(columnIndex(args));
+
+        } else if (methodName.equals("getLong")) {
+            return this.getLong(columnIndex(args));
+
+        } else if (methodName.equals("getObject")) {
+            return this.getObject(columnIndex(args));
+
+        } else if (methodName.equals("getShort")) {
+            return this.getShort(columnIndex(args));
+
+        } else if (methodName.equals("getString")) {
+            return this.getString(columnIndex(args));
+
+        } else if (methodName.equals("wasNull")) {
+            return this.wasNull();
+
+        } else if (methodName.equals("isLast")) {
+            return this.isLast();
+        }
+
+        return null;
+    }
+
+    protected Boolean isLast() throws SQLException {
+        return this.iter.hasNext() ? Boolean.FALSE : Boolean.TRUE;
+    }
+
+    protected Boolean next() throws SQLException {
+        if (!this.iter.hasNext()) {
+            return Boolean.FALSE;
+        } else {
+            this.currentRow = (Object[]) iter.next();
+            return Boolean.TRUE;
+        }
+    }
+
+    /**
+     * Assigns this.wasNull a Boolean value based on the object passed in.
+     * @param isNull
+     */
+    private void setWasNull(Object isNull) {
+        this.wasNull = (isNull == null) ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    protected Boolean wasNull() throws SQLException {
+        return this.wasNull;
+    }
 }
