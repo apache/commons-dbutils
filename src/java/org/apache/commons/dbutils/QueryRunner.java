@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.3 2003/11/11 00:49:44 dgraham Exp $
- * $Revision: 1.3 $
- * $Date: 2003/11/11 00:49:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.4 2003/11/11 01:26:25 dgraham Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/11/11 01:26:25 $
  * 
  * ====================================================================
  *
@@ -450,22 +450,13 @@ public class QueryRunner {
     public int update(String sql, Object[] params) throws SQLException {
 
         Connection conn = this.ds.getConnection();
-        int rows = 0;
 
         try {
-            conn.setAutoCommit(false); // single transaction.
-            rows = this.update(conn, sql, params);
-            conn.commit();
-
-        } catch (SQLException e) {
-            DbUtils.rollback(conn);
-            throw e;
+            return this.update(conn, sql, params);
 
         } finally {
             DbUtils.close(conn);
         }
-
-        return rows;
     }
 
     /**
