@@ -4,7 +4,7 @@
   <version>3</version>
   <name>commons-dbutils</name>
   <id>commons-dbutils</id>
-  <currentVersion>1.0-RC1</currentVersion>
+  <currentVersion>1.1-dev</currentVersion>
 
   <organization>
     <name>Apache Software Foundation</name>
