@@ -169,13 +169,6 @@
         <include>**/BaseTestCase.java</include>
       </includes>
     </unitTest>
-
-    <!-- Resources that are packaged up inside the JAR file -->
-    <resources>
-      <includes>
-        <include>**/*.properties</include>
-      </includes>
-    </resources>
     
   </build>
   
@@ -189,8 +182,6 @@
      <report>maven-junit-report-plugin</report>
      <report>maven-jxr-plugin</report>
      <report>maven-license-plugin</report>
-     <!--report>maven-linkcheck-plugin</report-->
-     <!--report>maven-tasklist-plugin</report-->
   </reports>
 
 </project>
