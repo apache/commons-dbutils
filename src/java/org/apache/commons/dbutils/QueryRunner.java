@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.2 2003/11/03 00:38:21 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/03 00:38:21 $
  * 
  * ====================================================================
  *
@@ -213,8 +213,8 @@ public class QueryRunner {
             this.rethrow(e, sql, params);
 
         } finally {
-            DbUtils.closeQuietly(rs);
-            DbUtils.closeQuietly(stmt);
+            DbUtils.close(rs);
+            DbUtils.close(stmt);
         }
 
         return result;
@@ -281,7 +281,7 @@ public class QueryRunner {
             result = this.query(conn, sql, params, rsh);
 
         } finally {
-            DbUtils.closeQuietly(conn);
+            DbUtils.close(conn);
         }
 
         return result;
@@ -320,6 +320,7 @@ public class QueryRunner {
 
         StringBuffer msg =
             new StringBuffer(cause.getMessage() + " in query " + sql);
+            
         if (params != null) {
             msg.append(Arrays.asList(params).toString());
         }
@@ -396,7 +397,7 @@ public class QueryRunner {
             this.rethrow(e, sql, params);
 
         } finally {
-            DbUtils.closeQuietly(stmt);
+            DbUtils.close(stmt);
         }
 
         return rows;
@@ -461,7 +462,7 @@ public class QueryRunner {
             throw e;
 
         } finally {
-            DbUtils.closeQuietly(conn);
+            DbUtils.close(conn);
         }
 
         return rows;
