@@ -19,7 +19,6 @@
 
  <properties>
   <title>JDBC Utility Component</title>
-  <author email="dgraham@apache.org">David Graham</author>
  </properties>
 
 <body>
