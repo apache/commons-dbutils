@@ -89,7 +89,7 @@ public class QueryLoader {
      * @since DbUtils 1.1
      */
     protected Map loadQueries(String path) throws IOException {
-        InputStream in = QueryLoader.class.getResourceAsStream(path);
+        InputStream in = getClass().getResourceAsStream(path);
 
         if (in == null) {
             throw new IllegalArgumentException(path + " not found.");
