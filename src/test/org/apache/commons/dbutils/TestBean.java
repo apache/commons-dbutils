@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/TestBean.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/09 04:30:50 $
  * 
  * ====================================================================
  *
@@ -81,6 +81,25 @@ public class TestBean {
     private String doNotSet = "not set";
 
     /**
+     * toBean() should set primitive fields to their defaults (ie. 0) when 
+     * null is returned from the ResultSet.
+     */
+    private int nullPrimitiveTest = 7;
+
+    /**
+     * toBean() should set Object fields to null when null is returned from the
+     * ResultSet
+     */
+    private Object nullObjectTest = "overwrite";
+
+    /**
+     * The property should not be set when the object returned from the 
+     * ResultSet does not match the type of the bean property.  In this case, 
+     * a Date will be returned but the property is a String.
+     */
+    private String notADate = "not a date";
+
+    /**
      * Constructor for TestBean.
      */
     public TestBean() {
@@ -133,6 +152,30 @@ public class TestBean {
 
     public void setIntTest(int i) {
         intTest = i;
+    }
+
+    public Object getNullObjectTest() {
+        return nullObjectTest;
+    }
+
+    public int getNullPrimitiveTest() {
+        return nullPrimitiveTest;
+    }
+
+    public void setNullObjectTest(Object object) {
+        nullObjectTest = object;
+    }
+
+    public void setNullPrimitiveTest(int i) {
+        nullPrimitiveTest = i;
+    }
+
+    public String getNotADate() {
+        return notADate;
+    }
+
+    public void setNotADate(String string) {
+        notADate = string;
     }
 
 }

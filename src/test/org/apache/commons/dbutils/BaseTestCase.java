@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BaseTestCase.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BaseTestCase.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/09 04:30:50 $
  * 
  * ====================================================================
  *
@@ -63,6 +63,7 @@ package org.apache.commons.dbutils;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.Date;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -93,12 +94,15 @@ public class BaseTestCase extends TestCase {
             "three",
             "notInBean",
             "intTest",
-            "integerTest" };
+            "integerTest",
+            "nullObjectTest",
+            "nullPrimitiveTest",
+            "wrongType" };
 
     /**
      * The number of columns in the MockResultSet.
      */
-    protected static final int COLS = 6;
+    protected static final int COLS = columnNames.length;
 
     protected static final ResultSetMetaData metaData =
         MockResultSetMetaData.create(columnNames);
@@ -110,7 +114,10 @@ public class BaseTestCase extends TestCase {
             "3",
             "  notInBean  ",
             new Integer(1),
-            new Integer(2)};
+            new Integer(2),
+            null,
+            null,
+            new Date()};
 
     private static final Object[] row2 =
         new Object[] {
@@ -119,14 +126,17 @@ public class BaseTestCase extends TestCase {
             "6",
             "  notInBean  ",
             new Integer(3),
-            new Integer(4)};
+            new Integer(4),
+            null,
+            null,
+            new Date()};
 
     private static final Object[][] rows = new Object[][] { row1, row2 };
 
     /**
      * The number of rows in the MockResultSet.
      */
-    protected static final int ROWS = 2;
+    protected static final int ROWS = rows.length;
 
     /**
      * The ResultSet all test methods will use.

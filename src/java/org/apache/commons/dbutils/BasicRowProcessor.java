@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/09 04:30:50 $
  * 
  * ====================================================================
  *
@@ -89,6 +89,24 @@ import java.util.Map;
 public class BasicRowProcessor implements RowProcessor {
 
     /**
+     * Set a bean's primitive properties to these defaults when SQL NULL 
+     * is returned.  These are the same as the defaults that ResultSet get* 
+     * methods return in the event of a NULL column.
+     */
+    private static final Map primitveDefaults = new HashMap();
+
+    static {
+        primitveDefaults.put(Integer.TYPE, new Integer(0));
+        primitveDefaults.put(Short.TYPE, new Short((short) 0));
+        primitveDefaults.put(Byte.TYPE, new Byte((byte) 0));
+        primitveDefaults.put(Float.TYPE, new Float(0));
+        primitveDefaults.put(Double.TYPE, new Double(0));
+        primitveDefaults.put(Long.TYPE, new Long(0));
+        primitveDefaults.put(Boolean.TYPE, Boolean.FALSE);
+        primitveDefaults.put(Character.TYPE, new Character('\u0000'));
+    }
+
+    /**
      * Special array index that indicates there is no bean property that
      * matches a column from a ResultSet.
      */
@@ -123,15 +141,13 @@ public class BasicRowProcessor implements RowProcessor {
     public Object[] toArray(ResultSet rs) throws SQLException {
         ResultSetMetaData meta = rs.getMetaData();
         int cols = meta.getColumnCount();
-        Object[] objs = new Object[cols];
+        Object[] result = new Object[cols];
 
         for (int i = 0; i < cols; i++) {
-            Object obj = rs.getObject(i + 1);
-
-            objs[i] = rs.wasNull() ? null : obj;
+            result[i] = rs.getObject(i + 1);
         }
 
-        return objs;
+        return result;
     }
 
     /**
@@ -148,38 +164,31 @@ public class BasicRowProcessor implements RowProcessor {
      * 
      *     <li>
      *     The property's set method parameter type matches the column 
-     *     type. If the datatypes do not match, the setter will not be called.
+     *     type. If the data types do not match, the setter will not be called.
      *     </li>
      * </ol>
+     * 
+     * <p>
+     * Primitive bean properties are set to their defaults when SQL NULL is
+     * returned from the <code>ResultSet</code>.  Numeric fields are set to 0
+     * and booleans are set to false.  Object bean properties are set to 
+     * <code>null</code> when SQL NULL is returned.  This is the same behavior
+     * as the <code>ResultSet</code> get* methods.
+     * </p>
+     * 
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
      */
     public Object toBean(ResultSet rs, Class type) throws SQLException {
-        Object obj = newInstance(type);
 
-        PropertyDescriptor[] pd = propertyDescriptors(type);
+        PropertyDescriptor[] props = this.propertyDescriptors(type);
 
         ResultSetMetaData rsmd = rs.getMetaData();
+
+        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+
         int cols = rsmd.getColumnCount();
-        for (int i = 1; i <= cols; i++) {
-            String columnName = rsmd.getColumnName(i);
 
-            for (int j = 0; j < pd.length; j++) {
-
-                if (columnName.equalsIgnoreCase(pd[j].getName())) {
-                    Object value = rs.getObject(i);
-
-                    if (rs.wasNull()
-                        && pd[j].getPropertyType().isPrimitive()) {
-                        continue;
-                    }
-
-                    callSetter(pd[j], obj, value);
-                    break;
-                }
-            }
-        }
-
-        return obj;
+        return this.createBean(rs, type, props, columnToProperty, cols);
     }
 
     /**
@@ -196,9 +205,18 @@ public class BasicRowProcessor implements RowProcessor {
      * 
      *     <li>
      *     The property's set method parameter type matches the column 
-     *     type. If the datatypes do not match, the setter will not be called.
+     *     type. If the data types do not match, the setter will not be called.
      *     </li>
      * </ol>
+     * 
+     * <p>
+     * Primitive bean properties are set to their defaults when SQL NULL is
+     * returned from the <code>ResultSet</code>.  Numeric fields are set to 0
+     * and booleans are set to false.  Object bean properties are set to 
+     * <code>null</code> when SQL NULL is returned.  This is the same behavior
+     * as the <code>ResultSet</code> get* methods.
+     * </p>
+     * 
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      */
     public List toBeanList(ResultSet rs, Class type) throws SQLException {
@@ -208,32 +226,58 @@ public class BasicRowProcessor implements RowProcessor {
             return results;
         }
 
-        PropertyDescriptor[] pd = propertyDescriptors(type);
+        PropertyDescriptor[] pd = this.propertyDescriptors(type);
         ResultSetMetaData rsmd = rs.getMetaData();
-
-        int[] columnNameToIndex = this.mapColumnsToProperties(rsmd, pd);
-
+        int[] columnToProperty = this.mapColumnsToProperties(rsmd, pd);
         int cols = rsmd.getColumnCount();
 
         do {
-            Object obj = newInstance(type);
-
-            for (int i = 1; i <= cols; i++) {
-                Object value = rs.getObject(i);
-                if (rs.wasNull()) {
-                    continue;
-                }
-
-                if (columnNameToIndex[i] != PROPERTY_NOT_FOUND) {
-                    callSetter(pd[columnNameToIndex[i]], obj, value);
-                }
-            }
-
-            results.add(obj);
+            results.add(this.createBean(rs, type, pd, columnToProperty, cols));
 
         } while (rs.next());
 
         return results;
+    }
+
+    /**
+     * Creates a new object and initializes its fields from the ResultSet.
+     * @param rs
+     * @param type
+     * @param props
+     * @param columnToProperty
+     * @param cols
+     * @return An initialized object.
+     * @throws SQLException
+     */
+    private Object createBean(
+        ResultSet rs,
+        Class type,
+        PropertyDescriptor[] props,
+        int[] columnToProperty,
+        int cols)
+        throws SQLException {
+
+        Object bean = this.newInstance(type);
+
+        for (int i = 1; i <= cols; i++) {
+
+            if (columnToProperty[i] == PROPERTY_NOT_FOUND) {
+                continue;
+            }
+            
+            Object value = rs.getObject(i);
+
+            PropertyDescriptor prop = props[columnToProperty[i]];
+            Class propType = prop.getPropertyType();
+
+            if (propType != null && value == null && propType.isPrimitive()) {
+                value = primitveDefaults.get(propType);
+            }
+
+            this.callSetter(bean, prop, value);
+        }
+
+        return bean;
     }
 
     /**
@@ -293,15 +337,18 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Calls the setter method on the target object for the given property.
      * If no setter method exists for the property, this method does nothing.
-     * @param pd The property to set.
      * @param target The object to set the property on.
+     * @param prop The property to set.
      * @param value The value to pass into the setter.
      * @throws SQLException if an error occurs setting the property.
      */
-    private void callSetter(PropertyDescriptor pd, Object target, Object value)
+    private void callSetter(
+        Object target,
+        PropertyDescriptor prop,
+        Object value)
         throws SQLException {
 
-        Method setter = pd.getWriteMethod();
+        Method setter = prop.getWriteMethod();
 
         if (setter == null) {
             return;
@@ -316,15 +363,15 @@ public class BasicRowProcessor implements RowProcessor {
 
         } catch (IllegalArgumentException e) {
             throw new SQLException(
-                "Cannot set " + pd.getName() + ": " + e.getMessage());
+                "Cannot set " + prop.getName() + ": " + e.getMessage());
 
         } catch (IllegalAccessException e) {
             throw new SQLException(
-                "Cannot set " + pd.getName() + ": " + e.getMessage());
+                "Cannot set " + prop.getName() + ": " + e.getMessage());
 
         } catch (InvocationTargetException e) {
             throw new SQLException(
-                "Cannot set " + pd.getName() + ": " + e.getMessage());
+                "Cannot set " + prop.getName() + ": " + e.getMessage());
         }
     }
 

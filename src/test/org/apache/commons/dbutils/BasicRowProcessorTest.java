@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BasicRowProcessorTest.java,v 1.1 2003/11/02 19:15:23 dgraham Exp $
- * $Revision: 1.1 $
- * $Date: 2003/11/02 19:15:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/test/org/apache/commons/dbutils/BasicRowProcessorTest.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/11/09 04:30:50 $
  * 
  * ====================================================================
  *
@@ -72,82 +72,88 @@ import java.util.Map;
  */
 public class BasicRowProcessorTest extends BaseTestCase {
 
-	private static final RowProcessor processor = BasicRowProcessor.instance();
+    private static final RowProcessor processor = BasicRowProcessor.instance();
 
-	/**
-	 * Constructor for BasicRowProcessorTest.
-	 * @param name
-	 */
-	public BasicRowProcessorTest(String name) {
-		super(name);
-	}
+    /**
+     * Constructor for BasicRowProcessorTest.
+     * @param name
+     */
+    public BasicRowProcessorTest(String name) {
+        super(name);
+    }
 
-	public void testToArray() throws SQLException {
+    public void testToArray() throws SQLException {
 
-		int rowCount = 0;
-		Object[] a = null;
-		while (this.rs.next()) {
-			a = processor.toArray(this.rs);
-			assertEquals(COLS, a.length);
-			rowCount++;
-		}
+        int rowCount = 0;
+        Object[] a = null;
+        while (this.rs.next()) {
+            a = processor.toArray(this.rs);
+            assertEquals(COLS, a.length);
+            rowCount++;
+        }
 
-		assertEquals(ROWS, rowCount);
-		assertEquals("4", a[0]);
-		assertEquals("5", a[1]);
-		assertEquals("6", a[2]);
-	}
+        assertEquals(ROWS, rowCount);
+        assertEquals("4", a[0]);
+        assertEquals("5", a[1]);
+        assertEquals("6", a[2]);
+    }
 
-	public void testToBean() throws SQLException {
+    public void testToBean() throws SQLException {
 
-		int rowCount = 0;
-		TestBean b = null;
-		while (this.rs.next()) {
-			b = (TestBean) processor.toBean(this.rs, TestBean.class);
-			assertNotNull(b);
-			rowCount++;
-		}
+        int rowCount = 0;
+        TestBean b = null;
+        while (this.rs.next()) {
+            b = (TestBean) processor.toBean(this.rs, TestBean.class);
+            assertNotNull(b);
+            rowCount++;
+        }
 
-		assertEquals(ROWS, rowCount);
-		assertEquals("4", b.getOne());
-		assertEquals("5", b.getTwo());
-		assertEquals("6", b.getThree());
-		assertEquals("not set", b.getDoNotSet());
+        assertEquals(ROWS, rowCount);
+        assertEquals("4", b.getOne());
+        assertEquals("5", b.getTwo());
+        assertEquals("6", b.getThree());
+        assertEquals("not set", b.getDoNotSet());
         assertEquals(3, b.getIntTest());
         assertEquals(new Integer(4), b.getIntegerTest());
-	}
+        assertEquals(null, b.getNullObjectTest());
+        assertEquals(0, b.getNullPrimitiveTest());
+        assertEquals("not a date", b.getNotADate());
+    }
 
-	public void testToBeanList() throws SQLException {
+    public void testToBeanList() throws SQLException {
 
-		List list = processor.toBeanList(this.rs, TestBean.class);
-		assertNotNull(list);
-		assertEquals(ROWS, list.size());
+        List list = processor.toBeanList(this.rs, TestBean.class);
+        assertNotNull(list);
+        assertEquals(ROWS, list.size());
 
-		TestBean b = (TestBean) list.get(1);
+        TestBean b = (TestBean) list.get(1);
 
-		assertEquals("4", b.getOne());
-		assertEquals("5", b.getTwo());
-		assertEquals("6", b.getThree());
-		assertEquals("not set", b.getDoNotSet());
+        assertEquals("4", b.getOne());
+        assertEquals("5", b.getTwo());
+        assertEquals("6", b.getThree());
+        assertEquals("not set", b.getDoNotSet());
         assertEquals(3, b.getIntTest());
         assertEquals(new Integer(4), b.getIntegerTest());
-	}
+        assertEquals(null, b.getNullObjectTest());
+        assertEquals(0, b.getNullPrimitiveTest());
+        assertEquals("not a date", b.getNotADate());
+    }
 
-	public void testToMap() throws SQLException {
+    public void testToMap() throws SQLException {
 
-		int rowCount = 0;
-		Map m = null;
-		while (this.rs.next()) {
-			m = processor.toMap(this.rs);
-			assertNotNull(m);
-			assertEquals(COLS, m.keySet().size());
-			rowCount++;
-		}
+        int rowCount = 0;
+        Map m = null;
+        while (this.rs.next()) {
+            m = processor.toMap(this.rs);
+            assertNotNull(m);
+            assertEquals(COLS, m.keySet().size());
+            rowCount++;
+        }
 
-		assertEquals(ROWS, rowCount);
-		assertEquals("4", m.get("One")); // case shouldn't matter
-		assertEquals("5", m.get("two"));
-		assertEquals("6", m.get("THREE"));
-	}
+        assertEquals(ROWS, rowCount);
+        assertEquals("4", m.get("One")); // case shouldn't matter
+        assertEquals("5", m.get("two"));
+        assertEquals("6", m.get("THREE"));
+    }
 
 }
