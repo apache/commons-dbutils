@@ -14,7 +14,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
+
 <!DOCTYPE org.apache.commons.menus SYSTEM '../../commons-build/menus/menus.dtd'>
+
 <project name="DbUtils">
 
   <title>DbUtils</title>
@@ -30,15 +32,12 @@
 
     <menu name="Commons DbUtils">
       <item name="Overview" href="/index.html"/>
-      <!--item name="Users guide" href="/userguide.html"/-->
       <item name="Examples" href="/examples.html"/>
-      <!--item name="Javadoc (3.0 release)" href="apidocs-COLLECTIONS_3_0/index.html"/-->
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
       <item name="Tasks" href="/todo.html"/>
       <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/dbutils/"/>
-      <!--item name="Javadoc (CVS latest)" href="apidocs/index.html"/-->
       <item name="Downloads" href="/downloads.html"/>
     </menu>
     
