@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.2 2003/11/09 04:30:50 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/11/09 04:30:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/BasicRowProcessor.java,v 1.3 2003/11/09 18:52:18 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/11/09 18:52:18 $
  * 
  * ====================================================================
  *
@@ -226,13 +226,13 @@ public class BasicRowProcessor implements RowProcessor {
             return results;
         }
 
-        PropertyDescriptor[] pd = this.propertyDescriptors(type);
+        PropertyDescriptor[] props = this.propertyDescriptors(type);
         ResultSetMetaData rsmd = rs.getMetaData();
-        int[] columnToProperty = this.mapColumnsToProperties(rsmd, pd);
+        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
         int cols = rsmd.getColumnCount();
 
         do {
-            results.add(this.createBean(rs, type, pd, columnToProperty, cols));
+            results.add(this.createBean(rs, type, props, columnToProperty, cols));
 
         } while (rs.next());
 
@@ -283,7 +283,8 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * The positions in the returned array represent column numbers.  The values
      * stored at each position represent the index in the PropertyDescriptor[] 
-     * for the bean property that matches the column name. 
+     * for the bean property that matches the column name.  If no bean property
+     * was found for a column, the position is set to PROPERTY_NOT_FOUND.
      * 
      * @return An int[] with column index to property index mappings.  The 0th 
      * element is meaningless as column indexing starts at 1.
@@ -292,27 +293,27 @@ public class BasicRowProcessor implements RowProcessor {
      */
     private int[] mapColumnsToProperties(
         ResultSetMetaData rsmd,
-        PropertyDescriptor[] pd)
+        PropertyDescriptor[] props)
         throws SQLException {
 
         int cols = rsmd.getColumnCount();
-        int columnNameToIndex[] = new int[cols + 1];
+        int columnToProperty[] = new int[cols + 1];
 
         for (int col = 1; col <= cols; col++) {
             String columnName = rsmd.getColumnName(col);
-            for (int j = 0; j < pd.length; j++) {
+            for (int i = 0; i < props.length; i++) {
 
-                if (columnName.equalsIgnoreCase(pd[j].getName())) {
-                    columnNameToIndex[col] = j;
+                if (columnName.equalsIgnoreCase(props[i].getName())) {
+                    columnToProperty[col] = i;
                     break;
 
                 } else {
-                    columnNameToIndex[col] = PROPERTY_NOT_FOUND;
+                    columnToProperty[col] = PROPERTY_NOT_FOUND;
                 }
             }
         }
 
-        return columnNameToIndex;
+        return columnToProperty;
     }
 
     /**
@@ -496,7 +497,6 @@ public class BasicRowProcessor implements RowProcessor {
         public Object remove(Object key) {
             return super.remove(key.toString().toLowerCase());
         }
-
     }
 
 }
