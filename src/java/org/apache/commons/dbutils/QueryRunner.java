@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.4 2003/11/11 01:26:25 dgraham Exp $
- * $Revision: 1.4 $
- * $Date: 2003/11/11 01:26:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/QueryRunner.java,v 1.5 2003/11/11 03:24:27 dgraham Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/11/11 03:24:27 $
  * 
  * ====================================================================
  *
@@ -405,10 +405,8 @@ public class QueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement without
-     * any replacement parameters.  The statement is executed in its own 
-     * transaction that will be committed or rolled back depending on any 
-     * SQLExceptions thrown.  The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * any replacement parameters. The <code>Connection</code> is retrieved 
+     * from the <code>DataSource</code> set in the constructor.
      * 
      * @param sql The SQL statement to execute.
      * @throws SQLException
@@ -420,10 +418,8 @@ public class QueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement with
-     * a single replacement parameter.  The statement is executed in its own 
-     * transaction that will be committed or rolled back depending on any 
-     * SQLExceptions thrown.  The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * a single replacement parameter.  The <code>Connection</code> is 
+     * retrieved from the <code>DataSource</code> set in the constructor.
      * 
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
@@ -436,8 +432,6 @@ public class QueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The 
-     * statement is executed in its own transaction that will be committed or 
-     * rolled back depending on any SQLExceptions thrown.  The 
      * <code>Connection</code> is retrieved from the <code>DataSource</code> 
      * set in the constructor.
      * 
