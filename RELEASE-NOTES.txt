@@ -1,7 +1,7 @@
-$Id: RELEASE-NOTES.txt,v 1.2 2003/11/09 19:07:53 dgraham Exp $
+$Id: RELEASE-NOTES.txt,v 1.3 2003/11/12 03:07:34 dgraham Exp $
 
 			 Commons DbUtils Package
-			   Version 1.0-RC1
+			   Version 1.0
 			    Release Notes
 
 
