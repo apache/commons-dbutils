@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/ColumnProcessor.java,v 1.2 2003/12/07 17:25:01 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/12/07 17:25:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/ColumnProcessor.java,v 1.3 2003/12/13 20:51:09 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/12/13 20:51:09 $
  * 
  * ====================================================================
  *
@@ -76,6 +76,7 @@ import java.sql.SQLException;
  * @author Corby Page
  * @author David Graham
  * 
+ * @see BasicColumnProcessor
  * @see BasicRowProcessor
  * 
  * @since DbUtils 1.1
@@ -83,7 +84,7 @@ import java.sql.SQLException;
 public interface ColumnProcessor {
 
     /**
-     * Special array index used by <code>mapColumnsToProperties</code> that 
+     * Special array value used by <code>mapColumnsToProperties</code> that 
      * indicates there is no bean property that matches a column from a 
      * <code>ResultSet</code>.
      */

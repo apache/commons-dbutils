@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/BasicColumnProcessor.java,v 1.2 2003/12/07 17:25:01 dgraham Exp $
- * $Revision: 1.2 $
- * $Date: 2003/12/07 17:25:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//dbutils/src/java/org/apache/commons/dbutils/Attic/BasicColumnProcessor.java,v 1.3 2003/12/13 20:51:09 dgraham Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/12/13 20:51:09 $
  * 
  * ====================================================================
  *
@@ -73,7 +73,7 @@ import java.sql.SQLException;
  * the supplied JavaBean property type.
  * 
  * <p>
- * This class is thread-safe.
+ * This class is thread safe.
  * </p>
  * 
  * @author Corby Page
