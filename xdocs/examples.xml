@@ -18,7 +18,7 @@
 <document>
 
  <properties>
-  <title>JDBC Utility Component -- Examples</title>
+    <title>JDBC Utility Component -- Examples</title>
  </properties>
 
 <body>
@@ -47,6 +47,10 @@ library.  The following example demonstrates how these classes are used together
 // first row into an Object[].
 ResultSetHandler h = new ResultSetHandler() {
     public Object handle(ResultSet rs) throws SQLException {
+        if (!rs.next()) {
+            return null;
+        }
+    
         ResultSetMetaData meta = rs.getMetaData();
         int cols = meta.getColumnCount();
         Object[] result = new Object[cols];
@@ -77,20 +81,9 @@ instead of a <code>DataSource</code>.  Notice that you are responsible for closi
 </p>
 <source>
 <![CDATA[
-ResultSetHandler h = new ResultSetHandler() {
-    public Object handle(ResultSet rs) throws SQLException {
-        ResultSetMetaData meta = rs.getMetaData();
-        int cols = meta.getColumnCount();
-        Object[] result = new Object[cols];
+ResultSetHandler h = ... // Define a handler the same as above example
 
-        for (int i = 0; i < cols; i++) {
-            result[i] = rs.getObject(i + 1);
-        }
-
-        return result;
-    }
-};
-
+// No DataSource so we must handle Connections manually
 QueryRunner run = new QueryRunner();
 
 Connection conn = ... // open a connection
@@ -100,7 +93,7 @@ try{
 	// do something with the result
 	
 } finally {
-    // use this helper method so we don't have to check for null
+    // Use this helper method so we don't have to check for null
     DbUtils.close(conn);  
 }
 ]]>
