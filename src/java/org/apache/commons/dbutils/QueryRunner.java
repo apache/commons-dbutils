@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
 package org.apache.commons.dbutils;
 
 import java.sql.Connection;
@@ -54,6 +55,64 @@ public class QueryRunner {
     public QueryRunner(DataSource ds) {
         super();
         this.ds = ds;
+    }
+    
+    /**
+     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
+     * 
+     * @param conn The Connection to use to run the query.  The caller is
+     * responsible for closing this Connection.
+     * @param sql The SQL to execute.
+     * @param params An array of query replacement parameters.  Each row in
+     * this array is one set of batch replacement values. 
+     * @return The number of rows updated per statement.
+     * @throws SQLException
+     * @since DbUtils 1.1
+     */
+    public int[] batch(Connection conn, String sql, Object[][] params)
+        throws SQLException {
+
+        PreparedStatement stmt = null;
+        int[] rows = null;
+        try {
+            stmt = this.prepareStatement(conn, sql);
+
+            for (int i = 0; i < params.length; i++) {
+                this.fillStatement(stmt, params[i]);
+                stmt.addBatch();
+            }
+            rows = stmt.executeBatch();
+
+        } catch (SQLException e) {
+            this.rethrow(e, sql, params);
+        } finally {
+            DbUtils.close(stmt);
+        }
+
+        return rows;
+    }
+
+    /**
+     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The 
+     * <code>Connection</code> is retrieved from the <code>DataSource</code> 
+     * set in the constructor.  This <code>Connection</code> must be in 
+     * auto-commit mode or the update will not be saved. 
+     * 
+     * @param sql The SQL to execute.
+     * @param params An array of query replacement parameters.  Each row in
+     * this array is one set of batch replacement values. 
+     * @return The number of rows updated per statement.
+     * @throws SQLException
+     * @since DbUtils 1.1
+     */
+    public int[] batch(String sql, Object[][] params) throws SQLException {
+        Connection conn = this.ds.getConnection();
+
+        try {
+            return this.batch(conn, sql, params);
+        } finally {
+            DbUtils.close(conn);
+        }
     }
 
     /**
@@ -109,7 +168,7 @@ public class QueryRunner {
 
     /**
      * Execute an SQL SELECT query with a single replacement parameter.  The
-     * caller is responsible for connection cleanup.
+     * caller is responsible for closing the connection.
      * 
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -130,7 +189,7 @@ public class QueryRunner {
 
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
-     * caller is responsible for connection cleanup.
+     * caller is responsible for closing the connection.
      * 
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -174,7 +233,7 @@ public class QueryRunner {
 
     /**
      * Execute an SQL SELECT query without any replacement parameters.  The
-     * caller is responsible for connection cleanup.
+     * caller is responsible for closing the connection.
      * 
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -360,7 +419,9 @@ public class QueryRunner {
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement without
      * any replacement parameters. The <code>Connection</code> is retrieved 
-     * from the <code>DataSource</code> set in the constructor.
+     * from the <code>DataSource</code> set in the constructor.  This 
+     * <code>Connection</code> must be in auto-commit mode or the update will 
+     * not be saved. 
      * 
      * @param sql The SQL statement to execute.
      * @throws SQLException
@@ -374,6 +435,8 @@ public class QueryRunner {
      * Executes the given INSERT, UPDATE, or DELETE SQL statement with
      * a single replacement parameter.  The <code>Connection</code> is 
      * retrieved from the <code>DataSource</code> set in the constructor.
+     * This <code>Connection</code> must be in auto-commit mode or the 
+     * update will not be saved. 
      * 
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
@@ -397,17 +460,15 @@ public class QueryRunner {
      * @return The number of rows updated.
      */
     public int update(String sql, Object[] params) throws SQLException {
-
         Connection conn = this.ds.getConnection();
 
         try {
             return this.update(conn, sql, params);
-
         } finally {
             DbUtils.close(conn);
         }
     }
-
+    
     /**
      * Wrap the <code>ResultSet</code> in a decorator before processing it.
      * This implementation returns the <code>ResultSet</code> it is given

@@ -106,7 +106,7 @@ Please see <a href="examples.html">Examples Page</a>.
 <section name="Interaction With Other Packages">
     <p>DbUtils relies on these packages:</p> 
     <ul>
-        <li>Java 1.2 (or later)</li>
+        <li>Java 1.3 (or later)</li>
         <li>JDBC 2.0 (or later)</li>
     </ul>
 </section>
