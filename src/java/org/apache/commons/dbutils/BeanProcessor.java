@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -182,13 +183,9 @@ public class BeanProcessor {
      * @return An initialized object.
      * @throws SQLException If a database error occurs
      */
-    private Object createBean(
-        ResultSet rs,
-        Class type,
-        PropertyDescriptor[] props,
-        int[] columnToProperty,
-        int cols)
-        throws SQLException {
+    private Object createBean(ResultSet rs, Class type,
+            PropertyDescriptor[] props, int[] columnToProperty, int cols)
+            throws SQLException {
 
         Object bean = this.newInstance(type);
 
@@ -221,11 +218,8 @@ public class BeanProcessor {
      * @param value The value to pass into the setter.
      * @throws SQLException if an error occurs setting the property.
      */
-    private void callSetter(
-        Object target,
-        PropertyDescriptor prop,
-        Object value)
-        throws SQLException {
+    private void callSetter(Object target, PropertyDescriptor prop, Object value)
+            throws SQLException {
 
         Method setter = prop.getWriteMethod();
 
@@ -364,10 +358,8 @@ public class BeanProcessor {
      * 
      * @throws SQLException 
      */
-    protected int[] mapColumnsToProperties(
-        ResultSetMetaData rsmd,
-        PropertyDescriptor[] props)
-        throws SQLException {
+    protected int[] mapColumnsToProperties(ResultSetMetaData rsmd,
+            PropertyDescriptor[] props) throws SQLException {
 
         int cols = rsmd.getColumnCount();
         int columnToProperty[] = new int[cols + 1];
@@ -447,7 +439,10 @@ public class BeanProcessor {
 
         } else if (propType.equals(Byte.TYPE) || propType.equals(Byte.class)) {
             return new Byte(rs.getByte(index));
-                        
+            
+        } else if (propType.equals(Timestamp.class)) {
+            return rs.getTimestamp(index);
+
         } else {
             return rs.getObject(index);
         }

@@ -40,6 +40,12 @@ The <action> type attribute can be add,update,fix,remove.
 
     <release version="1.1-dev" date="in CVS">
       <action dev="dgraham" type="update">
+        Call ResultSet.getTimestamp() in BeanProcessor.processColumn() if 
+        the bean property is a java.sql.Timestamp.  Oracle's getObject() 
+        implementation returns its own incompatible Timestamp class.
+        PR: 30749
+      </action>
+      <action dev="dgraham" type="update">
         Changed QueryRunner.fillStatement() null handling 
         to use Types.VARCHAR instead of Types.OTHER.  This works for the 
         following tested drivers: Firebird 1.5/firebirdsql 1.5RC3,
