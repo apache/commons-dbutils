@@ -39,6 +39,10 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-dev" date="in CVS">
+      <action dev="dgraham" type="update">
+        QueryRunner now calls getDataSource() internally any time it needs access
+        to its DataSource object to allow subclasses to provide different behavior.
+      </action>
       <action dev="dgraham" type="add">
         Added DbUtils.rollbackAndClose() and DbUtils.rollbackAndCloseQuietly().
       </action>

@@ -55,7 +55,7 @@ public class QueryRunner {
      */
     public QueryRunner(DataSource ds) {
         super();
-        this.ds = ds;
+        setDataSource(ds);
     }
     
     /**
@@ -144,7 +144,10 @@ public class QueryRunner {
     }
 
     /**
-     * Returns the <code>DataSource</code> this runner is using.
+     * Returns the <code>DataSource</code> this runner is using.  
+     * <code>QueryRunner</code> methods always call this method to get the
+     * <code>DataSource</code> so subclasses can provide specialized
+     * behavior.
      */
     public DataSource getDataSource() {
         return this.ds;
@@ -183,7 +186,7 @@ public class QueryRunner {
      * @since DbUtils 1.1
      */
     protected Connection prepareConnection() throws SQLException {
-        return this.ds.getConnection();
+        return this.getDataSource().getConnection();
     }
 
     /**
@@ -224,9 +227,7 @@ public class QueryRunner {
         try {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
-
             rs = this.wrap(stmt.executeQuery());
-
             result = rsh.handle(rs);
 
         } catch (SQLException e) {
@@ -300,7 +301,6 @@ public class QueryRunner {
 
         try {
             return this.query(conn, sql, params, rsh);
-
         } finally {
             close(conn);
         }
@@ -415,7 +415,6 @@ public class QueryRunner {
         try {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
-
             rows = stmt.executeUpdate();
 
         } catch (SQLException e) {
