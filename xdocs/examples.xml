@@ -149,6 +149,26 @@ subclass and override processing steps to handle datatype mapping specific to
 your application.  The provided implementation delegates datatype conversion to 
 the JDBC driver.
 </p>
+<p>
+BeanProcessor maps columns to bean properties as documented in the 
+<a href="apidocs/org/apache/commons/dbutils/BeanProcessor.html#toBean(java.sql.ResultSet,%20java.lang.Class)">BeanProcessor.toBean()</a> javadoc.  
+Column names must match the bean's property names case insensitively.  
+For example, the <code>firstname</code> column would be stored in the bean 
+by calling its <code>setFirstName()</code> method.  However, many database 
+column names include characters that either can't be used or are not typically 
+used in Java method names.  You can do one of the following to map 
+these columns to bean properties:
+<ol>
+    <li>
+        Alias the column names in the SQL so they match the Java names:  
+        <code>select social_sec# as socialSecurityNumber from person</code>
+    </li>
+    <li>
+        Subclass BeanProcessor and override the <a href="apidocs/org/apache/commons/dbutils/BeanProcessor.html#mapColumnsToProperties(java.sql.ResultSetMetaData,%20java.beans.PropertyDescriptor[])">mapColumnsToProperties()</a> 
+        method to strip out the offending characters.
+    </li>
+</ol>
+</p>
 </section>
 
 </body>
