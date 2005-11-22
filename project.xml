@@ -17,9 +17,10 @@
 <project>
   <pomVersion>3</pomVersion>
   
-  <id>commons-dbutils</id>
+  <groupId>commons-dbutils</groupId>
+  <artifactId>commons-dbutils</artifactId>
   <inceptionYear>2002</inceptionYear>
-  <currentVersion>1.1-dev</currentVersion>
+  <currentVersion>1.1-SNAPSHOT</currentVersion>
   <name>DbUtils</name>
   <shortDescription>Commons DbUtils</shortDescription>
   <description>A package of Java utility classes for easing JDBC development</description>
@@ -119,81 +120,60 @@
   <contributors>
     <contributor>
       <name>Péter Bagyinszki</name>
-      <id></id>
-      <email></email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Stefan Fleiter</name>
-      <id></id>
       <email>stefan.fleiter@web.de</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Adkins Kendall</name>
-      <id></id>
-      <email></email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Markus Khouri</name>
-      <id></id>
       <email>mkhouri.list@gmail.com</email>
-      <organization></organization>
       <roles>
         <role>Documentation</role>
       </roles>
     </contributor>
     <contributor>
       <name>Uli Kleeberger</name>
-      <id></id>
       <email>ukleeberger@web.de</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Piotr Lakomy</name>
-      <id></id>
       <email>piotrl@cft-inc.net</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Corby Page</name>
-      <id></id>
-      <email></email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Michael Schuerig</name>
-      <id></id>
       <email>michael@schuerig.de</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
     </contributor>
     <contributor>
       <name>Norris Shelton</name>
-      <id></id>
       <email>norrisshelton@yahoo.com</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -202,7 +182,8 @@
 
   <dependencies>
     <dependency>
-      <id>junit</id>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <url>http://www.junit.org/</url>
     </dependency>
