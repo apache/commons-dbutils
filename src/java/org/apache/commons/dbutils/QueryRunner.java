@@ -186,6 +186,9 @@ public class QueryRunner {
      * @since DbUtils 1.1
      */
     protected Connection prepareConnection() throws SQLException {
+        if(this.getDataSource() == null) {
+            throw new SQLException("QueryRunner requires a DataSource to be invoked in this way, or a Connection should be passed in");
+        }
         return this.getDataSource().getConnection();
     }
 
