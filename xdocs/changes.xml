@@ -39,23 +39,23 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.1-dev" date="in CVS">
-      <action dev="dgraham" type="add">
+      <action dev="dgraham" type="add" issue="32120">
         Added protected ResultSetIterator.rethrow() method to wrap SQLExceptions in 
-        RuntimeExceptions.  PR: 32120
+        RuntimeExceptions.
       </action>
-      <action dev="dgraham" type="update">
-        Added SQLState and error code to rethrown SQLExceptions.  PR: 33614
+      <action dev="dgraham" type="update" issue="33614">
+        Added SQLState and error code to rethrown SQLExceptions.
       </action>
-      <action dev="dgraham" type="add">
-        Added KeyedHandler to create a Map of Maps from a ResultSet. PR: 31446
+      <action dev="dgraham" type="add" issue="31446">
+        Added KeyedHandler to create a Map of Maps from a ResultSet.
       </action>
-      <action dev="dgraham" type="update">
+      <action dev="dgraham" type="update" issue="31169">
         Use current class' ClassLoader instead of QueryLoader's ClassLoader
-        in loadQueries().  PR: 31169
+        in loadQueries().
       </action>
-      <action dev="dgraham" type="update">
+      <action dev="dgraham" type="update" issue="31460">
         Made QueryLoader.loadQueries() protected so subclasses can use query
-        repositories other than properties files.  PR: 31460        
+        repositories other than properties files.    
       </action>
       <action dev="dgraham" type="update">
         QueryRunner now calls getDataSource() internally any time it needs access
@@ -64,39 +64,34 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="dgraham" type="add">
         Added DbUtils.rollbackAndClose() and DbUtils.rollbackAndCloseQuietly().
       </action>
-      <action dev="dgraham" type="update">
+      <action dev="dgraham" type="update" issue="30749">
         Call ResultSet.getTimestamp() in BeanProcessor.processColumn() if 
         the bean property is a java.sql.Timestamp.  Oracle's getObject() 
         implementation returns its own incompatible Timestamp class.
-        PR: 30749
       </action>
-      <action dev="dgraham" type="update">
+      <action dev="dgraham" type="update" issue="29212">
         Changed QueryRunner.fillStatement() null handling 
         to use Types.VARCHAR instead of Types.OTHER.  This works for the 
         following tested drivers: Firebird 1.5/firebirdsql 1.5RC3,
         Oracle 9/ Thin driver, MySQL 4.0/Msql Connecttor 3.0 and mm.mysql 
         2.0.4 MaxDB 7.5, HSQLDB 1.7.1, and MS Access/ODBC Bridge.
-        PR# 29212
       </action>
-      <action dev="dgraham" type="add">
+      <action dev="dgraham" type="add" issue="30032">
         Added a protected QueryRunner.prepareConnection() method to
         allow subclasses to customize the Connections retrieved from
         the DataSource before they're used.
-        PR# 30032
       </action>
       <action dev="dgraham" type="add">
         Refactored bean handling from BasicRowProcessor into new 
         BeanProcessor class.  This also fixes the common problem with
         Oracle NUMERIC fields not being set into bean properties.
       </action>
-      <action dev="dgraham" type="add">
+      <action dev="dgraham" type="add" issue="27530">
         Added QueryRunner.batch() methods for batch updates.
-        PR# 27530
       </action>
-      <action dev="dgraham" type="add">
+      <action dev="dgraham" type="add" issue="27377">
         Added new ResultSetHandler implementation, ColumnListHandler, that 
-        converts one ResultSet column into a List of Objects. 
-        PR# 27377
+        converts one ResultSet column into a List of Objects.
       </action>
     </release>
     
