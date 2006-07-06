@@ -315,7 +315,7 @@ public class MockResultSet implements InvocationHandler {
             return Boolean.valueOf(proxy == args[0]); 
         }
 
-        return null;
+        throw new UnsupportedOperationException("Unsupported method: " + methodName);
     }
 
     protected Boolean isLast() throws SQLException {

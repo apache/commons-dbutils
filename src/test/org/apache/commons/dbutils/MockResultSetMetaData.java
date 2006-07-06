@@ -72,19 +72,8 @@ public class MockResultSetMetaData implements InvocationHandler {
         } else if (methodName.equals("equals")) { 
             return Boolean.valueOf(proxy == args[0]); 
 
-            // stub out other methods for now
         } else {
-            Class returnType = method.getReturnType();
-
-            if (returnType.equals(String.class)) {
-                return "";
-
-            } else if (returnType.equals(Integer.TYPE)) {
-                return new Integer(0);
-
-            } else {
-                return Boolean.FALSE;
-            }
+            throw new UnsupportedOperationException("Unsupported method: " + methodName);
         }
     }
 }
