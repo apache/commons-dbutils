@@ -877,6 +877,14 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
         return null;
     }
 
+    public void free() throws SQLException {
+      
+    }
+
+    public InputStream getBinaryStream(long pos, long length) throws SQLException {
+      return null;
+    }
+
 }
 
 class SqlNullCheckedResultSetMockClob implements Clob {
@@ -924,6 +932,14 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     public int setString(long pos, String str, int offset, int len)
         throws SQLException {
         return 0;
+    }
+
+    public void free() throws SQLException {
+
+    }
+
+    public Reader getCharacterStream(long pos, long length) throws SQLException {
+      return null;
     }
 
 }
