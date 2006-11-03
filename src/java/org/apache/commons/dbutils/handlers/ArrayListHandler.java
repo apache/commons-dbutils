@@ -17,8 +17,6 @@ package org.apache.commons.dbutils.handlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
@@ -30,7 +28,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see ResultSetHandler
  */
-public class ArrayListHandler implements ResultSetHandler {
+public class ArrayListHandler extends GenericListHandler {
 
     /**
      * The RowProcessor implementation to use when converting rows 
@@ -57,26 +55,17 @@ public class ArrayListHandler implements ResultSetHandler {
         this.convert = convert;
     }
 
+    
     /**
-     * Convert each row's columns into an <code>Object[]</code> and store them 
-     * in a <code>List</code> in the same order they are returned from the
-     * <code>ResultSet.next()</code> method. 
-     * 
-     * @return A <code>List</code> of <code>Object[]</code>s, never 
-     * <code>null</code>.
-     * 
-     * @throws SQLException
-     * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
-     */
-    public Object handle(ResultSet rs) throws SQLException {
-
-        List result = new ArrayList();
-
-        while (rs.next()) {
-            result.add(this.convert.toArray(rs));
-        }
-
-        return result;
-    }
+      * Convert row's columns into an <code>Object[]</code>.
+      * 
+      * @return <code>Object[]</code>, never <code>null</code>.
+      * 
+      * @throws SQLException
+      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+      */
+     protected Object handleRow(ResultSet rs) throws SQLException {
+         return this.convert.toArray(rs);
+     }
 
 }

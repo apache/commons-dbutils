@@ -18,8 +18,6 @@ package org.apache.commons.dbutils.handlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 
@@ -31,7 +29,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * @see ResultSetHandler
  * @since DbUtils 1.1
  */
-public class ColumnListHandler implements ResultSetHandler {
+public class ColumnListHandler extends GenericListHandler {
 
     /**
      * The column number to retrieve.
@@ -73,28 +71,20 @@ public class ColumnListHandler implements ResultSetHandler {
     }
 
     /**
-     * Returns one <code>ResultSet</code> column as a <code>List</code> of
-     * <code>Object</code>s. The elements are added to the <code>List</code> via
-     * the <code>ResultSet.getObject()</code> method.
+     * Returns one <code>ResultSet</code> column value as <code>Object</code>.
      * 
-     * @return A <code>List</code> of <code>Object</code>s, never
-     * <code>null</code>. 
+     * @return <code>Object</code>, never <code>null</code>.
      * 
      * @throws SQLException
      * 
-     * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
+     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
-
-        List result = new ArrayList();
-
-        while (rs.next()) {
-            if (this.columnName == null) {
-                result.add(rs.getObject(this.columnIndex));
-            } else {
-                result.add(rs.getObject(this.columnName));
-            }
+   protected Object handleRow(ResultSet rs) throws SQLException {
+        if (this.columnName == null) {
+            return rs.getObject(this.columnIndex);
+        } else {
+            return rs.getObject(this.columnName);
         }
-        return result;
-    }
+   }
+
 }

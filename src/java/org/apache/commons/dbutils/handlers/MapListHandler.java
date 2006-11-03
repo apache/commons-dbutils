@@ -17,8 +17,6 @@ package org.apache.commons.dbutils.handlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
@@ -30,7 +28,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see ResultSetHandler
  */
-public class MapListHandler implements ResultSetHandler {
+public class MapListHandler extends GenericListHandler {
 
     /**
      * The RowProcessor implementation to use when converting rows 
@@ -58,24 +56,16 @@ public class MapListHandler implements ResultSetHandler {
     }
 
     /**
-     * Converts the <code>ResultSet</code> rows into a <code>List</code> of 
-     * <code>Map</code> objects.
+     * Converts the <code>ResultSet</code> row into a <code>Map</code> object.
      * 
-     * @return A <code>List</code> of <code>Map</code>s, never null.  
+     * @return A <code>Map</code>, never null.  
      * 
      * @throws SQLException
      * 
-     * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
+     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
-
-        List results = new ArrayList();
-
-        while (rs.next()) {
-            results.add(this.convert.toMap(rs));
-        }
-
-        return results;
+    protected Object handleRow(ResultSet rs) throws SQLException {
+    	return this.convert.toMap(rs);
     }
 
 }
