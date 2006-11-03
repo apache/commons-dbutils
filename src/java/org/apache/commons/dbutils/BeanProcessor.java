@@ -222,6 +222,21 @@ public class BeanProcessor {
 
         Class[] params = setter.getParameterTypes();
         try {
+            // convert types for some popular ones
+            if (value != null) {
+                if (value instanceof java.util.Date) {
+                    if (params[0].getName().equals("java.sql.Date")) {
+                        value = new java.sql.Date(((java.util.Date) value).getTime());
+                    } else
+                    if (params[0].getName().equals("java.sql.Time")) {
+                        value = new java.sql.Time(((java.util.Date) value).getTime());
+                    } else
+                    if (params[0].getName().equals("java.sql.Timestamp")) {
+                        value = new java.sql.Timestamp(((java.util.Date) value).getTime());
+                    }
+                }
+            }
+
             // Don't call setter if the value object isn't the right type 
             if (this.isCompatibleType(value, params[0])) {
                 setter.invoke(target, new Object[] { value });
