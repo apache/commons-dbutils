@@ -91,8 +91,6 @@
     <junit dir="./" failureproperty="test.failure" printSummary="yes" fork="true" haltonerror="true">
       <sysproperty key="basedir" value=".">
       </sysproperty>
-      <formatter type="xml">
-      </formatter>
       <formatter usefile="false" type="plain">
       </formatter>
       <classpath>
@@ -156,12 +154,13 @@
   <target name="get-deps" unless="noget" depends="init">
     <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/junit/jars/junit-3.8.1.jar">
     </get>
-    <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/junit/jars/junit-3.8.1.jar">
-    </get>
     <get dest="${libdir}/ant-1.5.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/ant/jars/ant-1.5.jar">
     </get>
     <get dest="${libdir}/ant-optional-1.5.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/ant/jars/ant-optional-1.5.jar">
     </get>
+    <echo message="Pay no attention if there is a subsequent warning if building under JDK 1.4+"/>
+    <copy file="lib/jdbc2_0-stdext.jar" todir="${libdir}" failonerror="false">
+    </copy>
   </target>
   <target name="install-maven">
     <get dest="${user.home}/maven-install-latest.jar" usetimestamp="true" src="${repo}/maven/maven-install-latest.jar">
