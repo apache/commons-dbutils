@@ -38,22 +38,22 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.1-dev" date="in CVS">
-      <action dev="dgraham" type="add" issue="32120">
+    <release version="1.1-dev" date="in SVN">
+      <action dev="dgraham" type="add" issue="DBUTILS-4">
         Added protected ResultSetIterator.rethrow() method to wrap SQLExceptions in 
         RuntimeExceptions.
       </action>
-      <action dev="dgraham" type="update" issue="33614">
+      <action dev="dgraham" type="update" issue="DBUTILS-5">
         Added SQLState and error code to rethrown SQLExceptions.
       </action>
-      <action dev="dgraham" type="add" issue="31446">
+      <action dev="dgraham" type="add" issue="DBUTILS-25">
         Added KeyedHandler to create a Map of Maps from a ResultSet.
       </action>
-      <action dev="dgraham" type="update" issue="31169">
+      <action dev="dgraham" type="update" issue="DBUTILS-2">
         Use current class' ClassLoader instead of QueryLoader's ClassLoader
         in loadQueries().
       </action>
-      <action dev="dgraham" type="update" issue="31460">
+      <action dev="dgraham" type="update" issue="DBUTILS-22">
         Made QueryLoader.loadQueries() protected so subclasses can use query
         repositories other than properties files.    
       </action>
@@ -64,19 +64,19 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="dgraham" type="add">
         Added DbUtils.rollbackAndClose() and DbUtils.rollbackAndCloseQuietly().
       </action>
-      <action dev="dgraham" type="update" issue="30749">
+      <action dev="dgraham" type="update" issue="DBUTILS-26">
         Call ResultSet.getTimestamp() in BeanProcessor.processColumn() if 
         the bean property is a java.sql.Timestamp.  Oracle's getObject() 
         implementation returns its own incompatible Timestamp class.
       </action>
-      <action dev="dgraham" type="update" issue="29212">
+      <action dev="dgraham" type="update" issue="DBUTILS-18">
         Changed QueryRunner.fillStatement() null handling 
         to use Types.VARCHAR instead of Types.OTHER.  This works for the 
         following tested drivers: Firebird 1.5/firebirdsql 1.5RC3,
         Oracle 9/ Thin driver, MySQL 4.0/Msql Connecttor 3.0 and mm.mysql 
         2.0.4 MaxDB 7.5, HSQLDB 1.7.1, and MS Access/ODBC Bridge.
       </action>
-      <action dev="dgraham" type="add" issue="30032">
+      <action dev="dgraham" type="add" issue="DBUTILS-21">
         Added a protected QueryRunner.prepareConnection() method to
         allow subclasses to customize the Connections retrieved from
         the DataSource before they're used.
@@ -86,10 +86,10 @@ The <action> type attribute can be add,update,fix,remove.
         BeanProcessor class.  This also fixes the common problem with
         Oracle NUMERIC fields not being set into bean properties.
       </action>
-      <action dev="dgraham" type="add" issue="27530">
+      <action dev="dgraham" type="add" issue="DBUTILS-13">
         Added QueryRunner.batch() methods for batch updates.
       </action>
-      <action dev="dgraham" type="add" issue="27377">
+      <action dev="dgraham" type="add" issue="DBUTILS-11">
         Added new ResultSetHandler implementation, ColumnListHandler, that 
         converts one ResultSet column into a List of Objects.
       </action>
