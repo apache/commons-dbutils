@@ -36,8 +36,8 @@
       <item name="Javadoc" href="apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
-      <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/dbutils/"/>
-      <item name="Downloads" href="/downloads.html"/>
+      <item name="Latest Source" href="/cvs-usage.html"/>
+      <item name="Downloads" href="http://jakarta.apache.org/site/downloads/downloads_commons-dbutils.cgi"/>
     </menu>
     
     &common-menus;
