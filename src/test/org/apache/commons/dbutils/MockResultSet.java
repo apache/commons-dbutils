@@ -312,7 +312,7 @@ public class MockResultSet implements InvocationHandler {
             return "MockResultSet " + System.identityHashCode(proxy);
 
         } else if (methodName.equals("equals")) { 
-            return Boolean.valueOf(proxy == args[0]); 
+            return new Boolean(proxy == args[0]); 
         }
 
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
