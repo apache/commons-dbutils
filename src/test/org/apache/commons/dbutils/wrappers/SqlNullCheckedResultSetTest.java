@@ -462,18 +462,41 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
     
     /**
-     * Tests the getURL implementation.
+     * Tests the getURL and setNullURL implementations.
+     *
+     * Uses reflection to allow for building under JDK 1.3.
      */
-    public void testGetURL() throws SQLException, MalformedURLException {
-        assertEquals(null, rs.getURL(1));
-        assertTrue(rs.wasNull());
-        assertEquals(null, rs.getURL("column"));
-        assertTrue(rs.wasNull());
-        // Set what gets returned to something other than the default
-        URL u = new URL("http://www.apache.org");
-        rs2.setNullURL(u);
-        assertEquals(u, rs.getURL(1));
-        assertEquals(u, rs.getURL("column"));
+    public void testURL() throws SQLException, MalformedURLException, 
+            IllegalAccessException, IllegalArgumentException, 
+            java.lang.reflect.InvocationTargetException 
+    {
+        Method getUrlInt = null;
+        Method getUrlString = null;
+        try {
+            getUrlInt = ResultSet.class.getMethod("getURL", 
+                        new Class[] { Integer.TYPE } );
+            getUrlString = ResultSet.class.getMethod("getURL", 
+                           new Class[] { String.class } );
+        } catch(NoSuchMethodException e) {
+            // ignore
+        } catch(SecurityException e) {
+            // ignore
+        }
+        if (getUrlInt != null && getUrlString != null) {
+            assertEquals(null, getUrlInt.invoke(rs, 
+                         new Object[] { new Integer(1) } ) );
+            assertTrue(rs.wasNull());
+            assertEquals(null, getUrlString.invoke(rs, 
+                         new Object[] { "column" } ) );
+            assertTrue(rs.wasNull());
+            // Set what gets returned to something other than the default
+            URL u = new URL("http://www.apache.org");
+            rs2.setNullURL(u);
+            assertEquals(u, getUrlInt.invoke(rs, 
+                         new Object[] { new Integer(1) } ) );
+            assertEquals(u, getUrlString.invoke(rs, 
+                         new Object[] { "column" } ) );
+        }
     }
 
     /**
@@ -784,17 +807,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
     }
     
-    /**
-     * Tests the setNullString implementation.
-     */
-    public void testSetNullURL() throws SQLException, MalformedURLException {
-        assertEquals(null, rs2.getNullURL());
-        // Set what gets returned to something other than the default
-        URL u = new URL("http://jakarta.apache.org");
-        rs2.setNullURL(u);
-        assertEquals(u, rs.getURL(1));
-        assertEquals(u, rs.getURL("column"));
-    }
 }
 
 class SqlNullUncheckedMockResultSet implements InvocationHandler {
