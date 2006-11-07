@@ -367,10 +367,10 @@ public class BeanProcessor {
      * 
      * @param props The bean property descriptors.
      * 
+     * @throws SQLException 
+     *
      * @return An int[] with column index to property index mappings.  The 0th 
      * element is meaningless because JDBC column indexing starts at 1.
-     * 
-     * @throws SQLException 
      */
     protected int[] mapColumnsToProperties(ResultSetMetaData rsmd,
             PropertyDescriptor[] props) throws SQLException {
@@ -414,11 +414,11 @@ public class BeanProcessor {
      * @param propType The bean property type that this column needs to be
      * converted into.
      * 
+     * @throws SQLException
+     * 
      * @return The object from the <code>ResultSet</code> at the given column
      * index after optional type processing or <code>null</code> if the column
      * value was SQL NULL.
-     * 
-     * @throws SQLException
      */
     protected Object processColumn(ResultSet rs, int index, Class propType)
         throws SQLException {

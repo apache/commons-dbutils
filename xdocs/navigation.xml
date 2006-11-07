@@ -33,10 +33,11 @@
     <menu name="Commons DbUtils">
       <item name="Overview" href="/index.html"/>
       <item name="Examples" href="/examples.html"/>
-      <item name="Javadoc" href="apidocs/index.html"/>
+      <item name="Latest Javadoc" href="apidocs/index.html"/>
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
       <item name="Latest Source" href="/cvs-usage.html"/>
+      <item name="Release History" href="/changes-report.html"/>
       <item name="Downloads" href="http://jakarta.apache.org/site/downloads/downloads_commons-dbutils.cgi"/>
     </menu>
     

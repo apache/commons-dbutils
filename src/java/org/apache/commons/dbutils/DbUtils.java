@@ -158,10 +158,22 @@ public final class DbUtils {
         }
     }
 
+    /**
+     * Print the stack trace for a SQLException to STDERR.
+     *
+     * @param e SQLException to print stack trace of
+     */
     public static void printStackTrace(SQLException e) {
         printStackTrace(e, new PrintWriter(System.err));
     }
 
+    /**
+     * Print the stack trace for a SQLException to a 
+     * specified PrintWriter. 
+     *
+     * @param e SQLException to print stack trace of
+     * @param pw PrintWriter to print to
+     */
     public static void printStackTrace(SQLException e, PrintWriter pw) {
 
         SQLException next = e;
@@ -174,10 +186,21 @@ public final class DbUtils {
         }
     }
 
+    /**
+     * Print warnings on a Connection to STDERR.
+     *
+     * @param conn Connection to print warnings from
+     */
     public static void printWarnings(Connection conn) {
         printWarnings(conn, new PrintWriter(System.err));
     }
 
+    /**
+     * Print warnings on a Connection to a specified PrintWriter. 
+     *
+     * @param conn Connection to print warnings from
+     * @param pw PrintWriter to print to
+     */
     public static void printWarnings(Connection conn, PrintWriter pw) {
         if (conn != null) {
             try {
