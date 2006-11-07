@@ -19,8 +19,6 @@ package org.apache.commons.dbutils.handlers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.dbutils.ResultSetHandler;
-
 /**
  * <code>ResultSetHandler</code> implementation that converts one
  * <code>ResultSet</code> column into a <code>List</code> of
