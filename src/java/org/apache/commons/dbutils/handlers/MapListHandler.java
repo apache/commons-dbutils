@@ -64,7 +64,7 @@ public class MapListHandler extends GenericListHandler {
      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */
     protected Object handleRow(ResultSet rs) throws SQLException {
-    	return this.convert.toMap(rs);
+        return this.convert.toMap(rs);
     }
 
 }

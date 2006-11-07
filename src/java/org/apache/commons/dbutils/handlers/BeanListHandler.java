@@ -73,7 +73,7 @@ public class BeanListHandler extends GenericListHandler {
      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */
     protected Object handleRow(ResultSet rs) throws SQLException {
-    	return this.convert.toBean(rs, type);
+        return this.convert.toBean(rs, type);
     }
 
 }

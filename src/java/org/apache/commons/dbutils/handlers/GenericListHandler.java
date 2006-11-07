@@ -28,27 +28,27 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * classes that convert <code>ResultSet</code> into <code>List</code>.
  */
 abstract class GenericListHandler implements ResultSetHandler {
-	/**
-	 * Whole <code>ResultSet</code> handler. It produce <code>List</code> as
-	 * result. To convert individual rows into Java objects it uses
-	 * <code>handleRow(ResultSet)</code> method.
-	 *
-	 * @see #handleRow(ResultSet)
-	 */
-	public Object handle(ResultSet rs) throws SQLException {
-		List rows = new ArrayList();
-		while (rs.next()) {
-			rows.add(this.handleRow(rs));
-		}
-		return rows;
-	}
-	
-	/**
-	 * Row handler. Method converts current row into some Java object.
-	 *
-	 * @param rs <code>ResultSet</code> to process.
-	 * @return row processing result
-	 * @throws SQLException error occurs
-	 */
-	protected abstract Object handleRow(ResultSet rs) throws SQLException;
+    /**
+     * Whole <code>ResultSet</code> handler. It produce <code>List</code> as
+     * result. To convert individual rows into Java objects it uses
+     * <code>handleRow(ResultSet)</code> method.
+     *
+     * @see #handleRow(ResultSet)
+     */
+    public Object handle(ResultSet rs) throws SQLException {
+        List rows = new ArrayList();
+        while (rs.next()) {
+            rows.add(this.handleRow(rs));
+        }
+        return rows;
+    }
+    
+    /**
+     * Row handler. Method converts current row into some Java object.
+     *
+     * @param rs <code>ResultSet</code> to process.
+     * @return row processing result
+     * @throws SQLException error occurs
+     */
+    protected abstract Object handleRow(ResultSet rs) throws SQLException;
 }
