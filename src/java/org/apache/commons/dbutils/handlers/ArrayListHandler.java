@@ -56,25 +56,25 @@ public class ArrayListHandler extends GenericListHandler {
 
     
     /**
-      * Convert row's columns into an <code>Object[]</code>.
-      * 
-      * @return <code>Object[]</code>, never <code>null</code>.
-      * 
-      * @throws SQLException
-      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
-      */
-     protected Object handleRow(ResultSet rs) throws SQLException {
-         return this.convert.toArray(rs);
-     }
+     * Convert row's columns into an <code>Object[]</code>.
+     * 
+     * @return <code>Object[]</code>, never <code>null</code>.
+     * 
+     * @throws SQLException
+     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     */
+    protected Object handleRow(ResultSet rs) throws SQLException {
+        return this.convert.toArray(rs);
+    }
 
-     /*
-      * Kept for binary compatibility. 
-      *
-      * @deprecated Remove in 2.0
-      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
-      */
-     public Object handle(ResultSet rs) throws SQLException {
-         return super.handle(rs);
-     }
+    /**
+     * Kept for binary compatibility. 
+     *
+     * @deprecated Remove in 2.0
+     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     */
+    public Object handle(ResultSet rs) throws SQLException {
+        return super.handle(rs);
+    }
 
 }
