@@ -76,4 +76,14 @@ public class BeanListHandler extends GenericListHandler {
         return this.convert.toBean(rs, type);
     }
 
+    /**
+     * Kept for binary compatibility. 
+     *
+     * @deprecated Remove in 2.0
+     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     */
+    public Object handle(ResultSet rs) throws SQLException {
+        return super.handle(rs);
+    }
+
 }

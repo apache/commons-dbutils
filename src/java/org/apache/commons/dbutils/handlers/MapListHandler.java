@@ -67,4 +67,14 @@ public class MapListHandler extends GenericListHandler {
         return this.convert.toMap(rs);
     }
 
+    /**
+     * Kept for binary compatibility. 
+     *
+     * @deprecated Remove in 2.0
+     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     */
+    public Object handle(ResultSet rs) throws SQLException {
+        return super.handle(rs);
+    }
+
 }
