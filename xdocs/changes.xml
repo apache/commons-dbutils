@@ -38,7 +38,38 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.1-dev" date="in SVN">
+    <release version="1.1" date="Unreleased" description="">
+
+      <action dev="bayard" type="fix" issue="DBUTILS-32">
+        Tests fail to build under 1.6, and warning while compiling source  
+      </action>
+      <action dev="bayard" type="fix" issue="DBUTILS-1">
+        BeanListHandler and BeanHandler fail to support java.sql.Date()
+      </action>
+      <action dev="bayard" type="update" issue="DBUTILS-16">
+        ResultSetRowProcessor abstract handler and some classes rework
+      </action>
+      <action dev="bayard" type="fix" issue="DBUTILS-3">
+        Setting bean properties fails silently
+      </action>
+      <action dev="dgraham" type="fix" issue="DBUTILS-9">
+        MockResultSet needs to handle equals and hashCode 
+      </action>
+      <action dev="bayard" type="fix" issue="DBUTILS-7">
+        MockResultSet: Throw UnsupportedOperationException for not implemented methods
+      </action>
+      <action dev="dgraham" type="add" issue="DBUTILS-20">
+        Implement Pluggable Adaptors to Make BeanHandler Smarter
+      </action>
+      <action dev="dgraham" type="update" issue="DBUTILS-15">
+        Patch for extending BasicRowProcessor 
+      </action>
+      <action dev="dgraham" type="add" issue="DBUTILS-12">
+        Protected QueryRunner.close() methods 
+      </action>
+      <action dev="dgraham" type="update" issue="DBUTILS-23">
+        Updated docs for example.html page (select AS) 
+      </action>
       <action dev="dgraham" type="add" issue="DBUTILS-4">
         Added protected ResultSetIterator.rethrow() method to wrap SQLExceptions in 
         RuntimeExceptions.
@@ -95,7 +126,7 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
     </release>
     
-    <release version="1.0" date="2003-11-10">
+    <release version="1.0" date="2003-11-10" description="First release of DbUtils">
       <action type="add">
         This is the first release of the Commons DbUtils package.  DbUtils
         is a small set of classes designed to make working with JDBC easier.
