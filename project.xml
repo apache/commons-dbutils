@@ -20,7 +20,7 @@
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-dbutils</artifactId>
   <inceptionYear>2002</inceptionYear>
-  <currentVersion>1.1-SNAPSHOT</currentVersion>
+  <currentVersion>1.1-RC1</currentVersion>
   <name>DbUtils</name>
   <shortDescription>Commons DbUtils</shortDescription>
   <description>A package of Java utility classes for easing JDBC development</description>
