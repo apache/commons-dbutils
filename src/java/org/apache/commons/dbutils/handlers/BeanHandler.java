@@ -25,7 +25,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * <code>ResultSetHandler</code> implementation that converts the first 
  * <code>ResultSet</code> row into a JavaBean. This class is thread safe.
  * 
- * @see ResultSetHandler
+ * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class BeanHandler implements ResultSetHandler {
 

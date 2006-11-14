@@ -25,7 +25,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * <code>ResultSet</code> into a <code>List</code> of <code>Object[]</code>s.
  * This class is thread safe.
  * 
- * @see ResultSetHandler
+ * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class ArrayListHandler extends GenericListHandler {
 

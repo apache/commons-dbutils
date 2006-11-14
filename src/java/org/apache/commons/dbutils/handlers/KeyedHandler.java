@@ -53,7 +53,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * </p>
  * <p>This class is thread safe.</p>
  * 
- * @see ResultSetHandler
+ * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
 public class KeyedHandler implements ResultSetHandler {

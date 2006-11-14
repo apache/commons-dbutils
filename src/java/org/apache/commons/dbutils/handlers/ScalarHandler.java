@@ -24,7 +24,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * <code>ResultSetHandler</code> implementation that converts one
  * <code>ResultSet</code> column into an Object. This class is thread safe.
  * 
- * @see ResultSetHandler
+ * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class ScalarHandler implements ResultSetHandler {
 

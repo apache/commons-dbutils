@@ -24,7 +24,7 @@ import java.sql.SQLException;
  * <code>ResultSet</code> column into a <code>List</code> of
  * <code>Object</code>s. This class is thread safe.
  * 
- * @see ResultSetHandler
+ * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
 public class ColumnListHandler extends GenericListHandler {

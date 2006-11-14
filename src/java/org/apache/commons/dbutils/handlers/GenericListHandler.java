@@ -26,6 +26,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 /**
  * Abstract class that simplify development of <code>ResultSetHandler</code>
  * classes that convert <code>ResultSet</code> into <code>List</code>.
+ *
+ * @see org.apache.commons.dbutils.ResultSetHandler
  */
 abstract class GenericListHandler implements ResultSetHandler {
     /**

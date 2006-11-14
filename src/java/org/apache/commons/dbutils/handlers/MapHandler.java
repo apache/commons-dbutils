@@ -26,7 +26,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * <code>ResultSet</code> row into a <code>Map</code>. This class is thread 
  * safe.
  * 
- * @see ResultSetHandler
+ * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class MapHandler implements ResultSetHandler {
 
