@@ -162,10 +162,4 @@
     <copy file="lib/jdbc2_0-stdext.jar" todir="${libdir}" failonerror="false">
     </copy>
   </target>
-  <target name="install-maven">
-    <get dest="${user.home}/maven-install-latest.jar" usetimestamp="true" src="${repo}/maven/maven-install-latest.jar">
-    </get>
-    <unjar dest="${maven.home}" src="${user.home}/maven-install-latest.jar">
-    </unjar>
-  </target>
 </project>
