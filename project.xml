@@ -1,23 +1,24 @@
 <?xml version="1.0"?>
 <!--
-   Copyright 2003-2006 The Apache Software Foundation
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
 
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
 -->
 <project>
   <pomVersion>3</pomVersion>
   
-  <groupId>org.apache.commons</groupId>
+  <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
   <inceptionYear>2002</inceptionYear>
   <currentVersion>1.1-RC1</currentVersion>
@@ -59,13 +60,13 @@
       <name>Commons Dev List</name>
       <subscribe>commons-dev-subscribe@jakarta.apache.org</subscribe>
       <unsubscribe>commons-dev-unsubscribe@jakarta.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/eyebrowse/SummarizeList?listName=commons-dev@jakarta.apache.org</archive>
+      <archive>http://mail-archives.apache.org/mod_mbox/jakarta-commons-dev/</archive>
     </mailingList>
     <mailingList>
       <name>Commons User List</name>
       <subscribe>commons-user-subscribe@jakarta.apache.org</subscribe>
       <unsubscribe>commons-user-unsubscribe@jakarta.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/eyebrowse/SummarizeList?listName=commons-user@jakarta.apache.org</archive>
+      <archive>http://mail-archives.apache.org/mod_mbox/jakarta-commons-user/</archive>
     </mailingList>
   </mailingLists>
 
@@ -74,7 +75,6 @@
       <name>Juozas Baliuka</name>
       <id>baliuka</id>
       <email>baliuka@apache.org</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -83,7 +83,6 @@
       <name>Steven Caswell</name>
       <id>scaswell</id>
       <email>steven@caswell.name</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -92,7 +91,6 @@
       <name>David Graham</name>
       <id>dgraham</id>
       <email>dgraham@apache.org</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -101,7 +99,6 @@
       <name>Yoav Shapira</name>
       <id>yoavs</id>
       <email>yoavs@apache.org</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -110,7 +107,6 @@
       <name>Henri Yandell</name>
       <id>bayard</id>
       <email>bayard@generationjava.com</email>
-      <organization></organization>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -192,6 +188,13 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <url>http://www.junit.org/</url>
+      <properties>
+          <scope>test</scope>
+          <comment>
+              &lt;strong&gt;Test Only&lt;/strong&gt; - required
+              only for running the unit tests.
+          </comment>
+      </properties>
     </dependency>
     
     <dependency>
@@ -200,6 +203,12 @@
       <version>1.9.2</version>
       <url>http://maven.apache.org/reference/plugins/xdoc</url>
       <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.9.2 (minimum)
+              required for building the Site documentation.
+          </comment>
+      </properties>
     </dependency> 
   </dependencies>
 	
@@ -215,6 +224,15 @@
       </includes>
     </unitTest>
     
+    <resources>
+        <resource>
+            <directory>${basedir}</directory>
+            <targetPath>META-INF</targetPath>
+            <includes>
+                <include>NOTICE.txt</include>
+            </includes>
+        </resource>
+    </resources>
   </build>
   
   <reports>
