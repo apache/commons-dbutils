@@ -70,7 +70,7 @@ public class BeanListHandler extends GenericListHandler {
      * 
      * @return A bean, never <code>null</code>.
      * 
-     * @throws SQLException
+     * @throws SQLException - if a database access error occurs
      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */
     protected Object handleRow(ResultSet rs) throws SQLException {

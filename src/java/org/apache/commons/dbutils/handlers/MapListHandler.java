@@ -60,7 +60,7 @@ public class MapListHandler extends GenericListHandler {
      * 
      * @return A <code>Map</code>, never null.  
      * 
-     * @throws SQLException
+     * @throws SQLException - if a database access error occurs
      * 
      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */

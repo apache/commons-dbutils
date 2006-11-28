@@ -73,7 +73,7 @@ public class ColumnListHandler extends GenericListHandler {
      * 
      * @return <code>Object</code>, never <code>null</code>.
      * 
-     * @throws SQLException
+     * @throws SQLException - if a database access error occurs
      * 
      * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
      */
