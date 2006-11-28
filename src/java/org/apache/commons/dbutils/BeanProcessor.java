@@ -109,6 +109,11 @@ public class BeanProcessor {
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
      * </p>
+     *
+     * @param rs ResultSet that supplies the bean data
+     * @param type Class from which to create the bean instance
+     * @throws SQLException - if a database access error occurs
+     * @return the newly created bean
      */
     public Object toBean(ResultSet rs, Class type) throws SQLException {
 
@@ -147,6 +152,12 @@ public class BeanProcessor {
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
      * </p>
+     *
+     * @param rs ResultSet that supplies the bean data
+     * @param type Class from which to create the bean instance
+     * @throws SQLException - if a database access error occurs
+     * @return the newly created List of beans
+     */
      */
     public List toBeanList(ResultSet rs, Class type) throws SQLException {
         List results = new ArrayList();
@@ -174,7 +185,7 @@ public class BeanProcessor {
      * @param props The property descriptors.
      * @param columnToProperty The column indices in the result set.
      * @return An initialized object.
-     * @throws SQLException If a database error occurs.
+     * @throws SQLException - if a database error occurs.
      */
     private Object createBean(ResultSet rs, Class type,
             PropertyDescriptor[] props, int[] columnToProperty)
@@ -367,7 +378,7 @@ public class BeanProcessor {
      * 
      * @param props The bean property descriptors.
      * 
-     * @throws SQLException 
+     * @throws SQLException - if a database access error occurs
      *
      * @return An int[] with column index to property index mappings.  The 0th 
      * element is meaningless because JDBC column indexing starts at 1.
@@ -414,7 +425,7 @@ public class BeanProcessor {
      * @param propType The bean property type that this column needs to be
      * converted into.
      * 
-     * @throws SQLException
+     * @throws SQLException- if a database access error occurs
      * 
      * @return The object from the <code>ResultSet</code> at the given column
      * index after optional type processing or <code>null</code> if the column
