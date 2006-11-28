@@ -123,7 +123,7 @@ public class KeyedHandler implements ResultSetHandler {
      * in a <code>Map</code> under <code>ResultSet.getObject(key)</code> key.
      * 
      * @return A <code>Map</code> of Maps, never <code>null</code>. 
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     public Object handle(ResultSet rs) throws SQLException {
@@ -138,6 +138,8 @@ public class KeyedHandler implements ResultSetHandler {
      * This factory method is called by <code>handle()</code> to create the Map
      * to store records in.  This implementation returns a <code>HashMap</code>
      * instance.
+     *
+     * @return Map to store records in
      */
     protected Map createMap() {
         return new HashMap();
@@ -148,7 +150,9 @@ public class KeyedHandler implements ResultSetHandler {
      * key value from the current <code>ResultSet</code> row.  This 
      * implementation returns <code>ResultSet.getObject()</code> for the 
      * configured key column name or index. 
-     * @throws SQLException - if a database access error occurs
+     * @param rs ResultSet to create a key from
+     * @return Object from the configured key column name/index
+     * @throws SQLException if a database access error occurs
      */
     protected Object createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ? rs.getObject(columnIndex) : rs
@@ -161,7 +165,9 @@ public class KeyedHandler implements ResultSetHandler {
      * implementation returns a <code>Map</code> with case insensitive column
      * names as keys.  Calls to <code>map.get("COL")</code> and 
      * <code>map.get("col")</code> return the same value.
-     * @throws SQLException - if a database access error occurs
+     * @param rs ResultSet to create a row from
+     * @return Object typed Map containing column names to values
+     * @throws SQLException if a database access error occurs
      */
     protected Object createRow(ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);

@@ -104,8 +104,8 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a <code>ResultSet</code> row into a JavaBean.  This 
      * implementation delegates to a BeanProcessor instance.
-     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class) 
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
+     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class) 
      */
     public Object toBean(ResultSet rs, Class type) throws SQLException {
         return this.convert.toBean(rs, type);
@@ -114,8 +114,8 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a <code>ResultSet</code> into a <code>List</code> of JavaBeans.  
      * This implementation delegates to a BeanProcessor instance. 
-     * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
+     * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      */
     public List toBeanList(ResultSet rs, Class type) throws SQLException {
         return this.convert.toBeanList(rs, type);

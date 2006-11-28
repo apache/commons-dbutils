@@ -63,7 +63,7 @@ public class MapHandler implements ResultSetHandler {
      * @return A <code>Map</code> with the values from the first row or 
      * <code>null</code> if there are no rows in the <code>ResultSet</code>. 
      * 
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      * 
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */

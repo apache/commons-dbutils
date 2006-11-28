@@ -58,6 +58,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * </pre>
      * 
      * @param rs The <code>ResultSet</code> to wrap.
+     * @return wrapped ResultSet
      */
     public static ResultSet wrap(ResultSet rs) {
         return factory.createResultSet(new StringTrimmedResultSet(rs));
@@ -71,6 +72,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
     /**
      * Constructs a new instance of <code>StringTrimmedResultSet</code>
      * to wrap the specified <code>ResultSet</code>.
+     * @param rs ResultSet to wrap
      */
     public StringTrimmedResultSet(ResultSet rs) {
         super();

@@ -71,7 +71,7 @@ public class BeanHandler implements ResultSetHandler {
      * @return An initialized JavaBean or <code>null</code> if there were no 
      * rows in the <code>ResultSet</code>.
      * 
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     public Object handle(ResultSet rs) throws SQLException {

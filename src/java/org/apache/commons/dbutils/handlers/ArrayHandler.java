@@ -70,7 +70,7 @@ public class ArrayHandler implements ResultSetHandler {
      * @return An Object[] or <code>null</code> if there are no rows in the
      * <code>ResultSet</code>.
      * 
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     public Object handle(ResultSet rs) throws SQLException {

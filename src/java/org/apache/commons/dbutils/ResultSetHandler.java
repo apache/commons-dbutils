@@ -34,7 +34,7 @@ public interface ResultSetHandler {
      * legal for implementations to return <code>null</code> if the 
      * <code>ResultSet</code> contained 0 rows.
      * 
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     public Object handle(ResultSet rs) throws SQLException;
 

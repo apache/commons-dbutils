@@ -66,6 +66,7 @@ public class ResultSetIterator implements Iterator {
 
     /**
      * Returns true if there are more rows in the ResultSet.
+     * @return boolean <code>true</code> if there are more rows
      * @throws RuntimeException if an SQLException occurs.
      */
     public boolean hasNext() {
@@ -110,6 +111,7 @@ public class ResultSetIterator implements Iterator {
     /**
      * Rethrow the SQLException as a RuntimeException.  This implementation
      * creates a new RuntimeException with the SQLException's error message.
+     * @param e SQLException to rethrow
      * @since DbUtils 1.1
      */
     protected void rethrow(SQLException e) {

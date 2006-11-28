@@ -37,6 +37,10 @@ public interface RowProcessor {
      * positioned on a valid row before passing it to this method.  
      * Implementations of this method must not alter the row position of 
      * the <code>ResultSet</code>. 
+     *
+     * @param rs ResultSet that supplies the array data
+     * @throws SQLException if a database access error occurs
+     * @return the newly created array
      */
     public Object[] toArray(ResultSet rs) throws SQLException;
 
@@ -45,6 +49,11 @@ public interface RowProcessor {
      * row.  The <code>ResultSet</code> should be positioned on a valid row before
      * passing it to this method.  Implementations of this method must not
      * alter the row position of the <code>ResultSet</code>.
+     *
+     * @param rs ResultSet that supplies the bean data
+     * @param type Class from which to create the bean instance
+     * @throws SQLException if a database access error occurs
+     * @return the newly created bean
      */
     public Object toBean(ResultSet rs, Class type) throws SQLException;
 
@@ -53,6 +62,9 @@ public interface RowProcessor {
      * <code>ResultSet</code> rows.  <code>ResultSet.next()</code> should 
      * <strong>not</strong> be called before passing it to this method.
      * 
+     * @param rs ResultSet that supplies the bean data
+     * @param type Class from which to create the bean instance
+     * @throws SQLException if a database access error occurs
      * @return A <code>List</code> of beans with the given type in the order 
      * they were returned by the <code>ResultSet</code>.
      */
@@ -64,6 +76,10 @@ public interface RowProcessor {
      * positioned on a valid row before
      * passing it to this method.  Implementations of this method must not
      * alter the row position of the <code>ResultSet</code>.
+     *
+     * @param rs ResultSet that supplies the map data
+     * @throws SQLException if a database access error occurs
+     * @return the newly created Map
      */
     public Map toMap(ResultSet rs) throws SQLException;
 

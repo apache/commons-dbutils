@@ -100,6 +100,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * </pre>
      * 
      * @param rs The <code>ResultSet</code> to wrap.
+     * @return wrapped ResultSet
      */
     public static ResultSet wrap(ResultSet rs) {
         return factory.createResultSet(new SqlNullCheckedResultSet(rs));
@@ -136,6 +137,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Constructs a new instance of
      * <code>SqlNullCheckedResultSet</code>
      * to wrap the specified <code>ResultSet</code>.
+     * @param rs ResultSet to wrap
      */
     public SqlNullCheckedResultSet(ResultSet rs) {
         super();

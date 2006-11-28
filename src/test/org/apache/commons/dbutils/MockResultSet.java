@@ -72,7 +72,7 @@ public class MockResultSet implements InvocationHandler {
      * index that the client is trying to get at.
      * @param args
      * @return A column index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     private int columnIndex(Object[] args) throws SQLException {
 
@@ -106,7 +106,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the boolean value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getBoolean(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -125,7 +125,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the byte value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getByte(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -144,7 +144,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the double value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getDouble(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -163,7 +163,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the float value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getFloat(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -180,7 +180,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the int value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getInt(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -199,7 +199,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the long value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getLong(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -220,7 +220,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the object at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getObject(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -231,7 +231,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the short value at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected Object getShort(int columnIndex) throws SQLException {
         Object obj = this.currentRow[columnIndex - 1];
@@ -250,7 +250,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * Gets the String at the given column index.
      * @param columnIndex A 1 based index.
-     * @throws SQLException - if a database access error occurs
+     * @throws SQLException if a database access error occurs
      */
     protected String getString(int columnIndex) throws SQLException {
         Object obj = this.getObject(columnIndex);
