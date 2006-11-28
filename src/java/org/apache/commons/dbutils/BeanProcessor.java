@@ -158,7 +158,6 @@ public class BeanProcessor {
      * @throws SQLException - if a database access error occurs
      * @return the newly created List of beans
      */
-     */
     public List toBeanList(ResultSet rs, Class type) throws SQLException {
         List results = new ArrayList();
 
