@@ -36,7 +36,7 @@
   </property>
   <property name="javadocdir" value="dist/docs/api">
   </property>
-  <property name="final.name" value="commons-dbutils-1.1">
+  <property name="final.name" value="commons-dbutils-1.2-SNAPSHOT">
   </property>
   <target name="init" description="o Initializes some properties">
     <mkdir dir="${libdir}">
@@ -139,7 +139,7 @@
     </tstamp>
     <property name="copyright" value="Copyright &amp;copy;  Apache Software Foundation. All Rights Reserved.">
     </property>
-    <property name="title" value="commons-dbutils 1.1 API">
+    <property name="title" value="commons-dbutils 1.2 SNAPSHOT API">
     </property>
     <javadoc use="true" private="true" destdir="${javadocdir}" author="true" version="true" sourcepath="src/java" packagenames="org.apache.commons.dbutils.*">
       <classpath>
