@@ -148,6 +148,13 @@ public class BasicRowProcessor implements RowProcessor {
     private static class CaseInsensitiveHashMap extends HashMap {
 
         /**
+         * Required for serialization support.
+         * 
+         * @see java.io.Serializable
+         */ 
+        private static final long serialVersionUID = 1841673097701957808L;
+
+        /**
          * @see java.util.Map#containsKey(java.lang.Object)
          */
         public boolean containsKey(Object key) {
