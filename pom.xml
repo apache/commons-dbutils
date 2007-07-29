@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>1</version>
+    <version>3</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
@@ -33,7 +33,7 @@
   <inceptionYear>2002</inceptionYear>
   <description>A package of Java utility classes for easing JDBC development</description>
 
-  <url>http://jakarta.apache.org/commons/dbutils/</url>
+  <url>http://commons.apache.org/dbutils/</url>
 
   <issueManagement>
     <system>jira</system>
@@ -41,9 +41,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/dbutils/trunk</connection>
-    <developerConnection>scm:svn:scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/dbutils/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/jakarta/commons/proper/dbutils/trunk</url>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/dbutils/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/dbutils/trunk</developerConnection>
+    <url>http://svn.apache.org/viewvc/commons/proper/dbutils/trunk</url>
   </scm>
 
   <developers>
@@ -96,7 +96,7 @@
 
   <contributors>
     <contributor>
-      <name>Péter Bagyinszki</name>
+      <name>P�ter Bagyinszki</name>
       <roles>
         <role>Java Developer</role>
       </roles>
