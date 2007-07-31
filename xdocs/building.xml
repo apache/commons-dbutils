@@ -61,10 +61,10 @@
 <!-- ================================================== -->
 <section name="Nightly Builds">
   <p>
-      <a href="http://people.apache.org/builds/jakarta-commons/nightly/commons-dbutils/">Nightly Builds</a>
+      <a href="http://people.apache.org/builds/commons/nightly/commons-dbutils/">Nightly Builds</a>
       are built once a day from the current SVN HEAD. These are provided purely for test purposes and are <b>NOT
       official releases</b> of the Apache Software Foundation - Released versions of Commons DBUtils are
-      available <a href="http://jakarta.apache.org/site/downloads/downloads_commons-dbutils.cgi">here</a>.
+      available <a href="http://commons.apache.org/downloads/download_dbutils.cgi">here</a>.
   </p>
 </section>
 
