@@ -13,8 +13,8 @@
     <description xml:lang="en">A package of Java utility classes for easing JDBC development</description>
     <repository>
       <SVNRepository>
-        <browse rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/dbutils/trunk"/>
-        <location rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/dbutils"/>
+        <browse rdf:resource="http://svn.apache.org/repos/asf/commons/proper/dbutils/trunk"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/commons/proper/dbutils"/>
       </SVNRepository>
     </repository>
     <release>
