@@ -6,7 +6,7 @@ Release Notes
 
 You can find release notes for this and past releases online at
 
-http://jakarta.apache.org/commons/dbutils/changes-report.html
+http://commons.apache.org/dbutils/changes-report.html
 
 
 

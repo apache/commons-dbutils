@@ -16,7 +16,7 @@
  limitations under the License.
 -->
 
-<!DOCTYPE org.apache.commons.menus SYSTEM 'http://jakarta.apache.org/commons/build/maven-build.dtd'>
+<!DOCTYPE org.apache.commons.menus SYSTEM 'http://commons.apache.org/build/maven-build.dtd'>
 
 <project name="DbUtils">
 
@@ -29,7 +29,7 @@
     <links>
       <item name="Apache"  href="http://www.apache.org"/>
       <item name="Jakarta" href="http://jakarta.apache.org"/>
-      <item name="Commons" href="http://jakarta.apache.org/commons/"/>
+      <item name="Commons" href="http://commons.apache.org/"/>
     </links>
 
     <menu name="Commons DbUtils">
