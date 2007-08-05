@@ -41,7 +41,7 @@
         <item name="Dependencies"          href="/dependencies.html"/>
         <item name="License"               href="/license.html"/>
         <item name="Latest Javadoc"        href="apidocs/index.html"/>
-        <item name="Wiki"                  href="http://wiki.apache.org/jakarta-commons/DbUtils"/>
+        <item name="Wiki"                  href="http://wiki.apache.org/commons/DbUtils"/>
       </item>
 
     </menu>
