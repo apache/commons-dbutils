@@ -22,9 +22,10 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>7</version>
+    <version>8</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
+  <packaging>bundle</packaging>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
   <version>1.2-SNAPSHOT</version>
@@ -171,6 +172,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <properties>
+    <commons.componentid>dbutils</commons.componentid>
+    <commons.release.version>1.1</commons.release.version>
+    <commons.binary.suffix></commons.binary.suffix>
+    <commons.jira.id>DBUTILS</commons.jira.id>
+    <commons.jira.pid>12310470</commons.jira.pid>
+  </properties> 
 
   <build>
     <sourceDirectory>src/java</sourceDirectory>
