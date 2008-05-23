@@ -211,6 +211,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-changes-plugin</artifactId>
+          <version>2.0</version>
           <configuration>
             <xmlPath>xdocs/changes.xml</xmlPath>
             <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
@@ -226,8 +227,9 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.1</version>
           <configuration>
-            <configLocation>checkstyle.xml</configLocation>
+            <configLocation>${basedir}/checkstyle.xml</configLocation>
             <enableRulesSummary>false</enableRulesSummary>
           </configuration>
         </plugin>
