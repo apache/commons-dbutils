@@ -29,7 +29,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
  *
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-abstract class GenericListHandler implements ResultSetHandler {
+public abstract class AbstractListHandler implements ResultSetHandler {
     /**
      * Whole <code>ResultSet</code> handler. It produce <code>List</code> as
      * result. To convert individual rows into Java objects it uses

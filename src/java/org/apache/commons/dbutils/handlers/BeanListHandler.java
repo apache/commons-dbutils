@@ -19,6 +19,7 @@ package org.apache.commons.dbutils.handlers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
 /**
@@ -28,7 +29,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class BeanListHandler extends GenericListHandler {
+public class BeanListHandler implements ResultSetHandler {
 
     /**
      * The Class of beans produced by this handler.
@@ -65,16 +66,17 @@ public class BeanListHandler extends GenericListHandler {
     }
 
     /**
-     * Convert the <code>ResultSet</code> row into a bean with
+     * Convert the whole <code>ResultSet</code> into a List of beans with
      * the <code>Class</code> given in the constructor.
      * 
-     * @return A bean, never <code>null</code>.
+     * @param rs The <code>ResultSet</code> to handle.
+     * 
+     * @return A List of beans, never <code>null</code>.
      * 
      * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     * @see org.apache.commons.dbutils.RowProcessor#toBeanList(ResultSet, Class)
      */
-    protected Object handleRow(ResultSet rs) throws SQLException {
-        return this.convert.toBean(rs, type);
+    public Object handle(ResultSet rs) throws SQLException {
+        return this.convert.toBeanList(rs, type);
     }
-
 }

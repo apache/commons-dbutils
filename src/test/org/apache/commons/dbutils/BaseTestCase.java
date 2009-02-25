@@ -144,6 +144,7 @@ public class BaseTestCase extends TestCase {
         suite.addTestSuite(ProxyFactoryTest.class);
         suite.addTestSuite(ResultSetIteratorTest.class);
         suite.addTestSuite(QueryLoaderTest.class);
+        suite.addTestSuite(QueryRunnerTest.class);
 
         // test handler implementations
         suite.addTestSuite(ArrayHandlerTest.class);

@@ -27,7 +27,7 @@ import java.sql.SQLException;
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
-public class ColumnListHandler extends GenericListHandler {
+public class ColumnListHandler extends AbstractListHandler {
 
     /**
      * The column number to retrieve.
@@ -75,7 +75,7 @@ public class ColumnListHandler extends GenericListHandler {
      * 
      * @throws SQLException if a database access error occurs
      * 
-     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
    protected Object handleRow(ResultSet rs) throws SQLException {
         if (this.columnName == null) {

@@ -16,7 +16,13 @@
  */
 package org.apache.commons.dbutils;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,6 +41,11 @@ import javax.sql.DataSource;
 public class QueryRunner {
 
     /**
+     * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried it yet)?
+     */
+    private volatile boolean pmdKnownBroken = false;
+    
+    /**
      * The DataSource to retrieve connections from.
      */
     protected DataSource ds = null;
@@ -47,7 +58,18 @@ public class QueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner.  Methods that do not take a 
+     * Constructor for QueryRunner, allows workaround for Oracle drivers
+     * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * and if it breaks, we'll remember not to use it again.
+     */
+    public QueryRunner(boolean pmdKnownBroken) {
+        super();
+        this.pmdKnownBroken = pmdKnownBroken; 
+    }
+    
+    /**
+     * Constructor for QueryRunner, allows workaround for Oracle drivers.  Methods that do not take a 
      * <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
      * 
@@ -55,6 +77,22 @@ public class QueryRunner {
      */
     public QueryRunner(DataSource ds) {
         super();
+        setDataSource(ds);
+    }
+    
+    /**
+     * Constructor for QueryRunner, allows workaround for Oracle drivers.  Methods that do not take a 
+     * <code>Connection</code> parameter will retrieve connections from this
+     * <code>DataSource</code>.
+     * 
+     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * and if it breaks, we'll remember not to use it again.
+     */
+    public QueryRunner(DataSource ds, boolean pmdKnownBroken) {
+        super();
+        this.pmdKnownBroken = pmdKnownBroken;
         setDataSource(ds);
     }
     
@@ -124,13 +162,18 @@ public class QueryRunner {
      * value to pass in.
      * @throws SQLException if a database access error occurs
      */
-    protected void fillStatement(PreparedStatement stmt, Object[] params)
+    public void fillStatement(PreparedStatement stmt, Object[] params)
         throws SQLException {
 
         if (params == null) {
             return;
         }
-
+        
+        ParameterMetaData pmd = stmt.getParameterMetaData();
+        if (pmd.getParameterCount() < params.length) {
+            throw new SQLException("Too many parameters: expected "
+                    + pmd.getParameterCount() + ", was given " + params.length);
+        }
         for (int i = 0; i < params.length; i++) {
             if (params[i] != null) {
                 stmt.setObject(i + 1, params[i]);
@@ -138,9 +181,100 @@ public class QueryRunner {
                 // VARCHAR works with many drivers regardless
                 // of the actual column type.  Oddly, NULL and 
                 // OTHER don't work with Oracle's drivers.
-                stmt.setNull(i + 1, Types.VARCHAR);
+                int sqlType = Types.VARCHAR;
+                if (!pmdKnownBroken) {
+                    try {
+                        sqlType = pmd.getParameterType(i + 1);
+                    } catch (SQLException e) {
+                        pmdKnownBroken = true;
+                    }
+                }
+                stmt.setNull(i + 1, sqlType);
             }
         }
+    }
+
+    /**
+     * Fill the <code>PreparedStatement</code> replacement parameters with the
+     * given object's bean property values.
+     * 
+     * @param stmt
+     *            PreparedStatement to fill
+     * @param bean
+     *            a JavaBean object
+     * @param properties
+     *            an ordered array of properties; this gives the order to insert
+     *            values in the statement
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
+            PropertyDescriptor[] properties) throws SQLException {
+        Object[] params = new Object[properties.length];
+        for (int i = 0; i < properties.length; i++) {
+            PropertyDescriptor property = properties[i];
+            Object value = null;
+            Method method = property.getReadMethod();
+            if (method == null)
+                throw new RuntimeException("No read method for bean property "
+                        + bean.getClass() + " " + property.getName());
+            try {
+                value = method.invoke(bean, new Object[0]);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException("Couldn't invoke method: " + method, e);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Couldn't invoke method with 0 arguments: " + method, e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Couldn't invoke method: " + method, e);
+            } 
+            params[i] = value;
+        }
+        fillStatement(stmt, params);
+    }
+
+    /**
+     * Fill the <code>PreparedStatement</code> replacement parameters with the
+     * given object's bean property values.
+     * 
+     * @param stmt
+     *            PreparedStatement to fill
+     * @param bean
+     *            a JavaBean object
+     * @param propertyNames
+     *            an ordered array of property names (these should match the
+     *            getters/setters); this gives the order to insert values in the
+     *            statement
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
+            String[] propertyNames) throws SQLException {
+        PropertyDescriptor[] descriptors;
+        try {
+            descriptors = Introspector.getBeanInfo(bean.getClass())
+                    .getPropertyDescriptors();
+        } catch (IntrospectionException e) {
+            throw new RuntimeException("Couldn't introspect bean " + bean.getClass().toString(), e);
+        }
+        PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
+        for (int i = 0; i < propertyNames.length; i++) {
+            String propertyName = propertyNames[i];
+            if (propertyName == null)
+                throw new NullPointerException("propertyName can't be null: " + i);
+            boolean found = false;
+            for (int j = 0; j < descriptors.length; j++) {
+                PropertyDescriptor descriptor = descriptors[j];
+                if (propertyName.equals(descriptor.getName())) {
+                    sorted[i] = descriptor;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                throw new RuntimeException("Couldn't find bean property: "
+                        + bean.getClass() + " " + propertyName);
+        }
+        fillStatementWithBean(stmt, bean, sorted);
     }
 
     /**
@@ -205,11 +339,12 @@ public class QueryRunner {
      * @param rsh The handler that converts the results into an object.
      * @return The object returned by the handler.
      * @throws SQLException if a database access error occurs
+     * @deprecated Use {@link #query(Connection,String,ResultSetHandler,Object[])} instead
      */
     public Object query(Connection conn, String sql, Object param,
             ResultSetHandler rsh) throws SQLException {
 
-        return this.query(conn, sql, new Object[] { param }, rsh);
+        return this.query(conn, sql, rsh, new Object[] { param });
     }
 
     /**
@@ -222,9 +357,26 @@ public class QueryRunner {
      * @param rsh The handler that converts the results into an object.
      * @return The object returned by the handler.
      * @throws SQLException if a database access error occurs
+     * @deprecated Use {@link #query(Connection,String,ResultSetHandler,Object[])} instead
      */
     public Object query(Connection conn, String sql, Object[] params,
             ResultSetHandler rsh) throws SQLException {
+                return query(conn, sql, rsh, params);
+            }
+
+    /**
+     * Execute an SQL SELECT query with replacement parameters.  The
+     * caller is responsible for closing the connection.
+     * 
+     * @param conn The connection to execute the query in.
+     * @param sql The query to execute.
+     * @param rsh The handler that converts the results into an object.
+     * @param params The replacement parameters.
+     * @return The object returned by the handler.
+     * @throws SQLException if a database access error occurs
+     */
+    public Object query(Connection conn, String sql, ResultSetHandler rsh,
+            Object[] params) throws SQLException {
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -263,7 +415,7 @@ public class QueryRunner {
     public Object query(Connection conn, String sql, ResultSetHandler rsh)
         throws SQLException {
 
-        return this.query(conn, sql, (Object[]) null, rsh);
+        return this.query(conn, sql, rsh, (Object[]) null);
     }
 
     /**
@@ -278,11 +430,12 @@ public class QueryRunner {
      * 
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
+     * @deprecated Use {@link #query(String,ResultSetHandler,Object[])} instead
      */
     public Object query(String sql, Object param, ResultSetHandler rsh)
         throws SQLException {
 
-        return this.query(sql, new Object[] { param }, rsh);
+        return this.query(sql, rsh, new Object[] { param });
     }
 
     /**
@@ -299,14 +452,33 @@ public class QueryRunner {
      * 
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
+     * @deprecated Use {@link #query(String,ResultSetHandler,Object[])} instead
      */
     public Object query(String sql, Object[] params, ResultSetHandler rsh)
+        throws SQLException {
+            return query(sql, rsh, params);
+        }
+
+    /**
+     * Executes the given SELECT SQL query and returns a result object.
+     * The <code>Connection</code> is retrieved from the 
+     * <code>DataSource</code> set in the constructor.
+     * 
+     * @param sql The SQL statement to execute.
+     * @param rsh The handler used to create the result object from 
+     * the <code>ResultSet</code>.
+     * @param params Initialize the PreparedStatement's IN parameters with 
+     * this array.
+     * @return An object generated by the handler.
+     * @throws SQLException if a database access error occurs
+     */
+    public Object query(String sql, ResultSetHandler rsh, Object[] params)
         throws SQLException {
 
         Connection conn = this.prepareConnection();
 
         try {
-            return this.query(conn, sql, params, rsh);
+            return this.query(conn, sql, rsh, params);
         } finally {
             close(conn);
         }
@@ -325,7 +497,7 @@ public class QueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Object query(String sql, ResultSetHandler rsh) throws SQLException {
-        return this.query(sql, (Object[]) null, rsh);
+        return this.query(sql, rsh, (Object[]) null);
     }
 
     /**
@@ -344,7 +516,9 @@ public class QueryRunner {
     protected void rethrow(SQLException cause, String sql, Object[] params)
         throws SQLException {
 
-        StringBuffer msg = new StringBuffer(cause.getMessage());
+        String causeMessage = cause.getMessage();
+        if (causeMessage == null) causeMessage = "";
+        StringBuffer msg = new StringBuffer(causeMessage);
 
         msg.append(" Query: ");
         msg.append(sql);

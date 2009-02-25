@@ -144,8 +144,34 @@ public class BasicRowProcessor implements RowProcessor {
      * A Map that converts all keys to lowercase Strings for case insensitive
      * lookups.  This is needed for the toMap() implementation because 
      * databases don't consistenly handle the casing of column names. 
+     * 
+     * <p>The keys are stored as they are given [BUG #DBUTILS-34], so we maintain
+     * an internal mapping from lowercase keys to the real keys in order to 
+     * achieve the case insensitive lookup.
+     * 
+     * <p>Note: This implementation does not allow <tt>null</tt>
+     * for key, whereas {@link HashMap} does, because of the code:
+     * <pre>
+     * key.toString().toLowerCase()
+     * </pre>
      */
     private static class CaseInsensitiveHashMap extends HashMap {
+
+        /**
+         * The internal mapping from lowercase keys to the real keys.
+         * 
+         * <p>
+         * Any query operation using the key 
+         * ({@link #get(Object)}, {@link #containsKey(Object)})
+         * is done in three steps:
+         * <ul>
+         * <li>convert the parameter key to lower case</li>
+         * <li>get the actual key that corresponds to the lower case key</li>
+         * <li>query the map with the actual key</li>
+         * </ul>
+         * </p>
+         */
+        private final Map lowerCaseMap = new HashMap();
 
         /**
          * Required for serialization support.
@@ -158,31 +184,48 @@ public class BasicRowProcessor implements RowProcessor {
          * @see java.util.Map#containsKey(java.lang.Object)
          */
         public boolean containsKey(Object key) {
-            return super.containsKey(key.toString().toLowerCase());
+            Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
+            return super.containsKey(realKey);
+            // Possible optimisation here:
+            // Since the lowerCaseMap contains a mapping for all the keys,
+            // we could just do this:
+            // return lowerCaseMap.containsKey(key.toString().toLowerCase());
         }
 
         /**
          * @see java.util.Map#get(java.lang.Object)
          */
         public Object get(Object key) {
-            return super.get(key.toString().toLowerCase());
+            Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
+            return super.get(realKey);
         }
 
         /**
          * @see java.util.Map#put(java.lang.Object, java.lang.Object)
          */
         public Object put(Object key, Object value) {
-            return super.put(key.toString().toLowerCase(), value);
+            /*
+             * In order to keep the map and lowerCaseMap synchronized,
+             * we have to remove the old mapping before putting the 
+             * new one. Indeed, oldKey and key are not necessaliry equals.
+             * (That's why we call super.remove(oldKey) and not just
+             * super.put(key, value))
+             */
+            Object oldKey = lowerCaseMap.put(key.toString().toLowerCase(), key);
+            Object oldValue = super.remove(oldKey);
+            super.put(key, value);
+            return oldValue;
         }
 
         /**
          * @see java.util.Map#putAll(java.util.Map)
          */
         public void putAll(Map m) {
-            Iterator iter = m.keySet().iterator();
+            Iterator iter = m.entrySet().iterator();
             while (iter.hasNext()) {
-                Object key = iter.next();
-                Object value = m.get(key);
+                Map.Entry entry = (Map.Entry) iter.next();
+                Object key = entry.getKey();
+                Object value = entry.getValue();
                 this.put(key, value);
             }
         }
@@ -191,7 +234,8 @@ public class BasicRowProcessor implements RowProcessor {
          * @see java.util.Map#remove(java.lang.Object)
          */
         public Object remove(Object key) {
-            return super.remove(key.toString().toLowerCase());
+            Object realKey = lowerCaseMap.remove(key.toString().toLowerCase());
+            return super.remove(realKey);
         }
     }
     

@@ -28,7 +28,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class ArrayListHandler extends GenericListHandler {
+public class ArrayListHandler extends AbstractListHandler {
 
     /**
      * The RowProcessor implementation to use when converting rows 
@@ -62,7 +62,7 @@ public class ArrayListHandler extends GenericListHandler {
      * @return <code>Object[]</code>, never <code>null</code>.
      * 
      * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.handlers.GenericListHandler#handle(ResultSet)
+     * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     protected Object handleRow(ResultSet rs) throws SQLException {
         return this.convert.toArray(rs);

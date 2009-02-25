@@ -432,7 +432,11 @@ public class BeanProcessor {
      */
     protected Object processColumn(ResultSet rs, int index, Class propType)
         throws SQLException {
-
+    	
+    	if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
+    		return null;
+    	}
+    	
         if (propType.equals(String.class)) {
             return rs.getString(index);
             
