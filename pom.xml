@@ -188,9 +188,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <includes>
-                <include>**/BaseTestCase.java</include>
-              </includes>
+              <excludes>
+                <exclude>**/BaseTestCase.java</exclude>
+              </excludes>
           </configuration>
         </plugin>
         <plugin>

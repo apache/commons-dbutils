@@ -133,34 +133,4 @@ public class BaseTestCase extends TestCase {
         return MockResultSet.create(metaData, rows);
     }
 
-    /**
-     * Return a TestSuite containing all of our test cases.
-     */
-    public static Test suite() {
-        TestSuite suite = new TestSuite("All DbUtils Tests");
-
-        suite.addTestSuite(BasicRowProcessorTest.class);
-        suite.addTestSuite(BeanProcessorTest.class);
-        suite.addTestSuite(ProxyFactoryTest.class);
-        suite.addTestSuite(ResultSetIteratorTest.class);
-        suite.addTestSuite(QueryLoaderTest.class);
-        suite.addTestSuite(QueryRunnerTest.class);
-
-        // test handler implementations
-        suite.addTestSuite(ArrayHandlerTest.class);
-        suite.addTestSuite(ArrayListHandlerTest.class);
-        suite.addTestSuite(BeanHandlerTest.class);
-        suite.addTestSuite(BeanListHandlerTest.class);
-        suite.addTestSuite(MapHandlerTest.class);
-        suite.addTestSuite(MapListHandlerTest.class);
-        suite.addTestSuite(ScalarHandlerTest.class);
-        suite.addTestSuite(ColumnListHandlerTest.class);
-        suite.addTestSuite(KeyedHandlerTest.class);
-
-        suite.addTestSuite(StringTrimmedResultSetTest.class);
-        suite.addTestSuite(SqlNullCheckedResultSetTest.class);
-
-        return suite;
-    }
-
 }
