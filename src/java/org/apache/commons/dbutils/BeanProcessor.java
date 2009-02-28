@@ -49,14 +49,14 @@ import java.util.Map;
  * @since DbUtils 1.1
  */
 public class BeanProcessor {
-    
+
     /**
      * Special array value used by <code>mapColumnsToProperties</code> that 
      * indicates there is no bean property that matches a column from a 
      * <code>ResultSet</code>.
      */
     protected static final int PROPERTY_NOT_FOUND = -1;
-    
+
     /**
      * Set a bean's primitive properties to these defaults when SQL NULL 
      * is returned.  These are the same as the defaults that ResultSet get* 
@@ -81,7 +81,7 @@ public class BeanProcessor {
     public BeanProcessor() {
         super();
     }
-    
+
     /**
      * Convert a <code>ResultSet</code> row into a JavaBean.  This 
      * implementation uses reflection and <code>BeanInfo</code> classes to 
@@ -124,7 +124,7 @@ public class BeanProcessor {
 
         return this.createBean(rs, type, props, columnToProperty);
     }
-    
+
     /**
      * Convert a <code>ResultSet</code> into a <code>List</code> of JavaBeans.  
      * This implementation uses reflection and <code>BeanInfo</code> classes to 
@@ -175,7 +175,7 @@ public class BeanProcessor {
 
         return results;
     }
-    
+
     /**
      * Creates a new object and initializes its fields from the ResultSet.
      *
@@ -197,7 +197,7 @@ public class BeanProcessor {
             if (columnToProperty[i] == PROPERTY_NOT_FOUND) {
                 continue;
             }
-            
+
             PropertyDescriptor prop = props[columnToProperty[i]];
             Class propType = prop.getPropertyType();
 
@@ -212,7 +212,7 @@ public class BeanProcessor {
 
         return bean;
     }
-    
+
     /**
      * Calls the setter method on the target object for the given property.
      * If no setter method exists for the property, this method does nothing.
@@ -364,7 +364,7 @@ public class BeanProcessor {
 
         return beanInfo.getPropertyDescriptors();
     }
-    
+
     /**
      * The positions in the returned array represent column numbers.  The 
      * values stored at each position represent the index in the 
@@ -432,14 +432,14 @@ public class BeanProcessor {
      */
     protected Object processColumn(ResultSet rs, int index, Class propType)
         throws SQLException {
-    	
-    	if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
-    		return null;
-    	}
-    	
+
+        if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
+            return null;
+        }
+
         if (propType.equals(String.class)) {
             return rs.getString(index);
-            
+
         } else if (
             propType.equals(Integer.TYPE) || propType.equals(Integer.class)) {
             return new Integer(rs.getInt(index));
@@ -465,7 +465,7 @@ public class BeanProcessor {
 
         } else if (propType.equals(Byte.TYPE) || propType.equals(Byte.class)) {
             return new Byte(rs.getByte(index));
-            
+
         } else if (propType.equals(Timestamp.class)) {
             return rs.getTimestamp(index);
 
