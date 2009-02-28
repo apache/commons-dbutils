@@ -215,9 +215,10 @@ public class QueryRunner {
             PropertyDescriptor property = properties[i];
             Object value = null;
             Method method = property.getReadMethod();
-            if (method == null)
+            if (method == null) {
                 throw new RuntimeException("No read method for bean property "
                         + bean.getClass() + " " + property.getName());
+            }
             try {
                 value = method.invoke(bean, new Object[0]);
             } catch (InvocationTargetException e) {
@@ -259,8 +260,9 @@ public class QueryRunner {
         PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
             String propertyName = propertyNames[i];
-            if (propertyName == null)
+            if (propertyName == null) {
                 throw new NullPointerException("propertyName can't be null: " + i);
+            }
             boolean found = false;
             for (int j = 0; j < descriptors.length; j++) {
                 PropertyDescriptor descriptor = descriptors[j];
@@ -270,9 +272,10 @@ public class QueryRunner {
                     break;
                 }
             }
-            if (!found)
+            if (!found) {
                 throw new RuntimeException("Couldn't find bean property: "
                         + bean.getClass() + " " + propertyName);
+            }
         }
         fillStatementWithBean(stmt, bean, sorted);
     }
@@ -517,7 +520,9 @@ public class QueryRunner {
         throws SQLException {
 
         String causeMessage = cause.getMessage();
-        if (causeMessage == null) causeMessage = "";
+        if (causeMessage == null) {
+            causeMessage = "";
+        }
         StringBuffer msg = new StringBuffer(causeMessage);
 
         msg.append(" Query: ");
