@@ -28,13 +28,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class ArrayListHandlerTest extends BaseTestCase {
 
-	/**
-	 * Constructor for ArrayListHandlerTest.
-	 */
-	public ArrayListHandlerTest(String name) {
-		super(name);
-	}
-
 	public void testHandle() throws SQLException {
 		ResultSetHandler h = new ArrayListHandler();
 		List results = (List) h.handle(this.rs);

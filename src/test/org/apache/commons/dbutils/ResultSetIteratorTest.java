@@ -23,14 +23,6 @@ import java.util.Iterator;
  */
 public class ResultSetIteratorTest extends BaseTestCase {
 
-	/**
-	 * Constructor for ResultSetIteratorTest.
-	 * @param arg0
-	 */
-	public ResultSetIteratorTest(String arg0) {
-		super(arg0);
-	}
-
 	public void testNext() {
 		
 		Iterator iter = new ResultSetIterator(this.rs);

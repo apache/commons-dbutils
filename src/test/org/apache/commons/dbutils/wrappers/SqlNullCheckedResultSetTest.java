@@ -50,17 +50,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     private SqlNullCheckedResultSet rs2 = null;
 
     /**
-     * Constructs a new instance of
-     * <code>SqlNullCheckedResultSetTestCase</code>
-     * with the specified name.
-     *
-     * @param name the test case name
-     */
-    public SqlNullCheckedResultSetTest(String name) {
-        super(name);
-    }
-
-    /**
      * Sets up instance variables required by this test case.
      */
     public void setUp() throws Exception {

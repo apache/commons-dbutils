@@ -27,13 +27,6 @@ import org.apache.commons.dbutils.TestBean;
  */
 public class BeanHandlerTest extends BaseTestCase {
 
-	/**
-	 * Constructor for BeanHandlerTest.
-	 */
-	public BeanHandlerTest(String name) {
-		super(name);
-	}
-
 	public void testHandle() throws SQLException {
 		ResultSetHandler h = new BeanHandler(TestBean.class);
         TestBean results = (TestBean) h.handle(this.rs);

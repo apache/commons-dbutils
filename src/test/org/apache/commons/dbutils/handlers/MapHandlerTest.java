@@ -27,13 +27,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class MapHandlerTest extends BaseTestCase {
 
-	/**
-	 * Constructor for MapHandlerTest.
-	 */
-	public MapHandlerTest(String name) {
-		super(name);
-	}
-
 	public void testHandle() throws SQLException {
 		ResultSetHandler h = new MapHandler();
         Map results = (Map) h.handle(this.rs);

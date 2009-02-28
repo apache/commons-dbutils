@@ -108,13 +108,6 @@ public class BaseTestCase extends TestCase {
     protected ResultSet emptyResultSet = null;
 
     /**
-     * Constructor for BaseTestCase.
-     */
-    public BaseTestCase(String name) {
-        super(name);
-    }
-
-    /**
      * This is called before each test method so ResultSet will be fresh each
      * time.
      * @see junit.framework.TestCase#setUp()

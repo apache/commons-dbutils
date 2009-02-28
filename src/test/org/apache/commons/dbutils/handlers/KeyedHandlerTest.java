@@ -25,10 +25,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 public class KeyedHandlerTest extends BaseTestCase {
 
-    public KeyedHandlerTest(String name) {
-        super(name);
-    }
-
     public void testHandle() throws SQLException {
         ResultSetHandler h = new KeyedHandler();
 

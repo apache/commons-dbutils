@@ -22,10 +22,6 @@ public class BeanProcessorTest extends BaseTestCase {
 
     private static final BeanProcessor beanProc = new BeanProcessor();
 
-    public BeanProcessorTest(String name) {
-        super(name);
-    }
-
     public void testProcess() throws SQLException {
         int rowCount = 0;
         TestBean b = null;

@@ -28,10 +28,6 @@ import org.apache.commons.dbutils.ProxyFactory;
  */
 public class StringTrimmedResultSetTest extends BaseTestCase {
 
-    public StringTrimmedResultSetTest(String name) {
-        super(name);
-    }
-
     public void setUp() throws Exception {
         super.setUp();
         this.rs = StringTrimmedResultSet.wrap(this.rs);

@@ -41,13 +41,6 @@ public class ProxyFactoryTest extends BaseTestCase {
 		}
 	};
 
-	/**
-	 * Constructor for ProxyFactoryTest.
-	 */
-	public ProxyFactoryTest(String name) {
-		super(name);
-	}
-
 	public void testCreateConnection() {
 		assertTrue(
 			ProxyFactory.instance().createConnection(stub)

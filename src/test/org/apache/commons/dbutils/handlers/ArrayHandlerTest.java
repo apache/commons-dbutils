@@ -26,13 +26,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class ArrayHandlerTest extends BaseTestCase {
 
-	/**
-	 * Constructor for ArrayHandlerTest.
-	 */
-	public ArrayHandlerTest(String name) {
-		super(name);
-	}
-
 	public void testHandle() throws SQLException {
 		ResultSetHandler h = new ArrayHandler();
 		Object[] results = (Object[]) h.handle(this.rs);

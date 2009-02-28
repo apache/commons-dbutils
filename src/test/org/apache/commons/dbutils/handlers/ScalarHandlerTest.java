@@ -23,10 +23,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 public class ScalarHandlerTest extends BaseTestCase {
 
-    public ScalarHandlerTest(String name) {
-        super(name);
-    }
-
     public void testHandle() throws SQLException {
         ResultSetHandler h = new ScalarHandler();
         Object results = h.handle(this.rs);

@@ -27,13 +27,6 @@ public class QueryLoaderTest extends BaseTestCase {
     private static final String QUERIES =
         "/org/apache/commons/dbutils/TestQueries.properties";
 
-    /**
-     * Constructor for QueryLoaderTest.
-     */
-    public QueryLoaderTest(String name) {
-        super(name);
-    }
-
     public void testLoad() throws IOException {
         try {
             QueryLoader loader = QueryLoader.instance();

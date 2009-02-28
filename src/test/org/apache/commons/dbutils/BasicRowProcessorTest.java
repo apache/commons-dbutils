@@ -38,14 +38,6 @@ public class BasicRowProcessorTest extends BaseTestCase {
     private static final DateFormat datef =
         new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
-    /**
-     * Constructor for BasicRowProcessorTest.
-     * @param name
-     */
-    public BasicRowProcessorTest(String name) {
-        super(name);
-    }
-
     public void testToArray() throws SQLException {
 
         int rowCount = 0;
