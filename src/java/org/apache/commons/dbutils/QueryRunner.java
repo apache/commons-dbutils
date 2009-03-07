@@ -719,8 +719,8 @@ public class QueryRunner {
      * Close a <code>ResultSet</code>.  This implementation avoids closing if 
      * null and does <strong>not</strong> suppress any exceptions.  Subclasses
      * can override to provide special handling like logging.
-     * @throws SQLException if a database access error occurs
      * @param rs ResultSet to close
+     * @throws SQLException if a database access error occurs
      * @since DbUtils 1.1
      */
     protected void close(ResultSet rs) throws SQLException {
