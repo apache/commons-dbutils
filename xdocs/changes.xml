@@ -38,7 +38,38 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
-
+    <release version="1.2" date="2009-03-06" description="Another round of fixes; deprecates methods in preparation for varargs in java5">
+      <action dev="bayard" type="remove">
+        Remove old Maven1/Ant build scripts
+      </action>
+      <action dev="dfabulich" type="update" issue="DBUTILS-29">
+        Support bean property to SQL IN parameter mapping
+      </action>
+      <action dev="dfabulich" type="fix" issue="DBUTILS-31">
+        fillStatement setNull bug with the Postgres/Derby JDBC driver (and others)
+      </action>
+      <action dev="dfabulich" type="update" issue="DBUTILS-33">
+        Make GenericListHandler (now AbstractListHandler) public
+      </action>
+      <action dev="dfabulich" type="update" issue="DBUTILS-34">
+        BasicRowProcessor loses any information on database field case
+      </action>
+      <action dev="dfabulich" type="update" issue="DBUTILS-37">
+        BeanListHandler#handle(ResultSet) is not optimal
+      </action>
+      <action dev="dfabulich" type="fix" issue="DBUTILS-40">
+        NullPointerException occured at rethrow method
+      </action>     
+      <action dev="dfabulich" type="update" issue="DBUTILS-42">
+        Object with Long or Decimal got initial zero value while database field is null
+      </action>
+      <action dev="dennisl" type="update" issue="DBUTILS-38">
+        example documentation page, update query
+      </action>
+      <action dev="bayard" type="fix" issue="DBUTILS-36">
+        Add serialVersionUID to BasicRowProcessor.CaseInsensitiveHashMap
+      </action>
+    </release>
     <release version="1.1" date="2006-12-01" description="Last couple of years of fixes">
 
       <action dev="bayard" type="fix" issue="DBUTILS-32">
