@@ -92,6 +92,15 @@
         <role>Java Developer</role>
       </roles>
     </developer>
+    <developer>
+      <name>Dan Fabulich</name>
+      <id>dfabulich</id>
+      <email>dan@fabulich.com</email>
+      <organization></organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
   </developers>
 
   <contributors>
