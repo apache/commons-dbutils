@@ -15,10 +15,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
@@ -51,7 +48,7 @@
       <name>Juozas Baliuka</name>
       <id>baliuka</id>
       <email>baliuka@apache.org</email>
-      <organization></organization>
+      <organization />
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -60,7 +57,7 @@
       <name>Steven Caswell</name>
       <id>scaswell</id>
       <email>steven@caswell.name</email>
-      <organization></organization>
+      <organization />
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -69,7 +66,7 @@
       <name>David Graham</name>
       <id>dgraham</id>
       <email>dgraham@apache.org</email>
-      <organization></organization>
+      <organization />
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -78,7 +75,7 @@
       <name>Yoav Shapira</name>
       <id>yoavs</id>
       <email>yoavs@apache.org</email>
-      <organization></organization>
+      <organization />
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -87,7 +84,7 @@
       <name>Henri Yandell</name>
       <id>bayard</id>
       <email>bayard@generationjava.com</email>
-      <organization></organization>
+      <organization />
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -96,7 +93,7 @@
       <name>Dan Fabulich</name>
       <id>dfabulich</id>
       <email>dan@fabulich.com</email>
-      <organization></organization>
+      <organization />
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -185,7 +182,7 @@
     <commons.componentid>dbutils</commons.componentid>
     <commons.release.version>1.2</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.binary.suffix></commons.binary.suffix>
+    <commons.binary.suffix />
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
   </properties> 
