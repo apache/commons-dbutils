@@ -20,8 +20,11 @@ import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Arrays;
 
 import junit.framework.TestCase;
@@ -30,9 +33,67 @@ public class QueryRunnerTest extends TestCase {
     QueryRunner runner;
     PreparedStatement stmt;
     
+    static final Method getParameterCount, getParameterType, getParameterMetaData;
+    static {
+        try {
+            getParameterCount = ParameterMetaData.class.getMethod("getParameterCount", new Class[0]);
+            getParameterType = ParameterMetaData.class.getMethod("getParameterType", new Class[]{int.class});
+            getParameterMetaData = PreparedStatement.class.getMethod("getParameterMetaData", new Class[0]);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     public void setUp() {
         runner = new QueryRunner();
         stmt = fakePreparedStatement();
+    }
+    
+    public void testFillStatementWithNull() throws Exception {
+        stmt = fakeFillablePreparedStatement(false, new int[] {Types.VARCHAR, Types.BIGINT});
+        runner.fillStatement(stmt, new Object[] { null, null }); 
+    }
+    
+    public void testFillStatementWithNullOracle() throws Exception {
+        stmt = fakeFillablePreparedStatement(true, new int[] {Types.VARCHAR, Types.BIGINT});
+        runner.fillStatement(stmt, new Object[] { null, null });
+    }
+
+    private PreparedStatement fakeFillablePreparedStatement(final boolean simulateOracle, final int[] types) throws NoSuchMethodException {
+        // prepare a mock ParameterMetaData and a mock PreparedStatement to return the PMD
+        final ParameterMetaData pmd = mockParameterMetaData(simulateOracle,types);
+        InvocationHandler stmtHandler = new InvocationHandler() {
+            public Object invoke(Object proxy, Method method, Object[] args)
+                    throws Throwable {
+                if (getParameterMetaData.equals(method)) {
+                    return pmd;
+                }
+                return null;
+            }
+        };
+        return ProxyFactory.instance().createPreparedStatement(stmtHandler);
+    }
+
+    private ParameterMetaData mockParameterMetaData(final boolean simulateOracle, final int[] types) {
+        InvocationHandler pmdHandler = new InvocationHandler() {
+            public Object invoke(Object proxy, Method method, Object[] args)
+                    throws Throwable {
+                if (getParameterCount.equals(method)) {
+                    return new Integer(types.length);
+                }
+                if (getParameterType.equals(method)) {
+                    if (simulateOracle) throw new SQLException("Oracle fails when you call getParameterType");
+                    int arg = ((Integer)args[0]).intValue();
+                    return new Integer(types[arg-1]);
+                }
+                return null;
+            }
+        };
+        
+        return (ParameterMetaData) Proxy.newProxyInstance(
+                pmdHandler.getClass().getClassLoader(),
+                new Class[] {ParameterMetaData.class},
+                pmdHandler);
     }
     
     public void testFillStatementWithBean() throws SQLException {
@@ -137,4 +198,5 @@ public class QueryRunnerTest extends TestCase {
             this.params = params;
         }
     }
+
 }
