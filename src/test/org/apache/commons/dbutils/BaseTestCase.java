@@ -21,21 +21,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Date;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.apache.commons.dbutils.handlers.ArrayHandlerTest;
-import org.apache.commons.dbutils.handlers.ArrayListHandlerTest;
-import org.apache.commons.dbutils.handlers.BeanHandlerTest;
-import org.apache.commons.dbutils.handlers.BeanListHandlerTest;
-import org.apache.commons.dbutils.handlers.ColumnListHandlerTest;
-import org.apache.commons.dbutils.handlers.KeyedHandlerTest;
-import org.apache.commons.dbutils.handlers.MapHandlerTest;
-import org.apache.commons.dbutils.handlers.MapListHandlerTest;
-import org.apache.commons.dbutils.handlers.ScalarHandlerTest;
-import org.apache.commons.dbutils.wrappers.SqlNullCheckedResultSetTest;
-import org.apache.commons.dbutils.wrappers.StringTrimmedResultSetTest;
 
 /**
  * BaseTestCase is the base class for all test cases as well as the "all tests"
