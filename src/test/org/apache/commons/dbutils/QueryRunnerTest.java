@@ -59,7 +59,7 @@ public class QueryRunnerTest extends TestCase {
         runner.fillStatement(stmt, new Object[] { null, null });
     }
 
-    private PreparedStatement fakeFillablePreparedStatement(final boolean simulateOracle, final int[] types) throws NoSuchMethodException {
+    private PreparedStatement fakeFillablePreparedStatement(final boolean simulateOracle, final int[] types) {
         // prepare a mock ParameterMetaData and a mock PreparedStatement to return the PMD
         final ParameterMetaData pmd = mockParameterMetaData(simulateOracle,types);
         InvocationHandler stmtHandler = new InvocationHandler() {
@@ -162,14 +162,14 @@ public class QueryRunnerTest extends TestCase {
         } catch (RuntimeException expected) {}
     }
     
-    public void testRethrowNullMessage() throws SQLException {
+    public void testRethrowNullMessage() {
         // DBUTILS-40
         SQLException sqe = new SQLException((String)null);
         QueryRunner qr = new QueryRunner();
         try {
             qr.rethrow(sqe, "foo", new Object[] {"bar"});
             fail("rethrow didn't throw");
-        } catch (SQLException expected) {};
+        } catch (SQLException expected) {}
     }
     
     // indexed bean property
