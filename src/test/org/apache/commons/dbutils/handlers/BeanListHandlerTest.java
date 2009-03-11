@@ -38,15 +38,22 @@ public class BeanListHandlerTest extends BaseTestCase {
 
 		Iterator iter = results.iterator();
 		TestBean row = null;
-		while (iter.hasNext()) {
-			row = (TestBean) iter.next();
-			assertNotNull(row);
-		}
+        assertTrue(iter.hasNext());
+        row = (TestBean) iter.next();
+        assertEquals("1", row.getOne());
+        assertEquals("2", row.getTwo());
+        assertEquals("3", row.getThree());
+        assertEquals("not set", row.getDoNotSet());
+            
+        assertTrue(iter.hasNext());
+        row = (TestBean) iter.next();
 
-		assertEquals("4", row.getOne());
-		assertEquals("5", row.getTwo());
-		assertEquals("6", row.getThree());
-		assertEquals("not set", row.getDoNotSet());
+        assertEquals("4", row.getOne());
+        assertEquals("5", row.getTwo());
+        assertEquals("6", row.getThree());
+        assertEquals("not set", row.getDoNotSet());
+        
+        assertFalse(iter.hasNext());
 	}
 
 	public void testEmptyResultSetHandle() throws SQLException {

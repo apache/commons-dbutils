@@ -18,13 +18,6 @@ package org.apache.commons.dbutils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
 
 /**
  * ProxyFactoryTest performs simple type checking on proxy objects returned
@@ -42,42 +35,31 @@ public class ProxyFactoryTest extends BaseTestCase {
 	};
 
 	public void testCreateConnection() {
-		assertTrue(
-			ProxyFactory.instance().createConnection(stub)
-				instanceof Connection);
+		assertNotNull(ProxyFactory.instance().createConnection(stub));
 	}
 
 	public void testCreateDriver() {
-		assertTrue(
-			ProxyFactory.instance().createDriver(stub) instanceof Driver);
+		assertNotNull(ProxyFactory.instance().createDriver(stub));
 	}
 
 	public void testCreatePreparedStatement() {
-		assertTrue(
-			ProxyFactory.instance().createPreparedStatement(stub)
-				instanceof PreparedStatement);
+		assertNotNull(ProxyFactory.instance().createPreparedStatement(stub));
 	}
 
 	public void testCreateResultSet() {
-		assertTrue(
-			ProxyFactory.instance().createResultSet(stub) instanceof ResultSet);
+		assertNotNull(ProxyFactory.instance().createResultSet(stub));
 	}
 
 	public void testCreateResultSetMetaData() {
-		assertTrue(
-			ProxyFactory.instance().createResultSetMetaData(stub)
-				instanceof ResultSetMetaData);
+		assertNotNull(ProxyFactory.instance().createResultSetMetaData(stub));
 	}
 
 	public void testCreateStatement() {
-		assertTrue(
-			ProxyFactory.instance().createStatement(stub) instanceof Statement);
+		assertNotNull(ProxyFactory.instance().createStatement(stub));
 	}
 
 	public void testCreateCallableStatement() {
-		assertTrue(
-			ProxyFactory.instance().createCallableStatement(stub)
-				instanceof CallableStatement);
+		assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
 	}
 
 }

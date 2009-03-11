@@ -40,43 +40,53 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToArray() throws SQLException {
 
-        int rowCount = 0;
         Object[] a = null;
-        while (this.rs.next()) {
-            a = processor.toArray(this.rs);
-            assertEquals(COLS, a.length);
-            rowCount++;
-        }
+        assertTrue(this.rs.next());
+        a = processor.toArray(this.rs);
+        assertEquals(COLS, a.length);
+        assertEquals("1", a[0]);
+        assertEquals("2", a[1]);
+        assertEquals("3", a[2]);
+            
+        assertTrue(this.rs.next());
+        a = processor.toArray(this.rs);
+        assertEquals(COLS, a.length);
 
-        assertEquals(ROWS, rowCount);
         assertEquals("4", a[0]);
         assertEquals("5", a[1]);
         assertEquals("6", a[2]);
+            
+        assertFalse(this.rs.next());
     }
 
     public void testToBean() throws SQLException, ParseException {
 
-        int rowCount = 0;
-        TestBean b = null;
-        while (this.rs.next()) {
-            b = (TestBean) processor.toBean(this.rs, TestBean.class);
-            assertNotNull(b);
-            rowCount++;
-        }
+        TestBean row = null;
+        assertTrue(this.rs.next());
+        row = (TestBean) processor.toBean(this.rs, TestBean.class);
+        assertEquals("1", row.getOne());
+        assertEquals("2", row.getTwo());
+        assertEquals("3", row.getThree());
+        assertEquals("not set", row.getDoNotSet());
+            
+        assertTrue(this.rs.next());
+        row = (TestBean) processor.toBean(this.rs, TestBean.class);
 
-        assertEquals(ROWS, rowCount);
-        assertEquals("4", b.getOne());
-        assertEquals("5", b.getTwo());
-        assertEquals("6", b.getThree());
-        assertEquals("not set", b.getDoNotSet());
-        assertEquals(3, b.getIntTest());
-        assertEquals(new Integer(4), b.getIntegerTest());
-        assertEquals(null, b.getNullObjectTest());
-        assertEquals(0, b.getNullPrimitiveTest());
+        assertEquals("4", row.getOne());
+        assertEquals("5", row.getTwo());
+        assertEquals("6", row.getThree());
+        assertEquals("not set", row.getDoNotSet());
+        assertEquals(3, row.getIntTest());
+        assertEquals(new Integer(4), row.getIntegerTest());
+        assertEquals(null, row.getNullObjectTest());
+        assertEquals(0, row.getNullPrimitiveTest());
         // test date -> string handling
-        assertNotNull(b.getNotDate());
-        assertTrue(!"not a date".equals(b.getNotDate()));
-        datef.parse(b.getNotDate());
+        assertNotNull(row.getNotDate());
+        assertTrue(!"not a date".equals(row.getNotDate()));
+        datef.parse(row.getNotDate());
+        
+        assertFalse(this.rs.next());
+        
     }
 
     public void testToBeanList() throws SQLException, ParseException {
@@ -85,8 +95,13 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertNotNull(list);
         assertEquals(ROWS, list.size());
 
-        TestBean b = (TestBean) list.get(1);
-
+        TestBean b = (TestBean) list.get(0);
+        assertEquals("1", b.getOne());
+        assertEquals("2", b.getTwo());
+        assertEquals("3", b.getThree());
+        assertEquals("not set", b.getDoNotSet());
+        
+        b = (TestBean) list.get(1);
         assertEquals("4", b.getOne());
         assertEquals("5", b.getTwo());
         assertEquals("6", b.getThree());
@@ -103,19 +118,22 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToMap() throws SQLException {
 
-        int rowCount = 0;
-        Map m = null;
-        while (this.rs.next()) {
-            m = processor.toMap(this.rs);
-            assertNotNull(m);
-            assertEquals(COLS, m.keySet().size());
-            rowCount++;
-        }
+        assertTrue(this.rs.next());
+        Map m = processor.toMap(this.rs);
+        assertEquals(COLS, m.keySet().size());
+        assertEquals("1", m.get("one"));
+        assertEquals("2", m.get("TWO"));
+        assertEquals("3", m.get("Three"));
+            
+        assertTrue(this.rs.next());
+        m = processor.toMap(this.rs);
+        assertEquals(COLS, m.keySet().size());
 
-        assertEquals(ROWS, rowCount);
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));
         assertEquals("6", m.get("THREE"));
+            
+        assertFalse(this.rs.next());
     }
 
 }
