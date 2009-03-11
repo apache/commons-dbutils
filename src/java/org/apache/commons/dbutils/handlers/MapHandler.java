@@ -35,14 +35,14 @@ public class MapHandler implements ResultSetHandler {
      * The RowProcessor implementation to use when converting rows 
      * into Maps.
      */
-    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
+    private final RowProcessor convert;
 
     /** 
      * Creates a new instance of MapHandler using a 
      * <code>BasicRowProcessor</code> for conversion.
      */
     public MapHandler() {
-        super();
+        this(ArrayHandler.ROW_PROCESSOR);
     }
 
     /** 

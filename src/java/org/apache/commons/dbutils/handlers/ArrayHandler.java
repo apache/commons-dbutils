@@ -43,14 +43,14 @@ public class ArrayHandler implements ResultSetHandler {
      * The RowProcessor implementation to use when converting rows 
      * into arrays.
      */
-    private RowProcessor convert = ROW_PROCESSOR;
+    private final RowProcessor convert;
 
     /** 
      * Creates a new instance of ArrayHandler using a 
      * <code>BasicRowProcessor</code> for conversion.
      */
     public ArrayHandler() {
-        super();
+        this(ROW_PROCESSOR);
     }
 
     /** 

@@ -32,20 +32,20 @@ public class ScalarHandler implements ResultSetHandler {
     /**
      * The column number to retrieve.
      */
-    private int columnIndex = 1;
+    private final int columnIndex;
 
     /**
      * The column name to retrieve.  Either columnName or columnIndex
      * will be used but never both.
      */
-    private String columnName = null;
+    private final String columnName;
 
     /** 
      * Creates a new instance of ScalarHandler.  The first column will
      * be returned from <code>handle()</code>.
      */
     public ScalarHandler() {
-        super();
+        this(1, null);
     }
 
     /** 
@@ -55,7 +55,7 @@ public class ScalarHandler implements ResultSetHandler {
      * <code>ResultSet</code>.
      */
     public ScalarHandler(int columnIndex) {
-        this.columnIndex = columnIndex;
+        this(columnIndex, null);
     }
 
     /** 
@@ -65,7 +65,13 @@ public class ScalarHandler implements ResultSetHandler {
      * <code>ResultSet</code>.
      */
     public ScalarHandler(String columnName) {
-        this.columnName = columnName;
+        this(1, columnName);
+    }
+
+    // Helper constructor
+    private ScalarHandler(int columnIndex, String columnName){
+        this.columnIndex = columnIndex;
+        this.columnName = columnName;        
     }
 
     /**

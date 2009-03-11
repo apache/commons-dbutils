@@ -33,13 +33,13 @@ public class BeanHandler implements ResultSetHandler {
     /**
      * The Class of beans produced by this handler.
      */
-    private Class type = null;
+    private final Class type;
 
     /**
      * The RowProcessor implementation to use when converting rows 
      * into beans.
      */
-    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
+    private final RowProcessor convert;
 
     /** 
      * Creates a new instance of BeanHandler.
@@ -48,7 +48,7 @@ public class BeanHandler implements ResultSetHandler {
      * are created from.
      */
     public BeanHandler(Class type) {
-        this.type = type;
+        this(type, ArrayHandler.ROW_PROCESSOR);
     }
 
     /** 
