@@ -59,7 +59,7 @@ public class QueryRunnerTest extends TestCase {
         runner.fillStatement(stmt, new Object[] { null, null });
     }
 
-    private PreparedStatement fakeFillablePreparedStatement(final boolean simulateOracle, final int[] types) {
+    private PreparedStatement fakeFillablePreparedStatement(final boolean simulateOracle, final int[] types) throws NoSuchMethodException {
         // prepare a mock ParameterMetaData and a mock PreparedStatement to return the PMD
         final ParameterMetaData pmd = mockParameterMetaData(simulateOracle,types);
         InvocationHandler stmtHandler = new InvocationHandler() {
@@ -153,13 +153,25 @@ public class QueryRunnerTest extends TestCase {
     
     public void testFillStatementWithBeanErrorReadMethodPrivate() throws Exception {
         getPrivate();
-        Method getPrivate = getClass().getDeclaredMethod("getPrivate", new Class[0]);
-        PropertyDescriptor badReadMethod = new PropertyDescriptor("throwsException", getPrivate, null);
+        PropertyDescriptor badReadMethod = new BadPrivatePropertyDescriptor();
         PropertyDescriptor properties[] = new PropertyDescriptor[] { badReadMethod };
         try {
             runner.fillStatementWithBean(stmt, this, properties);
             fail("Expected RuntimeException: tried to call a private method");
         } catch (RuntimeException expected) {}
+    }
+    
+    class BadPrivatePropertyDescriptor extends PropertyDescriptor {
+        Method getPrivate;
+        BadPrivatePropertyDescriptor() throws Exception {
+            super("throwsException", QueryRunnerTest.class, "getThrowsException", null);
+            getPrivate = QueryRunnerTest.class.getDeclaredMethod("getPrivate", new Class[0]);
+        }
+        
+        public synchronized Method getReadMethod() {
+            if (getPrivate == null) return super.getReadMethod();
+            return getPrivate;
+        }
     }
     
     public void testRethrowNullMessage() {
