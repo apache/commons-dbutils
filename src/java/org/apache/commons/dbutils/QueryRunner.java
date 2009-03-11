@@ -48,13 +48,14 @@ public class QueryRunner {
     /**
      * The DataSource to retrieve connections from.
      */
-    protected DataSource ds = null;
+    protected final DataSource ds;
 
     /**
      * Constructor for QueryRunner.
      */
     public QueryRunner() {
         super();
+        ds = null;
     }
 
     /**
@@ -66,6 +67,7 @@ public class QueryRunner {
     public QueryRunner(boolean pmdKnownBroken) {
         super();
         this.pmdKnownBroken = pmdKnownBroken; 
+        ds = null;
     }
     
     /**
@@ -77,7 +79,7 @@ public class QueryRunner {
      */
     public QueryRunner(DataSource ds) {
         super();
-        setDataSource(ds);
+        this.ds = ds;
     }
     
     /**
@@ -93,7 +95,7 @@ public class QueryRunner {
     public QueryRunner(DataSource ds, boolean pmdKnownBroken) {
         super();
         this.pmdKnownBroken = pmdKnownBroken;
-        setDataSource(ds);
+        this.ds = ds;
     }
     
     /**
@@ -540,18 +542,6 @@ public class QueryRunner {
         e.setNextException(cause);
 
         throw e;
-    }
-
-    /**
-     * Sets the <code>DataSource</code> this runner will use to get
-     * database connections from.  This should be called after creating a
-     * runner with the default constructor if you intend to use the
-     * execute methods without passing in a <code>Connection</code>.
-     * 
-     * @param dataSource The DataSource to use.
-     */
-    public void setDataSource(DataSource dataSource) {
-        this.ds = dataSource;
     }
 
     /**
