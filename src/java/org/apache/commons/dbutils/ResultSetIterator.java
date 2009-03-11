@@ -37,19 +37,19 @@ public class ResultSetIterator implements Iterator {
     /**
      * The wrapped <code>ResultSet</code>.
      */
-    private ResultSet rs = null;
+    private final ResultSet rs;
     
     /**
      * The processor to use when converting a row into an Object[].
      */
-    private RowProcessor convert = new BasicRowProcessor();
+    private final RowProcessor convert;
 
     /**
      * Constructor for ResultSetIterator.
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      */
     public ResultSetIterator(ResultSet rs) {
-        this.rs = rs;
+        this(rs , new BasicRowProcessor());
     }
     
     /**

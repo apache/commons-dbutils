@@ -153,8 +153,7 @@ public class QueryRunnerTest extends TestCase {
     
     public void testFillStatementWithBeanErrorReadMethodPrivate() throws Exception {
         getPrivate();
-        Method getPrivate = getClass().getDeclaredMethod("getPrivate", new Class[0]);
-        PropertyDescriptor badReadMethod = new PropertyDescriptor("throwsException", getPrivate, null);
+        PropertyDescriptor badReadMethod = new BadPrivatePropertyDescriptor();
         PropertyDescriptor properties[] = new PropertyDescriptor[] { badReadMethod };
         try {
             runner.fillStatementWithBean(stmt, this, properties);
@@ -162,14 +161,27 @@ public class QueryRunnerTest extends TestCase {
         } catch (RuntimeException expected) {}
     }
     
-    public void testRethrowNullMessage() throws SQLException {
+    class BadPrivatePropertyDescriptor extends PropertyDescriptor {
+        Method getPrivate;
+        BadPrivatePropertyDescriptor() throws Exception {
+            super("throwsException", QueryRunnerTest.class, "getThrowsException", null);
+            getPrivate = QueryRunnerTest.class.getDeclaredMethod("getPrivate", new Class[0]);
+        }
+        
+        public synchronized Method getReadMethod() {
+            if (getPrivate == null) return super.getReadMethod();
+            return getPrivate;
+        }
+    }
+    
+    public void testRethrowNullMessage() {
         // DBUTILS-40
         SQLException sqe = new SQLException((String)null);
         QueryRunner qr = new QueryRunner();
         try {
             qr.rethrow(sqe, "foo", new Object[] {"bar"});
             fail("rethrow didn't throw");
-        } catch (SQLException expected) {};
+        } catch (SQLException expected) {}
     }
     
     // indexed bean property

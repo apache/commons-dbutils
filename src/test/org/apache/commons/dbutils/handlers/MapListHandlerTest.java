@@ -38,14 +38,22 @@ public class MapListHandlerTest extends BaseTestCase {
 
 		Iterator iter = results.iterator();
         Map row = null;
-		while (iter.hasNext()) {
-			row = (Map) iter.next();
-			assertEquals(COLS, row.keySet().size());
-		}
+        assertTrue(iter.hasNext());
+        row = (Map) iter.next();
+        assertEquals(COLS, row.keySet().size());
+        assertEquals("1", row.get("one"));
+        assertEquals("2", row.get("TWO"));
+        assertEquals("3", row.get("Three"));
+            
+        assertTrue(iter.hasNext());
+        row = (Map) iter.next();
+        assertEquals(COLS, row.keySet().size());
 
-		assertEquals("4", row.get("one"));
-		assertEquals("5", row.get("TWO"));
-		assertEquals("6", row.get("Three"));
+        assertEquals("4", row.get("one"));
+        assertEquals("5", row.get("TWO"));
+        assertEquals("6", row.get("Three"));
+            
+        assertFalse(iter.hasNext());
 	}
 
 	public void testEmptyResultSetHandle() throws SQLException {

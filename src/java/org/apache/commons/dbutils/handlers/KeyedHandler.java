@@ -63,25 +63,25 @@ public class KeyedHandler implements ResultSetHandler {
      * The RowProcessor implementation to use when converting rows
      * into Objects.
      */
-    protected RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
+    protected final RowProcessor convert;
 
     /**
      * The column index to retrieve key values from.  Defaults to 1.
      */
-    protected int columnIndex = 1;
+    protected final int columnIndex;
 
     /**
      * The column name to retrieve key values from.  Either columnName or 
      * columnIndex will be used but never both.
      */
-    protected String columnName = null;
+    protected final String columnName;
 
     /** 
      * Creates a new instance of KeyedHandler.  The value of the first column 
      * of each row will be a key in the Map.
      */
     public KeyedHandler() {
-        super();
+        this(ArrayHandler.ROW_PROCESSOR, 1, null);
     }
 
     /**
@@ -92,8 +92,7 @@ public class KeyedHandler implements ResultSetHandler {
      * to use when converting rows into Maps
      */
     public KeyedHandler(RowProcessor convert) {
-        super();
-        this.convert = convert;
+        this(convert, 1, null);
     }
 
     /** 
@@ -103,8 +102,7 @@ public class KeyedHandler implements ResultSetHandler {
      * retrieved from the column at this index.
      */
     public KeyedHandler(int columnIndex) {
-        super();
-        this.columnIndex = columnIndex;
+        this(ArrayHandler.ROW_PROCESSOR, columnIndex, null);
     }
 
     /** 
@@ -114,7 +112,15 @@ public class KeyedHandler implements ResultSetHandler {
      * retrieved from the column with this name.
      */
     public KeyedHandler(String columnName) {
+        this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
+    }
+
+    // Helper
+    private KeyedHandler(RowProcessor convert, int columnIndex,
+            String columnName) {
         super();
+        this.convert = convert;
+        this.columnIndex = columnIndex;
         this.columnName = columnName;
     }
 

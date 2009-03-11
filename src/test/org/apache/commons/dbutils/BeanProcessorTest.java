@@ -23,16 +23,16 @@ public class BeanProcessorTest extends BaseTestCase {
     private static final BeanProcessor beanProc = new BeanProcessor();
 
     public void testProcess() throws SQLException {
-        int rowCount = 0;
         TestBean b = null;
-        while (this.rs.next()) {
-            b = (TestBean) beanProc.toBean(this.rs, TestBean.class);
-            assertNotNull(b);
-            rowCount++;
-        }
-
-        assertEquals(ROWS, rowCount);
+        assertTrue(this.rs.next());
+        b = (TestBean) beanProc.toBean(this.rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        
+        assertTrue(this.rs.next());
+        b = (TestBean) beanProc.toBean(this.rs, TestBean.class);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+
+        assertFalse(this.rs.next());
     }
 
 }

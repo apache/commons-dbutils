@@ -36,7 +36,7 @@ public class MockResultSetMetaData implements InvocationHandler {
      * </pre>
      * 
      * @param columnNames
-     * @return
+     * @return the proxy object
      */
     public static ResultSetMetaData create(String[] columnNames) {
         return ProxyFactory.instance().createResultSetMetaData(

@@ -32,20 +32,20 @@ public class ColumnListHandler extends AbstractListHandler {
     /**
      * The column number to retrieve.
      */
-    private int columnIndex = 1;
+    private final int columnIndex;
 
     /**
      * The column name to retrieve.  Either columnName or columnIndex
      * will be used but never both.
      */
-    private String columnName = null;
+    private final String columnName;
 
     /** 
      * Creates a new instance of ColumnListHandler.  The first column of each
      * row will be returned from <code>handle()</code>.
      */
     public ColumnListHandler() {
-        super();
+        this(1, null);
     }
 
     /** 
@@ -55,7 +55,7 @@ public class ColumnListHandler extends AbstractListHandler {
      * <code>ResultSet</code>.
      */
     public ColumnListHandler(int columnIndex) {
-        this.columnIndex = columnIndex;
+        this(columnIndex, null);
     }
 
     /** 
@@ -65,9 +65,16 @@ public class ColumnListHandler extends AbstractListHandler {
      * <code>ResultSet</code>.
      */
     public ColumnListHandler(String columnName) {
-        this.columnName = columnName;
+        this(1, columnName);
     }
 
+    // Helper
+    private ColumnListHandler(int columnIndex, String columnName) {
+        super();
+        this.columnIndex = columnIndex;
+        this.columnName = columnName;        
+    }
+    
     /**
      * Returns one <code>ResultSet</code> column value as <code>Object</code>.
      * 

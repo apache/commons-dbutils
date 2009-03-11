@@ -34,14 +34,14 @@ public class MapListHandler extends AbstractListHandler {
      * The RowProcessor implementation to use when converting rows 
      * into Maps.
      */
-    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
+    private final RowProcessor convert;
 
     /** 
      * Creates a new instance of MapListHandler using a 
      * <code>BasicRowProcessor</code> for conversion.
      */
     public MapListHandler() {
-        super();
+        this(ArrayHandler.ROW_PROCESSOR);
     }
 
     /** 

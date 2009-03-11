@@ -181,7 +181,7 @@
   <properties>
     <commons.componentid>dbutils</commons.componentid>
     <commons.release.version>1.2</commons.release.version>
-    <commons.rc.version>RC1</commons.rc.version>
+    <commons.rc.version>RC2</commons.rc.version>
     <commons.binary.suffix />
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>

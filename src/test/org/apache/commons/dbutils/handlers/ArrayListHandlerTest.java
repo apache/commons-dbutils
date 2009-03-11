@@ -36,15 +36,23 @@ public class ArrayListHandlerTest extends BaseTestCase {
 		assertEquals(ROWS, results.size());
 
 		Iterator iter = results.iterator();
-		Object[] row = null;
-		while (iter.hasNext()) {
-			row = (Object[]) iter.next();
-			assertEquals(COLS, row.length);
-		}
+	    Object[] row = null;
+	    assertTrue(iter.hasNext());
+	    row = (Object[]) iter.next();
+	    assertEquals(COLS, row.length);
+	    assertEquals("1", row[0]);
+	    assertEquals("2", row[1]);
+	    assertEquals("3", row[2]);
+	        
+	    assertTrue(iter.hasNext());
+	    row = (Object[]) iter.next();
+	    assertEquals(COLS, row.length);
 
-		assertEquals("4", row[0]);
-		assertEquals("5", row[1]);
-		assertEquals("6", row[2]);
+	    assertEquals("4", row[0]);
+	    assertEquals("5", row[1]);
+	    assertEquals("6", row[2]);
+	        
+	    assertFalse(iter.hasNext());
 	}
 
 	public void testEmptyResultSetHandle() throws SQLException {

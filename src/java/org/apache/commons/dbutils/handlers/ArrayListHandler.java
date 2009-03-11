@@ -34,14 +34,14 @@ public class ArrayListHandler extends AbstractListHandler {
      * The RowProcessor implementation to use when converting rows 
      * into Object[]s.
      */
-    private RowProcessor convert = ArrayHandler.ROW_PROCESSOR;
+    private final RowProcessor convert;
 
     /** 
      * Creates a new instance of ArrayListHandler using a 
      * <code>BasicRowProcessor</code> for conversions.
      */
     public ArrayListHandler() {
-        super();
+        this(ArrayHandler.ROW_PROCESSOR);
     }
 
     /** 
