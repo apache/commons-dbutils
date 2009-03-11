@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.2" date="2009-03-06" description="Another round of fixes; deprecates methods in preparation for varargs in java5">
+      <action dev="sebb" type="update" issue="DBUTILS-51">
+        Made numerous private instance members final to guarantee thread safety; changed protected member of KeyedHandler to final
+      </action>
       <action dev="bayard" type="remove">
         Remove old Maven1/Ant build scripts
       </action>
