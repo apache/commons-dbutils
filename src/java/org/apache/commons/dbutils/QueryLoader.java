@@ -46,7 +46,7 @@ public class QueryLoader {
     /**
      * Maps query set names to Maps of their queries.
      */
-    private Map queries = new HashMap();
+    private final Map queries = new HashMap();
 
     /**
      * QueryLoader constructor.

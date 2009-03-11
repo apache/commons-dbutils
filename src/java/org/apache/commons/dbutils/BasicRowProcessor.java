@@ -60,7 +60,7 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Use this to process beans.
      */
-    private BeanProcessor convert = null;
+    private final BeanProcessor convert;
 
     /**
      * BasicRowProcessor constructor.  Bean processing defaults to a 
