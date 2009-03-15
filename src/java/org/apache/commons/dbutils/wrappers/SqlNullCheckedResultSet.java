@@ -66,6 +66,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  * </pre>
  * </blockquote>
  * </p>
+ * <p>Unlike some other classes in DbUtils, this class is NOT thread-safe.</p>
  */
 public class SqlNullCheckedResultSet implements InvocationHandler {
 
