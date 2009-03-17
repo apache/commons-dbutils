@@ -71,7 +71,7 @@ public class MockResultSetMetaData implements InvocationHandler {
             return "MockResultSetMetaData " + System.identityHashCode(proxy);
 
         } else if (methodName.equals("equals")) { 
-            return new Boolean(proxy == args[0]); 
+            return Boolean.valueOf(proxy == args[0]); 
 
         } else {
             throw new UnsupportedOperationException("Unsupported method: " + methodName);

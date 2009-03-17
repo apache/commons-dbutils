@@ -446,7 +446,7 @@ public class BeanProcessor {
 
         } else if (
             propType.equals(Boolean.TYPE) || propType.equals(Boolean.class)) {
-            return new Boolean(rs.getBoolean(index));
+            return Boolean.valueOf(rs.getBoolean(index));
 
         } else if (propType.equals(Long.TYPE) || propType.equals(Long.class)) {
             return new Long(rs.getLong(index));
