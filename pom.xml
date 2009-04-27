@@ -281,6 +281,18 @@
         </site>
       </distributionManagement>
     </profile>
+    <profile>
+      <id>release</id>
+      <distributionManagement>
+        <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+        <site>
+          <id>apache.website</id>
+          <name>Apache Commons Release Site</name>
+          <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/dbutils/</url>
+        </site>
+      </distributionManagement>
+    </profile>
   </profiles>
+
 
 </project>
