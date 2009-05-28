@@ -34,11 +34,11 @@
       </SVNRepository>
     </repository>
     <release>
-      <revision>
+      <Version>
         <name>commons-dbutils</name>
         <created>2003-11-11</created>
-        <version>1.0</version>
-      </revision>
+        <revision>1.0</version>
+      </Version>
     </release>
     <mailing-list rdf:resource="http://commons.apache.org/mail-lists.html"/>
   </Project>
