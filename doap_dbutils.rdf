@@ -37,7 +37,7 @@
       <Version>
         <name>commons-dbutils</name>
         <created>2003-11-11</created>
-        <revision>1.0</version>
+        <revision>1.0</revision>
       </Version>
     </release>
     <mailing-list rdf:resource="http://commons.apache.org/mail-lists.html"/>
