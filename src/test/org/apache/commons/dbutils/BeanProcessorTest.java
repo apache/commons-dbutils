@@ -16,6 +16,9 @@
  */
 package org.apache.commons.dbutils;
 
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class BeanProcessorTest extends BaseTestCase {
@@ -25,14 +28,58 @@ public class BeanProcessorTest extends BaseTestCase {
     public void testProcess() throws SQLException {
         TestBean b = null;
         assertTrue(this.rs.next());
-        b = (TestBean) beanProc.toBean(this.rs, TestBean.class);
+        b = beanProc.toBean(this.rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        
+
         assertTrue(this.rs.next());
-        b = (TestBean) beanProc.toBean(this.rs, TestBean.class);
+        b = beanProc.toBean(this.rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
 
         assertFalse(this.rs.next());
     }
 
+    public static class MapColumnToPropertiesBean {
+        private String one;
+
+        private String two;
+
+        private String three;
+
+        public String getOne() {
+            return one;
+        }
+
+        public void setOne(String one) {
+            this.one = one;
+        }
+
+        public String getTwo() {
+            return two;
+        }
+
+        public void setTwo(String two) {
+            this.two = two;
+        }
+
+        public String getThree() {
+            return three;
+        }
+
+        public void setThree(String three) {
+            this.three = three;
+        }
+    }
+
+    public void testMapColumnToProperties() throws Exception {
+        String[] columnNames = { "test", "test", "three" };
+        String[] columnLabels = { "one", "two", null };
+        ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
+                new MockResultSetMetaData(columnNames, columnLabels));
+        PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
+
+        int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        for (int i = 1; i < columns.length; i++) {
+            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
+        }
+    }
 }

@@ -27,6 +27,7 @@ import java.sql.ResultSetMetaData;
 public class MockResultSetMetaData implements InvocationHandler {
 
     private String[] columnNames = null;
+    private String[] columnLabels = null;
 
     /**
      * Create a <code>MockResultSetMetaData</code> proxy object.  This is 
@@ -46,6 +47,14 @@ public class MockResultSetMetaData implements InvocationHandler {
     public MockResultSetMetaData(String[] columnNames) {
         super();
         this.columnNames = columnNames;
+        this.columnLabels = new String[columnNames.length];
+
+    }
+    
+    public MockResultSetMetaData(String[] columnNames, String[] columnLabels) {
+        super();
+        this.columnNames = columnNames;
+        this.columnLabels = columnLabels;
 
     }
 
@@ -58,11 +67,16 @@ public class MockResultSetMetaData implements InvocationHandler {
             return new Integer(this.columnNames.length);
 
         } else if (
-            methodName.equals("getColumnName")
-                || methodName.equals("getColumnLabel")) {
+                methodName.equals("getColumnName")) {
 
-            int col = ((Integer) args[0]).intValue() - 1;
-            return this.columnNames[col];
+                int col = ((Integer) args[0]).intValue() - 1;
+                return this.columnNames[col];
+
+        } else if (
+        		methodName.equals("getColumnLabel")) {
+
+                int col = ((Integer) args[0]).intValue() - 1;
+                return this.columnLabels[col];
 
         } else if (methodName.equals("hashCode")) {
             return new Integer(System.identityHashCode(proxy));

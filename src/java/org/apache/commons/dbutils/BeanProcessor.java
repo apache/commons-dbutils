@@ -390,7 +390,10 @@ public class BeanProcessor {
         Arrays.fill(columnToProperty, PROPERTY_NOT_FOUND);
 
         for (int col = 1; col <= cols; col++) {
-            String columnName = rsmd.getColumnName(col);
+            String columnName = rsmd.getColumnLabel(col);
+            if (null == columnName || 0 == columnName.length()) {
+              columnName = rsmd.getColumnName(col);
+            }
             for (int i = 0; i < props.length; i++) {
 
                 if (columnName.equalsIgnoreCase(props[i].getName())) {
