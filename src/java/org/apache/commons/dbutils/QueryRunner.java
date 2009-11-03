@@ -171,10 +171,13 @@ public class QueryRunner {
             return;
         }
         
-        ParameterMetaData pmd = stmt.getParameterMetaData();
-        if (pmd.getParameterCount() < params.length) {
-            throw new SQLException("Too many parameters: expected "
-                    + pmd.getParameterCount() + ", was given " + params.length);
+        ParameterMetaData pmd = null;
+        if (!pmdKnownBroken) {
+        	pmd = stmt.getParameterMetaData();
+            if (pmd.getParameterCount() < params.length) {
+                throw new SQLException("Too many parameters: expected "
+                        + pmd.getParameterCount() + ", was given " + params.length);
+            }
         }
         for (int i = 0; i < params.length; i++) {
             if (params[i] != null) {
