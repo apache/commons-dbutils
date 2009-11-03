@@ -536,7 +536,7 @@ public class QueryRunner {
         if (params == null) {
             msg.append("[]");
         } else {
-            msg.append(Arrays.asList(params));
+            msg.append(Arrays.deepToString(params));
         }
 
         SQLException e = new SQLException(msg.toString(), cause.getSQLState(),
