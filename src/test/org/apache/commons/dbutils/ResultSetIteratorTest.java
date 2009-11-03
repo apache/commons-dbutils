@@ -25,7 +25,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
 	public void testNext() {
 		
-		Iterator iter = new ResultSetIterator(this.rs);
+		Iterator<Object[]> iter = new ResultSetIterator(this.rs);
 
 		Object[] row = null;
 		assertTrue(iter.hasNext());

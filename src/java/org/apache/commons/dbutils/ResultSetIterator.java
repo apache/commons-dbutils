@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 /**
  * <p>
- * Wraps a <code>ResultSet</code> in an <code>Iterator</code>.  This is useful
+ * Wraps a <code>ResultSet</code> in an <code>Iterator<Object[]></code>.  This is useful
  * when you want to present a non-database application layer with domain
  * neutral data.
  * </p>
@@ -32,7 +32,7 @@ import java.util.Iterator;
  * to be implemented.
  * </p>
  */
-public class ResultSetIterator implements Iterator {
+public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * The wrapped <code>ResultSet</code>.
@@ -49,7 +49,7 @@ public class ResultSetIterator implements Iterator {
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      */
     public ResultSetIterator(ResultSet rs) {
-        this(rs , new BasicRowProcessor());
+        this(rs, new BasicRowProcessor());
     }
     
     /**
@@ -85,7 +85,7 @@ public class ResultSetIterator implements Iterator {
      * @see java.util.Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
      */
-    public Object next() {
+    public Object[] next() {
         try {
             rs.next();
             return this.convert.toArray(rs);
@@ -118,4 +118,21 @@ public class ResultSetIterator implements Iterator {
         throw new RuntimeException(e.getMessage());
     }
 
+    /** Generates an <code>Iterable</code>, suitable for use in for-each loops. 
+     * 
+     * @param <T> the type of the bean to create
+     * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
+     * @param type The type of bean to create
+     * @return an <code>Iterable</code>, suitable for use in for-each loops.
+     */
+    public static Iterable<Object[]> iterable(final ResultSet rs) {
+        return new Iterable<Object[]>() {
+
+            public Iterator<Object[]> iterator() {
+                return new ResultSetIterator(rs);
+            }
+            
+        };
+    }
+    
 }

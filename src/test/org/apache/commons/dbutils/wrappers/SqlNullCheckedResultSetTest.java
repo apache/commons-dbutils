@@ -330,9 +330,9 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertTrue(rs.wasNull());
         assertNull(rs.getObject("column"));
         assertTrue(rs.wasNull());
-        assertNull(rs.getObject(1, (Map) null));
+        assertNull(rs.getObject(1, (Map<String, Class<?>>) null));
         assertTrue(rs.wasNull());
-        assertNull(rs.getObject("column", (Map) null));
+        assertNull(rs.getObject("column", (Map<String, Class<?>>) null));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
         Object o = new Object();
@@ -341,10 +341,10 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(o, rs.getObject(1));
         assertNotNull(rs.getObject("column"));
         assertEquals(o, rs.getObject("column"));
-        assertNotNull(rs.getObject(1, (Map) null));
-        assertEquals(o, rs.getObject(1, (Map) null));
-        assertNotNull(rs.getObject("column", (Map) null));
-        assertEquals(o, rs.getObject("column", (Map) null));
+        assertNotNull(rs.getObject(1, (Map<String, Class<?>>) null));
+        assertEquals(o, rs.getObject(1, (Map<String, Class<?>>) null));
+        assertNotNull(rs.getObject("column", (Map<String, Class<?>>) null));
+        assertEquals(o, rs.getObject("column", (Map<String, Class<?>>) null));
 
     }
 
@@ -715,10 +715,10 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(o, rs.getObject(1));
         assertNotNull(rs.getObject("column"));
         assertEquals(o, rs.getObject("column"));
-        assertNotNull(rs.getObject(1, (Map) null));
-        assertEquals(o, rs.getObject(1, (Map) null));
-        assertNotNull(rs.getObject("column", (Map) null));
-        assertEquals(o, rs.getObject("column", (Map) null));
+        assertNotNull(rs.getObject(1, (Map<String, Class<?>>) null));
+        assertEquals(o, rs.getObject(1, (Map<String, Class<?>>) null));
+        assertNotNull(rs.getObject("column", (Map<String, Class<?>>) null));
+        assertEquals(o, rs.getObject("column", (Map<String, Class<?>>) null));
     }
 
     /**
@@ -808,7 +808,7 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {
 
-        Class returnType = method.getReturnType();
+        Class<?> returnType = method.getReturnType();
 
         if (method.getName().equals("wasNull")) {
             return Boolean.TRUE;
@@ -960,7 +960,7 @@ class SqlNullCheckedResultSetMockRef implements Ref {
 
     }
 
-    public Object getObject(Map map) throws SQLException {
+    public Object getObject(Map<String,Class<?>> map) throws SQLException {
         return null;
     }
 

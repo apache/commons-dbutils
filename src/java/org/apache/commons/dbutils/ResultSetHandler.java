@@ -22,7 +22,7 @@ import java.sql.SQLException;
 /**
  * Implementations of this interface convert ResultSets into other objects.
  */
-public interface ResultSetHandler {
+public interface ResultSetHandler<T> {
 
     /**
      * Turn the <code>ResultSet</code> into an Object.
@@ -36,6 +36,6 @@ public interface ResultSetHandler {
      * 
      * @throws SQLException if a database access error occurs
      */
-    public Object handle(ResultSet rs) throws SQLException;
+    public T handle(ResultSet rs) throws SQLException;
 
 }

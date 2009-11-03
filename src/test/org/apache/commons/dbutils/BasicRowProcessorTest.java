@@ -63,14 +63,14 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         TestBean row = null;
         assertTrue(this.rs.next());
-        row = (TestBean) processor.toBean(this.rs, TestBean.class);
+        row = processor.toBean(this.rs, TestBean.class);
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
         assertEquals("3", row.getThree());
         assertEquals("not set", row.getDoNotSet());
             
         assertTrue(this.rs.next());
-        row = (TestBean) processor.toBean(this.rs, TestBean.class);
+        row = processor.toBean(this.rs, TestBean.class);
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());
@@ -91,17 +91,17 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToBeanList() throws SQLException, ParseException {
 
-        List list = processor.toBeanList(this.rs, TestBean.class);
+        List<TestBean> list = processor.toBeanList(this.rs, TestBean.class);
         assertNotNull(list);
         assertEquals(ROWS, list.size());
 
-        TestBean b = (TestBean) list.get(0);
+        TestBean b = list.get(0);
         assertEquals("1", b.getOne());
         assertEquals("2", b.getTwo());
         assertEquals("3", b.getThree());
         assertEquals("not set", b.getDoNotSet());
         
-        b = (TestBean) list.get(1);
+        b = list.get(1);
         assertEquals("4", b.getOne());
         assertEquals("5", b.getTwo());
         assertEquals("6", b.getThree());
@@ -119,7 +119,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     public void testToMap() throws SQLException {
 
         assertTrue(this.rs.next());
-        Map m = processor.toMap(this.rs);
+        Map<String, Object> m = processor.toMap(this.rs);
         assertEquals(COLS, m.keySet().size());
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));

@@ -37,50 +37,9 @@ import java.sql.Statement;
 public class ProxyFactory {
 
     /**
-     * Class[] for CallableStatement interface.
-     */
-    private static final Class[] callableStatementClass =
-        new Class[] { CallableStatement.class };
-
-    /**
-     * Class[] for Connection interface.
-     */
-    private static final Class[] connectionClass =
-        new Class[] { Connection.class };
-
-    /**
-     * Class[] for Driver interface.
-     */
-    private static final Class[] driverClass = new Class[] { Driver.class };
-
-    /**
      * The Singleton instance of this class.
      */
     private static final ProxyFactory instance = new ProxyFactory();
-
-    /**
-     * Class[] for ResultSetMetaData interface.
-     */
-    private static final Class[] metaClass =
-        new Class[] { ResultSetMetaData.class };
-
-    /**
-     * Class[] for PreparedStatement interface.
-     */
-    private static final Class[] preparedStatementClass =
-        new Class[] { PreparedStatement.class };
-
-    /**
-     * Class[] for ResultSet interface.
-     */
-    private static final Class[] resultSetClass =
-        new Class[] { ResultSet.class };
-
-    /**
-     * Class[] for Statement interface.
-     */
-    private static final Class[] statementClass =
-        new Class[] { Statement.class };
 
     /**
      * Returns the Singleton instance of this class.
@@ -98,16 +57,24 @@ public class ProxyFactory {
         super();
     }
 
+    /** Convenience method to generate a single-interface proxy using the handler's classloader
+     * 
+     * @param <T> The type of object to proxy
+     * @param type The type of object to proxy
+     * @param handler The handler that intercepts/overrides method calls. 
+     * @return proxied object
+     */
+    public <T> T newProxyInstance(Class<T> type, InvocationHandler handler) {
+        return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] {type}, handler));
+    }
+    
     /**
      * Creates a new proxy <code>CallableStatement</code> object.
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied CallableStatement
      */
     public CallableStatement createCallableStatement(InvocationHandler handler) {
-        return (CallableStatement) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            callableStatementClass,
-            handler);
+        return newProxyInstance(CallableStatement.class, handler);
     }
 
     /**
@@ -116,10 +83,7 @@ public class ProxyFactory {
      * @return proxied Connection
      */
     public Connection createConnection(InvocationHandler handler) {
-        return (Connection) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            connectionClass,
-            handler);
+        return newProxyInstance(Connection.class, handler);
     }
 
     /**
@@ -128,10 +92,7 @@ public class ProxyFactory {
      * @return proxied Driver
      */
     public Driver createDriver(InvocationHandler handler) {
-        return (Driver) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            driverClass,
-            handler);
+        return newProxyInstance(Driver.class, handler);
     }
 
     /**
@@ -140,10 +101,7 @@ public class ProxyFactory {
      * @return proxied PreparedStatement
      */
     public PreparedStatement createPreparedStatement(InvocationHandler handler) {
-        return (PreparedStatement) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            preparedStatementClass,
-            handler);
+        return newProxyInstance(PreparedStatement.class, handler);
     }
 
     /**
@@ -152,10 +110,7 @@ public class ProxyFactory {
      * @return proxied ResultSet
      */
     public ResultSet createResultSet(InvocationHandler handler) {
-        return (ResultSet) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            resultSetClass,
-            handler);
+        return newProxyInstance(ResultSet.class, handler);
     }
 
     /**
@@ -164,10 +119,7 @@ public class ProxyFactory {
      * @return proxied ResultSetMetaData
      */
     public ResultSetMetaData createResultSetMetaData(InvocationHandler handler) {
-        return (ResultSetMetaData) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            metaClass,
-            handler);
+        return newProxyInstance(ResultSetMetaData.class, handler);
     }
 
     /**
@@ -176,10 +128,7 @@ public class ProxyFactory {
      * @return proxied Statement
      */
     public Statement createStatement(InvocationHandler handler) {
-        return (Statement) Proxy.newProxyInstance(
-            handler.getClass().getClassLoader(),
-            statementClass,
-            handler);
+        return newProxyInstance(Statement.class, handler);
     }
 
 }

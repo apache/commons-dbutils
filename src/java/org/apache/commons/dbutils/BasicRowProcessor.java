@@ -20,7 +20,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -107,7 +106,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class) 
      */
-    public Object toBean(ResultSet rs, Class type) throws SQLException {
+    public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
         return this.convert.toBean(rs, type);
     }
 
@@ -117,7 +116,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      */
-    public List toBeanList(ResultSet rs, Class type) throws SQLException {
+    public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
         return this.convert.toBeanList(rs, type);
     }
 
@@ -128,8 +127,8 @@ public class BasicRowProcessor implements RowProcessor {
      * <code>map.get("col")</code> return the same value.
      * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
      */
-    public Map toMap(ResultSet rs) throws SQLException {
-        Map result = new CaseInsensitiveHashMap();
+    public Map<String, Object> toMap(ResultSet rs) throws SQLException {
+        Map<String, Object> result = new CaseInsensitiveHashMap();
         ResultSetMetaData rsmd = rs.getMetaData();
         int cols = rsmd.getColumnCount();
 
@@ -155,9 +154,8 @@ public class BasicRowProcessor implements RowProcessor {
      * key.toString().toLowerCase()
      * </pre>
      */
-    private static class CaseInsensitiveHashMap extends HashMap {
-
-        /**
+    private static class CaseInsensitiveHashMap extends HashMap<String, Object> {
+		/**
          * The internal mapping from lowercase keys to the real keys.
          * 
          * <p>
@@ -171,18 +169,19 @@ public class BasicRowProcessor implements RowProcessor {
          * </ul>
          * </p>
          */
-        private final Map lowerCaseMap = new HashMap();
+        private final Map<String,String> lowerCaseMap = new HashMap<String,String>();
 
         /**
          * Required for serialization support.
          * 
          * @see java.io.Serializable
          */ 
-        private static final long serialVersionUID = 1841673097701957808L;
+        private static final long serialVersionUID = -2848100435296897392L;
 
         /**
          * @see java.util.Map#containsKey(java.lang.Object)
          */
+        @Override
         public boolean containsKey(Object key) {
             Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
             return super.containsKey(realKey);
@@ -195,6 +194,7 @@ public class BasicRowProcessor implements RowProcessor {
         /**
          * @see java.util.Map#get(java.lang.Object)
          */
+        @Override
         public Object get(Object key) {
             Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
             return super.get(realKey);
@@ -203,7 +203,8 @@ public class BasicRowProcessor implements RowProcessor {
         /**
          * @see java.util.Map#put(java.lang.Object, java.lang.Object)
          */
-        public Object put(Object key, Object value) {
+        @Override
+        public Object put(String key, Object value) {
             /*
              * In order to keep the map and lowerCaseMap synchronized,
              * we have to remove the old mapping before putting the 
@@ -220,11 +221,10 @@ public class BasicRowProcessor implements RowProcessor {
         /**
          * @see java.util.Map#putAll(java.util.Map)
          */
-        public void putAll(Map m) {
-            Iterator iter = m.entrySet().iterator();
-            while (iter.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter.next();
-                Object key = entry.getKey();
+        @Override
+        public void putAll(Map<? extends String,?> m) {
+            for (Map.Entry<? extends String, ?> entry : m.entrySet()) {
+                String key = entry.getKey();
                 Object value = entry.getValue();
                 this.put(key, value);
             }
@@ -233,6 +233,7 @@ public class BasicRowProcessor implements RowProcessor {
         /**
          * @see java.util.Map#remove(java.lang.Object)
          */
+        @Override
         public Object remove(Object key) {
             Object realKey = lowerCaseMap.remove(key.toString().toLowerCase());
             return super.remove(realKey);

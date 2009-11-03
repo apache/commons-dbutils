@@ -24,28 +24,28 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class ScalarHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler h = new ScalarHandler();
+        ResultSetHandler<Object> h = new ScalarHandler();
         Object results = h.handle(this.rs);
         assertNotNull(results);
         assertEquals("1", results);
     }
 
     public void testColumnIndexHandle() throws SQLException {
-        ResultSetHandler h = new ScalarHandler(2);
+        ResultSetHandler<Object> h = new ScalarHandler(2);
         Object results = h.handle(this.rs);
         assertNotNull(results);
         assertEquals("2", results);
     }
 
     public void testColumnNameHandle() throws SQLException {
-        ResultSetHandler h = new ScalarHandler("THree");
+        ResultSetHandler<Object> h = new ScalarHandler("THree");
         Object results = h.handle(this.rs);
         assertNotNull(results);
         assertEquals("3", results);
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler h = new ScalarHandler();
+        ResultSetHandler<Object> h = new ScalarHandler();
         Object results = h.handle(this.emptyResultSet);
         assertNull(results);
     }

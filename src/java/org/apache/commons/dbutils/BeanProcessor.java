@@ -62,7 +62,7 @@ public class BeanProcessor {
      * is returned.  These are the same as the defaults that ResultSet get* 
      * methods return in the event of a NULL column.
      */
-    private static final Map primitiveDefaults = new HashMap();
+    private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
 
     static {
         primitiveDefaults.put(Integer.TYPE, new Integer(0));
@@ -115,7 +115,7 @@ public class BeanProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
-    public Object toBean(ResultSet rs, Class type) throws SQLException {
+    public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
 
         PropertyDescriptor[] props = this.propertyDescriptors(type);
 
@@ -158,8 +158,8 @@ public class BeanProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created List of beans
      */
-    public List toBeanList(ResultSet rs, Class type) throws SQLException {
-        List results = new ArrayList();
+    public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
+        List<T> results = new ArrayList<T>();
 
         if (!rs.next()) {
             return results;
@@ -186,11 +186,11 @@ public class BeanProcessor {
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    private Object createBean(ResultSet rs, Class type,
+    private <T> T createBean(ResultSet rs, Class<T> type,
             PropertyDescriptor[] props, int[] columnToProperty)
             throws SQLException {
 
-        Object bean = this.newInstance(type);
+        T bean = this.newInstance(type);
 
         for (int i = 1; i < columnToProperty.length; i++) {
 
@@ -199,7 +199,7 @@ public class BeanProcessor {
             }
 
             PropertyDescriptor prop = props[columnToProperty[i]];
-            Class propType = prop.getPropertyType();
+            Class<?> propType = prop.getPropertyType();
 
             Object value = this.processColumn(rs, i, propType);
 
@@ -230,7 +230,7 @@ public class BeanProcessor {
             return;
         }
 
-        Class[] params = setter.getParameterTypes();
+        Class<?>[] params = setter.getParameterTypes();
         try {
             // convert types for some popular ones
             if (value != null) {
@@ -280,7 +280,7 @@ public class BeanProcessor {
      * @param type The setter's parameter type.
      * @return boolean True if the value is compatible.
      */
-    private boolean isCompatibleType(Object value, Class type) {
+    private boolean isCompatibleType(Object value, Class<?> type) {
         // Do object check first, then primitives
         if (value == null || type.isInstance(value)) {
             return true;
@@ -329,7 +329,7 @@ public class BeanProcessor {
      * @return A newly created object of the Class.
      * @throws SQLException if creation failed.
      */
-    protected Object newInstance(Class c) throws SQLException {
+    protected <T> T newInstance(Class<T> c) throws SQLException {
         try {
             return c.newInstance();
 
@@ -350,7 +350,7 @@ public class BeanProcessor {
      * @return A PropertyDescriptor[] describing the Class.
      * @throws SQLException if introspection failed.
      */
-    private PropertyDescriptor[] propertyDescriptors(Class c)
+    private PropertyDescriptor[] propertyDescriptors(Class<?> c)
         throws SQLException {
         // Introspector caches BeanInfo classes for better performance
         BeanInfo beanInfo = null;
@@ -430,9 +430,13 @@ public class BeanProcessor {
      * index after optional type processing or <code>null</code> if the column
      * value was SQL NULL.
      */
-    protected Object processColumn(ResultSet rs, int index, Class propType)
+    protected Object processColumn(ResultSet rs, int index, Class<?> propType)
         throws SQLException {
-
+    	
+    	if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
+    		return null;
+    	}
+    	
         if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
             return null;
         }

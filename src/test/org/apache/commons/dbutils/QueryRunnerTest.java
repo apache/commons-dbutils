@@ -205,7 +205,7 @@ public class QueryRunnerTest extends TestCase {
     
     private class NoOpFillStatement extends QueryRunner {
         Object[] params;
-        public void fillStatement(PreparedStatement stmt, Object[] params)
+        public void fillStatement(PreparedStatement stmt, Object... params)
                 throws SQLException {
             this.params = params;
         }

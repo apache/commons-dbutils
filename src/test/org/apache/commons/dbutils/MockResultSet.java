@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * MockResultSet dynamically implements the ResultSet interface.
@@ -47,7 +48,7 @@ public class MockResultSet implements InvocationHandler {
 
     private Object[] currentRow = null;
 
-    private Iterator iter = null;
+    private Iterator<Object[]> iter = null;
 
     private ResultSetMetaData metaData = null;
 
@@ -61,9 +62,12 @@ public class MockResultSet implements InvocationHandler {
     public MockResultSet(ResultSetMetaData metaData, Object[][] rows) {
         super();
         this.metaData = metaData;
-        this.iter = (rows == null)
-                ? Collections.EMPTY_LIST.iterator()
-                : Arrays.asList(rows).iterator();
+        if (rows == null) {
+            List<Object[]> empty = Collections.emptyList(); 
+            this.iter = empty.iterator();
+        } else {
+            this.iter = Arrays.asList(rows).iterator();
+        }
     }
 
     /**

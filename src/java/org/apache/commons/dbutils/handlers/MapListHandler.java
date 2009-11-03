@@ -18,6 +18,7 @@ package org.apache.commons.dbutils.handlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.apache.commons.dbutils.RowProcessor;
 
@@ -28,7 +29,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class MapListHandler extends AbstractListHandler {
+public class MapListHandler extends AbstractListHandler<Map<String,Object>> {
 
     /**
      * The RowProcessor implementation to use when converting rows 
@@ -64,7 +65,7 @@ public class MapListHandler extends AbstractListHandler {
      * 
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
-    protected Object handleRow(ResultSet rs) throws SQLException {
+    protected Map<String,Object> handleRow(ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);
     }
 

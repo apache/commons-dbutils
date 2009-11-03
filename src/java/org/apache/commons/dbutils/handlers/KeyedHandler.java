@@ -57,7 +57,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
-public class KeyedHandler implements ResultSetHandler {
+public class KeyedHandler implements ResultSetHandler<Map<Object,Map<String,Object>>> {
 
     /**
      * The RowProcessor implementation to use when converting rows
@@ -132,8 +132,8 @@ public class KeyedHandler implements ResultSetHandler {
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
-        Map result = createMap();
+    public Map<Object,Map<String,Object>> handle(ResultSet rs) throws SQLException {
+        Map<Object,Map<String,Object>> result = createMap();
         while (rs.next()) {
             result.put(createKey(rs), createRow(rs));
         }
@@ -147,8 +147,8 @@ public class KeyedHandler implements ResultSetHandler {
      *
      * @return Map to store records in
      */
-    protected Map createMap() {
-        return new HashMap();
+    protected Map<Object,Map<String,Object>> createMap() {
+        return new HashMap<Object,Map<String,Object>>();
     }
 
     /**
@@ -175,7 +175,7 @@ public class KeyedHandler implements ResultSetHandler {
      * @return Object typed Map containing column names to values
      * @throws SQLException if a database access error occurs
      */
-    protected Object createRow(ResultSet rs) throws SQLException {
+    protected Map<String,Object> createRow(ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);
     }
 

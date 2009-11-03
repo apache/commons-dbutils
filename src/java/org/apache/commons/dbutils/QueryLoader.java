@@ -46,7 +46,7 @@ public class QueryLoader {
     /**
      * Maps query set names to Maps of their queries.
      */
-    private final Map queries = new HashMap();
+    private final Map<String,Map<String,String>> queries = new HashMap<String, Map<String,String>>();
 
     /**
      * QueryLoader constructor.
@@ -69,9 +69,9 @@ public class QueryLoader {
      * the given path.
      * @return Map of query names to SQL values
      */
-    public synchronized Map load(String path) throws IOException {
+    public synchronized Map<String,String> load(String path) throws IOException {
 
-        Map queryMap = (Map) this.queries.get(path);
+        Map<String,String> queryMap = (Map<String,String>) this.queries.get(path);
 
         if (queryMap == null) {
             queryMap = this.loadQueries(path);
@@ -91,7 +91,8 @@ public class QueryLoader {
      * @since DbUtils 1.1
      * @return Map of query names to SQL values
      */
-    protected Map loadQueries(String path) throws IOException {
+    @SuppressWarnings("unchecked")
+    protected Map<String,String> loadQueries(String path) throws IOException {
         InputStream in = getClass().getResourceAsStream(path);
 
         if (in == null) {

@@ -26,78 +26,78 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class KeyedHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler h = new KeyedHandler();
+        ResultSetHandler<Map<Object,Map<String,Object>>> h = new KeyedHandler();
 
-        Map results = (Map) h.handle(this.rs);
+        Map<Object,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator iter = results.keySet().iterator();
-        Map row = null;
+        Iterator<Object> iter = results.keySet().iterator();
+        Map<String,Object> row = null;
         while (iter.hasNext()) {
             Object key = iter.next();
             assertNotNull(key);
-            row = (Map) results.get(key);
+            row = results.get(key);
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
 
-        row = (Map) results.get("1");
+        row = results.get("1");
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));
         assertEquals("3", row.get("Three"));
     }
 
     public void testColumnIndexHandle() throws SQLException {
-        ResultSetHandler h = new KeyedHandler(2);
-        Map results = (Map) h.handle(this.rs);
+        ResultSetHandler<Map<Object,Map<String,Object>>> h = new KeyedHandler(2);
+        Map<Object,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator iter = results.keySet().iterator();
-        Map row = null;
+        Iterator<Object> iter = results.keySet().iterator();
+        Map<String,Object> row = null;
         while (iter.hasNext()) {
             Object key = iter.next();
             assertNotNull(key);
-            row = (Map) results.get(key);
+            row = results.get(key);
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
 
-        row = (Map) results.get("5");
+        row = results.get("5");
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
         assertEquals("6", row.get("Three"));
     }
 
     public void testColumnNameHandle() throws SQLException {
-        ResultSetHandler h = new KeyedHandler("three");
-        Map results = (Map) h.handle(this.rs);
+        ResultSetHandler<Map<Object,Map<String,Object>>> h = new KeyedHandler("three");
+        Map<Object,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator iter = results.keySet().iterator();
-        Map row = null;
+        Iterator<Object> iter = results.keySet().iterator();
+        Map<String,Object> row = null;
         while (iter.hasNext()) {
             Object key = iter.next();
             assertNotNull(key);
-            row = (Map) results.get(key);
+            row = results.get(key);
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
 
-        row = (Map) results.get("6");
+        row = results.get("6");
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
         assertEquals("6", row.get("Three"));
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler h = new KeyedHandler();
-        Map results = (Map) h.handle(this.emptyResultSet);
+        ResultSetHandler<Map<Object,Map<String,Object>>> h = new KeyedHandler();
+        Map<Object,Map<String,Object>> results = h.handle(this.emptyResultSet);
         assertNotNull(results);
         assertTrue(results.isEmpty());
     }

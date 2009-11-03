@@ -179,6 +179,8 @@
   </dependencies>
 
   <properties>
+    <maven.compile.source>1.5</maven.compile.source>
+    <maven.compile.target>1.5</maven.compile.target>
     <commons.componentid>dbutils</commons.componentid>
     <commons.release.version>1.2</commons.release.version>
     <commons.rc.version>RC3</commons.rc.version>

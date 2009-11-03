@@ -30,7 +30,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class ArrayHandler implements ResultSetHandler {
+public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Singleton processor instance that handlers share to save memory.  Notice
@@ -73,7 +73,7 @@ public class ArrayHandler implements ResultSetHandler {
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
+    public Object[] handle(ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toArray(rs) : null;
     }
 

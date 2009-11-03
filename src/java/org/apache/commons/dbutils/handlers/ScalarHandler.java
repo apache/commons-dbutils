@@ -27,7 +27,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class ScalarHandler implements ResultSetHandler {
+public class ScalarHandler implements ResultSetHandler<Object> {
 
     /**
      * The column number to retrieve.

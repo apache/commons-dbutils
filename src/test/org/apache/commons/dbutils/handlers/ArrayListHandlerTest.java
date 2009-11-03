@@ -29,13 +29,13 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class ArrayListHandlerTest extends BaseTestCase {
 
 	public void testHandle() throws SQLException {
-		ResultSetHandler h = new ArrayListHandler();
-		List results = (List) h.handle(this.rs);
+		ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
+		List<Object[]> results = h.handle(this.rs);
 
 		assertNotNull(results);
 		assertEquals(ROWS, results.size());
 
-		Iterator iter = results.iterator();
+		Iterator<Object[]> iter = results.iterator();
 	    Object[] row = null;
 	    assertTrue(iter.hasNext());
 	    row = (Object[]) iter.next();
@@ -56,8 +56,8 @@ public class ArrayListHandlerTest extends BaseTestCase {
 	}
 
 	public void testEmptyResultSetHandle() throws SQLException {
-		ResultSetHandler h = new ArrayListHandler();
-		List results = (List) h.handle(this.emptyResultSet);
+		ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
+		List<Object[]> results = h.handle(this.emptyResultSet);
 
 		assertNotNull(results);
 		assertTrue(results.isEmpty());

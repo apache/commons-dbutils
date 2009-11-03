@@ -28,12 +28,12 @@ import org.apache.commons.dbutils.RowProcessor;
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class BeanHandler implements ResultSetHandler {
+public class BeanHandler<T> implements ResultSetHandler<T> {
 
     /**
      * The Class of beans produced by this handler.
      */
-    private final Class type;
+    private final Class<T> type;
 
     /**
      * The RowProcessor implementation to use when converting rows 
@@ -47,7 +47,7 @@ public class BeanHandler implements ResultSetHandler {
      * @param type The Class that objects returned from <code>handle()</code>
      * are created from.
      */
-    public BeanHandler(Class type) {
+    public BeanHandler(Class<T> type) {
         this(type, ArrayHandler.ROW_PROCESSOR);
     }
 
@@ -59,7 +59,7 @@ public class BeanHandler implements ResultSetHandler {
      * @param convert The <code>RowProcessor</code> implementation 
      * to use when converting rows into beans.
      */
-    public BeanHandler(Class type, RowProcessor convert) {
+    public BeanHandler(Class<T> type, RowProcessor convert) {
         this.type = type;
         this.convert = convert;
     }
@@ -74,7 +74,7 @@ public class BeanHandler implements ResultSetHandler {
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
+    public T handle(ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toBean(rs, this.type) : null;
     }
 
