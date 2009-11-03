@@ -18,19 +18,15 @@ package org.apache.commons.dbutils.handlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
 /**
  * <p>
  * <code>ResultSetHandler</code> implementation that returns a Map of Maps.
  * <code>ResultSet</code> rows are converted into Maps which are then stored
- * in a Map under the given key.  Although this implementation uses Maps to 
- * store row contents, subclasses are encouraged to override the 
- * <code>createRow()</code> method to convert the rows into any kind of object.
+ * in a Map under the given key.
  * </p>
  * <p>
  * If you had a Person table with a primary key column called ID, you could 
@@ -47,17 +43,12 @@ import org.apache.commons.dbutils.RowProcessor;
  * name and age are dependent upon how your JDBC driver converts SQL column 
  * types from the Person table into Java types.  
  * </p>
- * <p>
- * To avoid these type issues you could subclass KeyedHandler and override 
- * <code>createRow()</code> to store rows in Java bean instances (ie. a
- * Person class).
- * </p>
  * <p>This class is thread safe.</p>
  * 
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
-public class KeyedHandler implements ResultSetHandler<Map<Object,Map<String,Object>>> {
+public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object>> {
 
     /**
      * The RowProcessor implementation to use when converting rows
@@ -123,34 +114,6 @@ public class KeyedHandler implements ResultSetHandler<Map<Object,Map<String,Obje
         this.columnIndex = columnIndex;
         this.columnName = columnName;
     }
-
-    /**
-     * Convert each row's columns into a Map and store then 
-     * in a <code>Map</code> under <code>ResultSet.getObject(key)</code> key.
-     * 
-     * @return A <code>Map</code> of Maps, never <code>null</code>. 
-     * @throws SQLException if a database access error occurs
-     * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
-     */
-    public Map<Object,Map<String,Object>> handle(ResultSet rs) throws SQLException {
-        Map<Object,Map<String,Object>> result = createMap();
-        while (rs.next()) {
-            result.put(createKey(rs), createRow(rs));
-        }
-        return result;
-    }
-
-    /**
-     * This factory method is called by <code>handle()</code> to create the Map
-     * to store records in.  This implementation returns a <code>HashMap</code>
-     * instance.
-     *
-     * @return Map to store records in
-     */
-    protected Map<Object,Map<String,Object>> createMap() {
-        return new HashMap<Object,Map<String,Object>>();
-    }
-
     /**
      * This factory method is called by <code>handle()</code> to retrieve the
      * key value from the current <code>ResultSet</code> row.  This 
@@ -160,6 +123,7 @@ public class KeyedHandler implements ResultSetHandler<Map<Object,Map<String,Obje
      * @return Object from the configured key column name/index
      * @throws SQLException if a database access error occurs
      */
+    @Override
     protected Object createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ? rs.getObject(columnIndex) : rs
                 .getObject(columnName);
@@ -175,6 +139,7 @@ public class KeyedHandler implements ResultSetHandler<Map<Object,Map<String,Obje
      * @return Object typed Map containing column names to values
      * @throws SQLException if a database access error occurs
      */
+    @Override
     protected Map<String,Object> createRow(ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);
     }
