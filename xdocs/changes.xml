@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.3" date="2009-11-04" description="Adds Java5 generics and varargs">
+      <action dev="dfabulich" type="add" issue="DBUTILS-48">
+        Java 1.5 generics and varargs
+      </action>
       <action dev="dfabulich" type="update" issue="DBUTILS-57">
         BeanProcessor#mapColumnsToProperties now prefers to use column labels over column names (where aliases are not set, these should be identical)
       </action>
