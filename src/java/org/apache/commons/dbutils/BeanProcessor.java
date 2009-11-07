@@ -65,14 +65,14 @@ public class BeanProcessor {
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
 
     static {
-        primitiveDefaults.put(Integer.TYPE, new Integer(0));
-        primitiveDefaults.put(Short.TYPE, new Short((short) 0));
-        primitiveDefaults.put(Byte.TYPE, new Byte((byte) 0));
-        primitiveDefaults.put(Float.TYPE, new Float(0));
-        primitiveDefaults.put(Double.TYPE, new Double(0));
-        primitiveDefaults.put(Long.TYPE, new Long(0));
+        primitiveDefaults.put(Integer.TYPE, 0);
+        primitiveDefaults.put(Short.TYPE, (Short)((short) 0));
+        primitiveDefaults.put(Byte.TYPE, (Byte)((byte) 0));
+        primitiveDefaults.put(Float.TYPE, (Float)(float)(0));
+        primitiveDefaults.put(Double.TYPE, (Double)(double)(0));
+        primitiveDefaults.put(Long.TYPE, (Long)(0L));
         primitiveDefaults.put(Boolean.TYPE, Boolean.FALSE);
-        primitiveDefaults.put(Character.TYPE, new Character('\u0000'));
+        primitiveDefaults.put(Character.TYPE, '\u0000');
     }
 
     /**
@@ -449,29 +449,29 @@ public class BeanProcessor {
 
         } else if (
             propType.equals(Integer.TYPE) || propType.equals(Integer.class)) {
-            return new Integer(rs.getInt(index));
+            return (rs.getInt(index));
 
         } else if (
             propType.equals(Boolean.TYPE) || propType.equals(Boolean.class)) {
-            return Boolean.valueOf(rs.getBoolean(index));
+            return (rs.getBoolean(index));
 
         } else if (propType.equals(Long.TYPE) || propType.equals(Long.class)) {
-            return new Long(rs.getLong(index));
+            return (rs.getLong(index));
 
         } else if (
             propType.equals(Double.TYPE) || propType.equals(Double.class)) {
-            return new Double(rs.getDouble(index));
+            return (rs.getDouble(index));
 
         } else if (
             propType.equals(Float.TYPE) || propType.equals(Float.class)) {
-            return new Float(rs.getFloat(index));
+            return (rs.getFloat(index));
 
         } else if (
             propType.equals(Short.TYPE) || propType.equals(Short.class)) {
-            return new Short(rs.getShort(index));
+            return (rs.getShort(index));
 
         } else if (propType.equals(Byte.TYPE) || propType.equals(Byte.class)) {
-            return new Byte(rs.getByte(index));
+            return (rs.getByte(index));
 
         } else if (propType.equals(Timestamp.class)) {
             return rs.getTimestamp(index);
