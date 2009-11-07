@@ -58,7 +58,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
     
     /**
      * Convert row's columns into an <code>Object[]</code>.
-     * 
+     * @param rs <code>ResultSet</code> to process.
      * @return <code>Object[]</code>, never <code>null</code>.
      * 
      * @throws SQLException if a database access error occurs

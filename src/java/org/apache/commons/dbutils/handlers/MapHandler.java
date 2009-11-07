@@ -60,7 +60,7 @@ public class MapHandler implements ResultSetHandler<Map<String,Object>> {
     /**
      * Converts the first row in the <code>ResultSet</code> into a 
      * <code>Map</code>.
-     * 
+     * @param rs <code>ResultSet</code> to process.
      * @return A <code>Map</code> with the values from the first row or 
      * <code>null</code> if there are no rows in the <code>ResultSet</code>. 
      * 

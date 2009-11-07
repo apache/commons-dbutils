@@ -66,7 +66,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Places the column values from the first row in an <code>Object[]</code>.
-     * 
+     * @param rs <code>ResultSet</code> to process.
      * @return An Object[] or <code>null</code> if there are no rows in the
      * <code>ResultSet</code>.
      * 

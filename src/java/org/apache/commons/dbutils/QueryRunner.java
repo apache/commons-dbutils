@@ -173,7 +173,7 @@ public class QueryRunner {
         
         ParameterMetaData pmd = null;
         if (!pmdKnownBroken) {
-        	pmd = stmt.getParameterMetaData();
+            pmd = stmt.getParameterMetaData();
             if (pmd.getParameterCount() < params.length) {
                 throw new SQLException("Too many parameters: expected "
                         + pmd.getParameterCount() + ", was given " + params.length);
@@ -340,14 +340,14 @@ public class QueryRunner {
     /**
      * Execute an SQL SELECT query with a single replacement parameter. The
      * caller is responsible for closing the connection.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param param The replacement parameter.
      * @param rsh The handler that converts the results into an object.
      * @return The object returned by the handler.
      * @throws SQLException if a database access error occurs
-     * @deprecated Use {@link #query(Connection,String,ResultSetHandler<T>,Object...)} instead
+     * @deprecated Use {@link #query(Connection, String, ResultSetHandler, Object...)}
      */
     public <T> T query(Connection conn, String sql, Object param,
             ResultSetHandler<T> rsh) throws SQLException {
@@ -358,14 +358,14 @@ public class QueryRunner {
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
      * caller is responsible for closing the connection.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param params The replacement parameters.
      * @param rsh The handler that converts the results into an object.
      * @return The object returned by the handler.
      * @throws SQLException if a database access error occurs
-     * @deprecated Use {@link #query(Connection,String,ResultSetHandler<T>,Object...)} instead
+     * @deprecated Use {@link #query(Connection,String,ResultSetHandler,Object...)} instead
      */
     public <T> T query(Connection conn, String sql, Object[] params,
             ResultSetHandler<T> rsh) throws SQLException {
@@ -374,7 +374,7 @@ public class QueryRunner {
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
      * caller is responsible for closing the connection.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
@@ -412,7 +412,7 @@ public class QueryRunner {
     /**
      * Execute an SQL SELECT query without any replacement parameters.  The
      * caller is responsible for closing the connection.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
@@ -429,7 +429,7 @@ public class QueryRunner {
      * Executes the given SELECT SQL with a single replacement parameter.
      * The <code>Connection</code> is retrieved from the
      * <code>DataSource</code> set in the constructor.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
      * @param rsh The handler used to create the result object from 
@@ -449,7 +449,7 @@ public class QueryRunner {
      * Executes the given SELECT SQL query and returns a result object.
      * The <code>Connection</code> is retrieved from the 
      * <code>DataSource</code> set in the constructor.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param params Initialize the PreparedStatement's IN parameters with 
      * this array.
@@ -470,7 +470,7 @@ public class QueryRunner {
      * Executes the given SELECT SQL query and returns a result object.
      * The <code>Connection</code> is retrieved from the 
      * <code>DataSource</code> set in the constructor.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from 
      * the <code>ResultSet</code>.
@@ -495,7 +495,7 @@ public class QueryRunner {
      * Executes the given SELECT SQL without any replacement parameters.
      * The <code>Connection</code> is retrieved from the
      * <code>DataSource</code> set in the constructor.
-     * 
+     * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from 
      * the <code>ResultSet</code>.

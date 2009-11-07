@@ -68,7 +68,12 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
         this(1, columnName);
     }
 
-    // Helper
+    /** Private Helper
+     * @param columnIndex The index of the column to retrieve from the 
+     * <code>ResultSet</code>.
+     * @param columnName The name of the column to retrieve from the 
+     * <code>ResultSet</code>.
+     */
     private ColumnListHandler(int columnIndex, String columnName) {
         super();
         this.columnIndex = columnIndex;
@@ -77,7 +82,7 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
     
     /**
      * Returns one <code>ResultSet</code> column value as <code>Object</code>.
-     * 
+     * @param rs <code>ResultSet</code> to process.
      * @return <code>Object</code>, never <code>null</code>.
      * 
      * @throws SQLException if a database access error occurs

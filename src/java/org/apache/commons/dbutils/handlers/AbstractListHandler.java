@@ -36,6 +36,9 @@ public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>
      * <code>handleRow(ResultSet)</code> method.
      *
      * @see #handleRow(ResultSet)
+     * @param rs <code>ResultSet</code> to process.
+     * @return a list of all rows in the result set
+     * @throws SQLException error occurs
      */
     public List<T> handle(ResultSet rs) throws SQLException {
         List<T> rows = new ArrayList<T>();

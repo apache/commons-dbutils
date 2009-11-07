@@ -93,7 +93,7 @@ public class QueryLoader {
      */
     @SuppressWarnings("unchecked")
     protected Map<String,String> loadQueries(String path) throws IOException {
-    	// Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
+        // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
         InputStream in = getClass().getResourceAsStream(path);
 
         if (in == null) {

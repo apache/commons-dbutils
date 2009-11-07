@@ -84,8 +84,12 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * <code>getObject()</code> methods and trim any Strings before they're
      * returned.
      * 
-     * @throws Throwable
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+     * @param proxy Not used; all method calls go to the internal result set
+     * @param method The method to invoke on the result set
+     * @param args The arguments to pass to the result set
+     * @return string trimmed result
+     * @throws Throwable error
      */
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {

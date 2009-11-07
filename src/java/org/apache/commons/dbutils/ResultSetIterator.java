@@ -120,9 +120,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /** Generates an <code>Iterable</code>, suitable for use in for-each loops. 
      * 
-     * @param <T> the type of the bean to create
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
-     * @param type The type of bean to create
      * @return an <code>Iterable</code>, suitable for use in for-each loops.
      */
     public static Iterable<Object[]> iterable(final ResultSet rs) {

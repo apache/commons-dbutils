@@ -39,7 +39,7 @@ public abstract class AbstractKeyedHandler<K,V> implements ResultSetHandler<Map<
     /**
      * Convert each row's columns into a Map and store then 
      * in a <code>Map</code> under <code>ResultSet.getObject(key)</code> key.
-     * 
+     * @param rs <code>ResultSet</code> to process.
      * @return A <code>Map</code>, never <code>null</code>. 
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)

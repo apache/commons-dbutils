@@ -106,7 +106,14 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
         this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
-    // Helper
+    /** Private Helper 
+     * @param convert The <code>RowProcessor</code> implementation
+     * to use when converting rows into Maps
+     * @param columnIndex The values to use as keys in the Map are 
+     * retrieved from the column at this index.
+     * @param columnName The values to use as keys in the Map are 
+     * retrieved from the column with this name. 
+     */
     private KeyedHandler(RowProcessor convert, int columnIndex,
             String columnName) {
         super();

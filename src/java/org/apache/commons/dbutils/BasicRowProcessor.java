@@ -87,6 +87,9 @@ public class BasicRowProcessor implements RowProcessor {
      * will be set to <code>null</code> if the column was SQL NULL.
      *
      * @see org.apache.commons.dbutils.RowProcessor#toArray(java.sql.ResultSet)
+     * @param rs ResultSet that supplies the array data
+     * @throws SQLException if a database access error occurs
+     * @return the newly created array
      */
     public Object[] toArray(ResultSet rs) throws SQLException {
         ResultSetMetaData meta = rs.getMetaData();
@@ -104,7 +107,12 @@ public class BasicRowProcessor implements RowProcessor {
      * Convert a <code>ResultSet</code> row into a JavaBean.  This 
      * implementation delegates to a BeanProcessor instance.
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
-     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class) 
+     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class)
+     * @param <T> The type of bean to create
+     * @param rs ResultSet that supplies the bean data
+     * @param type Class from which to create the bean instance
+     * @throws SQLException if a database access error occurs
+     * @return the newly created bean 
      */
     public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
         return this.convert.toBean(rs, type);
@@ -115,6 +123,12 @@ public class BasicRowProcessor implements RowProcessor {
      * This implementation delegates to a BeanProcessor instance. 
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
+     * @param <T> The type of bean to create
+     * @param rs ResultSet that supplies the bean data
+     * @param type Class from which to create the bean instance
+     * @throws SQLException if a database access error occurs
+     * @return A <code>List</code> of beans with the given type in the order 
+     * they were returned by the <code>ResultSet</code>.
      */
     public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
         return this.convert.toBeanList(rs, type);
@@ -126,6 +140,9 @@ public class BasicRowProcessor implements RowProcessor {
      * names as keys.  Calls to <code>map.get("COL")</code> and 
      * <code>map.get("col")</code> return the same value.
      * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
+     * @param rs ResultSet that supplies the map data
+     * @throws SQLException if a database access error occurs
+     * @return the newly created Map
      */
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
         Map<String, Object> result = new CaseInsensitiveHashMap();
@@ -155,7 +172,7 @@ public class BasicRowProcessor implements RowProcessor {
      * </pre>
      */
     private static class CaseInsensitiveHashMap extends HashMap<String, Object> {
-		/**
+        /**
          * The internal mapping from lowercase keys to the real keys.
          * 
          * <p>
@@ -178,9 +195,7 @@ public class BasicRowProcessor implements RowProcessor {
          */ 
         private static final long serialVersionUID = -2848100435296897392L;
 
-        /**
-         * @see java.util.Map#containsKey(java.lang.Object)
-         */
+        /** {@inheritDoc} */
         @Override
         public boolean containsKey(Object key) {
             Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
@@ -191,18 +206,14 @@ public class BasicRowProcessor implements RowProcessor {
             // return lowerCaseMap.containsKey(key.toString().toLowerCase());
         }
 
-        /**
-         * @see java.util.Map#get(java.lang.Object)
-         */
+        /** {@inheritDoc} */
         @Override
         public Object get(Object key) {
             Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
             return super.get(realKey);
         }
 
-        /**
-         * @see java.util.Map#put(java.lang.Object, java.lang.Object)
-         */
+        /** {@inheritDoc} */
         @Override
         public Object put(String key, Object value) {
             /*
@@ -218,9 +229,7 @@ public class BasicRowProcessor implements RowProcessor {
             return oldValue;
         }
 
-        /**
-         * @see java.util.Map#putAll(java.util.Map)
-         */
+        /** {@inheritDoc} */
         @Override
         public void putAll(Map<? extends String,?> m) {
             for (Map.Entry<? extends String, ?> entry : m.entrySet()) {
@@ -230,9 +239,7 @@ public class BasicRowProcessor implements RowProcessor {
             }
         }
 
-        /**
-         * @see java.util.Map#remove(java.lang.Object)
-         */
+        /** {@inheritDoc} */
         @Override
         public Object remove(Object key) {
             Object realKey = lowerCaseMap.remove(key.toString().toLowerCase());

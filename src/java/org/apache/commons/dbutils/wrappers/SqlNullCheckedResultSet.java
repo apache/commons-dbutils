@@ -360,9 +360,13 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Intercepts calls to <code>get*</code> methods and calls the appropriate
      * <code>getNull*</code> method if the <code>ResultSet</code> returned
      * <code>null</code>.
-     * 
-     * @throws Throwable
-     * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+     *  
+     *  @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+     * @param proxy Not used; all method calls go to the internal result set
+     * @param method The method to invoke on the result set
+     * @param args The arguments to pass to the result set
+     * @return null checked result
+     * @throws Throwable error
      */
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {

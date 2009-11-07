@@ -109,7 +109,7 @@ public class BeanProcessor {
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
      * </p>
-     *
+     * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
@@ -152,7 +152,7 @@ public class BeanProcessor {
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
      * </p>
-     *
+     * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
@@ -178,7 +178,7 @@ public class BeanProcessor {
 
     /**
      * Creates a new object and initializes its fields from the ResultSet.
-     *
+     * @param <T> The type of bean to create
      * @param rs The result set.
      * @param type The bean type (the return type of the object).
      * @param props The property descriptors.
@@ -324,7 +324,7 @@ public class BeanProcessor {
      * is called at the start of the bean creation process and may be 
      * overridden to provide custom behavior like returning a cached bean
      * instance.
-     *
+     * @param <T> The type of object to create
      * @param c The Class to create an object from.
      * @return A newly created object of the Class.
      * @throws SQLException if creation failed.
@@ -435,11 +435,11 @@ public class BeanProcessor {
      */
     protected Object processColumn(ResultSet rs, int index, Class<?> propType)
         throws SQLException {
-    	
-    	if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
-    		return null;
-    	}
-    	
+        
+        if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
+            return null;
+        }
+        
         if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
             return null;
         }
