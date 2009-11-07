@@ -212,7 +212,7 @@ public class BasicRowProcessor implements RowProcessor {
              * (That's why we call super.remove(oldKey) and not just
              * super.put(key, value))
              */
-            Object oldKey = lowerCaseMap.put(key.toString().toLowerCase(), key);
+            Object oldKey = lowerCaseMap.put(key.toLowerCase(), key);
             Object oldValue = super.remove(oldKey);
             super.put(key, value);
             return oldValue;
