@@ -29,6 +29,7 @@ import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -212,7 +213,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public byte[] getNullBytes() {
-        return this.nullBytes;
+        return this.nullBytes == null ? null : Arrays.copyOf(this.nullBytes, this.nullBytes.length);
     }
 
     /**
@@ -444,7 +445,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullBytes the value
      */
     public void setNullBytes(byte[] nullBytes) {
-        this.nullBytes = nullBytes;
+        this.nullBytes = Arrays.copyOf(nullBytes, nullBytes.length);
     }
 
     /**

@@ -34,6 +34,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -188,10 +189,22 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         }
         rs2.setNullBytes(b);
         assertNotNull(rs.getBytes(1));
-        assertEquals(b, rs.getBytes(1));
+        assertArrayEquals(b, rs.getBytes(1));
         assertNotNull(rs.getBytes("column"));
-        assertEquals(b, rs.getBytes("column"));
+        assertArrayEquals(b, rs.getBytes("column"));
 
+    }
+    
+    private static void assertArrayEquals(byte[] expected, byte[] actual) {
+    	if (expected == actual) return;
+    	if (expected.length != actual.length) {
+    		failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
+    	}
+    	for (int i = 0; i < expected.length; i++) {
+    		byte expectedItem = expected[i];
+    		byte actualItem = actual[i];
+    		assertEquals("Array not equal at index " + i, expectedItem, actualItem);
+    	}
     }
 
     /**
@@ -593,9 +606,9 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         }
         rs2.setNullBytes(b);
         assertNotNull(rs.getBytes(1));
-        assertEquals(b, rs.getBytes(1));
+        assertArrayEquals(b, rs.getBytes(1));
         assertNotNull(rs.getBytes("column"));
-        assertEquals(b, rs.getBytes("column"));
+        assertArrayEquals(b, rs.getBytes("column"));
 
     }
 
