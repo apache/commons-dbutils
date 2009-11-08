@@ -212,7 +212,9 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public byte[] getNullBytes() {
-        if (this.nullBytes == null) return null;
+        if (this.nullBytes == null) {
+            return null;
+        }
         byte[] copy = new byte[this.nullBytes.length];
         System.arraycopy(this.nullBytes, 0, copy, 0, this.nullBytes.length);
         return copy;
