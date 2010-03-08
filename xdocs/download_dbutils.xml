@@ -99,14 +99,14 @@ limitations under the License.
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.3.tar.gz">commons-dbutils-1.3.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3.tar.gz.md5">md5</a></td>
-              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.3-bin.tar.gz">commons-dbutils-1.3-bin.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3-bin.tar.gz.md5">md5</a></td>
+              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.3.zip">commons-dbutils-1.3.zip</a></td>
-              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3.zip.md5">md5</a></td>
-              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.3-bin.zip">commons-dbutils-1.3-bin.zip</a></td>
+              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3-bin.zip.md5">md5</a></td>
+              <td><a href="http://www.apache.org/dist/commons/dbutils/binaries/commons-dbutils-1.3-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
