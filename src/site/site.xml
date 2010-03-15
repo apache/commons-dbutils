@@ -25,7 +25,7 @@
     <body>
         <menu name="DbUtils">
             <item name="Overview"      href="/index.html"/>
-            <item name="Download"      href="http://commons.apache.org/downloads/download_dbutils.cgi"/>
+            <item name="Download"      href="http://commons.apache.org/dbutils/download_dbutils.cgi"/>
             <item name="Examples"      href="/examples.html"/>
             <item name="Release Notes" href="/changes-report.html"/>
             <item name="Dependencies"  href="/dependencies.html"/>
