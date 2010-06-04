@@ -28,7 +28,7 @@ public class ArrayHandlerTest extends BaseTestCase {
 
 	public void testHandle() throws SQLException {
 		ResultSetHandler<Object[]> h = new ArrayHandler();
-		Object[] results = (Object[]) h.handle(this.rs);
+		Object[] results = h.handle(this.rs);
         
 		assertNotNull(results);
 		assertEquals(COLS, results.length);
@@ -39,7 +39,7 @@ public class ArrayHandlerTest extends BaseTestCase {
     
     public void testEmptyResultSetHandle() throws SQLException {
         ResultSetHandler<Object[]> h = new ArrayHandler();
-        Object[] results = (Object[]) h.handle(this.emptyResultSet);
+        Object[] results = h.handle(this.emptyResultSet);
         
         assertNull(results);
     }

@@ -40,7 +40,7 @@ public class BeanHandlerTest extends BaseTestCase {
     
     public void testEmptyResultSetHandle() throws SQLException {
         ResultSetHandler<TestBean> h = new BeanHandler<TestBean>(TestBean.class);
-        TestBean results = (TestBean) h.handle(this.emptyResultSet);
+        TestBean results = h.handle(this.emptyResultSet);
         
         assertNull(results);
     }

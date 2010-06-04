@@ -38,14 +38,14 @@ public class ArrayListHandlerTest extends BaseTestCase {
 		Iterator<Object[]> iter = results.iterator();
 	    Object[] row = null;
 	    assertTrue(iter.hasNext());
-	    row = (Object[]) iter.next();
+	    row = iter.next();
 	    assertEquals(COLS, row.length);
 	    assertEquals("1", row[0]);
 	    assertEquals("2", row[1]);
 	    assertEquals("3", row[2]);
 	        
 	    assertTrue(iter.hasNext());
-	    row = (Object[]) iter.next();
+	    row = iter.next();
 	    assertEquals(COLS, row.length);
 
 	    assertEquals("4", row[0]);

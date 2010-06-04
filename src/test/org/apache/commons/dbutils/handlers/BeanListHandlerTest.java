@@ -31,7 +31,7 @@ public class BeanListHandlerTest extends BaseTestCase {
 
 	public void testHandle() throws SQLException {
 		ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(TestBean.class);
-		List<TestBean> results = (List<TestBean>) h.handle(this.rs);
+		List<TestBean> results = h.handle(this.rs);
 
 		assertNotNull(results);
 		assertEquals(ROWS, results.size());
@@ -39,14 +39,14 @@ public class BeanListHandlerTest extends BaseTestCase {
 		Iterator<TestBean> iter = results.iterator();
 		TestBean row = null;
         assertTrue(iter.hasNext());
-        row = (TestBean) iter.next();
+        row = iter.next();
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
         assertEquals("3", row.getThree());
         assertEquals("not set", row.getDoNotSet());
             
         assertTrue(iter.hasNext());
-        row = (TestBean) iter.next();
+        row = iter.next();
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());

@@ -71,7 +71,7 @@ public class QueryLoader {
      */
     public synchronized Map<String,String> load(String path) throws IOException {
 
-        Map<String,String> queryMap = (Map<String,String>) this.queries.get(path);
+        Map<String,String> queryMap = this.queries.get(path);
 
         if (queryMap == null) {
             queryMap = this.loadQueries(path);

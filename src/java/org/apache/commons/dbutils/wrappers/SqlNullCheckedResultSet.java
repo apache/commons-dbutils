@@ -377,7 +377,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
         Object result = method.invoke(this.rs, args);
 
-        Method nullMethod = (Method) nullMethods.get(method.getName());
+        Method nullMethod = nullMethods.get(method.getName());
 
         // Check nullMethod != null first so that we don't call wasNull()
         // before a true getter method was invoked on the ResultSet.

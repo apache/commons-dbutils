@@ -331,7 +331,7 @@ public class MockResultSet implements InvocationHandler {
         if (!this.iter.hasNext()) {
             return Boolean.FALSE;
         } else {
-            this.currentRow = (Object[]) iter.next();
+            this.currentRow = iter.next();
             return Boolean.TRUE;
         }
     }
