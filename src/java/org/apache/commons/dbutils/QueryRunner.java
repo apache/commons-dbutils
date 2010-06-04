@@ -349,6 +349,7 @@ public class QueryRunner {
      * @throws SQLException if a database access error occurs
      * @deprecated Use {@link #query(Connection, String, ResultSetHandler, Object...)}
      */
+    @Deprecated
     public <T> T query(Connection conn, String sql, Object param,
             ResultSetHandler<T> rsh) throws SQLException {
 
@@ -367,6 +368,7 @@ public class QueryRunner {
      * @throws SQLException if a database access error occurs
      * @deprecated Use {@link #query(Connection,String,ResultSetHandler,Object...)} instead
      */
+    @Deprecated
     public <T> T query(Connection conn, String sql, Object[] params,
             ResultSetHandler<T> rsh) throws SQLException {
                 return query(conn, sql, rsh, params);
@@ -439,6 +441,7 @@ public class QueryRunner {
      * @throws SQLException if a database access error occurs
      * @deprecated Use {@link #query(String, ResultSetHandler, Object...)}
      */
+    @Deprecated
     public <T> T query(String sql, Object param, ResultSetHandler<T> rsh)
         throws SQLException {
 
@@ -461,6 +464,7 @@ public class QueryRunner {
      * @throws SQLException if a database access error occurs
      * @deprecated Use {@link #query(String, ResultSetHandler, Object...)}
      */
+    @Deprecated
     public <T> T query(String sql, Object[] params, ResultSetHandler<T> rsh)
         throws SQLException {
             return query(sql, rsh, params);

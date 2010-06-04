@@ -89,7 +89,8 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
      * 
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
-   protected Object handleRow(ResultSet rs) throws SQLException {
+    @Override
+    protected Object handleRow(ResultSet rs) throws SQLException {
         if (this.columnName == null) {
             return rs.getObject(this.columnIndex);
         } else {
