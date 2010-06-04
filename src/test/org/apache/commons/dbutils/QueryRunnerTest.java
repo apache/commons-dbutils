@@ -170,6 +170,7 @@ public class QueryRunnerTest extends TestCase {
             getPrivate = QueryRunnerTest.class.getDeclaredMethod("getPrivate", new Class[0]);
         }
         
+        @Override
         public synchronized Method getReadMethod() {
             if (getPrivate == null) return super.getReadMethod();
             return getPrivate;
@@ -207,6 +208,7 @@ public class QueryRunnerTest extends TestCase {
     
     private class NoOpFillStatement extends QueryRunner {
         Object[] params;
+        @Override
         public void fillStatement(PreparedStatement stmt, Object... params)
                 throws SQLException {
             this.params = params;

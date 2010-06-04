@@ -64,6 +64,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
+    @Override
     protected Object[] handleRow(ResultSet rs) throws SQLException {
         return this.convert.toArray(rs);
     }
