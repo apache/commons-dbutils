@@ -28,6 +28,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  */
 public class StringTrimmedResultSetTest extends BaseTestCase {
 
+    @Override
     public void setUp() throws Exception {
         super.setUp();
         this.rs = StringTrimmedResultSet.wrap(this.rs);

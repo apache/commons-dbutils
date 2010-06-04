@@ -44,6 +44,7 @@ public class QueryRunnerTest extends TestCase {
         }
     }
     
+    @Override
     public void setUp() {
         runner = new QueryRunner();
         stmt = fakePreparedStatement();
@@ -131,6 +132,7 @@ public class QueryRunnerTest extends TestCase {
     
     public void testFillStatementWithBeanErrorBadReadMethod() throws Exception {
         PropertyDescriptor badReadMethod = new IndexedPropertyDescriptor("indexed", getClass(), null, null, "getIndexed", null) {
+            @Override
             public synchronized Method getReadMethod() {
                 return super.getIndexedReadMethod();
             }
