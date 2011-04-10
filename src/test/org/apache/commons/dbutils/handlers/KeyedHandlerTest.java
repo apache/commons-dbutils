@@ -17,8 +17,8 @@
 package org.apache.commons.dbutils.handlers;
 
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -33,16 +33,15 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator<Object> iter = results.keySet().iterator();
         Map<String,Object> row = null;
-        while (iter.hasNext()) {
-            Object key = iter.next();
-            assertNotNull(key);
-            row = results.get(key);
+        for(Entry<Object, Map<String, Object>> entry : results.entrySet())
+        {
+        	Object key = entry.getKey();
+        	assertNotNull(key);
+        	row = entry.getValue();
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
-
         row = results.get("1");
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));
@@ -56,16 +55,15 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator<Object> iter = results.keySet().iterator();
         Map<String,Object> row = null;
-        while (iter.hasNext()) {
-            Object key = iter.next();
-            assertNotNull(key);
-            row = results.get(key);
+        for(Entry<Object, Map<String, Object>> entry : results.entrySet())
+        {
+        	Object key = entry.getKey();
+        	assertNotNull(key);
+        	row = entry.getValue();
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
-
         row = results.get("5");
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
@@ -79,16 +77,15 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator<Object> iter = results.keySet().iterator();
         Map<String,Object> row = null;
-        while (iter.hasNext()) {
-            Object key = iter.next();
-            assertNotNull(key);
-            row = results.get(key);
-            assertNotNull(row);
-            assertEquals(COLS, row.keySet().size());
+        for(Entry<Object, Map<String, Object>> entry : results.entrySet())
+        {
+        	Object key = entry.getKey();
+        	assertNotNull(key);
+        	row = entry.getValue();
+        	assertNotNull(row);
+        	assertEquals(COLS, row.keySet().size());
         }
-
         row = results.get("6");
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));

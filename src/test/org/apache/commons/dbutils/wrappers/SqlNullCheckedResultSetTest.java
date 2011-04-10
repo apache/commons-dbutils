@@ -488,7 +488,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         }
         if (getUrlInt != null && getUrlString != null) {
             assertEquals(null, getUrlInt.invoke(rs, 
-                         new Object[] { new Integer(1) } ) );
+                         new Object[] { Integer.valueOf(1) } ) );
             assertTrue(rs.wasNull());
             assertEquals(null, getUrlString.invoke(rs, 
                          new Object[] { "column" } ) );
@@ -497,7 +497,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
             URL u = new URL("http://www.apache.org");
             rs2.setNullURL(u);
             assertEquals(u, getUrlInt.invoke(rs, 
-                         new Object[] { new Integer(1) } ) );
+                         new Object[] { Integer.valueOf(1) } ) );
             assertEquals(u, getUrlString.invoke(rs, 
                          new Object[] { "column" } ) );
         }
@@ -831,19 +831,19 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
             return Boolean.FALSE;
 
         } else if (returnType.equals(Integer.TYPE)) {
-            return new Integer(0);
+            return Integer.valueOf(0);
 
         } else if (returnType.equals(Short.TYPE)) {
-            return new Short((short) 0);
+            return Short.valueOf((short) 0);
 
         } else if (returnType.equals(Double.TYPE)) {
             return new Double(0);
 
         } else if (returnType.equals(Long.TYPE)) {
-            return new Long(0);
+            return Long.valueOf(0);
 
         } else if (returnType.equals(Byte.TYPE)) {
-            return new Byte((byte) 0);
+            return Byte.valueOf((byte) 0);
 
         } else if (returnType.equals(Float.TYPE)) {
             return new Float(0);

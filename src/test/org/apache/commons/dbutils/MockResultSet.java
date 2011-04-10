@@ -137,7 +137,7 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return (obj == null)
-                ? new Byte((byte) 0)
+                ? Byte.valueOf((byte) 0)
                 : Byte.valueOf(obj.toString());
 
         } catch (NumberFormatException e) {
@@ -192,7 +192,7 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return (obj == null)
-                ? new Integer(0)
+                ? Integer.valueOf(0)
                 : Integer.valueOf(obj.toString());
 
         } catch (NumberFormatException e) {
@@ -210,7 +210,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null) ? new Long(0) : Long.valueOf(obj.toString());
+            return (obj == null) ? Long.valueOf(0) : Long.valueOf(obj.toString());
 
         } catch (NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -243,7 +243,7 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return (obj == null)
-                ? new Short((short) 0)
+                ? Short.valueOf((short) 0)
                 : Short.valueOf(obj.toString());
 
         } catch (NumberFormatException e) {
@@ -311,7 +311,7 @@ public class MockResultSet implements InvocationHandler {
             return this.isLast();
         
         } else if (methodName.equals("hashCode")) {
-            return new Integer(System.identityHashCode(proxy));
+            return Integer.valueOf(System.identityHashCode(proxy));
         
         } else if (methodName.equals("toString")) {
             return "MockResultSet " + System.identityHashCode(proxy);

@@ -80,12 +80,12 @@ public class QueryRunnerTest extends TestCase {
             public Object invoke(Object proxy, Method method, Object[] args)
                     throws Throwable {
                 if (getParameterCount.equals(method)) {
-                    return new Integer(types.length);
+                    return Integer.valueOf(types.length);
                 }
                 if (getParameterType.equals(method)) {
                     if (simulateOracle) throw new SQLException("Oracle fails when you call getParameterType");
                     int arg = ((Integer)args[0]).intValue();
-                    return new Integer(types[arg-1]);
+                    return Integer.valueOf(types[arg-1]);
                 }
                 return null;
             }

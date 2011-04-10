@@ -77,7 +77,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("6", row.getThree());
         assertEquals("not set", row.getDoNotSet());
         assertEquals(3, row.getIntTest());
-        assertEquals(new Integer(4), row.getIntegerTest());
+        assertEquals(Integer.valueOf(4), row.getIntegerTest());
         assertEquals(null, row.getNullObjectTest());
         assertEquals(0, row.getNullPrimitiveTest());
         // test date -> string handling
@@ -107,7 +107,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("6", b.getThree());
         assertEquals("not set", b.getDoNotSet());
         assertEquals(3, b.getIntTest());
-        assertEquals(new Integer(4), b.getIntegerTest());
+        assertEquals(Integer.valueOf(4), b.getIntegerTest());
         assertEquals(null, b.getNullObjectTest());
         assertEquals(0, b.getNullPrimitiveTest());
         // test date -> string handling

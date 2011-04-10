@@ -29,7 +29,7 @@ public class TestBean {
 
     private int intTest = 0;
 
-    private Integer integerTest = new Integer(0);
+    private Integer integerTest = Integer.valueOf(0);
 
     private String doNotSet = "not set";
 

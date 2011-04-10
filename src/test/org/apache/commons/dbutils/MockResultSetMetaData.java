@@ -64,7 +64,7 @@ public class MockResultSetMetaData implements InvocationHandler {
         String methodName = method.getName();
 
         if (methodName.equals("getColumnCount")) {
-            return new Integer(this.columnNames.length);
+            return Integer.valueOf(this.columnNames.length);
 
         } else if (
                 methodName.equals("getColumnName")) {
@@ -79,7 +79,7 @@ public class MockResultSetMetaData implements InvocationHandler {
                 return this.columnLabels[col];
 
         } else if (methodName.equals("hashCode")) {
-            return new Integer(System.identityHashCode(proxy));
+            return Integer.valueOf(System.identityHashCode(proxy));
 
         } else if (methodName.equals("toString")) {
             return "MockResultSetMetaData " + System.identityHashCode(proxy);
