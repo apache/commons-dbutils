@@ -439,10 +439,6 @@ public class BeanProcessor {
         if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
             return null;
         }
-        
-        if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
-            return null;
-        }
 
         if (propType.equals(String.class)) {
             return rs.getString(index);
