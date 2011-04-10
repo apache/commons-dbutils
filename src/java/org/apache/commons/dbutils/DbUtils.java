@@ -72,7 +72,7 @@ public final class DbUtils {
     public static void closeQuietly(Connection conn) {
         try {
             close(conn);
-        } catch (SQLException e) {
+        } catch (SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -110,7 +110,7 @@ public final class DbUtils {
     public static void closeQuietly(ResultSet rs) {
         try {
             close(rs);
-        } catch (SQLException e) {
+        } catch (SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -124,7 +124,7 @@ public final class DbUtils {
     public static void closeQuietly(Statement stmt) {
         try {
             close(stmt);
-        } catch (SQLException e) {
+        } catch (SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -154,7 +154,7 @@ public final class DbUtils {
     public static void commitAndCloseQuietly(Connection conn) {
         try {
             commitAndClose(conn);
-        } catch (SQLException e) {
+        } catch (SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -278,7 +278,7 @@ public final class DbUtils {
     public static void rollbackAndCloseQuietly(Connection conn) {
         try {
             rollbackAndClose(conn);
-        } catch (SQLException e) {
+        } catch (SQLException e) { // NOPMD
             // quiet
         }
     }
