@@ -40,6 +40,7 @@ import javax.sql.DataSource;
  * <code>ResultSet</code>s.  This class is thread safe.
  * 
  * @see ResultSetHandler
+ * @since 1.4
  */
 public class AsyncQueryRunner {
 
