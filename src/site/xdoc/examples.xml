@@ -128,6 +128,38 @@ catch(SQLException sqle) {
 ]]>
 </source>
 
+<p>
+  For long running calls you can use the <code>AsyncQueryRunner</code> to execute
+  the calls asynchronously. The <code>AsyncQueryRunner</code> class has the same
+  methods as the <code>QueryRunner</code> calls; however, the methods return a
+  <code>Callable</code>. 
+</p>
+
+<source>
+<![CDATA[
+ExecutorCompletionService<Integer> executor =
+    new ExecutorCompletionService<Integer>( Executors.newCachedThreadPool() );
+AsyncQueryRunner asyncRun = new AsyncQueryRunner( dataSource );
+
+try
+{
+    // Create a Callable for the update call
+    Callable<Integer> callable = asyncRun.update( "UPDATE Person SET height=? WHERE name=?",
+                                                  2.05, "John Doe" );
+
+    // Submit the Callable to the executor
+    executor.submit( callable );
+
+   // Later (or in another thread) get the result
+   Integer updates = executor.take().get();
+}
+catch(SQLException sqle) {
+    // Handle it
+}
+]]>
+</source>
+
+
 </section>
 
 
