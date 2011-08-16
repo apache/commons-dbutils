@@ -16,22 +16,12 @@
  */
 package org.apache.commons.dbutils;
 
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Types;
-import java.util.Arrays;
 import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.RunnableFuture;
 
 import javax.sql.DataSource;
 
@@ -42,44 +32,34 @@ import javax.sql.DataSource;
  * @see ResultSetHandler
  * @since 1.4
  */
-public class AsyncQueryRunner {
+public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
-     * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried it yet)?
-     */
-    private volatile boolean pmdKnownBroken = false;
-    
-    /**
-     * The DataSource to retrieve connections from.
-     */
-    protected final DataSource ds;
-
-    /**
-     * Constructor for QueryRunner.
+     * Constructor for AsyncQueryRunner.
      */
     public AsyncQueryRunner() {
-        this(null, false); 
+        super(null, false); 
     }
 
     /**
-     * Constructor for QueryRunner, allows workaround for Oracle drivers
+     * Constructor for AsyncQueryRunner, allows workaround for Oracle drivers
      * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
     public AsyncQueryRunner(boolean pmdKnownBroken) {
-        this(null, pmdKnownBroken); 
+        super(null, pmdKnownBroken); 
     }
     
     /**
-     * Constructor for QueryRunner, allows workaround for Oracle drivers.  Methods that do not take a 
+     * Constructor for AsyncQueryRunner which takes a <code>DataSource</code>.  Methods that do not take a 
      * <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
      * 
      * @param ds The <code>DataSource</code> to retrieve connections from.
      */
     public AsyncQueryRunner(DataSource ds) {
-        this(ds, false);
+        super(ds, false);
     }
     
     /**
@@ -93,10 +73,12 @@ public class AsyncQueryRunner {
      * and if it breaks, we'll remember not to use it again.
      */
     public AsyncQueryRunner(DataSource ds, boolean pmdKnownBroken) {
-        this.pmdKnownBroken = pmdKnownBroken;
-        this.ds = ds;
+        super(ds, pmdKnownBroken);
     }
     
+    /**
+     * Class that encapsulates the continuation for batch calls.
+     */
     protected class BatchCallableStatement implements Callable<int[]> {
     	private String sql;
     	private Object[][] params;
@@ -112,6 +94,9 @@ public class AsyncQueryRunner {
     		this.ps = ps;
     	}
 		
+    	/**
+    	 * The actual call to executeBatch.
+    	 */
     	public int[] call() throws Exception {
     		int[] ret = null;
     		
@@ -132,16 +117,16 @@ public class AsyncQueryRunner {
     /**
      * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
      * 
-     * @param conn The Connection to use to run the query.  The caller is
+     * @param conn The <code>Connection</code> to use to run the query.  The caller is
      * responsible for closing this Connection.
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values. 
-     * @return A RunnableFuture which when completed returns the number of rows updated per statement.
+     * @return A <code>Callable</code> which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      * @since DbUtils 1.1
      */
-    public RunnableFuture<int[]> batch(Connection conn, String sql, Object[][] params) throws SQLException {
+    public Callable<int[]> batch(Connection conn, String sql, Object[][] params) throws SQLException {
         return this.batch(conn, false, sql, params);
     }
 
@@ -154,17 +139,27 @@ public class AsyncQueryRunner {
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values. 
-     * @return A RunnableFuture which when completed returns the number of rows updated per statement.
+     * @return A <code>Callable</code> which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      * @since DbUtils 1.1
      */
-    public RunnableFuture<int[]> batch(String sql, Object[][] params) throws SQLException {
+    public Callable<int[]> batch(String sql, Object[][] params) throws SQLException {
         Connection conn = this.prepareConnection();
 
         return this.batch(conn, true, sql, params);
     }
     
-    private RunnableFuture<int[]> batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
+    /**
+     * Creates a continuation for a batch call, and returns it in a <code>RunnableFuture</code>.
+     * @param conn The connection to use for the batch call.
+     * @param closeConn True if the connection should be closed, false otherwise.
+     * @param sql The SQL statement to execute.
+     * @param params An array of query replacement parameters.  Each row in
+     * this array is one set of batch replacement values. 
+     * @return A <code>Callable</code> which returns the number of rows updated per statement.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    private Callable<int[]> batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
     	if(conn == null) {
     		if(closeConn)
     			close(conn);
@@ -184,7 +179,7 @@ public class AsyncQueryRunner {
     	}
 
         PreparedStatement stmt = null;
-        FutureTask<int[]> ret = null;
+        Callable<int[]> ret = null;
         try {
         	stmt = this.prepareStatement(conn, sql);
         	
@@ -193,7 +188,7 @@ public class AsyncQueryRunner {
                 stmt.addBatch();
             }
             
-            ret = new FutureTask<int[]>(new BatchCallableStatement(sql, params, conn, closeConn, stmt));
+            ret = new BatchCallableStatement(sql, params, conn, closeConn, stmt);
 
         } catch (SQLException e) {
             close(stmt);
@@ -205,186 +200,9 @@ public class AsyncQueryRunner {
     }
 
     /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with 
-     * the given objects.
-     * @param stmt PreparedStatement to fill
-     * @param params Query replacement parameters; <code>null</code> is a valid
-     * value to pass in.
-     * @throws SQLException if a database access error occurs
+     * Class that encapsulates the continuation for query calls.
+     * @param <T> The type of the result from the call to handle.
      */
-    public void fillStatement(PreparedStatement stmt, Object... params) throws SQLException {
-
-        // check the parameter count, if we can
-        ParameterMetaData pmd = null;
-        if (!pmdKnownBroken) {
-            pmd = stmt.getParameterMetaData();
-            int stmtCount = pmd.getParameterCount();
-            int paramsCount = params == null ? 0 : params.length;
-            
-            if (stmtCount != paramsCount) {
-                throw new SQLException("Wrong number of parameters: expected "
-                        + stmtCount + ", was given " + paramsCount);
-            }
-        }
-
-        // nothing to do here
-        if (params == null) {
-            return;
-        }
-
-        for (int i = 0; i < params.length; i++) {
-            if (params[i] != null) {
-                stmt.setObject(i + 1, params[i]);
-            } else {
-                // VARCHAR works with many drivers regardless
-                // of the actual column type.  Oddly, NULL and 
-                // OTHER don't work with Oracle's drivers.
-                int sqlType = Types.VARCHAR;
-                if (!pmdKnownBroken) {
-                    try {
-                        sqlType = pmd.getParameterType(i + 1);
-                    } catch (SQLException e) {
-                        pmdKnownBroken = true;
-                    }
-                }
-                stmt.setNull(i + 1, sqlType);
-            }
-        }
-    }
-
-    /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with the
-     * given object's bean property values.
-     * 
-     * @param stmt
-     *            PreparedStatement to fill
-     * @param bean
-     *            a JavaBean object
-     * @param properties
-     *            an ordered array of properties; this gives the order to insert
-     *            values in the statement
-     * @throws SQLException
-     *             if a database access error occurs
-     */
-    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
-            PropertyDescriptor[] properties) throws SQLException {
-        Object[] params = new Object[properties.length];
-        for (int i = 0; i < properties.length; i++) {
-            PropertyDescriptor property = properties[i];
-            Object value = null;
-            Method method = property.getReadMethod();
-            if (method == null) {
-                throw new RuntimeException("No read method for bean property "
-                        + bean.getClass() + " " + property.getName());
-            }
-            try {
-                value = method.invoke(bean, new Object[0]);
-            } catch (InvocationTargetException e) {
-                throw new RuntimeException("Couldn't invoke method: " + method, e);
-            } catch (IllegalArgumentException e) {
-                throw new RuntimeException("Couldn't invoke method with 0 arguments: " + method, e);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException("Couldn't invoke method: " + method, e);
-            } 
-            params[i] = value;
-        }
-        fillStatement(stmt, params);
-    }
-
-    /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with the
-     * given object's bean property values.
-     * 
-     * @param stmt PreparedStatement to fill
-     * @param bean A JavaBean object
-     * @param propertyNames An ordered array of property names (these should match the
-     *                      getters/setters); this gives the order to insert values in the
-     *                      statement
-     * @throws SQLException If a database access error occurs
-     */
-    public void fillStatementWithBean(PreparedStatement stmt, Object bean, String... propertyNames) throws SQLException {
-        PropertyDescriptor[] descriptors;
-        try {
-            descriptors = Introspector.getBeanInfo(bean.getClass())
-                    .getPropertyDescriptors();
-        } catch (IntrospectionException e) {
-            throw new RuntimeException("Couldn't introspect bean " + bean.getClass().toString(), e);
-        }
-        PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
-        for (int i = 0; i < propertyNames.length; i++) {
-            String propertyName = propertyNames[i];
-            if (propertyName == null) {
-                throw new NullPointerException("propertyName can't be null: " + i);
-            }
-            boolean found = false;
-            for (int j = 0; j < descriptors.length; j++) {
-                PropertyDescriptor descriptor = descriptors[j];
-                if (propertyName.equals(descriptor.getName())) {
-                    sorted[i] = descriptor;
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                throw new RuntimeException("Couldn't find bean property: "
-                        + bean.getClass() + " " + propertyName);
-            }
-        }
-        fillStatementWithBean(stmt, bean, sorted);
-    }
-
-    /**
-     * Returns the <code>DataSource</code> this runner is using.  
-     * <code>QueryRunner</code> methods always call this method to get the
-     * <code>DataSource</code> so subclasses can provide specialized
-     * behavior.
-     *
-     * @return DataSource the runner is using
-     */
-    public DataSource getDataSource() {
-        return this.ds;
-    }
-
-    /**
-     * Factory method that creates and initializes a 
-     * <code>PreparedStatement</code> object for the given SQL.  
-     * <code>QueryRunner</code> methods always call this method to prepare 
-     * statements for them.  Subclasses can override this method to provide 
-     * special PreparedStatement configuration if needed.  This implementation
-     * simply calls <code>conn.prepareStatement(sql)</code>.
-     *  
-     * @param conn The <code>Connection</code> used to create the 
-     * <code>PreparedStatement</code>
-     * @param sql The SQL statement to prepare.
-     * @return An initialized <code>PreparedStatement</code>.
-     * @throws SQLException if a database access error occurs
-     */
-    protected PreparedStatement prepareStatement(Connection conn, String sql)
-        throws SQLException {
-            
-        return conn.prepareStatement(sql);
-    }
-    
-    /**
-     * Factory method that creates and initializes a 
-     * <code>Connection</code> object.  <code>QueryRunner</code> methods 
-     * always call this method to retrieve connections from its DataSource.  
-     * Subclasses can override this method to provide 
-     * special <code>Connection</code> configuration if needed.  This 
-     * implementation simply calls <code>ds.getConnection()</code>.
-     * 
-     * @return An initialized <code>Connection</code>.
-     * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected Connection prepareConnection() throws SQLException {
-        if(this.getDataSource() == null) {
-            throw new SQLException("QueryRunner requires a DataSource to be " +
-                "invoked in this way, or a Connection should be passed in");
-        }
-        return this.getDataSource().getConnection();
-    }
-    
     protected class QueryCallableStatement<T> implements Callable<T> {
     	private String sql;
     	private Object[] params;
@@ -426,9 +244,19 @@ public class AsyncQueryRunner {
     	
     }
 
-    private <T> RunnableFuture<T> query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    /**
+     * Creates a continuation for a query call, and returns it in a <code>RunnableFuture</code>.
+     * @param conn The connection to use for the query call.
+     * @param closeConn True if the connection should be closed, false otherwise.
+     * @param sql The SQL statement to execute.
+     * @param params An array of query replacement parameters.  Each row in
+     * this array is one set of query replacement values. 
+     * @return A <code>Callable</code> which returns the result of the query call.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    private <T> Callable<T> query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         PreparedStatement stmt = null;
-        FutureTask<T> ret = null;
+        Callable<T> ret = null;
 
     	if(conn == null) {
     		if(closeConn)
@@ -452,7 +280,7 @@ public class AsyncQueryRunner {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
             
-            ret = new FutureTask<T>(new QueryCallableStatement<T>(conn, closeConn, stmt, rsh, sql, params));
+            ret = new QueryCallableStatement<T>(conn, closeConn, stmt, rsh, sql, params);
 
         } catch (SQLException e) {
             close(stmt);
@@ -472,10 +300,10 @@ public class AsyncQueryRunner {
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
      * @param params The replacement parameters.
-     * @return A RunnableFuture which when completed returns the object returned by the handler.
+     * @return A <code>Callable</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> RunnableFuture<T> query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    public <T> Callable<T> query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
     	return query(conn, false, sql, rsh, params);
     }
 
@@ -486,10 +314,10 @@ public class AsyncQueryRunner {
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
-     * @return A RunnableFuture which when completed returns the object returned by the handler.
+     * @return A <code>Callable</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> RunnableFuture<T> query(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
+    public <T> Callable<T> query(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
         return this.query(conn, false, sql, rsh, (Object[]) null);
     }
 
@@ -503,12 +331,11 @@ public class AsyncQueryRunner {
      * the <code>ResultSet</code>.
      * @param params Initialize the PreparedStatement's IN parameters with 
      * this array.
-     * @return A RunnableFuture which when completed returns the object generated by the handler.
+     * @return A <code>Callable</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> RunnableFuture<T> query(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    public <T> Callable<T> query(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         Connection conn = this.prepareConnection();
-
         return this.query(conn, true, sql, rsh, params);
     }
 
@@ -521,53 +348,17 @@ public class AsyncQueryRunner {
      * @param rsh The handler used to create the result object from 
      * the <code>ResultSet</code>.
      * 
-     * @return A RunnableFuture which when completed returns the object generated by the handler.
+     * @return A <code>Callable</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> RunnableFuture<T> query(String sql, ResultSetHandler<T> rsh) throws SQLException {
+    public <T> Callable<T> query(String sql, ResultSetHandler<T> rsh) throws SQLException {
         Connection conn = this.prepareConnection();
         return this.query(conn, true, sql, rsh, (Object[]) null);
     }
 
     /**
-     * Throws a new exception with a more informative error message.
-     * 
-     * @param cause The original exception that will be chained to the new 
-     * exception when it's rethrown. 
-     * 
-     * @param sql The query that was executing when the exception happened.
-     * 
-     * @param params The query replacement parameters; <code>null</code> is a 
-     * valid value to pass in.
-     * 
-     * @throws SQLException if a database access error occurs
+     * Class that encapsulates the continuation for update calls.
      */
-    protected void rethrow(SQLException cause, String sql, Object... params)
-        throws SQLException {
-
-        String causeMessage = cause.getMessage();
-        if (causeMessage == null) {
-            causeMessage = "";
-        }
-        StringBuffer msg = new StringBuffer(causeMessage);
-
-        msg.append(" Query: ");
-        msg.append(sql);
-        msg.append(" Parameters: ");
-
-        if (params == null) {
-            msg.append("[]");
-        } else {
-            msg.append(Arrays.deepToString(params));
-        }
-
-        SQLException e = new SQLException(msg.toString(), cause.getSQLState(),
-                cause.getErrorCode());
-        e.setNextException(cause);
-
-        throw e;
-    }
-
     protected class UpdateCallableStatement implements Callable<Integer> {
     	private String sql;
     	private Object[] params;
@@ -601,9 +392,19 @@ public class AsyncQueryRunner {
     	
     }
     
-    private RunnableFuture<Integer> update(Connection conn, boolean closeConn, String sql, Object... params) throws SQLException {
+    /**
+     * Creates a continuation for an update call, and returns it in a <code>RunnableFuture</code>.
+     * @param conn The connection to use for the update call.
+     * @param closeConn True if the connection should be closed, false otherwise.
+     * @param sql The SQL statement to execute.
+     * @param params An array of update replacement parameters.  Each row in
+     * this array is one set of update replacement values. 
+     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    private Callable<Integer> update(Connection conn, boolean closeConn, String sql, Object... params) throws SQLException {
         PreparedStatement stmt = null;
-        FutureTask<Integer> ret = null;
+        Callable<Integer> ret = null;
 
     	if(conn == null) {
     		if(closeConn)
@@ -621,7 +422,7 @@ public class AsyncQueryRunner {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
             
-            ret = new FutureTask<Integer>(new UpdateCallableStatement(conn, closeConn, stmt, sql, params));
+            ret = new UpdateCallableStatement(conn, closeConn, stmt, sql, params);
 
         } catch (SQLException e) {
         	close(stmt);
@@ -639,10 +440,10 @@ public class AsyncQueryRunner {
      * 
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
-     * @return A RunnableFuture which when completed returns the number of rows updated.
+     * @return A <code>Callable</code> which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
-    public RunnableFuture<Integer> update(Connection conn, String sql) throws SQLException {
+    public Callable<Integer> update(Connection conn, String sql) throws SQLException {
         return this.update(conn, false, sql, (Object[]) null);
     }
 
@@ -653,10 +454,10 @@ public class AsyncQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param param The replacement parameter.
-     * @return A RunnableFuture which when completed returns the number of rows updated.
+     * @return A <code>Callable</code> which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
-    public RunnableFuture<Integer> update(Connection conn, String sql, Object param) throws SQLException {
+    public Callable<Integer> update(Connection conn, String sql, Object param) throws SQLException {
         return this.update(conn, false, sql, new Object[] { param });
     }
 
@@ -666,10 +467,10 @@ public class AsyncQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param params The query replacement parameters.
-     * @return A RunnableFuture which when completed returns the number of rows updated.
+     * @return A <code>Callable</code> which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
-    public RunnableFuture<Integer> update(Connection conn, String sql, Object... params) throws SQLException {
+    public Callable<Integer> update(Connection conn, String sql, Object... params) throws SQLException {
     	return this.update(conn, false, sql, params);
     }
 
@@ -682,9 +483,9 @@ public class AsyncQueryRunner {
      * 
      * @param sql The SQL statement to execute.
      * @throws SQLException if a database access error occurs
-     * @return A RunnableFuture which when completed returns the number of rows updated.
+     * @return A <code>Callable</code> which returns the number of rows updated.
      */
-    public RunnableFuture<Integer> update(String sql) throws SQLException {
+    public Callable<Integer> update(String sql) throws SQLException {
         Connection conn = this.prepareConnection();
         return this.update(conn, true, sql, (Object[]) null);
     }
@@ -699,9 +500,9 @@ public class AsyncQueryRunner {
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
      * @throws SQLException if a database access error occurs
-     * @return A RunnableFuture which when completed returns the number of rows updated.
+     * @return A <code>Callable</code> which returns the number of rows updated.
      */
-    public RunnableFuture<Integer> update(String sql, Object param) throws SQLException {
+    public Callable<Integer> update(String sql, Object param) throws SQLException {
         Connection conn = this.prepareConnection();
         return this.update(conn, true, sql, new Object[] { param });
     }
@@ -716,72 +517,11 @@ public class AsyncQueryRunner {
      * @param params Initializes the PreparedStatement's IN (i.e. '?') 
      * parameters.
      * @throws SQLException if a database access error occurs
-     * @return A RunnableFuture which when completed returns the number of rows updated.
+     * @return A <code>Callable</code> which returns the number of rows updated.
      */
-    public RunnableFuture<Integer> update(String sql, Object... params) throws SQLException {
+    public Callable<Integer> update(String sql, Object... params) throws SQLException {
         Connection conn = this.prepareConnection();
         return this.update(conn, true, sql, params);
     }
     
-    /**
-     * Wrap the <code>ResultSet</code> in a decorator before processing it.
-     * This implementation returns the <code>ResultSet</code> it is given
-     * without any decoration.
-     *
-     * <p>
-     * Often, the implementation of this method can be done in an anonymous 
-     * inner class like this:
-     * </p>
-     * <pre> 
-     * QueryRunner run = new QueryRunner() {
-     *     protected ResultSet wrap(ResultSet rs) {
-     *         return StringTrimmedResultSet.wrap(rs);
-     *     }
-     * };
-     * </pre>
-     * 
-     * @param rs The <code>ResultSet</code> to decorate; never 
-     * <code>null</code>.
-     * @return The <code>ResultSet</code> wrapped in some decorator. 
-     */
-    protected ResultSet wrap(ResultSet rs) {
-        return rs;
-    }
-    
-    /**
-     * Close a <code>Connection</code>.  This implementation avoids closing if 
-     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
-     * can override to provide special handling like logging.
-     * @param conn Connection to close
-     * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected void close(Connection conn) throws SQLException {
-        DbUtils.close(conn);
-    }
-    
-    /**
-     * Close a <code>Statement</code>.  This implementation avoids closing if 
-     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
-     * can override to provide special handling like logging.
-     * @param stmt Statement to close
-     * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected void close(Statement stmt) throws SQLException {
-        DbUtils.close(stmt);
-    }
-
-    /**
-     * Close a <code>ResultSet</code>.  This implementation avoids closing if 
-     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
-     * can override to provide special handling like logging.
-     * @param rs ResultSet to close
-     * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected void close(ResultSet rs) throws SQLException {
-        DbUtils.close(rs);
-    }
-
 }
