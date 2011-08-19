@@ -121,8 +121,6 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     private int[] batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
         if(conn == null) {
-            if(closeConn)
-                close(conn);
             throw new SQLException("Null connection");
         }
         
@@ -316,8 +314,6 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         if(conn == null) {
-            if(closeConn)
-                close(conn);
             throw new SQLException("Null connection");
         }
         
@@ -462,10 +458,8 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      * @throws SQLException If there are database or parameter errors.
      */
-    public int update(Connection conn, boolean closeConn, String sql, Object... params) throws SQLException {
+    private int update(Connection conn, boolean closeConn, String sql, Object... params) throws SQLException {
         if(conn == null) {
-            if(closeConn)
-                close(conn);
             throw new SQLException("Null connection");
         }
         
