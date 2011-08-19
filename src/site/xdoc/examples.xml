@@ -146,14 +146,18 @@ try
     // Create a Callable for the update call
     Callable<Integer> callable = asyncRun.update( "UPDATE Person SET height=? WHERE name=?",
                                                   2.05, "John Doe" );
-
     // Submit the Callable to the executor
     executor.submit( callable );
-
-   // Later (or in another thread) get the result
-   Integer updates = executor.take().get();
+} catch(SQLException sqle) {
+    // Handle it
 }
-catch(SQLException sqle) {
+
+// Sometime later (or in another thread)
+try
+{
+   // Get the result of the update
+   Integer updates = executor.take().get();
+} catch(InterruptedException ie) {
     // Handle it
 }
 ]]>
