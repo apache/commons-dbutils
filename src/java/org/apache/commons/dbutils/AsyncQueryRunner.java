@@ -161,8 +161,6 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      */
     private Callable<int[]> batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
     	if(conn == null) {
-    		if(closeConn)
-    			close(conn);
     		throw new SQLException("Null connection");
     	}
     	
@@ -259,8 +257,6 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         Callable<T> ret = null;
 
     	if(conn == null) {
-    		if(closeConn)
-    			close(conn);
     		throw new SQLException("Null connection");
     	}
     	
@@ -407,8 +403,6 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         Callable<Integer> ret = null;
 
     	if(conn == null) {
-    		if(closeConn)
-    			close(conn);
     		throw new SQLException("Null connection");
     	}
     	
