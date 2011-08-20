@@ -29,8 +29,6 @@ import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.RunnableFuture;
 
 import javax.sql.DataSource;
 
