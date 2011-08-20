@@ -65,14 +65,14 @@ public class BeanProcessor {
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
 
     static {
-        primitiveDefaults.put(Integer.TYPE, 0);
-        primitiveDefaults.put(Short.TYPE, (Short)((short) 0));
-        primitiveDefaults.put(Byte.TYPE, (Byte)((byte) 0));
-        primitiveDefaults.put(Float.TYPE, (Float)(float)(0));
-        primitiveDefaults.put(Double.TYPE, (Double)(double)(0));
-        primitiveDefaults.put(Long.TYPE, (Long)(0L));
+        primitiveDefaults.put(Integer.TYPE, Integer.valueOf(0));
+        primitiveDefaults.put(Short.TYPE, Short.valueOf((short) 0));
+        primitiveDefaults.put(Byte.TYPE, Byte.valueOf((byte) 0));
+        primitiveDefaults.put(Float.TYPE, Float.valueOf(0f));
+        primitiveDefaults.put(Double.TYPE, Double.valueOf(0d));
+        primitiveDefaults.put(Long.TYPE, Long.valueOf(0L));
         primitiveDefaults.put(Boolean.TYPE, Boolean.FALSE);
-        primitiveDefaults.put(Character.TYPE, '\u0000');
+        primitiveDefaults.put(Character.TYPE, Character.valueOf((char) 0));
     }
 
     /**
