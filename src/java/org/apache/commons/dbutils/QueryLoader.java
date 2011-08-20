@@ -91,7 +91,6 @@ public class QueryLoader {
      * @since DbUtils 1.1
      * @return Map of query names to SQL values
      */
-    @SuppressWarnings("unchecked")
     protected Map<String,String> loadQueries(String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
         InputStream in = getClass().getResourceAsStream(path);
@@ -104,7 +103,10 @@ public class QueryLoader {
         props.load(in);
 
         // Copy to HashMap for better performance
-        return new HashMap(props);
+   
+        @SuppressWarnings({ "rawtypes", "unchecked" }) // load() always creates <String,String> entries
+        HashMap<String,String> hashMap = new HashMap(props);
+        return hashMap;
     }
     
     /**
