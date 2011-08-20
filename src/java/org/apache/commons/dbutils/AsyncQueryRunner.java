@@ -150,7 +150,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
     
     /**
-     * Creates a continuation for a batch call, and returns it in a <code>RunnableFuture</code>.
+     * Creates a continuation for a batch call, and returns it in a <code>Callable</code>.
      * @param conn The connection to use for the batch call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
@@ -243,7 +243,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Creates a continuation for a query call, and returns it in a <code>RunnableFuture</code>.
+     * Creates a continuation for a query call, and returns it in a <code>Callable</code>.
      * @param conn The connection to use for the query call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
@@ -389,7 +389,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
     
     /**
-     * Creates a continuation for an update call, and returns it in a <code>RunnableFuture</code>.
+     * Creates a continuation for an update call, and returns it in a <code>Callable</code>.
      * @param conn The connection to use for the update call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
