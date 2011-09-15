@@ -1,12 +1,20 @@
-$Id$
+The Commons DbUtils team is pleased to announce the commons-dbutils-1.4-SNAPSHOT release!
 
-Commons DbUtils Package
-Release Notes
+A package of Java utility classes for easing JDBC development
+
+Changes in this version include:
+
+New features:
+o Add asynchronous batch, query, and update calls  Issue: DBUTILS-78. 
+
+Fixed Bugs:
+o Duplicate code introduced during Java 1.5 branch merge  Issue: DBUTILS-65. 
+o fillStatement doesn't complain when there are too few parameters  Issue: DBUTILS-79. 
+
+Changes:
+o efficient usage from findbugs  Issue: DBUTILS-75. 
 
 
-You can find release notes for this and past releases online at
-
-http://commons.apache.org/dbutils/changes-report.html
-
-
+Have fun!
+-Commons DbUtils team
 
