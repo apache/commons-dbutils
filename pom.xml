@@ -167,6 +167,12 @@
         <role>Java Developer</role>
       </roles>
     </contributor>
+    <contributor>
+      <name>Bill Speirs</name>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
   </contributors>
 
   <dependencies>
