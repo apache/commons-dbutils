@@ -105,8 +105,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
                 rethrow(e, sql, (Object[])params);
             } finally {
                 close(ps);
-                if(closeConn)
+                if(closeConn) {
                     close(conn);
+                }
             }
 
             return ret;
@@ -164,14 +165,16 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         }
 
         if(sql == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null SQL statement");
         }
 
         if(params == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
         }
 
@@ -231,8 +234,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
                     close(rs);
                 } finally {
                     close(ps);
-                    if(closeConn)
+                    if(closeConn) {
                         close(conn);
+                    }
                 }
             }
 
@@ -260,14 +264,16 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         }
 
         if(sql == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null SQL statement");
         }
 
         if(rsh == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null ResultSetHandler");
         }
 
@@ -279,8 +285,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
         } catch (SQLException e) {
             close(stmt);
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             this.rethrow(e, sql, params);
         }
 
@@ -378,8 +385,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
                 rethrow(e, sql, params);
             } finally {
                 close(ps);
-                if(closeConn)
+                if(closeConn) {
                     close(conn);
+                }
             }
 
             return rows;
@@ -406,8 +414,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         }
 
         if(sql == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null SQL statement");
         }
 
@@ -419,8 +428,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
         } catch (SQLException e) {
             close(stmt);
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             this.rethrow(e, sql, params);
         }
 
