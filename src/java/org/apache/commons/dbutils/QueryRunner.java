@@ -352,8 +352,9 @@ public class QueryRunner extends AbstractQueryRunner {
                 close(rs);
             } finally {
                 close(stmt);
-                if (closeConn)
+                if (closeConn) {
                     close(conn);
+                }
             }
         }
 
@@ -488,8 +489,9 @@ public class QueryRunner extends AbstractQueryRunner {
 
         } finally {
             close(stmt);
-            if (closeConn)
+            if (closeConn) {
                 close(conn);
+            }
         }
 
         return rows;
