@@ -46,7 +46,7 @@ public class QueryLoader {
     /**
      * Maps query set names to Maps of their queries.
      */
-    private final Map<String,Map<String,String>> queries = new HashMap<String, Map<String,String>>();
+    private final Map<String, Map<String, String>> queries = new HashMap<String, Map<String, String>>();
 
     /**
      * QueryLoader constructor.
@@ -69,9 +69,9 @@ public class QueryLoader {
      * the given path.
      * @return Map of query names to SQL values
      */
-    public synchronized Map<String,String> load(String path) throws IOException {
+    public synchronized Map<String, String> load(String path) throws IOException {
 
-        Map<String,String> queryMap = this.queries.get(path);
+        Map<String, String> queryMap = this.queries.get(path);
 
         if (queryMap == null) {
             queryMap = this.loadQueries(path);
@@ -91,7 +91,7 @@ public class QueryLoader {
      * @since DbUtils 1.1
      * @return Map of query names to SQL values
      */
-    protected Map<String,String> loadQueries(String path) throws IOException {
+    protected Map<String, String> loadQueries(String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
         InputStream in = getClass().getResourceAsStream(path);
 
@@ -105,7 +105,7 @@ public class QueryLoader {
         // Copy to HashMap for better performance
 
         @SuppressWarnings({ "rawtypes", "unchecked" }) // load() always creates <String,String> entries
-        HashMap<String,String> hashMap = new HashMap(props);
+        HashMap<String, String> hashMap = new HashMap(props);
         return hashMap;
     }
 
@@ -113,7 +113,7 @@ public class QueryLoader {
      * Removes the queries for the given path from the cache.
      * @param path The path that the queries were loaded from.
      */
-    public synchronized void unload(String path){
+    public synchronized void unload(String path) {
         this.queries.remove(path);
     }
 

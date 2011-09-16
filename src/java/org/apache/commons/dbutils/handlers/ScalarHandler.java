@@ -74,7 +74,7 @@ public class ScalarHandler implements ResultSetHandler<Object> {
      * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    private ScalarHandler(int columnIndex, String columnName){
+    private ScalarHandler(int columnIndex, String columnName) {
         this.columnIndex = columnIndex;
         this.columnName = columnName;
     }

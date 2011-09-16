@@ -48,7 +48,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
-public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object>> {
+public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String, Object>> {
 
     /**
      * The RowProcessor implementation to use when converting rows
@@ -147,7 +147,7 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
      * @throws SQLException if a database access error occurs
      */
     @Override
-    protected Map<String,Object> createRow(ResultSet rs) throws SQLException {
+    protected Map<String, Object> createRow(ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);
     }
 

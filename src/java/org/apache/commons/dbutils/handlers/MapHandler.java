@@ -30,7 +30,7 @@ import org.apache.commons.dbutils.RowProcessor;
  *
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class MapHandler implements ResultSetHandler<Map<String,Object>> {
+public class MapHandler implements ResultSetHandler<Map<String, Object>> {
 
     /**
      * The RowProcessor implementation to use when converting rows
@@ -68,7 +68,7 @@ public class MapHandler implements ResultSetHandler<Map<String,Object>> {
      *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Map<String,Object> handle(ResultSet rs) throws SQLException {
+    public Map<String, Object> handle(ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toMap(rs) : null;
     }
 

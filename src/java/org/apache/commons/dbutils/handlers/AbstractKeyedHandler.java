@@ -33,7 +33,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.3
  */
-public abstract class AbstractKeyedHandler<K,V> implements ResultSetHandler<Map<K,V>> {
+public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map<K, V>> {
 
 
     /**
@@ -44,8 +44,8 @@ public abstract class AbstractKeyedHandler<K,V> implements ResultSetHandler<Map<
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Map<K,V> handle(ResultSet rs) throws SQLException {
-        Map<K,V> result = createMap();
+    public Map<K, V> handle(ResultSet rs) throws SQLException {
+        Map<K, V> result = createMap();
         while (rs.next()) {
             result.put(createKey(rs), createRow(rs));
         }
@@ -59,8 +59,8 @@ public abstract class AbstractKeyedHandler<K,V> implements ResultSetHandler<Map<
      *
      * @return Map to store records in
      */
-    protected Map<K,V> createMap() {
-        return new HashMap<K,V>();
+    protected Map<K, V> createMap() {
+        return new HashMap<K, V>();
     }
 
     /**

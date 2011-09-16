@@ -101,11 +101,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             try {
                 ret = ps.executeBatch();
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 rethrow(e, sql, (Object[])params);
             } finally {
                 close(ps);
-                if(closeConn) {
+                if (closeConn) {
                     close(conn);
                 }
             }
@@ -160,19 +160,19 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      */
     private Callable<int[]> batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
-        if(conn == null) {
+        if (conn == null) {
             throw new SQLException("Null connection");
         }
 
-        if(sql == null) {
-            if(closeConn) {
+        if (sql == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null SQL statement");
         }
 
-        if(params == null) {
-            if(closeConn) {
+        if (params == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
@@ -227,14 +227,14 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             try {
                 rs = wrap(ps.executeQuery());
                 ret = rsh.handle(rs);
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 rethrow(e, sql, params);
             } finally {
                 try {
                     close(rs);
                 } finally {
                     close(ps);
-                    if(closeConn) {
+                    if (closeConn) {
                         close(conn);
                     }
                 }
@@ -259,19 +259,19 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         PreparedStatement stmt = null;
         Callable<T> ret = null;
 
-        if(conn == null) {
+        if (conn == null) {
             throw new SQLException("Null connection");
         }
 
-        if(sql == null) {
-            if(closeConn) {
+        if (sql == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null SQL statement");
         }
 
-        if(rsh == null) {
-            if(closeConn) {
+        if (rsh == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null ResultSetHandler");
@@ -285,7 +285,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
         } catch (SQLException e) {
             close(stmt);
-            if(closeConn) {
+            if (closeConn) {
                 close(conn);
             }
             this.rethrow(e, sql, params);
@@ -385,7 +385,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
                 rethrow(e, sql, params);
             } finally {
                 close(ps);
-                if(closeConn) {
+                if (closeConn) {
                     close(conn);
                 }
             }
@@ -409,12 +409,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         PreparedStatement stmt = null;
         Callable<Integer> ret = null;
 
-        if(conn == null) {
+        if (conn == null) {
             throw new SQLException("Null connection");
         }
 
-        if(sql == null) {
-            if(closeConn) {
+        if (sql == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null SQL statement");
@@ -428,7 +428,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
         } catch (SQLException e) {
             close(stmt);
-            if(closeConn) {
+            if (closeConn) {
                 close(conn);
             }
             this.rethrow(e, sql, params);

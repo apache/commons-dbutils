@@ -120,19 +120,19 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      */
     private int[] batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
-        if(conn == null) {
+        if (conn == null) {
             throw new SQLException("Null connection");
         }
 
-        if(sql == null) {
-            if(closeConn) {
+        if (sql == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null SQL statement");
         }
 
-        if(params == null) {
-            if(closeConn) {
+        if (params == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
@@ -153,7 +153,7 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
-            if(closeConn) {
+            if (closeConn) {
                 close(conn);
             }
         }
@@ -316,19 +316,19 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      */
     private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
-        if(conn == null) {
+        if (conn == null) {
             throw new SQLException("Null connection");
         }
 
-        if(sql == null) {
-            if(closeConn) {
+        if (sql == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null SQL statement");
         }
 
-        if(rsh == null) {
-            if(closeConn) {
+        if (rsh == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null ResultSetHandler");
@@ -352,7 +352,7 @@ public class QueryRunner extends AbstractQueryRunner {
                 close(rs);
             } finally {
                 close(stmt);
-                if(closeConn)
+                if (closeConn)
                     close(conn);
             }
         }
@@ -464,12 +464,12 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      */
     private int update(Connection conn, boolean closeConn, String sql, Object... params) throws SQLException {
-        if(conn == null) {
+        if (conn == null) {
             throw new SQLException("Null connection");
         }
 
-        if(sql == null) {
-            if(closeConn) {
+        if (sql == null) {
+            if (closeConn) {
                 close(conn);
             }
             throw new SQLException("Null SQL statement");
@@ -488,7 +488,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
         } finally {
             close(stmt);
-            if(closeConn)
+            if (closeConn)
                 close(conn);
         }
 

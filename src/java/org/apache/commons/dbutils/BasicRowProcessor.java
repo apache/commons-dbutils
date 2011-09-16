@@ -187,7 +187,7 @@ public class BasicRowProcessor implements RowProcessor {
          * </ul>
          * </p>
          */
-        private final Map<String,String> lowerCaseMap = new HashMap<String,String>();
+        private final Map<String, String> lowerCaseMap = new HashMap<String, String>();
 
         /**
          * Required for serialization support.
@@ -232,7 +232,7 @@ public class BasicRowProcessor implements RowProcessor {
 
         /** {@inheritDoc} */
         @Override
-        public void putAll(Map<? extends String,?> m) {
+        public void putAll(Map<? extends String, ?> m) {
             for (Map.Entry<? extends String, ?> entry : m.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();
