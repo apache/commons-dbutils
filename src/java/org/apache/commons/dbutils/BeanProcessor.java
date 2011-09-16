@@ -309,9 +309,8 @@ public class BeanProcessor {
         } else if (type.equals(Boolean.TYPE) && Boolean.class.isInstance(value)) {
             return true;
 
-        } else {
-            return false;
         }
+        return false;
 
     }
 
