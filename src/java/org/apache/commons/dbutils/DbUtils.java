@@ -78,8 +78,8 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Connection</code>, <code>Statement</code> and 
-     * <code>ResultSet</code>.  Avoid closing if null and hide any 
+     * Close a <code>Connection</code>, <code>Statement</code> and
+     * <code>ResultSet</code>.  Avoid closing if null and hide any
      * SQLExceptions that occur.
      *
      * @param conn Connection to close.
@@ -146,7 +146,7 @@ public final class DbUtils {
     }
 
     /**
-     * Commits a <code>Connection</code> then closes it, avoid closing if null 
+     * Commits a <code>Connection</code> then closes it, avoid closing if null
      * and hide any SQLExceptions that occur.
      *
      * @param conn Connection to close.
@@ -196,8 +196,8 @@ public final class DbUtils {
     }
 
     /**
-     * Print the stack trace for a SQLException to a 
-     * specified PrintWriter. 
+     * Print the stack trace for a SQLException to a
+     * specified PrintWriter.
      *
      * @param e SQLException to print stack trace of
      * @param pw PrintWriter to print to
@@ -224,7 +224,7 @@ public final class DbUtils {
     }
 
     /**
-     * Print warnings on a Connection to a specified PrintWriter. 
+     * Print warnings on a Connection to a specified PrintWriter.
      *
      * @param conn Connection to print warnings from
      * @param pw PrintWriter to print to
@@ -249,9 +249,9 @@ public final class DbUtils {
             conn.rollback();
         }
     }
-    
+
     /**
-     * Performs a rollback on the <code>Connection</code> then closes it, 
+     * Performs a rollback on the <code>Connection</code> then closes it,
      * avoid closing if null.
      *
      * @param conn Connection to rollback.  A null value is legal.
@@ -269,7 +269,7 @@ public final class DbUtils {
     }
 
     /**
-     * Performs a rollback on the <code>Connection</code> then closes it, 
+     * Performs a rollback on the <code>Connection</code> then closes it,
      * avoid closing if null and hide any SQLExceptions that occur.
      *
      * @param conn Connection to rollback.  A null value is legal.
