@@ -76,13 +76,19 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      */
     private static final Map<String, Method> nullMethods = new HashMap<String, Method>();
 
+    /**
+     * The {@code getNull} string prefix.
+     * @since 1.4
+     */
+    private static final String GET_NULL_PREFIX = "getNull";
+
     static {
         Method[] methods = SqlNullCheckedResultSet.class.getMethods();
         for (int i = 0; i < methods.length; i++) {
             String methodName = methods[i].getName();
 
-            if (methodName.startsWith("getNull")) {
-                String normalName = "get" + methodName.substring(7);
+            if (methodName.startsWith(GET_NULL_PREFIX)) {
+                String normalName = "get" + methodName.substring(GET_NULL_PREFIX.length());
                 nullMethods.put(normalName, methods[i]);
             }
         }
