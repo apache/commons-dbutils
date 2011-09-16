@@ -28,6 +28,15 @@ import java.sql.Statement;
 public final class DbUtils {
 
     /**
+     * Hidden constructor - Utility classes should not have a public or default constructor.
+     *
+     * @since 1.4
+     */
+    private DbUtils() {
+        // do nothing
+    }
+
+    /**
      * Close a <code>Connection</code>, avoid closing if null.
      *
      * @param conn Connection to close.
