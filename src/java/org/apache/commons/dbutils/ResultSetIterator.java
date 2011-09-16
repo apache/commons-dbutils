@@ -26,7 +26,7 @@ import java.util.Iterator;
  * when you want to present a non-database application layer with domain
  * neutral data.
  * </p>
- * 
+ *
  * <p>
  * This implementation requires the <code>ResultSet.isLast()</code> method
  * to be implemented.
@@ -38,7 +38,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * The wrapped <code>ResultSet</code>.
      */
     private final ResultSet rs;
-    
+
     /**
      * The processor to use when converting a row into an Object[].
      */
@@ -51,11 +51,11 @@ public class ResultSetIterator implements Iterator<Object[]> {
     public ResultSetIterator(ResultSet rs) {
         this(rs, new BasicRowProcessor());
     }
-    
+
     /**
      * Constructor for ResultSetIterator.
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
-     * @param convert The processor to use when converting a row into an 
+     * @param convert The processor to use when converting a row into an
      * <code>Object[]</code>.  Defaults to a 
      * <code>BasicRowProcessor</code>.
      */
@@ -81,7 +81,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     /**
      * Returns the next row as an <code>Object[]</code>.
      * @return An <code>Object[]</code> with the same number of elements as
-     * columns in the <code>ResultSet</code>. 
+     * columns in the <code>ResultSet</code>.
      * @see java.util.Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
      */
@@ -118,8 +118,9 @@ public class ResultSetIterator implements Iterator<Object[]> {
         throw new RuntimeException(e.getMessage());
     }
 
-    /** Generates an <code>Iterable</code>, suitable for use in for-each loops. 
-     * 
+    /**
+     * Generates an <code>Iterable</code>, suitable for use in for-each loops.
+     *
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      * @return an <code>Iterable</code>, suitable for use in for-each loops.
      */
@@ -129,8 +130,8 @@ public class ResultSetIterator implements Iterator<Object[]> {
             public Iterator<Object[]> iterator() {
                 return new ResultSetIterator(rs);
             }
-            
+
         };
     }
-    
+
 }
