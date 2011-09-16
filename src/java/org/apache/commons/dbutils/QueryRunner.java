@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 /**
  * Executes SQL queries with pluggable strategies for handling 
  * <code>ResultSet</code>s.  This class is thread safe.
- * 
+ *
  * @see ResultSetHandler
  */
 public class QueryRunner extends AbstractQueryRunner {
@@ -48,23 +48,23 @@ public class QueryRunner extends AbstractQueryRunner {
     public QueryRunner(boolean pmdKnownBroken) {
         super(pmdKnownBroken);
     }
-    
+
     /**
-     * Constructor for QueryRunner which takes a <code>DataSource</code>.  Methods that do not take a 
+     * Constructor for QueryRunner which takes a <code>DataSource</code>.  Methods that do not take a
      * <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
-     * 
+     *
      * @param ds The <code>DataSource</code> to retrieve connections from.
      */
     public QueryRunner(DataSource ds) {
         super(ds);
     }
-    
+
     /**
      * Constructor for QueryRunner, allows workaround for Oracle drivers.  Methods that do not take a 
      * <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
-     * 
+     *
      * @param ds The <code>DataSource</code> to retrieve connections from.
      * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
@@ -73,15 +73,15 @@ public class QueryRunner extends AbstractQueryRunner {
     public QueryRunner(DataSource ds, boolean pmdKnownBroken) {
         super(ds, pmdKnownBroken);
     }
-    
+
     /**
      * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
-     * 
+     *
      * @param conn The Connection to use to run the query.  The caller is
      * responsible for closing this Connection.
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values. 
+     * this array is one set of batch replacement values.
      * @return The number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      * @since DbUtils 1.1
@@ -91,14 +91,14 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The 
-     * <code>Connection</code> is retrieved from the <code>DataSource</code> 
-     * set in the constructor.  This <code>Connection</code> must be in 
-     * auto-commit mode or the update will not be saved. 
-     * 
+     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The
+     * <code>Connection</code> is retrieved from the <code>DataSource</code>
+     * set in the constructor.  This <code>Connection</code> must be in
+     * auto-commit mode or the update will not be saved.
+     *
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values. 
+     * this array is one set of batch replacement values.
      * @return The number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      * @since DbUtils 1.1
@@ -115,7 +115,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values. 
+     * this array is one set of batch replacement values.
      * @return The number of rows updated in the batch.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -123,13 +123,13 @@ public class QueryRunner extends AbstractQueryRunner {
         if(conn == null) {
             throw new SQLException("Null connection");
         }
-        
+
         if(sql == null) {
             if(closeConn)
                 close(conn);
             throw new SQLException("Null SQL statement");
         }
-        
+
         if(params == null) {
             if(closeConn)
                 close(conn);
@@ -157,7 +157,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
         return rows;
     }
-    
+
     /**
      * Execute an SQL SELECT query with a single replacement parameter. The
      * caller is responsible for closing the connection.
@@ -191,7 +191,7 @@ public class QueryRunner extends AbstractQueryRunner {
     public <T> T query(Connection conn, String sql, Object[] params, ResultSetHandler<T> rsh) throws SQLException {
                 return this.query(conn, false, sql, rsh, params);
     }
-    
+
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
      * caller is responsible for closing the connection.
@@ -206,7 +206,7 @@ public class QueryRunner extends AbstractQueryRunner {
     public <T> T query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         return this.query(conn, false, sql, rsh, params);
     }
-    
+
     /**
      * Execute an SQL SELECT query without any replacement parameters.  The
      * caller is responsible for closing the connection.
@@ -230,7 +230,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param param The replacement parameter.
      * @param rsh The handler used to create the result object from 
      * the <code>ResultSet</code>.
-     * 
+     *
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
      * @deprecated Use {@link #query(String, ResultSetHandler, Object...)}
@@ -250,10 +250,10 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param sql The SQL statement to execute.
      * @param params Initialize the PreparedStatement's IN parameters with 
      * this array.
-     * 
+     *
      * @param rsh The handler used to create the result object from 
      * the <code>ResultSet</code>.
-     * 
+     *
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
      * @deprecated Use {@link #query(String, ResultSetHandler, Object...)}
@@ -308,7 +308,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values. 
+     * this array is one set of batch replacement values.
      * @return The results of the query.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -316,19 +316,19 @@ public class QueryRunner extends AbstractQueryRunner {
         if(conn == null) {
             throw new SQLException("Null connection");
         }
-        
+
         if(sql == null) {
             if(closeConn)
                 close(conn);
             throw new SQLException("Null SQL statement");
         }
-        
+
         if(rsh == null) {
             if(closeConn)
                 close(conn);
             throw new SQLException("Null ResultSetHandler");
         }
-        
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
         T result = null;
@@ -358,7 +358,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL INSERT, UPDATE, or DELETE query without replacement
      * parameters.
-     * 
+     *
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @return The number of rows updated.
@@ -371,7 +371,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL INSERT, UPDATE, or DELETE query with a single replacement
      * parameter.
-     * 
+     *
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param param The replacement parameter.
@@ -384,7 +384,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Execute an SQL INSERT, UPDATE, or DELETE query.
-     * 
+     *
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param params The query replacement parameters.
@@ -397,10 +397,10 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement without
-     * any replacement parameters. The <code>Connection</code> is retrieved 
-     * from the <code>DataSource</code> set in the constructor.  This 
-     * <code>Connection</code> must be in auto-commit mode or the update will 
-     * not be saved. 
+     * any replacement parameters. The <code>Connection</code> is retrieved
+     * from the <code>DataSource</code> set in the constructor.  This
+     * <code>Connection</code> must be in auto-commit mode or the update will
+     * not be saved.
      * 
      * @param sql The SQL statement to execute.
      * @throws SQLException if a database access error occurs
@@ -417,8 +417,8 @@ public class QueryRunner extends AbstractQueryRunner {
      * a single replacement parameter.  The <code>Connection</code> is 
      * retrieved from the <code>DataSource</code> set in the constructor.
      * This <code>Connection</code> must be in auto-commit mode or the 
-     * update will not be saved. 
-     * 
+     * update will not be saved.
+     *
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
      * @throws SQLException if a database access error occurs
@@ -431,13 +431,13 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The 
-     * <code>Connection</code> is retrieved from the <code>DataSource</code> 
-     * set in the constructor.  This <code>Connection</code> must be in 
-     * auto-commit mode or the update will not be saved. 
-     * 
+     * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The
+     * <code>Connection</code> is retrieved from the <code>DataSource</code>
+     * set in the constructor.  This <code>Connection</code> must be in
+     * auto-commit mode or the update will not be saved.
+     *
      * @param sql The SQL statement to execute.
-     * @param params Initializes the PreparedStatement's IN (i.e. '?') 
+     * @param params Initializes the PreparedStatement's IN (i.e. '?')
      * parameters.
      * @throws SQLException if a database access error occurs
      * @return The number of rows updated.
@@ -447,14 +447,14 @@ public class QueryRunner extends AbstractQueryRunner {
 
         return this.update(conn, true, sql, params);
     }
-    
+
     /**
      * Calls update after checking the parameters to ensure nothing is null.
      * @param conn The connection to use for the update call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      * @param params An array of update replacement parameters.  Each row in
-     * this array is one set of update replacement values. 
+     * this array is one set of update replacement values.
      * @return The number of rows updated.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -462,7 +462,7 @@ public class QueryRunner extends AbstractQueryRunner {
         if(conn == null) {
             throw new SQLException("Null connection");
         }
-        
+
         if(sql == null) {
             if(closeConn)
                 close(conn);
@@ -488,5 +488,5 @@ public class QueryRunner extends AbstractQueryRunner {
 
         return rows;
     }
-    
+
 }
