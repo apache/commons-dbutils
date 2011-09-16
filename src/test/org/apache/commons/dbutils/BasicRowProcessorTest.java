@@ -30,11 +30,11 @@ import java.util.Map;
 public class BasicRowProcessorTest extends BaseTestCase {
 
     private static final RowProcessor processor = new BasicRowProcessor();
-    
+
     /**
      * Format that matches Date.toString().
      * Sun Mar 14 15:19:15 MST 2004
-     */ 
+     */
     private static final DateFormat datef =
         new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
@@ -47,7 +47,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("1", a[0]);
         assertEquals("2", a[1]);
         assertEquals("3", a[2]);
-            
+
         assertTrue(this.rs.next());
         a = processor.toArray(this.rs);
         assertEquals(COLS, a.length);
@@ -55,7 +55,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("4", a[0]);
         assertEquals("5", a[1]);
         assertEquals("6", a[2]);
-            
+
         assertFalse(this.rs.next());
     }
 
@@ -68,7 +68,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("2", row.getTwo());
         assertEquals("3", row.getThree());
         assertEquals("not set", row.getDoNotSet());
-            
+
         assertTrue(this.rs.next());
         row = processor.toBean(this.rs, TestBean.class);
 
@@ -84,9 +84,9 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertNotNull(row.getNotDate());
         assertTrue(!"not a date".equals(row.getNotDate()));
         datef.parse(row.getNotDate());
-        
+
         assertFalse(this.rs.next());
-        
+
     }
 
     public void testToBeanList() throws SQLException, ParseException {
@@ -100,7 +100,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("2", b.getTwo());
         assertEquals("3", b.getThree());
         assertEquals("not set", b.getDoNotSet());
-        
+
         b = list.get(1);
         assertEquals("4", b.getOne());
         assertEquals("5", b.getTwo());
@@ -124,7 +124,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));
         assertEquals("3", m.get("Three"));
-            
+
         assertTrue(this.rs.next());
         m = processor.toMap(this.rs);
         assertEquals(COLS, m.keySet().size());
@@ -132,7 +132,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));
         assertEquals("6", m.get("THREE"));
-            
+
         assertFalse(this.rs.next());
     }
 

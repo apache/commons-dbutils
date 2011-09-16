@@ -29,22 +29,22 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class MapListHandlerTest extends BaseTestCase {
 
-	public void testHandle() throws SQLException {
-		ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
-		List<Map<String,Object>> results = h.handle(this.rs);
+    public void testHandle() throws SQLException {
+        ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
+        List<Map<String,Object>> results = h.handle(this.rs);
 
-		assertNotNull(results);
-		assertEquals(ROWS, results.size());
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
 
-		Iterator<Map<String,Object>> iter = results.iterator();
-		Map<String,Object> row = null;
+        Iterator<Map<String,Object>> iter = results.iterator();
+        Map<String,Object> row = null;
         assertTrue(iter.hasNext());
         row = iter.next();
         assertEquals(COLS, row.keySet().size());
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));
         assertEquals("3", row.get("Three"));
-            
+
         assertTrue(iter.hasNext());
         row = iter.next();
         assertEquals(COLS, row.keySet().size());
@@ -52,16 +52,16 @@ public class MapListHandlerTest extends BaseTestCase {
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
         assertEquals("6", row.get("Three"));
-            
+
         assertFalse(iter.hasNext());
-	}
+    }
 
-	public void testEmptyResultSetHandle() throws SQLException {
-		ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
-		List<Map<String,Object>> results = h.handle(this.emptyResultSet);
+    public void testEmptyResultSetHandle() throws SQLException {
+        ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
+        List<Map<String,Object>> results = h.handle(this.emptyResultSet);
 
-		assertNotNull(results);
-		assertTrue(results.isEmpty());
-	}
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
 
 }

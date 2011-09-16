@@ -36,11 +36,11 @@ public class MockResultSet implements InvocationHandler {
      * <pre>
      * ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
      * </pre>
-     * 
+     *
      * @param metaData
      * @param rows A null value indicates an empty <code>ResultSet</code>.
      */
-    public static ResultSet create(ResultSetMetaData metaData, 
+    public static ResultSet create(ResultSetMetaData metaData,
             Object[][] rows) {
         return ProxyFactory.instance().createResultSet(
             new MockResultSet(metaData, rows));
@@ -63,7 +63,7 @@ public class MockResultSet implements InvocationHandler {
         super();
         this.metaData = metaData;
         if (rows == null) {
-            List<Object[]> empty = Collections.emptyList(); 
+            List<Object[]> empty = Collections.emptyList();
             this.iter = empty.iterator();
         } else {
             this.iter = Arrays.asList(rows).iterator();
@@ -309,15 +309,15 @@ public class MockResultSet implements InvocationHandler {
 
         } else if (methodName.equals("isLast")) {
             return this.isLast();
-        
+
         } else if (methodName.equals("hashCode")) {
             return Integer.valueOf(System.identityHashCode(proxy));
-        
+
         } else if (methodName.equals("toString")) {
             return "MockResultSet " + System.identityHashCode(proxy);
 
-        } else if (methodName.equals("equals")) { 
-            return Boolean.valueOf(proxy == args[0]); 
+        } else if (methodName.equals("equals")) {
+            return Boolean.valueOf(proxy == args[0]);
         }
 
         throw new UnsupportedOperationException("Unsupported method: " + methodName);

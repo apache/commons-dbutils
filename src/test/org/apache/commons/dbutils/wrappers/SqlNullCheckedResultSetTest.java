@@ -195,17 +195,17 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertArrayEquals(b, rs.getBytes("column"));
 
     }
-    
+
     private static void assertArrayEquals(byte[] expected, byte[] actual) {
-    	if (expected == actual) return;
-    	if (expected.length != actual.length) {
-    		failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
-    	}
-    	for (int i = 0; i < expected.length; i++) {
-    		byte expectedItem = expected[i];
-    		byte actualItem = actual[i];
-    		assertEquals("Array not equal at index " + i, expectedItem, actualItem);
-    	}
+        if (expected == actual) return;
+        if (expected.length != actual.length) {
+            failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
+        }
+        for (int i = 0; i < expected.length; i++) {
+            byte expectedItem = expected[i];
+            byte actualItem = actual[i];
+            assertEquals("Array not equal at index " + i, expectedItem, actualItem);
+        }
     }
 
     /**
@@ -464,22 +464,22 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNotNull(rs.getTimestamp("column", Calendar.getInstance()));
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
     }
-    
+
     /**
      * Tests the getURL and setNullURL implementations.
      *
      * Uses reflection to allow for building under JDK 1.3.
      */
-    public void testURL() throws SQLException, MalformedURLException, 
-            IllegalAccessException, IllegalArgumentException, 
-            java.lang.reflect.InvocationTargetException 
+    public void testURL() throws SQLException, MalformedURLException,
+            IllegalAccessException, IllegalArgumentException,
+            java.lang.reflect.InvocationTargetException
     {
         Method getUrlInt = null;
         Method getUrlString = null;
         try {
-            getUrlInt = ResultSet.class.getMethod("getURL", 
+            getUrlInt = ResultSet.class.getMethod("getURL",
                         new Class[] { Integer.TYPE } );
-            getUrlString = ResultSet.class.getMethod("getURL", 
+            getUrlString = ResultSet.class.getMethod("getURL",
                            new Class[] { String.class } );
         } catch(NoSuchMethodException e) {
             // ignore
@@ -487,18 +487,18 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
             // ignore
         }
         if (getUrlInt != null && getUrlString != null) {
-            assertEquals(null, getUrlInt.invoke(rs, 
+            assertEquals(null, getUrlInt.invoke(rs,
                          new Object[] { Integer.valueOf(1) } ) );
             assertTrue(rs.wasNull());
-            assertEquals(null, getUrlString.invoke(rs, 
+            assertEquals(null, getUrlString.invoke(rs,
                          new Object[] { "column" } ) );
             assertTrue(rs.wasNull());
             // Set what gets returned to something other than the default
             URL u = new URL("http://www.apache.org");
             rs2.setNullURL(u);
-            assertEquals(u, getUrlInt.invoke(rs, 
+            assertEquals(u, getUrlInt.invoke(rs,
                          new Object[] { Integer.valueOf(1) } ) );
-            assertEquals(u, getUrlString.invoke(rs, 
+            assertEquals(u, getUrlString.invoke(rs,
                          new Object[] { "column" } ) );
         }
     }
@@ -810,7 +810,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNotNull(rs.getTimestamp("column", Calendar.getInstance()));
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
     }
-    
+
 }
 
 class SqlNullUncheckedMockResultSet implements InvocationHandler {
@@ -894,7 +894,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     }
 
     public void free() throws SQLException {
-      
+
     }
 
     public InputStream getBinaryStream(long pos, long length) throws SQLException {

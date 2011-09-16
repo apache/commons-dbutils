@@ -29,22 +29,22 @@ import org.apache.commons.dbutils.TestBean;
  */
 public class BeanListHandlerTest extends BaseTestCase {
 
-	public void testHandle() throws SQLException {
-		ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(TestBean.class);
-		List<TestBean> results = h.handle(this.rs);
+    public void testHandle() throws SQLException {
+        ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(TestBean.class);
+        List<TestBean> results = h.handle(this.rs);
 
-		assertNotNull(results);
-		assertEquals(ROWS, results.size());
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
 
-		Iterator<TestBean> iter = results.iterator();
-		TestBean row = null;
+        Iterator<TestBean> iter = results.iterator();
+        TestBean row = null;
         assertTrue(iter.hasNext());
         row = iter.next();
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
         assertEquals("3", row.getThree());
         assertEquals("not set", row.getDoNotSet());
-            
+
         assertTrue(iter.hasNext());
         row = iter.next();
 
@@ -52,16 +52,16 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertEquals("5", row.getTwo());
         assertEquals("6", row.getThree());
         assertEquals("not set", row.getDoNotSet());
-        
+
         assertFalse(iter.hasNext());
-	}
+    }
 
-	public void testEmptyResultSetHandle() throws SQLException {
-		ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(TestBean.class);
-		List<TestBean> results = h.handle(this.emptyResultSet);
+    public void testEmptyResultSetHandle() throws SQLException {
+        ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(TestBean.class);
+        List<TestBean> results = h.handle(this.emptyResultSet);
 
-		assertNotNull(results);
-		assertTrue(results.isEmpty());
-	}
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
 
 }

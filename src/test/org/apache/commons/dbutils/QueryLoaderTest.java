@@ -40,8 +40,8 @@ public class QueryLoaderTest extends BaseTestCase {
             assertTrue(q != q3); // pointer comparison should return false
 
         } catch (IllegalArgumentException e) {
-            // TODO Figure out why the Maven build can't find the properties 
-            // file.  The tests run fine in Eclipse so just catch this 
+            // TODO Figure out why the Maven build can't find the properties
+            // file.  The tests run fine in Eclipse so just catch this
             // exception for now.
         }
     }

@@ -27,21 +27,21 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class MapHandlerTest extends BaseTestCase {
 
-	public void testHandle() throws SQLException {
-		ResultSetHandler<Map<String,Object>> h = new MapHandler();
+    public void testHandle() throws SQLException {
+        ResultSetHandler<Map<String,Object>> h = new MapHandler();
         Map<String,Object> results = h.handle(this.rs);
-        
-		assertNotNull(results);
-		assertEquals(COLS, results.keySet().size());
-		assertEquals("1", results.get("ONE"));
-		assertEquals("2", results.get("two"));
-		assertEquals("3", results.get("Three"));
-	}
-    
+
+        assertNotNull(results);
+        assertEquals(COLS, results.keySet().size());
+        assertEquals("1", results.get("ONE"));
+        assertEquals("2", results.get("two"));
+        assertEquals("3", results.get("Three"));
+    }
+
     public void testEmptyResultSetHandle() throws SQLException {
         ResultSetHandler<Map<String,Object>> h = new MapHandler();
         Map<String,Object> results = h.handle(this.emptyResultSet);
-        
+
         assertNull(results);
     }
 

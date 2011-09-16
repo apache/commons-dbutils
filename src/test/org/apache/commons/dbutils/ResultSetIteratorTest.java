@@ -23,27 +23,27 @@ import java.util.Iterator;
  */
 public class ResultSetIteratorTest extends BaseTestCase {
 
-	public void testNext() {
-		
-		Iterator<Object[]> iter = new ResultSetIterator(this.rs);
+    public void testNext() {
 
-		Object[] row = null;
-		assertTrue(iter.hasNext());
-		row = iter.next();
-		assertEquals(COLS, row.length);
-		assertEquals("1", row[0]);
-		assertEquals("2", row[1]);
-		assertEquals("3", row[2]);
-		
-		assertTrue(iter.hasNext());
-		row = iter.next();
-		assertEquals(COLS, row.length);
+        Iterator<Object[]> iter = new ResultSetIterator(this.rs);
 
-		assertEquals("4", row[0]);
-		assertEquals("5", row[1]);
-		assertEquals("6", row[2]);
-		
-		assertFalse(iter.hasNext());
-	}
+        Object[] row = null;
+        assertTrue(iter.hasNext());
+        row = iter.next();
+        assertEquals(COLS, row.length);
+        assertEquals("1", row[0]);
+        assertEquals("2", row[1]);
+        assertEquals("3", row[2]);
+
+        assertTrue(iter.hasNext());
+        row = iter.next();
+        assertEquals(COLS, row.length);
+
+        assertEquals("4", row[0]);
+        assertEquals("5", row[1]);
+        assertEquals("6", row[2]);
+
+        assertFalse(iter.hasNext());
+    }
 
 }

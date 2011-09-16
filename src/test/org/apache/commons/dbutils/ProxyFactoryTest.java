@@ -25,41 +25,41 @@ import java.lang.reflect.Method;
  */
 public class ProxyFactoryTest extends BaseTestCase {
 
-	private static final InvocationHandler stub = new InvocationHandler() {
+    private static final InvocationHandler stub = new InvocationHandler() {
 
-		public Object invoke(Object proxy, Method method, Object[] args)
-			throws Throwable {
+        public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
 
-			return null;
-		}
-	};
+            return null;
+        }
+    };
 
-	public void testCreateConnection() {
-		assertNotNull(ProxyFactory.instance().createConnection(stub));
-	}
+    public void testCreateConnection() {
+        assertNotNull(ProxyFactory.instance().createConnection(stub));
+    }
 
-	public void testCreateDriver() {
-		assertNotNull(ProxyFactory.instance().createDriver(stub));
-	}
+    public void testCreateDriver() {
+        assertNotNull(ProxyFactory.instance().createDriver(stub));
+    }
 
-	public void testCreatePreparedStatement() {
-		assertNotNull(ProxyFactory.instance().createPreparedStatement(stub));
-	}
+    public void testCreatePreparedStatement() {
+        assertNotNull(ProxyFactory.instance().createPreparedStatement(stub));
+    }
 
-	public void testCreateResultSet() {
-		assertNotNull(ProxyFactory.instance().createResultSet(stub));
-	}
+    public void testCreateResultSet() {
+        assertNotNull(ProxyFactory.instance().createResultSet(stub));
+    }
 
-	public void testCreateResultSetMetaData() {
-		assertNotNull(ProxyFactory.instance().createResultSetMetaData(stub));
-	}
+    public void testCreateResultSetMetaData() {
+        assertNotNull(ProxyFactory.instance().createResultSetMetaData(stub));
+    }
 
-	public void testCreateStatement() {
-		assertNotNull(ProxyFactory.instance().createStatement(stub));
-	}
+    public void testCreateStatement() {
+        assertNotNull(ProxyFactory.instance().createStatement(stub));
+    }
 
-	public void testCreateCallableStatement() {
-		assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
-	}
+    public void testCreateCallableStatement() {
+        assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
+    }
 
 }

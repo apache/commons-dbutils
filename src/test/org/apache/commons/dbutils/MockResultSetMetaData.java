@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSetMetaData;
 
 /**
- * MockResultSetMetaData dynamically implements the ResultSetMetaData 
+ * MockResultSetMetaData dynamically implements the ResultSetMetaData
  * interface.
  */
 public class MockResultSetMetaData implements InvocationHandler {
@@ -30,12 +30,12 @@ public class MockResultSetMetaData implements InvocationHandler {
     private String[] columnLabels = null;
 
     /**
-     * Create a <code>MockResultSetMetaData</code> proxy object.  This is 
+     * Create a <code>MockResultSetMetaData</code> proxy object.  This is
      * equivalent to:
      * <pre>
      * ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames));
      * </pre>
-     * 
+     *
      * @param columnNames
      * @return the proxy object
      */
@@ -50,7 +50,7 @@ public class MockResultSetMetaData implements InvocationHandler {
         this.columnLabels = new String[columnNames.length];
 
     }
-    
+
     public MockResultSetMetaData(String[] columnNames, String[] columnLabels) {
         super();
         this.columnNames = columnNames;
@@ -73,7 +73,7 @@ public class MockResultSetMetaData implements InvocationHandler {
                 return this.columnNames[col];
 
         } else if (
-        		methodName.equals("getColumnLabel")) {
+                methodName.equals("getColumnLabel")) {
 
                 int col = ((Integer) args[0]).intValue() - 1;
                 return this.columnLabels[col];
@@ -84,8 +84,8 @@ public class MockResultSetMetaData implements InvocationHandler {
         } else if (methodName.equals("toString")) {
             return "MockResultSetMetaData " + System.identityHashCode(proxy);
 
-        } else if (methodName.equals("equals")) { 
-            return Boolean.valueOf(proxy == args[0]); 
+        } else if (methodName.equals("equals")) {
+            return Boolean.valueOf(proxy == args[0]);
 
         } else {
             throw new UnsupportedOperationException("Unsupported method: " + methodName);

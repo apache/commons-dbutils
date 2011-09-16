@@ -36,9 +36,9 @@ public class KeyedHandlerTest extends BaseTestCase {
         Map<String,Object> row = null;
         for(Entry<Object, Map<String, Object>> entry : results.entrySet())
         {
-        	Object key = entry.getKey();
-        	assertNotNull(key);
-        	row = entry.getValue();
+            Object key = entry.getKey();
+            assertNotNull(key);
+            row = entry.getValue();
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
@@ -58,9 +58,9 @@ public class KeyedHandlerTest extends BaseTestCase {
         Map<String,Object> row = null;
         for(Entry<Object, Map<String, Object>> entry : results.entrySet())
         {
-        	Object key = entry.getKey();
-        	assertNotNull(key);
-        	row = entry.getValue();
+            Object key = entry.getKey();
+            assertNotNull(key);
+            row = entry.getValue();
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
@@ -80,11 +80,11 @@ public class KeyedHandlerTest extends BaseTestCase {
         Map<String,Object> row = null;
         for(Entry<Object, Map<String, Object>> entry : results.entrySet())
         {
-        	Object key = entry.getKey();
-        	assertNotNull(key);
-        	row = entry.getValue();
-        	assertNotNull(row);
-        	assertEquals(COLS, row.keySet().size());
+            Object key = entry.getKey();
+            assertNotNull(key);
+            row = entry.getValue();
+            assertNotNull(row);
+            assertEquals(COLS, row.keySet().size());
         }
         row = results.get("6");
         assertEquals("4", row.get("one"));
