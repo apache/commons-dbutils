@@ -23,9 +23,9 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * <code>QueryLoader</code> is a registry for sets of queries so 
+ * <code>QueryLoader</code> is a registry for sets of queries so
  * that multiple copies of the same queries aren't loaded into memory.
- * This implementation loads properties files filled with query name to 
+ * This implementation loads properties files filled with query name to
  * SQL mappings.  This class is thread safe.
  */
 public class QueryLoader {
@@ -56,13 +56,13 @@ public class QueryLoader {
     }
 
     /**
-     * Loads a Map of query names to SQL values.  The Maps are cached so a 
+     * Loads a Map of query names to SQL values.  The Maps are cached so a
      * subsequent request to load queries from the same path will return
      * the cached Map.
-     * 
-     * @param path The path that the ClassLoader will use to find the file. 
+     *
+     * @param path The path that the ClassLoader will use to find the file.
      * This is <strong>not</strong> a file system path.  If you had a jarred
-     * Queries.properties file in the com.yourcorp.app.jdbc package you would 
+     * Queries.properties file in the com.yourcorp.app.jdbc package you would
      * pass "/com/yourcorp/app/jdbc/Queries.properties" to this method.
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
@@ -103,12 +103,12 @@ public class QueryLoader {
         props.load(in);
 
         // Copy to HashMap for better performance
-   
+
         @SuppressWarnings({ "rawtypes", "unchecked" }) // load() always creates <String,String> entries
         HashMap<String,String> hashMap = new HashMap(props);
         return hashMap;
     }
-    
+
     /**
      * Removes the queries for the given path from the cache.
      * @param path The path that the queries were loaded from.
