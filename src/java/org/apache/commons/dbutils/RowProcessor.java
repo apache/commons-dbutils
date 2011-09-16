@@ -42,7 +42,7 @@ public interface RowProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created array
      */
-    public Object[] toArray(ResultSet rs) throws SQLException;
+    Object[] toArray(ResultSet rs) throws SQLException;
 
     /**
      * Create a JavaBean from the column values in one <code>ResultSet</code> 
@@ -55,7 +55,7 @@ public interface RowProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
-    public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException;
+    <T> T toBean(ResultSet rs, Class<T> type) throws SQLException;
 
     /**
      * Create a <code>List</code> of JavaBeans from the column values in all 
@@ -68,7 +68,7 @@ public interface RowProcessor {
      * @return A <code>List</code> of beans with the given type in the order 
      * they were returned by the <code>ResultSet</code>.
      */
-    public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException;
+    <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException;
 
     /**
      * Create a <code>Map</code> from the column values in one 
@@ -81,6 +81,6 @@ public interface RowProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created Map
      */
-    public Map<String, Object> toMap(ResultSet rs) throws SQLException;
+    Map<String, Object> toMap(ResultSet rs) throws SQLException;
 
 }
