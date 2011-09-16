@@ -50,7 +50,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     public AsyncQueryRunner(boolean pmdKnownBroken) {
         super(null, pmdKnownBroken); 
     }
-    
+
     /**
      * Constructor for AsyncQueryRunner which takes a <code>DataSource</code>.  Methods that do not take a 
      * <code>Connection</code> parameter will retrieve connections from this
@@ -61,7 +61,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     public AsyncQueryRunner(DataSource ds) {
         super(ds, false);
     }
-    
+
     /**
      * Constructor for QueryRunner, allows workaround for Oracle drivers.  Methods that do not take a 
      * <code>Connection</code> parameter will retrieve connections from this
@@ -75,45 +75,45 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     public AsyncQueryRunner(DataSource ds, boolean pmdKnownBroken) {
         super(ds, pmdKnownBroken);
     }
-    
+
     /**
      * Class that encapsulates the continuation for batch calls.
      */
     protected class BatchCallableStatement implements Callable<int[]> {
-    	private String sql;
-    	private Object[][] params;
-    	private Connection conn;
-    	private boolean closeConn;
-    	private PreparedStatement ps;
-    	
-    	public BatchCallableStatement(String sql, Object[][] params, Connection conn, boolean closeConn, PreparedStatement ps) {
-    		this.sql = sql;
-    		this.params = params;
-    		this.conn = conn;
-    		this.closeConn = closeConn;
-    		this.ps = ps;
-    	}
-		
-    	/**
-    	 * The actual call to executeBatch.
-    	 */
-    	public int[] call() throws Exception {
-    		int[] ret = null;
-    		
-    		try {
-    			ret = ps.executeBatch();
-    		} catch(SQLException e) {
-    			rethrow(e, sql, (Object[])params);
-    		} finally {
-    			close(ps);
-    			if(closeConn)
-    				close(conn);
-    		}
-    		
-    		return ret;
-    	}
+        private String sql;
+        private Object[][] params;
+        private Connection conn;
+        private boolean closeConn;
+        private PreparedStatement ps;
+
+        public BatchCallableStatement(String sql, Object[][] params, Connection conn, boolean closeConn, PreparedStatement ps) {
+            this.sql = sql;
+            this.params = params;
+            this.conn = conn;
+            this.closeConn = closeConn;
+            this.ps = ps;
+        }
+
+        /**
+         * The actual call to executeBatch.
+         */
+        public int[] call() throws Exception {
+            int[] ret = null;
+
+            try {
+                ret = ps.executeBatch();
+            } catch(SQLException e) {
+                rethrow(e, sql, (Object[])params);
+            } finally {
+                close(ps);
+                if(closeConn)
+                    close(conn);
+            }
+
+            return ret;
+        }
     }
-    
+
     /**
      * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
      * 
@@ -148,7 +148,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
         return this.batch(conn, true, sql, params);
     }
-    
+
     /**
      * Creates a continuation for a batch call, and returns it in a <code>Callable</code>.
      * @param conn The connection to use for the batch call.
@@ -160,32 +160,32 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      */
     private Callable<int[]> batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
-    	if(conn == null) {
-    		throw new SQLException("Null connection");
-    	}
-    	
-    	if(sql == null) {
-    		if(closeConn)
-    			close(conn);
-    		throw new SQLException("Null SQL statement");
-    	}
-    	
-    	if(params == null) {
-    		if(closeConn)
-    			close(conn);
-    		throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
-    	}
+        if(conn == null) {
+            throw new SQLException("Null connection");
+        }
+
+        if(sql == null) {
+            if(closeConn)
+                close(conn);
+            throw new SQLException("Null SQL statement");
+        }
+
+        if(params == null) {
+            if(closeConn)
+                close(conn);
+            throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
+        }
 
         PreparedStatement stmt = null;
         Callable<int[]> ret = null;
         try {
-        	stmt = this.prepareStatement(conn, sql);
-        	
+            stmt = this.prepareStatement(conn, sql);
+
             for (int i = 0; i < params.length; i++) {
                 this.fillStatement(stmt, params[i]);
                 stmt.addBatch();
             }
-            
+
             ret = new BatchCallableStatement(sql, params, conn, closeConn, stmt);
 
         } catch (SQLException e) {
@@ -202,44 +202,44 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param <T> The type of the result from the call to handle.
      */
     protected class QueryCallableStatement<T> implements Callable<T> {
-    	private String sql;
-    	private Object[] params;
-    	private Connection conn;
-    	private boolean closeConn;
-    	private PreparedStatement ps;
-    	private ResultSetHandler<T> rsh;
-    	
-    	public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, ResultSetHandler<T> rsh, String sql, Object... params) {
-    		this.sql = sql;
-    		this.params = params;
-    		this.conn = conn;
-    		this.closeConn = closeConn;
-    		this.ps = ps;
-    		this.rsh = rsh;
-    	}
+        private String sql;
+        private Object[] params;
+        private Connection conn;
+        private boolean closeConn;
+        private PreparedStatement ps;
+        private ResultSetHandler<T> rsh;
 
-		public T call() throws Exception {
+        public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, ResultSetHandler<T> rsh, String sql, Object... params) {
+            this.sql = sql;
+            this.params = params;
+            this.conn = conn;
+            this.closeConn = closeConn;
+            this.ps = ps;
+            this.rsh = rsh;
+        }
+
+        public T call() throws Exception {
             ResultSet rs = null;
             T ret = null;
-            
+
             try {
                 rs = wrap(ps.executeQuery());
                 ret = rsh.handle(rs);
             } catch(SQLException e) {
-            	rethrow(e, sql, params);
+                rethrow(e, sql, params);
             } finally {
-            	try {
-            		close(rs);
-            	} finally {
-            		close(ps);
-            		if(closeConn)
-            			close(conn);
-            	}
+                try {
+                    close(rs);
+                } finally {
+                    close(ps);
+                    if(closeConn)
+                        close(conn);
+                }
             }
-            
+
             return ret;
-		}
-    	
+        }
+
     }
 
     /**
@@ -256,22 +256,22 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         PreparedStatement stmt = null;
         Callable<T> ret = null;
 
-    	if(conn == null) {
-    		throw new SQLException("Null connection");
-    	}
-    	
-    	if(sql == null) {
-    		if(closeConn)
-    			close(conn);
-    		throw new SQLException("Null SQL statement");
-    	}
-    	
-    	if(rsh == null) {
-    		if(closeConn)
-    			close(conn);
-    		throw new SQLException("Null ResultSetHandler");
-    	}
-    	
+        if(conn == null) {
+            throw new SQLException("Null connection");
+        }
+
+        if(sql == null) {
+            if(closeConn)
+                close(conn);
+            throw new SQLException("Null SQL statement");
+        }
+
+        if(rsh == null) {
+            if(closeConn)
+                close(conn);
+            throw new SQLException("Null ResultSetHandler");
+        }
+
         try {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
@@ -281,7 +281,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         } catch (SQLException e) {
             close(stmt);
             if(closeConn)
-            	close(conn);
+                close(conn);
             this.rethrow(e, sql, params);
         }
 
@@ -300,7 +300,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Callable<T> query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
-    	return query(conn, false, sql, rsh, params);
+        return query(conn, false, sql, rsh, params);
     }
 
     /**
@@ -356,38 +356,38 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * Class that encapsulates the continuation for update calls.
      */
     protected class UpdateCallableStatement implements Callable<Integer> {
-    	private String sql;
-    	private Object[] params;
-    	private Connection conn;
-    	private boolean closeConn;
-    	private PreparedStatement ps;
-    	
-    	public UpdateCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, String sql, Object... params) {
-    		this.sql = sql;
-    		this.params = params;
-    		this.conn = conn;
-    		this.closeConn = closeConn;
-    		this.ps = ps;
-    	}
+        private String sql;
+        private Object[] params;
+        private Connection conn;
+        private boolean closeConn;
+        private PreparedStatement ps;
 
-		public Integer call() throws Exception {
-			int rows = 0;
-			
-			try {
-	            rows = ps.executeUpdate();
-			} catch (SQLException e) {
-				rethrow(e, sql, params);
-			} finally {
-				close(ps);
-				if(closeConn)
-					close(conn);
-			}
-			
-			return rows;
-		}
-    	
+        public UpdateCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, String sql, Object... params) {
+            this.sql = sql;
+            this.params = params;
+            this.conn = conn;
+            this.closeConn = closeConn;
+            this.ps = ps;
+        }
+
+        public Integer call() throws Exception {
+            int rows = 0;
+
+            try {
+                rows = ps.executeUpdate();
+            } catch (SQLException e) {
+                rethrow(e, sql, params);
+            } finally {
+                close(ps);
+                if(closeConn)
+                    close(conn);
+            }
+            
+            return rows;
+        }
+
     }
-    
+
     /**
      * Creates a continuation for an update call, and returns it in a <code>Callable</code>.
      * @param conn The connection to use for the update call.
@@ -402,26 +402,26 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         PreparedStatement stmt = null;
         Callable<Integer> ret = null;
 
-    	if(conn == null) {
-    		throw new SQLException("Null connection");
-    	}
-    	
-    	if(sql == null) {
-    		if(closeConn)
-    			close(conn);
-    		throw new SQLException("Null SQL statement");
-    	}
+        if(conn == null) {
+            throw new SQLException("Null connection");
+        }
+
+        if(sql == null) {
+            if(closeConn)
+                close(conn);
+            throw new SQLException("Null SQL statement");
+        }
 
         try {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
-            
+
             ret = new UpdateCallableStatement(conn, closeConn, stmt, sql, params);
 
         } catch (SQLException e) {
-        	close(stmt);
-        	if(closeConn)
-        		close(conn);
+            close(stmt);
+            if(closeConn)
+                close(conn);
             this.rethrow(e, sql, params);
         }
 
@@ -465,7 +465,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Callable<Integer> update(Connection conn, String sql, Object... params) throws SQLException {
-    	return this.update(conn, false, sql, params);
+        return this.update(conn, false, sql, params);
     }
 
     /**
@@ -517,5 +517,5 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         Connection conn = this.prepareConnection();
         return this.update(conn, true, sql, params);
     }
-    
+
 }
