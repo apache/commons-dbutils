@@ -125,14 +125,16 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if(sql == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null SQL statement");
         }
 
         if(params == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
         }
 
@@ -151,8 +153,9 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
         }
 
         return rows;
@@ -318,14 +321,16 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if(sql == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null SQL statement");
         }
 
         if(rsh == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null ResultSetHandler");
         }
 
@@ -464,8 +469,9 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if(sql == null) {
-            if(closeConn)
+            if(closeConn) {
                 close(conn);
+            }
             throw new SQLException("Null SQL statement");
         }
 
