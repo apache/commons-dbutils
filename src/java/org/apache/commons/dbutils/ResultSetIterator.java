@@ -56,7 +56,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * Constructor for ResultSetIterator.
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      * @param convert The processor to use when converting a row into an
-     * <code>Object[]</code>.  Defaults to a 
+     * <code>Object[]</code>.  Defaults to a
      * <code>BasicRowProcessor</code>.
      */
     public ResultSetIterator(ResultSet rs, RowProcessor convert) {
