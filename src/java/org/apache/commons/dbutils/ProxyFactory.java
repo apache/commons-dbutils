@@ -27,10 +27,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 /**
- * Creates proxy implementations of JDBC interfaces.  This avoids 
- * incompatibilities between the JDBC 2 and JDBC 3 interfaces.  This class is 
+ * Creates proxy implementations of JDBC interfaces.  This avoids
+ * incompatibilities between the JDBC 2 and JDBC 3 interfaces.  This class is
  * thread safe.
- * 
+ *
  * @see java.lang.reflect.Proxy
  * @see java.lang.reflect.InvocationHandler
  */
@@ -57,17 +57,18 @@ public class ProxyFactory {
         super();
     }
 
-    /** Convenience method to generate a single-interface proxy using the handler's classloader
-     * 
+    /**
+     * Convenience method to generate a single-interface proxy using the handler's classloader
+     *
      * @param <T> The type of object to proxy
      * @param type The type of object to proxy
-     * @param handler The handler that intercepts/overrides method calls. 
+     * @param handler The handler that intercepts/overrides method calls.
      * @return proxied object
      */
     public <T> T newProxyInstance(Class<T> type, InvocationHandler handler) {
         return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] {type}, handler));
     }
-    
+
     /**
      * Creates a new proxy <code>CallableStatement</code> object.
      * @param handler The handler that intercepts/overrides method calls.
