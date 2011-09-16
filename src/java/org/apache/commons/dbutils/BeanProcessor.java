@@ -381,7 +381,7 @@ public class BeanProcessor {
             PropertyDescriptor[] props) throws SQLException {
 
         int cols = rsmd.getColumnCount();
-        int columnToProperty[] = new int[cols + 1];
+        int[] columnToProperty = new int[cols + 1];
         Arrays.fill(columnToProperty, PROPERTY_NOT_FOUND);
 
         for (int col = 1; col <= cols; col++) {
