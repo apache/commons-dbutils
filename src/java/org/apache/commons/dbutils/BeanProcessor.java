@@ -34,32 +34,32 @@ import java.util.Map;
 
 /**
  * <p>
- * <code>BeanProcessor</code> matches column names to bean property names 
- * and converts <code>ResultSet</code> columns into objects for those bean 
+ * <code>BeanProcessor</code> matches column names to bean property names
+ * and converts <code>ResultSet</code> columns into objects for those bean
  * properties.  Subclasses should override the methods in the processing chain
  * to customize behavior.
  * </p>
- * 
+ *
  * <p>
  * This class is thread-safe.
  * </p>
- * 
+ *
  * @see BasicRowProcessor
- * 
+ *
  * @since DbUtils 1.1
  */
 public class BeanProcessor {
 
     /**
-     * Special array value used by <code>mapColumnsToProperties</code> that 
-     * indicates there is no bean property that matches a column from a 
+     * Special array value used by <code>mapColumnsToProperties</code> that
+     * indicates there is no bean property that matches a column from a
      * <code>ResultSet</code>.
      */
     protected static final int PROPERTY_NOT_FOUND = -1;
 
     /**
-     * Set a bean's primitive properties to these defaults when SQL NULL 
-     * is returned.  These are the same as the defaults that ResultSet get* 
+     * Set a bean's primitive properties to these defaults when SQL NULL
+     * is returned.  These are the same as the defaults that ResultSet get*
      * methods return in the event of a NULL column.
      */
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
@@ -83,9 +83,9 @@ public class BeanProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> row into a JavaBean.  This 
-     * implementation uses reflection and <code>BeanInfo</code> classes to 
-     * match column names to bean property names.  Properties are matched to 
+     * Convert a <code>ResultSet</code> row into a JavaBean.  This
+     * implementation uses reflection and <code>BeanInfo</code> classes to
+     * match column names to bean property names.  Properties are matched to
      * columns based on several factors:
      * <br/>
      * <ol>
@@ -93,19 +93,19 @@ public class BeanProcessor {
      *     The class has a writable property with the same name as a column.
      *     The name comparison is case insensitive.
      *     </li>
-     * 
+     *
      *     <li>
-     *     The column type can be converted to the property's set method 
+     *     The column type can be converted to the property's set method
      *     parameter type with a ResultSet.get* method.  If the conversion fails
      *     (ie. the property was an int and the column was a Timestamp) an
      *     SQLException is thrown.
      *     </li>
      * </ol>
-     * 
+     *
      * <p>
      * Primitive bean properties are set to their defaults when SQL NULL is
      * returned from the <code>ResultSet</code>.  Numeric fields are set to 0
-     * and booleans are set to false.  Object bean properties are set to 
+     * and booleans are set to false.  Object bean properties are set to
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
      * </p>
@@ -126,9 +126,9 @@ public class BeanProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> into a <code>List</code> of JavaBeans.  
-     * This implementation uses reflection and <code>BeanInfo</code> classes to 
-     * match column names to bean property names. Properties are matched to 
+     * Convert a <code>ResultSet</code> into a <code>List</code> of JavaBeans.
+     * This implementation uses reflection and <code>BeanInfo</code> classes to
+     * match column names to bean property names. Properties are matched to
      * columns based on several factors:
      * <br/>
      * <ol>
@@ -136,19 +136,19 @@ public class BeanProcessor {
      *     The class has a writable property with the same name as a column.
      *     The name comparison is case insensitive.
      *     </li>
-     * 
+     *
      *     <li>
-     *     The column type can be converted to the property's set method 
+     *     The column type can be converted to the property's set method
      *     parameter type with a ResultSet.get* method.  If the conversion fails
      *     (ie. the property was an int and the column was a Timestamp) an
      *     SQLException is thrown.
      *     </li>
      * </ol>
-     * 
+     *
      * <p>
      * Primitive bean properties are set to their defaults when SQL NULL is
      * returned from the <code>ResultSet</code>.  Numeric fields are set to 0
-     * and booleans are set to false.  Object bean properties are set to 
+     * and booleans are set to false.  Object bean properties are set to
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
      * </p>
@@ -247,7 +247,7 @@ public class BeanProcessor {
                 }
             }
 
-            // Don't call setter if the value object isn't the right type 
+            // Don't call setter if the value object isn't the right type
             if (this.isCompatibleType(value, params[0])) {
                 setter.invoke(target, new Object[] { value });
             } else {
@@ -275,7 +275,7 @@ public class BeanProcessor {
      * This method returns true if the value can be successfully passed into
      * the setter method.  Remember, Method.invoke() handles the unwrapping
      * of Integer into an int.
-     * 
+     *
      * @param value The value to be passed into the setter method.
      * @param type The setter's parameter type.
      * @return boolean True if the value is compatible.
@@ -321,7 +321,7 @@ public class BeanProcessor {
 
     /**
      * Factory method that returns a new instance of the given Class.  This
-     * is called at the start of the bean creation process and may be 
+     * is called at the start of the bean creation process and may be
      * overridden to provide custom behavior like returning a cached bean
      * instance.
      * @param <T> The type of object to create
@@ -366,20 +366,20 @@ public class BeanProcessor {
     }
 
     /**
-     * The positions in the returned array represent column numbers.  The 
-     * values stored at each position represent the index in the 
-     * <code>PropertyDescriptor[]</code> for the bean property that matches 
-     * the column name.  If no bean property was found for a column, the 
+     * The positions in the returned array represent column numbers.  The
+     * values stored at each position represent the index in the
+     * <code>PropertyDescriptor[]</code> for the bean property that matches
+     * the column name.  If no bean property was found for a column, the
      * position is set to <code>PROPERTY_NOT_FOUND</code>.
-     * 
-     * @param rsmd The <code>ResultSetMetaData</code> containing column 
+     *
+     * @param rsmd The <code>ResultSetMetaData</code> containing column
      * information.
-     * 
+     *
      * @param props The bean property descriptors.
-     * 
+     *
      * @throws SQLException if a database access error occurs
      *
-     * @return An int[] with column index to property index mappings.  The 0th 
+     * @return An int[] with column index to property index mappings.  The 0th
      * element is meaningless because JDBC column indexing starts at 1.
      */
     protected int[] mapColumnsToProperties(ResultSetMetaData rsmd,
@@ -407,35 +407,35 @@ public class BeanProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> column into an object.  Simple 
+     * Convert a <code>ResultSet</code> column into an object.  Simple
      * implementations could just call <code>rs.getObject(index)</code> while
-     * more complex implementations could perform type manipulation to match 
+     * more complex implementations could perform type manipulation to match
      * the column's type to the bean property type.
-     * 
+     *
      * <p>
-     * This implementation calls the appropriate <code>ResultSet</code> getter 
-     * method for the given property type to perform the type conversion.  If 
-     * the property type doesn't match one of the supported 
+     * This implementation calls the appropriate <code>ResultSet</code> getter
+     * method for the given property type to perform the type conversion.  If
+     * the property type doesn't match one of the supported
      * <code>ResultSet</code> types, <code>getObject</code> is called.
      * </p>
-     * 
+     *
      * @param rs The <code>ResultSet</code> currently being processed.  It is
      * positioned on a valid row before being passed into this method.
-     * 
+     *
      * @param index The current column index being processed.
-     * 
+     *
      * @param propType The bean property type that this column needs to be
      * converted into.
-     * 
+     *
      * @throws SQLException if a database access error occurs
-     * 
+     *
      * @return The object from the <code>ResultSet</code> at the given column
      * index after optional type processing or <code>null</code> if the column
      * value was SQL NULL.
      */
     protected Object processColumn(ResultSet rs, int index, Class<?> propType)
         throws SQLException {
-        
+
         if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
             return null;
         }
