@@ -69,6 +69,7 @@ public class QueryRunnerTest {
 
     private void callGoodBatch(Connection conn, Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
+        @SuppressWarnings( "unused" )
         int[] ret = runner.batch(conn, "select * from blah where ? = ?", params);
 
         verify(stmt, times(2)).addBatch();
@@ -79,6 +80,7 @@ public class QueryRunnerTest {
 
     private void callGoodBatch(Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
+        @SuppressWarnings( "unused" )
         int[] ret = runner.batch("select * from blah where ? = ?", params);
 
         verify(stmt, times(2)).addBatch();
@@ -121,6 +123,7 @@ public class QueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callBatchWithException(String sql, Object[][] params) throws Exception {
+        @SuppressWarnings( "unused" )
         int[] ret = null;
         boolean caught = false;
 
@@ -203,6 +206,7 @@ public class QueryRunnerTest {
     //
     private void callGoodQuery(Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
+        @SuppressWarnings( "unused" )
         Object[] ret = runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
 
         verify(stmt, times(1)).executeQuery();
@@ -222,6 +226,7 @@ public class QueryRunnerTest {
 
     private void callGoodQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
+        @SuppressWarnings( "unused" )
         Object[] ret = runner.query("select * from blah where ? = ?", handler, "unit", "test");
 
         verify(stmt, times(1)).executeQuery();
@@ -259,6 +264,7 @@ public class QueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callQueryWithException(Object... params) throws Exception {
+        @SuppressWarnings( "unused" )
         Object[] ret = null;
         boolean caught = false;
 
@@ -329,6 +335,7 @@ public class QueryRunnerTest {
     //
     private void callGoodUpdate(Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
+        @SuppressWarnings( "unused" )
         Integer ret = runner.update(conn, "update blah set ? = ?", "unit", "test");
 
         verify(stmt, times(1)).executeUpdate();
@@ -354,6 +361,7 @@ public class QueryRunnerTest {
 
     private void callGoodUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
+        @SuppressWarnings( "unused" )
         Integer ret = runner.update("update blah set ? = ?", "unit", "test");
 
         verify(stmt, times(1)).executeUpdate();
@@ -396,6 +404,7 @@ public class QueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callUpdateWithException(Object... params) throws Exception {
+        @SuppressWarnings( "unused" )
         Integer ret = null;
         boolean caught = false;
 
