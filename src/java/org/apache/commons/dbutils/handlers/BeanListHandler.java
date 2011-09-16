@@ -28,6 +28,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * <code>ResultSet</code> into a <code>List</code> of beans. This class is
  * thread safe.
  *
+ * @param <T> the target bean type
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
