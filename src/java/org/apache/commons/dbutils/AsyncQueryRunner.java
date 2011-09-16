@@ -42,7 +42,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Constructor for AsyncQueryRunner, allows workaround for Oracle drivers
-     * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Oracle drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
@@ -67,7 +67,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * <code>DataSource</code>.
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
-     * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Oracle drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
