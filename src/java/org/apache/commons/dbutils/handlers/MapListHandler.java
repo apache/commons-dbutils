@@ -26,29 +26,29 @@ import org.apache.commons.dbutils.RowProcessor;
  * <code>ResultSetHandler</code> implementation that converts a
  * <code>ResultSet</code> into a <code>List</code> of <code>Map</code>s.
  * This class is thread safe.
- * 
+ *
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class MapListHandler extends AbstractListHandler<Map<String,Object>> {
 
     /**
-     * The RowProcessor implementation to use when converting rows 
+     * The RowProcessor implementation to use when converting rows
      * into Maps.
      */
     private final RowProcessor convert;
 
-    /** 
-     * Creates a new instance of MapListHandler using a 
+    /**
+     * Creates a new instance of MapListHandler using a
      * <code>BasicRowProcessor</code> for conversion.
      */
     public MapListHandler() {
         this(ArrayHandler.ROW_PROCESSOR);
     }
 
-    /** 
+    /**
      * Creates a new instance of MapListHandler.
-     * 
-     * @param convert The <code>RowProcessor</code> implementation 
+     *
+     * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Maps.
      */
     public MapListHandler(RowProcessor convert) {
@@ -59,10 +59,10 @@ public class MapListHandler extends AbstractListHandler<Map<String,Object>> {
     /**
      * Converts the <code>ResultSet</code> row into a <code>Map</code> object.
      * @param rs <code>ResultSet</code> to process.
-     * @return A <code>Map</code>, never null.  
-     * 
+     * @return A <code>Map</code>, never null.
+     *
      * @throws SQLException if a database access error occurs
-     * 
+     *
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override

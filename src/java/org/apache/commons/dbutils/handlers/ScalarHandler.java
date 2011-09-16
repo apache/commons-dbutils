@@ -24,7 +24,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 /**
  * <code>ResultSetHandler</code> implementation that converts one
  * <code>ResultSet</code> column into an Object. This class is thread safe.
- * 
+ *
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public class ScalarHandler implements ResultSetHandler<Object> {
@@ -40,7 +40,7 @@ public class ScalarHandler implements ResultSetHandler<Object> {
      */
     private final String columnName;
 
-    /** 
+    /**
      * Creates a new instance of ScalarHandler.  The first column will
      * be returned from <code>handle()</code>.
      */
@@ -48,20 +48,20 @@ public class ScalarHandler implements ResultSetHandler<Object> {
         this(1, null);
     }
 
-    /** 
+    /**
      * Creates a new instance of ScalarHandler.
-     * 
-     * @param columnIndex The index of the column to retrieve from the 
+     *
+     * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
      */
     public ScalarHandler(int columnIndex) {
         this(columnIndex, null);
     }
 
-    /** 
+    /**
      * Creates a new instance of ScalarHandler.
-     * 
-     * @param columnName The name of the column to retrieve from the 
+     *
+     * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
     public ScalarHandler(String columnName) {
@@ -69,26 +69,26 @@ public class ScalarHandler implements ResultSetHandler<Object> {
     }
 
     /** Helper constructor
-     * @param columnIndex The index of the column to retrieve from the 
+     * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
-     * @param columnName The name of the column to retrieve from the 
+     * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
     private ScalarHandler(int columnIndex, String columnName){
         this.columnIndex = columnIndex;
-        this.columnName = columnName;        
+        this.columnName = columnName;
     }
 
     /**
      * Returns one <code>ResultSet</code> column as an object via the
-     * <code>ResultSet.getObject()</code> method that performs type 
+     * <code>ResultSet.getObject()</code> method that performs type
      * conversions.
      * @param rs <code>ResultSet</code> to process.
      * @return The column or <code>null</code> if there are no rows in
      * the <code>ResultSet</code>.
-     * 
+     *
      * @throws SQLException if a database access error occurs
-     * 
+     *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     public Object handle(ResultSet rs) throws SQLException {

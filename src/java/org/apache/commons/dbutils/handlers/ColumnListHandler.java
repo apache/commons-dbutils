@@ -23,7 +23,7 @@ import java.sql.SQLException;
  * <code>ResultSetHandler</code> implementation that converts one
  * <code>ResultSet</code> column into a <code>List</code> of
  * <code>Object</code>s. This class is thread safe.
- * 
+ *
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
@@ -40,7 +40,7 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
      */
     private final String columnName;
 
-    /** 
+    /**
      * Creates a new instance of ColumnListHandler.  The first column of each
      * row will be returned from <code>handle()</code>.
      */
@@ -48,20 +48,20 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
         this(1, null);
     }
 
-    /** 
+    /**
      * Creates a new instance of ColumnListHandler.
-     * 
-     * @param columnIndex The index of the column to retrieve from the 
+     *
+     * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
      */
     public ColumnListHandler(int columnIndex) {
         this(columnIndex, null);
     }
 
-    /** 
+    /**
      * Creates a new instance of ColumnListHandler.
-     * 
-     * @param columnName The name of the column to retrieve from the 
+     *
+     * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
     public ColumnListHandler(String columnName) {
@@ -69,24 +69,24 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
     }
 
     /** Private Helper
-     * @param columnIndex The index of the column to retrieve from the 
+     * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
-     * @param columnName The name of the column to retrieve from the 
+     * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
     private ColumnListHandler(int columnIndex, String columnName) {
         super();
         this.columnIndex = columnIndex;
-        this.columnName = columnName;        
+        this.columnName = columnName;
     }
-    
+
     /**
      * Returns one <code>ResultSet</code> column value as <code>Object</code>.
      * @param rs <code>ResultSet</code> to process.
      * @return <code>Object</code>, never <code>null</code>.
-     * 
+     *
      * @throws SQLException if a database access error occurs
-     * 
+     *
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override

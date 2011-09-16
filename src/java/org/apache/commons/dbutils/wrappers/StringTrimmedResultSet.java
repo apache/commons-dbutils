@@ -25,20 +25,20 @@ import org.apache.commons.dbutils.ProxyFactory;
 /**
  * Wraps a <code>ResultSet</code> to trim strings returned by the
  * <code>getString()</code> and <code>getObject()</code> methods.
- * 
+ *
  * <p>
  * Usage Example:
- * This example shows how to decorate ResultSets so processing continues as 
- * normal but all Strings are trimmed before being returned from the 
+ * This example shows how to decorate ResultSets so processing continues as
+ * normal but all Strings are trimmed before being returned from the
  * <code>ResultSet</code>.
  * </p>
- * 
+ *
  * <pre>
  * ResultSet rs = // somehow get a ResultSet;
- * 
+ *
  * // Substitute wrapped ResultSet with additional behavior for real ResultSet
  * rs = StringTrimmedResultSet.wrap(rs);
- * 
+ *
  * // Pass wrapped ResultSet to processor
  * List list = new BasicRowProcessor().toBeanList(rs);
  * </pre>
@@ -56,7 +56,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * <pre>
      * ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(rs));
      * </pre>
-     * 
+     *
      * @param rs The <code>ResultSet</code> to wrap.
      * @return wrapped ResultSet
      */
@@ -65,7 +65,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
     }
 
     /**
-     * The wrapped result. 
+     * The wrapped result.
      */
     private final ResultSet rs;
 
@@ -80,10 +80,10 @@ public class StringTrimmedResultSet implements InvocationHandler {
     }
 
     /**
-     * Intercept calls to the <code>getString()</code> and 
+     * Intercept calls to the <code>getString()</code> and
      * <code>getObject()</code> methods and trim any Strings before they're
      * returned.
-     * 
+     *
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
      * @param proxy Not used; all method calls go to the internal result set
      * @param method The method to invoke on the result set

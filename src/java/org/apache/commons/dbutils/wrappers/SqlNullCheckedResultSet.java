@@ -36,12 +36,12 @@ import org.apache.commons.dbutils.ProxyFactory;
 
 /**
  * Decorates a <code>ResultSet</code> with checks for a SQL NULL value on each
- * <code>getXXX</code> method. If a column value obtained by a 
+ * <code>getXXX</code> method. If a column value obtained by a
  * <code>getXXX</code> method is not SQL NULL, the column value is returned. If
  * the column value is SQL null, an alternate value is returned. The alternate
  * value defaults to the Java <code>null</code> value, which can be overridden
  * for instances of the class.
- * 
+ *
  * <p>
  * Usage example:
  * <blockquote>
@@ -49,13 +49,13 @@ import org.apache.commons.dbutils.ProxyFactory;
  * Connection conn = // somehow get a connection
  * Statement stmt = conn.createStatement();
  * ResultSet rs = stmt.executeQuery("SELECT col1, col2 FROM table1");
- * 
+ *
  * // Wrap the result set for SQL NULL checking
  * SqlNullCheckedResultSet wrapper = new SqlNullCheckedResultSet(rs);
  * wrapper.setNullString("---N/A---"); // Set null string
  * wrapper.setNullInt(-999); // Set null integer
  * rs = ProxyFactory.instance().createResultSet(wrapper);
- * 
+ *
  * while (rs.next()) {
  *     // If col1 is SQL NULL, value returned will be "---N/A---"
  *     String col1 = rs.getString("col1");
@@ -99,7 +99,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * <pre>
      * ProxyFactory.instance().createResultSet(new SqlNullCheckedResultSet(rs));
      * </pre>
-     * 
+     *
      * @param rs The <code>ResultSet</code> to wrap.
      * @return wrapped ResultSet
      */
@@ -130,7 +130,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     private URL nullURL = null;
 
     /**
-     * The wrapped result. 
+     * The wrapped result.
      */
     private final ResultSet rs;
 
@@ -364,7 +364,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Intercepts calls to <code>get*</code> methods and calls the appropriate
      * <code>getNull*</code> method if the <code>ResultSet</code> returned
      * <code>null</code>.
-     *  
+     *
      *  @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
      * @param proxy Not used; all method calls go to the internal result set
      * @param method The method to invoke on the result set

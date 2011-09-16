@@ -29,7 +29,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * in a Map under the given key.
  * </p>
  * <p>
- * If you had a Person table with a primary key column called ID, you could 
+ * If you had a Person table with a primary key column called ID, you could
  * retrieve rows from the table like this:
  * <pre>
  * ResultSetHandler h = new KeyedHandler("id");
@@ -40,11 +40,11 @@ import org.apache.commons.dbutils.RowProcessor;
  * </pre>
  * Note that the "id" passed to KeyedHandler and "name" and "age" passed to the
  * returned Map's get() method can be in any case.  The data types returned for
- * name and age are dependent upon how your JDBC driver converts SQL column 
- * types from the Person table into Java types.  
+ * name and age are dependent upon how your JDBC driver converts SQL column
+ * types from the Person table into Java types.
  * </p>
  * <p>This class is thread safe.</p>
- * 
+ *
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
@@ -62,13 +62,13 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
     protected final int columnIndex;
 
     /**
-     * The column name to retrieve key values from.  Either columnName or 
+     * The column name to retrieve key values from.  Either columnName or
      * columnIndex will be used but never both.
      */
     protected final String columnName;
 
-    /** 
-     * Creates a new instance of KeyedHandler.  The value of the first column 
+    /**
+     * Creates a new instance of KeyedHandler.  The value of the first column
      * of each row will be a key in the Map.
      */
     public KeyedHandler() {
@@ -76,7 +76,7 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
     }
 
     /**
-     * Creates a new instance of KeyedHandler.  The value of the first column 
+     * Creates a new instance of KeyedHandler.  The value of the first column
      * of each row will be a key in the Map.
      *
      * @param convert The <code>RowProcessor</code> implementation
@@ -86,33 +86,33 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
         this(convert, 1, null);
     }
 
-    /** 
+    /**
      * Creates a new instance of KeyedHandler.
-     * 
-     * @param columnIndex The values to use as keys in the Map are 
+     *
+     * @param columnIndex The values to use as keys in the Map are
      * retrieved from the column at this index.
      */
     public KeyedHandler(int columnIndex) {
         this(ArrayHandler.ROW_PROCESSOR, columnIndex, null);
     }
 
-    /** 
+    /**
      * Creates a new instance of KeyedHandler.
-     * 
-     * @param columnName The values to use as keys in the Map are 
+     *
+     * @param columnName The values to use as keys in the Map are
      * retrieved from the column with this name.
      */
     public KeyedHandler(String columnName) {
         this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
-    /** Private Helper 
+    /** Private Helper
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Maps
-     * @param columnIndex The values to use as keys in the Map are 
+     * @param columnIndex The values to use as keys in the Map are
      * retrieved from the column at this index.
-     * @param columnName The values to use as keys in the Map are 
-     * retrieved from the column with this name. 
+     * @param columnName The values to use as keys in the Map are
+     * retrieved from the column with this name.
      */
     private KeyedHandler(RowProcessor convert, int columnIndex,
             String columnName) {
@@ -123,9 +123,9 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
     }
     /**
      * This factory method is called by <code>handle()</code> to retrieve the
-     * key value from the current <code>ResultSet</code> row.  This 
-     * implementation returns <code>ResultSet.getObject()</code> for the 
-     * configured key column name or index. 
+     * key value from the current <code>ResultSet</code> row.  This
+     * implementation returns <code>ResultSet.getObject()</code> for the
+     * configured key column name or index.
      * @param rs ResultSet to create a key from
      * @return Object from the configured key column name/index
      * @throws SQLException if a database access error occurs
@@ -138,9 +138,9 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String,Object
 
     /**
      * This factory method is called by <code>handle()</code> to store the
-     * current <code>ResultSet</code> row in some object. This 
+     * current <code>ResultSet</code> row in some object. This
      * implementation returns a <code>Map</code> with case insensitive column
-     * names as keys.  Calls to <code>map.get("COL")</code> and 
+     * names as keys.  Calls to <code>map.get("COL")</code> and
      * <code>map.get("col")</code> return the same value.
      * @param rs ResultSet to create a row from
      * @return Object typed Map containing column names to values

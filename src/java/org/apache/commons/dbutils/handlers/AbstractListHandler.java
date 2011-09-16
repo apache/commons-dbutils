@@ -47,7 +47,7 @@ public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>
         }
         return rows;
     }
-    
+
     /**
      * Row handler. Method converts current row into some Java object.
      *
