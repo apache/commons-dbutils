@@ -27,7 +27,7 @@
 <section name="Commons DbUtils: JDBC Utility Component">
 
 <p>
-DbUtils is a small set of classes designed to make working with 
+The Commons DbUtils library is a small set of classes designed to make working with 
 <a href="http://java.sun.com/products/jdbc/">JDBC</a> easier.  JDBC 
 resource cleanup code is mundane, error prone work so these classes 
 abstract out all of the cleanup tasks from your code leaving you with
