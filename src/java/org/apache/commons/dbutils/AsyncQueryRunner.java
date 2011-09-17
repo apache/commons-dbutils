@@ -85,6 +85,16 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         private boolean closeConn;
         private PreparedStatement ps;
 
+        /**
+         * Creates a new BatchCallableStatement instance.
+         *
+         * @param sql The SQL statement to execute.
+         * @param params An array of query replacement parameters.  Each row in
+         *        this array is one set of batch replacement values.
+         * @param conn The connection to use for the batch call.
+         * @param closeConn True if the connection should be closed, false otherwise.
+         * @param ps The {@link PreparedStatement} to be executed.
+         */
         public BatchCallableStatement(String sql, Object[][] params, Connection conn, boolean closeConn, PreparedStatement ps) {
             this.sql = sql;
             this.params = params;
