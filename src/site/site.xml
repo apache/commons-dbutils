@@ -29,7 +29,6 @@
             <item name="Examples"      href="/examples.html"/>
             <item name="Release Notes" href="/changes-report.html"/>
             <item name="Dependencies"  href="/dependencies.html"/>
-            <item name="License"       href="/license.html"/>
             <item name="Wiki"          href="http://wiki.apache.org/commons/DbUtils"/>
         </menu>
 
