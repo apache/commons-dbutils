@@ -40,12 +40,12 @@ public abstract class AbstractQueryRunner {
     /**
      * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried it yet)?
      */
-    protected volatile boolean pmdKnownBroken = false;
+    private volatile boolean pmdKnownBroken = false;
 
     /**
      * The DataSource to retrieve connections from.
      */
-    protected final DataSource ds;
+    private final DataSource ds;
 
     /**
      * Default constructor, sets pmdKnownBroken to false and ds to null.
@@ -103,6 +103,17 @@ public abstract class AbstractQueryRunner {
         return this.ds;
     }
 
+    /**
+     * Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * and if it breaks, we'll remember not to use it again.
+     *
+     * @return the flag to skip (or not) {@link ParameterMetaData#getParameterType(int) }
+     * @since 1.4
+     */
+    public boolean isPmdKnownBroken() {
+        return pmdKnownBroken;
+    }
 
     /**
      * Factory method that creates and initializes a
