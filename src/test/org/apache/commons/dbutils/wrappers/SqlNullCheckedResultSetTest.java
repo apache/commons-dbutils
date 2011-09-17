@@ -891,10 +891,16 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
         return null;
     }
 
+    /**
+     * @throws SQLException  
+     */
     public void free() throws SQLException {
 
     }
 
+    /**
+     * @throws SQLException  
+     */
     public InputStream getBinaryStream(long pos, long length) throws SQLException {
       return null;
     }
@@ -948,10 +954,16 @@ class SqlNullCheckedResultSetMockClob implements Clob {
         return 0;
     }
 
+    /**
+     * @throws SQLException  
+     */
     public void free() throws SQLException {
 
     }
 
+    /**
+     * @throws SQLException  
+     */
     public Reader getCharacterStream(long pos, long length) throws SQLException {
       return null;
     }
