@@ -69,8 +69,7 @@ public class QueryRunnerTest {
 
     private void callGoodBatch(Connection conn, Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        @SuppressWarnings( "unused" )
-        int[] ret = runner.batch(conn, "select * from blah where ? = ?", params);
+        runner.batch(conn, "select * from blah where ? = ?", params);
 
         verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
@@ -80,8 +79,7 @@ public class QueryRunnerTest {
 
     private void callGoodBatch(Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        @SuppressWarnings( "unused" )
-        int[] ret = runner.batch("select * from blah where ? = ?", params);
+        runner.batch("select * from blah where ? = ?", params);
 
         verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
@@ -123,12 +121,10 @@ public class QueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callBatchWithException(String sql, Object[][] params) throws Exception {
-        @SuppressWarnings( "unused" )
-        int[] ret = null;
         boolean caught = false;
 
         try {
-            ret = runner.batch(sql, params);
+            runner.batch(sql, params);
 
             verify(stmt, times(2)).addBatch();
             verify(stmt, times(1)).executeBatch();
@@ -206,8 +202,7 @@ public class QueryRunnerTest {
     //
     private void callGoodQuery(Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        @SuppressWarnings( "unused" )
-        Object[] ret = runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
+        runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
 
         verify(stmt, times(1)).executeQuery();
         verify(results, times(1)).close();
@@ -216,7 +211,7 @@ public class QueryRunnerTest {
 
         // call the other variation of query
         when(meta.getParameterCount()).thenReturn(0);
-        ret = runner.query(conn, "select * from blah", handler);
+        runner.query(conn, "select * from blah", handler);
 
         verify(stmt, times(2)).executeQuery();
         verify(results, times(2)).close();
@@ -226,8 +221,7 @@ public class QueryRunnerTest {
 
     private void callGoodQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        @SuppressWarnings( "unused" )
-        Object[] ret = runner.query("select * from blah where ? = ?", handler, "unit", "test");
+        runner.query("select * from blah where ? = ?", handler, "unit", "test");
 
         verify(stmt, times(1)).executeQuery();
         verify(results, times(1)).close();
@@ -236,7 +230,7 @@ public class QueryRunnerTest {
 
         // call the other variation of query
         when(meta.getParameterCount()).thenReturn(0);
-        ret = runner.query("select * from blah", handler);
+        runner.query("select * from blah", handler);
 
         verify(stmt, times(2)).executeQuery();
         verify(results, times(2)).close();
@@ -264,13 +258,11 @@ public class QueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callQueryWithException(Object... params) throws Exception {
-        @SuppressWarnings( "unused" )
-        Object[] ret = null;
         boolean caught = false;
 
         try {
             when(meta.getParameterCount()).thenReturn(2);
-            ret = runner.query("select * from blah where ? = ?", handler, params);
+            runner.query("select * from blah where ? = ?", handler, params);
 
             verify(stmt, never()).close();    // make sure the statement is still open
             verify(stmt, times(1)).executeQuery();
@@ -335,8 +327,7 @@ public class QueryRunnerTest {
     //
     private void callGoodUpdate(Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        @SuppressWarnings( "unused" )
-        Integer ret = runner.update(conn, "update blah set ? = ?", "unit", "test");
+        runner.update(conn, "update blah set ? = ?", "unit", "test");
 
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -344,7 +335,7 @@ public class QueryRunnerTest {
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
-        ret = runner.update(conn, "update blah set unit = test");
+        runner.update(conn, "update blah set unit = test");
 
         verify(stmt, times(2)).executeUpdate();
         verify(stmt, times(2)).close();    // make sure we closed the statement
@@ -352,7 +343,7 @@ public class QueryRunnerTest {
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
-        ret = runner.update(conn, "update blah set unit = ?", "test");
+        runner.update(conn, "update blah set unit = ?", "test");
 
         verify(stmt, times(3)).executeUpdate();
         verify(stmt, times(3)).close();    // make sure we closed the statement
@@ -361,8 +352,7 @@ public class QueryRunnerTest {
 
     private void callGoodUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        @SuppressWarnings( "unused" )
-        Integer ret = runner.update("update blah set ? = ?", "unit", "test");
+        runner.update("update blah set ? = ?", "unit", "test");
 
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -370,7 +360,7 @@ public class QueryRunnerTest {
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
-        ret = runner.update("update blah set unit = test");
+        runner.update("update blah set unit = test");
 
         verify(stmt, times(2)).executeUpdate();
         verify(stmt, times(2)).close();    // make sure we closed the statement
@@ -378,7 +368,7 @@ public class QueryRunnerTest {
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
-        ret = runner.update("update blah set unit = ?", "test");
+        runner.update("update blah set unit = ?", "test");
 
         verify(stmt, times(3)).executeUpdate();
         verify(stmt, times(3)).close();    // make sure we closed the statement
@@ -404,13 +394,11 @@ public class QueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callUpdateWithException(Object... params) throws Exception {
-        @SuppressWarnings( "unused" )
-        Integer ret = null;
         boolean caught = false;
 
         try {
             when(meta.getParameterCount()).thenReturn(2);
-            ret = runner.update("select * from blah where ? = ?", params);
+            runner.update("select * from blah where ? = ?", params);
 
             verify(stmt, times(1)).executeUpdate();
             verify(stmt, times(1)).close();    // make sure we closed the statement
