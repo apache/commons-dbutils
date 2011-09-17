@@ -105,6 +105,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
         /**
          * The actual call to executeBatch.
+         *
+         * @return an array of update counts containing one element for each command in the batch.
+         * @throws Exception if a database access error occurs or one of the commands sent to the database fails.
+         * @see PreparedStatement#executeBatch()
          */
         public int[] call() throws Exception {
             int[] ret = null;
