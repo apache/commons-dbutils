@@ -46,8 +46,6 @@ import org.apache.commons.dbutils.ProxyFactory;
  */
 public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
-    private ResultSet rs = null;
-
     private SqlNullCheckedResultSet rs2 = null;
 
     /**
@@ -62,7 +60,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
                 ProxyFactory.instance().createResultSet(
                     new SqlNullUncheckedMockResultSet()));
 
-        rs = ProxyFactory.instance().createResultSet(rs2);
+        rs = ProxyFactory.instance().createResultSet(rs2); // Override superclass field
     }
 
     /**
