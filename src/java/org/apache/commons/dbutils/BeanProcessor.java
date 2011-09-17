@@ -440,29 +440,29 @@ public class BeanProcessor {
 
         } else if (
             propType.equals(Integer.TYPE) || propType.equals(Integer.class)) {
-            return (rs.getInt(index));
+            return Integer.valueOf(rs.getInt(index));
 
         } else if (
             propType.equals(Boolean.TYPE) || propType.equals(Boolean.class)) {
-            return (rs.getBoolean(index));
+            return Boolean.valueOf(rs.getBoolean(index));
 
         } else if (propType.equals(Long.TYPE) || propType.equals(Long.class)) {
-            return (rs.getLong(index));
+            return Long.valueOf(rs.getLong(index));
 
         } else if (
             propType.equals(Double.TYPE) || propType.equals(Double.class)) {
-            return (rs.getDouble(index));
+            return Double.valueOf(rs.getDouble(index));
 
         } else if (
             propType.equals(Float.TYPE) || propType.equals(Float.class)) {
-            return (rs.getFloat(index));
+            return Float.valueOf(rs.getFloat(index));
 
         } else if (
             propType.equals(Short.TYPE) || propType.equals(Short.class)) {
-            return (rs.getShort(index));
+            return Short.valueOf(rs.getShort(index));
 
         } else if (propType.equals(Byte.TYPE) || propType.equals(Byte.class)) {
-            return (rs.getByte(index));
+            return Byte.valueOf(rs.getByte(index));
 
         } else if (propType.equals(Timestamp.class)) {
             return rs.getTimestamp(index);

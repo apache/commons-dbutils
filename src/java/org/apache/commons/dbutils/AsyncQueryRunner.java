@@ -440,7 +440,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
                 }
             }
 
-            return rows;
+            return Integer.valueOf(rows);
         }
 
     }
