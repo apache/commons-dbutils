@@ -41,7 +41,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Constructor for QueryRunner, allows workaround for Oracle drivers
      * @param pmdKnownBroken Oracle drivers don't support
-     *        {@link java.sql.ParameterMetaData.ParameterMetaData#getParameterType(int) };
+     *        {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
