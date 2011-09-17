@@ -225,6 +225,17 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         private PreparedStatement ps;
         private ResultSetHandler<T> rsh;
 
+        /**
+         * Creates a new {@code QueryCallableStatement} instance.
+         *
+         * @param conn The connection to use for the batch call.
+         * @param closeConn True if the connection should be closed, false otherwise.
+         * @param ps The {@link PreparedStatement} to be executed.
+         * @param rsh The handler that converts the results into an object.
+         * @param sql The SQL statement to execute.
+         * @param params An array of query replacement parameters.  Each row in
+         *        this array is one set of batch replacement values.
+         */
         public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, ResultSetHandler<T> rsh, String sql, Object... params) {
             this.sql = sql;
             this.params = params;
@@ -234,6 +245,13 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             this.rsh = rsh;
         }
 
+        /**
+         * The actual call to {@code handle()} method.
+         *
+         * @return an array of update counts containing one element for each command in the batch.
+         * @throws Exception if a database access error occurs.
+         * @see ResultSetHandler#handle(ResultSet)
+         */
         public T call() throws Exception {
             ResultSet rs = null;
             T ret = null;
