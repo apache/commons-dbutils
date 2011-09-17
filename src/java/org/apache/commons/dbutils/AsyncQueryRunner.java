@@ -400,6 +400,16 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         private boolean closeConn;
         private PreparedStatement ps;
 
+        /**
+         *
+         *
+         * @param conn The connection to use for the batch call.
+         * @param closeConn True if the connection should be closed, false otherwise.
+         * @param ps The {@link PreparedStatement} to be executed.
+         * @param sql The SQL statement to execute.
+         * @param params An array of query replacement parameters.  Each row in
+         *        this array is one set of batch replacement values.
+         */
         public UpdateCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, String sql, Object... params) {
             this.sql = sql;
             this.params = params;
@@ -408,6 +418,14 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             this.ps = ps;
         }
 
+        /**
+         * The actual call to {@code executeUpdate()} method.
+         *
+         * @return either (1) the row count for SQL Data Manipulation Language (DML) statements or
+         *                (2) 0 for SQL statements that return nothing
+         * @throws Exception if a database access error occurs.
+         * @see PreparedStatement#executeUpdate()
+         */
         public Integer call() throws Exception {
             int rows = 0;
 
