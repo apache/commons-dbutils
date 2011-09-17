@@ -100,7 +100,11 @@ public class QueryLoader {
         }
 
         Properties props = new Properties();
-        props.load(in);
+        try {
+            props.load(in);
+        } finally {
+            in.close();
+        }
 
         // Copy to HashMap for better performance
 
