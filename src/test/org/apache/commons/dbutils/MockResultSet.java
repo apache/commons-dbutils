@@ -217,6 +217,9 @@ public class MockResultSet implements InvocationHandler {
         }
     }
 
+    /**
+     * @throws SQLException  
+     */
     protected ResultSetMetaData getMetaData() throws SQLException {
         return this.metaData;
     }
@@ -323,10 +326,16 @@ public class MockResultSet implements InvocationHandler {
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
     }
 
+    /**
+     * @throws SQLException  
+     */
     protected Boolean isLast() throws SQLException {
         return this.iter.hasNext() ? Boolean.FALSE : Boolean.TRUE;
     }
 
+    /**
+     * @throws SQLException  
+     */
     protected Boolean next() throws SQLException {
         if (!this.iter.hasNext()) {
             return Boolean.FALSE;
@@ -344,6 +353,9 @@ public class MockResultSet implements InvocationHandler {
         this.wasNull = (isNull == null) ? Boolean.TRUE : Boolean.FALSE;
     }
 
+    /**
+     * @throws SQLException  
+     */
     protected Boolean wasNull() throws SQLException {
         return this.wasNull;
     }
