@@ -24,8 +24,8 @@
     <fileSets>
         <fileSet>
             <includes>
-                <include>build.xml</include>
                 <include>checkstyle.xml</include>
+                <include>license-header.txt</include>
                 <include>LICENSE.txt</include>
                 <include>NOTICE.txt</include>
                 <include>pom.xml</include>
