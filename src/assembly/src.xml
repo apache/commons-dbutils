@@ -33,9 +33,6 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>lib</directory>
-        </fileSet>
-        <fileSet>
             <directory>src</directory>
         </fileSet>
     </fileSets>
