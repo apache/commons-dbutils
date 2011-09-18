@@ -205,8 +205,8 @@
     <maven.compile.source>1.5</maven.compile.source>
     <maven.compile.target>1.5</maven.compile.target>
     <commons.componentid>dbutils</commons.componentid>
-    <commons.release.version>1.4-SNAPSHOT</commons.release.version>
-    <commons.rc.version>RC1</commons.rc.version>
+    <commons.release.version>1.4</commons.release.version>
+    <commons.rc.version>RC2</commons.rc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
   </properties> 
