@@ -138,7 +138,6 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * this array is one set of batch replacement values.
      * @return A <code>Callable</code> which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
      */
     public Callable<int[]> batch(Connection conn, String sql, Object[][] params) throws SQLException {
         return this.batch(conn, false, sql, params);
@@ -155,7 +154,6 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * this array is one set of batch replacement values.
      * @return A <code>Callable</code> which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
      */
     public Callable<int[]> batch(String sql, Object[][] params) throws SQLException {
         Connection conn = this.prepareConnection();
