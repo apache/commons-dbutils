@@ -315,7 +315,8 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The results of the query.
      * @throws SQLException If there are database or parameter errors.
      */
-    private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params)
+            throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
         }

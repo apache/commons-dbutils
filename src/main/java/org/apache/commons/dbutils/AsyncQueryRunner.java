@@ -236,7 +236,8 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @param params An array of query replacement parameters.  Each row in
          *        this array is one set of batch replacement values.
          */
-        public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, ResultSetHandler<T> rsh, String sql, Object... params) {
+        public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, 
+                ResultSetHandler<T> rsh, String sql, Object... params) {
             this.sql = sql;
             this.params = params;
             this.conn = conn;
@@ -287,7 +288,8 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @return A <code>Callable</code> which returns the result of the query call.
      * @throws SQLException If there are database or parameter errors.
      */
-    private <T> Callable<T> query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    private <T> Callable<T> query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params)
+            throws SQLException {
         PreparedStatement stmt = null;
         Callable<T> ret = null;
 
