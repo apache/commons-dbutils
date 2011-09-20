@@ -107,10 +107,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * The actual call to executeBatch.
          *
          * @return an array of update counts containing one element for each command in the batch.
-         * @throws Exception if a database access error occurs or one of the commands sent to the database fails.
+         * @throws SQLException if a database access error occurs or one of the commands sent to the database fails.
          * @see PreparedStatement#executeBatch()
          */
-        public int[] call() throws Exception {
+        public int[] call() throws SQLException {
             int[] ret = null;
 
             try {
@@ -248,10 +248,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * The actual call to {@code handle()} method.
          *
          * @return an array of update counts containing one element for each command in the batch.
-         * @throws Exception if a database access error occurs.
+         * @throws SQLException if a database access error occurs.
          * @see ResultSetHandler#handle(ResultSet)
          */
-        public T call() throws Exception {
+        public T call() throws SQLException {
             ResultSet rs = null;
             T ret = null;
 
@@ -423,10 +423,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          *
          * @return either (1) the row count for SQL Data Manipulation Language (DML) statements or
          *                (2) 0 for SQL statements that return nothing
-         * @throws Exception if a database access error occurs.
+         * @throws SQLException if a database access error occurs.
          * @see PreparedStatement#executeUpdate()
          */
-        public Integer call() throws Exception {
+        public Integer call() throws SQLException {
             int rows = 0;
 
             try {
