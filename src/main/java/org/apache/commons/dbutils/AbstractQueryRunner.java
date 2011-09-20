@@ -35,6 +35,7 @@ import javax.sql.DataSource;
 /**
  * The base class for QueryRunner & AsyncQueryRunner.
  * This class is thread safe.
+ * @since 1.4 (mostly extracted from QueryRunner)
  */
 public abstract class AbstractQueryRunner {
     /**
