@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.4" date="2011-09-??" description="Bugfixes and addition of asynchronous QueryLoader">
+      <action type="fix" issue="DBUTILS-80">
+        DbUtils.loadDriver catches Throwable
+      </action>
       <action type="fix" issue="DBUTILS-65">
         Duplicate code introduced during Java 1.5 branch merge
       </action>

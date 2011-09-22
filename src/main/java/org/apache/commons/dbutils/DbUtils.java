@@ -180,18 +180,13 @@ public final class DbUtils {
             Class.forName(driverClassName).newInstance();
             return true;
 
-        } catch (ClassNotFoundException e) {
-            return false;
-
         } catch (IllegalAccessException e) {
             // Constructor is private, OK for DriverManager contract
             return true;
 
-        } catch (InstantiationException e) {
+        } catch (Exception e) {
             return false;
 
-        } catch (Throwable e) {
-            return false;
         }
     }
 
