@@ -176,8 +176,21 @@ public final class DbUtils {
      * @return boolean <code>true</code> if the driver was found, otherwise <code>false</code>
      */
     public static boolean loadDriver(String driverClassName) {
+        return loadDriver(DbUtils.class.getClassLoader(), driverClassName);
+    }
+
+    /**
+     * Loads and registers a database driver class.
+     * If this succeeds, it returns true, else it returns false.
+     *
+     * @param classLoader the class loader used to load the driver class
+     * @param driverClassName of driver to load
+     * @return boolean <code>true</code> if the driver was found, otherwise <code>false</code>
+     * @since 1.4
+     */
+    public static boolean loadDriver(ClassLoader classLoader, String driverClassName) {
         try {
-            Class.forName(driverClassName).newInstance();
+            classLoader.loadClass(driverClassName).newInstance();
             return true;
 
         } catch (IllegalAccessException e) {
