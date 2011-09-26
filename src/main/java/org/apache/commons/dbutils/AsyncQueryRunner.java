@@ -21,6 +21,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import javax.sql.DataSource;
 
@@ -33,11 +35,13 @@ import javax.sql.DataSource;
  */
 public class AsyncQueryRunner extends AbstractQueryRunner {
 
+    private final ExecutorService executorService;
+
     /**
      * Constructor for AsyncQueryRunner.
      */
-    public AsyncQueryRunner() {
-        super(null, false);
+    public AsyncQueryRunner(ExecutorService executorService) {
+        this(null, false, executorService);
     }
 
     /**
@@ -46,8 +50,8 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
-    public AsyncQueryRunner(boolean pmdKnownBroken) {
-        super(null, pmdKnownBroken);
+    public AsyncQueryRunner(boolean pmdKnownBroken, ExecutorService executorService) {
+        this(null, pmdKnownBroken, executorService);
     }
 
     /**
@@ -57,8 +61,8 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
      */
-    public AsyncQueryRunner(DataSource ds) {
-        super(ds, false);
+    public AsyncQueryRunner(DataSource ds, ExecutorService executorService) {
+        this(ds, false, executorService);
     }
 
     /**
@@ -71,8 +75,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
-    public AsyncQueryRunner(DataSource ds, boolean pmdKnownBroken) {
+    public AsyncQueryRunner(DataSource ds, boolean pmdKnownBroken, ExecutorService executorService) {
         super(ds, pmdKnownBroken);
+        this.executorService = executorService;
     }
 
     /**
@@ -136,11 +141,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
-     * @return A <code>Callable</code> which returns the number of rows updated per statement.
+     * @return A <code>Future</code> which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      */
-    public Callable<int[]> batch(Connection conn, String sql, Object[][] params) throws SQLException {
-        return this.batch(conn, false, sql, params);
+    public Future<int[]> batch(Connection conn, String sql, Object[][] params) throws SQLException {
+        return executorService.submit(this.batch(conn, false, sql, params));
     }
 
     /**
@@ -152,13 +157,13 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
-     * @return A <code>Callable</code> which returns the number of rows updated per statement.
+     * @return A <code>Future</code> which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      */
-    public Callable<int[]> batch(String sql, Object[][] params) throws SQLException {
+    public Future<int[]> batch(String sql, Object[][] params) throws SQLException {
         Connection conn = this.prepareConnection();
 
-        return this.batch(conn, true, sql, params);
+        return executorService.submit(this.batch(conn, true, sql, params));
     }
 
     /**
@@ -234,7 +239,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @param params An array of query replacement parameters.  Each row in
          *        this array is one set of batch replacement values.
          */
-        public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, 
+        public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps,
                 ResultSetHandler<T> rsh, String sql, Object... params) {
             this.sql = sql;
             this.params = params;
@@ -334,11 +339,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
      * @param params The replacement parameters.
-     * @return A <code>Callable</code> which returns the result of the query call.
+     * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Callable<T> query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
-        return query(conn, false, sql, rsh, params);
+    public <T> Future<T> query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+        return executorService.submit(query(conn, false, sql, rsh, params));
     }
 
     /**
@@ -348,11 +353,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
-     * @return A <code>Callable</code> which returns the result of the query call.
+     * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Callable<T> query(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
-        return this.query(conn, false, sql, rsh, (Object[]) null);
+    public <T> Future<T> query(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
+        return executorService.submit(this.query(conn, false, sql, rsh, (Object[]) null));
     }
 
     /**
@@ -365,12 +370,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * the <code>ResultSet</code>.
      * @param params Initialize the PreparedStatement's IN parameters with
      * this array.
-     * @return A <code>Callable</code> which returns the result of the query call.
+     * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Callable<T> query(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    public <T> Future<T> query(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         Connection conn = this.prepareConnection();
-        return this.query(conn, true, sql, rsh, params);
+        return executorService.submit(this.query(conn, true, sql, rsh, params));
     }
 
     /**
@@ -382,12 +387,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param rsh The handler used to create the result object from
      * the <code>ResultSet</code>.
      *
-     * @return A <code>Callable</code> which returns the result of the query call.
+     * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Callable<T> query(String sql, ResultSetHandler<T> rsh) throws SQLException {
+    public <T> Future<T> query(String sql, ResultSetHandler<T> rsh) throws SQLException {
         Connection conn = this.prepareConnection();
-        return this.query(conn, true, sql, rsh, (Object[]) null);
+        return executorService.submit(this.query(conn, true, sql, rsh, (Object[]) null));
     }
 
     /**
@@ -493,11 +498,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      *
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
-     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @return A <code>Future</code> which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
-    public Callable<Integer> update(Connection conn, String sql) throws SQLException {
-        return this.update(conn, false, sql, (Object[]) null);
+    public Future<Integer> update(Connection conn, String sql) throws SQLException {
+        return executorService.submit(this.update(conn, false, sql, (Object[]) null));
     }
 
     /**
@@ -507,11 +512,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param param The replacement parameter.
-     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @return A <code>Future</code> which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
-    public Callable<Integer> update(Connection conn, String sql, Object param) throws SQLException {
-        return this.update(conn, false, sql, new Object[] { param });
+    public Future<Integer> update(Connection conn, String sql, Object param) throws SQLException {
+        return executorService.submit(this.update(conn, false, sql, new Object[] { param }));
     }
 
     /**
@@ -520,11 +525,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param params The query replacement parameters.
-     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @return A <code>Future</code> which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
-    public Callable<Integer> update(Connection conn, String sql, Object... params) throws SQLException {
-        return this.update(conn, false, sql, params);
+    public Future<Integer> update(Connection conn, String sql, Object... params) throws SQLException {
+        return executorService.submit(this.update(conn, false, sql, params));
     }
 
     /**
@@ -536,11 +541,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      *
      * @param sql The SQL statement to execute.
      * @throws SQLException if a database access error occurs
-     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @return A <code>Future</code> which returns the number of rows updated.
      */
-    public Callable<Integer> update(String sql) throws SQLException {
+    public Future<Integer> update(String sql) throws SQLException {
         Connection conn = this.prepareConnection();
-        return this.update(conn, true, sql, (Object[]) null);
+        return executorService.submit(this.update(conn, true, sql, (Object[]) null));
     }
 
     /**
@@ -553,11 +558,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
      * @throws SQLException if a database access error occurs
-     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @return A <code>Future</code> which returns the number of rows updated.
      */
-    public Callable<Integer> update(String sql, Object param) throws SQLException {
+    public Future<Integer> update(String sql, Object param) throws SQLException {
         Connection conn = this.prepareConnection();
-        return this.update(conn, true, sql, new Object[] { param });
+        return executorService.submit(this.update(conn, true, sql, new Object[] { param }));
     }
 
     /**
@@ -570,11 +575,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param params Initializes the PreparedStatement's IN (i.e. '?')
      * parameters.
      * @throws SQLException if a database access error occurs
-     * @return A <code>Callable</code> which returns the number of rows updated.
+     * @return A <code>Future</code> which returns the number of rows updated.
      */
-    public Callable<Integer> update(String sql, Object... params) throws SQLException {
+    public Future<Integer> update(String sql, Object... params) throws SQLException {
         Connection conn = this.prepareConnection();
-        return this.update(conn, true, sql, params);
+        return executorService.submit(this.update(conn, true, sql, params));
     }
 
 }

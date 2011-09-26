@@ -30,6 +30,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.sql.DataSource;
 
@@ -62,7 +64,7 @@ public class AsyncQueryRunnerTest {
         when(results.next()).thenReturn(false);
 
          handler = new ArrayHandler();
-         runner = new AsyncQueryRunner(dataSource);
+         runner = new AsyncQueryRunner(dataSource, Executors.newFixedThreadPool(1));
     }
 
     //
@@ -70,11 +72,11 @@ public class AsyncQueryRunnerTest {
     //
     private void callGoodBatch(Connection conn, Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Callable<int[]> callable = runner.batch(conn, "select * from blah where ? = ?", params);
+        Future<int[]> callable = runner.batch(conn, "select * from blah where ? = ?", params);
         verify(stmt, times(2)).addBatch();
         verify(stmt, never()).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we closed the connection
@@ -82,11 +84,10 @@ public class AsyncQueryRunnerTest {
 
     private void callGoodBatch(Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Callable<int[]> callable = runner.batch("select * from blah where ? = ?", params);
+        Future<int[]> callable = runner.batch("select * from blah where ? = ?", params);
         verify(stmt, times(2)).addBatch();
-        verify(stmt, never()).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
@@ -101,7 +102,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testGoodBatchPmdTrue() throws Exception {
-        runner = new AsyncQueryRunner(dataSource, true);
+        runner = new AsyncQueryRunner(dataSource, true, Executors.newFixedThreadPool(1));
         String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
@@ -109,7 +110,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testGoodBatchDefaultConstructor() throws Exception {
-        runner = new AsyncQueryRunner();
+        runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(conn, params);
@@ -126,7 +127,7 @@ public class AsyncQueryRunnerTest {
 
     // helper method for calling batch when an exception is expected
     private void callBatchWithException(String sql, Object[][] params) throws Exception {
-        Callable<int[]> callable = null;
+        Future<int[]> callable = null;
         boolean caught = false;
 
         try {
@@ -134,7 +135,7 @@ public class AsyncQueryRunnerTest {
             verify(stmt, times(2)).addBatch();
             verify(stmt, never()).close();    // make sure the statement is still open
 
-            callable.call();
+            callable.get();
             verify(stmt, times(1)).executeBatch();
             verify(stmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
@@ -210,10 +211,10 @@ public class AsyncQueryRunnerTest {
     //
     private void callGoodQuery(Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Callable<Object[]> callable = runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
+        Future<Object[]> callable = runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
         verify(stmt, never()).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(1)).executeQuery();
         verify(results, times(1)).close();
         verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -224,7 +225,7 @@ public class AsyncQueryRunnerTest {
         callable = runner.query(conn, "select * from blah", handler);
         verify(stmt, times(1)).close();    // make sure the statement has only been closed once
 
-        callable.call();
+        callable.get();
         verify(stmt, times(2)).executeQuery();
         verify(results, times(2)).close();
         verify(stmt, times(2)).close();    // make sure we closed the statement
@@ -233,10 +234,10 @@ public class AsyncQueryRunnerTest {
 
     private void callGoodQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Callable<Object[]> callable = runner.query("select * from blah where ? = ?", handler, "unit", "test");
+        Future<Object[]> callable = runner.query("select * from blah where ? = ?", handler, "unit", "test");
         verify(stmt, never()).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(1)).executeQuery();
         verify(results, times(1)).close();
         verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -247,7 +248,7 @@ public class AsyncQueryRunnerTest {
         callable = runner.query("select * from blah", handler);
         verify(stmt, times(1)).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(2)).executeQuery();
         verify(results, times(2)).close();
         verify(stmt, times(2)).close();    // make sure we closed the statement
@@ -261,20 +262,20 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testGoodQueryPmdTrue() throws Exception {
-        runner = new AsyncQueryRunner(true);
+        runner = new AsyncQueryRunner(true, Executors.newFixedThreadPool(1));
         callGoodQuery(conn);
     }
 
     @Test
     public void testGoodQueryDefaultConstructor() throws Exception {
-        runner = new AsyncQueryRunner();
+        runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         callGoodQuery(conn);
     }
 
 
     // helper method for calling batch when an exception is expected
     private void callQueryWithException(Object... params) throws Exception {
-        Callable<Object[]> callable = null;
+        Future<Object[]> callable = null;
         boolean caught = false;
 
         try {
@@ -282,7 +283,7 @@ public class AsyncQueryRunnerTest {
             callable = runner.query("select * from blah where ? = ?", handler, params);
             verify(stmt, never()).close();    // make sure the statement is still open
 
-            callable.call();
+            callable.get();
             verify(stmt, times(1)).executeQuery();
             verify(results, times(1)).close();
             verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -345,10 +346,10 @@ public class AsyncQueryRunnerTest {
     //
     private void callGoodUpdate(Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Callable<Integer> callable = runner.update(conn, "update blah set ? = ?", "unit", "test");
+        Future<Integer> callable = runner.update(conn, "update blah set ? = ?", "unit", "test");
         verify(stmt, never()).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we closed the connection
@@ -356,9 +357,8 @@ public class AsyncQueryRunnerTest {
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
         callable = runner.update(conn, "update blah set unit = test");
-        verify(stmt, times(1)).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(2)).executeUpdate();
         verify(stmt, times(2)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we closed the connection
@@ -366,9 +366,8 @@ public class AsyncQueryRunnerTest {
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
         callable = runner.update(conn, "update blah set unit = ?", "test");
-        verify(stmt, times(2)).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(3)).executeUpdate();
         verify(stmt, times(3)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we closed the connection
@@ -376,10 +375,10 @@ public class AsyncQueryRunnerTest {
 
     private void callGoodUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Callable<Integer> callable = runner.update("update blah set ? = ?", "unit", "test");
+        Future<Integer> callable = runner.update("update blah set ? = ?", "unit", "test");
         verify(stmt, never()).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
@@ -387,9 +386,8 @@ public class AsyncQueryRunnerTest {
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
         callable = runner.update("update blah set unit = test");
-        verify(stmt, times(1)).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(2)).executeUpdate();
         verify(stmt, times(2)).close();    // make sure we closed the statement
         verify(conn, times(2)).close();    // make sure we closed the connection
@@ -397,9 +395,8 @@ public class AsyncQueryRunnerTest {
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
         callable = runner.update("update blah set unit = ?", "test");
-        verify(stmt, times(2)).close();    // make sure the statement is still open
 
-        callable.call();
+        callable.get();
         verify(stmt, times(3)).executeUpdate();
         verify(stmt, times(3)).close();    // make sure we closed the statement
         verify(conn, times(3)).close();    // make sure we closed the connection
@@ -412,19 +409,19 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testGoodUpdatePmdTrue() throws Exception {
-        runner = new AsyncQueryRunner(true);
+        runner = new AsyncQueryRunner(true, Executors.newFixedThreadPool(1));
         callGoodUpdate(conn);
     }
 
     @Test
     public void testGoodUpdateDefaultConstructor() throws Exception {
-        runner = new AsyncQueryRunner();
+        runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         callGoodUpdate(conn);
     }
 
     // helper method for calling batch when an exception is expected
     private void callUpdateWithException(Object... params) throws Exception {
-        Callable<Integer> callable = null;
+        Future<Integer> callable = null;
         boolean caught = false;
 
         try {
@@ -432,7 +429,7 @@ public class AsyncQueryRunnerTest {
             callable = runner.update("select * from blah where ? = ?", params);
             verify(stmt, never()).close();    // make sure the statement is still open
 
-            callable.call();
+            callable.get();
             verify(stmt, times(1)).executeUpdate();
             verify(stmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
@@ -513,7 +510,7 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testBadPrepareConnection() throws Exception {
-        runner = new AsyncQueryRunner();
+        runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         runner.update("update blah set unit = test");
     }
 }
