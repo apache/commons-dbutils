@@ -73,7 +73,6 @@ public class AsyncQueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         Future<int[]> callable = runner.batch(conn, "select * from blah where ? = ?", params);
         verify(stmt, times(2)).addBatch();
-        verify(stmt, never()).close();    // make sure the statement is still open
 
         callable.get();
         verify(stmt, times(1)).executeBatch();
