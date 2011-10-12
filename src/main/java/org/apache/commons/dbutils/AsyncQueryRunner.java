@@ -39,6 +39,8 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Constructor for AsyncQueryRunner.
+     *
+     * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     public AsyncQueryRunner(ExecutorService executorService) {
         this(null, false, executorService);
@@ -49,6 +51,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param pmdKnownBroken Oracle drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
+     * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     public AsyncQueryRunner(boolean pmdKnownBroken, ExecutorService executorService) {
         this(null, pmdKnownBroken, executorService);
@@ -60,6 +63,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * <code>DataSource</code>.
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     public AsyncQueryRunner(DataSource ds, ExecutorService executorService) {
         this(ds, false, executorService);
@@ -74,6 +78,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param pmdKnownBroken Oracle drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
+     * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     public AsyncQueryRunner(DataSource ds, boolean pmdKnownBroken, ExecutorService executorService) {
         super(ds, pmdKnownBroken);
