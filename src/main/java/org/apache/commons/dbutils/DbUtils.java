@@ -28,11 +28,14 @@ import java.sql.Statement;
 public final class DbUtils {
 
     /**
-     * Hidden constructor - Utility classes should not have a public or default constructor.
+     * Default constructor.
+     *
+     * Utility classes should not have a public or default constructor,
+     * but this one preserves retro-compatibility.
      *
      * @since 1.4
      */
-    private DbUtils() {
+    public DbUtils() {
         // do nothing
     }
 
