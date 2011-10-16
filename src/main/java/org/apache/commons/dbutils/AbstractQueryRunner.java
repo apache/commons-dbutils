@@ -46,7 +46,7 @@ public abstract class AbstractQueryRunner {
     /**
      * The DataSource to retrieve connections from.
      */
-    private final DataSource ds;
+    protected final DataSource ds;
 
     /**
      * Default constructor, sets pmdKnownBroken to false and ds to null.
