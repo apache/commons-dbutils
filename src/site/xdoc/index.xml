@@ -37,23 +37,23 @@ update data.
 
 <p>Some of the advantages of using DbUtils are:</p>
 <ul>
-	<li>
-	    No possibility for resource leaks.  Correct JDBC coding isn't 
-	    difficult but it is time-consuming and tedious.  This often 
-	    leads to connection leaks that may be difficult to track down.
-	</li>
-	<li>
-    	Cleaner, clearer persistence code.  The amount of code needed 
-    	to persist data in a database is drastically reduced. The remaining 
-    	code clearly expresses your intention without being cluttered 
-    	with resource cleanup.
-	</li>
-	<li>
-	    Automatically populate JavaBean properties from ResultSets.  You
-	    don't need to manually copy column values into bean instances
-	    by calling setter methods.  Each row of the ResultSet can be
-	    represented by one fully populated bean instance.
-	</li>
+    <li>
+        No possibility for resource leaks.  Correct JDBC coding isn't 
+        difficult but it is time-consuming and tedious.  This often 
+        leads to connection leaks that may be difficult to track down.
+    </li>
+    <li>
+        Cleaner, clearer persistence code.  The amount of code needed 
+        to persist data in a database is drastically reduced. The remaining 
+        code clearly expresses your intention without being cluttered 
+        with resource cleanup.
+    </li>
+    <li>
+        Automatically populate JavaBean properties from ResultSets.  You
+        don't need to manually copy column values into bean instances
+        by calling setter methods.  Each row of the ResultSet can be
+        represented by one fully populated bean instance.
+    </li>
 </ul>
 
 </section>
