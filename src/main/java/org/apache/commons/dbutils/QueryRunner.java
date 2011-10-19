@@ -175,7 +175,7 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(Connection conn, String sql, Object param, ResultSetHandler<T> rsh) throws SQLException {
-        return this.query(conn, false, sql, rsh, new Object[] { param });
+        return this.query(conn, false, sql, rsh, new Object[]{param});
     }
 
     /**
@@ -242,7 +242,7 @@ public class QueryRunner extends AbstractQueryRunner {
     public <T> T query(String sql, Object param, ResultSetHandler<T> rsh) throws SQLException {
         Connection conn = this.prepareConnection();
 
-        return this.query(conn, true, sql, rsh, new Object[] { param });
+        return this.query(conn, true, sql, rsh, new Object[]{param});
     }
 
     /**
@@ -386,7 +386,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public int update(Connection conn, String sql, Object param) throws SQLException {
-        return this.update(conn, false, sql, new Object[] { param });
+        return this.update(conn, false, sql, new Object[]{param});
     }
 
     /**
@@ -434,7 +434,7 @@ public class QueryRunner extends AbstractQueryRunner {
     public int update(String sql, Object param) throws SQLException {
         Connection conn = this.prepareConnection();
 
-        return this.update(conn, true, sql, new Object[] { param });
+        return this.update(conn, true, sql, new Object[]{param});
     }
 
     /**

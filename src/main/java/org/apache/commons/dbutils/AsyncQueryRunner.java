@@ -521,7 +521,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(Connection conn, String sql, Object param) throws SQLException {
-        return executorService.submit(this.update(conn, false, sql, new Object[] { param }));
+        return executorService.submit(this.update(conn, false, sql, new Object[]{param}));
     }
 
     /**
@@ -567,7 +567,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      */
     public Future<Integer> update(String sql, Object param) throws SQLException {
         Connection conn = this.prepareConnection();
-        return executorService.submit(this.update(conn, true, sql, new Object[] { param }));
+        return executorService.submit(this.update(conn, true, sql, new Object[]{param}));
     }
 
     /**
