@@ -1,20 +1,71 @@
-The Commons DbUtils team is pleased to announce the commons-dbutils-1.4-SNAPSHOT release!
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
 
-A package of Java utility classes for easing JDBC development
+       http://www.apache.org/licenses/LICENSE-2.0
 
-Changes in this version include:
-
-New features:
-o Add asynchronous batch, query, and update calls  Issue: DBUTILS-78. 
-
-Fixed Bugs:
-o Duplicate code introduced during Java 1.5 branch merge  Issue: DBUTILS-65. 
-o fillStatement doesn't complain when there are too few parameters  Issue: DBUTILS-79. 
-
-Changes:
-o efficient usage from findbugs  Issue: DBUTILS-75. 
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+$Id$
 
 
-Have fun!
--Commons DbUtils team
+                          Commons DbUtils Package
+                                Version 1.4
+                               Release Notes
 
+
+INTRODUCTION
+============
+
+This is a maintenance release with new features. New projects are encouraged to
+use this release of dbutils. There is no urgency for existing projects to
+upgrade.
+
+IMPORTANT NOTES
+================
+
+BREAKING CHANGES:
+
+ * NONE.
+
+DEPENDENCIES
+=============
+
+Commons DbUtils 1.4 has not dependencies.
+
+NEW FEATURES
+=============
+
+ * Asynchronous executor
+       Added methods for asynchronous batch, query, and update calls.
+
+BUGS FROM PREVIOUS RELEASE
+===========================
+
+ * [DBUTILS-65] Duplicate code introduced during Java 1.5 branch merge.
+ * [DBUTILS-79] fillStatement doesn't complain when there are too few parameters.
+
+IMPROVEMENTS OVER PREVIOUS RELEASE
+===================================
+
+ * [DBUTILS-78] Add asynchronous batch, query, and update calls.
+ * [DBUTILS-75] efficient usage from findbugs
+
+DEPRECATIONS
+============
+
+ * NONE
+
+OTHER NOTES
+============
+
+ * NONE
+ 
