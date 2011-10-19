@@ -28,7 +28,8 @@
   <name>Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
-  <description>A package of Java utility classes for easing JDBC development</description>
+  <description>The Apache Commons-DbUtils package is a set of
+  Java utility classes for easing JDBC development.</description>
 
   <url>http://commons.apache.org/dbutils/</url>
 
