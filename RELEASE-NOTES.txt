@@ -39,7 +39,7 @@ BREAKING CHANGES:
 DEPENDENCIES
 =============
 
-Commons DbUtils 1.4 has not dependencies.
+Commons DbUtils 1.4 has no dependencies.
 
 NEW FEATURES
 =============
