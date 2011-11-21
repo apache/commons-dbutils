@@ -56,8 +56,8 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor to allow workaround for Oracle drivers
-     * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * Constructor to control the use of <code>ParameterMetaData</code>.
+     * @param pmdKnownBroken Some drivers don't support {@link ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
@@ -78,12 +78,12 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor to allow workaround for Oracle drivers.  Methods that do not take a
-     * <code>Connection</code> parameter will retrieve connections from this
+     * Constructor to provide a <code>DataSource</code> and control the use of <code>ParameterMetaData</code>.
+     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
-     * @param pmdKnownBroken Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
@@ -105,7 +105,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Oracle drivers don't support {@link ParameterMetaData#getParameterType(int) };
+     * Some drivers don't support {@link ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      *

@@ -39,9 +39,9 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner, allows workaround for Oracle drivers
-     * @param pmdKnownBroken Oracle drivers don't support
-     *        {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * Constructor for QueryRunner that controls the use of <code>ParameterMetaData</code>.
+     * 
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
@@ -50,8 +50,9 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner which takes a <code>DataSource</code>.  Methods that do not take a
-     * <code>Connection</code> parameter will retrieve connections from this
+     * Constructor for QueryRunner that takes a <code>DataSource</code> to use.
+     * 
+     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
@@ -61,12 +62,12 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner, allows workaround for Oracle drivers.  Methods that do not take a
-     * <code>Connection</code> parameter will retrieve connections from this
+     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and controls the use of <code>ParameterMetaData</code>.
+     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
-     * @param pmdKnownBroken Oracle drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
      * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
