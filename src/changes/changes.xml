@@ -45,6 +45,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action due-to="Michael Osipov" type="add" issue="DBUTILS-67">
         Added BeanMapHandler
       </action>
+      <action due-to="Michael Osipov" type="update" issue="DBUTILS-66">
+        Added generics to ScalarHandler, ColumnHandler, and KeyedHandler
+      </action>
     </release>
     <release version="1.4" date="2011-10-23" description="Bugfixes and addition of asynchronous QueryLoader">
       <action type="fix" issue="DBUTILS-81">
