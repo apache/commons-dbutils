@@ -21,6 +21,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -199,7 +200,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public boolean containsKey(Object key) {
-            Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
+            Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.containsKey(realKey);
             // Possible optimisation here:
             // Since the lowerCaseMap contains a mapping for all the keys,
@@ -210,7 +211,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public Object get(Object key) {
-            Object realKey = lowerCaseMap.get(key.toString().toLowerCase());
+            Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.get(realKey);
         }
 
@@ -224,7 +225,7 @@ public class BasicRowProcessor implements RowProcessor {
              * (That's why we call super.remove(oldKey) and not just
              * super.put(key, value))
              */
-            Object oldKey = lowerCaseMap.put(key.toLowerCase(), key);
+            Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ENGLISH), key);
             Object oldValue = super.remove(oldKey);
             super.put(key, value);
             return oldValue;
@@ -243,7 +244,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public Object remove(Object key) {
-            Object realKey = lowerCaseMap.remove(key.toString().toLowerCase());
+            Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));
             return super.remove(realKey);
         }
     }

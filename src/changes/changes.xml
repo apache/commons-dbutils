@@ -42,6 +42,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="wspeirs" type="update" issue="DBUTILS-77">
         Updated documentation to better reflect the use of pmdKnownBroken
       </action>
+      <action due-to="Sebb" type="fix" issue="DBUTILS-73">
+        Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor
+      </action>
       <action due-to="Michael Osipov" type="add" issue="DBUTILS-67">
         Added BeanMapHandler
       </action>
