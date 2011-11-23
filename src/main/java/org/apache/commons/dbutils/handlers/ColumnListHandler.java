@@ -90,6 +90,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      *
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected T handleRow(ResultSet rs) throws SQLException {
         if (this.columnName == null) {

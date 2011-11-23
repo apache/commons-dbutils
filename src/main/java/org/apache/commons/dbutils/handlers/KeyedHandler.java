@@ -131,6 +131,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * @return Object from the configured key column name/index
      * @throws SQLException if a database access error occurs
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ?

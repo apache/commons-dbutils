@@ -155,15 +155,16 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
         this.columnName = columnName;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
-        return (columnName == null) ? (K) rs.getObject(columnIndex) : (K) rs
-                .getObject(columnName);
+        return (columnName == null) ?
+               (K) rs.getObject(columnIndex) :
+               (K) rs.getObject(columnName);
     }
 
     @Override
     protected V createRow(ResultSet rs) throws SQLException {
-        // TODO Auto-generated method stub
         return this.convert.toBean(rs, type);
     }
 

@@ -92,6 +92,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
+    @SuppressWarnings("unchecked")
     public T handle(ResultSet rs) throws SQLException {
 
         if (rs.next()) {
