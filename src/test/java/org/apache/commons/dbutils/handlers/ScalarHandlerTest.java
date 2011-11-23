@@ -41,7 +41,7 @@ public class ScalarHandlerTest extends BaseTestCase {
         ResultSetHandler<Integer> h = new ScalarHandler<Integer>("intTest");
         Object results = h.handle(this.rs);
         assertNotNull(results);
-        assertEquals(1, results);
+        assertEquals(Integer.valueOf(1), results);
     }
 
     public void testEmptyResultSetHandle() throws SQLException {

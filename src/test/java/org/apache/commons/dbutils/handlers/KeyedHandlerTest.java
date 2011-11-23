@@ -86,7 +86,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(row);
             assertEquals(COLS, row.keySet().size());
         }
-        row = results.get(3);
+        row = results.get(Integer.valueOf(3));
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
         assertEquals("6", row.get("Three"));

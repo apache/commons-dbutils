@@ -42,17 +42,17 @@ public class BeanMapHandlerTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getObject(1)).thenReturn(23L);
-		when(rs.getObject(2)).thenReturn(23L);
-		when(rs.getObject("id")).thenReturn(23L);
+		when(Boolean.valueOf(rs.next())).thenReturn(Boolean.TRUE, Boolean.FALSE);
+		when(rs.getObject(1)).thenReturn(Long.valueOf(23L));
+		when(rs.getObject(2)).thenReturn(Long.valueOf(23L));
+		when(rs.getObject("id")).thenReturn(Long.valueOf(23L));
 		when(rs.getMetaData()).thenReturn(rsmd);
 		when(rp.toBean(rs, TestBean.class)).thenReturn(new TestBean());
 	}
 
 	private void handle() throws Exception {
 		res = bmh.handle(rs);
-		assertNotNull(res.get(23L));
+		assertNotNull(res.get(Long.valueOf(23L)));
 	}
 	
 	@Test
@@ -81,10 +81,10 @@ public class BeanMapHandlerTest {
 	
 	@Test
 	public void testEmptyResultSet() throws Exception {
-		when(rs.next()).thenReturn(false);
+		when(Boolean.valueOf(rs.next())).thenReturn(Boolean.FALSE);
 		bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
 		res = bmh.handle(rs);
-		assertNull(res.get(23L));
+		assertNull(res.get(Long.valueOf(23L)));
 	}
 
 }
