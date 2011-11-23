@@ -64,6 +64,15 @@
       </roles>
     </developer>
     <developer>
+      <name>Dan Fabulich</name>
+      <id>dfabulich</id>
+      <email>dan@fabulich.com</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
       <name>David Graham</name>
       <id>dgraham</id>
       <email>dgraham@apache.org</email>
@@ -82,19 +91,9 @@
       </roles>
     </developer>
     <developer>
-      <name>Henri Yandell</name>
-      <id>bayard</id>
-      <email>bayard@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Dan Fabulich</name>
-      <id>dfabulich</id>
-      <email>dan@fabulich.com</email>
-      <organization />
+      <name>William Speirs</name>
+      <id>wspeirs</id>
+      <email>wspeirs@apache.org</email>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -103,6 +102,15 @@
       <name>Simone Tripodi</name>
       <id>simonetripodi</id>
       <email>simonetripodi at apache dot org</email>
+    </developer>
+    <developer>
+      <name>Henri Yandell</name>
+      <id>bayard</id>
+      <email>bayard@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
     </developer>
   </developers>
 
@@ -169,12 +177,6 @@
     <contributor>
       <name>Norris Shelton</name>
       <email>norrisshelton@yahoo.com</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Bill Speirs</name>
       <roles>
         <role>Java Developer</role>
       </roles>

@@ -38,6 +38,14 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
+    <release version="1.5" date="2011-11-25" description="Bugfixes and addition of BeanMapHandler">
+      <action dev="wspeirs" type="update" issue="DBUTILS-77">
+        Updated documentation to better reflect the use of pmdKnownBroken
+      </action>
+      <action due-to="Michael Osipov" type="add" issue="DBUTILS-67">
+        Added BeanMapHandler
+      </action>
+    </release>
     <release version="1.4" date="2011-10-23" description="Bugfixes and addition of asynchronous QueryLoader">
       <action type="fix" issue="DBUTILS-81">
         DbUtils.loadDriver() uses Class.forName()
@@ -54,7 +62,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action type="update" issue="DBUTILS-75">
         efficient usage from findbugs
       </action>
-      <action type="add" issue="DBUTILS-78">
+      <action dev="wspeirs" type="add" issue="DBUTILS-78">
         Add asynchronous batch, query, and update calls
       </action>
     </release>
