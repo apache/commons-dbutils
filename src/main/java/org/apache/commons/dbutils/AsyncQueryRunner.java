@@ -91,11 +91,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * Class that encapsulates the continuation for batch calls.
      */
     protected class BatchCallableStatement implements Callable<int[]> {
-        private String sql;
-        private Object[][] params;
-        private Connection conn;
-        private boolean closeConn;
-        private PreparedStatement ps;
+        private final String sql;
+        private final Object[][] params;
+        private final Connection conn;
+        private final boolean closeConn;
+        private final PreparedStatement ps;
 
         /**
          * Creates a new BatchCallableStatement instance.
@@ -228,12 +228,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param <T> The type of the result from the call to handle.
      */
     protected class QueryCallableStatement<T> implements Callable<T> {
-        private String sql;
-        private Object[] params;
-        private Connection conn;
-        private boolean closeConn;
-        private PreparedStatement ps;
-        private ResultSetHandler<T> rsh;
+        private final String sql;
+        private final Object[] params;
+        private final Connection conn;
+        private final boolean closeConn;
+        private final PreparedStatement ps;
+        private final ResultSetHandler<T> rsh;
 
         /**
          * Creates a new {@code QueryCallableStatement} instance.
@@ -406,11 +406,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * Class that encapsulates the continuation for update calls.
      */
     protected class UpdateCallableStatement implements Callable<Integer> {
-        private String sql;
-        private Object[] params;
-        private Connection conn;
-        private boolean closeConn;
-        private PreparedStatement ps;
+        private final String sql;
+        private final Object[] params;
+        private final Connection conn;
+        private final boolean closeConn;
+        private final PreparedStatement ps;
 
         /**
          *
