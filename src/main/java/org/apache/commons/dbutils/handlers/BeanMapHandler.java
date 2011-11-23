@@ -60,23 +60,23 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * The Class of beans produced by this handler.
      */
-    private Class<V> type;
+    private final Class<V> type;
 
     /**
      * The RowProcessor implementation to use when converting rows into Objects.
      */
-    private RowProcessor convert;
+    private final RowProcessor convert;
 
     /**
      * The column index to retrieve key values from. Defaults to 1.
      */
-    private int columnIndex;
+    private final int columnIndex;
 
     /**
      * The column name to retrieve key values from. Either columnName or
      * columnIndex will be used but never both.
      */
-    private String columnName;
+    private final String columnName;
 
     /**
      * Creates a new instance of BeanMapHandler. The value of the first column
@@ -155,7 +155,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
         this.columnName = columnName;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // cast exception will immediately be thrown and warn the developer
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ?
