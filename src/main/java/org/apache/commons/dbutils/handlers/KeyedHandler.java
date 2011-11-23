@@ -45,10 +45,11 @@ import org.apache.commons.dbutils.RowProcessor;
  * </p>
  * <p>This class is thread safe.</p>
  *
+ * @param <K> The type of the key
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
-public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String, Object>> {
+public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>> {
 
     /**
      * The RowProcessor implementation to use when converting rows
@@ -131,9 +132,10 @@ public class KeyedHandler extends AbstractKeyedHandler<Object, Map<String, Objec
      * @throws SQLException if a database access error occurs
      */
     @Override
-    protected Object createKey(ResultSet rs) throws SQLException {
-        return (columnName == null) ? rs.getObject(columnIndex) : rs
-                .getObject(columnName);
+    protected K createKey(ResultSet rs) throws SQLException {
+        return (columnName == null) ?
+               (K) rs.getObject(columnIndex) :
+               (K) rs.getObject(columnName);
     }
 
     /**

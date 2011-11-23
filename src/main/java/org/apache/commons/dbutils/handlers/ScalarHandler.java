@@ -25,9 +25,10 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * <code>ResultSetHandler</code> implementation that converts one
  * <code>ResultSet</code> column into an Object. This class is thread safe.
  *
+ * @param <T> The type of the scalar
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
-public class ScalarHandler implements ResultSetHandler<Object> {
+public class ScalarHandler<T> implements ResultSetHandler<T> {
 
     /**
      * The column number to retrieve.
@@ -91,13 +92,13 @@ public class ScalarHandler implements ResultSetHandler<Object> {
      *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
-    public Object handle(ResultSet rs) throws SQLException {
+    public T handle(ResultSet rs) throws SQLException {
 
         if (rs.next()) {
             if (this.columnName == null) {
-                return rs.getObject(this.columnIndex);
+                return (T) rs.getObject(this.columnIndex);
             } else {
-                return rs.getObject(this.columnName);
+                return (T) rs.getObject(this.columnName);
             }
 
         } else {

@@ -24,10 +24,11 @@ import java.sql.SQLException;
  * <code>ResultSet</code> column into a <code>List</code> of
  * <code>Object</code>s. This class is thread safe.
  *
+ * @param <T> The type of the column.
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since DbUtils 1.1
  */
-public class ColumnListHandler extends AbstractListHandler<Object> {
+public class ColumnListHandler<T> extends AbstractListHandler<T> {
 
     /**
      * The column number to retrieve.
@@ -90,11 +91,11 @@ public class ColumnListHandler extends AbstractListHandler<Object> {
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override
-    protected Object handleRow(ResultSet rs) throws SQLException {
+    protected T handleRow(ResultSet rs) throws SQLException {
         if (this.columnName == null) {
-            return rs.getObject(this.columnIndex);
+            return (T) rs.getObject(this.columnIndex);
         } else {
-            return rs.getObject(this.columnName);
+            return (T) rs.getObject(this.columnName);
         }
    }
 
