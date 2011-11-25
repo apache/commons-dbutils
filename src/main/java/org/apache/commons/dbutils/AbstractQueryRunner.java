@@ -194,6 +194,10 @@ public abstract class AbstractQueryRunner {
                 int sqlType = Types.VARCHAR;
                 if (!pmdKnownBroken) {
                     try {
+                        /*
+                         * It's not possible for pmdKnownBroken to change from true to false,
+                         * (once true, always true) so pmd cannot be null here.
+                         */
                         sqlType = pmd.getParameterType(i + 1);
                     } catch (SQLException e) {
                         pmdKnownBroken = true;
