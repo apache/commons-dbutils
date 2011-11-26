@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.5" date="2011-11-25" description="Bugfixes and addition of BeanMapHandler">
+      <action due-to="Tiago Cavaleiro" type="fix" issue="DBUTILS-84">
+        Added case for SQLXML
+      </action>
       <action dev="wspeirs" type="update" issue="DBUTILS-77">
         Updated documentation to better reflect the use of pmdKnownBroken
       </action>
