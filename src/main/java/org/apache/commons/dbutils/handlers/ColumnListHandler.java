@@ -87,10 +87,13 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * @return <code>Object</code>, never <code>null</code>.
      *
      * @throws SQLException if a database access error occurs
+     * @throws ClassCastException if the class datatype does not match the column type
      *
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
-    @SuppressWarnings("unchecked") // cast exception will immediately be thrown and warn the developer
+    // We assume that the user has picked the correct type to match the column
+    // so getObject will return the appropriate type and the cast will succeed.
+    @SuppressWarnings("unchecked")
     @Override
     protected T handleRow(ResultSet rs) throws SQLException {
         if (this.columnName == null) {

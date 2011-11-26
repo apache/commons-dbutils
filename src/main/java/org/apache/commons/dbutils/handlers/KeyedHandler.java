@@ -129,9 +129,13 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * configured key column name or index.
      * @param rs ResultSet to create a key from
      * @return Object from the configured key column name/index
+     *
      * @throws SQLException if a database access error occurs
+     * @throws ClassCastException if the class datatype does not match the column type
      */
-    @SuppressWarnings("unchecked") // cast exception will immediately be thrown and warn the developer
+    // We assume that the user has picked the correct type to match the column
+    // so getObject will return the appropriate type and the cast will succeed.
+    @SuppressWarnings("unchecked")
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ?

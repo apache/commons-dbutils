@@ -155,7 +155,21 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
         this.columnName = columnName;
     }
 
-    @SuppressWarnings("unchecked") // cast exception will immediately be thrown and warn the developer
+    /**
+     * This factory method is called by <code>handle()</code> to retrieve the
+     * key value from the current <code>ResultSet</code> row.
+     * @param rs ResultSet to create a key from
+     *
+     * @return K from the configured key column name/index
+     *
+     * @throws SQLException if a database access error occurs
+     * @throws ClassCastException if the class datatype does not match the column type
+     *
+     * @see org.apache.commons.dbutils.handlers.AbstractKeyedHandler#createKey(ResultSet)
+     */
+    // We assume that the user has picked the correct type to match the column
+    // so getObject will return the appropriate type and the cast will succeed.
+    @SuppressWarnings("unchecked")
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ?
