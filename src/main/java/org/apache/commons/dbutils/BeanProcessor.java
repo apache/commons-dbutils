@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.SQLXML;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -466,6 +467,9 @@ public class BeanProcessor {
 
         } else if (propType.equals(Timestamp.class)) {
             return rs.getTimestamp(index);
+
+        } else if (propType.equals(SQLXML.class)) {
+            return rs.getSQLXML(index);
 
         } else {
             return rs.getObject(index);
