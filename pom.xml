@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.5-SNAPSHOT</version>
+  <version>1.5</version>
   <name>Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
@@ -205,11 +205,11 @@
   </dependencies>
 
   <properties>
-    <maven.compile.source>1.5</maven.compile.source>
-    <maven.compile.target>1.5</maven.compile.target>
+    <maven.compile.source>1.6</maven.compile.source>
+    <maven.compile.target>1.6</maven.compile.target>
     <commons.componentid>dbutils</commons.componentid>
-    <commons.release.version>1.4</commons.release.version>
-    <commons.rc.version>RC3</commons.rc.version>
+    <commons.release.version>1.5</commons.release.version>
+    <commons.rc.version>RC1</commons.rc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
   </properties> 
@@ -223,14 +223,6 @@
             <excludes>
               <exclude>**/BaseTestCase.java</exclude>
             </excludes>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>${maven.compile.source}</source>
-            <target>${maven.compile.target}</target>
         </configuration>
       </plugin>
       <plugin>
@@ -294,15 +286,6 @@
         <version>2.5</version>
         <configuration>
           <targetJdk>1.5</targetJdk>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>clirr-maven-plugin</artifactId>
-        <version>2.2.2</version>
-        <configuration>
-          <comparisonVersion>1.3</comparisonVersion>
-          <minSeverity>info</minSeverity>
         </configuration>
       </plugin>
     </plugins>
