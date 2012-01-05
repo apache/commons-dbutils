@@ -235,13 +235,13 @@ public class BeanProcessor {
         try {
             // convert types for some popular ones
             if (value != null && value instanceof java.util.Date) {
-                if (params[0].getName().equals("java.sql.Date")) {
+                if ("java.sql.Date".equals(params[0].getName())) {
                     value = new java.sql.Date(((java.util.Date) value).getTime());
                 } else
-                if (params[0].getName().equals("java.sql.Time")) {
+                if ("java.sql.Time".equals(params[0].getName())) {
                     value = new java.sql.Time(((java.util.Date) value).getTime());
                 } else
-                if (params[0].getName().equals("java.sql.Timestamp")) {
+                if ("java.sql.Timestamp".equals(params[0].getName())) {
                     value = new java.sql.Timestamp(((java.util.Date) value).getTime());
                 }
             }
