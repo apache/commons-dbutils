@@ -37,6 +37,11 @@
       <!-- Dates for 1.1-1.3 taken from http://archive.apache.org/dist/commons/dbutils/binaries/ -->
       <Version>
         <name>commons-dbutils</name>
+        <created>2011-10-23</created>
+        <revision>1.4</revision>
+      </Version>
+      <Version>
+        <name>commons-dbutils</name>
         <created>2009-11-11</created>
         <revision>1.3</revision>
       </Version>
