@@ -350,7 +350,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
-        return executorService.submit(query(conn, false, sql, rsh, params));
+        return executorService.submit(this.<T>query(conn, false, sql, rsh, params));
     }
 
     /**
@@ -364,7 +364,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(this.query(conn, false, sql, rsh, (Object[]) null));
+        return executorService.submit(this.<T>query(conn, false, sql, rsh, (Object[]) null));
     }
 
     /**
@@ -382,7 +382,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      */
     public <T> Future<T> query(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         Connection conn = this.prepareConnection();
-        return executorService.submit(this.query(conn, true, sql, rsh, params));
+        return executorService.submit(this.<T>query(conn, true, sql, rsh, params));
     }
 
     /**
@@ -399,7 +399,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      */
     public <T> Future<T> query(String sql, ResultSetHandler<T> rsh) throws SQLException {
         Connection conn = this.prepareConnection();
-        return executorService.submit(this.query(conn, true, sql, rsh, (Object[]) null));
+        return executorService.submit(this.<T>query(conn, true, sql, rsh, (Object[]) null));
     }
 
     /**
