@@ -18,7 +18,7 @@ $Id$
 
 
                           Commons DbUtils Package
-                                Version 1.4
+                                Version 1.5
                                Release Notes
 
 
@@ -39,25 +39,25 @@ BREAKING CHANGES:
 DEPENDENCIES
 =============
 
-Commons DbUtils 1.4 has no dependencies.
+Commons DbUtils 1.5 has no dependencies.
 
 NEW FEATURES
 =============
 
- * Asynchronous executor
-       Added methods for asynchronous batch, query, and update calls.
+ * [DBUTILS-67] Add a BeanMapHandler
 
 BUGS FROM PREVIOUS RELEASE
 ===========================
 
- * [DBUTILS-65] Duplicate code introduced during Java 1.5 branch merge.
- * [DBUTILS-79] fillStatement doesn't complain when there are too few parameters.
+ * [DBUTILS-77] Updated documentation to better reflect the use of pmdKnownBroken
+ * [DBUTILS-73] Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor
 
 IMPROVEMENTS OVER PREVIOUS RELEASE
 ===================================
 
- * [DBUTILS-78] Add asynchronous batch, query, and update calls.
+ * [DBUTILS-84] BeanProcessor method processColumn should take SQLXML in consideration
  * [DBUTILS-75] efficient usage from findbugs
+ * [DBUTILS-66] ScalarHandler, ColumnHandler and KeyedHandler are missing generics
 
 DEPRECATIONS
 ============
