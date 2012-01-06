@@ -31,60 +31,60 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class BeanMapHandlerTest {
-	
-	private BeanMapHandler<Long, TestBean> bmh;
-	private Map<Long, TestBean> res;
-	@Mock private ResultSet rs;
-	@Mock private ResultSetMetaData rsmd;
-	@Mock private RowProcessor rp;
-	
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
 
-		when(Boolean.valueOf(rs.next())).thenReturn(Boolean.TRUE, Boolean.FALSE);
-		when(rs.getObject(1)).thenReturn(Long.valueOf(23L));
-		when(rs.getObject(2)).thenReturn(Long.valueOf(23L));
-		when(rs.getObject("id")).thenReturn(Long.valueOf(23L));
-		when(rs.getMetaData()).thenReturn(rsmd);
-		when(rp.toBean(rs, TestBean.class)).thenReturn(new TestBean());
-	}
+    private BeanMapHandler<Long, TestBean> bmh;
+    private Map<Long, TestBean> res;
+    @Mock private ResultSet rs;
+    @Mock private ResultSetMetaData rsmd;
+    @Mock private RowProcessor rp;
 
-	private void handle() throws Exception {
-		res = bmh.handle(rs);
-		assertNotNull(res.get(Long.valueOf(23L)));
-	}
-	
-	@Test
-	public void testBeanMapHandlerClassOfV() throws Exception {
-		bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
-		handle();
-	}
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
 
-	@Test
-	public void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
-		bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, rp);
-		handle();
-	}
+        when(Boolean.valueOf(rs.next())).thenReturn(Boolean.TRUE, Boolean.FALSE);
+        when(rs.getObject(1)).thenReturn(Long.valueOf(23L));
+        when(rs.getObject(2)).thenReturn(Long.valueOf(23L));
+        when(rs.getObject("id")).thenReturn(Long.valueOf(23L));
+        when(rs.getMetaData()).thenReturn(rsmd);
+        when(rp.toBean(rs, TestBean.class)).thenReturn(new TestBean());
+    }
 
-	@Test
-	public void testBeanMapHandlerClassOfVInt() throws Exception {
-		bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, 2);
-		handle();
-	}
+    private void handle() throws Exception {
+        res = bmh.handle(rs);
+        assertNotNull(res.get(Long.valueOf(23L)));
+    }
 
-	@Test
-	public void testBeanMapHandlerClassOfVString() throws Exception {
-		bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, "id");
-		handle();
-	}
-	
-	@Test
-	public void testEmptyResultSet() throws Exception {
-		when(Boolean.valueOf(rs.next())).thenReturn(Boolean.FALSE);
-		bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
-		res = bmh.handle(rs);
-		assertNull(res.get(Long.valueOf(23L)));
-	}
+    @Test
+    public void testBeanMapHandlerClassOfV() throws Exception {
+        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
+        handle();
+    }
+
+    @Test
+    public void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
+        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, rp);
+        handle();
+    }
+
+    @Test
+    public void testBeanMapHandlerClassOfVInt() throws Exception {
+        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, 2);
+        handle();
+    }
+
+    @Test
+    public void testBeanMapHandlerClassOfVString() throws Exception {
+        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, "id");
+        handle();
+    }
+
+    @Test
+    public void testEmptyResultSet() throws Exception {
+        when(Boolean.valueOf(rs.next())).thenReturn(Boolean.FALSE);
+        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
+        res = bmh.handle(rs);
+        assertNull(res.get(Long.valueOf(23L)));
+    }
 
 }
