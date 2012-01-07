@@ -278,7 +278,7 @@ public class BeanProcessor {
      *
      * @param value The value to be passed into the setter method.
      * @param type The setter's parameter type.
-     * @return boolean True if the value is compatible.
+     * @return boolean True if the value is compatible (null => true)
      */
     private boolean isCompatibleType(Object value, Class<?> type) {
         // Do object check first, then primitives
