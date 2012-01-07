@@ -252,7 +252,9 @@ public class BeanProcessor {
                 setter.invoke(target, new Object[]{value});
             } else {
               throw new SQLException(
-                  "Cannot set " + prop.getName() + ": incompatible types.");
+                  "Cannot set " + prop.getName() + ": incompatible types, cannot convert "
+                  + value.getClass().getName() + " to " + params[0].getName());
+                  // value cannot be null here because isCompatibleType allows null
             }
 
         } catch (IllegalArgumentException e) {
@@ -277,7 +279,7 @@ public class BeanProcessor {
      * of Integer into an int.
      *
      * @param value The value to be passed into the setter method.
-     * @param type The setter's parameter type.
+     * @param type The setter's parameter type (non-null)
      * @return boolean True if the value is compatible (null => true)
      */
     private boolean isCompatibleType(Object value, Class<?> type) {
