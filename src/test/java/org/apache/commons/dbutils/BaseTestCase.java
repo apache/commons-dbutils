@@ -119,4 +119,9 @@ public class BaseTestCase extends TestCase {
         assertEquals("Row 1 must contain correct number of columns", columnNames.length, row1.length);
         assertEquals("Row 1 must contain correct number of columns", columnNames.length, row2.length);
     }
+
+    public void testResultSets() throws Exception {
+        assertFalse("emptyResultSet should be empty", emptyResultSet.next());
+        // fails in SqlNullCheckedResultSetTest assertTrue("rs should not be empty", rs.next());
+    }
 }
