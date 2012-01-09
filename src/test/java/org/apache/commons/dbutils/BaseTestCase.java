@@ -113,4 +113,10 @@ public class BaseTestCase extends TestCase {
         return MockResultSet.create(metaData, rows);
     }
 
+    // Test which allows Eclipse to be run on full project (avoids no tests found)
+    // check that the rows are valid for the column definition
+    public void testCheckDataSizes() {
+        assertEquals("Row 1 must contain correct number of columns", columnNames.length, row1.length);
+        assertEquals("Row 1 must contain correct number of columns", columnNames.length, row2.length);
+    }
 }
