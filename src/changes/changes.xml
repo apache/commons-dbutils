@@ -41,7 +41,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.5" date="2011-12-11" description="Bugfixes and addition of BeanMapHandler">
-      <action due="wspeirs" type="update">
+      <action due-to="wspeirs" type="update">
         Updated pom.xml: Java 1.6 now required, clirr and compiler plugin removed 
       </action>
       <action due-to="Tiago Cavaleiro" type="fix" issue="DBUTILS-84">
