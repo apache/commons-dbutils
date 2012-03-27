@@ -41,6 +41,7 @@ public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>
      * @return a list of all rows in the result set
      * @throws SQLException error occurs
      */
+    @Override
     public List<T> handle(ResultSet rs) throws SQLException {
         List<T> rows = new ArrayList<T>();
         while (rs.next()) {

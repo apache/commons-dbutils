@@ -91,6 +91,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * @return string trimmed result
      * @throws Throwable error
      */
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {
 

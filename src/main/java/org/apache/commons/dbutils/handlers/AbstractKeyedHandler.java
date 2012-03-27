@@ -46,6 +46,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
+    @Override
     public Map<K, V> handle(ResultSet rs) throws SQLException {
         Map<K, V> result = createMap();
         while (rs.next()) {

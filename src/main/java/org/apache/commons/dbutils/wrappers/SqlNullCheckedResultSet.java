@@ -378,6 +378,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return null checked result
      * @throws Throwable error
      */
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {
 

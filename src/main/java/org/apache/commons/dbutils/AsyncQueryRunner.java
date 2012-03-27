@@ -143,6 +143,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @throws SQLException if a database access error occurs or one of the commands sent to the database fails.
          * @see PreparedStatement#executeBatch()
          */
+        @Override
         public int[] call() throws SQLException {
             int[] ret = null;
 
@@ -246,6 +247,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @throws SQLException if a database access error occurs.
          * @see ResultSetHandler#handle(ResultSet)
          */
+        @Override
         public T call() throws SQLException {
             ResultSet rs = null;
             T ret = null;
@@ -400,6 +402,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @throws SQLException if a database access error occurs.
          * @see PreparedStatement#executeUpdate()
          */
+        @Override
         public Integer call() throws SQLException {
             int rows = 0;
 

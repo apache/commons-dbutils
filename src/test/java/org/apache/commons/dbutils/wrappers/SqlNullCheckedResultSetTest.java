@@ -817,6 +817,7 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
      * Always return false for booleans, 0 for numerics, and null for Objects.
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
      */
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {
 
@@ -854,39 +855,48 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
 
 class SqlNullCheckedResultSetMockBlob implements Blob {
 
+    @Override
     public InputStream getBinaryStream() throws SQLException {
         return new ByteArrayInputStream(new byte[0]);
     }
 
+    @Override
     public byte[] getBytes(long param, int param1) throws SQLException {
         return new byte[0];
     }
 
+    @Override
     public long length() throws SQLException {
         return 0;
     }
 
+    @Override
     public long position(byte[] values, long param) throws SQLException {
         return 0;
     }
 
+    @Override
     public long position(Blob blob, long param) throws SQLException {
         return 0;
     }
 
+    @Override
     public void truncate(long len) throws SQLException {
 
     }
 
+    @Override
     public int setBytes(long pos, byte[] bytes) throws SQLException {
         return 0;
     }
 
+    @Override
     public int setBytes(long pos, byte[] bytes, int offset, int len)
         throws SQLException {
         return 0;
     }
 
+    @Override
     public OutputStream setBinaryStream(long pos) throws SQLException {
         return null;
     }
@@ -894,6 +904,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     /**
      * @throws SQLException  
      */
+    @Override
     public void free() throws SQLException {
 
     }
@@ -901,6 +912,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     /**
      * @throws SQLException  
      */
+    @Override
     public InputStream getBinaryStream(long pos, long length) throws SQLException {
       return null;
     }
@@ -909,46 +921,57 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
 
 class SqlNullCheckedResultSetMockClob implements Clob {
 
+    @Override
     public InputStream getAsciiStream() throws SQLException {
         return null;
     }
 
+    @Override
     public Reader getCharacterStream() throws SQLException {
         return null;
     }
 
+    @Override
     public String getSubString(long param, int param1) throws SQLException {
         return "";
     }
 
+    @Override
     public long length() throws SQLException {
         return 0;
     }
 
+    @Override
     public long position(Clob clob, long param) throws SQLException {
         return 0;
     }
 
+    @Override
     public long position(String str, long param) throws SQLException {
         return 0;
     }
 
+    @Override
     public void truncate(long len) throws SQLException {
 
     }
 
+    @Override
     public OutputStream setAsciiStream(long pos) throws SQLException {
         return null;
     }
 
+    @Override
     public Writer setCharacterStream(long pos) throws SQLException {
         return null;
     }
 
+    @Override
     public int setString(long pos, String str) throws SQLException {
         return 0;
     }
 
+    @Override
     public int setString(long pos, String str, int offset, int len)
         throws SQLException {
         return 0;
@@ -957,6 +980,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     /**
      * @throws SQLException  
      */
+    @Override
     public void free() throws SQLException {
 
     }
@@ -964,6 +988,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     /**
      * @throws SQLException  
      */
+    @Override
     public Reader getCharacterStream(long pos, long length) throws SQLException {
       return null;
     }
@@ -972,18 +997,22 @@ class SqlNullCheckedResultSetMockClob implements Clob {
 
 class SqlNullCheckedResultSetMockRef implements Ref {
 
+    @Override
     public String getBaseTypeName() throws SQLException {
         return "";
     }
 
+    @Override
     public Object getObject() throws SQLException {
         return null;
     }
 
+    @Override
     public void setObject(Object value) throws SQLException {
 
     }
 
+    @Override
     public Object getObject(Map<String,Class<?>> map) throws SQLException {
         return null;
     }

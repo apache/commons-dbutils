@@ -73,6 +73,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
+    @Override
     public Object[] handle(ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toArray(rs) : null;
     }

@@ -265,6 +265,7 @@ public class MockResultSet implements InvocationHandler {
         return (obj == null) ? null : obj.toString();
     }
 
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable {
 

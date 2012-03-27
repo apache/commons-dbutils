@@ -93,6 +93,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created array
      */
+    @Override
     public Object[] toArray(ResultSet rs) throws SQLException {
         ResultSetMetaData meta = rs.getMetaData();
         int cols = meta.getColumnCount();
@@ -116,6 +117,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
+    @Override
     public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
         return this.convert.toBean(rs, type);
     }
@@ -132,6 +134,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @return A <code>List</code> of beans with the given type in the order
      * they were returned by the <code>ResultSet</code>.
      */
+    @Override
     public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
         return this.convert.toBeanList(rs, type);
     }
@@ -146,6 +149,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created Map
      */
+    @Override
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
         Map<String, Object> result = new CaseInsensitiveHashMap();
         ResultSetMetaData rsmd = rs.getMetaData();

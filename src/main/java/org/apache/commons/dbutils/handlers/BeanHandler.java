@@ -75,6 +75,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
+    @Override
     public T handle(ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toBean(rs, this.type) : null;
     }

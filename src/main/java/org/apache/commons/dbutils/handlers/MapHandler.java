@@ -68,6 +68,7 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
+    @Override
     public Map<String, Object> handle(ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toMap(rs) : null;
     }

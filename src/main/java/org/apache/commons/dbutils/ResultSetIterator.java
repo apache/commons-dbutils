@@ -69,6 +69,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * @return boolean <code>true</code> if there are more rows
      * @throws RuntimeException if an SQLException occurs.
      */
+    @Override
     public boolean hasNext() {
         try {
             return !rs.isLast();
@@ -85,6 +86,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * @see java.util.Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
      */
+    @Override
     public Object[] next() {
         try {
             rs.next();
@@ -100,6 +102,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * @see java.util.Iterator#remove()
      * @throws RuntimeException if an SQLException occurs.
      */
+    @Override
     public void remove() {
         try {
             this.rs.deleteRow();
@@ -127,6 +130,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     public static Iterable<Object[]> iterable(final ResultSet rs) {
         return new Iterable<Object[]>() {
 
+            @Override
             public Iterator<Object[]> iterator() {
                 return new ResultSetIterator(rs);
             }
