@@ -19,7 +19,7 @@
                      Version ${version} 
                     RELEASE NOTES
 
-The ${developmentTeam} is pleased to announce the release of ${finalName}
+The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}
 
 ## This defaults to the ${project.description}
 $introduction.replaceAll("(?<!\015)\012", "
