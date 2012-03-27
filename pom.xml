@@ -204,6 +204,15 @@
     </dependency>
   </dependencies>
 
+  <distributionManagement>
+    <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
+    <site>
+      <id>apache.website</id>
+      <name>Apache Commons Site</name>
+      <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/${commons.componentid}</url>
+    </site>
+  </distributionManagement>
+
   <properties>
     <maven.compile.source>1.6</maven.compile.source>
     <maven.compile.target>1.6</maven.compile.target>
@@ -299,17 +308,6 @@
           <id>apache.website</id>
           <name>Apache Commons Release Candidate Staging Site</name>
           <url>${commons.deployment.protocol}://people.apache.org/www/people.apache.org/builds/commons/${commons.componentid}/${commons.release.version}/${commons.rc.version}/site</url>
-        </site>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>release</id>
-      <distributionManagement>
-        <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
-        <site>
-          <id>apache.website</id>
-          <name>Apache Commons Release Site</name>
-          <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/dbutils/</url>
         </site>
       </distributionManagement>
     </profile>
