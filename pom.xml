@@ -19,7 +19,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>23</version>
+    <version>24</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
@@ -285,7 +285,7 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <version>2.5</version>
         <configuration>
-          <targetJdk>1.5</targetJdk>
+          <targetJdk>${maven.compile.source}</targetJdk>
         </configuration>
       </plugin>
     </plugins>
