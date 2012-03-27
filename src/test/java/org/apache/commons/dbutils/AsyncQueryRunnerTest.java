@@ -28,6 +28,7 @@ import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
@@ -71,9 +72,10 @@ public class AsyncQueryRunnerTest {
     private void callGoodBatch(Connection conn, Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         Future<int[]> future = runner.batch(conn, "select * from blah where ? = ?", params);
-        verify(stmt, times(2)).addBatch();
 
         future.get();
+
+        verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we closed the connection
@@ -82,9 +84,10 @@ public class AsyncQueryRunnerTest {
     private void callGoodBatch(Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         Future<int[]> future = runner.batch("select * from blah where ? = ?", params);
-        verify(stmt, times(2)).addBatch();
 
         future.get();
+        
+        verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
@@ -129,9 +132,10 @@ public class AsyncQueryRunnerTest {
 
         try {
             future = runner.batch(sql, params);
-            verify(stmt, times(2)).addBatch();
-
+            
             future.get();
+            
+            verify(stmt, times(2)).addBatch();
             verify(stmt, times(1)).executeBatch();
             verify(stmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
@@ -157,30 +161,30 @@ public class AsyncQueryRunnerTest {
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullConnectionBatch() throws Exception {
         String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
-        runner.batch("select * from blah where ? = ?", params);
+        runner.batch("select * from blah where ? = ?", params).get();
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullSqlBatch() throws Exception {
         String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         when(meta.getParameterCount()).thenReturn(2);
 
-        runner.batch(null, params);
+        runner.batch(null, params).get();
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullParamsArgBatch() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
 
-        runner.batch("select * from blah where ? = ?", null);
+        runner.batch("select * from blah where ? = ?", null).get();
     }
 
     @Test
@@ -296,26 +300,26 @@ public class AsyncQueryRunnerTest {
         callQueryWithException("unit", "test", "fail");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullConnectionQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
-        runner.query("select * from blah where ? = ?", handler, "unit", "test");
+        runner.query("select * from blah where ? = ?", handler, "unit", "test").get();
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullSqlQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
 
-        runner.query(null, handler);
+        runner.query(null, handler).get();
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullHandlerQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
 
-        runner.query("select * from blah where ? = ?", null);
+        runner.query("select * from blah where ? = ?", null).get();
     }
 
     @Test
@@ -430,19 +434,19 @@ public class AsyncQueryRunnerTest {
         callUpdateWithException("unit", "test", "fail");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullConnectionUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
-        runner.update("select * from blah where ? = ?", "unit", "test");
+        runner.update("select * from blah where ? = ?", "unit", "test").get();
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testNullSqlUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
 
-        runner.update(null);
+        runner.update(null).get();
     }
 
     @Test
@@ -455,36 +459,9 @@ public class AsyncQueryRunnerTest {
     //
     // Random tests
     //
-    class MyBean {
-        private int a;
-        private double b;
-        private String c;
-
-        public int getA() {    return a; }
-        public void setA(int a) { this.a = a; }
-        public double getB() { return b; }
-        public void setB(double b) { this.b = b; }
-        public String getC() { return c; }
-        public void setC(String c) { this.c = c; }
-    }
-
-    @Test
-    public void testFillStatementWithBean() throws Exception {
-        MyBean bean = new MyBean();
-        when(meta.getParameterCount()).thenReturn(3);
-        runner.fillStatementWithBean(stmt, bean, new String[] { "a", "b", "c" });
-    }
-
-    @Test(expected=NullPointerException.class)
-    public void testFillStatementWithBeanNullNames() throws Exception {
-        MyBean bean = new MyBean();
-        when(meta.getParameterCount()).thenReturn(3);
-        runner.fillStatementWithBean(stmt, bean, new String[] { "a", "b", null });
-    }
-
-    @Test(expected=SQLException.class)
+    @Test(expected=ExecutionException.class)
     public void testBadPrepareConnection() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
-        runner.update("update blah set unit = test");
+        runner.update("update blah set unit = test").get();
     }
 }

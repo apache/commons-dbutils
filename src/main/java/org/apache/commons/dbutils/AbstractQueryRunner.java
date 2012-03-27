@@ -33,20 +33,21 @@ import java.util.Arrays;
 import javax.sql.DataSource;
 
 /**
- * The base class for QueryRunner & AsyncQueryRunner.
- * This class is thread safe.
+ * The base class for QueryRunner & AsyncQueryRunner. This class is thread safe.
+ *
  * @since 1.4 (mostly extracted from QueryRunner)
  */
 public abstract class AbstractQueryRunner {
     /**
-     * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried it yet)?
+     * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried
+     * it yet)?
      */
     private volatile boolean pmdKnownBroken = false;
 
     /**
      * The DataSource to retrieve connections from.
      */
-    protected final DataSource ds;
+    private final DataSource ds;
 
     /**
      * Default constructor, sets pmdKnownBroken to false and ds to null.
@@ -57,9 +58,13 @@ public abstract class AbstractQueryRunner {
 
     /**
      * Constructor to control the use of <code>ParameterMetaData</code>.
-     * @param pmdKnownBroken Some drivers don't support {@link ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
-     * and if it breaks, we'll remember not to use it again.
+     *
+     * @param pmdKnownBroken
+     *            Some drivers don't support
+     *            {@link ParameterMetaData#getParameterType(int) }; if
+     *            <code>pmdKnownBroken</code> is set to true, we won't even try
+     *            it; if false, we'll try it, and if it breaks, we'll remember
+     *            not to use it again.
      */
     public AbstractQueryRunner(boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
@@ -67,25 +72,31 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor to provide a <code>DataSource</code>.
-     * Methods that do not take a <code>Connection</code> parameter will
-     * retrieve connections from this <code>DataSource</code>.
+     * Constructor to provide a <code>DataSource</code>. Methods that do not
+     * take a <code>Connection</code> parameter will retrieve connections from
+     * this <code>DataSource</code>.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds
+     *            The <code>DataSource</code> to retrieve connections from.
      */
     public AbstractQueryRunner(DataSource ds) {
         this.ds = ds;
     }
 
     /**
-     * Constructor to provide a <code>DataSource</code> and control the use of <code>ParameterMetaData</code>.
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
+     * Constructor to provide a <code>DataSource</code> and control the use of
+     * <code>ParameterMetaData</code>. Methods that do not take a
+     * <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
-     * @param pmdKnownBroken Some drivers don't support {@link ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
-     * and if it breaks, we'll remember not to use it again.
+     * @param ds
+     *            The <code>DataSource</code> to retrieve connections from.
+     * @param pmdKnownBroken
+     *            Some drivers don't support
+     *            {@link ParameterMetaData#getParameterType(int) }; if
+     *            <code>pmdKnownBroken</code> is set to true, we won't even try
+     *            it; if false, we'll try it, and if it breaks, we'll remember
+     *            not to use it again.
      */
     public AbstractQueryRunner(DataSource ds, boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
@@ -95,8 +106,7 @@ public abstract class AbstractQueryRunner {
     /**
      * Returns the <code>DataSource</code> this runner is using.
      * <code>QueryRunner</code> methods always call this method to get the
-     * <code>DataSource</code> so subclasses can provide specialized
-     * behavior.
+     * <code>DataSource</code> so subclasses can provide specialized behavior.
      *
      * @return DataSource the runner is using
      */
@@ -105,11 +115,14 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Some drivers don't support {@link ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
-     * and if it breaks, we'll remember not to use it again.
+     * Some drivers don't support
+     * {@link ParameterMetaData#getParameterType(int) }; if
+     * <code>pmdKnownBroken</code> is set to true, we won't even try it; if
+     * false, we'll try it, and if it breaks, we'll remember not to use it
+     * again.
      *
-     * @return the flag to skip (or not) {@link ParameterMetaData#getParameterType(int) }
+     * @return the flag to skip (or not)
+     *         {@link ParameterMetaData#getParameterType(int) }
      * @since 1.4
      */
     public boolean isPmdKnownBroken() {
@@ -120,51 +133,60 @@ public abstract class AbstractQueryRunner {
      * Factory method that creates and initializes a
      * <code>PreparedStatement</code> object for the given SQL.
      * <code>QueryRunner</code> methods always call this method to prepare
-     * statements for them.  Subclasses can override this method to provide
-     * special PreparedStatement configuration if needed.  This implementation
+     * statements for them. Subclasses can override this method to provide
+     * special PreparedStatement configuration if needed. This implementation
      * simply calls <code>conn.prepareStatement(sql)</code>.
      *
-     * @param conn The <code>Connection</code> used to create the
-     * <code>PreparedStatement</code>
-     * @param sql The SQL statement to prepare.
+     * @param conn
+     *            The <code>Connection</code> used to create the
+     *            <code>PreparedStatement</code>
+     * @param sql
+     *            The SQL statement to prepare.
      * @return An initialized <code>PreparedStatement</code>.
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException
+     *             if a database access error occurs
      */
     protected PreparedStatement prepareStatement(Connection conn, String sql)
-        throws SQLException {
+    throws SQLException {
 
         return conn.prepareStatement(sql);
     }
 
     /**
-     * Factory method that creates and initializes a
-     * <code>Connection</code> object.  <code>QueryRunner</code> methods
-     * always call this method to retrieve connections from its DataSource.
-     * Subclasses can override this method to provide
-     * special <code>Connection</code> configuration if needed.  This
-     * implementation simply calls <code>ds.getConnection()</code>.
+     * Factory method that creates and initializes a <code>Connection</code>
+     * object. <code>QueryRunner</code> methods always call this method to
+     * retrieve connections from its DataSource. Subclasses can override this
+     * method to provide special <code>Connection</code> configuration if
+     * needed. This implementation simply calls <code>ds.getConnection()</code>.
      *
      * @return An initialized <code>Connection</code>.
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException
+     *             if a database access error occurs
      * @since DbUtils 1.1
      */
     protected Connection prepareConnection() throws SQLException {
         if (this.getDataSource() == null) {
-            throw new SQLException("QueryRunner requires a DataSource to be " +
-                "invoked in this way, or a Connection should be passed in");
+            throw new SQLException(
+                    "QueryRunner requires a DataSource to be "
+                    + "invoked in this way, or a Connection should be passed in");
         }
         return this.getDataSource().getConnection();
     }
 
     /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with
-     * the given objects.
-     * @param stmt PreparedStatement to fill
-     * @param params Query replacement parameters; <code>null</code> is a valid
-     * value to pass in.
-     * @throws SQLException if a database access error occurs
+     * Fill the <code>PreparedStatement</code> replacement parameters with the
+     * given objects.
+     *
+     * @param stmt
+     *            PreparedStatement to fill
+     * @param params
+     *            Query replacement parameters; <code>null</code> is a valid
+     *            value to pass in.
+     * @throws SQLException
+     *             if a database access error occurs
      */
-    public void fillStatement(PreparedStatement stmt, Object... params) throws SQLException {
+    public void fillStatement(PreparedStatement stmt, Object... params)
+    throws SQLException {
 
         // check the parameter count, if we can
         ParameterMetaData pmd = null;
@@ -189,14 +211,15 @@ public abstract class AbstractQueryRunner {
                 stmt.setObject(i + 1, params[i]);
             } else {
                 // VARCHAR works with many drivers regardless
-                // of the actual column type.  Oddly, NULL and
+                // of the actual column type. Oddly, NULL and
                 // OTHER don't work with Oracle's drivers.
                 int sqlType = Types.VARCHAR;
                 if (!pmdKnownBroken) {
                     try {
                         /*
-                         * It's not possible for pmdKnownBroken to change from true to false,
-                         * (once true, always true) so pmd cannot be null here.
+                         * It's not possible for pmdKnownBroken to change from
+                         * true to false, (once true, always true) so pmd cannot
+                         * be null here.
                          */
                         sqlType = pmd.getParameterType(i + 1);
                     } catch (SQLException e) {
@@ -236,11 +259,14 @@ public abstract class AbstractQueryRunner {
             try {
                 value = method.invoke(bean, new Object[0]);
             } catch (InvocationTargetException e) {
-                throw new RuntimeException("Couldn't invoke method: " + method, e);
+                throw new RuntimeException("Couldn't invoke method: " + method,
+                        e);
             } catch (IllegalArgumentException e) {
-                throw new RuntimeException("Couldn't invoke method with 0 arguments: " + method, e);
+                throw new RuntimeException(
+                        "Couldn't invoke method with 0 arguments: " + method, e);
             } catch (IllegalAccessException e) {
-                throw new RuntimeException("Couldn't invoke method: " + method, e);
+                throw new RuntimeException("Couldn't invoke method: " + method,
+                        e);
             }
             params[i] = value;
         }
@@ -251,26 +277,33 @@ public abstract class AbstractQueryRunner {
      * Fill the <code>PreparedStatement</code> replacement parameters with the
      * given object's bean property values.
      *
-     * @param stmt PreparedStatement to fill
-     * @param bean A JavaBean object
-     * @param propertyNames An ordered array of property names (these should match the
-     *                      getters/setters); this gives the order to insert values in the
-     *                      statement
-     * @throws SQLException If a database access error occurs
+     * @param stmt
+     *            PreparedStatement to fill
+     * @param bean
+     *            A JavaBean object
+     * @param propertyNames
+     *            An ordered array of property names (these should match the
+     *            getters/setters); this gives the order to insert values in the
+     *            statement
+     * @throws SQLException
+     *             If a database access error occurs
      */
-    public void fillStatementWithBean(PreparedStatement stmt, Object bean, String... propertyNames) throws SQLException {
+    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
+            String... propertyNames) throws SQLException {
         PropertyDescriptor[] descriptors;
         try {
             descriptors = Introspector.getBeanInfo(bean.getClass())
-                    .getPropertyDescriptors();
+            .getPropertyDescriptors();
         } catch (IntrospectionException e) {
-            throw new RuntimeException("Couldn't introspect bean " + bean.getClass().toString(), e);
+            throw new RuntimeException("Couldn't introspect bean "
+                    + bean.getClass().toString(), e);
         }
         PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
             String propertyName = propertyNames[i];
             if (propertyName == null) {
-                throw new NullPointerException("propertyName can't be null: " + i);
+                throw new NullPointerException("propertyName can't be null: "
+                        + i);
             }
             boolean found = false;
             for (int j = 0; j < descriptors.length; j++) {
@@ -292,18 +325,22 @@ public abstract class AbstractQueryRunner {
     /**
      * Throws a new exception with a more informative error message.
      *
-     * @param cause The original exception that will be chained to the new
-     * exception when it's rethrown.
+     * @param cause
+     *            The original exception that will be chained to the new
+     *            exception when it's rethrown.
      *
-     * @param sql The query that was executing when the exception happened.
+     * @param sql
+     *            The query that was executing when the exception happened.
      *
-     * @param params The query replacement parameters; <code>null</code> is a
-     * valid value to pass in.
+     * @param params
+     *            The query replacement parameters; <code>null</code> is a valid
+     *            value to pass in.
      *
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException
+     *             if a database access error occurs
      */
     protected void rethrow(SQLException cause, String sql, Object... params)
-        throws SQLException {
+    throws SQLException {
 
         String causeMessage = cause.getMessage();
         if (causeMessage == null) {
@@ -329,14 +366,15 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Wrap the <code>ResultSet</code> in a decorator before processing it.
-     * This implementation returns the <code>ResultSet</code> it is given
-     * without any decoration.
+     * Wrap the <code>ResultSet</code> in a decorator before processing it. This
+     * implementation returns the <code>ResultSet</code> it is given without any
+     * decoration.
      *
      * <p>
      * Often, the implementation of this method can be done in an anonymous
      * inner class like this:
      * </p>
+     *
      * <pre>
      * QueryRunner run = new QueryRunner() {
      *     protected ResultSet wrap(ResultSet rs) {
@@ -345,8 +383,9 @@ public abstract class AbstractQueryRunner {
      * };
      * </pre>
      *
-     * @param rs The <code>ResultSet</code> to decorate; never
-     * <code>null</code>.
+     * @param rs
+     *            The <code>ResultSet</code> to decorate; never
+     *            <code>null</code>.
      * @return The <code>ResultSet</code> wrapped in some decorator.
      */
     protected ResultSet wrap(ResultSet rs) {
@@ -354,11 +393,14 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Close a <code>Connection</code>.  This implementation avoids closing if
-     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
+     * Close a <code>Connection</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
-     * @param conn Connection to close
-     * @throws SQLException if a database access error occurs
+     *
+     * @param conn
+     *            Connection to close
+     * @throws SQLException
+     *             if a database access error occurs
      * @since DbUtils 1.1
      */
     protected void close(Connection conn) throws SQLException {
@@ -366,11 +408,14 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Close a <code>Statement</code>.  This implementation avoids closing if
-     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
+     * Close a <code>Statement</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
-     * @param stmt Statement to close
-     * @throws SQLException if a database access error occurs
+     *
+     * @param stmt
+     *            Statement to close
+     * @throws SQLException
+     *             if a database access error occurs
      * @since DbUtils 1.1
      */
     protected void close(Statement stmt) throws SQLException {
@@ -378,11 +423,14 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Close a <code>ResultSet</code>.  This implementation avoids closing if
-     * null and does <strong>not</strong> suppress any exceptions.  Subclasses
+     * Close a <code>ResultSet</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
-     * @param rs ResultSet to close
-     * @throws SQLException if a database access error occurs
+     *
+     * @param rs
+     *            ResultSet to close
+     * @throws SQLException
+     *             if a database access error occurs
      * @since DbUtils 1.1
      */
     protected void close(ResultSet rs) throws SQLException {
