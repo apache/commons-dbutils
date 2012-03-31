@@ -43,6 +43,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      *
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      * @param queryRunner the {@code QueryRunner} instance to use for the queries.
+     * @since DbUtils 1.5
      */
     public AsyncQueryRunner(ExecutorService executorService, QueryRunner queryRunner) {
         this.executorService = executorService;
