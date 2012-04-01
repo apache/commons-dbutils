@@ -1,71 +1,33 @@
-<!--
-   Licensed to the Apache Software Foundation (ASF) under one or more
-   contributor license agreements.  See the NOTICE file distributed with
-   this work for additional information regarding copyright ownership.
-   The ASF licenses this file to You under the Apache License, Version 2.0
-   (the "License"); you may not use this file except in compliance with
-   the License.  You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+              Apache Commons DbUtils 
+                     Version 1.5 
+                    RELEASE NOTES
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
--->
-$Id$
+The Commons DbUtils team is pleased to announce the release of Commons DbUtils 1.5
+
+The Apache Commons-DbUtils package is a set of
+  Java utility classes for easing JDBC development.
+
+Bugfixes and addition of BeanMapHandler
+
+Changes in this version include:
+
+New features:
+o DBUTILS-67:  Added BeanMapHandler Thanks to Michael Osipov. 
+
+Fixed Bugs:
+o DBUTILS-84:  Added case for SQLXML Thanks to Tiago Cavaleiro. 
+o DBUTILS-73:  Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor Thanks to Sebb. 
+
+Changes:
+o           Updated pom.xml: Java 1.6 now required, clirr and compiler plugin removed Thanks to wspeirs. 
+o DBUTILS-77:  Updated documentation to better reflect the use of pmdKnownBroken 
+o DBUTILS-66:  Added generics to ScalarHandler, ColumnHandler, and KeyedHandler Thanks to Michael Osipov. 
 
 
-                          Commons DbUtils Package
-                                Version 1.5
-                               Release Notes
+For complete information on Commons DbUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons DbUtils website:
+
+http://commons.apache.org/dbutils/
 
 
-INTRODUCTION
-============
-
-This is a maintenance release with new features. New projects are encouraged to
-use this release of dbutils. There is no urgency for existing projects to
-upgrade.
-
-IMPORTANT NOTES
-================
-
-BREAKING CHANGES:
-
- * NONE.
-
-DEPENDENCIES
-=============
-
-Commons DbUtils 1.5 has no dependencies.
-
-NEW FEATURES
-=============
-
- * [DBUTILS-67] Add a BeanMapHandler
-
-BUGS FROM PREVIOUS RELEASE
-===========================
-
- * [DBUTILS-77] Updated documentation to better reflect the use of pmdKnownBroken
- * [DBUTILS-73] Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor
-
-IMPROVEMENTS OVER PREVIOUS RELEASE
-===================================
-
- * [DBUTILS-84] BeanProcessor method processColumn should take SQLXML in consideration
- * [DBUTILS-75] efficient usage from findbugs
- * [DBUTILS-66] ScalarHandler, ColumnHandler and KeyedHandler are missing generics
-
-DEPRECATIONS
-============
-
- * NONE
-
-OTHER NOTES
-============
-
- * NONE
- 
