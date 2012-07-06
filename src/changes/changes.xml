@@ -50,8 +50,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action due-to="wspeirs" type="update">
         Updated pom.xml: Java 1.6 now required, clirr and compiler plugin removed 
       </action>
-      <action due-to="Tiago Cavaleiro" type="fix" issue="DBUTILS-84">
-        Added case for SQLXML
+      <action due-to="Tiago Cavaleiro" dev="wspeirs" type="fix" issue="DBUTILS-84">
+        BeanProcessor method processColumn should take SQLXML in consideration
       </action>
       <action dev="wspeirs" type="update" issue="DBUTILS-77">
         Updated documentation to better reflect the use of pmdKnownBroken
