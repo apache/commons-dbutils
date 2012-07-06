@@ -68,7 +68,7 @@ public class BeanProcessor {
     /**
      * ResultSet column to bean property name overrides.
      */
-    private Map<String, String> columnToPropertyOverrides = new HashMap<String, String>();
+    private final Map<String, String> columnToPropertyOverrides;
 
     static {
         primitiveDefaults.put(Integer.TYPE, Integer.valueOf(0));
@@ -85,7 +85,7 @@ public class BeanProcessor {
      * Constructor for BeanProcessor.
      */
     public BeanProcessor() {
-        super();
+        this(new HashMap<String, String>());
     }
 
     /**
