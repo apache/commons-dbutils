@@ -65,6 +65,11 @@ public class BeanProcessor {
      */
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
 
+    /**
+     * ResultSet column to bean property name overrides.
+     */
+    private Map<String, String> columnToPropertyOverrides = new HashMap<String, String>();
+
     static {
         primitiveDefaults.put(Integer.TYPE, Integer.valueOf(0));
         primitiveDefaults.put(Short.TYPE, Short.valueOf((short) 0));
@@ -81,6 +86,20 @@ public class BeanProcessor {
      */
     public BeanProcessor() {
         super();
+    }
+
+    /**
+     * Constructor for BeanProcessor configured with column to property name overrides.
+     *
+     * @param columnToPropertyOverrides ResultSet column to bean property name overrides
+     * @since 1.5
+     */
+    public BeanProcessor(Map<String, String> columnToPropertyOverrides) {
+        super();
+        if (columnToPropertyOverrides == null) {
+            throw new IllegalArgumentException("columnToPropertyOverrides map cannot be null");
+        }
+        this.columnToPropertyOverrides = columnToPropertyOverrides;
     }
 
     /**
@@ -391,9 +410,13 @@ public class BeanProcessor {
             if (null == columnName || 0 == columnName.length()) {
               columnName = rsmd.getColumnName(col);
             }
+            String propertyName = columnToPropertyOverrides.get(columnName);
+            if (propertyName == null) {
+                propertyName = columnName;
+            }
             for (int i = 0; i < props.length; i++) {
 
-                if (columnName.equalsIgnoreCase(props[i].getName())) {
+                if (propertyName.equalsIgnoreCase(props[i].getName())) {
                     columnToProperty[col] = i;
                     break;
                 }

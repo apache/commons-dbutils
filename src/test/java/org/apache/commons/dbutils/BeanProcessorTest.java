@@ -20,6 +20,8 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BeanProcessorTest extends BaseTestCase {
 
@@ -45,6 +47,8 @@ public class BeanProcessorTest extends BaseTestCase {
 
         private String three;
 
+        private String four;
+
         public String getOne() {
             return one;
         }
@@ -68,11 +72,35 @@ public class BeanProcessorTest extends BaseTestCase {
         public void setThree(String three) {
             this.three = three;
         }
+
+        public String getFour() {
+            return four;
+        }
+
+        public void setFour(String four) {
+            this.four = four;
+        }
     }
 
     public void testMapColumnToProperties() throws Exception {
         String[] columnNames = { "test", "test", "three" };
         String[] columnLabels = { "one", "two", null };
+        ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
+                new MockResultSetMetaData(columnNames, columnLabels));
+        PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
+
+        int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        for (int i = 1; i < columns.length; i++) {
+            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
+        }
+    }
+
+    public void testMapColumnToPropertiesWithOverrides() throws Exception {
+        Map<String, String> columnToPropertyOverrides = new HashMap<String, String>();
+        columnToPropertyOverrides.put("five", "four");
+        BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
+        String[] columnNames = { "test", "test", "three", "five" };
+        String[] columnLabels = { "one", "two", null, null };
         ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
                 new MockResultSetMetaData(columnNames, columnLabels));
         PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();

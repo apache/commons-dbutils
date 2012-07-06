@@ -44,6 +44,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.5" date="2012-??-??" description="Bugfixes and addition of BeanMapHandler">
+      <action dev="simonetripodi" due-to="Stevo Slavic" type="update" issue="DBUTILS-91">
+        Enhance BasicRowProcessor to have row mapping easier to configure
+      </action>
       <action due-to="wspeirs" type="update">
         Updated pom.xml: Java 1.6 now required, clirr and compiler plugin removed 
       </action>
