@@ -43,7 +43,7 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="1.5" date="2012-??-??" description="Bugfixes and addition of BeanMapHandler">
+    <release version="1.5" date="2012-07-19" description="Bugfixes and addition of BeanMapHandler">
       <action dev="simonetripodi" due-to="Stevo Slavic" type="update" issue="DBUTILS-91">
         Enhance BasicRowProcessor to have row mapping easier to configure
       </action>
