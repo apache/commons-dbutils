@@ -16,6 +16,7 @@ New features:
 o DBUTILS-67:  Added BeanMapHandler Thanks to Michael Osipov. 
 
 Fixed Bugs:
+o DBUTILS-93:  Source assembly artifact fails to build a site because of missing pmd-ruleset.xml Thanks to Stevo Slavic. 
 o DBUTILS-84:  BeanProcessor method processColumn should take SQLXML in consideration Thanks to Tiago Cavaleiro. 
 o DBUTILS-73:  Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor Thanks to Sebb. 
 
