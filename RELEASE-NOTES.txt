@@ -21,6 +21,7 @@ o DBUTILS-84:  BeanProcessor method processColumn should take SQLXML in consider
 o DBUTILS-73:  Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor Thanks to Sebb. 
 
 Changes:
+o DBUTILS-94:  Provide test coverage for org.apache.commons.dbutils.DbUtils Thanks to Benedikt Ritter. 
 o DBUTILS-91:  Enhance BasicRowProcessor to have row mapping easier to configure Thanks to Stevo Slavic. 
 o           Updated pom.xml: Java 1.6 now required, clirr and compiler plugin removed Thanks to wspeirs. 
 o DBUTILS-77:  Updated documentation to better reflect the use of pmdKnownBroken 
