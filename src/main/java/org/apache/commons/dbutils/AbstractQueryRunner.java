@@ -48,6 +48,7 @@ public abstract class AbstractQueryRunner {
      * The DataSource to retrieve connections from.
      * @deprecated Access to this field should be through {@link #getDataSource()}.
      */
+    @Deprecated
     protected final DataSource ds;
 
     /**
