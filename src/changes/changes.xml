@@ -43,7 +43,7 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="1.5" date="2012-07-19" description="Bugfixes and addition of BeanMapHandler">
+    <release version="1.5" date="2012-07-20" description="Bugfixes and addition of BeanMapHandler">
       <action dev="simonetripodi" due-to="Benedikt Ritter" type="update" issue="DBUTILS-94">
         Provide test coverage for org.apache.commons.dbutils.DbUtils
       </action>
