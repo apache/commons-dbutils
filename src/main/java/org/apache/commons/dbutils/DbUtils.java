@@ -16,11 +16,17 @@
  */
 package org.apache.commons.dbutils;
 
+import static java.sql.DriverManager.registerDriver;
+
 import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
 import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverPropertyInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * A collection of JDBC helper methods.  This class is thread safe.
@@ -193,13 +199,30 @@ public final class DbUtils {
      */
     public static boolean loadDriver(ClassLoader classLoader, String driverClassName) {
         try {
-            classLoader.loadClass(driverClassName).newInstance();
-            return true;
+            Class<?> loadedClass = classLoader.loadClass(driverClassName);
 
-        } catch (IllegalAccessException e) {
-            // Constructor is private, OK for DriverManager contract
-            return true;
+            if (!Driver.class.isAssignableFrom(loadedClass)) {
+                return false;
+            }
 
+            @SuppressWarnings("unchecked") // guarded by previous check
+            Class<Driver> driverClass = (Class<Driver>) loadedClass;
+            Constructor<Driver> driverConstructor = driverClass.getConstructor();
+
+            // make Constructor accessible if it is private
+            boolean isConstructorAccessible = driverConstructor.isAccessible();
+            if (!isConstructorAccessible) {
+                driverConstructor.setAccessible(true);
+            }
+
+            try {
+                Driver driver = driverConstructor.newInstance();
+                registerDriver(new DriverProxy(driver));
+            } finally {
+                driverConstructor.setAccessible(isConstructorAccessible);
+            }
+
+            return true;
         } catch (Exception e) {
             return false;
 
@@ -301,6 +324,77 @@ public final class DbUtils {
         } catch (SQLException e) { // NOPMD
             // quiet
         }
+    }
+
+    /**
+     * Simple {@link Driver} proxy class that proxies a JDBC Driver loaded dynamically.
+     *
+     * @since 1.6
+     */
+    private static final class DriverProxy implements Driver {
+
+        /**
+         * The adapted JDBC Driver loaded dynamically.
+         */
+        private final Driver adapted;
+
+        /**
+         * Creates a new JDBC Driver that adapts a JDBC Driver loaded dynamically.
+         *
+         * @param adapted the adapted JDBC Driver loaded dynamically.
+         */
+        public DriverProxy(Driver adapted) {
+            this.adapted = adapted;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean acceptsURL(String url) throws SQLException {
+            return adapted.acceptsURL(url);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Connection connect(String url, Properties info) throws SQLException {
+            return adapted.connect(url, info);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getMajorVersion() {
+            return adapted.getMajorVersion();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getMinorVersion() {
+            return adapted.getMinorVersion();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
+            return adapted.getPropertyInfo(url, info);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean jdbcCompliant() {
+            return adapted.jdbcCompliant();
+        }
+
     }
 
 }

@@ -43,6 +43,12 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
+    <release version="1.6" date="201?-??-??" description="Bugfixes">
+      <action dev="simonetripodi" due-to="yuyf" type="fix" issue="DBUTILS-96">
+        DbUtils#loadDriver(ClassLoader,String) makes DriverManager throwing "No suitable driver found for jdbc"
+        if ClassLoader is not the System's one
+      </action>
+    </release>
     <release version="1.5" date="2012-07-20" description="Bugfixes and addition of BeanMapHandler">
       <action dev="simonetripodi" due-to="Benedikt Ritter" type="update" issue="DBUTILS-94">
         Provide test coverage for org.apache.commons.dbutils.DbUtils
