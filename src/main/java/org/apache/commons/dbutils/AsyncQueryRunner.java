@@ -552,4 +552,65 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         });
     }
 
+    /**
+     * Executes {@link QueryRunner#insert(String, ResultSetHandler)} asynchronously.
+     * 
+     * @see QueryRunner#insert(String, ResultSetHandler)
+     */
+    public <T> Future<T> insert(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
+    	return executorService.submit(new Callable<T>() {
+    
+    	    @Override
+    	    public T call() throws Exception {
+    		return queryRunner.insert(sql, rsh);
+    	    }
+    	    
+    	});
+    }
+    
+    /**
+     * Executes {@link QueryRunner#insert(String, ResultSetHandler, Object...)} asynchronously.
+     * 
+     * @see QueryRunner#insert(String, ResultSetHandler, Object...)
+     */
+    public <T> Future<T> insert(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
+    	return executorService.submit(new Callable<T>() {
+    
+    	    @Override
+    	    public T call() throws Exception {
+    		return queryRunner.insert(sql, rsh, params);
+    	    }
+    	});
+    }
+    
+    /**
+     * Executes {@link QueryRunner#insert(Connection, String, ResultSetHandler)} asynchronously.
+     * 
+     * @see QueryRunner#insert(Connection, String, ResultSetHandler)
+     */
+    public <T> Future<T> insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
+    	return executorService.submit(new Callable<T>() {
+    
+    	    @Override
+    	    public T call() throws Exception {
+    		return queryRunner.insert(conn, sql, rsh);
+    	    }
+    	});
+    }
+    
+    /**
+     * Executes {@link QueryRunner#insert(Connection, String, ResultSetHandler, Object...)} asynchronously.
+     * 
+     * @see QueryRunner#insert(Connection, String, ResultSetHandler, Object...)
+     */
+    public <T> Future<T> insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
+    	return executorService.submit(new Callable<T>() {
+    
+    	    @Override
+    	    public T call() throws Exception {
+    		return queryRunner.insert(conn, sql, rsh, params);
+    	    }
+    	});
+    }
+
 }

@@ -19,6 +19,7 @@ package org.apache.commons.dbutils;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -432,6 +433,22 @@ public class AsyncQueryRunnerTest {
     @Test
     public void testTooManyParamsUpdate() throws Exception {
         callUpdateWithException("unit", "test", "fail");
+    }
+    
+    @Test
+    public void testInsertUsesGivenQueryRunner() throws Exception {
+    	QueryRunner mockQueryRunner = mock(QueryRunner.class);
+    	runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
+    	
+    	runner.insert("1", handler);
+    	runner.insert("2", handler, "param1");
+    	runner.insert(conn, "3", handler);
+    	runner.insert(conn, "4", handler, "param1");
+    	
+    	verify(mockQueryRunner).insert("1", handler);
+    	verify(mockQueryRunner).insert("2", handler, "param1");
+    	verify(mockQueryRunner).insert(conn, "3", handler);
+    	verify(mockQueryRunner).insert(conn, "4", handler, "param1");
     }
 
     @Test(expected=ExecutionException.class)

@@ -18,7 +18,9 @@ package org.apache.commons.dbutils;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -29,10 +31,13 @@ import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.handlers.ArrayHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -391,6 +396,25 @@ public class QueryRunnerTest {
     public void testGoodUpdateDefaultConstructor() throws Exception {
         runner = new QueryRunner();
         callGoodUpdate(conn);
+    }
+    
+    @Test
+    public void testGoodInsert() throws Exception {
+        results = mock(ResultSet.class);
+        
+        when(meta.getParameterCount()).thenReturn(2);
+        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmt);
+        when(stmt.getGeneratedKeys()).thenReturn(results);
+        when(results.next()).thenReturn(true).thenReturn(false);
+        when(results.getObject(1)).thenReturn(1L);
+	
+        Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<Long>(), "unit", "test");
+
+        verify(stmt, times(1)).executeUpdate();
+        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(conn, times(1)).close();    // make sure we closed the connection
+        
+        Assert.assertEquals(1L, generatedKey.longValue());
     }
 
     // helper method for calling batch when an exception is expected

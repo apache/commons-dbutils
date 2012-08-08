@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.sql.DataSource;
 
@@ -498,5 +499,60 @@ public class QueryRunner extends AbstractQueryRunner {
 
         return rows;
     }
+    
+    public <T> T insert(String sql, ResultSetHandler<T> rsh) throws SQLException {
+        return insert(this.prepareConnection(), true, sql, rsh, (Object[]) null);
+    }
+    
+    public <T> T insert(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+        return insert(this.prepareConnection(), true, sql, rsh, params);
+    }
+    
+    public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
+        return insert(conn, false, sql, rsh, (Object[]) null);
+    }
+    
+    public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+        return insert(conn, false, sql, rsh, params);
+    }
 
+    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    	if (conn == null) {
+    	    throw new SQLException("Null connection");
+    	}
+    
+    	if (sql == null) {
+    	    if (closeConn) {
+    		close(conn);
+    	    }
+    	    throw new SQLException("Null SQL statement");
+    	}
+    
+    	if (rsh == null) {
+    	    if (closeConn) {
+    		close(conn);
+    	    }
+    	    throw new SQLException("Null ResultSetHandler");
+    	}
+    	
+        PreparedStatement stmt = null;
+        T generatedKeys = null;
+
+        try {
+            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            this.fillStatement(stmt, params);
+            stmt.executeUpdate();
+            ResultSet resultSet = stmt.getGeneratedKeys();
+            generatedKeys = rsh.handle(resultSet);
+        } catch (SQLException e) {
+            this.rethrow(e, sql, params);
+        } finally {
+            close(stmt);
+            if (closeConn) {
+                close(conn);
+            }
+        }
+        
+        return generatedKeys;
+    }
 }
