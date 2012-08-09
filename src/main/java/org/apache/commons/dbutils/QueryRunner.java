@@ -500,22 +500,74 @@ public class QueryRunner extends AbstractQueryRunner {
         return rows;
     }
 
+    /**
+     * TODO fill me!
+     *
+     * @param sql
+     * @param rsh
+     * @return
+     * @throws SQLException
+     * @since 1.6
+     */
     public <T> T insert(String sql, ResultSetHandler<T> rsh) throws SQLException {
         return insert(this.prepareConnection(), true, sql, rsh, (Object[]) null);
     }
 
+    /**
+     * TODO fill me!
+     *
+     * @param sql
+     * @param rsh
+     * @param params
+     * @return
+     * @throws SQLException
+     * @since 1.6
+     */
     public <T> T insert(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         return insert(this.prepareConnection(), true, sql, rsh, params);
     }
 
+    /**
+     * TODO fill me!
+     *
+     * @param conn
+     * @param sql
+     * @param rsh
+     * @return
+     * @throws SQLException
+     * @since 1.6
+     */
     public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
         return insert(conn, false, sql, rsh, (Object[]) null);
     }
 
+    /**
+     * TODO fill me!
+     *
+     * @param conn
+     * @param sql
+     * @param rsh
+     * @param params
+     * @return
+     * @throws SQLException
+     * @since 1.6
+     */
     public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         return insert(conn, false, sql, rsh, params);
     }
 
+    /**
+     * TODO fill me!
+     *
+     * @param conn
+     * @param closeConn
+     * @param sql
+     * @param rsh
+     * @param params
+     * @return
+     * @throws SQLException
+     * @since 1.6
+     */
     private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
