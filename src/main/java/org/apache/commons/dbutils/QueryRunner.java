@@ -575,14 +575,14 @@ public class QueryRunner extends AbstractQueryRunner {
 
         if (sql == null) {
             if (closeConn) {
-            close(conn);
+                close(conn);
             }
             throw new SQLException("Null SQL statement");
         }
 
         if (rsh == null) {
             if (closeConn) {
-            close(conn);
+                close(conn);
             }
             throw new SQLException("Null ResultSetHandler");
         }
