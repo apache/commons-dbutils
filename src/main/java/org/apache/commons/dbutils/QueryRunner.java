@@ -499,42 +499,42 @@ public class QueryRunner extends AbstractQueryRunner {
 
         return rows;
     }
-    
+
     public <T> T insert(String sql, ResultSetHandler<T> rsh) throws SQLException {
         return insert(this.prepareConnection(), true, sql, rsh, (Object[]) null);
     }
-    
+
     public <T> T insert(String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         return insert(this.prepareConnection(), true, sql, rsh, params);
     }
-    
+
     public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
         return insert(conn, false, sql, rsh, (Object[]) null);
     }
-    
+
     public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
         return insert(conn, false, sql, rsh, params);
     }
 
     private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
-    	if (conn == null) {
-    	    throw new SQLException("Null connection");
-    	}
-    
-    	if (sql == null) {
-    	    if (closeConn) {
-    		close(conn);
-    	    }
-    	    throw new SQLException("Null SQL statement");
-    	}
-    
-    	if (rsh == null) {
-    	    if (closeConn) {
-    		close(conn);
-    	    }
-    	    throw new SQLException("Null ResultSetHandler");
-    	}
-    	
+        if (conn == null) {
+            throw new SQLException("Null connection");
+        }
+
+        if (sql == null) {
+            if (closeConn) {
+            close(conn);
+            }
+            throw new SQLException("Null SQL statement");
+        }
+
+        if (rsh == null) {
+            if (closeConn) {
+            close(conn);
+            }
+            throw new SQLException("Null ResultSetHandler");
+        }
+
         PreparedStatement stmt = null;
         T generatedKeys = null;
 
@@ -552,7 +552,7 @@ public class QueryRunner extends AbstractQueryRunner {
                 close(conn);
             }
         }
-        
+
         return generatedKeys;
     }
 }
