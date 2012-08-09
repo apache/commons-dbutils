@@ -562,7 +562,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public T call() throws Exception {
-            return queryRunner.insert(sql, rsh);
+                return queryRunner.insert(sql, rsh);
             }
 
         });
@@ -578,7 +578,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public T call() throws Exception {
-            return queryRunner.insert(sql, rsh, params);
+                return queryRunner.insert(sql, rsh, params);
             }
         });
     }
@@ -593,7 +593,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public T call() throws Exception {
-            return queryRunner.insert(conn, sql, rsh);
+                return queryRunner.insert(conn, sql, rsh);
             }
         });
     }
@@ -608,7 +608,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public T call() throws Exception {
-            return queryRunner.insert(conn, sql, rsh, params);
+                return queryRunner.insert(conn, sql, rsh, params);
             }
         });
     }
