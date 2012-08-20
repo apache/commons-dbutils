@@ -44,6 +44,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.6" date="201?-??-??" description="Bugfixes and addition of insert methods">
+      <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
+        Add missing JavaDoc to QueryRunner#insert
+      </action>
       <action dev="wspeirs" due-to="Moandji Ezana" type="add" issue="DBUTILS-87">
         Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.
       </action>
