@@ -47,6 +47,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
         Add missing JavaDoc to QueryRunner#insert
       </action>
+      <action dev="simonetripodi" type="add" issue="DBUTILS-97">
+        Add an Abstract ResultSetHandler implementation in order to reduce redundant 'resultSet' variable invocation
+      </action>
       <action dev="wspeirs" due-to="Moandji Ezana" type="add" issue="DBUTILS-87">
         Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.
       </action>
