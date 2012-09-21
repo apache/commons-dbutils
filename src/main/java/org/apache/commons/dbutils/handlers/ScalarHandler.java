@@ -102,12 +102,9 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
         if (rs.next()) {
             if (this.columnName == null) {
                 return (T) rs.getObject(this.columnIndex);
-            } else {
-                return (T) rs.getObject(this.columnName);
             }
-
-        } else {
-            return null;
+            return (T) rs.getObject(this.columnName);
         }
+        return null;
     }
 }
