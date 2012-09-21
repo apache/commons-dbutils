@@ -98,9 +98,8 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
     protected T handleRow(ResultSet rs) throws SQLException {
         if (this.columnName == null) {
             return (T) rs.getObject(this.columnIndex);
-        } else {
-            return (T) rs.getObject(this.columnName);
         }
+        return (T) rs.getObject(this.columnName);
    }
 
 }
