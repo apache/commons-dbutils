@@ -25,7 +25,9 @@ import java.sql.Driver;
 import java.sql.DriverPropertyInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
+import java.util.logging.Logger;
 import java.util.Properties;
 
 /**
@@ -393,6 +395,13 @@ public final class DbUtils {
         @Override
         public boolean jdbcCompliant() {
             return adapted.jdbcCompliant();
+        }
+
+        /**
+         * Java 1.7 method.
+         */
+        public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+            throw new SQLFeatureNotSupportedException();
         }
 
     }
