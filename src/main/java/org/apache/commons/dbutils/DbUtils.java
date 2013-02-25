@@ -17,7 +17,6 @@
 package org.apache.commons.dbutils;
 
 import static java.sql.DriverManager.registerDriver;
-
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.sql.Connection;
@@ -27,8 +26,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
-import java.util.logging.Logger;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * A collection of JDBC helper methods.  This class is thread safe.
@@ -36,14 +35,11 @@ import java.util.Properties;
 public final class DbUtils {
 
     /**
-     * Default constructor.
-     *
-     * Utility classes should not have a public or default constructor,
-     * but this one preserves retro-compatibility.
+     * Utility classes do not have a public default constructor.
      *
      * @since 1.4
      */
-    public DbUtils() {
+    private DbUtils() {
         // do nothing
     }
 
@@ -400,6 +396,7 @@ public final class DbUtils {
         /**
          * Java 1.7 method.
          */
+        @SuppressWarnings("unused")
         public Logger getParentLogger() throws SQLFeatureNotSupportedException {
             throw new SQLFeatureNotSupportedException();
         }
