@@ -2,6 +2,7 @@ package org.apache.commons.dbutils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Types;
 
 /**
  * This class provides the ability to execute a batch of statements.
@@ -30,9 +31,32 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      */
     @Override
     public BatchExecutor bind(final String name, final Object value) throws SQLException {
-        bind(name, value, false);
-        
-        return this;
+        return bind(name, value, false);
+    }
+    
+    /**
+     * Binds null to a parameter.
+     * Types.VARCHAR is used as the type's parameter.
+     * This usually works, but fails with some Oracle and MS SQL drivers.
+     * @param name the name of the parameter.
+     * @return this execution object to provide the fluent style.
+     * @throws SQLException throw if the parameter is not found, already bound, or there is an issue binding null.
+     */
+    @Override
+    public BatchExecutor bindNull(final String name) throws SQLException {
+        return bindNull(name, Types.VARCHAR, false);
+    }
+    
+    /**
+     * Binds null to a parameter, specifying the parameter's type.
+     * @param name the name of the parameter.
+     * @param sqlType the type of the parameter.
+     * @return this execution object to provide the fluent style.
+     * @throws SQLException throw if the parameter is not found, already bound, or there is an issue binding null.
+     */
+    @Override
+    public BatchExecutor bindNull(final String name, final int sqlType) throws SQLException {
+        return bindNull(name, sqlType, false);
     }
     
     /**

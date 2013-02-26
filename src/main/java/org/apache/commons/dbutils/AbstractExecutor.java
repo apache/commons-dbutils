@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,16 +137,72 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @return this execution object to provide the fluent style.
      * @throws SQLException thrown if the parameter is not found, already bound, or there is an issue binding it.
      */
-    public T bind(String name, final Object value) throws SQLException {
+    public T bind(final String name, final Object value) throws SQLException {
         return bind(name, value, true);
+    }
+    
+    /**
+     * Binds null to a parameter.
+     * Types.VARCHAR is used as the type's parameter.
+     * This usually works, but fails with some Oracle and MS SQL drivers.
+     * @param name the name of the parameter.
+     * @return this execution object to provide the fluent style.
+     * @throws SQLException throw if the parameter is not found, already bound, or there is an issue binding null.
+     */
+    public T bindNull(final String name) throws SQLException {
+        return bindNull(name, Types.VARCHAR, true);
+    }
+    
+    /**
+     * Binds null to a parameter, specifying the parameter's type.
+     * @param name the name of the parameter.
+     * @param sqlType the type of the parameter.
+     * @return this execution object to provide the fluent style.
+     * @throws SQLException throw if the parameter is not found, already bound, or there is an issue binding null.
+     */
+    public T bindNull(final String name, final int sqlType) throws SQLException {
+        return bindNull(name, sqlType, true);
+    }
+    
+    /**
+     * Given a param name and sqlType, binds a null to that parameter.
+     * @param name the name of the parameter.
+     * @param sqlType the type of the parameter.
+     * @param removeFromPosMap if the param should be removed from the pos map.
+     * @return this
+     * @throws SQLException if there is an SQLException during binding.
+     */
+    protected T bindNull(String name, int sqlType, boolean removeFromPosMap) throws SQLException {
+        name = name.replace(COLON, ""); // so we can take ":name" or "name"
+
+        final List<Integer> pos = removeFromPosMap ? paramPosMap.remove(name) : paramPosMap.get(name);
+        
+        if(pos == null) {
+            throw new SQLException(name + " is not found in the SQL statement");
+        }
+        
+        // go through and bind all of the positions for this name
+        for(Integer p:pos) {
+            stmt.setNull(p, sqlType);
+        }
+        
+        // add the param and value to our map
+        paramValueMap.put(name, null);
+        
+        // suppressed because the casting will always work here
+        @SuppressWarnings("unchecked")
+        final T ret = (T) this;
+        
+        return ret;
     }
 
     /**
      * Binds value to name, but does not do the bookkeeping.
      * @param name the parameter name.
      * @param value the value.
+     * @param removeFromPosMap if the param should be removed from the pos map.
      * @return this
-     * @throws SQLException if there is any SQLException during binding.
+     * @throws SQLException if there is an SQLException during binding.
      */
     protected T bind(String name, final Object value, boolean removeFromPosMap) throws SQLException {
         name = name.replace(COLON, ""); // so we can take ":name" or "name"
@@ -188,7 +245,6 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @throws SQLException if a database access error occurs
      */
     protected void rethrow(SQLException cause) throws SQLException {
-
         String causeMessage = cause.getMessage();
         
         if (causeMessage == null) {

@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -104,5 +105,18 @@ public class AbstractExecutorTest {
         
         verify(stmt, times(1)).setObject(1, "first_name");
         verify(stmt, times(1)).setObject(2, "last_name");
+    }
+    
+    @Test
+    public void testNullBind() throws SQLException {
+        createExecutor("select * from blah :first = first and :last=last");
+
+        verify(conn, times(1)).prepareStatement("select * from blah ? = first and ?=last");
+
+        executor.bindNull("first")
+                .bindNull(":last", Types.NULL);
+        
+        verify(stmt, times(1)).setNull(1, Types.VARCHAR);
+        verify(stmt, times(1)).setNull(2, Types.NULL);
     }
 }
