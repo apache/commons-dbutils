@@ -26,13 +26,17 @@ import javax.sql.DataSource;
  *
  * @see ResultSetHandler
  */
-public class QueryRunner extends AbstractQueryRunner {
+public class QueryRunner {
+    /**
+     * The DataSource to retrieve connections from.
+     */
+    private final DataSource ds;
 
     /**
      * Constructor for QueryRunner.
      */
     public QueryRunner() {
-        super();
+        ds = null;
     }
 
     /**
@@ -43,8 +47,50 @@ public class QueryRunner extends AbstractQueryRunner {
      *
      * @param ds The <code>DataSource</code> to retrieve connections from.
      */
-    public QueryRunner(DataSource ds) {
-        super(ds);
+    public QueryRunner(final DataSource ds) {
+        this.ds = ds;
+    }
+    
+    /**
+     * Returns the <code>DataSource</code> this runner is using.
+     * <code>QueryRunner</code> methods always call this method to get the
+     * <code>DataSource</code> so subclasses can provide specialized behavior.
+     *
+     * @return DataSource the runner is using
+     */
+    public DataSource getDataSource() {
+        return this.ds;
+    }
+
+    /**
+     * Factory method that creates and initializes a <code>Connection</code>
+     * object. <code>QueryRunner</code> methods always call this method to
+     * retrieve connections from its DataSource. Subclasses can override this
+     * method to provide special <code>Connection</code> configuration if
+     * needed. This implementation simply calls <code>ds.getConnection()</code>.
+     *
+     * @return An initialized <code>Connection</code>.
+     * @throws SQLException if a database access error occurs
+     */
+    protected Connection prepareConnection() throws SQLException {
+        if (this.getDataSource() == null) {
+            throw new SQLException(
+                    "QueryRunner requires a DataSource to be "
+                    + "invoked in this way, or a Connection should be passed in");
+        }
+        return this.getDataSource().getConnection();
+    }
+
+    /**
+     * Close a <code>Connection</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
+     * can override to provide special handling like logging.
+     *
+     * @param conn Connection to close
+     * @throws SQLException if a database access error occurs
+     */
+    private void close(Connection conn) throws SQLException {
+        DbUtils.close(conn);
     }
 
     /**
