@@ -27,7 +27,7 @@ import java.util.concurrent.Future;
  * @author William Speirs <wspeirs@apache.org>
  * @since 2.0
  */
-public class AsyncQueryRunner {
+public class AsyncExecutor {
 
     private final ExecutorService executorService;
 
@@ -37,7 +37,7 @@ public class AsyncQueryRunner {
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      * @param queryRunner the {@code QueryRunner} instance to use for the queries.
      */
-    public AsyncQueryRunner(ExecutorService executorService) {
+    public AsyncExecutor(ExecutorService executorService) {
         this.executorService = executorService;
     }
 

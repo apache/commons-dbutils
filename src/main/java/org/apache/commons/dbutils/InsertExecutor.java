@@ -73,4 +73,26 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
         return null;
     }
     
+    /**
+     * Executes the given INSERT SQL statement.
+     * 
+     * @throws SQLException If there are database or parameter errors.
+     */
+    public void insert() throws SQLException {
+        // throw an exception if there are unmapped parameters
+        this.throwIfUnmappedParams();
+
+        try {
+            // execute the insert
+            getStatement().executeUpdate();
+        } catch (SQLException e) {
+            this.rethrow(e);
+        } finally {
+            close(getStatement());
+            if (closeConn) {
+                close(getConnection());
+            }
+        }
+    }
+    
 }

@@ -28,8 +28,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @SuppressWarnings("boxing") // test code
-public class AsyncQueryRunnerTest {
-    AsyncQueryRunner runner;
+public class AsyncExecutorTest {
+    AsyncExecutor runner;
 
     @Mock QueryRunner qRunner;
     @Mock ResultSetHandler<Object> handler;
@@ -41,7 +41,7 @@ public class AsyncQueryRunnerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);    // init the mocks
 
-         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
+         runner = new AsyncExecutor(Executors.newFixedThreadPool(1));
     }
 
     @Test
