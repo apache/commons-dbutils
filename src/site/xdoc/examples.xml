@@ -37,42 +37,30 @@ This page provides examples that show how DbUtils may be used.
 DbUtils is a very small library of classes so it won't take long 
 to go through the <a href="apidocs/">javadocs</a> for each class.  
 The core classes/interfaces in DbUtils are 
-<code><a href="apidocs/org/apache/commons/dbutils/QueryRunner.html">QueryRunner</a></code>
-and
-<code><a href="apidocs/org/apache/commons/dbutils/ResultSetHandler.html">ResultSetHandler</a></code>.
+<code><a href="apidocs/org/apache/commons/dbutils/QueryRunner.html">QueryRunner</a></code>,
+<code><a href="apidocs/org/apache/commons/dbutils/ResultSetHandler.html">ResultSetHandler</a></code>, and
+<code><a href="apidocs/org/apache/commons/dbutils/AbstractExecutor.html">AbstractExecutor</a></code>.
 You don't need to know about any other DbUtils classes to benefit from using the 
 library.  The following example demonstrates how these classes are used together.
 </p>
 
 <source>
 <![CDATA[
-// Create a ResultSetHandler implementation to convert the
+// Use a ResultSetHandler implementation, ArrayHandler, to convert the
 // first row into an Object[].
-ResultSetHandler<Object[]> h = new ResultSetHandler<Object[]>() {
-    public Object[] handle(ResultSet rs) throws SQLException {
-        if (!rs.next()) {
-            return null;
-        }
-    
-        ResultSetMetaData meta = rs.getMetaData();
-        int cols = meta.getColumnCount();
-        Object[] result = new Object[cols];
-
-        for (int i = 0; i < cols; i++) {
-            result[i] = rs.getObject(i + 1);
-        }
-
-        return result;
-    }
-};
+ResultSetHandler<Object[]> handler = new ArrayHandler();
 
 // Create a QueryRunner that will use connections from
 // the given DataSource
-QueryRunner run = new QueryRunner(dataSource);
+QueryRunner runner = new QueryRunner(dataSource);
 
-// Execute the query and get the results back from the handler
-Object[] result = run.query(
-    "SELECT * FROM Person WHERE name=?", h, "John Doe");
+// Generate a QueryExecutor for the query
+QueryExecutor executor = runner.query("SELECT * FROM Person WHERE first_name=:first_name and last_name = :last_name");
+
+// Bind our parameters and execute the query
+Object[] result = executor.bind("first_name", "John")
+                          .bind("last_name", "Doe")
+                          .query(handler);
 ]]>
 </source>
 
@@ -84,17 +72,20 @@ instead of a <code>DataSource</code>.  Notice that you are responsible for closi
 </p>
 <source>
 <![CDATA[
-ResultSetHandler<Object[]> h = ... // Define a handler the same as above example
+ResultSetHandler<Object[]> handler = ... // Define a handler the same as above example
 
 // No DataSource so we must handle Connections manually
-QueryRunner run = new QueryRunner();
+QueryRunner runner = new QueryRunner();
 
 Connection conn = ... // open a connection
 try{
-    Object[] result = run.query(
-        conn, "SELECT * FROM Person WHERE name=?", h, "John Doe");
-	// do something with the result
-	
+    // Generate a QueryExecutor for the query
+    QueryExecutor executor = runner.query("SELECT * FROM Person WHERE first_name=:first_name and last_name = :last_name");
+    
+    // Bind our parameters and execute the query
+    Object[] result = executor.bind("first_name", "John") // note you don't need a colon
+                              .bind(":last_name", "Doe")  // or you can add one, doesn't matter!
+                              .query(conn, handler);
 } finally {
     // Use this helper method so we don't have to check for null
     DbUtils.close(conn);  
@@ -110,19 +101,20 @@ try{
 
 <source>
 <![CDATA[
-QueryRunner run = new QueryRunner( dataSource );
+QueryRunner runner = new QueryRunner(dataSource);
 try
 {
-    // Execute the SQL update statement and return the number of
-    // inserts that were made
-    int inserts = run.update( "INSERT INTO Person (name,height) VALUES (?,?)",
-                              "John Doe", 1.82 );
-    // The line before uses varargs and autoboxing to simplify the code
+    // Execute the SQL insert statement
+    runner.insert("INSERT INTO Person (name,height) VALUES (:name,:height)")
+          .bind("name", "John Doe")
+          .bind("height", 1.82)
+          .insert();
 
     // Now it's time to rise to the occation...
-    int updates = run.update( "UPDATE Person SET height=? WHERE name=?",
-                              2.05, "John Doe" );
-    // So does the line above
+    int updates = runner.update("UPDATE Person SET height=:height WHERE name=:name")
+                        .bind("name", "John Doe")
+                        .bind("height", 2.05)
+                        .update();                         
 }
 catch(SQLException sqle) {
     // Handle it
@@ -131,25 +123,25 @@ catch(SQLException sqle) {
 </source>
 
 <p>
-  For long running calls you can use the <code>AsyncQueryRunner</code> to execute
-  the calls asynchronously. The <code>AsyncQueryRunner</code> class has the same
-  methods as the <code>QueryRunner</code> calls; however, the methods return a
-  <code>Callable</code>. 
+  For long running calls you can use the <code>AsyncExecutor</code> to execute
+  the calls asynchronously. The <code>AsyncExecutor</code> class is simply
+  a helper class to submit an executor to the <code>ExecutorService</code>,
+  wrapped in a <code>Callable</code>. 
 </p>
 
 <source>
 <![CDATA[
-ExecutorCompletionService<Integer> executor =
-    new ExecutorCompletionService<Integer>( Executors.newCachedThreadPool() );
-AsyncQueryRunner asyncRun = new AsyncQueryRunner( dataSource );
+AsyncExecutor asyncRun = new AsyncExecutor(Executors.newFixedThreadPool(5));
 
 try
 {
-    // Create a Callable for the update call
-    Callable<Integer> callable = asyncRun.update( "UPDATE Person SET height=? WHERE name=?",
-                                                  2.05, "John Doe" );
-    // Submit the Callable to the executor
-    executor.submit( callable );
+    // Setup the UpdateExecutor
+    UpdateExecutor executor = runner.update("UPDATE Person SET height=:height WHERE name=:name")
+                                    .bind(":height", 2.05)
+                                    .bind("name", "John Doe");
+
+    // Returns a Future for the update call
+    Future<Integer> callable = asyncRun.update(executor);
 } catch(SQLException sqle) {
     // Handle it
 }
@@ -158,7 +150,7 @@ try
 try
 {
    // Get the result of the update
-   Integer updates = executor.take().get();
+   Integer updates = callable.get();
 } catch(InterruptedException ie) {
     // Handle it
 }
@@ -171,13 +163,11 @@ try
 
 <section name="ResultSetHandler Implementations">
 <p>
-In the examples above we implemented the <code>ResultSetHandler</code> interface
-to turn the first row of the <code>ResultSet</code> into an Object[].  This is a
-fairly generic implementation that can be reused across many projects.
-In recognition of this DbUtils provides a set of <code>ResultSetHandler</code>
-implementations in the 
+In the examples above we used the <code>ArrayHandler</code> to turn the first
+row of the <code>ResultSet</code> into an Object[]. DbUtils provides a number
+of other<code>ResultSetHandler</code> implementations in the 
 <a href="apidocs/org/apache/commons/dbutils/handlers/package-summary.html">org.apache.commons.dbutils.handlers</a> 
-package that perform common transformations into arrays, Maps, and JavaBeans.
+package. There are handlers that perform common transformations into arrays, Maps, and JavaBeans.
 There is a version of each implementation that converts just the first row and 
 another that converts all rows in the <code>ResultSet</code>. 
 </p>
@@ -189,16 +179,17 @@ another that converts all rows in the <code>ResultSet</code>.
 
 <source>
 <![CDATA[
-QueryRunner run = new QueryRunner(dataSource);
+QueryRunner runner = new QueryRunner(dataSource);
 
 // Use the BeanHandler implementation to convert the first
 // ResultSet row into a Person JavaBean.
-ResultSetHandler<Person> h = new BeanHandler<Person>(Person.class);
+ResultSetHandler<Person> handler = new BeanHandler<Person>(Person.class);
 
 // Execute the SQL statement with one replacement parameter and
 // return the results in a new Person object generated by the BeanHandler.
-Person p = run.query(
-    "SELECT * FROM Person WHERE name=?", h, "John Doe"); 
+Person p = runner.query("SELECT * FROM Person WHERE name=:name")
+                 .bind("name", "John Doe")
+                 .query(handler); 
 ]]>
 </source>
 
@@ -209,15 +200,15 @@ Person p = run.query(
 
 <source>
 <![CDATA[
-QueryRunner run = new QueryRunner(dataSource);
+QueryRunner runner = new QueryRunner(dataSource);
 
 // Use the BeanListHandler implementation to convert all
 // ResultSet rows into a List of Person JavaBeans.
-ResultSetHandler<List<Person>> h = new BeanListHandler<Person>(Person.class);
+ResultSetHandler<List<Person>> handler = new BeanListHandler<Person>(Person.class);
 
 // Execute the SQL statement and return the results in a List of
 // Person objects generated by the BeanListHandler.
-List<Person> persons = run.query("SELECT * FROM Person", h);
+List<Person> persons = runner.query("SELECT * FROM Person").query(handler);
 ]]>
 </source>
 

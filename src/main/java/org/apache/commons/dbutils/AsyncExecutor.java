@@ -40,6 +40,22 @@ public class AsyncExecutor {
     public AsyncExecutor(ExecutorService executorService) {
         this.executorService = executorService;
     }
+    
+    /**
+     * Execute a {@link org.apache.commons.dbutils.BatchExecutor}.
+     * @return A <code>Future</code> which returns the result of the batch call.
+     * @throws SQLException if a database access error occurs
+     */
+    public Future<int[]> batch(final BatchExecutor executor) throws SQLException {
+        return executorService.submit(new Callable<int[]>() {
+            
+            @Override
+            public int[] call() throws Exception {
+                return executor.batch();
+            }
+            
+        });
+    }
 
     /**
      * Execute a {@link org.apache.commons.dbutils.QueryExecutor} given a handler.
@@ -60,7 +76,7 @@ public class AsyncExecutor {
     }
 
     /**
-     * Execute a {@link org.apache.commons.dbutils.UpdateExecutor} given a handler.
+     * Execute a {@link org.apache.commons.dbutils.UpdateExecutor}.
      * @param <T> The type of object that the handler returns
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
