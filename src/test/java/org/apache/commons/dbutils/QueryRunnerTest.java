@@ -43,6 +43,34 @@ public class QueryRunnerTest {
         runner = new QueryRunner(dataSource);
     }
     
+    // batch tests
+    
+    @Test
+    public void testBatchSQL() throws SQLException {        
+        assertNotNull(runner.batch("select * from blah where :first=first"));
+        verify(dataSource, times(1)).getConnection();
+    }
+    
+    @Test
+    public void testBatchConnSQL() throws SQLException {
+        assertNotNull(runner.batch(conn, "select * from blah where :first=first"));
+    }
+    
+    @Test
+    public void testBatchConnSQLBoolean() throws SQLException {
+        assertNotNull(runner.batch(conn, true, "select * from blah where :first=first"));
+    }
+    
+    @Test(expected=SQLException.class)
+    public void testBatchNullConn() throws SQLException {
+        assertNotNull(runner.batch(null, true, "select"));
+    }
+    
+    @Test(expected=SQLException.class)
+    public void testBatchNullSQL() throws SQLException {
+        assertNotNull(runner.batch(conn, true, null));
+    }
+    
     // query tests
     
     @Test
@@ -59,6 +87,16 @@ public class QueryRunnerTest {
     @Test
     public void testQueryConnSQLBoolean() throws SQLException {
         assertNotNull(runner.query(conn, true, "select * from blah where :first=first"));
+    }
+    
+    @Test(expected=SQLException.class)
+    public void testQueryNullConn() throws SQLException {
+        assertNotNull(runner.query(null, true, "select"));
+    }
+    
+    @Test(expected=SQLException.class)
+    public void testQueryNullSQL() throws SQLException {
+        assertNotNull(runner.query(conn, true, null));
     }
     
     // insert tests
@@ -79,6 +117,16 @@ public class QueryRunnerTest {
         assertNotNull(runner.insert(conn, true, "insert * from blah where :first=first"));
     }
     
+    @Test(expected=SQLException.class)
+    public void testInsertNullConn() throws SQLException {
+        assertNotNull(runner.insert(null, true, "select"));
+    }
+    
+    @Test(expected=SQLException.class)
+    public void testInsertNullSQL() throws SQLException {
+        assertNotNull(runner.insert(conn, true, null));
+    }
+    
     // update tests
     
     @Test
@@ -96,5 +144,16 @@ public class QueryRunnerTest {
     public void testUpdateConnSQLBoolean() throws SQLException {
         assertNotNull(runner.update(conn, true, "select * from blah where :first=first"));
     }
+
+    @Test(expected=SQLException.class)
+    public void testUpdateNullConn() throws SQLException {
+        assertNotNull(runner.update(null, true, "select"));
+    }
+    
+    @Test(expected=SQLException.class)
+    public void testUpdateNullSQL() throws SQLException {
+        assertNotNull(runner.update(conn, true, null));
+    }
+    
     
 }

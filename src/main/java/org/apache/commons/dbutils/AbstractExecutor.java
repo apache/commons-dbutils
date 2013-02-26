@@ -137,12 +137,23 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @throws SQLException thrown if the parameter is not found, already bound, or there is an issue binding it.
      */
     public T bind(String name, final Object value) throws SQLException {
+        return bind(name, value, true);
+    }
+
+    /**
+     * Binds value to name, but does not do the bookkeeping.
+     * @param name the parameter name.
+     * @param value the value.
+     * @return this
+     * @throws SQLException if there is any SQLException during binding.
+     */
+    protected T bind(String name, final Object value, boolean removeFromPosMap) throws SQLException {
         name = name.replace(COLON, ""); // so we can take ":name" or "name"
 
-        final List<Integer> pos = paramPosMap.remove(name);
+        final List<Integer> pos = removeFromPosMap ? paramPosMap.remove(name) : paramPosMap.get(name);
         
         if(pos == null) {
-            throw new SQLException(name + " is either not found in the SQL statement, or was already bound");
+            throw new SQLException(name + " is not found in the SQL statement");
         }
         
         // go through and bind all of the positions for this name
@@ -159,6 +170,13 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
         final T ret = (T) this;
         
         return ret;
+    }
+    
+    /**
+     * Used for batch calls so we can clear the map after the addBatch call.
+     */
+    protected void clearValueMap() {
+        paramValueMap.clear();
     }
 
     /**

@@ -30,9 +30,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 
-public class UpdateExecutorTest {
+public class BatchExecutorTest {
 
-    private UpdateExecutor executor;
+    private BatchExecutor executor;
     
     @Mock private Connection conn;
     @Mock private PreparedStatement stmt;
@@ -42,31 +42,24 @@ public class UpdateExecutorTest {
         MockitoAnnotations.initMocks(this);
         
         when(conn.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(stmt.executeUpdate()).thenReturn(20);
+        when(stmt.executeBatch()).thenReturn(new int[] { 2, 3, 4 });
     }
     
     protected void createExecutor(String sql) throws Exception {
-        executor = new UpdateExecutor(conn, sql, true);
+        executor = new BatchExecutor(conn, sql, true);
     }
     
     @Test
     public void testGoodSQL() throws Exception {
         createExecutor("insert into blah");
         
-        int ret = executor.update();
+        executor.addBatch();
+        int[] ret = executor.batch();
         
-        assertEquals(20, ret);
-        verify(conn, times(1)).close();
-        verify(stmt, times(1)).close();
-    }
-    
-    @Test(expected=SQLException.class)
-    public void testUnmappedParams() throws Exception {
-        createExecutor("insert into blah (:something)");
-        
-        int ret = executor.update();
-        
-        assertEquals(20, ret);
+        assertEquals(3, ret.length);
+        assertEquals(2, ret[0]);
+        assertEquals(3, ret[1]);
+        assertEquals(4, ret[2]);
         verify(conn, times(1)).close();
         verify(stmt, times(1)).close();
     }
