@@ -16,363 +16,81 @@
  */
 package org.apache.commons.dbutils;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
 /**
- * Executes SQL queries with pluggable strategies for handling
- * <code>ResultSet</code>s.  This class is thread safe.
+ * Convenience class for executing QueryExecutor, InsertExecutor, or UpdateExecutors asynchronously.
  *
- * @see ResultSetHandler
- * @since 1.4
+ * @author William Speirs <wspeirs@apache.org>
+ * @since 2.0
  */
-public class AsyncQueryRunner extends AbstractQueryRunner {
+public class AsyncQueryRunner {
 
     private final ExecutorService executorService;
-    private final QueryRunner queryRunner;
 
     /**
      * Constructor for AsyncQueryRunner which uses a provided ExecutorService and underlying QueryRunner.
      *
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      * @param queryRunner the {@code QueryRunner} instance to use for the queries.
-     * @since DbUtils 1.5
      */
-    public AsyncQueryRunner(ExecutorService executorService, QueryRunner queryRunner) {
+    public AsyncQueryRunner(ExecutorService executorService) {
         this.executorService = executorService;
-        this.queryRunner = queryRunner;
     }
 
     /**
-     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
-     *
-     * @param conn The <code>Connection</code> to use to run the query.  The caller is
-     * responsible for closing this Connection.
-     * @param sql The SQL to execute.
-     * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values.
-     * @return A <code>Future</code> which returns the number of rows updated per statement.
-     * @throws SQLException if a database access error occurs
-     */
-    public Future<int[]> batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
-        return executorService.submit(new Callable<int[]>() {
-
-            @Override
-            public int[] call() throws Exception {
-                return queryRunner.batch(conn, sql, params);
-            }
-
-        });
-    }
-
-    /**
-     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
-     * auto-commit mode or the update will not be saved.
-     *
-     * @param sql The SQL to execute.
-     * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values.
-     * @return A <code>Future</code> which returns the number of rows updated per statement.
-     * @throws SQLException if a database access error occurs
-     */
-    public Future<int[]> batch(final String sql, final Object[][] params) throws SQLException {
-        return executorService.submit(new Callable<int[]>() {
-
-            @Override
-            public int[] call() throws Exception {
-                return queryRunner.batch(sql, params);
-            }
-
-        });
-    }
-
-    /**
-     * Execute an SQL SELECT query with replacement parameters.  The
-     * caller is responsible for closing the connection.
+     * Execute a {@link org.apache.commons.dbutils.QueryExecutor} given a handler.
      * @param <T> The type of object that the handler returns
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param rsh The handler that converts the results into an object.
-     * @param params The replacement parameters.
+     * @param handler The handler that converts the results into an object.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params)
-        throws SQLException {
+    public <T> Future<T> query(final QueryExecutor executor, final ResultSetHandler<T> handler) throws SQLException {
         return executorService.submit(new Callable<T>() {
 
             @Override
             public T call() throws Exception {
-                return queryRunner.query(conn, sql, rsh, params);
+                return executor.query(handler);
             }
 
         });
     }
 
     /**
-     * Execute an SQL SELECT query without any replacement parameters.  The
-     * caller is responsible for closing the connection.
+     * Execute a {@link org.apache.commons.dbutils.UpdateExecutor} given a handler.
      * @param <T> The type of object that the handler returns
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param rsh The handler that converts the results into an object.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
+    public Future<Integer> update(final UpdateExecutor executor) throws SQLException {
+        return executorService.submit(new Callable<Integer>() {
 
             @Override
-            public T call() throws Exception {
-                return queryRunner.query(conn, sql, rsh);
+            public Integer call() throws Exception {
+                return executor.update();
             }
 
         });
     }
 
     /**
-     * Executes the given SELECT SQL query and returns a result object.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * Execute a {@link org.apache.commons.dbutils.InsertExecutor} given a handler.
      * @param <T> The type of object that the handler returns
-     * @param sql The SQL statement to execute.
-     * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
-     * @param params Initialize the PreparedStatement's IN parameters with
-     * this array.
+     * @param handler The handler that converts the results into an object.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Future<T> query(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
+    public <T> Future<T> insert(final InsertExecutor executor, final ResultSetHandler<T> handler) throws SQLException {
         return executorService.submit(new Callable<T>() {
 
             @Override
             public T call() throws Exception {
-                return queryRunner.query(sql, rsh, params);
+                return executor.insert(handler);
             }
 
-        });
-    }
-
-    /**
-     * Executes the given SELECT SQL without any replacement parameters.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
-     * @param <T> The type of object that the handler returns
-     * @param sql The SQL statement to execute.
-     * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
-     *
-     * @return A <code>Future</code> which returns the result of the query call.
-     * @throws SQLException if a database access error occurs
-     */
-    public <T> Future<T> query(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.query(sql, rsh);
-            }
-
-        });
-    }
-
-    /**
-     * Execute an SQL INSERT, UPDATE, or DELETE query without replacement
-     * parameters.
-     *
-     * @param conn The connection to use to run the query.
-     * @param sql The SQL to execute.
-     * @return A <code>Future</code> which returns the number of rows updated.
-     * @throws SQLException if a database access error occurs
-     */
-    public Future<Integer> update(final Connection conn, final String sql) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return queryRunner.update(conn, sql);
-            }
-
-        });
-    }
-
-    /**
-     * Execute an SQL INSERT, UPDATE, or DELETE query with a single replacement
-     * parameter.
-     *
-     * @param conn The connection to use to run the query.
-     * @param sql The SQL to execute.
-     * @param param The replacement parameter.
-     * @return A <code>Future</code> which returns the number of rows updated.
-     * @throws SQLException if a database access error occurs
-     */
-    public Future<Integer> update(final Connection conn, final String sql, final Object param) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return queryRunner.update(conn, sql, param);
-            }
-
-        });
-    }
-
-    /**
-     * Execute an SQL INSERT, UPDATE, or DELETE query.
-     *
-     * @param conn The connection to use to run the query.
-     * @param sql The SQL to execute.
-     * @param params The query replacement parameters.
-     * @return A <code>Future</code> which returns the number of rows updated.
-     * @throws SQLException if a database access error occurs
-     */
-    public Future<Integer> update(final Connection conn, final String sql, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return queryRunner.update(conn, sql, params);
-            }
-
-        });
-    }
-
-    /**
-     * Executes the given INSERT, UPDATE, or DELETE SQL statement without
-     * any replacement parameters. The <code>Connection</code> is retrieved
-     * from the <code>DataSource</code> set in the constructor.  This
-     * <code>Connection</code> must be in auto-commit mode or the update will
-     * not be saved.
-     *
-     * @param sql The SQL statement to execute.
-     * @throws SQLException if a database access error occurs
-     * @return A <code>Future</code> which returns the number of rows updated.
-     */
-    public Future<Integer> update(final String sql) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return queryRunner.update(sql);
-            }
-
-        });
-    }
-
-    /**
-     * Executes the given INSERT, UPDATE, or DELETE SQL statement with
-     * a single replacement parameter.  The <code>Connection</code> is
-     * retrieved from the <code>DataSource</code> set in the constructor.
-     * This <code>Connection</code> must be in auto-commit mode or the
-     * update will not be saved.
-     *
-     * @param sql The SQL statement to execute.
-     * @param param The replacement parameter.
-     * @throws SQLException if a database access error occurs
-     * @return A <code>Future</code> which returns the number of rows updated.
-     */
-    public Future<Integer> update(final String sql, final Object param) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return queryRunner.update(sql, param);
-            }
-
-        });
-    }
-
-    /**
-     * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
-     * auto-commit mode or the update will not be saved.
-     *
-     * @param sql The SQL statement to execute.
-     * @param params Initializes the PreparedStatement's IN (i.e. '?')
-     * parameters.
-     * @throws SQLException if a database access error occurs
-     * @return A <code>Future</code> which returns the number of rows updated.
-     */
-    public Future<Integer> update(final String sql, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return queryRunner.update(sql, params);
-            }
-
-        });
-    }
-
-    /**
-     * Executes {@link QueryRunner#insert(String, ResultSetHandler)} asynchronously.
-     *
-     * @see QueryRunner#insert(String, ResultSetHandler)
-     * @since 1.6
-     */
-    public <T> Future<T> insert(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(sql, rsh);
-            }
-
-        });
-    }
-
-    /**
-     * Executes {@link QueryRunner#insert(String, ResultSetHandler, Object...)} asynchronously.
-     *
-     * @see QueryRunner#insert(String, ResultSetHandler, Object...)
-     * @since 1.6
-     */
-    public <T> Future<T> insert(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(sql, rsh, params);
-            }
-        });
-    }
-
-    /**
-     * Executes {@link QueryRunner#insert(Connection, String, ResultSetHandler)} asynchronously.
-     *
-     * @see QueryRunner#insert(Connection, String, ResultSetHandler)
-     * @since 1.6
-     */
-    public <T> Future<T> insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(conn, sql, rsh);
-            }
-        });
-    }
-
-    /**
-     * Executes {@link QueryRunner#insert(Connection, String, ResultSetHandler, Object...)} asynchronously.
-     *
-     * @see QueryRunner#insert(Connection, String, ResultSetHandler, Object...)
-     * @since 1.6
-     */
-    public <T> Future<T> insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(conn, sql, rsh, params);
-            }
         });
     }
 
