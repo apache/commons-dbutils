@@ -98,7 +98,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      * @throws SQLException If there are database or parameter errors.
      * @see org.apache.commons.dbutils.UpdateExecutor.update()
      */
-    public int[] batch() throws SQLException {
+    public int[] execute() throws SQLException {
         try {
             return getStatement().executeBatch();
         } catch (SQLException e) {

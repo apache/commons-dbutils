@@ -46,47 +46,47 @@ public class AsyncExecutorTest {
 
     @Test
     public void testQueryExecutor() throws Exception {
-        runner.query(queryExecutor, handler).get();
+        runner.execute(queryExecutor, handler).get();
         
-        verify(queryExecutor, times(1)).query(handler);
+        verify(queryExecutor, times(1)).execute(handler);
     }
 
     @Test(expected=ExecutionException.class)
     public void testQueryExecutorException() throws Exception {
-        doThrow(SQLException.class).when(queryExecutor).query(handler);
-        runner.query(queryExecutor, handler).get();
+        doThrow(SQLException.class).when(queryExecutor).execute(handler);
+        runner.execute(queryExecutor, handler).get();
         
-        verify(queryExecutor, times(1)).query(handler);
+        verify(queryExecutor, times(1)).execute(handler);
     }
 
     @Test
     public void testUpdateExecutor() throws Exception {
-        runner.update(updateExecutor).get();
+        runner.execute(updateExecutor).get();
         
-        verify(updateExecutor, times(1)).update();
+        verify(updateExecutor, times(1)).execute();
     }
 
     @Test(expected=ExecutionException.class)
     public void testUpdateExecutorException() throws Exception {
-        doThrow(SQLException.class).when(updateExecutor).update();
-        runner.update(updateExecutor).get();
+        doThrow(SQLException.class).when(updateExecutor).execute();
+        runner.execute(updateExecutor).get();
         
-        verify(updateExecutor, times(1)).update();
+        verify(updateExecutor, times(1)).execute();
     }
 
     @Test
     public void testInsertExecutor() throws Exception {
-        runner.insert(insertExecutor, handler).get();
+        runner.execute(insertExecutor, handler).get();
         
-        verify(insertExecutor, times(1)).insert(handler);
+        verify(insertExecutor, times(1)).execute(handler);
     }
 
     @Test(expected=ExecutionException.class)
     public void testInsertExecutorException() throws Exception {
-        doThrow(SQLException.class).when(insertExecutor).insert(handler);
-        runner.insert(insertExecutor, handler).get();
+        doThrow(SQLException.class).when(insertExecutor).execute(handler);
+        runner.execute(insertExecutor, handler).get();
         
-        verify(insertExecutor, times(1)).insert(handler);
+        verify(insertExecutor, times(1)).execute(handler);
     }
 
 

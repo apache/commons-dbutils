@@ -57,7 +57,7 @@ public class QueryExecutorTest {
     public void testGoodSQL() throws Exception {
         createExecutor("insert into blah");
         
-        Object ret = executor.query(handler);
+        Object ret = executor.execute(handler);
         
         assertNotNull(ret);
         verify(handler, times(1)).handle(resultSet);
@@ -69,7 +69,7 @@ public class QueryExecutorTest {
     public void testUnmappedParams() throws Exception {
         createExecutor("insert into blah (:something)");
         
-        Object ret = executor.query(handler);
+        Object ret = executor.execute(handler);
         
         assertNotNull(ret);
         verify(handler, times(1)).handle(resultSet);
@@ -81,7 +81,7 @@ public class QueryExecutorTest {
     public void testNullHandler() throws Exception {
         createExecutor("insert into blah");
         
-        Object ret = executor.query(null);
+        Object ret = executor.execute(null);
         
         assertNotNull(ret);
         verify(handler, times(1)).handle(resultSet);

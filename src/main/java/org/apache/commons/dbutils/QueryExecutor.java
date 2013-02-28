@@ -43,7 +43,7 @@ class QueryExecutor extends AbstractExecutor<QueryExecutor> {
      * @return The results of the query.
      * @throws SQLException If there are database or parameter errors.
      */
-    public <T> T query(ResultSetHandler<T> handler) throws SQLException {
+    public <T> T execute(ResultSetHandler<T> handler) throws SQLException {
         // throw an exception if there are unmapped parameters
         this.throwIfUnmappedParams();
         

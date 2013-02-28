@@ -54,7 +54,7 @@ public class BatchExecutorTest {
         createExecutor("insert into blah");
         
         executor.addBatch();
-        int[] ret = executor.batch();
+        int[] ret = executor.execute();
         
         assertEquals(3, ret.length);
         assertEquals(2, ret[0]);

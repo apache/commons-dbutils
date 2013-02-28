@@ -34,7 +34,7 @@ public class UpdateExecutor extends AbstractExecutor<UpdateExecutor> {
      * @return The number of rows updated.
      * @throws SQLException If there are database or parameter errors.
      */
-    public int update() throws SQLException {
+    public int execute() throws SQLException {
         // throw an exception if there are unmapped parameters
         this.throwIfUnmappedParams();
 

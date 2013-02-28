@@ -53,7 +53,7 @@ public class UpdateExecutorTest {
     public void testGoodSQL() throws Exception {
         createExecutor("insert into blah");
         
-        int ret = executor.update();
+        int ret = executor.execute();
         
         assertEquals(20, ret);
         verify(conn, times(1)).close();
@@ -64,7 +64,7 @@ public class UpdateExecutorTest {
     public void testUnmappedParams() throws Exception {
         createExecutor("insert into blah (:something)");
         
-        int ret = executor.update();
+        int ret = executor.execute();
         
         assertEquals(20, ret);
         verify(conn, times(1)).close();

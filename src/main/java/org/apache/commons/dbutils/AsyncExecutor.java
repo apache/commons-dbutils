@@ -46,12 +46,12 @@ public class AsyncExecutor {
      * @return A <code>Future</code> which returns the result of the batch call.
      * @throws SQLException if a database access error occurs
      */
-    public Future<int[]> batch(final BatchExecutor executor) throws SQLException {
+    public Future<int[]> execute(final BatchExecutor executor) throws SQLException {
         return executorService.submit(new Callable<int[]>() {
             
             @Override
             public int[] call() throws Exception {
-                return executor.batch();
+                return executor.execute();
             }
             
         });
@@ -64,12 +64,12 @@ public class AsyncExecutor {
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Future<T> query(final QueryExecutor executor, final ResultSetHandler<T> handler) throws SQLException {
+    public <T> Future<T> execute(final QueryExecutor executor, final ResultSetHandler<T> handler) throws SQLException {
         return executorService.submit(new Callable<T>() {
 
             @Override
             public T call() throws Exception {
-                return executor.query(handler);
+                return executor.execute(handler);
             }
 
         });
@@ -81,12 +81,12 @@ public class AsyncExecutor {
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public Future<Integer> update(final UpdateExecutor executor) throws SQLException {
+    public Future<Integer> execute(final UpdateExecutor executor) throws SQLException {
         return executorService.submit(new Callable<Integer>() {
 
             @Override
             public Integer call() throws Exception {
-                return executor.update();
+                return executor.execute();
             }
 
         });
@@ -99,12 +99,28 @@ public class AsyncExecutor {
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
-    public <T> Future<T> insert(final InsertExecutor executor, final ResultSetHandler<T> handler) throws SQLException {
+    public <T> Future<T> execute(final InsertExecutor executor, final ResultSetHandler<T> handler) throws SQLException {
         return executorService.submit(new Callable<T>() {
 
             @Override
             public T call() throws Exception {
-                return executor.insert(handler);
+                return executor.execute(handler);
+            }
+
+        });
+    }
+
+    /**
+     * Execute a {@link org.apache.commons.dbutils.InsertExecutor} given a handler.
+     * @return A <code>Future</code> which returns the number of rows inserted.
+     * @throws SQLException if a database access error occurs
+     */
+    public Future<Integer> execute(final InsertExecutor executor) throws SQLException {
+        return executorService.submit(new Callable<Integer>() {
+
+            @Override
+            public Integer call() throws Exception {
+                return executor.execute();
             }
 
         });
