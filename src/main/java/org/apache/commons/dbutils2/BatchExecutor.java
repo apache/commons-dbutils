@@ -22,23 +22,30 @@ import java.sql.Types;
 
 /**
  * This class provides the ability to execute a batch of statements.
- * 
+ *
  * It is really just a facade to an array of UpdateExecutors.
- * 
+ *
+ * @since 2.0
  * @author William Speirs <wspeirs@apache.org>
  */
 public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 
     private final boolean closeConn;
-    
-    public BatchExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
+
+    /**
+     * Constructs a BatchExecutor given a connection and SQL statement.
+     * @param conn The connection to use during execution.
+     * @param sql The SQL statement.
+     * @param closeConnection If the connection should be closed or not.
+     * @throws SQLException thrown if there is an error during execution.
+     */
+    BatchExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
         super(conn, sql);
         this.closeConn = closeConnection;
     }
-    
+
     /**
      * Binds a parameter name to a value for a given statement.
-     * @param statement the statement number to operate on.
      * @param name the name of the parameter.
      * @param value the value to bind to the parameter.
      * @return this object.
@@ -49,7 +56,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
     public BatchExecutor bind(final String name, final Object value) throws SQLException {
         return bind(name, value, false);
     }
-    
+
     /**
      * Binds null to a parameter.
      * Types.VARCHAR is used as the type's parameter.
@@ -62,7 +69,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
     public BatchExecutor bindNull(final String name) throws SQLException {
         return bindNull(name, Types.VARCHAR, false);
     }
-    
+
     /**
      * Binds null to a parameter, specifying the parameter's type.
      * @param name the name of the parameter.
@@ -74,7 +81,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
     public BatchExecutor bindNull(final String name, final int sqlType) throws SQLException {
         return bindNull(name, sqlType, false);
     }
-    
+
     /**
      * Adds the statement to the batch after binding all of the parameters.
      * @return this object.
@@ -85,10 +92,10 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
         try {
             getStatement().addBatch();
             clearValueMap();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             rethrow(e);
         }
-        
+
         return this;
     }
 

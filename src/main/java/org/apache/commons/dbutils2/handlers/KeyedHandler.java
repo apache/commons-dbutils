@@ -55,18 +55,18 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * The RowProcessor implementation to use when converting rows
      * into Objects.
      */
-    protected final RowProcessor convert;
+    private final RowProcessor convert;
 
     /**
      * The column index to retrieve key values from.  Defaults to 1.
      */
-    protected final int columnIndex;
+    private final int columnIndex;
 
     /**
      * The column name to retrieve key values from.  Either columnName or
      * columnIndex will be used but never both.
      */
-    protected final String columnName;
+    private final String columnName;
 
     /**
      * Creates a new instance of KeyedHandler.  The value of the first column
@@ -139,8 +139,8 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     @Override
     protected K createKey(ResultSet rs) throws SQLException {
         return (columnName == null) ?
-               (K) rs.getObject(columnIndex) :
-               (K) rs.getObject(columnName);
+                (K) rs.getObject(columnIndex) :
+                    (K) rs.getObject(columnName);
     }
 
     /**

@@ -22,15 +22,22 @@ import java.sql.SQLException;
 
 /**
  * Fluent class for executing a query.
- * 
+ *
  * @since 2.0
  * @author William Speirs <wspeirs@apache.org>
  */
 class QueryExecutor extends AbstractExecutor<QueryExecutor> {
-    
+
     private final boolean closeConn;
 
-    public QueryExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
+    /**
+     * Constructs a QueryExecutor given a connection and SQL statement.
+     * @param conn The connection to use during execution.
+     * @param sql The SQL statement.
+     * @param closeConnection If the connection should be closed or not.
+     * @throws SQLException thrown if there is an error during execution.
+     */
+    QueryExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
         super(conn, sql);
         this.closeConn = closeConnection;
     }
@@ -46,7 +53,7 @@ class QueryExecutor extends AbstractExecutor<QueryExecutor> {
     public <T> T execute(ResultSetHandler<T> handler) throws SQLException {
         // throw an exception if there are unmapped parameters
         this.throwIfUnmappedParams();
-        
+
         // make sure our handler is not null
         if (handler == null) {
             if (closeConn) {

@@ -43,7 +43,12 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="1.6" date="201?-??-??" description="Bugfixes and addition of insert methods">
+    <release version="2.0" date="2013-??-??" description="Backwards incompatible update of Commons DBUtils">
+      <action dev="wspeirs" type="add" issue="DBUTILS-105">
+        Added named parameter support with fluent API
+      </action>
+    </release>
+    <release version="1.6" date="2013-??-??" description="Bugfixes and addition of insert methods">
       <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
         Add missing JavaDoc to QueryRunner#insert
       </action>

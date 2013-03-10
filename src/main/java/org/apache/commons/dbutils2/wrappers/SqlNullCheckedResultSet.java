@@ -253,7 +253,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public Date getNullDate() {
-        return this.nullDate;
+        return new Date(this.nullDate.getTime());
     }
 
     /**
@@ -353,7 +353,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public Timestamp getNullTimestamp() {
-        return this.nullTimestamp;
+        return new Timestamp(this.nullTimestamp.getTime());
     }
 
     /**
@@ -380,7 +380,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
-        throws Throwable {
+            throws Throwable {
 
         Object result = method.invoke(this.rs, args);
 
@@ -389,8 +389,8 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
         // Check nullMethod != null first so that we don't call wasNull()
         // before a true getter method was invoked on the ResultSet.
         return (nullMethod != null && this.rs.wasNull())
-            ? nullMethod.invoke(this, (Object[]) null)
-            : result;
+                ? nullMethod.invoke(this, (Object[]) null)
+                        : result;
     }
 
     /**
@@ -492,7 +492,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullDate the value
      */
     public void setNullDate(Date nullDate) {
-        this.nullDate = nullDate;
+        this.nullDate = nullDate != null ? new Date(nullDate.getTime()) : null;
     }
 
     /**
@@ -592,7 +592,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullTimestamp the value
      */
     public void setNullTimestamp(Timestamp nullTimestamp) {
-        this.nullTimestamp = nullTimestamp;
+        this.nullTimestamp = nullTimestamp != null ? new Timestamp(nullTimestamp.getTime()) : null;
     }
 
     /**

@@ -35,31 +35,32 @@ public class AsyncExecutor {
      * Constructor for AsyncQueryRunner which uses a provided ExecutorService and underlying QueryRunner.
      *
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
-     * @param queryRunner the {@code QueryRunner} instance to use for the queries.
      */
     public AsyncExecutor(ExecutorService executorService) {
         this.executorService = executorService;
     }
-    
+
     /**
      * Execute a {@link org.apache.commons.dbutils2.BatchExecutor}.
+     * @param executor The executor for this SQL statement.
      * @return A <code>Future</code> which returns the result of the batch call.
      * @throws SQLException if a database access error occurs
      */
     public Future<int[]> execute(final BatchExecutor executor) throws SQLException {
         return executorService.submit(new Callable<int[]>() {
-            
+
             @Override
             public int[] call() throws Exception {
                 return executor.execute();
             }
-            
+
         });
     }
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.QueryExecutor} given a handler.
      * @param <T> The type of object that the handler returns
+     * @param executor The executor for this SQL statement.
      * @param handler The handler that converts the results into an object.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
@@ -77,7 +78,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.UpdateExecutor}.
-     * @param <T> The type of object that the handler returns
+     * @param executor The executor for this SQL statement.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
@@ -95,6 +96,7 @@ public class AsyncExecutor {
     /**
      * Execute a {@link org.apache.commons.dbutils2.InsertExecutor} given a handler.
      * @param <T> The type of object that the handler returns
+     * @param executor The executor for this SQL statement.
      * @param handler The handler that converts the results into an object.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
@@ -112,6 +114,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.InsertExecutor} given a handler.
+     * @param executor The executor for this SQL statement.
      * @return A <code>Future</code> which returns the number of rows inserted.
      * @throws SQLException if a database access error occurs
      */

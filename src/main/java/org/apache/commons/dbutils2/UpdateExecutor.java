@@ -19,12 +19,24 @@ package org.apache.commons.dbutils2;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+/**
+ * Fluent class for executing updates.
+ *
+ * @since 2.0
+ * @author William Speirs <wspeirs@apache.org>
+ */
 public class UpdateExecutor extends AbstractExecutor<UpdateExecutor> {
 
     private final boolean closeConn;
-    
-    public UpdateExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
+
+    /**
+     * Constructs an UpdateExecutor given a connection and SQL statement.
+     * @param conn The connection to use during execution.
+     * @param sql The SQL statement.
+     * @param closeConnection If the connection should be closed or not.
+     * @throws SQLException thrown if there is an error during execution.
+     */
+    UpdateExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
         super(conn, sql);
         this.closeConn = closeConnection;
     }

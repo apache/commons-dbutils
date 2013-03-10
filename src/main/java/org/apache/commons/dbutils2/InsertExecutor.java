@@ -21,18 +21,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+/**
+ * Fluent class for executing inserts.
+ *
+ * @since 2.0
+ * @author William Speirs <wspeirs@apache.org>
+ */
 public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
 
     private final boolean closeConn;
 
-    public InsertExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
+    /**
+     * Constructs an InsertExecutor given a connection and SQL statement.
+     * @param conn The connection to use during execution.
+     * @param sql The SQL statement.
+     * @param closeConnection If the connection should be closed or not.
+     * @throws SQLException thrown if there is an error during execution.
+     */
+    InsertExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
         super(conn, sql);
         this.closeConn = closeConnection;
     }
 
     /**
      * Executes the given INSERT SQL statement.
-     * 
+     *
+     * @param <T> the type returned by the ResultSetHandler.
      * @param handler The handler used to create the result object from
      * the <code>ResultSet</code> of auto-generated keys.
      *
@@ -54,10 +68,10 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
         try {
             // execute the update
             getStatement().executeUpdate();
-            
+
             // get the result set
             final ResultSet resultSet = getStatement().getGeneratedKeys();
-            
+
             // run the handler over the results and return them
             return handler.handle(resultSet);
         } catch (SQLException e) {
@@ -72,7 +86,7 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
         // we get here only if something is thrown
         return null;
     }
-    
+
     /**
      * Executes the given INSERT SQL statement.
      * @return the number of rows updated.
@@ -93,8 +107,8 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
                 close(getConnection());
             }
         }
-        
+
         return 0; // only get here on an error
     }
-    
+
 }

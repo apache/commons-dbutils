@@ -17,8 +17,10 @@
 package org.apache.commons.dbutils2;
 
 import static java.sql.DriverManager.registerDriver;
+
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverPropertyInfo;
@@ -216,14 +218,27 @@ public final class DbUtils {
             try {
                 Driver driver = driverConstructor.newInstance();
                 registerDriver(new DriverProxy(driver));
+            } catch (SQLException e) {
+                return false;
+            } catch (InstantiationException e) {
+                return false;
+            } catch (IllegalAccessException e) {
+                return false;
+            } catch (IllegalArgumentException e) {
+                return false;
+            } catch (InvocationTargetException e) {
+                return false;
             } finally {
                 driverConstructor.setAccessible(isConstructorAccessible);
             }
 
             return true;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException e) {
             return false;
-
+        } catch (NoSuchMethodException e) {
+            return false;
+        } catch (SecurityException e) {
+            return false;
         }
     }
 
@@ -396,7 +411,6 @@ public final class DbUtils {
         /**
          * Java 1.7 method.
          */
-        @SuppressWarnings("unused")
         public Logger getParentLogger() throws SQLFeatureNotSupportedException {
             throw new SQLFeatureNotSupportedException();
         }

@@ -50,7 +50,7 @@ public class QueryRunner {
     public QueryRunner(final DataSource ds) {
         this.ds = ds;
     }
-    
+
     /**
      * Returns the <code>DataSource</code> this runner is using.
      * <code>QueryRunner</code> methods always call this method to get the
@@ -76,7 +76,7 @@ public class QueryRunner {
         if (this.getDataSource() == null) {
             throw new SQLException(
                     "QueryRunner requires a DataSource to be "
-                    + "invoked in this way, or a Connection should be passed in");
+                            + "invoked in this way, or a Connection should be passed in");
         }
         return this.getDataSource().getConnection();
     }
@@ -98,10 +98,10 @@ public class QueryRunner {
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
-     * closed after the call. 
-     * 
+     * closed after the call.
+     *
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.BatchExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -115,7 +115,7 @@ public class QueryRunner {
      *
      * @param conn The connection to use for the batch call.
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.BatchExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -125,11 +125,11 @@ public class QueryRunner {
 
     /**
      * Creates an {@link org.apache.commons.dbutils2.BatchExecutor} for the given SQL statement and connection.
-     * 
+     *
      * @param conn The connection to use for the batch call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.BatchExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -144,7 +144,7 @@ public class QueryRunner {
             }
             throw new SQLException("Null SQL statement");
         }
-        
+
         return new BatchExecutor(conn, sql, closeConn);
     }
 
@@ -153,10 +153,10 @@ public class QueryRunner {
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
-     * closed after the call. 
-     * 
+     * closed after the call.
+     *
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.QueryExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -167,10 +167,10 @@ public class QueryRunner {
     /**
      * Creates an {@link org.apache.commons.dbutils2.QueryExecutor} for the given SQL statement and connection.
      * The connection is <b>NOT</b> closed after execution.
-     * 
+     *
      * @param conn The connection to use for the update call.
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.QueryExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -180,11 +180,11 @@ public class QueryRunner {
 
     /**
      * Creates an {@link org.apache.commons.dbutils2.QueryExecutor} for the given SQL statement and connection.
-     * 
+     *
      * @param conn The connection to use for the query call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.QueryExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -199,7 +199,7 @@ public class QueryRunner {
             }
             throw new SQLException("Null SQL statement");
         }
-        
+
         return new QueryExecutor(conn, sql, closeConn);
     }
 
@@ -208,10 +208,10 @@ public class QueryRunner {
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
-     * closed after the call. 
+     * closed after the call.
      *
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.UpdateExecutor} for this SQL statement.
      * @throws SQLException if a database access error occurs
      */
@@ -222,10 +222,10 @@ public class QueryRunner {
     /**
      * Creates an {@link org.apache.commons.dbutils2.UpdateExecutor} for the given SQL statement and connection.
      * The connection is <b>NOT</b> closed after execution.
-     * 
+     *
      * @param conn The connection to use for the update call.
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.UpdateExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -235,11 +235,11 @@ public class QueryRunner {
 
     /**
      * Creates an {@link org.apache.commons.dbutils2.UpdateExecutor} for the given SQL statement and connection.
-     * 
+     *
      * @param conn The connection to use for the update call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
-     * 
+     *
      * @return An {@link org.apache.commons.dbutils2.UpdateExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
@@ -263,8 +263,8 @@ public class QueryRunner {
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
-     * closed after the call. 
-     * 
+     * closed after the call.
+     *
      * @param sql The SQL statement to execute.
      *
      * @return An {@link org.apache.commons.dbutils2.InsertExecutor} for this SQL statement.
@@ -277,7 +277,7 @@ public class QueryRunner {
     /**
      * Creates an {@link org.apache.commons.dbutils2.InsertExecutor} for the given SQL and connection
      * The connection is <b>NOT</b> closed after execution.
-     * 
+     *
      * @param conn The connection to use for the query call.
      * @param sql The SQL statement to execute.
      *
@@ -290,7 +290,7 @@ public class QueryRunner {
 
     /**
      * Creates an {@link org.apache.commons.dbutils2.InsertExecutor} for the given SQL and connection.
-     * 
+     *
      * @param conn The connection to use for the insert call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
@@ -309,7 +309,7 @@ public class QueryRunner {
             }
             throw new SQLException("Null SQL statement");
         }
-        
+
         return new InsertExecutor(conn, sql, closeConn);
     }
 }
