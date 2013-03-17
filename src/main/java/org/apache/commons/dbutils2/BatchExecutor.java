@@ -50,7 +50,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      * @param value the value to bind to the parameter.
      * @return this object.
      * @throws SQLException thrown if the statement number does not exist, or any other SQLException.
-     * @see org.apache.commons.dbutils.UpdateExecutor.bind(String, Object)
+     * @see org.apache.commons.dbutils2.UpdateExecutor#bind(String, Object)
      */
     @Override
     public BatchExecutor bind(final String name, final Object value) throws SQLException {
@@ -86,7 +86,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      * Adds the statement to the batch after binding all of the parameters.
      * @return this object.
      * @throws SQLException if a SQLException is thrown during the addBatch() call.
-     * @see java.sql.PreparedStatement.addBatch()
+     * @see java.sql.PreparedStatement#addBatch()
      */
     public BatchExecutor addBatch() throws SQLException {
         try {
@@ -103,7 +103,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      * Calls batch after checking the parameters to ensure nothing is null.
      * @return an array containing the number of rows updated for each statement.
      * @throws SQLException If there are database or parameter errors.
-     * @see org.apache.commons.dbutils.UpdateExecutor.update()
+     * @see org.apache.commons.dbutils2.UpdateExecutor#execute()
      */
     public int[] execute() throws SQLException {
         try {

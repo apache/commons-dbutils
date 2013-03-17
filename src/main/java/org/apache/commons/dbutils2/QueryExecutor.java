@@ -45,7 +45,7 @@ class QueryExecutor extends AbstractExecutor<QueryExecutor> {
     /**
      * Calls query after checking the parameters to ensure nothing is null.
      *
-     * @param rsh The handler that converts the results into an object.
+     * @param handler The handler that converts the results into an object.
      *
      * @return The results of the query.
      * @throws SQLException If there are database or parameter errors.
