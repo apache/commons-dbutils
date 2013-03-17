@@ -183,7 +183,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
         // go through and bind all of the positions for this name
         for (Integer p:pos) {
-            stmt.setNull(p, sqlType);
+            stmt.setNull(p.intValue(), sqlType);
         }
 
         // add the param and value to our map
@@ -216,7 +216,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
         // go through and bind all of the positions for this name
         for (Integer p:pos) {
             // TODO: need to figure out how to bind NULL
-            stmt.setObject(p, value);
+            stmt.setObject(p.intValue(), value);
         }
 
         // add the param and value to our map
