@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-@SuppressWarnings("boxing") // test code
 public class AsyncExecutorTest {
     AsyncExecutor runner;
 
