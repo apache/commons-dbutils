@@ -173,8 +173,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the name of the column.
+     * @return an array of values from the ResultSet.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getArray(java.lang.String)
      */
@@ -183,8 +183,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getAsciiStream(int)
      */
@@ -193,8 +193,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getAsciiStream(java.lang.String)
      */
@@ -203,8 +203,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the BigDecimal.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBigDecimal(int)
      */
@@ -213,8 +213,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the BigDecimal.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBigDecimal(java.lang.String)
      */
@@ -223,8 +223,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBinaryStream(int)
      */
@@ -233,8 +233,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBinaryStream(java.lang.String)
      */
@@ -243,8 +243,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the Blob.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBlob(int)
      */
@@ -253,8 +253,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the Blob.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBlob(java.lang.String)
      */
@@ -263,8 +263,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the boolean.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBoolean(int)
      */
@@ -273,8 +273,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the boolean.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBoolean(java.lang.String)
      */
@@ -283,8 +283,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the byte.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getByte(int)
      */
@@ -293,8 +293,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the byte.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getByte(java.lang.String)
      */
@@ -303,8 +303,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the byte array.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBytes(int)
      */
@@ -313,8 +313,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the byte array.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getBytes(java.lang.String)
      */
@@ -323,7 +323,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getCharacterStream(int)
@@ -333,8 +333,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getCharacterStream(java.lang.String)
      */
@@ -343,8 +343,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the Clob.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getClob(int)
      */
@@ -353,8 +353,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getClob(java.lang.String)
      */
@@ -363,7 +362,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the concurrency.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getConcurrency()
      */
@@ -372,7 +371,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the cursor name.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getCursorName()
      */
@@ -381,8 +380,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param cal
+     * @param columnIndex the index of the column.
+     * @param cal the Calendar.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDate(int, java.util.Calendar)
@@ -392,8 +391,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the date.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDate(int)
      */
@@ -402,9 +401,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param cal
-     * @return
+     * @param columnLabel the column's label.
+     * @param cal the Calendar.
+     * @return the date.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDate(java.lang.String, java.util.Calendar)
      */
@@ -413,8 +412,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the date.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDate(java.lang.String)
      */
@@ -423,8 +422,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the Double.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDouble(int)
      */
@@ -433,8 +432,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the Double.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDouble(java.lang.String)
      */
@@ -443,7 +442,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the fetch direction.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getFetchDirection()
      */
@@ -452,7 +451,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the fetch size.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getFetchSize()
      */
@@ -461,8 +460,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the float.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getFloat(int)
      */
@@ -471,8 +470,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the float.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getFloat(java.lang.String)
      */
@@ -481,7 +480,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the holdability.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getHoldability()
      */
@@ -490,8 +489,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the int.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getInt(int)
      */
@@ -500,8 +499,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the int.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getInt(java.lang.String)
      */
@@ -510,8 +509,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the long.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getLong(int)
      */
@@ -520,8 +519,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the long.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getLong(java.lang.String)
      */
@@ -530,7 +529,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the ResultSetMetaData.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getMetaData()
      */
@@ -539,8 +538,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the N character stream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getNCharacterStream(int)
      */
@@ -549,8 +548,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the N character stream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getNCharacterStream(java.lang.String)
      */
@@ -559,8 +558,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the N Clob.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getNClob(int)
      */
@@ -569,8 +568,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the N Clob.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getNClob(java.lang.String)
      */
@@ -579,8 +578,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
+     * @param columnIndex the index of the column.
+     * @return the N String.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getNString(int)
      */
@@ -589,8 +588,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
+     * @param columnLabel the column's label.
+     * @return the N String.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getNString(java.lang.String)
      */
@@ -599,7 +598,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @param map
      * @return
      * @throws SQLException thrown if there is an SQL error.
@@ -610,7 +609,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getObject(int)
@@ -620,7 +619,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @param map
      * @return
      * @throws SQLException thrown if there is an SQL error.
@@ -631,7 +630,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getObject(java.lang.String)
@@ -641,7 +640,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRef(int)
@@ -651,7 +650,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRef(java.lang.String)
@@ -670,7 +669,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRowId(int)
@@ -680,7 +679,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRowId(java.lang.String)
@@ -690,7 +689,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getSQLXML(int)
@@ -700,7 +699,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getSQLXML(java.lang.String)
@@ -710,7 +709,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getShort(int)
@@ -720,7 +719,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getShort(java.lang.String)
@@ -739,7 +738,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getString(int)
@@ -749,7 +748,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getString(java.lang.String)
@@ -759,8 +758,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param cal
+     * @param columnIndex the index of the column.
+     * @param cal the Calendar.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(int, java.util.Calendar)
@@ -770,7 +769,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(int)
@@ -780,8 +779,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param cal
+     * @param columnLabel the column's label.
+     * @param cal the Calendar.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(java.lang.String, java.util.Calendar)
@@ -791,7 +790,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(java.lang.String)
@@ -801,8 +800,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param cal
+     * @param columnIndex the index of the column.
+     * @param cal the Calendar.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(int, java.util.Calendar)
@@ -812,7 +811,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(int)
@@ -822,8 +821,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param cal
+     * @param columnLabel the column's label.
+     * @param cal the Calendar.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(java.lang.String, java.util.Calendar)
@@ -833,7 +832,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(java.lang.String)
@@ -852,7 +851,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getURL(int)
@@ -862,7 +861,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @return
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getURL(java.lang.String)
@@ -1060,8 +1059,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateArray(int, java.sql.Array)
      */
@@ -1070,8 +1069,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateArray(java.lang.String, java.sql.Array)
      */
@@ -1080,9 +1079,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream, int)
      */
@@ -1091,9 +1090,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream, long)
      */
@@ -1102,8 +1101,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream)
      */
@@ -1112,9 +1111,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream, int)
      */
@@ -1123,9 +1122,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream, long)
      */
@@ -1134,8 +1133,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream)
      */
@@ -1144,8 +1143,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBigDecimal(int, java.math.BigDecimal)
      */
@@ -1154,8 +1153,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBigDecimal(java.lang.String, java.math.BigDecimal)
      */
@@ -1164,9 +1163,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream, int)
      */
@@ -1175,9 +1174,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream, long)
      */
@@ -1186,8 +1185,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream)
      */
@@ -1196,9 +1195,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream, int)
      */
@@ -1207,9 +1206,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream, long)
      */
@@ -1218,8 +1217,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream)
      */
@@ -1228,8 +1227,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBlob(int, java.sql.Blob)
      */
@@ -1238,9 +1237,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @param inputStream
-     * @param length
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBlob(int, java.io.InputStream, long)
      */
@@ -1249,7 +1248,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @param inputStream
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBlob(int, java.io.InputStream)
@@ -1259,8 +1258,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBlob(java.lang.String, java.sql.Blob)
      */
@@ -1269,9 +1268,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @param inputStream
-     * @param length
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBlob(java.lang.String, java.io.InputStream, long)
      */
@@ -1280,7 +1279,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @param inputStream
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBlob(java.lang.String, java.io.InputStream)
@@ -1290,8 +1289,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBoolean(int, boolean)
      */
@@ -1300,8 +1299,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBoolean(java.lang.String, boolean)
      */
@@ -1310,8 +1309,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateByte(int, byte)
      */
@@ -1320,8 +1319,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateByte(java.lang.String, byte)
      */
@@ -1330,8 +1329,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBytes(int, byte[])
      */
@@ -1340,8 +1339,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateBytes(java.lang.String, byte[])
      */
@@ -1350,9 +1349,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader, int)
      */
@@ -1361,9 +1360,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader, long)
      */
@@ -1372,8 +1371,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader)
      */
@@ -1382,9 +1381,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader, int)
      */
@@ -1393,9 +1392,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader, long)
      */
@@ -1404,8 +1403,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader)
      */
@@ -1414,8 +1413,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateClob(int, java.sql.Clob)
      */
@@ -1424,9 +1423,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param reader
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateClob(int, java.io.Reader, long)
      */
@@ -1435,8 +1434,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param reader
+     * @param columnIndex the index of the column.
+     * @param reader the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateClob(int, java.io.Reader)
      */
@@ -1445,8 +1444,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateClob(java.lang.String, java.sql.Clob)
      */
@@ -1455,9 +1454,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateClob(java.lang.String, java.io.Reader, long)
      */
@@ -1466,8 +1465,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateClob(java.lang.String, java.io.Reader)
      */
@@ -1476,8 +1475,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateDate(int, java.sql.Date)
      */
@@ -1486,8 +1485,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateDate(java.lang.String, java.sql.Date)
      */
@@ -1496,8 +1495,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateDouble(int, double)
      */
@@ -1506,8 +1505,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateDouble(java.lang.String, double)
      */
@@ -1516,8 +1515,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateFloat(int, float)
      */
@@ -1526,8 +1525,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateFloat(java.lang.String, float)
      */
@@ -1536,8 +1535,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateInt(int, int)
      */
@@ -1546,8 +1545,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateInt(java.lang.String, int)
      */
@@ -1556,8 +1555,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateLong(int, long)
      */
@@ -1566,8 +1565,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateLong(java.lang.String, long)
      */
@@ -1576,9 +1575,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNCharacterStream(int, java.io.Reader, long)
      */
@@ -1587,8 +1586,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNCharacterStream(int, java.io.Reader)
      */
@@ -1597,9 +1596,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNCharacterStream(java.lang.String, java.io.Reader, long)
      */
@@ -1608,8 +1607,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNCharacterStream(java.lang.String, java.io.Reader)
      */
@@ -1618,7 +1617,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @param nClob
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNClob(int, java.sql.NClob)
@@ -1628,9 +1627,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param reader
-     * @param length
+     * @param columnIndex the index of the column.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNClob(int, java.io.Reader, long)
      */
@@ -1639,8 +1638,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param reader
+     * @param columnIndex the index of the column.
+     * @param reader the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNClob(int, java.io.Reader)
      */
@@ -1649,7 +1648,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @param nClob
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNClob(java.lang.String, java.sql.NClob)
@@ -1659,9 +1658,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
+     * @param length the length of the data.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNClob(java.lang.String, java.io.Reader, long)
      */
@@ -1670,8 +1669,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param reader
+     * @param columnLabel the column's label.
+     * @param reader the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNClob(java.lang.String, java.io.Reader)
      */
@@ -1680,7 +1679,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @param nString
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNString(int, java.lang.String)
@@ -1690,7 +1689,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @param nString
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNString(java.lang.String, java.lang.String)
@@ -1700,7 +1699,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNull(int)
      */
@@ -1709,7 +1708,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateNull(java.lang.String)
      */
@@ -1718,8 +1717,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @param scaleOrLength
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateObject(int, java.lang.Object, int)
@@ -1729,8 +1728,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateObject(int, java.lang.Object)
      */
@@ -1739,8 +1738,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @param scaleOrLength
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateObject(java.lang.String, java.lang.Object, int)
@@ -1750,8 +1749,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateObject(java.lang.String, java.lang.Object)
      */
@@ -1760,8 +1759,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateRef(int, java.sql.Ref)
      */
@@ -1770,8 +1769,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateRef(java.lang.String, java.sql.Ref)
      */
@@ -1788,8 +1787,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateRowId(int, java.sql.RowId)
      */
@@ -1798,8 +1797,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateRowId(java.lang.String, java.sql.RowId)
      */
@@ -1808,7 +1807,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
+     * @param columnIndex the index of the column.
      * @param xmlObject
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateSQLXML(int, java.sql.SQLXML)
@@ -1818,7 +1817,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
+     * @param columnLabel the column's label.
      * @param xmlObject
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateSQLXML(java.lang.String, java.sql.SQLXML)
@@ -1828,8 +1827,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateShort(int, short)
      */
@@ -1838,8 +1837,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateShort(java.lang.String, short)
      */
@@ -1848,8 +1847,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateString(int, java.lang.String)
      */
@@ -1858,8 +1857,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateString(java.lang.String, java.lang.String)
      */
@@ -1868,8 +1867,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateTime(int, java.sql.Time)
      */
@@ -1878,8 +1877,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateTime(java.lang.String, java.sql.Time)
      */
@@ -1888,8 +1887,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @param x
+     * @param columnIndex the index of the column.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateTimestamp(int, java.sql.Timestamp)
      */
@@ -1898,8 +1897,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @param x
+     * @param columnLabel the column's label.
+     * @param x the InputStream.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#updateTimestamp(java.lang.String, java.sql.Timestamp)
      */

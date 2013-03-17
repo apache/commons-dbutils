@@ -19,10 +19,10 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>26</version>
+    <version>28</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>commons-dbutils</groupId>
+  <groupId>org.apache.commons</groupId>
   <artifactId>commons-dbutils</artifactId>
   <version>2.0-SNAPSHOT</version>
   <name>Commons DbUtils</name>
