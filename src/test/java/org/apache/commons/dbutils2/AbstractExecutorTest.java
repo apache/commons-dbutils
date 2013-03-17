@@ -70,6 +70,7 @@ public class AbstractExecutorTest {
         executor.throwIfUnmappedParams();
     }
 
+    @SuppressWarnings("boxing") // test code
     @Test
     public void testNoParamsSql() throws SQLException {
         createExecutor("select * from blah");
