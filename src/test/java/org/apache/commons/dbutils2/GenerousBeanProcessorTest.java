@@ -29,6 +29,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 
+@SuppressWarnings("boxing") // test code
 public class GenerousBeanProcessorTest {
     
     GenerousBeanProcessor processor = new GenerousBeanProcessor();

@@ -39,6 +39,7 @@ public class UpdateExecutorTest {
     @Mock private Connection conn;
     @Mock private PreparedStatement stmt;
     
+    @SuppressWarnings("boxing") // test code
     @Before
     public void setup() throws SQLException {
         MockitoAnnotations.initMocks(this);
