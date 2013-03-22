@@ -64,7 +64,7 @@ public class AsyncQueryRunnerTest {
         when(results.next()).thenReturn(false);
 
          handler = new ArrayHandler();
-         runner = new AsyncQueryRunner(dataSource, Executors.newFixedThreadPool(1));
+         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1), new QueryRunner(dataSource));
     }
 
     //
@@ -101,6 +101,7 @@ public class AsyncQueryRunnerTest {
         callGoodBatch(params);
     }
 
+    @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
     public void testGoodBatchPmdTrue() throws Exception {
         runner = new AsyncQueryRunner(dataSource, true, Executors.newFixedThreadPool(1));
@@ -253,6 +254,7 @@ public class AsyncQueryRunnerTest {
         callGoodQuery();
     }
 
+    @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
     public void testGoodQueryPmdTrue() throws Exception {
         runner = new AsyncQueryRunner(true, Executors.newFixedThreadPool(1));
@@ -389,6 +391,7 @@ public class AsyncQueryRunnerTest {
         callGoodUpdate();
     }
 
+    @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
     public void testGoodUpdatePmdTrue() throws Exception {
         runner = new AsyncQueryRunner(true, Executors.newFixedThreadPool(1));
