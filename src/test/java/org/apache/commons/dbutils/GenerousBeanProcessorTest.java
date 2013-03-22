@@ -44,6 +44,7 @@ public class GenerousBeanProcessorTest {
         propDescriptors[2] = new PropertyDescriptor("three", TestBean.class);
     }
 
+    @SuppressWarnings("boxing") // test code
     @Test
     public void testMapColumnsToPropertiesWithOutUnderscores() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
@@ -62,6 +63,7 @@ public class GenerousBeanProcessorTest {
         assertEquals(1, ret[3]);
     }
     
+    @SuppressWarnings("boxing") // test code
     @Test
     public void testMapColumnsToPropertiesWithUnderscores() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
