@@ -210,6 +210,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @deprecated
      * @see java.sql.ResultSet#getBigDecimal(int, int)
      */
+    @Deprecated
     protected final BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
         return rs.getBigDecimal(columnIndex, scale);
     }
@@ -232,6 +233,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @deprecated
      * @see java.sql.ResultSet#getBigDecimal(java.lang.String, int)
      */
+    @Deprecated
     protected final BigDecimal getBigDecimal(String columnLabel, int scale) throws SQLException {
         return rs.getBigDecimal(columnLabel, scale);
     }
@@ -902,6 +904,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @deprecated
      * @see java.sql.ResultSet#getUnicodeStream(int)
      */
+    @Deprecated
     protected final InputStream getUnicodeStream(int columnIndex) throws SQLException {
         return rs.getUnicodeStream(columnIndex);
     }
@@ -913,6 +916,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @deprecated
      * @see java.sql.ResultSet#getUnicodeStream(java.lang.String)
      */
+    @Deprecated
     protected final InputStream getUnicodeStream(String columnLabel) throws SQLException {
         return rs.getUnicodeStream(columnLabel);
     }
