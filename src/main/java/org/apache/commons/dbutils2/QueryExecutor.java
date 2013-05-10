@@ -25,7 +25,7 @@ import java.sql.SQLException;
  *
  * @since 2.0
  */
-class QueryExecutor extends AbstractExecutor<QueryExecutor> {
+public class QueryExecutor extends AbstractExecutor<QueryExecutor> {
 
     private final boolean closeConn;
 
