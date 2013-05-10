@@ -25,7 +25,6 @@ import java.sql.SQLException;
  * Fluent class for executing inserts.
  *
  * @since 2.0
- * @author William Speirs <wspeirs@apache.org>
  */
 public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
 

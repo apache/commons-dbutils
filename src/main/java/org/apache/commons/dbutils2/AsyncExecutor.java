@@ -24,7 +24,6 @@ import java.util.concurrent.Future;
 /**
  * Convenience class for executing QueryExecutor, InsertExecutor, or UpdateExecutors asynchronously.
  *
- * @author William Speirs <wspeirs@apache.org>
  * @since 2.0
  */
 public class AsyncExecutor {

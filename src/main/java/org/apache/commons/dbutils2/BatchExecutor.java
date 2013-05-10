@@ -26,7 +26,6 @@ import java.sql.Types;
  * It is really just a facade to an array of UpdateExecutors.
  *
  * @since 2.0
- * @author William Speirs <wspeirs@apache.org>
  */
 public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 

@@ -23,7 +23,6 @@ import java.sql.SQLException;
  * Fluent class for executing updates.
  *
  * @since 2.0
- * @author William Speirs <wspeirs@apache.org>
  */
 public class UpdateExecutor extends AbstractExecutor<UpdateExecutor> {
 

@@ -24,7 +24,6 @@ import java.sql.SQLException;
  * Fluent class for executing a query.
  *
  * @since 2.0
- * @author William Speirs <wspeirs@apache.org>
  */
 class QueryExecutor extends AbstractExecutor<QueryExecutor> {
 

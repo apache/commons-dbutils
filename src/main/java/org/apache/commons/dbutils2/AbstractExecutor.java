@@ -34,7 +34,6 @@ import java.util.regex.Pattern;
  * Abstract class for executing a query, insert, update, or batch.
  *
  * @since 2.0
- * @author William Speirs <wspeirs@apache.org>
  */
 abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
