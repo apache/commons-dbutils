@@ -45,7 +45,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     private final Map<String, List<Integer>> paramPosMap;
     private final Map<String, Object> paramValueMap;
-    private Integer currentPosition = Integer.valueOf(0);
+    private int currentPosition = 0;
 
     public AbstractExecutor(final Connection conn, final String sql) throws SQLException {
         this.conn = conn;
@@ -79,7 +79,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
         }
 
         // increment first, so we match SQL numbering
-        posList.add(++currentPosition);
+        posList.add(Integer.valueOf(++currentPosition));
     }
 
     /**
