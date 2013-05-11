@@ -47,7 +47,7 @@ import org.apache.commons.dbutils2.RowProcessor;
  *
  * @param <K> The type of the key
  * @see org.apache.commons.dbutils2.ResultSetHandler
- * @since DbUtils 1.1
+ * @since 1.1
  */
 public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>> {
 

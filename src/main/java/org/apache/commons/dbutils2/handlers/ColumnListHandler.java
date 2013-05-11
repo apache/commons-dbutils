@@ -26,7 +26,7 @@ import java.sql.SQLException;
  *
  * @param <T> The type of the column.
  * @see org.apache.commons.dbutils2.ResultSetHandler
- * @since DbUtils 1.1
+ * @since 1.1
  */
 public class ColumnListHandler<T> extends AbstractListHandler<T> {
 

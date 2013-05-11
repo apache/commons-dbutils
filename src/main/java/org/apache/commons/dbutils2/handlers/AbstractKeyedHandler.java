@@ -33,7 +33,7 @@ import org.apache.commons.dbutils2.ResultSetHandler;
  * @param <K> the type of keys maintained by the returned map
  * @param <V> the type of mapped values
  * @see org.apache.commons.dbutils2.ResultSetHandler
- * @since DbUtils 1.3
+ * @since 1.3
  */
 public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map<K, V>> {
 

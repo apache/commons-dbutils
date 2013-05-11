@@ -88,7 +88,7 @@ public class QueryLoader {
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
      * the given path.
-     * @since DbUtils 1.1
+     * @since 1.1
      * @return Map of query names to SQL values
      */
     protected Map<String, String> loadQueries(String path) throws IOException {
