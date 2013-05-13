@@ -15,8 +15,8 @@
 ## specific language governing permissions and limitations
 ## under the License.
 
-              Apache ${project.name} 
-                     Version ${version} 
+              Apache ${project.name}
+                     Version ${version}
                     RELEASE NOTES
 
 The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}
@@ -61,7 +61,7 @@ o#if($!issue != "") $issue: #else$indent#end ${action} #if($!dueto != "")Thanks 
 
 #set($issue="")
 #set($dueto="")
-#end 
+#end
 #end
 
 #if ($release.getActions('fix').size() !=0)
