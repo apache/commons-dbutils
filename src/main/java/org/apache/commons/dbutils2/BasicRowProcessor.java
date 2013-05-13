@@ -142,7 +142,11 @@ public class BasicRowProcessor implements RowProcessor {
         int cols = rsmd.getColumnCount();
 
         for (int i = 1; i <= cols; i++) {
-            result.put(rsmd.getColumnName(i), rs.getObject(i));
+            String columnName = rsmd.getColumnLabel(i);
+            if (null == columnName || 0 == columnName.length()) {
+                columnName = rsmd.getColumnName(i);
+            }
+            result.put(columnName, rs.getObject(i));		
         }
 
         return result;
