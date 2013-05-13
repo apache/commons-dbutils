@@ -94,7 +94,7 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.BatchExecutor} for the given SQL.
+     * Creates an {@link BatchExecutor} for the given SQL.
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
@@ -102,7 +102,7 @@ public class QueryRunner {
      *
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.BatchExecutor} for this SQL statement.
+     * @return An {@link BatchExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public BatchExecutor batch(String sql) throws SQLException {
@@ -110,13 +110,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.BatchExecutor} for the given SQL statement and connection.
+     * Creates an {@link BatchExecutor} for the given SQL statement and connection.
      * The connection is <b>NOT</b> closed after execution.
      *
      * @param conn The connection to use for the batch call.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.BatchExecutor} for this SQL statement.
+     * @return An {@link BatchExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public BatchExecutor batch(Connection conn, String sql) throws SQLException {
@@ -124,13 +124,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.BatchExecutor} for the given SQL statement and connection.
+     * Creates an {@link BatchExecutor} for the given SQL statement and connection.
      *
      * @param conn The connection to use for the batch call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.BatchExecutor} for this SQL statement.
+     * @return An {@link BatchExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public BatchExecutor batch(Connection conn, boolean closeConn, String sql) throws SQLException {
@@ -149,7 +149,7 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.QueryExecutor} for the given SQL.
+     * Creates an {@link QueryExecutor} for the given SQL.
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
@@ -157,7 +157,7 @@ public class QueryRunner {
      *
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.QueryExecutor} for this SQL statement.
+     * @return A {@link QueryExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public QueryExecutor query(String sql) throws SQLException {
@@ -165,13 +165,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.QueryExecutor} for the given SQL statement and connection.
+     * Creates an {@link QueryExecutor} for the given SQL statement and connection.
      * The connection is <b>NOT</b> closed after execution.
      *
      * @param conn The connection to use for the update call.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.QueryExecutor} for this SQL statement.
+     * @return An {@link QueryExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public QueryExecutor query(Connection conn, String sql) throws SQLException {
@@ -179,13 +179,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.QueryExecutor} for the given SQL statement and connection.
+     * Creates an {@link QueryExecutor} for the given SQL statement and connection.
      *
      * @param conn The connection to use for the query call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.QueryExecutor} for this SQL statement.
+     * @return An {@link QueryExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public QueryExecutor query(Connection conn, boolean closeConn, String sql) throws SQLException {
@@ -204,7 +204,7 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.UpdateExecutor} for the given SQL.
+     * Creates an {@link UpdateExecutor} for the given SQL.
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
@@ -212,7 +212,7 @@ public class QueryRunner {
      *
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.UpdateExecutor} for this SQL statement.
+     * @return An {@link UpdateExecutor} for this SQL statement.
      * @throws SQLException if a database access error occurs
      */
     public UpdateExecutor update(String sql) throws SQLException {
@@ -220,13 +220,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.UpdateExecutor} for the given SQL statement and connection.
+     * Creates an {@link UpdateExecutor} for the given SQL statement and connection.
      * The connection is <b>NOT</b> closed after execution.
      *
      * @param conn The connection to use for the update call.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.UpdateExecutor} for this SQL statement.
+     * @return An {@link UpdateExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public UpdateExecutor update(Connection conn, String sql) throws SQLException {
@@ -234,13 +234,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.UpdateExecutor} for the given SQL statement and connection.
+     * Creates an {@link UpdateExecutor} for the given SQL statement and connection.
      *
      * @param conn The connection to use for the update call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.UpdateExecutor} for this SQL statement.
+     * @return An {@link UpdateExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public UpdateExecutor update(Connection conn, boolean closeConn, String sql) throws SQLException {
@@ -259,7 +259,7 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.InsertExecutor} for the given SQL.
+     * Creates an {@link InsertExecutor} for the given SQL.
      * <code>Connection</code> is retrieved from the <code>DataSource</code>
      * set in the constructor.  This <code>Connection</code> must be in
      * auto-commit mode or the insert will not be saved. The <code>Connection</code> is
@@ -267,7 +267,7 @@ public class QueryRunner {
      *
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.InsertExecutor} for this SQL statement.
+     * @return An {@link InsertExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public InsertExecutor insert(String sql) throws SQLException {
@@ -275,13 +275,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.InsertExecutor} for the given SQL and connection
+     * Creates an {@link InsertExecutor} for the given SQL and connection
      * The connection is <b>NOT</b> closed after execution.
      *
      * @param conn The connection to use for the query call.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.InsertExecutor} for this SQL statement.
+     * @return An {@link InsertExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public InsertExecutor insert(Connection conn, String sql) throws SQLException {
@@ -289,13 +289,13 @@ public class QueryRunner {
     }
 
     /**
-     * Creates an {@link org.apache.commons.dbutils2.InsertExecutor} for the given SQL and connection.
+     * Creates an {@link InsertExecutor} for the given SQL and connection.
      *
      * @param conn The connection to use for the insert call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      *
-     * @return An {@link org.apache.commons.dbutils2.InsertExecutor} for this SQL statement.
+     * @return An {@link InsertExecutor} for this SQL statement.
      * @throws SQLException If there are database or parameter errors.
      */
     public InsertExecutor insert(Connection conn, boolean closeConn, String sql) throws SQLException {
