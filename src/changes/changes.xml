@@ -47,6 +47,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="wspeirs" due-to="Micah Huff" type="add" issue="DBUTILS-108">
         Create functionality to return auto-generated keys in batches of SQL inserts
       </action>
+      <action dev="wspeirs" due-to="PB" type="add" issue="DBUTILS-107">
+        Patch QueryLoader to also load from XML properties files
+      </action>
       <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
         Add missing JavaDoc to QueryRunner#insert
       </action>
