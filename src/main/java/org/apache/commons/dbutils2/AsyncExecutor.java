@@ -41,6 +41,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.BatchExecutor}.
+     * 
      * @param executor The executor for this SQL statement.
      * @return A <code>Future</code> which returns the result of the batch call.
      * @throws SQLException if a database access error occurs
@@ -58,6 +59,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.QueryExecutor} given a handler.
+     * 
      * @param <T> The type of object that the handler returns
      * @param executor The executor for this SQL statement.
      * @param handler The handler that converts the results into an object.
@@ -77,6 +79,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.UpdateExecutor}.
+     * 
      * @param executor The executor for this SQL statement.
      * @return A <code>Future</code> which returns the result of the query call.
      * @throws SQLException if a database access error occurs
@@ -94,6 +97,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.InsertExecutor} given a handler.
+     * 
      * @param <T> The type of object that the handler returns
      * @param executor The executor for this SQL statement.
      * @param handler The handler that converts the results into an object.
@@ -113,6 +117,7 @@ public class AsyncExecutor {
 
     /**
      * Execute a {@link org.apache.commons.dbutils2.InsertExecutor} given a handler.
+     * 
      * @param executor The executor for this SQL statement.
      * @return A <code>Future</code> which returns the number of rows inserted.
      * @throws SQLException if a database access error occurs

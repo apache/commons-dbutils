@@ -49,6 +49,7 @@ public interface RowProcessor {
      * row.  The <code>ResultSet</code> should be positioned on a valid row before
      * passing it to this method.  Implementations of this method must not
      * alter the row position of the <code>ResultSet</code>.
+     * 
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
@@ -61,6 +62,7 @@ public interface RowProcessor {
      * Create a <code>List</code> of JavaBeans from the column values in all
      * <code>ResultSet</code> rows.  <code>ResultSet.next()</code> should
      * <strong>not</strong> be called before passing it to this method.
+     * 
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance

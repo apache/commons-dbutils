@@ -37,6 +37,7 @@ public class QueryLoader {
 
     /**
      * Return an instance of this class.
+     * 
      * @return The Singleton instance.
      */
     public static QueryLoader instance() {
@@ -84,6 +85,7 @@ public class QueryLoader {
     /**
      * Loads a set of named queries into a Map object.  This implementation
      * reads a properties file at the given path.
+     * 
      * @param path The path that the ClassLoader will use to find the file.
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
@@ -115,6 +117,7 @@ public class QueryLoader {
 
     /**
      * Removes the queries for the given path from the cache.
+     * 
      * @param path The path that the queries were loaded from.
      */
     public synchronized void unload(String path) {

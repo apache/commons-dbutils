@@ -32,6 +32,7 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
 
     /**
      * Constructs an InsertExecutor given a connection and SQL statement.
+     * 
      * @param conn The connection to use during execution.
      * @param sql The SQL statement.
      * @param closeConnection If the connection should be closed or not.
@@ -88,6 +89,7 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
 
     /**
      * Executes the given INSERT SQL statement.
+     * 
      * @return the number of rows updated.
      * @throws SQLException If there are database or parameter errors.
      */

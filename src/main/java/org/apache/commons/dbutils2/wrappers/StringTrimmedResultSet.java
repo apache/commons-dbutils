@@ -72,6 +72,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
     /**
      * Constructs a new instance of <code>StringTrimmedResultSet</code>
      * to wrap the specified <code>ResultSet</code>.
+     * 
      * @param rs ResultSet to wrap
      */
     public StringTrimmedResultSet(ResultSet rs) {

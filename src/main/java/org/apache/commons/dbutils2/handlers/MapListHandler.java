@@ -58,6 +58,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
 
     /**
      * Converts the <code>ResultSet</code> row into a <code>Map</code> object.
+     * 
      * @param rs <code>ResultSet</code> to process.
      * @return A <code>Map</code>, never null.
      *

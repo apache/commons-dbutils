@@ -30,6 +30,7 @@ public class UpdateExecutor extends AbstractExecutor<UpdateExecutor> {
 
     /**
      * Constructs an UpdateExecutor given a connection and SQL statement.
+     * 
      * @param conn The connection to use during execution.
      * @param sql The SQL statement.
      * @param closeConnection If the connection should be closed or not.
@@ -42,6 +43,7 @@ public class UpdateExecutor extends AbstractExecutor<UpdateExecutor> {
 
     /**
      * Calls update after checking the parameters to ensure nothing is null.
+     * 
      * @return The number of rows updated.
      * @throws SQLException If there are database or parameter errors.
      */

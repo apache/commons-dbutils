@@ -84,6 +84,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Gets the SQL statement that was passed into the constructor.
+     * 
      * @return the SQL statement passed into the constructor.
      */
     protected String getSql() {
@@ -92,6 +93,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Returns the underlying prepared statement.
+     * 
      * @return the underlying prepared statement.
      */
     protected PreparedStatement getStatement() {
@@ -100,6 +102,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Returns the underlying connection.
+     * 
      * @return the underlying connection.
      */
     protected Connection getConnection() {
@@ -108,6 +111,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Throws an exception if there are unmapped params.
+     * 
      * @throws SQLException if there are unmapped params.
      */
     protected void throwIfUnmappedParams() throws SQLException {
@@ -144,6 +148,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * Binds null to a parameter.
      * Types.VARCHAR is used as the type's parameter.
      * This usually works, but fails with some Oracle and MS SQL drivers.
+     * 
      * @param name the name of the parameter.
      * @return this execution object to provide the fluent style.
      * @throws SQLException throw if the parameter is not found, already bound, or there is an issue binding null.
@@ -154,6 +159,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Binds null to a parameter, specifying the parameter's type.
+     * 
      * @param name the name of the parameter.
      * @param sqlType the type of the parameter.
      * @return this execution object to provide the fluent style.
@@ -165,6 +171,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Given a param name and sqlType, binds a null to that parameter.
+     * 
      * @param name the name of the parameter.
      * @param sqlType the type of the parameter.
      * @param removeFromPosMap if the param should be removed from the pos map.
@@ -197,6 +204,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
 
     /**
      * Binds value to name, but does not do the bookkeeping.
+     * 
      * @param name the parameter name.
      * @param value the value.
      * @param removeFromPosMap if the param should be removed from the pos map.

@@ -69,7 +69,9 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
         this(1, columnName);
     }
 
-    /** Private Helper
+    /**
+     * Private Helper
+     * 
      * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
      * @param columnName The name of the column to retrieve from the
@@ -83,6 +85,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
 
     /**
      * Returns one <code>ResultSet</code> column value as <code>Object</code>.
+     * 
      * @param rs <code>ResultSet</code> to process.
      * @return <code>Object</code>, never <code>null</code>.
      *

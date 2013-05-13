@@ -297,6 +297,7 @@ public final class DbUtils {
 
     /**
      * Rollback any changes made on the given connection.
+     * 
      * @param conn Connection to rollback.  A null value is legal.
      * @throws SQLException if a database access error occurs
      */
@@ -360,49 +361,31 @@ public final class DbUtils {
             this.adapted = adapted;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public boolean acceptsURL(String url) throws SQLException {
             return adapted.acceptsURL(url);
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public Connection connect(String url, Properties info) throws SQLException {
             return adapted.connect(url, info);
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public int getMajorVersion() {
             return adapted.getMajorVersion();
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public int getMinorVersion() {
             return adapted.getMinorVersion();
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
             return adapted.getPropertyInfo(url, info);
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public boolean jdbcCompliant() {
             return adapted.jdbcCompliant();

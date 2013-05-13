@@ -68,6 +68,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     /**
      * Convert the first row of the <code>ResultSet</code> into a bean with the
      * <code>Class</code> given in the constructor.
+     * 
      * @param rs <code>ResultSet</code> to process.
      * @return An initialized JavaBean or <code>null</code> if there were no
      * rows in the <code>ResultSet</code>.

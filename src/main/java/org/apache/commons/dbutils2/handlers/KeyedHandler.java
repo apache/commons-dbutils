@@ -107,7 +107,9 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
         this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
-    /** Private Helper
+    /**
+     * Private Helper
+     * 
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Maps
      * @param columnIndex The values to use as keys in the Map are
@@ -127,6 +129,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * key value from the current <code>ResultSet</code> row.  This
      * implementation returns <code>ResultSet.getObject()</code> for the
      * configured key column name or index.
+     * 
      * @param rs ResultSet to create a key from
      * @return Object from the configured key column name/index
      *
@@ -149,6 +152,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * implementation returns a <code>Map</code> with case insensitive column
      * names as keys.  Calls to <code>map.get("COL")</code> and
      * <code>map.get("col")</code> return the same value.
+     * 
      * @param rs ResultSet to create a row from
      * @return Object typed Map containing column names to values
      * @throws SQLException if a database access error occurs

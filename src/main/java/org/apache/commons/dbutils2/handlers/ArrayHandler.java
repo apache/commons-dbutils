@@ -66,6 +66,7 @@ public class ArrayHandler<T> implements ResultSetHandler<T[]> {
 
     /**
      * Places the column values from the first row in an <code>T[]</code>.
+     * 
      * @param rs <code>ResultSet</code> to process.
      * @return An T[] or <code>null</code> if there are no rows in the
      * <code>ResultSet</code>.

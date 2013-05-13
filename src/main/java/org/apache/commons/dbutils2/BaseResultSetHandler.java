@@ -58,9 +58,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     private ResultSet rs;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final T handle(ResultSet rs) throws SQLException {
         if (this.rs != null) {

@@ -31,6 +31,7 @@ public class QueryExecutor extends AbstractExecutor<QueryExecutor> {
 
     /**
      * Constructs a QueryExecutor given a connection and SQL statement.
+     * 
      * @param conn The connection to use during execution.
      * @param sql The SQL statement.
      * @param closeConnection If the connection should be closed or not.

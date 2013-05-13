@@ -69,7 +69,9 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
         this(1, columnName);
     }
 
-    /** Helper constructor
+    /**
+     * Helper constructor
+     * 
      * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
      * @param columnName The name of the column to retrieve from the
@@ -84,6 +86,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Returns one <code>ResultSet</code> column as an object via the
      * <code>ResultSet.getObject()</code> method that performs type
      * conversions.
+     * 
      * @param rs <code>ResultSet</code> to process.
      * @return The column or <code>null</code> if there are no rows in
      * the <code>ResultSet</code>.

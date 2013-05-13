@@ -33,6 +33,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 
     /**
      * Constructs a BatchExecutor given a connection and SQL statement.
+     * 
      * @param conn The connection to use during execution.
      * @param sql The SQL statement.
      * @param closeConnection If the connection should be closed or not.
@@ -45,6 +46,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 
     /**
      * Binds a parameter name to a value for a given statement.
+     * 
      * @param name the name of the parameter.
      * @param value the value to bind to the parameter.
      * @return this object.
@@ -60,6 +62,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      * Binds null to a parameter.
      * Types.VARCHAR is used as the type's parameter.
      * This usually works, but fails with some Oracle and MS SQL drivers.
+     * 
      * @param name the name of the parameter.
      * @return this execution object to provide the fluent style.
      * @throws SQLException throw if the parameter is not found, already bound, or there is an issue binding null.
@@ -71,6 +74,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 
     /**
      * Binds null to a parameter, specifying the parameter's type.
+     * 
      * @param name the name of the parameter.
      * @param sqlType the type of the parameter.
      * @return this execution object to provide the fluent style.
@@ -83,6 +87,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 
     /**
      * Adds the statement to the batch after binding all of the parameters.
+     * 
      * @return this object.
      * @throws SQLException if a SQLException is thrown during the addBatch() call.
      * @see java.sql.PreparedStatement#addBatch()
@@ -100,6 +105,7 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
 
     /**
      * Calls batch after checking the parameters to ensure nothing is null.
+     * 
      * @return an array containing the number of rows updated for each statement.
      * @throws SQLException If there are database or parameter errors.
      * @see org.apache.commons.dbutils2.UpdateExecutor#execute()
