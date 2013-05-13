@@ -16,7 +16,6 @@
  */
 package org.apache.commons.dbutils2;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -26,8 +25,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import org.apache.commons.dbutils2.handlers.ArrayListHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
