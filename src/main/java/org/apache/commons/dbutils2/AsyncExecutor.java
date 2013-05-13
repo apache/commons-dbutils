@@ -89,7 +89,7 @@ public class AsyncExecutor {
 
             @Override
             public Integer call() throws Exception {
-                return executor.execute();
+                return Integer.valueOf(executor.execute());
             }
 
         });
@@ -127,7 +127,7 @@ public class AsyncExecutor {
 
             @Override
             public Integer call() throws Exception {
-                return executor.execute();
+                return Integer.valueOf(executor.execute());
             }
 
         });
