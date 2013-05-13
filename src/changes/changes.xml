@@ -43,11 +43,11 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="2.0" date="2013-??-??" description="Backwards incompatible update of Commons DBUtils">
-      <action dev="wspeirs" type="add">
-        This is the first release of the 2.x branch of the Commons DbUtils package, DbUtils2.
-	The motivation for creating DbUtils2 was two-fold: a number of deprecated methods in the original DbUtils, and the desire to support named parameters (DBUTILS-105).
-      </action>
+    <release version="2.0" date="2013-??-??" description="Backwards incompatible update of Commons DBUtils
+ 
+ This is the first release of the 2.x branch of the Commons DbUtils package, DbUtils2.
+ The motivation for creating DbUtils2 was two-fold: a number of deprecated methods in the original DbUtils, and the desire to support named parameters (DBUTILS-105).
+    ">
       <action dev="sebb" type="fix" issue="DBUTILS-109">
         AbstractExecutor.currentPosition should be an int
       </action>

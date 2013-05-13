@@ -1,5 +1,5 @@
 
-              Apache Commons DbUtils 
+              Apache Commons DbUtils
                      Version 2.0
                     RELEASE NOTES
 
@@ -8,17 +8,19 @@ The Commons DbUtils team is pleased to announce the release of Commons DbUtils 2
 The Apache Commons-DbUtils package is a set of
   Java utility classes for easing JDBC development.
 
-Complete re-write of QueryRunner to use a fluent API and provide named bindings.
-*Note: This version is NOT backwards compatible with 1.x versions.
+Backwards incompatible update of Commons DBUtils
+
+This is the first release of the 2.x branch of the Commons DbUtils package, DbUtils2.
+The motivation for creating DbUtils2 was two-fold: a number of deprecated methods in the original DbUtils, and the desire to support named parameters (DBUTILS-105).
 
 Changes in this version include:
 
 New features:
-o DBUTILS-105:  Add Named Parameter Support
+o DBUTILS-105:  Added named parameter support with fluent API 
 
 Fixed Bugs:
+o DBUTILS-109:  AbstractExecutor.currentPosition should be an int 
 
-Changes:
 
 
 For complete information on Commons DbUtils, including instructions on how to submit bug reports,
