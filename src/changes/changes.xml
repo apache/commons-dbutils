@@ -47,6 +47,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="wspeirs" type="add">
         This is the first release of the 2.x branch of the Commons DbUtils package, DbUtils2.
 	The motivation for creating DbUtils2 was two-fold: a number of deprecated methods in the original DbUtils, and the desire to support named parameters (DBUTILS-105).
+      </action>
       <action dev="wspeirs" type="add" issue="DBUTILS-105">
         Added named parameter support with fluent API
       </action>
