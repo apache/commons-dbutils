@@ -19,8 +19,10 @@ package org.apache.commons.dbutils2;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 /**
  * <code>QueryLoader</code> is a registry for sets of queries so
@@ -34,6 +36,11 @@ public class QueryLoader {
      * The Singleton instance of this class.
      */
     private static final QueryLoader instance = new QueryLoader();
+
+    /**
+     * Matches .xml file extensions.
+     */
+    private static final Pattern dotXml = Pattern.compile(".+\\.[xX][mM][lL]");
 
     /**
      * Return an instance of this class.
@@ -59,7 +66,9 @@ public class QueryLoader {
     /**
      * Loads a Map of query names to SQL values.  The Maps are cached so a
      * subsequent request to load queries from the same path will return
-     * the cached Map.
+     * the cached Map.  The properties file to load can be in either
+     * line-oriented or XML format.  XML formatted properties files must use a
+     * <code>.xml</code> file extension.
      *
      * @param path The path that the ClassLoader will use to find the file.
      * This is <strong>not</strong> a file system path.  If you had a jarred
@@ -68,7 +77,10 @@ public class QueryLoader {
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
      * the given path.
+     * @throws InvalidPropertiesFormatException if the XML properties file is
+     * invalid
      * @return Map of query names to SQL values
+     * @see java.util.Properties
      */
     public synchronized Map<String, String> load(String path) throws IOException {
 
@@ -84,14 +96,19 @@ public class QueryLoader {
 
     /**
      * Loads a set of named queries into a Map object.  This implementation
-     * reads a properties file at the given path.
+     * reads a properties file at the given path.  The properties file can be
+     * in either line-oriented or XML format.  XML formatted properties files
+     * must use a <code>.xml</code> file extension.
      * 
      * @param path The path that the ClassLoader will use to find the file.
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
      * the given path.
+     * @throws InvalidPropertiesFormatException if the XML properties file is
+     * invalid
      * @since 1.1
      * @return Map of query names to SQL values
+     * @see java.util.Properties
      */
     protected Map<String, String> loadQueries(String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
@@ -103,7 +120,11 @@ public class QueryLoader {
 
         Properties props = new Properties();
         try {
-            props.load(in);
+            if (dotXml.matcher(path).matches()) {
+                props.loadFromXML(in);
+            } else {
+                props.load(in);
+            }
         } finally {
             in.close();
         }
