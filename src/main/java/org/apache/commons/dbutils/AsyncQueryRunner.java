@@ -617,4 +617,36 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         });
     }
 
+    /**
+     * {@link QueryRunner#insertBatch(String, ResultSetHandler, Object[][])} asynchronously.
+     * 
+     * @see QueryRunner#insertBatch(String, ResultSetHandler, Object[][])
+     * @since 1.6
+     */
+    public <T> Future<T> insertBatch(final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
+        return executorService.submit(new Callable<T>() {
+
+            @Override
+            public T call() throws Exception {
+                return queryRunner.insertBatch(sql, rsh, params);
+            }
+        });
+    }
+    
+    /**
+     * {@link QueryRunner#insertBatch(Connection, String, ResultSetHandler, Object[][])} asynchronously.
+     * 
+     * @see QueryRunner#insertBatch(Connection, String, ResultSetHandler, Object[][])
+     * @since 1.6
+     */
+    public <T> Future<T> insertBatch(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
+        return executorService.submit(new Callable<T>() {
+
+            @Override
+            public T call() throws Exception {
+                return queryRunner.insertBatch(conn, sql, rsh, params);
+            }
+        });
+    }
+    
 }

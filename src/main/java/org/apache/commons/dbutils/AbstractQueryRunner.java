@@ -153,6 +153,34 @@ public abstract class AbstractQueryRunner {
 
         return conn.prepareStatement(sql);
     }
+    
+    /**
+     * Factory method that creates and initializes a
+     * <code>PreparedStatement</code> object for the given SQL.
+     * <code>QueryRunner</code> methods always call this method to prepare
+     * statements for them. Subclasses can override this method to provide
+     * special PreparedStatement configuration if needed. This implementation
+     * simply calls <code>conn.prepareStatement(sql, returnedKeys)</code>
+     * which will result in the ability to retrieve the automatically-generated
+     * keys from an auto_increment column.
+     *
+     * @param conn
+     *            The <code>Connection</code> used to create the
+     *            <code>PreparedStatement</code>
+     * @param sql
+     *            The SQL statement to prepare.
+     * @param returnedKeys
+     *            Flag indicating whether to return generated keys or not.
+     * 
+     * @return An initialized <code>PreparedStatement</code>.
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
+    throws SQLException {
+
+        return conn.prepareStatement(sql, returnedKeys);
+    }
 
     /**
      * Factory method that creates and initializes a <code>Connection</code>

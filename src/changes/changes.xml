@@ -44,18 +44,21 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.6" date="201?-??-??" description="Bugfixes and addition of insert methods">
+      <action dev="wspeirs" due-to="Micah Huff" type="add" issue="DBUTILS-108">
+        Create functionality to return auto-generated keys in batches of SQL inserts
+      </action>
       <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
         Add missing JavaDoc to QueryRunner#insert
       </action>
       <action dev="simonetripodi" type="add" issue="DBUTILS-97">
         Add an Abstract ResultSetHandler implementation in order to reduce redundant 'resultSet' variable invocation
       </action>
-      <action dev="wspeirs" due-to="Moandji Ezana" type="add" issue="DBUTILS-87">
-        Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.
-      </action>
       <action dev="simonetripodi" due-to="yuyf" type="fix" issue="DBUTILS-96">
         DbUtils#loadDriver(ClassLoader,String) makes DriverManager throwing "No suitable driver found for jdbc"
         if ClassLoader is not the System's one
+      </action>
+      <action dev="wspeirs" due-to="Moandji Ezana" type="add" issue="DBUTILS-87">
+        Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.
       </action>
     </release>
     <release version="1.5" date="2012-07-20" description="Bugfixes and addition of BeanMapHandler">
