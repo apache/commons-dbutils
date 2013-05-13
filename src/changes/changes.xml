@@ -50,6 +50,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="wspeirs" due-to="PB" type="add" issue="DBUTILS-107">
         Patch QueryLoader to also load from XML properties files
       </action>
+      <action dev="wspeirs" due-to="xiaofei.xu" type="fix" issue="DBUTILS-100">
+        Updated the use of getColumnName to try getColumnLabel first
+      </action>
       <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
         Add missing JavaDoc to QueryRunner#insert
       </action>
