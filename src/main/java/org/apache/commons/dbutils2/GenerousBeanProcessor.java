@@ -24,8 +24,7 @@ import java.util.Arrays;
 
 
 /**
- * Provides generous name matching (e.g. underscore-aware) from DB
- * columns to Java Bean properties.
+ * Provides generous name matching between DB columns and Java Bean properties by matching with and without underscores.
  */
 public class GenerousBeanProcessor extends BeanProcessor {
 
