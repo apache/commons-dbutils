@@ -28,13 +28,6 @@ import java.util.Arrays;
  */
 public class GenerousBeanProcessor extends BeanProcessor {
 
-    /**
-     * Default constructor.
-     */
-    public GenerousBeanProcessor() {
-        super();
-    }
-
     @Override
     protected int[] mapColumnsToProperties(final ResultSetMetaData rsmd,
             final PropertyDescriptor[] props) throws SQLException {
