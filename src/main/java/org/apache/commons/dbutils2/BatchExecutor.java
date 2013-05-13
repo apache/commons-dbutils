@@ -17,6 +17,7 @@
 package org.apache.commons.dbutils2;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
@@ -42,6 +43,14 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
     BatchExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
         super(conn, sql);
         this.closeConn = closeConnection;
+    }
+    
+    /**
+     * Returns the close connection flag.
+     * @return close connection flag.
+     */
+    boolean getCloseConn() {
+        return closeConn;
     }
 
     /**
@@ -111,6 +120,9 @@ public class BatchExecutor extends AbstractExecutor<BatchExecutor> {
      * @see org.apache.commons.dbutils2.UpdateExecutor#execute()
      */
     public int[] execute() throws SQLException {
+        // throw an exception if there are unmapped parameters
+        this.throwIfUnmappedParams();
+
         try {
             return getStatement().executeBatch();
         } catch (SQLException e) {
