@@ -355,12 +355,10 @@ public class BeanProcessor {
             return c.newInstance();
 
         } catch (InstantiationException e) {
-            throw new SQLException(
-                "Cannot create " + c.getName() + ": " + e.getMessage());
+            throw new SQLException("Cannot create " + c.getName() + ": " + e.getMessage());
 
         } catch (IllegalAccessException e) {
-            throw new SQLException(
-                "Cannot create " + c.getName() + ": " + e.getMessage());
+            throw new SQLException("Cannot create " + c.getName() + ": " + e.getMessage());
         }
     }
 
@@ -371,16 +369,14 @@ public class BeanProcessor {
      * @return A PropertyDescriptor[] describing the Class.
      * @throws SQLException if introspection failed.
      */
-    private PropertyDescriptor[] propertyDescriptors(Class<?> c)
-        throws SQLException {
+    private PropertyDescriptor[] propertyDescriptors(Class<?> c) throws SQLException {
         // Introspector caches BeanInfo classes for better performance
-        BeanInfo beanInfo = null;
+        BeanInfo beanInfo;
         try {
             beanInfo = Introspector.getBeanInfo(c);
 
         } catch (IntrospectionException e) {
-            throw new SQLException(
-                "Bean introspection failed: " + e.getMessage());
+            throw new SQLException("Bean introspection failed: " + e.getMessage());
         }
 
         return beanInfo.getPropertyDescriptors();
