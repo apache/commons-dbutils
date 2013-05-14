@@ -25,12 +25,12 @@ import org.apache.commons.dbutils2.RowProcessor;
 
 /**
  * <code>ResultSetHandler</code> implementation that converts a
- * <code>ResultSet</code> into an <code>T[]</code>. This class is
+ * <code>ResultSet</code> into an <code>Object[]</code>. This class is
  * thread safe.
  *
  * @see org.apache.commons.dbutils2.ResultSetHandler
  */
-public class ArrayHandler<T> implements ResultSetHandler<T[]> {
+public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Singleton processor instance that handlers share to save memory.  Notice
@@ -65,18 +65,18 @@ public class ArrayHandler<T> implements ResultSetHandler<T[]> {
     }
 
     /**
-     * Places the column values from the first row in an <code>T[]</code>.
+     * Places the column values from the first row in an <code>Object[]</code>.
      * 
      * @param rs <code>ResultSet</code> to process.
-     * @return An T[] or <code>null</code> if there are no rows in the
+     * @return An Object[] or <code>null</code> if there are no rows in the
      * <code>ResultSet</code>.
      *
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils2.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public T[] handle(ResultSet rs) throws SQLException {
-        return (T[]) (rs.next() ? this.convert.toArray(rs) : null);
+    public Object[] handle(ResultSet rs) throws SQLException {
+        return rs.next() ? this.convert.toArray(rs) : null;
     }
 
 }
