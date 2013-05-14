@@ -310,28 +310,28 @@ public class BeanProcessor {
         if (value == null || type.isInstance(value)) {
             return true;
 
-        } else if (type.equals(Integer.TYPE) && Integer.class.isInstance(value)) {
+        } else if (type.equals(Integer.TYPE) && value instanceof Integer) {
             return true;
 
-        } else if (type.equals(Long.TYPE) && Long.class.isInstance(value)) {
+        } else if (type.equals(Long.TYPE) && value instanceof Long) {
             return true;
 
-        } else if (type.equals(Double.TYPE) && Double.class.isInstance(value)) {
+        } else if (type.equals(Double.TYPE) && value instanceof Double) {
             return true;
 
-        } else if (type.equals(Float.TYPE) && Float.class.isInstance(value)) {
+        } else if (type.equals(Float.TYPE) && value instanceof Float) {
             return true;
 
-        } else if (type.equals(Short.TYPE) && Short.class.isInstance(value)) {
+        } else if (type.equals(Short.TYPE) && value instanceof Short) {
             return true;
 
-        } else if (type.equals(Byte.TYPE) && Byte.class.isInstance(value)) {
+        } else if (type.equals(Byte.TYPE) && value instanceof Byte) {
             return true;
 
-        } else if (type.equals(Character.TYPE) && Character.class.isInstance(value)) {
+        } else if (type.equals(Character.TYPE) && value instanceof Character) {
             return true;
 
-        } else if (type.equals(Boolean.TYPE) && Boolean.class.isInstance(value)) {
+        } else if (type.equals(Boolean.TYPE) && value instanceof Boolean) {
             return true;
 
         }

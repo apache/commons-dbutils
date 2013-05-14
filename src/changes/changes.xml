@@ -48,6 +48,10 @@ The <action> type attribute can be add,update,fix,remove.
  This is the first release of the 2.x branch of the Commons DbUtils package, DbUtils2.
  The motivation for creating DbUtils2 was two-fold: a number of deprecated methods in the original DbUtils, and the desire to support named parameters (DBUTILS-105).
     ">
+      <action dev="sebb" type="update" issue="DBUTILS-85">
+        In BeanProcessor#isCompatibleType, can Integer.class.isInstance(value) be replaced by value instanceof Integer (etc)?
+        Simplified code by using instanceof.
+      </action>
       <action dev="sebb" type="fix" issue="DBUTILS-106">
         DBUtils can't build using JDK 1.7 - DriverProxy needs to implement getParentLogger()
         Add dynamic invocation. 
