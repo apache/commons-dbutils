@@ -87,7 +87,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * 
      * @return the SQL statement passed into the constructor.
      */
-    protected String getSql() {
+    String getSql() {
         return sql;
     }
 
@@ -96,7 +96,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * 
      * @return the underlying prepared statement.
      */
-    protected PreparedStatement getStatement() {
+    PreparedStatement getStatement() {
         return stmt;
     }
 
@@ -105,7 +105,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * 
      * @return the underlying connection.
      */
-    protected Connection getConnection() {
+    Connection getConnection() {
         return conn;
     }
 
@@ -114,7 +114,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * 
      * @throws SQLException if there are unmapped params.
      */
-    protected void throwIfUnmappedParams() throws SQLException {
+    void throwIfUnmappedParams() throws SQLException {
         if (paramPosMap.size() != 0) {
             final Set<String> unmappedParams = paramPosMap.keySet();
             final StringBuilder sb = new StringBuilder("There are unbound parameters: ");
@@ -178,7 +178,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @return this
      * @throws SQLException if there is an SQLException during binding.
      */
-    protected T bindNull(String name, int sqlType, boolean removeFromPosMap) throws SQLException {
+    T bindNull(String name, int sqlType, boolean removeFromPosMap) throws SQLException {
         name = name.replace(COLON, ""); // so we can take ":name" or "name"
 
         final List<Integer> pos = removeFromPosMap ? paramPosMap.remove(name) : paramPosMap.get(name);
@@ -211,7 +211,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @return this
      * @throws SQLException if there is an SQLException during binding.
      */
-    protected T bind(String name, final Object value, boolean removeFromPosMap) throws SQLException {
+    T bind(String name, final Object value, boolean removeFromPosMap) throws SQLException {
         name = name.replace(COLON, ""); // so we can take ":name" or "name"
 
         final List<Integer> pos = removeFromPosMap ? paramPosMap.remove(name) : paramPosMap.get(name);
@@ -239,7 +239,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
     /**
      * Used for batch calls so we can clear the map after the addBatch call.
      */
-    protected void clearValueMap() {
+    void clearValueMap() {
         paramValueMap.clear();
     }
 
@@ -251,7 +251,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      *
      * @throws SQLException if a database access error occurs
      */
-    protected void rethrow(SQLException cause) throws SQLException {
+    void rethrow(SQLException cause) throws SQLException {
         String causeMessage = cause.getMessage();
 
         if (causeMessage == null) {
@@ -286,7 +286,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @param rs The <code>ResultSet</code> to decorate; never <code>null</code>.
      * @return The <code>ResultSet</code> wrapped in some decorator.
      */
-    protected ResultSet wrap(ResultSet rs) {
+    ResultSet wrap(ResultSet rs) {
         return rs;
     }
 
@@ -298,7 +298,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @param conn Connection to close
      * @throws SQLException if a database access error occurs
      */
-    protected void close(Connection conn) throws SQLException {
+    void close(Connection conn) throws SQLException {
         DbUtils.close(conn);
     }
 
@@ -310,7 +310,7 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @param stmt Statement to close
      * @throws SQLException if a database access error occurs
      */
-    protected void close(Statement stmt) throws SQLException {
+    void close(Statement stmt) throws SQLException {
         DbUtils.close(stmt);
     }
 
@@ -322,9 +322,8 @@ abstract class AbstractExecutor<T extends AbstractExecutor<T>> {
      * @param rs ResultSet to close
      * @throws SQLException if a database access error occurs
      */
-    protected void close(ResultSet rs) throws SQLException {
+    void close(ResultSet rs) throws SQLException {
         DbUtils.close(rs);
     }
-
 
 }
