@@ -16,6 +16,7 @@
  */
 package org.apache.commons.dbutils2;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -270,4 +271,15 @@ public class DbUtilsTest {
         verify(mockConnection).close();
     }
 
+    @Test(expected=NullPointerException.class)
+    public void loadDriverNull() throws Exception {
+        DbUtils.loadDriver(null);
+    }
+
+    @Test
+    public void loadDriver() throws Exception {
+        assertFalse(DbUtils.loadDriver(""));
+    }
+
+    //TODO need test for getParentLogger
 }
