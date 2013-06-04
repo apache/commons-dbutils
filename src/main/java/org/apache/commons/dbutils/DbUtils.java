@@ -419,9 +419,8 @@ public final class DbUtils {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);
                 }
-            } else {
-                throw new SQLFeatureNotSupportedException();
             }
+            throw new SQLFeatureNotSupportedException();
         }
 
     }
