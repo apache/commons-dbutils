@@ -435,6 +435,7 @@ public class QueryRunnerTest {
         
         ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
         {
+            @Override
             public List<Object> handle(ResultSet rs) throws SQLException
             {
                 List<Object> objects = new ArrayList<Object>();
