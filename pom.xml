@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.6</version>
+  <version>1.6-SNAPSHOT</version>
   <name>Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
