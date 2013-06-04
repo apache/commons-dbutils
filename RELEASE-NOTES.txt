@@ -1,31 +1,32 @@
 
               Apache Commons DbUtils 
-                     Version 1.5 
+                     Version 1.6
                     RELEASE NOTES
 
-The Commons DbUtils team is pleased to announce the release of Commons DbUtils 1.5
+The Commons DbUtils team is pleased to announce the release of Commons DbUtils 1.6
 
 The Apache Commons-DbUtils package is a set of
   Java utility classes for easing JDBC development.
 
-Bugfixes and addition of BeanMapHandler
-
 Changes in this version include:
 
 New features:
-o DBUTILS-67:  Added BeanMapHandler Thanks to Michael Osipov. 
+o Create functionality to return auto-generated keys in batches of SQL inserts  Issue: DBUTILS-108. Thanks to Micah Huff. 
+o Patch QueryLoader to also load from XML properties files  Issue: DBUTILS-107. Thanks to PB. 
+o Add missing JavaDoc to QueryRunner#insert  Issue: DBUTILS-98. Thanks to Moandji Ezana. 
+o Add an Abstract ResultSetHandler implementation in order to reduce redundant 'resultSet' variable invocation  Issue: DBUTILS-97. 
+o Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.  Issue: DBUTILS-87. Thanks to Moandji Ezana. 
 
 Fixed Bugs:
-o DBUTILS-93:  Source assembly artifact fails to build a site because of missing pmd-ruleset.xml Thanks to Stevo Slavic. 
-o DBUTILS-84:  BeanProcessor method processColumn should take SQLXML in consideration Thanks to Tiago Cavaleiro. 
-o DBUTILS-73:  Added a fixed Locale (Locale.ENGLISH) to all toLowerCase calls in BasicRowProcessor Thanks to Sebb. 
+o DBUtils can't build using JDK 1.7 - DriverProxy needs to implement getParentLogger()
+        Add dynamic invocation.  Issue: DBUTILS-106. Thanks to Niall Pemberton. 
+o Updated the use of getColumnName to try getColumnLabel first  Issue: DBUTILS-100. Thanks to xiaofei.xu. 
+o DbUtils#loadDriver(ClassLoader,String) makes DriverManager throwing "No suitable driver found for jdbc"
+        if ClassLoader is not the System's one  Issue: DBUTILS-96. Thanks to yuyf. 
 
 Changes:
-o DBUTILS-94:  Provide test coverage for org.apache.commons.dbutils.DbUtils Thanks to Benedikt Ritter. 
-o DBUTILS-91:  Enhance BasicRowProcessor to have row mapping easier to configure Thanks to Stevo Slavic. 
-o           Updated pom.xml: Java 1.6 now required, clirr and compiler plugin removed Thanks to wspeirs. 
-o DBUTILS-77:  Updated documentation to better reflect the use of pmdKnownBroken 
-o DBUTILS-66:  Added generics to ScalarHandler, ColumnHandler, and KeyedHandler Thanks to Michael Osipov. 
+o In BeanProcessor#isCompatibleType, can Integer.class.isInstance(value) be replaced by value instanceof Integer (etc)?
+        Simplified code by using instanceof.  Issue: DBUTILS-85. 
 
 
 For complete information on Commons DbUtils, including instructions on how to submit bug reports,
