@@ -286,7 +286,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params)
-        throws SQLException {
+            throws SQLException {
         return executorService.submit(new Callable<T>() {
 
             @Override
@@ -619,7 +619,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * {@link QueryRunner#insertBatch(String, ResultSetHandler, Object[][])} asynchronously.
-     * 
+     *
      * @see QueryRunner#insertBatch(String, ResultSetHandler, Object[][])
      * @since 1.6
      */
@@ -632,10 +632,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             }
         });
     }
-    
+
     /**
      * {@link QueryRunner#insertBatch(Connection, String, ResultSetHandler, Object[][])} asynchronously.
-     * 
+     *
      * @see QueryRunner#insertBatch(Connection, String, ResultSetHandler, Object[][])
      * @since 1.6
      */
@@ -648,5 +648,5 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             }
         });
     }
-    
+
 }

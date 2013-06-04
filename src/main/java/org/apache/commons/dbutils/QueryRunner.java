@@ -194,7 +194,7 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(Connection conn, String sql, Object[] params, ResultSetHandler<T> rsh) throws SQLException {
-                return this.<T>query(conn, false, sql, rsh, params);
+        return this.<T>query(conn, false, sql, rsh, params);
     }
 
     /**
@@ -650,7 +650,7 @@ public class QueryRunner extends AbstractQueryRunner {
     public <T> T insertBatch(Connection conn, String sql, ResultSetHandler<T> rsh, Object[][] params) throws SQLException {
         return insertBatch(conn, false, sql, rsh, params);
     }
-    
+
     /**
      * Executes the given batch of INSERT SQL statements.
      * @param conn The connection to use for the query call.
@@ -664,46 +664,46 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object[][] params) throws SQLException {
-       if (conn == null) {
-          throw new SQLException("Null connection");
-       }
+        if (conn == null) {
+            throw new SQLException("Null connection");
+        }
 
-      if (sql == null) {
-          if (closeConn) {
-              close(conn);
-          }
-          throw new SQLException("Null SQL statement");
-      }
+        if (sql == null) {
+            if (closeConn) {
+                close(conn);
+            }
+            throw new SQLException("Null SQL statement");
+        }
 
-      if (params == null) {
-          if (closeConn) {
-              close(conn);
-          }
-          throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
-      }
+        if (params == null) {
+            if (closeConn) {
+                close(conn);
+            }
+            throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
+        }
 
-      PreparedStatement stmt = null;
-      T generatedKeys = null;
-      try {
-          stmt = this.prepareStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement stmt = null;
+        T generatedKeys = null;
+        try {
+            stmt = this.prepareStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
-          for (int i = 0; i < params.length; i++) {
-              this.fillStatement(stmt, params[i]);
-              stmt.addBatch();
-          }
-          stmt.executeBatch();
-          ResultSet rs = stmt.getGeneratedKeys();
-          generatedKeys = rsh.handle(rs);
+            for (int i = 0; i < params.length; i++) {
+                this.fillStatement(stmt, params[i]);
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
+            ResultSet rs = stmt.getGeneratedKeys();
+            generatedKeys = rsh.handle(rs);
 
-      } catch (SQLException e) {
-          this.rethrow(e, sql, (Object[])params);
-      } finally {
-          close(stmt);
-          if (closeConn) {
-              close(conn);
-          }
-      }
+        } catch (SQLException e) {
+            this.rethrow(e, sql, (Object[])params);
+        } finally {
+            close(stmt);
+            if (closeConn) {
+                close(conn);
+            }
+        }
 
-      return generatedKeys;
+        return generatedKeys;
     }
 }

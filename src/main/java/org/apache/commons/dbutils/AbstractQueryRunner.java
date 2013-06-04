@@ -149,11 +149,11 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      */
     protected PreparedStatement prepareStatement(Connection conn, String sql)
-    throws SQLException {
+            throws SQLException {
 
         return conn.prepareStatement(sql);
     }
-    
+
     /**
      * Factory method that creates and initializes a
      * <code>PreparedStatement</code> object for the given SQL.
@@ -171,13 +171,13 @@ public abstract class AbstractQueryRunner {
      *            The SQL statement to prepare.
      * @param returnedKeys
      *            Flag indicating whether to return generated keys or not.
-     * 
+     *
      * @return An initialized <code>PreparedStatement</code>.
      * @throws SQLException
      *             if a database access error occurs
      */
     protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
-    throws SQLException {
+            throws SQLException {
 
         return conn.prepareStatement(sql, returnedKeys);
     }
@@ -198,7 +198,7 @@ public abstract class AbstractQueryRunner {
         if (this.getDataSource() == null) {
             throw new SQLException(
                     "QueryRunner requires a DataSource to be "
-                    + "invoked in this way, or a Connection should be passed in");
+                            + "invoked in this way, or a Connection should be passed in");
         }
         return this.getDataSource().getConnection();
     }
@@ -216,7 +216,7 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      */
     public void fillStatement(PreparedStatement stmt, Object... params)
-    throws SQLException {
+            throws SQLException {
 
         // check the parameter count, if we can
         ParameterMetaData pmd = null;
@@ -323,7 +323,7 @@ public abstract class AbstractQueryRunner {
         PropertyDescriptor[] descriptors;
         try {
             descriptors = Introspector.getBeanInfo(bean.getClass())
-            .getPropertyDescriptors();
+                    .getPropertyDescriptors();
         } catch (IntrospectionException e) {
             throw new RuntimeException("Couldn't introspect bean "
                     + bean.getClass().toString(), e);
@@ -370,7 +370,7 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      */
     protected void rethrow(SQLException cause, String sql, Object... params)
-    throws SQLException {
+            throws SQLException {
 
         String causeMessage = cause.getMessage();
         if (causeMessage == null) {
