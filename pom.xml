@@ -25,10 +25,10 @@
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
   <version>1.6-SNAPSHOT</version>
-  <name>Commons DbUtils</name>
+  <name>Apache Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
-  <description>The Apache Commons-DbUtils package is a set of
+  <description>The Apache Commons DbUtils package is a set of
   Java utility classes for easing JDBC development.</description>
 
   <url>http://commons.apache.org/proper/commons-dbutils/</url>
