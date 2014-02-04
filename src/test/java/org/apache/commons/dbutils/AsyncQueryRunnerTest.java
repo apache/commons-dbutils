@@ -40,6 +40,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.exceptions.verification.junit.ArgumentsAreDifferent;
 
 @SuppressWarnings("boxing") // test code
 public class AsyncQueryRunnerTest {
@@ -448,10 +449,29 @@ public class AsyncQueryRunnerTest {
     	runner.insert(conn, "3", handler);
     	runner.insert(conn, "4", handler, "param1");
     	
-    	verify(mockQueryRunner).insert("1", handler);
+    	boolean failed = false;
+    	try {
+            verify(mockQueryRunner).insert("1", handler);
+        } catch (AssertionError e) {
+            failed = true;
+            e.printStackTrace();
+        }
+        try {
     	verify(mockQueryRunner).insert("2", handler, "param1");
+        } catch (AssertionError e) {
+            failed = true;
+            e.printStackTrace();
+        }
+        try {
     	verify(mockQueryRunner).insert(conn, "3", handler);
+        } catch (AssertionError e) {
+            failed = true;
+            e.printStackTrace();
+        }
     	verify(mockQueryRunner).insert(conn, "4", handler, "param1");
+    	if (failed) {
+    	    throw new AssertionError("One or more failures detected");
+    	}
     }
 
     @Test(expected=ExecutionException.class)
