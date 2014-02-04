@@ -444,14 +444,14 @@ public class AsyncQueryRunnerTest {
     	QueryRunner mockQueryRunner = mock(QueryRunner.class);
     	runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
     	
-    	runner.insert("1", handler);
+    	runner.insert("1", handler,"");
     	runner.insert("2", handler, "param1");
     	runner.insert(conn, "3", handler);
     	runner.insert(conn, "4", handler, "param1");
     	
     	boolean failed = false;
     	try {
-            verify(mockQueryRunner).insert("1", handler);
+            verify(mockQueryRunner).insert("1", handler,"");
         } catch (AssertionError e) {
             failed = true;
             e.printStackTrace();
