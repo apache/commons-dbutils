@@ -437,7 +437,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public Integer call() throws Exception {
-                return queryRunner.update(conn, sql);
+                return Integer.valueOf(queryRunner.update(conn, sql));
             }
 
         });
@@ -458,7 +458,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public Integer call() throws Exception {
-                return queryRunner.update(conn, sql, param);
+                return Integer.valueOf(queryRunner.update(conn, sql, param));
             }
 
         });
@@ -478,7 +478,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public Integer call() throws Exception {
-                return queryRunner.update(conn, sql, params);
+                return Integer.valueOf(queryRunner.update(conn, sql, params));
             }
 
         });
@@ -500,7 +500,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public Integer call() throws Exception {
-                return queryRunner.update(sql);
+                return Integer.valueOf(queryRunner.update(sql));
             }
 
         });
@@ -523,7 +523,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public Integer call() throws Exception {
-                return queryRunner.update(sql, param);
+                return Integer.valueOf(queryRunner.update(sql, param));
             }
 
         });
@@ -546,7 +546,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             @Override
             public Integer call() throws Exception {
-                return queryRunner.update(sql, params);
+                return Integer.valueOf(queryRunner.update(sql, params));
             }
 
         });
