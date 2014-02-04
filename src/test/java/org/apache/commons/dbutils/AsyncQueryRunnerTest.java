@@ -440,7 +440,9 @@ public class AsyncQueryRunnerTest {
     
     @Test
     public void testInsertUsesGivenQueryRunner() throws Exception {
-    	QueryRunner mockQueryRunner = mock(QueryRunner.class);
+    	QueryRunner mockQueryRunner = mock(QueryRunner.class
+    	        , org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
+    	        );
     	runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
     	
     	runner.insert("1", handler);
