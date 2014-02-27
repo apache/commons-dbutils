@@ -43,7 +43,7 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Release Notes</title>
   </properties>
   <body>
-    <release version="1.6" date="2013-06-03" description="Bugfixes and addition of insert methods">
+    <release version="1.6" date="TBA" description="Bugfixes and addition of insert methods">
       <action dev="sebb" type="update" issue="DBUTILS-85">
         In BeanProcessor#isCompatibleType, can Integer.class.isInstance(value) be replaced by value instanceof Integer (etc)?
         Simplified code by using instanceof.
