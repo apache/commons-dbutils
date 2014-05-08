@@ -54,7 +54,7 @@ public class BaseTestCase extends TestCase {
         new Object[] {
             "1",
             "2",
-            "3",
+            "THREE",
             "  notInBean  ",
             Integer.valueOf(1),
             Integer.valueOf(2),
@@ -67,7 +67,7 @@ public class BaseTestCase extends TestCase {
         new Object[] {
             "4",
             "5",
-            "6",
+            "SIX",
             "  notInBean  ",
             Integer.valueOf(3),
             Integer.valueOf(4),

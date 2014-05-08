@@ -42,7 +42,7 @@ public class ArrayListHandlerTest extends BaseTestCase {
         assertEquals(COLS, row.length);
         assertEquals("1", row[0]);
         assertEquals("2", row[1]);
-        assertEquals("3", row[2]);
+        assertEquals("THREE", row[2]);
 
         assertTrue(iter.hasNext());
         row = iter.next();
@@ -50,7 +50,7 @@ public class ArrayListHandlerTest extends BaseTestCase {
 
         assertEquals("4", row[0]);
         assertEquals("5", row[1]);
-        assertEquals("6", row[2]);
+        assertEquals("SIX", row[2]);
 
         assertFalse(iter.hasNext());
     }

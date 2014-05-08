@@ -264,6 +264,9 @@ public class BeanProcessor {
                 if ("java.sql.Timestamp".equals(targetType)) {
                     value = new java.sql.Timestamp(((java.util.Date) value).getTime());
                 }
+            } else
+            if (value instanceof String && params[0].isEnum()) {
+                value = Enum.valueOf(params[0].asSubclass(Enum.class), (String) value);
             }
 
             // Don't call setter if the value object isn't the right type

@@ -21,11 +21,17 @@ package org.apache.commons.dbutils;
  */
 public class TestBean {
 
+    public enum Ordinal {
+
+        THREE, SIX;
+
+    };
+
     private String one = null;
 
     private String two = null;
 
-    private String three = null;
+    private Ordinal three = null;
 
     private int intTest = 0;
 
@@ -69,7 +75,7 @@ public class TestBean {
         return one;
     }
 
-    public String getThree() {
+    public Ordinal getThree() {
         return three;
     }
 
@@ -81,8 +87,8 @@ public class TestBean {
         one = string;
     }
 
-    public void setThree(String string) {
-        three = string;
+    public void setThree(Ordinal ordinal) {
+        three = ordinal;
     }
 
     public void setTwo(String string) {

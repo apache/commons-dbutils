@@ -43,7 +43,7 @@ public class MapListHandlerTest extends BaseTestCase {
         assertEquals(COLS, row.keySet().size());
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));
-        assertEquals("3", row.get("Three"));
+        assertEquals("THREE", row.get("Three"));
 
         assertTrue(iter.hasNext());
         row = iter.next();
@@ -51,7 +51,7 @@ public class MapListHandlerTest extends BaseTestCase {
 
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
-        assertEquals("6", row.get("Three"));
+        assertEquals("SIX", row.get("Three"));
 
         assertFalse(iter.hasNext());
     }

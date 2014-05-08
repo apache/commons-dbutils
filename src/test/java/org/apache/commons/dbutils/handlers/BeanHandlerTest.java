@@ -34,7 +34,7 @@ public class BeanHandlerTest extends BaseTestCase {
         assertNotNull(results);
         assertEquals("1", results.getOne());
         assertEquals("2", results.getTwo());
-        assertEquals("3", results.getThree());
+        assertEquals(TestBean.Ordinal.THREE, results.getThree());
         assertEquals("not set", results.getDoNotSet());
     }
 

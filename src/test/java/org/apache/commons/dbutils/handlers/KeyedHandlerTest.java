@@ -45,7 +45,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         row = results.get("1");
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));
-        assertEquals("3", row.get("Three"));
+        assertEquals("THREE", row.get("Three"));
     }
 
     public void testColumnIndexHandle() throws SQLException {
@@ -67,7 +67,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         row = results.get("5");
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
-        assertEquals("6", row.get("Three"));
+        assertEquals("SIX", row.get("Three"));
     }
 
     public void testColumnNameHandle() throws SQLException {
@@ -89,7 +89,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         row = results.get(Integer.valueOf(3));
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));
-        assertEquals("6", row.get("Three"));
+        assertEquals("SIX", row.get("Three"));
     }
 
     public void testEmptyResultSetHandle() throws SQLException {

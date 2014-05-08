@@ -34,7 +34,7 @@ public class ArrayHandlerTest extends BaseTestCase {
         assertEquals(COLS, results.length);
         assertEquals("1", results[0]);
         assertEquals("2", results[1]);
-        assertEquals("3", results[2]);
+        assertEquals("THREE", results[2]);
     }
 
     public void testEmptyResultSetHandle() throws SQLException {

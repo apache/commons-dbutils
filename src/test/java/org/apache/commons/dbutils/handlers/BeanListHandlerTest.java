@@ -42,7 +42,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         row = iter.next();
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
-        assertEquals("3", row.getThree());
+        assertEquals(TestBean.Ordinal.THREE, row.getThree());
         assertEquals("not set", row.getDoNotSet());
 
         assertTrue(iter.hasNext());
@@ -50,7 +50,7 @@ public class BeanListHandlerTest extends BaseTestCase {
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());
-        assertEquals("6", row.getThree());
+        assertEquals(TestBean.Ordinal.SIX, row.getThree());
         assertEquals("not set", row.getDoNotSet());
 
         assertFalse(iter.hasNext());

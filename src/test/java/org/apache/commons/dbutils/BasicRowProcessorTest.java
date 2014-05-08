@@ -46,7 +46,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(COLS, a.length);
         assertEquals("1", a[0]);
         assertEquals("2", a[1]);
-        assertEquals("3", a[2]);
+        assertEquals("THREE", a[2]);
 
         assertTrue(this.rs.next());
         a = processor.toArray(this.rs);
@@ -54,7 +54,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         assertEquals("4", a[0]);
         assertEquals("5", a[1]);
-        assertEquals("6", a[2]);
+        assertEquals("SIX", a[2]);
 
         assertFalse(this.rs.next());
     }
@@ -66,7 +66,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         row = processor.toBean(this.rs, TestBean.class);
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
-        assertEquals("3", row.getThree());
+        assertEquals(TestBean.Ordinal.THREE, row.getThree());
         assertEquals("not set", row.getDoNotSet());
 
         assertTrue(this.rs.next());
@@ -74,7 +74,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());
-        assertEquals("6", row.getThree());
+        assertEquals(TestBean.Ordinal.SIX, row.getThree());
         assertEquals("not set", row.getDoNotSet());
         assertEquals(3, row.getIntTest());
         assertEquals(Integer.valueOf(4), row.getIntegerTest());
@@ -98,13 +98,13 @@ public class BasicRowProcessorTest extends BaseTestCase {
         TestBean b = list.get(0);
         assertEquals("1", b.getOne());
         assertEquals("2", b.getTwo());
-        assertEquals("3", b.getThree());
+        assertEquals(TestBean.Ordinal.THREE, b.getThree());
         assertEquals("not set", b.getDoNotSet());
 
         b = list.get(1);
         assertEquals("4", b.getOne());
         assertEquals("5", b.getTwo());
-        assertEquals("6", b.getThree());
+        assertEquals(TestBean.Ordinal.SIX, b.getThree());
         assertEquals("not set", b.getDoNotSet());
         assertEquals(3, b.getIntTest());
         assertEquals(Integer.valueOf(4), b.getIntegerTest());
@@ -123,7 +123,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(COLS, m.keySet().size());
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));
-        assertEquals("3", m.get("Three"));
+        assertEquals("THREE", m.get("Three"));
 
         assertTrue(this.rs.next());
         m = processor.toMap(this.rs);
@@ -131,7 +131,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));
-        assertEquals("6", m.get("THREE"));
+        assertEquals("SIX", m.get("THREE"));
 
         assertFalse(this.rs.next());
     }

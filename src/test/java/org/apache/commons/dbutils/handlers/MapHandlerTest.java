@@ -35,7 +35,7 @@ public class MapHandlerTest extends BaseTestCase {
         assertEquals(COLS, results.keySet().size());
         assertEquals("1", results.get("ONE"));
         assertEquals("2", results.get("two"));
-        assertEquals("3", results.get("Three"));
+        assertEquals("THREE", results.get("Three"));
     }
 
     public void testEmptyResultSetHandle() throws SQLException {

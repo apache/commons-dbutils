@@ -32,10 +32,12 @@ public class BeanProcessorTest extends BaseTestCase {
         assertTrue(this.rs.next());
         b = beanProc.toBean(this.rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
 
         assertTrue(this.rs.next());
         b = beanProc.toBean(this.rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
 
         assertFalse(this.rs.next());
     }
