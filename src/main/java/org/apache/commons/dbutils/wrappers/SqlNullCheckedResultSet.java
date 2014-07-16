@@ -253,7 +253,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public Date getNullDate() {
-        return this.nullDate;
+        return this.nullDate != null ? new Date(this.nullDate.getTime()) : null;
     }
 
     /**
@@ -353,7 +353,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public Timestamp getNullTimestamp() {
-        return this.nullTimestamp;
+        return this.nullTimestamp != null ? new Timestamp(this.nullTimestamp.getTime()) : null;
     }
 
     /**
@@ -492,7 +492,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullDate the value
      */
     public void setNullDate(Date nullDate) {
-        this.nullDate = nullDate;
+        this.nullDate = nullDate != null ? new Date(nullDate.getTime()) : null;
     }
 
     /**
@@ -592,7 +592,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullTimestamp the value
      */
     public void setNullTimestamp(Timestamp nullTimestamp) {
-        this.nullTimestamp = nullTimestamp;
+        this.nullTimestamp = nullTimestamp != null ? new Timestamp(nullTimestamp.getTime()) : null;
     }
 
     /**
