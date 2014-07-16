@@ -112,6 +112,15 @@
         <role>Java Developer</role>
       </roles>
     </developer>
+    <developer>
+      <name>Benedikt Ritter</name>
+      <id>britter</id>
+      <email>britter@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
   </developers>
 
   <contributors>
