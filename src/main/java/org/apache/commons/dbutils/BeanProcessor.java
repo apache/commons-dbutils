@@ -221,10 +221,13 @@ public class BeanProcessor {
             PropertyDescriptor prop = props[columnToProperty[i]];
             Class<?> propType = prop.getPropertyType();
 
-            Object value = this.processColumn(rs, i, propType);
+            Object value = null;
+            if(propType != null) {
+                value = this.processColumn(rs, i, propType);
 
-            if (propType != null && value == null && propType.isPrimitive()) {
-                value = primitiveDefaults.get(propType);
+                if (value == null && propType.isPrimitive()) {
+                    value = primitiveDefaults.get(propType);
+                }
             }
 
             this.callSetter(bean, prop, value);
