@@ -15,7 +15,7 @@
 ## specific language governing permissions and limitations
 ## under the License.
 
-              Apache ${project.name} 
+              ${project.name}
                      Version ${version} 
                     RELEASE NOTES
 
