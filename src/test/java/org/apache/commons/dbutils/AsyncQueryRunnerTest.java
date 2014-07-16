@@ -54,7 +54,7 @@ public class AsyncQueryRunnerTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);    // init the mocks
+        MockitoAnnotations.initMocks(this);
 
         when(dataSource.getConnection()).thenReturn(conn);
         when(conn.prepareStatement(any(String.class))).thenReturn(stmt);
