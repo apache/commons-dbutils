@@ -175,6 +175,7 @@ public abstract class AbstractQueryRunner {
      * @return An initialized <code>PreparedStatement</code>.
      * @throws SQLException
      *             if a database access error occurs
+     * @since 1.6
      */
     protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
             throws SQLException {
