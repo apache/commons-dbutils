@@ -227,9 +227,10 @@ public final class DbUtils {
             }
 
             return true;
+        } catch (RuntimeException e) {
+            return false;
         } catch (Exception e) {
             return false;
-
         }
     }
 
