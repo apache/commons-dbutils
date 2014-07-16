@@ -577,7 +577,8 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      * @since 1.6
      */
-    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params)
+            throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
         }
@@ -663,7 +664,8 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException If there are database or parameter errors.
      * @since 1.6
      */
-    private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object[][] params) throws SQLException {
+    private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object[][] params)
+            throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
         }

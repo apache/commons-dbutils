@@ -51,7 +51,7 @@ public class GenerousBeanProcessor extends BeanProcessor {
                 columnName = rsmd.getColumnName(col);
             }
 
-            final String generousColumnName = columnName.replace("_","");
+            final String generousColumnName = columnName.replace("_", "");
 
             for (int i = 0; i < props.length; i++) {
                 final String propName = props[i].getName();
