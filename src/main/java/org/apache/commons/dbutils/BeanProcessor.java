@@ -262,7 +262,10 @@ public class BeanProcessor {
                     value = new java.sql.Time(((java.util.Date) value).getTime());
                 } else
                 if ("java.sql.Timestamp".equals(targetType)) {
-                    value = new java.sql.Timestamp(((java.util.Date) value).getTime());
+                    Timestamp tsValue = (Timestamp) value;
+                    int nanos = tsValue.getNanos();
+                    value = new java.sql.Timestamp(tsValue.getTime());
+                    ((Timestamp) value).setNanos(nanos);
                 }
             } else
             if (value instanceof String && params[0].isEnum()) {

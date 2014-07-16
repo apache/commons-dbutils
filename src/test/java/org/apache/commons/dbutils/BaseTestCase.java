@@ -19,6 +19,7 @@ package org.apache.commons.dbutils;
 import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import junit.framework.TestCase;
@@ -50,6 +51,16 @@ public class BaseTestCase extends TestCase {
     protected static final ResultSetMetaData metaData =
         MockResultSetMetaData.create(columnNames);
 
+    /**
+     * A Timestamp for test purposes having 9 decimals
+     */
+    static final Timestamp ts789456123;
+
+    static {
+        ts789456123 = new Timestamp(new Date().getTime());
+        ts789456123.setNanos(789456123);
+    }
+    
     private static final Object[] row1 =
         new Object[] {
             "1",
@@ -73,7 +84,7 @@ public class BaseTestCase extends TestCase {
             Integer.valueOf(4),
             null,
             null,
-            new Date(),
+            ts789456123,
             BigInteger.valueOf(13)};
 
     private static final Object[][] rows = new Object[][] { row1, row2 };

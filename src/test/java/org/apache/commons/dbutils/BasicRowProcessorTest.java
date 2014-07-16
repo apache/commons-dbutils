@@ -83,7 +83,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         // test date -> string handling
         assertNotNull(row.getNotDate());
         assertTrue(!"not a date".equals(row.getNotDate()));
-        datef.parse(row.getNotDate());
+        assertTrue(row.getNotDate().endsWith("789456123"));
 
         assertFalse(this.rs.next());
 
@@ -100,6 +100,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("2", b.getTwo());
         assertEquals(TestBean.Ordinal.THREE, b.getThree());
         assertEquals("not set", b.getDoNotSet());
+        datef.parse(b.getNotDate());
 
         b = list.get(1);
         assertEquals("4", b.getOne());
@@ -113,7 +114,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         // test date -> string handling
         assertNotNull(b.getNotDate());
         assertTrue(!"not a date".equals(b.getNotDate()));
-        datef.parse(b.getNotDate());
+        assertTrue(b.getNotDate().endsWith("789456123"));
     }
 
     public void testToMap() throws SQLException {

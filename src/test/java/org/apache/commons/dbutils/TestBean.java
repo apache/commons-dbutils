@@ -16,6 +16,8 @@
  */
 package org.apache.commons.dbutils;
 
+import java.sql.Timestamp;
+
 /**
  * A bean to use in testing toBean() and toBeanList().
  */
@@ -36,6 +38,8 @@ public class TestBean {
     private int intTest = 0;
 
     private Integer integerTest = Integer.valueOf(0);
+
+    private Timestamp timestamp = null;
 
     private String doNotSet = "not set";
 
