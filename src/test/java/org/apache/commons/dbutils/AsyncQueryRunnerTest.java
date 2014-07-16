@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
@@ -449,6 +450,9 @@ public class AsyncQueryRunnerTest {
         runner.insert("2", handler, "param1");
         runner.insert(conn, "3", handler);
         runner.insert(conn, "4", handler, "param1");
+
+        // give the Executor time to submit all insert statements. Otherwise the following verify statements will fail from time to time.
+        TimeUnit.MILLISECONDS.sleep(50);
 
         verify(mockQueryRunner).insert("1", handler);
         verify(mockQueryRunner).insert("2", handler, "param1");
