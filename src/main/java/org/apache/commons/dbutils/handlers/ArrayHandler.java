@@ -40,6 +40,11 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
     static final RowProcessor ROW_PROCESSOR = new BasicRowProcessor();
 
     /**
+     * An empty array to return when no more rows are available in the ResultSet.
+     */
+    private static final Object[] EMPTY_ARRAY = new Object[0];
+
+    /**
      * The RowProcessor implementation to use when converting rows
      * into arrays.
      */
@@ -67,15 +72,15 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
     /**
      * Places the column values from the first row in an <code>Object[]</code>.
      * @param rs <code>ResultSet</code> to process.
-     * @return An Object[] or <code>null</code> if there are no rows in the
-     * <code>ResultSet</code>.
+     * @return An Object[]. If there are no rows in the <code>ResultSet</code>
+     * an empty array will be returned.
      *
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
     public Object[] handle(ResultSet rs) throws SQLException {
-        return rs.next() ? this.convert.toArray(rs) : null;
+        return rs.next() ? this.convert.toArray(rs) : EMPTY_ARRAY;
     }
 
 }

@@ -16,6 +16,10 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.hamcrest.Matchers.emptyArray;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.BaseTestCase;
@@ -41,7 +45,7 @@ public class ArrayHandlerTest extends BaseTestCase {
         ResultSetHandler<Object[]> h = new ArrayHandler();
         Object[] results = h.handle(this.emptyResultSet);
 
-        assertNull(results);
+        assertThat(results, is(emptyArray()));
     }
 
 }
