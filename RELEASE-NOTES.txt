@@ -1,37 +1,46 @@
 
-              Apache Commons DbUtils 
+              Apache Commons DbUtils
                      Version 1.6
                     RELEASE NOTES
 
-The Commons DbUtils team is pleased to announce the release of Commons DbUtils 1.6
-
-The Apache Commons-DbUtils package is a set of
-  Java utility classes for easing JDBC development.
+The Apache Commons DbUtils team is pleased to announce the release of Apache Commons DbUtils 1.6.
+The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.
 
 Changes in this version include:
 
-New features:
-o Create functionality to return auto-generated keys in batches of SQL inserts  Issue: DBUTILS-108. Thanks to Micah Huff. 
-o Patch QueryLoader to also load from XML properties files  Issue: DBUTILS-107. Thanks to PB. 
-o Add missing JavaDoc to QueryRunner#insert  Issue: DBUTILS-98. Thanks to Moandji Ezana. 
-o Add an Abstract ResultSetHandler implementation in order to reduce redundant 'resultSet' variable invocation  Issue: DBUTILS-97. 
-o Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.  Issue: DBUTILS-87. Thanks to Moandji Ezana. 
+NEW FEATURES:
+=============
+o DBUTILS-113:  Add support for conversion of ResultSet strings to enums in the BeanProcessor
+                Thanks to Graylin Kim, Michael Osipov.
+o DBUTILS-108:  Create functionality to return auto-generated keys in batches of SQL inserts
+                Thanks to Micah Huff.
+o DBUTILS-107:  Patch QueryLoader to also load from XML properties files
+                Thanks to PB.
+o DBUTILS-98:   Add missing JavaDoc to QueryRunner#insert
+                Thanks to Moandji Ezana.
+o DBUTILS-97:   Add an Abstract ResultSetHandler implementation in order to reduce redundant 'resultSet' variable invocation
+o DBUTILS-87:   Added insert methods to QueryRunner and AsyncQueryRunner that return the generated key.
+                Thanks to Moandji Ezana.
 
-Fixed Bugs:
-o DBUtils can't build using JDK 1.7 - DriverProxy needs to implement getParentLogger()
-        Add dynamic invocation.  Issue: DBUTILS-106. Thanks to Niall Pemberton. 
-o Updated the use of getColumnName to try getColumnLabel first  Issue: DBUTILS-100. Thanks to xiaofei.xu. 
-o DbUtils#loadDriver(ClassLoader,String) makes DriverManager throwing "No suitable driver found for jdbc"
-        if ClassLoader is not the System's one  Issue: DBUTILS-96. Thanks to yuyf. 
+FIXED BUGS:
+===========
+o DBUTILS-110:  ArrayHandler should return an empty array when handle has no rows 
+o DBUTILS-114:  Order of columns not retained in BasicRowProcessor with HashMap
+                Thanks to Michael Osipov.
+o DBUTILS-118:  BeanProcessor not returning nanoseconds
+                Thanks to Feysal Rujbally, Daniele Cremonini.
+o DBUTILS-106:  DBUtils can't build using JDK 1.7 - DriverProxy needs to implement getParentLogger()
+                Add dynamic invocation. Thanks to Niall Pemberton.
+o DBUTILS-100:  Updated the use of getColumnName to try getColumnLabel first Thanks to xiaofei.xu. 
+o DBUTILS-96:   DbUtils#loadDriver(ClassLoader,String) makes DriverManager throwing "No suitable driver found for jdbc"
+                if ClassLoader is not the System's one Thanks to yuyf.
 
 Changes:
-o In BeanProcessor#isCompatibleType, can Integer.class.isInstance(value) be replaced by value instanceof Integer (etc)?
-        Simplified code by using instanceof.  Issue: DBUTILS-85. 
+o DBUTILS-85:   In BeanProcessor#isCompatibleType, can Integer.class.isInstance(value) be replaced by value instanceof Integer (etc)?
+                Simplified code by using instanceof.
 
 
-For complete information on Commons DbUtils, including instructions on how to submit bug reports,
-patches, or suggestions for improvement, see the Apache Commons DbUtils website:
+For complete information on Apache Commons DbUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Apache Commons DbUtils website:
 
-http://commons.apache.org/dbutils/
-
-
+http://commons.apache.org/proper/commons-dbutils/
