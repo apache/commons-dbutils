@@ -440,20 +440,20 @@ public class AsyncQueryRunnerTest {
     
     @Test
     public void testInsertUsesGivenQueryRunner() throws Exception {
-    	QueryRunner mockQueryRunner = mock(QueryRunner.class
-    	        , org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
-    	        );
-    	runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
-    	
-    	runner.insert("1", handler);
-    	runner.insert("2", handler, "param1");
-    	runner.insert(conn, "3", handler);
-    	runner.insert(conn, "4", handler, "param1");
-    	
-    	verify(mockQueryRunner).insert("1", handler);
-    	verify(mockQueryRunner).insert("2", handler, "param1");
-    	verify(mockQueryRunner).insert(conn, "3", handler);
-    	verify(mockQueryRunner).insert(conn, "4", handler, "param1");
+        QueryRunner mockQueryRunner = mock(QueryRunner.class
+                , org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
+                );
+        runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
+
+        runner.insert("1", handler);
+        runner.insert("2", handler, "param1");
+        runner.insert(conn, "3", handler);
+        runner.insert(conn, "4", handler, "param1");
+
+        verify(mockQueryRunner).insert("1", handler);
+        verify(mockQueryRunner).insert("2", handler, "param1");
+        verify(mockQueryRunner).insert(conn, "3", handler);
+        verify(mockQueryRunner).insert(conn, "4", handler, "param1");
     }
 
     @Test(expected=ExecutionException.class)
