@@ -84,7 +84,7 @@ public class QueryRunnerTest {
         verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we closed the connection
+        verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.batch(Connection, String, Object[][]) does not close connections
     }
 
     private void callGoodBatch(Object[][] params) throws Exception {
@@ -217,7 +217,7 @@ public class QueryRunnerTest {
         verify(stmt, times(1)).executeQuery();
         verify(results, times(1)).close();
         verify(stmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we closed the connection
+        verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.query(Connection, String, ResultSetHandler<T>, Object...) does not close connections
 
         // call the other variation of query
         when(meta.getParameterCount()).thenReturn(0);
@@ -226,7 +226,7 @@ public class QueryRunnerTest {
         verify(stmt, times(2)).executeQuery();
         verify(results, times(2)).close();
         verify(stmt, times(2)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we closed the connection
+        verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
 
     private void callGoodQuery() throws Exception {
@@ -341,7 +341,7 @@ public class QueryRunnerTest {
 
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we closed the connection
+        verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.update(Connection, String, Object...) does not close connections
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
@@ -349,7 +349,7 @@ public class QueryRunnerTest {
 
         verify(stmt, times(2)).executeUpdate();
         verify(stmt, times(2)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we closed the connection
+        verify(conn, times(0)).close();    // make sure we do not close the connection, see above
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
@@ -357,7 +357,7 @@ public class QueryRunnerTest {
 
         verify(stmt, times(3)).executeUpdate();
         verify(stmt, times(3)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we closed the connection
+        verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
 
     private void callGoodUpdate() throws Exception {
