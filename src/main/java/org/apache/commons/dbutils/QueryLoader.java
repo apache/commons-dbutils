@@ -19,7 +19,6 @@ package org.apache.commons.dbutils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -76,7 +75,7 @@ public class QueryLoader {
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
      * the given path.
-     * @throws InvalidPropertiesFormatException if the XML properties file is
+     * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
      * invalid
      * @return Map of query names to SQL values
      * @see java.util.Properties
@@ -103,7 +102,7 @@ public class QueryLoader {
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
      * the given path.
-     * @throws InvalidPropertiesFormatException if the XML properties file is
+     * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
      * invalid
      * @since DbUtils 1.1
      * @return Map of query names to SQL values
