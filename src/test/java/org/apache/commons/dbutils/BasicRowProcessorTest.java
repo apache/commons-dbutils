@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -135,6 +136,26 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("SIX", m.get("THREE"));
 
         assertFalse(this.rs.next());
+    }
+
+    public void testToMapOrdering() throws SQLException {
+
+        assertTrue(this.rs.next());
+        Map<String, Object> m = processor.toMap(this.rs);
+
+        Iterator<String> itr = m.keySet().iterator();
+        assertEquals("one", itr.next());
+        assertEquals("two", itr.next());
+        assertEquals("three", itr.next());
+        assertEquals("notInBean", itr.next());
+        assertEquals("intTest", itr.next());
+        assertEquals("integerTest", itr.next());
+        assertEquals("nullObjectTest", itr.next());
+        assertEquals("nullPrimitiveTest", itr.next());
+        assertEquals("notDate", itr.next());
+        assertEquals("columnProcessorDoubleTest", itr.next());
+
+        assertFalse(itr.hasNext());
     }
 
 }

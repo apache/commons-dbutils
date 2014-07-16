@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -140,14 +141,19 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> row into a <code>Map</code>.  This
-     * implementation returns a <code>Map</code> with case insensitive column
-     * names as keys.  Calls to <code>map.get("COL")</code> and
-     * <code>map.get("col")</code> return the same value.
-     * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
+     * Convert a <code>ResultSet</code> row into a <code>Map</code>.
+     *
+     * <p>
+     * This implementation returns a <code>Map</code> with case insensitive column names as keys. Calls to
+     * <code>map.get("COL")</code> and <code>map.get("col")</code> return the same value. Furthermore this implementation
+     * will return an ordered map, that preserves the ordering of the columns in the ResultSet, so that iterating over
+     * the entry set of the returned map will return the first column of the ResultSet, then the second and so forth.
+     * </p>
+     *
      * @param rs ResultSet that supplies the map data
-     * @throws SQLException if a database access error occurs
      * @return the newly created Map
+     * @throws SQLException if a database access error occurs
+     * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
      */
     @Override
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
@@ -176,12 +182,12 @@ public class BasicRowProcessor implements RowProcessor {
      * achieve the case insensitive lookup.
      *
      * <p>Note: This implementation does not allow <tt>null</tt>
-     * for key, whereas {@link HashMap} does, because of the code:
+     * for key, whereas {@link LinkedHashMap} does, because of the code:
      * <pre>
      * key.toString().toLowerCase()
      * </pre>
      */
-    private static class CaseInsensitiveHashMap extends HashMap<String, Object> {
+    private static class CaseInsensitiveHashMap extends LinkedHashMap<String, Object> {
         /**
          * The internal mapping from lowercase keys to the real keys.
          *
