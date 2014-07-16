@@ -44,6 +44,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.6" date="TBA" description="Bugfixes and addition of insert methods">
+      <action dev="britter" type="fix" issue="DBUTILS-110">
+        ArrayHandler should return an empty array when handle has no rows
+      </action>
       <action dev="britter" type="fix" issue="DBUTILS-114" due-to="Michael Osipov">
         Order of columns not retained in BasicRowProcessor with HashMap
       </action>
