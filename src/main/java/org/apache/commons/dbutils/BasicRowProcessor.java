@@ -181,7 +181,7 @@ public class BasicRowProcessor implements RowProcessor {
      * an internal mapping from lowercase keys to the real keys in order to
      * achieve the case insensitive lookup.
      *
-     * <p>Note: This implementation does not allow <tt>null</tt>
+     * <p>Note: This implementation does not allow {@code null}
      * for key, whereas {@link LinkedHashMap} does, because of the code:
      * <pre>
      * key.toString().toLowerCase()
