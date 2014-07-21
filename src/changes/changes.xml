@@ -45,6 +45,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.7" date="TBA" description="TBD">
+      <action dev="britter" type="update" issue="DBUTILS-117" due-to="Michael Akerman">
+        Correct errors in BeanMapHandler JavaDoc
+      </action>
     </release>
 
     <release version="1.6" date="2014-07-20" description="Bugfixes and addition of insert methods">

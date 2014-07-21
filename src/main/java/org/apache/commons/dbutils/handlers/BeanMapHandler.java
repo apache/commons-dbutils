@@ -32,8 +32,8 @@ import org.apache.commons.dbutils.RowProcessor;
  * retrieve rows from the table like this:
  *
  * <pre>
- * ResultSetHandler&lt;Map&lt;Long, Person&gt;&gt; h = new BeanMapdHandler&lt;Long, Person&gt;(Person.class, &quot;id&quot;);
- * Map&amp;ltLong, Person&gt; found = queryRunner.query(&quot;select id, name, age from person&quot;, h);
+ * ResultSetHandler&lt;Map&lt;Long, Person&gt;&gt; h = new BeanMapHandler&lt;Long, Person&gt;(Person.class, &quot;id&quot;);
+ * Map&lt;Long, Person&gt; found = queryRunner.query(&quot;select id, name, age from person&quot;, h);
  * Person jane = found.get(1L); // jane's id is 1
  * String janesName = jane.getName();
  * Integer janesAge = jane.getAge();
