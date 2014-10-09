@@ -28,22 +28,15 @@ public class QueryLoaderTest extends BaseTestCase {
         "/org/apache/commons/dbutils/TestQueries.properties";
 
     public void testLoad() throws IOException {
-        try {
-            QueryLoader loader = QueryLoader.instance();
-            Map<String,String> q = loader.load(QUERIES);
-            Map<String,String> q2 = loader.load(QUERIES);
-            assertTrue(q == q2); // pointer comparison should return true
-            assertEquals("SELECT * FROM SomeTable", q.get("test.query"));
+        QueryLoader loader = QueryLoader.instance();
+        Map<String,String> q = loader.load(QUERIES);
+        Map<String,String> q2 = loader.load(QUERIES);
+        assertTrue(q == q2); // pointer comparison should return true
+        assertEquals("SELECT * FROM SomeTable", q.get("test.query"));
 
-            loader.unload(QUERIES);
-            Map<String,String> q3 = loader.load(QUERIES);
-            assertTrue(q != q3); // pointer comparison should return false
-
-        } catch (IllegalArgumentException e) {
-            // TODO Figure out why the Maven build can't find the properties
-            // file.  The tests run fine in Eclipse so just catch this
-            // exception for now.
-        }
+        loader.unload(QUERIES);
+        Map<String,String> q3 = loader.load(QUERIES);
+        assertTrue(q != q3); // pointer comparison should return false
     }
 
 }
