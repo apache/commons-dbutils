@@ -26,6 +26,7 @@ import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.Arrays;
@@ -222,18 +223,23 @@ public abstract class AbstractQueryRunner {
         // check the parameter count, if we can
         ParameterMetaData pmd = null;
         if (!pmdKnownBroken) {
-            pmd = stmt.getParameterMetaData();
-            if (pmd == null) { // can be returned by implementations that don't support the method
-                pmdKnownBroken = true;
-            } else {
-                int stmtCount = pmd.getParameterCount();
-                int paramsCount = params == null ? 0 : params.length;
-    
-                if (stmtCount != paramsCount) {
-                    throw new SQLException("Wrong number of parameters: expected "
-                            + stmtCount + ", was given " + paramsCount);
+            try {
+                pmd = stmt.getParameterMetaData();
+                if (pmd == null) { // can be returned by implementations that don't support the method
+                    pmdKnownBroken = true;
+                } else {
+                    int stmtCount = pmd.getParameterCount();
+                    int paramsCount = params == null ? 0 : params.length;
+        
+                    if (stmtCount != paramsCount) {
+                        throw new SQLException("Wrong number of parameters: expected "
+                                + stmtCount + ", was given " + paramsCount);
+                    }
                 }
+            } catch (SQLFeatureNotSupportedException ex) {
+                pmdKnownBroken = true;                
             }
+            // TODO see DBUTILS-117: would it make sense to catch any other SQLEx types here?
         }
 
         // nothing to do here
@@ -250,6 +256,7 @@ public abstract class AbstractQueryRunner {
                 // OTHER don't work with Oracle's drivers.
                 int sqlType = Types.VARCHAR;
                 if (!pmdKnownBroken) {
+                    // TODO see DBUTILS-117: does it make sense to catch SQLEx here?
                     try {
                         /*
                          * It's not possible for pmdKnownBroken to change from
