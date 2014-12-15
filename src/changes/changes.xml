@@ -49,7 +49,7 @@ The <action> type attribute can be add,update,fix,remove.
         Error handling possible getParameterMetaData() results
         - allow for null return
       </action>
-      <action dev="britter" type="update" issue="DBUTILS-117" due-to="Michael Akerman">
+      <action dev="britter" type="update" issue="DBUTILS-119" due-to="Michael Akerman">
         Correct errors in BeanMapHandler JavaDoc
       </action>
     </release>
