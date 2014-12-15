@@ -411,7 +411,7 @@ public class QueryRunnerTest {
         when(stmt.getGeneratedKeys()).thenReturn(results);
         when(results.next()).thenReturn(true).thenReturn(false);
         when(results.getObject(1)).thenReturn(1L);
-	
+
         Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<Long>(), "unit", "test");
 
         verify(stmt, times(1)).executeUpdate();

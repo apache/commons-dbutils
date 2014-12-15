@@ -93,8 +93,7 @@ Connection conn = ... // open a connection
 try{
     Object[] result = run.query(
         conn, "SELECT * FROM Person WHERE name=?", h, "John Doe");
-	// do something with the result
-	
+    // do something with the result
 } finally {
     // Use this helper method so we don't have to check for null
     DbUtils.close(conn);  
