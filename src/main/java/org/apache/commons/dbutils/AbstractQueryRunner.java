@@ -223,12 +223,16 @@ public abstract class AbstractQueryRunner {
         ParameterMetaData pmd = null;
         if (!pmdKnownBroken) {
             pmd = stmt.getParameterMetaData();
-            int stmtCount = pmd.getParameterCount();
-            int paramsCount = params == null ? 0 : params.length;
-
-            if (stmtCount != paramsCount) {
-                throw new SQLException("Wrong number of parameters: expected "
-                        + stmtCount + ", was given " + paramsCount);
+            if (pmd == null) { // can be returned by implementations that don't support the method
+                pmdKnownBroken = true;
+            } else {
+                int stmtCount = pmd.getParameterCount();
+                int paramsCount = params == null ? 0 : params.length;
+    
+                if (stmtCount != paramsCount) {
+                    throw new SQLException("Wrong number of parameters: expected "
+                            + stmtCount + ", was given " + paramsCount);
+                }
             }
         }
 

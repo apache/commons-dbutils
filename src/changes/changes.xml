@@ -45,6 +45,10 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.7" date="TBA" description="TBD">
+      <action dev="sebb" type="update" issue="DBUTILS-117" due-to="Vadim Smirnov">
+        Error handling possible getParameterMetaData() results
+        - allow for null return
+      </action>
       <action dev="britter" type="update" issue="DBUTILS-117" due-to="Michael Akerman">
         Correct errors in BeanMapHandler JavaDoc
       </action>
