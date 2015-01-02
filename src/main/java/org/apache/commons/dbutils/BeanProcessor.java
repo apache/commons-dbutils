@@ -247,7 +247,7 @@ public class BeanProcessor {
     private void callSetter(Object target, PropertyDescriptor prop, Object value)
             throws SQLException {
 
-        Method setter = prop.getWriteMethod();
+        Method setter = getWriteMethod(target, prop, value);
 
         if (setter == null) {
             return;
@@ -342,6 +342,20 @@ public class BeanProcessor {
         }
         return false;
 
+    }
+
+    /**
+     * Get the write method to use when setting {@code value} to the {@code target}.
+     *
+     * @param target Object where the write method will be called.
+     * @param prop   BeanUtils information.
+     * @param value  The value that will be passed to the write method.
+     * @return The {@link java.lang.reflect.Method} to call on {@code target} to write {@code value} or {@code null} if
+     *         there is no suitable write method.
+     */
+    protected Method getWriteMethod(Object target, PropertyDescriptor prop, Object value) {
+        Method method = prop.getWriteMethod();
+        return method;
     }
 
     /**
