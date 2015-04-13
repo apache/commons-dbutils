@@ -119,7 +119,7 @@ public class BasicRowProcessor implements RowProcessor {
      * @return the newly created bean
      */
     @Override
-    public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
+    public <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException {
         return this.convert.toBean(rs, type);
     }
 
@@ -136,7 +136,7 @@ public class BasicRowProcessor implements RowProcessor {
      * they were returned by the <code>ResultSet</code>.
      */
     @Override
-    public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
+    public <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException {
         return this.convert.toBeanList(rs, type);
     }
 

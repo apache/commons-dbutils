@@ -135,7 +135,7 @@ public class BeanProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
-    public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
+    public <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException {
 
         PropertyDescriptor[] props = this.propertyDescriptors(type);
 
@@ -178,7 +178,7 @@ public class BeanProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created List of beans
      */
-    public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
+    public <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException {
         List<T> results = new ArrayList<T>();
 
         if (!rs.next()) {
