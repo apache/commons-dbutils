@@ -136,13 +136,8 @@ public class BeanProcessor {
      * @return the newly created bean
      */
     public <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException {
-
-        PropertyDescriptor[] props = this.propertyDescriptors(type);
-
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
-
-        return this.createBean(rs, type, props, columnToProperty);
+        T bean = this.newInstance(type);
+        return this.populateBean(rs, bean);
     }
 
     /**
@@ -207,10 +202,43 @@ public class BeanProcessor {
      * @throws SQLException if a database error occurs.
      */
     private <T> T createBean(ResultSet rs, Class<T> type,
-            PropertyDescriptor[] props, int[] columnToProperty)
-            throws SQLException {
+                             PropertyDescriptor[] props, int[] columnToProperty)
+    throws SQLException {
 
         T bean = this.newInstance(type);
+        return populateBean(rs, bean, props, columnToProperty);
+    }
+
+    /**
+     * Initializes the fields of the provided bean from the ResultSet.
+     * @param <T> The type of bean
+     * @param rs The result set.
+     * @param bean The bean to be populated.
+     * @return An initialized object.
+     * @throws SQLException if a database error occurs.
+     */
+    public <T> T populateBean(ResultSet rs, T bean) throws SQLException {
+        PropertyDescriptor[] props = this.propertyDescriptors(bean.getClass());
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+
+        return populateBean(rs, bean, props, columnToProperty);
+    }
+
+    /**
+     * This method populates a bean from the ResultSet based upon the underlying meta-data.
+     *
+     * @param <T> The type of bean
+     * @param rs The result set.
+     * @param bean The bean to be populated.
+     * @param props The property descriptors.
+     * @param columnToProperty The column indices in the result set.
+     * @return An initialized object.
+     * @throws SQLException if a database error occurs.
+     */
+    private <T> T populateBean(ResultSet rs, T bean,
+            PropertyDescriptor[] props, int[] columnToProperty)
+            throws SQLException {
 
         for (int i = 1; i < columnToProperty.length; i++) {
 

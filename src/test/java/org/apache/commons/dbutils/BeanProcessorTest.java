@@ -27,7 +27,7 @@ public class BeanProcessorTest extends BaseTestCase {
 
     private static final BeanProcessor beanProc = new BeanProcessor();
 
-    public void testProcess() throws SQLException {
+    public void testProcessWithToBean() throws SQLException {
         TestBean b = null;
         assertTrue(this.rs.next());
         b = beanProc.toBean(this.rs, TestBean.class);
@@ -36,6 +36,22 @@ public class BeanProcessorTest extends BaseTestCase {
 
         assertTrue(this.rs.next());
         b = beanProc.toBean(this.rs, TestBean.class);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
+
+        assertFalse(this.rs.next());
+    }
+
+    public void testProcessWithPopulateBean() throws SQLException {
+        TestBean b = new TestBean();
+
+        assertTrue(this.rs.next());
+        b = beanProc.populateBean(this.rs, b);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
+
+        assertTrue(this.rs.next());
+        b = beanProc.populateBean(this.rs, b);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
         assertEquals(b.getThree(), TestBean.Ordinal.SIX);
 
