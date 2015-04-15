@@ -121,6 +121,15 @@
         <role>Java Developer</role>
       </roles>
     </developer>
+    <developer>
+      <name>Carl Hall</name>
+      <id>thecarlhall</id>
+      <email>thecarlhall@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
   </developers>
 
   <contributors>
@@ -256,6 +265,19 @@
           </descriptors>
           <tarLongFileMode>gnu</tarLongFileMode>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.11</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
