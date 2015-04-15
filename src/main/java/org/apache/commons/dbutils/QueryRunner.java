@@ -63,6 +63,16 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
+     * Constructor for QueryRunner that takes a <code>StatementConfiguration</code> to configure statements when
+     * preparing them.
+     *
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
+     */
+    public QueryRunner(StatementConfiguration stmtConfig) {
+        super(stmtConfig);
+    }
+
+    /**
      * Constructor for QueryRunner that takes a <code>DataSource</code> and controls the use of <code>ParameterMetaData</code>.
      * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
      * <code>DataSource</code>.
@@ -74,6 +84,34 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public QueryRunner(DataSource ds, boolean pmdKnownBroken) {
         super(ds, pmdKnownBroken);
+    }
+
+    /**
+     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and a <code>StatementConfiguration</code>.
+     *
+     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
+     * <code>DataSource</code>.
+     *
+     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
+     */
+    public QueryRunner(DataSource ds, StatementConfiguration stmtConfig) {
+        super(ds, stmtConfig);
+    }
+
+    /**
+     * Constructor for QueryRunner that takes a <code>DataSource</code>, a <code>StatementConfiguration</code>, and
+     * controls the use of <code>ParameterMetaData</code>.  Methods that do not take a <code>Connection</code> parameter
+     * will retrieve connections from this <code>DataSource</code>.
+     *
+     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * and if it breaks, we'll remember not to use it again.
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
+     */
+    public QueryRunner(DataSource ds, boolean pmdKnownBroken, StatementConfiguration stmtConfig) {
+        super(ds, pmdKnownBroken, stmtConfig);
     }
 
     /**

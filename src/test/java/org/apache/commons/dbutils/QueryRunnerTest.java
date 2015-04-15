@@ -519,6 +519,19 @@ public class QueryRunnerTest {
         callUpdateWithException("unit", "test");
     }
 
+    @Test
+    public void testStatementConfiguration() throws Exception {
+        StatementConfiguration stmtConfig = new StatementConfiguration(1, 2, 3, 4, 5);
+        QueryRunner queryRunner = new QueryRunner(stmtConfig);
+        queryRunner.prepareStatement(conn, "select 1");
+
+        verify(stmt).setFetchDirection(eq(1));
+        verify(stmt).setFetchSize(eq(2));
+        verify(stmt).setMaxFieldSize(eq(3));
+        verify(stmt).setMaxRows(eq(4));
+        verify(stmt).setQueryTimeout(eq(5));
+    }
+
     //
     // Random tests
     //

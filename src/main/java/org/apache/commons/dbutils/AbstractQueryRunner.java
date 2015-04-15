@@ -53,10 +53,16 @@ public abstract class AbstractQueryRunner {
     protected final DataSource ds;
 
     /**
-     * Default constructor, sets pmdKnownBroken to false and ds to null.
+     * Configuration to use when preparing statements.
+     */
+    private final StatementConfiguration stmtConfig;
+
+    /**
+     * Default constructor, sets pmdKnownBroken to false, ds to null and stmtConfig to null.
      */
     public AbstractQueryRunner() {
         ds = null;
+        this.stmtConfig = null;
     }
 
     /**
@@ -72,6 +78,7 @@ public abstract class AbstractQueryRunner {
     public AbstractQueryRunner(boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
         ds = null;
+        this.stmtConfig = null;
     }
 
     /**
@@ -84,6 +91,18 @@ public abstract class AbstractQueryRunner {
      */
     public AbstractQueryRunner(DataSource ds) {
         this.ds = ds;
+        this.stmtConfig = null;
+    }
+
+    /**
+     * Constructor for QueryRunner that takes a <code>StatementConfiguration</code> to configure statements when
+     * preparing them.
+     *
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
+     */
+    public AbstractQueryRunner(StatementConfiguration stmtConfig) {
+        this.ds = null;
+        this.stmtConfig = stmtConfig;
     }
 
     /**
@@ -104,6 +123,38 @@ public abstract class AbstractQueryRunner {
     public AbstractQueryRunner(DataSource ds, boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
         this.ds = ds;
+        this.stmtConfig = null;
+    }
+
+    /**
+     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and a <code>StatementConfiguration</code>.
+     *
+     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
+     * <code>DataSource</code>.
+     *
+     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
+     */
+    public AbstractQueryRunner(DataSource ds, StatementConfiguration stmtConfig) {
+        this.ds = ds;
+        this.stmtConfig = stmtConfig;
+    }
+
+    /**
+     * Constructor for QueryRunner that takes a <code>DataSource</code>, a <code>StatementConfiguration</code>, and
+     * controls the use of <code>ParameterMetaData</code>.  Methods that do not take a <code>Connection</code> parameter
+     * will retrieve connections from this <code>DataSource</code>.
+     *
+     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * and if it breaks, we'll remember not to use it again.
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
+     */
+    public AbstractQueryRunner(DataSource ds, boolean pmdKnownBroken, StatementConfiguration stmtConfig) {
+        this.pmdKnownBroken = pmdKnownBroken;
+        this.ds = ds;
+        this.stmtConfig = stmtConfig;
     }
 
     /**
@@ -152,7 +203,9 @@ public abstract class AbstractQueryRunner {
     protected PreparedStatement prepareStatement(Connection conn, String sql)
             throws SQLException {
 
-        return conn.prepareStatement(sql);
+        PreparedStatement ps = conn.prepareStatement(sql);
+        configureStatement(ps);
+        return ps;
     }
 
     /**
@@ -181,7 +234,34 @@ public abstract class AbstractQueryRunner {
     protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
             throws SQLException {
 
-        return conn.prepareStatement(sql, returnedKeys);
+        PreparedStatement ps = conn.prepareStatement(sql, returnedKeys);
+        configureStatement(ps);
+        return ps;
+    }
+
+    private void configureStatement(Statement stmt) throws SQLException {
+
+        if (stmtConfig != null) {
+            if (stmtConfig.isFetchDirectionSet()) {
+                stmt.setFetchDirection(stmtConfig.getFetchDirection());
+            }
+
+            if (stmtConfig.isFetchSizeSet()) {
+                stmt.setFetchSize(stmtConfig.getFetchSize());
+            }
+
+            if (stmtConfig.isMaxFieldSizeSet()) {
+                stmt.setMaxFieldSize(stmtConfig.getMaxFieldSize());
+            }
+
+            if (stmtConfig.isMaxRowsSet()) {
+                stmt.setMaxRows(stmtConfig.getMaxRows());
+            }
+
+            if (stmtConfig.isQueryTimeoutSet()) {
+                stmt.setQueryTimeout(stmtConfig.getQueryTimeout());
+            }
+        }
     }
 
     /**
