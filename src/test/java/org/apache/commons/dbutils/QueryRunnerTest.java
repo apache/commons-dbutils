@@ -26,6 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
@@ -33,6 +34,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 @SuppressWarnings("boxing") // test code
 public class QueryRunnerTest {
@@ -54,6 +58,7 @@ public class QueryRunnerTest {
     @Mock DataSource dataSource;
     @Mock Connection conn;
     @Mock PreparedStatement stmt;
+    @Mock CallableStatement call;
     @Mock ParameterMetaData meta;
     @Mock ResultSet results;
     @Mock ResultSetMetaData resultsMeta;
@@ -67,6 +72,10 @@ public class QueryRunnerTest {
         when(stmt.getParameterMetaData()).thenReturn(meta);
         when(stmt.getResultSet()).thenReturn(results);
         when(stmt.executeQuery()).thenReturn(results);
+        when(conn.prepareCall(any(String.class))).thenReturn(call);
+        when(call.getParameterMetaData()).thenReturn(meta);
+        when(call.getResultSet()).thenReturn(results);
+        when(call.getMoreResults()).thenReturn(false);
         when(results.next()).thenReturn(false);
 
          handler = new ArrayHandler();
@@ -401,7 +410,7 @@ public class QueryRunnerTest {
         runner = new QueryRunner();
         callGoodUpdate(conn);
     }
-    
+
     @Test
     public void testGoodInsert() throws Exception {
         results = mock(ResultSet.class);
@@ -530,6 +539,458 @@ public class QueryRunnerTest {
         verify(stmt).setMaxFieldSize(eq(3));
         verify(stmt).setMaxRows(eq(4));
         verify(stmt).setQueryTimeout(eq(5));
+    }
+
+    //
+    // Execute tests
+    //
+    private void callGoodExecute(Connection conn) throws Exception {
+        when(call.execute()).thenReturn(false);
+        when(call.getUpdateCount()).thenReturn(3);
+
+        when(meta.getParameterCount()).thenReturn(2);
+        int result = runner.execute(conn, "{call my_proc(?, ?)}", "unit", "test");
+
+        Assert.assertEquals(3, result);
+
+        verify(call, times(1)).execute();
+        verify(call, times(1)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // call the other variation of query
+        when(meta.getParameterCount()).thenReturn(0);
+        result = runner.execute(conn, "{call my_proc()}");
+
+        Assert.assertEquals(3, result);
+
+        verify(call, times(2)).execute();
+        verify(call, times(2)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // Test single OUT parameter
+        when(meta.getParameterCount()).thenReturn(1);
+        when(call.getObject(1)).thenReturn(42);
+        OutParameter<Integer> intParam =
+            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+        result = runner.execute(conn, "{?= call my_proc()}", intParam);
+
+        Assert.assertEquals(42, intParam.getValue().intValue());
+        Assert.assertEquals(3, result);
+
+        verify(call, times(3)).execute();
+        verify(call, times(3)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // Test OUT parameters with IN parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(4242);
+        intParam.setValue(null);
+        result = runner.execute(conn, "{?= call my_proc(?, ?)}", intParam, "unit", "test");
+
+        Assert.assertEquals(4242, intParam.getValue().intValue());
+        Assert.assertEquals(3, result);
+
+        verify(call, times(4)).execute();
+        verify(call, times(4)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // Test INOUT parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(24);
+        when(call.getObject(3)).thenReturn("out");
+        intParam.setValue(null);
+        OutParameter<String> stringParam =
+            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+        result = runner.execute(conn, "{?= call my_proc(?, ?)}", intParam, "test", stringParam);
+
+        Assert.assertEquals(24, intParam.getValue().intValue());
+        Assert.assertEquals("out", stringParam.getValue());
+        Assert.assertEquals(3, result);
+
+        verify(call, times(5)).execute();
+        verify(call, times(5)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+    }
+
+    private void callGoodExecute() throws Exception {
+        when(call.execute()).thenReturn(false);
+        when(call.getUpdateCount()).thenReturn(3);
+
+        when(meta.getParameterCount()).thenReturn(2);
+        int result = runner.execute("{call my_proc(?, ?)}", "unit", "test");
+
+        Assert.assertEquals(3, result);
+
+        verify(call, times(1)).execute();
+        verify(call, times(1)).close();    // make sure we closed the statement
+        verify(conn, times(1)).close();    // make sure we do not close the connection
+
+        // call the other variation of query
+        when(meta.getParameterCount()).thenReturn(0);
+        result = runner.execute("{call my_proc()}");
+
+        Assert.assertEquals(3, result);
+
+        verify(call, times(2)).execute();
+        verify(call, times(2)).close();    // make sure we closed the statement
+        verify(conn, times(2)).close();    // make sure we do not close the connection
+
+        // Test single OUT parameter
+        when(meta.getParameterCount()).thenReturn(1);
+        when(call.getObject(1)).thenReturn(42);
+        OutParameter<Integer> intParam =
+            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+        result = runner.execute("{?= call my_proc()}", intParam);
+
+        Assert.assertEquals(42, intParam.getValue().intValue());
+        Assert.assertEquals(3, result);
+
+        verify(call, times(3)).execute();
+        verify(call, times(3)).close();    // make sure we closed the statement
+        verify(conn, times(3)).close();    // make sure we do not close the connection
+
+        // Test OUT parameters with IN parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(4242);
+        intParam.setValue(null);
+        result = runner.execute("{?= call my_proc(?, ?)}", intParam, "unit", "test");
+
+        Assert.assertEquals(4242, intParam.getValue().intValue());
+        Assert.assertEquals(3, result);
+
+        verify(call, times(4)).execute();
+        verify(call, times(4)).close();    // make sure we closed the statement
+        verify(conn, times(4)).close();    // make sure we do not close the connection
+
+        // Test INOUT parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(24);
+        when(call.getObject(3)).thenReturn("out");
+        intParam.setValue(null);
+        OutParameter<String> stringParam =
+            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+        result = runner.execute("{?= call my_proc(?, ?)}", intParam, "test", stringParam);
+
+        Assert.assertEquals(24, intParam.getValue().intValue());
+        Assert.assertEquals("out", stringParam.getValue());
+        Assert.assertEquals(3, result);
+
+        verify(call, times(5)).execute();
+        verify(call, times(5)).close();    // make sure we closed the statement
+        verify(conn, times(5)).close();    // make sure we do not close the connection
+    }
+
+    @Test
+    public void testGoodExecute() throws Exception {
+        callGoodExecute();
+    }
+
+    @Test
+    public void testGoodExecutePmdTrue() throws Exception {
+        runner = new QueryRunner(true);
+        callGoodExecute(conn);
+    }
+
+    @Test
+    public void testGoodExecuteDefaultConstructor() throws Exception {
+        runner = new QueryRunner();
+        callGoodExecute(conn);
+    }
+
+    // helper method for calling execute when an exception is expected
+    private void callExecuteWithException(Object... params) throws Exception {
+        boolean caught = false;
+
+        try {
+            when(call.execute()).thenReturn(false);
+            when(meta.getParameterCount()).thenReturn(2);
+            runner.query("{call my_proc(?, ?)}", handler, params);
+
+        } catch(SQLException e) {
+            caught = true;
+        }
+
+        if(!caught)
+            fail("Exception never thrown, but expected");
+    }
+
+    @Test
+    public void testNoParamsExecute() throws Exception {
+        callExecuteWithException();
+    }
+
+    @Test
+    public void testTooFewParamsExecute() throws Exception {
+        callExecuteWithException("unit");
+    }
+
+    @Test
+    public void testTooManyParamsExecute() throws Exception {
+        callExecuteWithException("unit", "test", "fail");
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNullConnectionExecute() throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
+        when(dataSource.getConnection()).thenReturn(null);
+
+        runner.execute("{call my_proc(?, ?)}", "unit", "test");
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNullSqlExecute() throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
+
+        runner.execute(null);
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNullHandlerExecute() throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
+
+        runner.execute("{call my_proc(?, ?)}");
+    }
+
+    @Test
+    public void testExecuteException() throws Exception {
+        doThrow(new SQLException()).when(stmt).execute();
+
+        callExecuteWithException(handler, "unit", "test");
+    }
+
+    //
+    // Execute with ResultSetHandler
+    //
+
+    @Test
+    public void testExecuteWithMultipleResultSets() throws Exception {
+        when(call.execute()).thenReturn(true);
+        when(call.getMoreResults()).thenAnswer(new Answer<Boolean>()
+        {
+            int count = 1;
+            @Override
+            public Boolean answer(InvocationOnMock invocation)
+            {
+                return ++count <= 3;
+            }
+        });
+        when(meta.getParameterCount()).thenReturn(0);
+        List<Object[]> objects = runner.execute("{call my_proc()}", handler);
+
+        Assert.assertEquals(3, objects.size());
+        verify(call, times(1)).execute();
+        verify(results, times(3)).close();
+        verify(call, times(1)).close();    // make sure we closed the statement
+        verify(conn, times(1)).close();    // make sure we close the connection
+
+    }
+
+    private void callGoodExecuteWithResultSet(Connection conn) throws Exception {
+        when(call.execute()).thenReturn(true);
+
+        when(meta.getParameterCount()).thenReturn(2);
+        runner.execute(conn, "{call my_proc(?, ?)}", handler, "unit", "test");
+
+        verify(call, times(1)).execute();
+        verify(results, times(1)).close();
+        verify(call, times(1)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // call the other variation of query
+        when(meta.getParameterCount()).thenReturn(0);
+        runner.execute(conn, "{call my_proc()}", handler);
+
+        verify(call, times(2)).execute();
+        verify(results, times(2)).close();
+        verify(call, times(2)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // Test single OUT parameter
+        when(meta.getParameterCount()).thenReturn(1);
+        when(call.getObject(1)).thenReturn(42);
+        OutParameter<Integer> intParam =
+            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+        runner.execute(conn, "{?= call my_proc()}", handler, intParam);
+
+        Assert.assertEquals(42, intParam.getValue().intValue());
+
+        verify(call, times(3)).execute();
+        verify(results, times(3)).close();
+        verify(call, times(3)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // Test OUT parameters with IN parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(4242);
+        intParam.setValue(null);
+        runner.execute(conn, "{?= call my_proc(?, ?)}", handler, intParam, "unit", "test");
+
+        Assert.assertEquals(4242, intParam.getValue().intValue());
+
+        verify(call, times(4)).execute();
+        verify(results, times(4)).close();
+        verify(call, times(4)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+
+        // Test INOUT parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(24);
+        when(call.getObject(3)).thenReturn("out");
+        intParam.setValue(null);
+        OutParameter<String> stringParam =
+            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+        runner.execute(conn, "{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
+
+        Assert.assertEquals(24, intParam.getValue().intValue());
+        Assert.assertEquals("out", stringParam.getValue());
+
+        verify(call, times(5)).execute();
+        verify(results, times(5)).close();
+        verify(call, times(5)).close();    // make sure we closed the statement
+        verify(conn, times(0)).close();    // make sure we do not close the connection
+    }
+
+    private void callGoodExecuteWithResultSet() throws Exception {
+        when(call.execute()).thenReturn(true);
+
+        when(meta.getParameterCount()).thenReturn(2);
+        runner.execute("{call my_proc(?, ?)}", handler, "unit", "test");
+
+        verify(call, times(1)).execute();
+        verify(results, times(1)).close();
+        verify(call, times(1)).close();    // make sure we closed the statement
+        verify(conn, times(1)).close();    // make sure we do not close the connection
+
+        // call the other variation of query
+        when(meta.getParameterCount()).thenReturn(0);
+        runner.execute("{call my_proc()}", handler);
+
+        verify(call, times(2)).execute();
+        verify(results, times(2)).close();
+        verify(call, times(2)).close();    // make sure we closed the statement
+        verify(conn, times(2)).close();    // make sure we do not close the connection
+
+        // Test single OUT parameter
+        when(meta.getParameterCount()).thenReturn(1);
+        when(call.getObject(1)).thenReturn(42);
+        OutParameter<Integer> intParam =
+            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+        runner.execute("{?= call my_proc()}", handler, intParam);
+
+        Assert.assertEquals(42, intParam.getValue().intValue());
+
+        verify(call, times(3)).execute();
+        verify(results, times(3)).close();
+        verify(call, times(3)).close();    // make sure we closed the statement
+        verify(conn, times(3)).close();    // make sure we do not close the connection
+
+        // Test OUT parameters with IN parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(4242);
+        intParam.setValue(null);
+        runner.execute("{?= call my_proc(?, ?)}", handler, intParam, "unit", "test");
+
+        Assert.assertEquals(4242, intParam.getValue().intValue());
+
+        verify(call, times(4)).execute();
+        verify(results, times(4)).close();
+        verify(call, times(4)).close();    // make sure we closed the statement
+        verify(conn, times(4)).close();    // make sure we do not close the connection
+
+        // Test INOUT parameters
+        when(meta.getParameterCount()).thenReturn(3);
+        when(call.getObject(1)).thenReturn(24);
+        when(call.getObject(3)).thenReturn("out");
+        intParam.setValue(null);
+        OutParameter<String> stringParam =
+            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+        runner.execute("{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
+
+        Assert.assertEquals(24, intParam.getValue().intValue());
+        Assert.assertEquals("out", stringParam.getValue());
+
+        verify(call, times(5)).execute();
+        verify(results, times(5)).close();
+        verify(call, times(5)).close();    // make sure we closed the statement
+        verify(conn, times(5)).close();    // make sure we do not close the connection
+    }
+
+    @Test
+    public void testGoodExecuteWithResultSet() throws Exception {
+        callGoodExecuteWithResultSet();
+    }
+
+    @Test
+    public void testGoodExecuteWithResultSetPmdTrue() throws Exception {
+        runner = new QueryRunner(true);
+        callGoodExecuteWithResultSet(conn);
+    }
+
+    @Test
+    public void testGoodExecuteWithResultSetDefaultConstructor() throws Exception {
+        runner = new QueryRunner();
+        callGoodExecuteWithResultSet(conn);
+    }
+
+    // helper method for calling execute when an exception is expected
+    private void callExecuteWithResultSetWithException(Object... params) throws Exception {
+        boolean caught = false;
+
+        try {
+            when(call.execute()).thenReturn(true);
+            when(meta.getParameterCount()).thenReturn(2);
+            runner.query("{call my_proc(?, ?)}", handler, params);
+
+        } catch(SQLException e) {
+            caught = true;
+        }
+
+        if(!caught)
+            fail("Exception never thrown, but expected");
+    }
+
+    @Test
+    public void testNoParamsExecuteWithResultSet() throws Exception {
+        callExecuteWithResultSetWithException();
+    }
+
+    @Test
+    public void testTooFewParamsExecuteWithResultSet() throws Exception {
+        callExecuteWithResultSetWithException("unit");
+    }
+
+    @Test
+    public void testTooManyParamsExecuteWithResultSet() throws Exception {
+        callExecuteWithResultSetWithException("unit", "test", "fail");
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNullConnectionExecuteWithResultSet() throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
+        when(dataSource.getConnection()).thenReturn(null);
+
+        runner.execute("{call my_proc(?, ?)}", handler, "unit", "test");
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNullSqlExecuteWithResultSet() throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
+
+        runner.execute(null, handler);
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNullHandlerExecuteWithResultSet() throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
+
+        runner.execute("{call my_proc(?, ?)}", (ResultSetHandler)null);
+    }
+
+    @Test
+    public void testExecuteWithResultSetException() throws Exception {
+        doThrow(new SQLException()).when(stmt).execute();
+
+        callExecuteWithResultSetWithException(handler, "unit", "test");
     }
 
     //

@@ -65,6 +65,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="thecarlhall" type="fix" issue="DBUTILS-70" due-to="Michael Akerman">
         Add ability to configure statements used in QueryRunner
       </action>
+      <action dev="thecarlhall" type="add" issue="DBUTILS-50" due-to="Dan Fabulich">
+        Support CallableStatement "out" parameters
+      </action>
     </release>
 
     <release version="1.6" date="2014-07-20" description="Bugfixes and addition of insert methods">

@@ -21,6 +21,7 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
@@ -265,6 +266,29 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
+     * Factory method that creates and initializes a
+     * <code>CallableStatement</code> object for the given SQL.
+     * <code>QueryRunner</code> methods always call this method to prepare
+     * callable statements for them. Subclasses can override this method to
+     * provide special CallableStatement configuration if needed. This
+     * implementation simply calls <code>conn.prepareCall(sql)</code>.
+     *
+     * @param conn
+     *            The <code>Connection</code> used to create the
+     *            <code>CallableStatement</code>
+     * @param sql
+     *            The SQL statement to prepare.
+     * @return An initialized <code>CallableStatement</code>.
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    protected CallableStatement prepareCall(Connection conn, String sql)
+            throws SQLException {
+
+        return conn.prepareCall(sql);
+    }
+
+    /**
      * Factory method that creates and initializes a <code>Connection</code>
      * object. <code>QueryRunner</code> methods always call this method to
      * retrieve connections from its DataSource. Subclasses can override this
@@ -327,9 +351,18 @@ public abstract class AbstractQueryRunner {
             return;
         }
 
+        CallableStatement call = null;
+        if (stmt instanceof CallableStatement) {
+            call = (CallableStatement) stmt;
+        }
+
         for (int i = 0; i < params.length; i++) {
             if (params[i] != null) {
-                stmt.setObject(i + 1, params[i]);
+                if (call != null && params[i] instanceof OutParameter) {
+                    ((OutParameter)params[i]).register(call, i + 1);
+                } else {
+                    stmt.setObject(i + 1, params[i]);
+                }
             } else {
                 // VARCHAR works with many drivers regardless
                 // of the actual column type. Oddly, NULL and
