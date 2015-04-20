@@ -20,18 +20,18 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.SQLXML;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ServiceLoader;
 
 /**
  * <p>
@@ -64,6 +64,20 @@ public class BeanProcessor {
      * methods return in the event of a NULL column.
      */
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
+
+    /**
+     * ServiceLoader to find <code>ColumnHandler</code> implementations on the classpath.  The iterator for this is
+     * lazy and each time <code>iterator()</code> is called.
+     */
+    // FIXME: I think this instantiates new handlers on each iterator() call. This might be worth caching upfront.
+    private static final ServiceLoader<ColumnHandler> columnHandlers = ServiceLoader.load(ColumnHandler.class);
+
+    /**
+     * ServiceLoader to find <code>PropertyHandler</code> implementations on the classpath.  The iterator for this is
+     * lazy and each time <code>iterator()</code> is called.
+     */
+    // FIXME: I think this instantiates new handlers on each iterator() call. This might be worth caching upfront.
+    private static final ServiceLoader<PropertyHandler> propertyHandlers = ServiceLoader.load(PropertyHandler.class);
 
     /**
      * ResultSet column to bean property name overrides.
@@ -277,39 +291,26 @@ public class BeanProcessor {
 
         Method setter = getWriteMethod(target, prop, value);
 
-        if (setter == null) {
+        if (setter == null || setter.getParameterTypes().length != 1) {
             return;
         }
 
-        Class<?>[] params = setter.getParameterTypes();
         try {
-            // convert types for some popular ones
-            if (value instanceof java.util.Date) {
-                final String targetType = params[0].getName();
-                if ("java.sql.Date".equals(targetType)) {
-                    value = new java.sql.Date(((java.util.Date) value).getTime());
-                } else
-                if ("java.sql.Time".equals(targetType)) {
-                    value = new java.sql.Time(((java.util.Date) value).getTime());
-                } else
-                if ("java.sql.Timestamp".equals(targetType)) {
-                    Timestamp tsValue = (Timestamp) value;
-                    int nanos = tsValue.getNanos();
-                    value = new java.sql.Timestamp(tsValue.getTime());
-                    ((Timestamp) value).setNanos(nanos);
+            Class<?> firstParam = setter.getParameterTypes()[0];
+            for (PropertyHandler handler : propertyHandlers) {
+                if (handler.match(firstParam, value)) {
+                    value = handler.apply(firstParam, value);
+                    break;
                 }
-            } else
-            if (value instanceof String && params[0].isEnum()) {
-                value = Enum.valueOf(params[0].asSubclass(Enum.class), (String) value);
             }
 
             // Don't call setter if the value object isn't the right type
-            if (this.isCompatibleType(value, params[0])) {
+            if (this.isCompatibleType(value, firstParam)) {
                 setter.invoke(target, new Object[]{value});
             } else {
               throw new SQLException(
                   "Cannot set " + prop.getName() + ": incompatible types, cannot convert "
-                  + value.getClass().getName() + " to " + params[0].getName());
+                  + value.getClass().getName() + " to " + firstParam.getName());
                   // value cannot be null here because isCompatibleType allows null
             }
 
@@ -340,36 +341,40 @@ public class BeanProcessor {
      */
     private boolean isCompatibleType(Object value, Class<?> type) {
         // Do object check first, then primitives
-        if (value == null || type.isInstance(value)) {
-            return true;
-
-        } else if (type.equals(Integer.TYPE) && value instanceof Integer) {
-            return true;
-
-        } else if (type.equals(Long.TYPE) && value instanceof Long) {
-            return true;
-
-        } else if (type.equals(Double.TYPE) && value instanceof Double) {
-            return true;
-
-        } else if (type.equals(Float.TYPE) && value instanceof Float) {
-            return true;
-
-        } else if (type.equals(Short.TYPE) && value instanceof Short) {
-            return true;
-
-        } else if (type.equals(Byte.TYPE) && value instanceof Byte) {
-            return true;
-
-        } else if (type.equals(Character.TYPE) && value instanceof Character) {
-            return true;
-
-        } else if (type.equals(Boolean.TYPE) && value instanceof Boolean) {
+        if (value == null
+                || type.isInstance(value)
+                || (type.isPrimitive() && matchesPrimitive(type, value.getClass()))) {
             return true;
 
         }
         return false;
 
+    }
+
+    /**
+     * Check whether a value is of the same primitive type as <code>targetType</code>.
+     *
+     * @param targetType The primitive type to target.
+     * @param valueType The value to match to the primitive type.
+     * @return Whether <code>valueType</code> can be coerced (e.g. autoboxed) into <code>targetType</code>.
+     */
+    private boolean matchesPrimitive(Class<?> targetType, Class<?> valueType) {
+        try {
+            // see if there is a "TYPE" field.  This is present for primitive wrappers.
+            Field typeField = valueType.getField("TYPE");
+            Object primitiveValueType = typeField.get(valueType);
+
+            if (targetType == primitiveValueType) {
+                return true;
+            }
+        } catch (NoSuchFieldException e) {
+            // lacking the TYPE field is a good sign that we're not working with a primitive wrapper.
+            // we can't match for compatibility
+        } catch (IllegalAccessException e) {
+            // an inaccessible TYPE field is a good sign that we're not working with a primitive wrapper.
+            // nothing to do.  we can't match for compatibility
+        }
+        return false;
     }
 
     /**
@@ -507,48 +512,20 @@ public class BeanProcessor {
     protected Object processColumn(ResultSet rs, int index, Class<?> propType)
         throws SQLException {
 
-        if ( !propType.isPrimitive() && rs.getObject(index) == null ) {
+        Object retval = rs.getObject(index);
+
+        if ( !propType.isPrimitive() && retval == null ) {
             return null;
         }
 
-        if (propType.equals(String.class)) {
-            return rs.getString(index);
-
-        } else if (
-            propType.equals(Integer.TYPE) || propType.equals(Integer.class)) {
-            return Integer.valueOf(rs.getInt(index));
-
-        } else if (
-            propType.equals(Boolean.TYPE) || propType.equals(Boolean.class)) {
-            return Boolean.valueOf(rs.getBoolean(index));
-
-        } else if (propType.equals(Long.TYPE) || propType.equals(Long.class)) {
-            return Long.valueOf(rs.getLong(index));
-
-        } else if (
-            propType.equals(Double.TYPE) || propType.equals(Double.class)) {
-            return Double.valueOf(rs.getDouble(index));
-
-        } else if (
-            propType.equals(Float.TYPE) || propType.equals(Float.class)) {
-            return Float.valueOf(rs.getFloat(index));
-
-        } else if (
-            propType.equals(Short.TYPE) || propType.equals(Short.class)) {
-            return Short.valueOf(rs.getShort(index));
-
-        } else if (propType.equals(Byte.TYPE) || propType.equals(Byte.class)) {
-            return Byte.valueOf(rs.getByte(index));
-
-        } else if (propType.equals(Timestamp.class)) {
-            return rs.getTimestamp(index);
-
-        } else if (propType.equals(SQLXML.class)) {
-            return rs.getSQLXML(index);
-
-        } else {
-            return rs.getObject(index);
+        for (ColumnHandler handler : columnHandlers) {
+            if (handler.match(propType)) {
+                retval = handler.apply(rs, index);
+                break;
+            }
         }
+
+        return retval;
 
     }
 
