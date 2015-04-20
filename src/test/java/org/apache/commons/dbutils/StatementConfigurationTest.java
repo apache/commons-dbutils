@@ -17,7 +17,8 @@
 package org.apache.commons.dbutils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -29,11 +30,11 @@ public class StatementConfigurationTest {
     public void testEmptyBuilder() {
         StatementConfiguration config = new StatementConfiguration.Builder().build();
 
-        assertNull(config.getFetchDirection());
-        assertNull(config.getFetchSize());
-        assertNull(config.getMaxFieldSize());
-        assertNull(config.getMaxRows());
-        assertNull(config.getQueryTimeout());
+        assertFalse(config.isFetchDirectionSet());
+        assertFalse(config.isFetchSizeSet());
+        assertFalse(config.isMaxFieldSizeSet());
+        assertFalse(config.isMaxRowsSet());
+        assertFalse(config.isQueryTimeoutSet());
     }
 
     /**
@@ -49,10 +50,19 @@ public class StatementConfigurationTest {
                 .queryTimeout(5);
         StatementConfiguration config = builder.build();
 
+        assertTrue(config.isFetchDirectionSet());
         assertEquals(Integer.valueOf(1), config.getFetchDirection());
+
+        assertTrue(config.isFetchSizeSet());
         assertEquals(Integer.valueOf(2), config.getFetchSize());
+
+        assertTrue(config.isMaxFieldSizeSet());
         assertEquals(Integer.valueOf(3), config.getMaxFieldSize());
+
+        assertTrue(config.isMaxRowsSet());
         assertEquals(Integer.valueOf(4), config.getMaxRows());
+
+        assertTrue(config.isQueryTimeoutSet());
         assertEquals(Integer.valueOf(5), config.getQueryTimeout());
     }
 
