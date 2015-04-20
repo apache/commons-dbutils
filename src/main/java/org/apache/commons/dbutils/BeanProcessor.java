@@ -341,9 +341,7 @@ public class BeanProcessor {
      */
     private boolean isCompatibleType(Object value, Class<?> type) {
         // Do object check first, then primitives
-        if (value == null
-                || type.isInstance(value)
-                || (type.isPrimitive() && matchesPrimitive(type, value.getClass()))) {
+        if (value == null || type.isInstance(value) || matchesPrimitive(type, value.getClass())) {
             return true;
 
         }
@@ -359,6 +357,10 @@ public class BeanProcessor {
      * @return Whether <code>valueType</code> can be coerced (e.g. autoboxed) into <code>targetType</code>.
      */
     private boolean matchesPrimitive(Class<?> targetType, Class<?> valueType) {
+        if (!targetType.isPrimitive()) {
+            return false;
+        }
+
         try {
             // see if there is a "TYPE" field.  This is present for primitive wrappers.
             Field typeField = valueType.getField("TYPE");
