@@ -239,6 +239,7 @@
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
     <commons.componentid>dbutils</commons.componentid>
+    <commons.module.name>org.apache.commons.dbutils</commons.module.name>
     <commons.release.version>1.6</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
