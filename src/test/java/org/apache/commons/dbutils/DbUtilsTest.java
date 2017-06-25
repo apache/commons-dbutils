@@ -16,17 +16,16 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.*;
 
 public class DbUtilsTest {
 
@@ -269,4 +268,18 @@ public class DbUtilsTest {
         verify(mockConnection).close();
     }
 
+    @Test
+    public void testLoadDriverReturnsFalse() {
+        
+        assertFalse(DbUtils.loadDriver(""));
+
+    }
+
+    @Test
+    public void testCommitAndCloseQuietlyWithNullDoesNotThrowAnSQLException() {
+
+        DbUtils.commitAndCloseQuietly(null);
+
+    }
+    
 }
