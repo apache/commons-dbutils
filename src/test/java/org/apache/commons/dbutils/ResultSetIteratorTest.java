@@ -16,7 +16,13 @@
  */
 package org.apache.commons.dbutils;
 
+import org.junit.Test;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * ResultSetIteratorTest
@@ -45,5 +51,31 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
         assertFalse(iter.hasNext());
     }
+
+    @Test
+    public void testRethrowThrowsRuntimeException() {
+
+        ResultSetIterator resultSetIterator = new ResultSetIterator((ResultSet) null);
+        Throwable throwable = new Throwable();
+        SQLException sQLException = new SQLException(throwable);
+
+        try {
+            resultSetIterator.rethrow(sQLException);
+            fail("Expecting exception: RuntimeException");
+        } catch(RuntimeException e) {
+            assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
+        }
+
+    }
+
+    @Test
+    public void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
+
+        ResultSet resultSet = mock(ResultSet.class);
+        ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet,null);
+        resultSetIterator.remove();
+
+    }
+
 
 }
