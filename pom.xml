@@ -31,17 +31,17 @@
   <description>The Apache Commons DbUtils package is a set of
   Java utility classes for easing JDBC development.</description>
 
-  <url>http://commons.apache.org/proper/commons-dbutils/</url>
+  <url>https://commons.apache.org/proper/commons-dbutils/</url>
 
   <issueManagement>
     <system>jira</system>
-    <url>http://issues.apache.org/jira/browse/DBUTILS</url>
+    <url>https://issues.apache.org/jira/browse/DBUTILS</url>
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/dbutils/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/dbutils/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/dbutils/trunk</url>
+    <connection>scm:git:git://git.apache.org/commons-dbutils.git</connection>
+    <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/commons-dbutils.git</developerConnection>
+    <url>https://git-wip-us.apache.org/repos/asf?p=commons-dbutils.git</url>
   </scm>
 
   <developers>
