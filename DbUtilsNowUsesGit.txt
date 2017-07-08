@@ -1,0 +1,10 @@
+The Commons DbUtils project now uses Git for its source code respository.
+
+
+Please see:
+
+http://commons.apache.org/dbutils/source-repository.html
+
+The SVN tree has been moved to:
+https://svn.apache.org/repos/asf/commons/_moved_to_git/dbutils
+
