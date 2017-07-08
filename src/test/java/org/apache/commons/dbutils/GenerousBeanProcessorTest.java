@@ -16,15 +16,17 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
-import java.beans.PropertyDescriptor;
-import java.sql.ResultSetMetaData;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.beans.PropertyDescriptor;
+import java.sql.ResultSetMetaData;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 
 public class GenerousBeanProcessorTest {
@@ -62,7 +64,26 @@ public class GenerousBeanProcessorTest {
         assertEquals(0, ret[2]);
         assertEquals(1, ret[3]);
     }
-    
+
+    @SuppressWarnings("boxing") // test code
+    @Test
+    public void testMapColumnsToPropertiesMixedCase() throws Exception {
+        when(metaData.getColumnCount()).thenReturn(3);
+
+        when(metaData.getColumnLabel(1)).thenReturn("tHree");
+        when(metaData.getColumnLabel(2)).thenReturn("One");
+        when(metaData.getColumnLabel(3)).thenReturn("tWO");
+
+        int[] ret = processor.mapColumnsToProperties(metaData, propDescriptors);
+
+        assertNotNull(ret);
+        assertEquals(4, ret.length);
+        assertEquals(-1, ret[0]);
+        assertEquals(2, ret[1]);
+        assertEquals(0, ret[2]);
+        assertEquals(1, ret[3]);
+    }
+
     @SuppressWarnings("boxing") // test code
     @Test
     public void testMapColumnsToPropertiesWithUnderscores() throws Exception {
@@ -81,7 +102,27 @@ public class GenerousBeanProcessorTest {
         assertEquals(0, ret[2]);
         assertEquals(1, ret[3]);
     }
-    
+
+    @SuppressWarnings("boxing") // test code
+    @Test
+    public void testMapColumnsToPropertiesColumnLabelIsNull() throws Exception {
+        when(metaData.getColumnCount()).thenReturn(1);
+        when(metaData.getColumnName(1)).thenReturn("juhu");
+
+        when(metaData.getColumnLabel(1)).thenReturn(null);
+        when(metaData.getColumnLabel(2)).thenReturn("One");
+        when(metaData.getColumnLabel(3)).thenReturn("tWO");
+
+        int[] ret = processor.mapColumnsToProperties(metaData, propDescriptors);
+
+        assertNotNull(ret);
+        assertEquals(2, ret.length);
+        assertEquals(-1, ret[0]);
+        assertEquals(-1, ret[1]);
+        assertEquals(-1, ret[1]);
+        assertEquals(-1, ret[1]);
+    }
+
     static class TestBean {
         private String one;
         private int two;

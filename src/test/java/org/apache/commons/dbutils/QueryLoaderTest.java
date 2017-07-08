@@ -39,4 +39,18 @@ public class QueryLoaderTest extends BaseTestCase {
         assertTrue(q != q3); // pointer comparison should return false
     }
 
+    public void testLoadThrowsIllegalArgumentException() throws IOException {
+
+        QueryLoader queryLoader = QueryLoader.instance();
+
+        try {
+            queryLoader.load("e");
+            fail("Expecting exception: IllegalArgumentException");
+        } catch(IllegalArgumentException e) {
+            assertEquals("e not found.",e.getMessage());
+            assertEquals(QueryLoader.class.getName(), e.getStackTrace()[0].getClassName());
+        }
+
+    }
+
 }
