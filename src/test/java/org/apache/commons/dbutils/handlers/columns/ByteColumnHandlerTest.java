@@ -29,6 +29,7 @@ public class ByteColumnHandlerTest extends ColumnHandlerTestBase {
         super(new ByteColumnHandler(), Byte.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getByte(1)).thenReturn(Byte.MIN_VALUE);

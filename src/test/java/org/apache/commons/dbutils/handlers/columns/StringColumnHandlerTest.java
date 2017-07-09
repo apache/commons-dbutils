@@ -29,6 +29,7 @@ public class StringColumnHandlerTest extends ColumnHandlerTestBase {
         super(new StringColumnHandler(), String.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getString(1)).thenReturn("tester");

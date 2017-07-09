@@ -29,6 +29,7 @@ public class FloatColumnHandlerTest extends ColumnHandlerTestBase {
         super(new FloatColumnHandler(), Float.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getFloat(1)).thenReturn(Float.MIN_VALUE);

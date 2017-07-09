@@ -29,6 +29,7 @@ public class BooleanColumnHandlerTest extends ColumnHandlerTestBase {
         super(new BooleanColumnHandler(), Boolean.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getBoolean(1)).thenReturn(Boolean.TRUE);

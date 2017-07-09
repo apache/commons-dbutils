@@ -29,6 +29,7 @@ public class LongColumnHandlerTest extends ColumnHandlerTestBase {
         super(new LongColumnHandler(), Long.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getLong(1)).thenReturn(Long.MIN_VALUE);

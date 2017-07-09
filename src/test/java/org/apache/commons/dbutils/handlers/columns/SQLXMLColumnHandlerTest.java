@@ -35,6 +35,7 @@ public class SQLXMLColumnHandlerTest extends ColumnHandlerTestBase {
         super(new SQLXMLColumnHandler(), SQLXML.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getSQLXML(1)).thenReturn(sqlxml);

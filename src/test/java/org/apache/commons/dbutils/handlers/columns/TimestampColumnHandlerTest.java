@@ -32,6 +32,7 @@ public class TimestampColumnHandlerTest extends ColumnHandlerTestBase {
         super(new TimestampColumnHandler(), Timestamp.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getTimestamp(1)).thenReturn(new Timestamp(new Date().getTime()));

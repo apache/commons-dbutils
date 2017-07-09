@@ -29,6 +29,7 @@ public class DoubleColumnHandlerTest extends ColumnHandlerTestBase {
         super(new DoubleColumnHandler(), Double.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getDouble(1)).thenReturn(Double.MIN_VALUE);

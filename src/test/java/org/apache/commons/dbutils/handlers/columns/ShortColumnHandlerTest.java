@@ -29,6 +29,7 @@ public class ShortColumnHandlerTest extends ColumnHandlerTestBase {
         super(new ShortColumnHandler(), Short.class);
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getShort(1)).thenReturn(Short.MIN_VALUE);

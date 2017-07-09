@@ -30,11 +30,13 @@ public class IntegerColumnHandlerTest extends ColumnHandlerTestBase {
         super(new IntegerColumnHandler(), Integer.class);
     }
 
+    @Override
     @Test
     public void testMatchNegative() {
         assertFalse(handler.match(Float.class));
     }
 
+    @Override
     @Test
     public void testApplyType() throws Exception {
         when(rs.getInt(1)).thenReturn(Integer.MIN_VALUE);
