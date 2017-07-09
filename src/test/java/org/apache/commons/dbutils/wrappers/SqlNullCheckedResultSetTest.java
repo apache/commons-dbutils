@@ -195,7 +195,9 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     private static void assertArrayEquals(byte[] expected, byte[] actual) {
-        if (expected == actual) return;
+        if (expected == actual) {
+            return;
+        }
         if (expected.length != actual.length) {
             failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
         }

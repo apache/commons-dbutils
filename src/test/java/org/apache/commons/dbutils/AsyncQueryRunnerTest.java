@@ -146,8 +146,9 @@ public class AsyncQueryRunnerTest {
             caught = true;
         }
 
-        if(!caught)
+        if(!caught) {
             fail("Exception never thrown, but expected");
+        }
     }
 
     @Test
@@ -285,8 +286,9 @@ public class AsyncQueryRunnerTest {
             caught = true;
         }
 
-        if(!caught)
+        if(!caught) {
             fail("Exception never thrown, but expected");
+        }
     }
 
     @Test
@@ -420,8 +422,9 @@ public class AsyncQueryRunnerTest {
             caught = true;
         }
 
-        if(!caught)
+        if(!caught) {
             fail("Exception never thrown, but expected");
+        }
     }
 
     @Test
