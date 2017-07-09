@@ -16,7 +16,7 @@
 ## under the License.
 
               ${project.name}
-                     Version ${version} 
+                     Version ${version}
                     RELEASE NOTES
 
 The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}
