@@ -21,7 +21,7 @@ import java.sql.SQLException;
 
 /**
  * Represents an OUT parameter for a stored procedure.  When running a stored
- * procedure with {@link ProcedureRunner}, pass an instance of
+ * procedure with {@link QueryRunner}, pass an instance of
  * <code>OutParameter</code> to indicate that the parameter at that index is an
  * OUT parameter.  The value of the parameter may be obtained from the
  * <code>OutParameter</code> instance via {@link #getValue() }.

@@ -65,7 +65,7 @@ import org.apache.commons.dbutils.ProxyFactory;
  * rs.close();
  * </pre>
  * </blockquote>
- * </p>
+ * &lt;/p&gt;
  * <p>Unlike some other classes in DbUtils, this class is NOT thread-safe.</p>
  */
 public class SqlNullCheckedResultSet implements InvocationHandler {

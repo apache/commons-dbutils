@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 /**
  * <p>
- * Wraps a <code>ResultSet</code> in an <code>Iterator<Object[]></code>.  This is useful
+ * Wraps a <code>ResultSet</code> in an <code>Iterator&lt;Object[]&gt;</code>.  This is useful
  * when you want to present a non-database application layer with domain
  * neutral data.
  * </p>

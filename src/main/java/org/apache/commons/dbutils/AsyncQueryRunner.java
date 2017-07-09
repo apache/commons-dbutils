@@ -555,6 +555,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Executes {@link QueryRunner#insert(String, ResultSetHandler)} asynchronously.
      *
+     * @param <T> Return type expected
+     * @param sql SQL insert statement to execute
+     * @param rsh {@link ResultSetHandler} for handling the results
+     * @return {@link Future} that executes a query runner insert
      * @see QueryRunner#insert(String, ResultSetHandler)
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -573,6 +577,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Executes {@link QueryRunner#insert(String, ResultSetHandler, Object...)} asynchronously.
      *
+     * @param <T> Return type expected
+     * @param sql SQL insert statement to execute
+     * @param rsh {@link ResultSetHandler} for handling the results
+     * @param params Parameter values for substitution in the SQL statement
+     * @return {@link Future} that executes a query runner insert
      * @see QueryRunner#insert(String, ResultSetHandler, Object...)
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -590,6 +599,11 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Executes {@link QueryRunner#insert(Connection, String, ResultSetHandler)} asynchronously.
      *
+     * @param <T> Return type expected
+     * @param conn {@link Connection} to use to execute the SQL statement
+     * @param sql SQL insert statement to execute
+     * @param rsh {@link ResultSetHandler} for handling the results
+     * @return {@link Future} that executes a query runner insert
      * @see QueryRunner#insert(Connection, String, ResultSetHandler)
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -607,6 +621,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Executes {@link QueryRunner#insert(Connection, String, ResultSetHandler, Object...)} asynchronously.
      *
+     * @param <T> Return type expected
+     * @param conn {@link Connection} to use to execute the SQL statement
+     * @param sql SQL insert statement to execute
+     * @param rsh {@link ResultSetHandler} for handling the results
+     * @param params Parameter values for substitution in the SQL statement
+     * @return {@link Future} that executes a query runner insert
      * @see QueryRunner#insert(Connection, String, ResultSetHandler, Object...)
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -624,6 +644,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * {@link QueryRunner#insertBatch(String, ResultSetHandler, Object[][])} asynchronously.
      *
+     * @param <T> Return type expected
+     * @param sql SQL insert statement to execute
+     * @param rsh {@link ResultSetHandler} for handling the results
+     * @param params An array of query replacement parameters.  Each row in
+     *        this array is one set of batch replacement values.
+     * @return {@link Future} that executes a query runner batch insert
      * @see QueryRunner#insertBatch(String, ResultSetHandler, Object[][])
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -641,6 +667,13 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * {@link QueryRunner#insertBatch(Connection, String, ResultSetHandler, Object[][])} asynchronously.
      *
+     * @param <T> Return type expected
+     * @param conn {@link Connection} to use to execute the SQL statement
+     * @param sql SQL insert statement to execute
+     * @param rsh {@link ResultSetHandler} for handling the results
+     * @param params An array of query replacement parameters.  Each row in
+     *        this array is one set of batch replacement values.
+     * @return {@link Future} that executes a query runner batch insert
      * @see QueryRunner#insertBatch(Connection, String, ResultSetHandler, Object[][])
      * @throws SQLException if a database access error occurs
      * @since 1.6

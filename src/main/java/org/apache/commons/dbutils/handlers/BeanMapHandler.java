@@ -43,10 +43,10 @@ import org.apache.commons.dbutils.RowProcessor;
  * returned for id is dependent upon how your JDBC driver converts SQL column
  * types from the Person table into Java types. The "name" and "age" columns are
  * converted according to their property descriptors by DbUtils.
- * </p>
+ * &lt;/p&gt;
  * <p>
  * This class is thread safe.
- * </p>
+ * &lt;/p&gt;
  *
  * @param <K>
  *            the type of keys maintained by the returned map

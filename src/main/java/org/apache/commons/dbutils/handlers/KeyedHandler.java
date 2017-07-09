@@ -42,7 +42,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * returned Map's get() method can be in any case.  The data types returned for
  * name and age are dependent upon how your JDBC driver converts SQL column
  * types from the Person table into Java types.
- * </p>
+ * &lt;/p&gt;
  * <p>This class is thread safe.</p>
  *
  * @param <K> The type of the key
