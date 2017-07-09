@@ -35,7 +35,7 @@ import java.util.Arrays;
 import javax.sql.DataSource;
 
 /**
- * The base class for QueryRunner & AsyncQueryRunner. This class is thread safe.
+ * The base class for QueryRunner &amp; AsyncQueryRunner. This class is thread safe.
  *
  * @since 1.4 (mostly extracted from QueryRunner)
  */

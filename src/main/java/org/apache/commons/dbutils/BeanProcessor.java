@@ -121,28 +121,28 @@ public class BeanProcessor {
      * implementation uses reflection and <code>BeanInfo</code> classes to
      * match column names to bean property names.  Properties are matched to
      * columns based on several factors:
-     * <br/>
-     * <ol>
-     *     <li>
+     * &lt;br/&gt;
+     * &lt;ol&gt;
+     *     &lt;li&gt;
      *     The class has a writable property with the same name as a column.
      *     The name comparison is case insensitive.
-     *     </li>
+     *     &lt;/li&gt;
      *
-     *     <li>
+     *     &lt;li&gt;
      *     The column type can be converted to the property's set method
      *     parameter type with a ResultSet.get* method.  If the conversion fails
      *     (ie. the property was an int and the column was a Timestamp) an
      *     SQLException is thrown.
-     *     </li>
-     * </ol>
+     *     &lt;/li&gt;
+     * &lt;/ol&gt;
      *
-     * <p>
+     * &lt;p&gt;
      * Primitive bean properties are set to their defaults when SQL NULL is
      * returned from the <code>ResultSet</code>.  Numeric fields are set to 0
      * and booleans are set to false.  Object bean properties are set to
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
-     * </p>
+     * &lt;/p&gt;
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
@@ -159,20 +159,20 @@ public class BeanProcessor {
      * This implementation uses reflection and <code>BeanInfo</code> classes to
      * match column names to bean property names. Properties are matched to
      * columns based on several factors:
-     * <br/>
-     * <ol>
-     *     <li>
+     * &lt;br/&gt;
+     * &lt;ol&gt;
+     *     &lt;li&gt;
      *     The class has a writable property with the same name as a column.
      *     The name comparison is case insensitive.
-     *     </li>
+     *     &lt;/li&gt;
      *
-     *     <li>
+     *     &lt;li&gt;
      *     The column type can be converted to the property's set method
      *     parameter type with a ResultSet.get* method.  If the conversion fails
      *     (ie. the property was an int and the column was a Timestamp) an
      *     SQLException is thrown.
-     *     </li>
-     * </ol>
+     *     &lt;/li&gt;
+     * &lt;/ol&gt;
      *
      * <p>
      * Primitive bean properties are set to their defaults when SQL NULL is
@@ -180,7 +180,7 @@ public class BeanProcessor {
      * and booleans are set to false.  Object bean properties are set to
      * <code>null</code> when SQL NULL is returned.  This is the same behavior
      * as the <code>ResultSet</code> get* methods.
-     * </p>
+     * &lt;/p&gt;
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
