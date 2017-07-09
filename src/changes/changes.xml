@@ -44,7 +44,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.7" date="TBA" description="TBD">
+    <release version="1.7" date="TBA" description="Bugfixes and separate column &amp; property handlers using SPI">
       <action dev="sebb" type="update" issue="DBUTILS-117" due-to="Vadim Smirnov">
         Error handling possible getParameterMetaData() results
         - allow for null return
@@ -70,6 +70,9 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
       <action dev="thecarlhall" type="add" issue="DBUTILS-124">
         Implement column and property handlers using Java's service interfaces.
+      </action>
+      <action dev="thecarlhall" type="update" issue="PR/1" due-to="Michael Hausegger">
+        Created some Unit Tests to increase code coverage.
       </action>
     </release>
 

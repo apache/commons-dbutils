@@ -24,12 +24,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.7-SNAPSHOT</version>
+  <version>1.7</version>
   <name>Apache Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
-  <description>The Apache Commons DbUtils package is a set of
-  Java utility classes for easing JDBC development.</description>
+  <description>The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.</description>
 
   <url>https://commons.apache.org/proper/commons-dbutils/</url>
 
