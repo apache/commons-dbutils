@@ -321,11 +321,15 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <enableRulesSummary>false</enableRulesSummary>
+          <headerLocation>${basedir}/license-header.txt</headerLocation>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>2.5.4</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
@@ -334,7 +338,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.3</version>
         <configuration>
           <targetJdk>${maven.compiler.source}</targetJdk>
           <rulesets>
