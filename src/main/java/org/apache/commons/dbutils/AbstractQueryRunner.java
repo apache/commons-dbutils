@@ -205,7 +205,12 @@ public abstract class AbstractQueryRunner {
             throws SQLException {
 
         PreparedStatement ps = conn.prepareStatement(sql);
-        configureStatement(ps);
+        try {
+            configureStatement(ps);
+        } catch (SQLException e) {
+            ps.close();
+            throw e;
+        }
         return ps;
     }
 
@@ -236,7 +241,12 @@ public abstract class AbstractQueryRunner {
             throws SQLException {
 
         PreparedStatement ps = conn.prepareStatement(sql, returnedKeys);
-        configureStatement(ps);
+        try {
+            configureStatement(ps);
+        } catch (SQLException e) {
+            ps.close();
+            throw e;
+        }
         return ps;
     }
 
