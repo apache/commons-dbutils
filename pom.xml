@@ -19,7 +19,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>40</version>
+    <version>42</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
@@ -237,13 +237,16 @@
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
+
+    <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
     <commons.release.version>1.7</commons.release.version>
     <commons.rc.version>RC2</commons.rc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
-  </properties> 
+  </properties>
 
   <build>
     <plugins>
