@@ -250,6 +250,21 @@
   </properties>
 
   <build>
+    <defaultGoal>clean verify apache-rat:check clirr:check checkstyle:check findbugs:check javadoc:javadoc</defaultGoal>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${checkstyle.plugin.version}</version>
+          <configuration>
+            <configLocation>${basedir}/checkstyle.xml</configLocation>
+            <enableRulesSummary>false</enableRulesSummary>
+            <headerLocation>${basedir}/license-header.txt</headerLocation>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -307,12 +322,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${checkstyle.plugin.version}</version>
-        <configuration>
-          <configLocation>${basedir}/checkstyle.xml</configLocation>
-          <enableRulesSummary>false</enableRulesSummary>
-          <headerLocation>${basedir}/license-header.txt</headerLocation>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
