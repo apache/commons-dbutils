@@ -142,9 +142,9 @@ public class DbProUsageDemo {
 }
 ```		
  
-二. Transaction 
+二. Transaction  
     jTransactions is a  declarative transaction service tool, includes 2 implementations: TinyTx and SpringTx. Below demo shows how to use TinyTx or SpringTx with DbUtils-Pro, and switch between these 2 transaction services at runtime:
-'''
+```
 public class TxDemo {
 	private static Class<?> tx = TinyTx.class;
 	private static ConnectionManager cm = TinyTxConnectionManager.instance();
@@ -196,4 +196,4 @@ public class TxDemo {
 		BeanBox.defaultContext.close();// Release DataSource Pool
 	}
 }
-'''
+```
