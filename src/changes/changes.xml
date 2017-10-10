@@ -44,7 +44,13 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.7" date="2017-07-20" description="Bugfixes and separate column &amp; property handlers using SPI">
+    <release version="2.0" date="2017-MM-DD" description="New features and bug fixes.">
+      <action dev="ggregory" type="update" issue="DBUTILS-135" due-to="hdevalke">
+        BeanProcessor is not thread safe since [DBUTILS-124].
+      </action>
+    </release>
+    
+    <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">
       <action dev="sebb" type="update" issue="DBUTILS-117" due-to="Vadim Smirnov">
         Error handling possible getParameterMetaData() results
         - allow for null return
@@ -74,12 +80,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="thecarlhall" type="update" issue="PR/1" due-to="Michael Hausegger">
         Created some Unit Tests to increase code coverage.
       </action>
-      <action dev="ggregory" type="update" issue="DBUTILS-135" due-to="hdevalke">
-        BeanProcessor is not thread safe since [DBUTILS-124].
-      </action>
     </release>
 
-    <release version="1.6" date="2014-07-20" description="Bugfixes and addition of insert methods">
+    <release version="1.6" date="2014-07-20" description="Bug fixes and addition of insert methods">
       <action dev="britter" type="fix" issue="DBUTILS-110">
         ArrayHandler should return an empty array when handle has no rows
       </action>
@@ -124,7 +127,7 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
     </release>
 
-    <release version="1.5" date="2012-07-20" description="Bugfixes and addition of BeanMapHandler">
+    <release version="1.5" date="2012-07-20" description="Bug fixes and addition of BeanMapHandler">
       <action dev="simonetripodi" due-to="Benedikt Ritter" type="update" issue="DBUTILS-94">
         Provide test coverage for org.apache.commons.dbutils.DbUtils
       </action>
@@ -154,7 +157,7 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
     </release>
 
-    <release version="1.4" date="2011-10-23" description="Bugfixes and addition of asynchronous QueryLoader">
+    <release version="1.4" date="2011-10-23" description="Bug fixes and addition of asynchronous QueryLoader">
       <action type="fix" issue="DBUTILS-81">
         DbUtils.loadDriver() uses Class.forName()
       </action>
