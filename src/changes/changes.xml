@@ -74,6 +74,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="thecarlhall" type="update" issue="PR/1" due-to="Michael Hausegger">
         Created some Unit Tests to increase code coverage.
       </action>
+      <action dev="ggregory" type="update" issue="DBUTILS-135" due-to="hdevalke">
+        BeanProcessor is not thread safe since [DBUTILS-124].
+      </action>
     </release>
 
     <release version="1.6" date="2014-07-20" description="Bugfixes and addition of insert methods">

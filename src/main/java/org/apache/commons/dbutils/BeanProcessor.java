@@ -65,19 +65,9 @@ public class BeanProcessor {
      */
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
 
-    /**
-     * ServiceLoader to find <code>ColumnHandler</code> implementations on the classpath.  The iterator for this is
-     * lazy and each time <code>iterator()</code> is called.
-     */
-    // FIXME: I think this instantiates new handlers on each iterator() call. This might be worth caching upfront.
-    private static final ServiceLoader<ColumnHandler> columnHandlers = ServiceLoader.load(ColumnHandler.class);
+    private static final List<ColumnHandler> columnHandlers = new ArrayList<ColumnHandler>();
 
-    /**
-     * ServiceLoader to find <code>PropertyHandler</code> implementations on the classpath.  The iterator for this is
-     * lazy and each time <code>iterator()</code> is called.
-     */
-    // FIXME: I think this instantiates new handlers on each iterator() call. This might be worth caching upfront.
-    private static final ServiceLoader<PropertyHandler> propertyHandlers = ServiceLoader.load(PropertyHandler.class);
+    private static final List<PropertyHandler> propertyHandlers = new ArrayList<PropertyHandler>();
 
     /**
      * ResultSet column to bean property name overrides.
@@ -93,6 +83,16 @@ public class BeanProcessor {
         primitiveDefaults.put(Long.TYPE, Long.valueOf(0L));
         primitiveDefaults.put(Boolean.TYPE, Boolean.FALSE);
         primitiveDefaults.put(Character.TYPE, Character.valueOf((char) 0));
+    
+        // Use a ServiceLoader to find implementations
+        for (ColumnHandler handler : ServiceLoader.load(ColumnHandler.class)) {
+            columnHandlers.add(handler);
+        }
+    
+        // Use a ServiceLoader to find implementations
+        for (PropertyHandler handler : ServiceLoader.load(PropertyHandler.class)) {
+            propertyHandlers.add(handler);
+        }
     }
 
     /**
