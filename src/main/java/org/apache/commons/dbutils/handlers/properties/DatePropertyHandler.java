@@ -16,22 +16,38 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.Instant;
 
 import org.apache.commons.dbutils.PropertyHandler;
 
 public class DatePropertyHandler implements PropertyHandler {
-    @Override
+    public DatePropertyHandler() {
+    }
+
     public boolean match(Class<?> parameter, Object value) {
-        if (value instanceof java.util.Date) {
-            final String targetType = parameter.getName();
+        if (value instanceof Date) {
+            String targetType = parameter.getName();
             if ("java.sql.Date".equals(targetType)) {
                 return true;
-            } else
+            }
+
             if ("java.sql.Time".equals(targetType)) {
                 return true;
-            } else
+            }
+
             if ("java.sql.Timestamp".equals(targetType)) {
+                return true;
+            }
+
+            if ("java.time.LocalDate".equals(targetType)) {
+                return true;
+            }
+
+            if ("java.time.Instant".equals(targetType)) {
                 return true;
             }
         }
@@ -39,22 +55,26 @@ public class DatePropertyHandler implements PropertyHandler {
         return false;
     }
 
-    @Override
     public Object apply(Class<?> parameter, Object value) {
-        final String targetType = parameter.getName();
+        String targetType = parameter.getName();
         if ("java.sql.Date".equals(targetType)) {
-            value = new java.sql.Date(((java.util.Date) value).getTime());
-        } else
-        if ("java.sql.Time".equals(targetType)) {
-            value = new java.sql.Time(((java.util.Date) value).getTime());
-        } else
-        if ("java.sql.Timestamp".equals(targetType)) {
+            value = new java.sql.Date(((Date) value).getTime());
+        } else if ("java.sql.Time".equals(targetType)) {
+            value = new Time(((Date) value).getTime());
+        } else if ("java.sql.Timestamp".equals(targetType)) {
             Timestamp tsValue = (Timestamp) value;
             int nanos = tsValue.getNanos();
-            value = new java.sql.Timestamp(tsValue.getTime());
+            value = new Timestamp(tsValue.getTime());
             ((Timestamp) value).setNanos(nanos);
+        } else if ("java.time.LocalDate".equals(targetType)) {
+            LocalDate localDate = ((java.sql.Date)value).toLocalDate();
+            return localDate;
+        } else if ("java.time.Instant".equals(targetType)) {
+            Instant instant = ((Date) value).toInstant();
+            return instant;
         }
 
         return value;
     }
 }
+
