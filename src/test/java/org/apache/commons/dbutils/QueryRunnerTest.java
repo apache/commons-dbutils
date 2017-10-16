@@ -416,7 +416,7 @@ public class QueryRunnerTest {
     @Test
     public void testGoodInsert() throws Exception {
         results = mock(ResultSet.class);
-        
+
         when(meta.getParameterCount()).thenReturn(2);
         when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmt);
         when(stmt.getGeneratedKeys()).thenReturn(results);
@@ -428,22 +428,22 @@ public class QueryRunnerTest {
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
-        
+
         Assert.assertEquals(1L, generatedKey.longValue());
     }
-    
+
     @Test
     public void testGoodBatchInsert() throws Exception {
         results = mock(ResultSet.class);
         resultsMeta = mock(ResultSetMetaData.class);
-        
+
         when(meta.getParameterCount()).thenReturn(2);
         when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmt);
         when(stmt.getGeneratedKeys()).thenReturn(results);
         when(results.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         when(results.getMetaData()).thenReturn(resultsMeta);
         when(resultsMeta.getColumnCount()).thenReturn(1);
-        
+
         ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
         {
             @Override
@@ -457,20 +457,20 @@ public class QueryRunnerTest {
                 return objects;
             }
         };
-        
+
         Object[][] params = new Object[2][2];
         params[0][0] = "Test";
         params[0][1] = "Blah";
         params[1][0] = "Test2";
         params[1][1] = "Blah2";
-        
+
         List<Object> generatedKeys = runner.insertBatch("INSERT INTO blah(col1, col2) VALUES(?,?)", handler, params);
 
         verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
-        
+
         Assert.assertEquals(2, generatedKeys.size());
     }
 

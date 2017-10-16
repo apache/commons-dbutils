@@ -218,7 +218,7 @@ public class MockResultSet implements InvocationHandler {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     protected ResultSetMetaData getMetaData() throws SQLException {
         return this.metaData;
@@ -328,14 +328,14 @@ public class MockResultSet implements InvocationHandler {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     protected Boolean isLast() throws SQLException {
         return this.iter.hasNext() ? Boolean.FALSE : Boolean.TRUE;
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     protected Boolean next() throws SQLException {
         if (!this.iter.hasNext()) {
@@ -355,7 +355,7 @@ public class MockResultSet implements InvocationHandler {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     protected Boolean wasNull() throws SQLException {
         return this.wasNull;

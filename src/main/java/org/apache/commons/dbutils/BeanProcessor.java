@@ -83,12 +83,12 @@ public class BeanProcessor {
         primitiveDefaults.put(Long.TYPE, Long.valueOf(0L));
         primitiveDefaults.put(Boolean.TYPE, Boolean.FALSE);
         primitiveDefaults.put(Character.TYPE, Character.valueOf((char) 0));
-    
+
         // Use a ServiceLoader to find implementations
         for (ColumnHandler handler : ServiceLoader.load(ColumnHandler.class)) {
             columnHandlers.add(handler);
         }
-    
+
         // Use a ServiceLoader to find implementations
         for (PropertyHandler handler : ServiceLoader.load(PropertyHandler.class)) {
             propertyHandlers.add(handler);

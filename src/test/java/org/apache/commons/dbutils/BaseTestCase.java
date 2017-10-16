@@ -60,7 +60,7 @@ public class BaseTestCase extends TestCase {
         ts789456123 = new Timestamp(new Date().getTime());
         ts789456123.setNanos(789456123);
     }
-    
+
     private static final Object[] row1 =
         new Object[] {
             "1",

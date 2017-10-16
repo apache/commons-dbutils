@@ -904,7 +904,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     @Override
     public void free() throws SQLException {
@@ -912,7 +912,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     @Override
     public InputStream getBinaryStream(long pos, long length) throws SQLException {
@@ -980,7 +980,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     @Override
     public void free() throws SQLException {
@@ -988,7 +988,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     @Override
     public Reader getCharacterStream(long pos, long length) throws SQLException {

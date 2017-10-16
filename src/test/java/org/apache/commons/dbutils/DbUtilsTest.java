@@ -270,7 +270,7 @@ public class DbUtilsTest {
 
     @Test
     public void testLoadDriverReturnsFalse() {
-        
+
         assertFalse(DbUtils.loadDriver(""));
 
     }
@@ -281,5 +281,5 @@ public class DbUtilsTest {
         DbUtils.commitAndCloseQuietly(null);
 
     }
-    
+
 }
