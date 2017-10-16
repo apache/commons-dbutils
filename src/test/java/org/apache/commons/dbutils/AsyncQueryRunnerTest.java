@@ -88,7 +88,7 @@ public class AsyncQueryRunnerTest {
         Future<int[]> future = runner.batch("select * from blah where ? = ?", params);
 
         future.get();
-        
+
         verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
         verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -135,9 +135,9 @@ public class AsyncQueryRunnerTest {
 
         try {
             future = runner.batch(sql, params);
-            
+
             future.get();
-            
+
             verify(stmt, times(2)).addBatch();
             verify(stmt, times(1)).executeBatch();
             verify(stmt, times(1)).close();    // make sure the statement is closed
@@ -441,7 +441,7 @@ public class AsyncQueryRunnerTest {
     public void testTooManyParamsUpdate() throws Exception {
         callUpdateWithException("unit", "test", "fail");
     }
-    
+
     @Test
     public void testInsertUsesGivenQueryRunner() throws Exception {
         QueryRunner mockQueryRunner = mock(QueryRunner.class

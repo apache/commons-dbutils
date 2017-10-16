@@ -344,14 +344,14 @@ public abstract class AbstractQueryRunner {
                 } else {
                     int stmtCount = pmd.getParameterCount();
                     int paramsCount = params == null ? 0 : params.length;
-        
+
                     if (stmtCount != paramsCount) {
                         throw new SQLException("Wrong number of parameters: expected "
                                 + stmtCount + ", was given " + paramsCount);
                     }
                 }
             } catch (SQLFeatureNotSupportedException ex) {
-                pmdKnownBroken = true;                
+                pmdKnownBroken = true;
             }
             // TODO see DBUTILS-117: would it make sense to catch any other SQLEx types here?
         }

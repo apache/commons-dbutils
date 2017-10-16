@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 
 
 public class GenerousBeanProcessorTest {
-    
+
     GenerousBeanProcessor processor = new GenerousBeanProcessor();
     @Mock ResultSetMetaData metaData;
     PropertyDescriptor[] propDescriptors;
@@ -38,9 +38,9 @@ public class GenerousBeanProcessorTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        
+
         propDescriptors = new PropertyDescriptor[3];
-        
+
         propDescriptors[0] = new PropertyDescriptor("one", TestBean.class);
         propDescriptors[1] = new PropertyDescriptor("two", TestBean.class);
         propDescriptors[2] = new PropertyDescriptor("three", TestBean.class);
@@ -50,13 +50,13 @@ public class GenerousBeanProcessorTest {
     @Test
     public void testMapColumnsToPropertiesWithOutUnderscores() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
-        
+
         when(metaData.getColumnLabel(1)).thenReturn("three");
         when(metaData.getColumnLabel(2)).thenReturn("one");
         when(metaData.getColumnLabel(3)).thenReturn("two");
-        
+
         int[] ret = processor.mapColumnsToProperties(metaData, propDescriptors);
-        
+
         assertNotNull(ret);
         assertEquals(4, ret.length);
         assertEquals(-1, ret[0]);
@@ -88,13 +88,13 @@ public class GenerousBeanProcessorTest {
     @Test
     public void testMapColumnsToPropertiesWithUnderscores() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
-        
+
         when(metaData.getColumnLabel(1)).thenReturn("t_h_r_e_e");
         when(metaData.getColumnLabel(2)).thenReturn("o_n_e");
         when(metaData.getColumnLabel(3)).thenReturn("t_w_o");
-        
+
         int[] ret = processor.mapColumnsToProperties(metaData, propDescriptors);
-        
+
         assertNotNull(ret);
         assertEquals(4, ret.length);
         assertEquals(-1, ret[0]);
@@ -127,27 +127,27 @@ public class GenerousBeanProcessorTest {
         private String one;
         private int two;
         private long three;
-        
+
         public String getOne() {
             return one;
         }
-        
+
         public void setOne(String one) {
             this.one = one;
         }
-        
+
         public int getTwo() {
             return two;
         }
-        
+
         public void setTwo(int two) {
             this.two = two;
         }
-        
+
         public long getThree() {
             return three;
         }
-        
+
         public void setThree(long three) {
             this.three = three;
         }
