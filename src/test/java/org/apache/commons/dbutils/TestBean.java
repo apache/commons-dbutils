@@ -25,7 +25,7 @@ public class TestBean {
 
         THREE, SIX;
 
-    };
+    }
 
     private String one = null;
 
