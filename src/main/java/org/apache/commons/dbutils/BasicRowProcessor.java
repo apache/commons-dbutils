@@ -47,7 +47,7 @@ public class BasicRowProcessor implements RowProcessor {
      */
     private static final BasicRowProcessor instance = new BasicRowProcessor();
 
-    protected static LinkedHashMap<String, Object> createCaseInsensitiveHashMap(int cols) {
+    protected static Map<String, Object> createCaseInsensitiveHashMap(int cols) {
         return new CaseInsensitiveHashMap(cols);
     }
 
