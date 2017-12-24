@@ -47,6 +47,10 @@ public class BasicRowProcessor implements RowProcessor {
      */
     private static final BasicRowProcessor instance = new BasicRowProcessor();
 
+    protected static LinkedHashMap<String, Object> createCaseInsensitiveHashMap(int cols) {
+        return new CaseInsensitiveHashMap(cols);
+    }
+
     /**
      * Returns the Singleton instance of this class.
      *
@@ -159,7 +163,7 @@ public class BasicRowProcessor implements RowProcessor {
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
         int cols = rsmd.getColumnCount();
-        Map<String, Object> result = new CaseInsensitiveHashMap(cols);
+        Map<String, Object> result = createCaseInsensitiveHashMap(cols);
 
         for (int i = 1; i <= cols; i++) {
             String columnName = rsmd.getColumnLabel(i);
@@ -171,6 +175,7 @@ public class BasicRowProcessor implements RowProcessor {
 
         return result;
     }
+
 
     /**
      * A Map that converts all keys to lowercase Strings for case insensitive
