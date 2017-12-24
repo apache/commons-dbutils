@@ -51,6 +51,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" issue="DBUTILS-137" due-to="Gary Gregory">
         Inefficient allocation of Maps in org.apache.commons.dbutils.BasicRowProcessor.toMap(ResultSet).
       </action>
+      <action dev="ggregory" type="add" issue="DBUTILS-136" due-to="Matthew Hall, Gary Gregory">
+        CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int).
+      </action>
     </release>
     
     <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">
