@@ -157,9 +157,9 @@ public class BasicRowProcessor implements RowProcessor {
      */
     @Override
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
-        Map<String, Object> result = new CaseInsensitiveHashMap();
         ResultSetMetaData rsmd = rs.getMetaData();
         int cols = rsmd.getColumnCount();
+        Map<String, Object> result = new CaseInsensitiveHashMap(cols);
 
         for (int i = 1; i <= cols; i++) {
             String columnName = rsmd.getColumnLabel(i);
@@ -188,6 +188,11 @@ public class BasicRowProcessor implements RowProcessor {
      * </pre>
      */
     private static class CaseInsensitiveHashMap extends LinkedHashMap<String, Object> {
+
+        private CaseInsensitiveHashMap(int initialCapacity) {
+            super(initialCapacity);
+        }
+
         /**
          * The internal mapping from lowercase keys to the real keys.
          *
