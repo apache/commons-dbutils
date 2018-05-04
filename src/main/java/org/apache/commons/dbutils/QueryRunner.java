@@ -391,13 +391,10 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, params);
 
         } finally {
-            try {
-                close(rs);
-            } finally {
-                close(stmt);
-                if (closeConn) {
-                    close(conn);
-                }
+            closeQuietly(rs);
+            closeQuietly(stmt);
+            if (closeConn) {
+                close(conn);
             }
         }
 
