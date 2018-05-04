@@ -110,26 +110,23 @@ public class QueryLoader {
      */
     protected Map<String, String> loadQueries(String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
-        InputStream in = getClass().getResourceAsStream(path);
+        final Properties props;
+        try (InputStream in = getClass().getResourceAsStream(path)) {
 
-        if (in == null) {
-            throw new IllegalArgumentException(path + " not found.");
-        }
-
-        Properties props = new Properties();
-        try {
+            if (in == null) {
+                throw new IllegalArgumentException(path + " not found.");
+            }
+            props = new Properties();
             if (dotXml.matcher(path).matches()) {
                 props.loadFromXML(in);
             } else {
                 props.load(in);
             }
-        } finally {
-            in.close();
         }
 
         // Copy to HashMap for better performance
 
-        @SuppressWarnings({ "rawtypes", "unchecked" }) // load() always creates <String,String> entries
+        @SuppressWarnings({"rawtypes", "unchecked" }) // load() always creates <String,String> entries
         HashMap<String, String> hashMap = new HashMap(props);
         return hashMap;
     }
