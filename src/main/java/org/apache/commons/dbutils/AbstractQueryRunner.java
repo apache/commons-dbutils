@@ -96,17 +96,6 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>StatementConfiguration</code> to configure statements when
-     * preparing them.
-     *
-     * @param stmtConfig The configuration to apply to statements when they are prepared.
-     */
-    public AbstractQueryRunner(StatementConfiguration stmtConfig) {
-        this.ds = null;
-        this.stmtConfig = stmtConfig;
-    }
-
-    /**
      * Constructor to provide a <code>DataSource</code> and control the use of
      * <code>ParameterMetaData</code>. Methods that do not take a
      * <code>Connection</code> parameter will retrieve connections from this
@@ -128,20 +117,6 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and a <code>StatementConfiguration</code>.
-     *
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
-     *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
-     * @param stmtConfig The configuration to apply to statements when they are prepared.
-     */
-    public AbstractQueryRunner(DataSource ds, StatementConfiguration stmtConfig) {
-        this.ds = ds;
-        this.stmtConfig = stmtConfig;
-    }
-
-    /**
      * Constructor for QueryRunner that takes a <code>DataSource</code>, a <code>StatementConfiguration</code>, and
      * controls the use of <code>ParameterMetaData</code>.  Methods that do not take a <code>Connection</code> parameter
      * will retrieve connections from this <code>DataSource</code>.
@@ -159,95 +134,73 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Returns the <code>DataSource</code> this runner is using.
-     * <code>QueryRunner</code> methods always call this method to get the
-     * <code>DataSource</code> so subclasses can provide specialized behavior.
+     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and a <code>StatementConfiguration</code>.
      *
-     * @return DataSource the runner is using
+     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
+     * <code>DataSource</code>.
+     *
+     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public DataSource getDataSource() {
-        return this.ds;
+    public AbstractQueryRunner(DataSource ds, StatementConfiguration stmtConfig) {
+        this.ds = ds;
+        this.stmtConfig = stmtConfig;
     }
 
     /**
-     * Some drivers don't support
-     * {@link ParameterMetaData#getParameterType(int) }; if
-     * <code>pmdKnownBroken</code> is set to true, we won't even try it; if
-     * false, we'll try it, and if it breaks, we'll remember not to use it
-     * again.
+     * Constructor for QueryRunner that takes a <code>StatementConfiguration</code> to configure statements when
+     * preparing them.
      *
-     * @return the flag to skip (or not)
-     *         {@link ParameterMetaData#getParameterType(int) }
-     * @since 1.4
+     * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public boolean isPmdKnownBroken() {
-        return pmdKnownBroken;
+    public AbstractQueryRunner(StatementConfiguration stmtConfig) {
+        this.ds = null;
+        this.stmtConfig = stmtConfig;
     }
 
     /**
-     * Factory method that creates and initializes a
-     * <code>PreparedStatement</code> object for the given SQL.
-     * <code>QueryRunner</code> methods always call this method to prepare
-     * statements for them. Subclasses can override this method to provide
-     * special PreparedStatement configuration if needed. This implementation
-     * simply calls <code>conn.prepareStatement(sql)</code>.
+     * Close a <code>Connection</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
+     * can override to provide special handling like logging.
      *
      * @param conn
-     *            The <code>Connection</code> used to create the
-     *            <code>PreparedStatement</code>
-     * @param sql
-     *            The SQL statement to prepare.
-     * @return An initialized <code>PreparedStatement</code>.
+     *            Connection to close
      * @throws SQLException
      *             if a database access error occurs
+     * @since DbUtils 1.1
      */
-    protected PreparedStatement prepareStatement(Connection conn, String sql)
-            throws SQLException {
-
-        PreparedStatement ps = conn.prepareStatement(sql);
-        try {
-            configureStatement(ps);
-        } catch (SQLException e) {
-            ps.close();
-            throw e;
-        }
-        return ps;
+    protected void close(Connection conn) throws SQLException {
+        DbUtils.close(conn);
     }
 
     /**
-     * Factory method that creates and initializes a
-     * <code>PreparedStatement</code> object for the given SQL.
-     * <code>QueryRunner</code> methods always call this method to prepare
-     * statements for them. Subclasses can override this method to provide
-     * special PreparedStatement configuration if needed. This implementation
-     * simply calls <code>conn.prepareStatement(sql, returnedKeys)</code>
-     * which will result in the ability to retrieve the automatically-generated
-     * keys from an auto_increment column.
+     * Close a <code>ResultSet</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
+     * can override to provide special handling like logging.
      *
-     * @param conn
-     *            The <code>Connection</code> used to create the
-     *            <code>PreparedStatement</code>
-     * @param sql
-     *            The SQL statement to prepare.
-     * @param returnedKeys
-     *            Flag indicating whether to return generated keys or not.
-     *
-     * @return An initialized <code>PreparedStatement</code>.
+     * @param rs
+     *            ResultSet to close
      * @throws SQLException
      *             if a database access error occurs
-     * @since 1.6
+     * @since DbUtils 1.1
      */
-    protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
-            throws SQLException {
+    protected void close(ResultSet rs) throws SQLException {
+        DbUtils.close(rs);
+    }
 
-        PreparedStatement ps = conn.prepareStatement(sql, returnedKeys);
-        try {
-            configureStatement(ps);
-        } catch (SQLException e) {
-            ps.close();
-            throw e;
-        }
-        return ps;
+    /**
+     * Close a <code>Statement</code>. This implementation avoids closing if
+     * null and does <strong>not</strong> suppress any exceptions. Subclasses
+     * can override to provide special handling like logging.
+     *
+     * @param stmt
+     *            Statement to close
+     * @throws SQLException
+     *             if a database access error occurs
+     * @since DbUtils 1.1
+     */
+    protected void close(Statement stmt) throws SQLException {
+        DbUtils.close(stmt);
     }
 
     private void configureStatement(Statement stmt) throws SQLException {
@@ -273,50 +226,6 @@ public abstract class AbstractQueryRunner {
                 stmt.setQueryTimeout(stmtConfig.getQueryTimeout());
             }
         }
-    }
-
-    /**
-     * Factory method that creates and initializes a
-     * <code>CallableStatement</code> object for the given SQL.
-     * <code>QueryRunner</code> methods always call this method to prepare
-     * callable statements for them. Subclasses can override this method to
-     * provide special CallableStatement configuration if needed. This
-     * implementation simply calls <code>conn.prepareCall(sql)</code>.
-     *
-     * @param conn
-     *            The <code>Connection</code> used to create the
-     *            <code>CallableStatement</code>
-     * @param sql
-     *            The SQL statement to prepare.
-     * @return An initialized <code>CallableStatement</code>.
-     * @throws SQLException
-     *             if a database access error occurs
-     */
-    protected CallableStatement prepareCall(Connection conn, String sql)
-            throws SQLException {
-
-        return conn.prepareCall(sql);
-    }
-
-    /**
-     * Factory method that creates and initializes a <code>Connection</code>
-     * object. <code>QueryRunner</code> methods always call this method to
-     * retrieve connections from its DataSource. Subclasses can override this
-     * method to provide special <code>Connection</code> configuration if
-     * needed. This implementation simply calls <code>ds.getConnection()</code>.
-     *
-     * @return An initialized <code>Connection</code>.
-     * @throws SQLException
-     *             if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected Connection prepareConnection() throws SQLException {
-        if (this.getDataSource() == null) {
-            throw new SQLException(
-                    "QueryRunner requires a DataSource to be "
-                            + "invoked in this way, or a Connection should be passed in");
-        }
-        return this.getDataSource().getConnection();
     }
 
     /**
@@ -488,6 +397,142 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
+     * Returns the <code>DataSource</code> this runner is using.
+     * <code>QueryRunner</code> methods always call this method to get the
+     * <code>DataSource</code> so subclasses can provide specialized behavior.
+     *
+     * @return DataSource the runner is using
+     */
+    public DataSource getDataSource() {
+        return this.ds;
+    }
+
+    /**
+     * Some drivers don't support
+     * {@link ParameterMetaData#getParameterType(int) }; if
+     * <code>pmdKnownBroken</code> is set to true, we won't even try it; if
+     * false, we'll try it, and if it breaks, we'll remember not to use it
+     * again.
+     *
+     * @return the flag to skip (or not)
+     *         {@link ParameterMetaData#getParameterType(int) }
+     * @since 1.4
+     */
+    public boolean isPmdKnownBroken() {
+        return pmdKnownBroken;
+    }
+
+    /**
+     * Factory method that creates and initializes a
+     * <code>CallableStatement</code> object for the given SQL.
+     * <code>QueryRunner</code> methods always call this method to prepare
+     * callable statements for them. Subclasses can override this method to
+     * provide special CallableStatement configuration if needed. This
+     * implementation simply calls <code>conn.prepareCall(sql)</code>.
+     *
+     * @param conn
+     *            The <code>Connection</code> used to create the
+     *            <code>CallableStatement</code>
+     * @param sql
+     *            The SQL statement to prepare.
+     * @return An initialized <code>CallableStatement</code>.
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    protected CallableStatement prepareCall(Connection conn, String sql)
+            throws SQLException {
+
+        return conn.prepareCall(sql);
+    }
+
+    /**
+     * Factory method that creates and initializes a <code>Connection</code>
+     * object. <code>QueryRunner</code> methods always call this method to
+     * retrieve connections from its DataSource. Subclasses can override this
+     * method to provide special <code>Connection</code> configuration if
+     * needed. This implementation simply calls <code>ds.getConnection()</code>.
+     *
+     * @return An initialized <code>Connection</code>.
+     * @throws SQLException
+     *             if a database access error occurs
+     * @since DbUtils 1.1
+     */
+    protected Connection prepareConnection() throws SQLException {
+        if (this.getDataSource() == null) {
+            throw new SQLException(
+                    "QueryRunner requires a DataSource to be "
+                            + "invoked in this way, or a Connection should be passed in");
+        }
+        return this.getDataSource().getConnection();
+    }
+
+    /**
+     * Factory method that creates and initializes a
+     * <code>PreparedStatement</code> object for the given SQL.
+     * <code>QueryRunner</code> methods always call this method to prepare
+     * statements for them. Subclasses can override this method to provide
+     * special PreparedStatement configuration if needed. This implementation
+     * simply calls <code>conn.prepareStatement(sql)</code>.
+     *
+     * @param conn
+     *            The <code>Connection</code> used to create the
+     *            <code>PreparedStatement</code>
+     * @param sql
+     *            The SQL statement to prepare.
+     * @return An initialized <code>PreparedStatement</code>.
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    protected PreparedStatement prepareStatement(Connection conn, String sql)
+            throws SQLException {
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        try {
+            configureStatement(ps);
+        } catch (SQLException e) {
+            ps.close();
+            throw e;
+        }
+        return ps;
+    }
+
+    /**
+     * Factory method that creates and initializes a
+     * <code>PreparedStatement</code> object for the given SQL.
+     * <code>QueryRunner</code> methods always call this method to prepare
+     * statements for them. Subclasses can override this method to provide
+     * special PreparedStatement configuration if needed. This implementation
+     * simply calls <code>conn.prepareStatement(sql, returnedKeys)</code>
+     * which will result in the ability to retrieve the automatically-generated
+     * keys from an auto_increment column.
+     *
+     * @param conn
+     *            The <code>Connection</code> used to create the
+     *            <code>PreparedStatement</code>
+     * @param sql
+     *            The SQL statement to prepare.
+     * @param returnedKeys
+     *            Flag indicating whether to return generated keys or not.
+     *
+     * @return An initialized <code>PreparedStatement</code>.
+     * @throws SQLException
+     *             if a database access error occurs
+     * @since 1.6
+     */
+    protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
+            throws SQLException {
+
+        PreparedStatement ps = conn.prepareStatement(sql, returnedKeys);
+        try {
+            configureStatement(ps);
+        } catch (SQLException e) {
+            ps.close();
+            throw e;
+        }
+        return ps;
+    }
+
+    /**
      * Throws a new exception with a more informative error message.
      *
      * @param cause
@@ -555,51 +600,6 @@ public abstract class AbstractQueryRunner {
      */
     protected ResultSet wrap(ResultSet rs) {
         return rs;
-    }
-
-    /**
-     * Close a <code>Connection</code>. This implementation avoids closing if
-     * null and does <strong>not</strong> suppress any exceptions. Subclasses
-     * can override to provide special handling like logging.
-     *
-     * @param conn
-     *            Connection to close
-     * @throws SQLException
-     *             if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected void close(Connection conn) throws SQLException {
-        DbUtils.close(conn);
-    }
-
-    /**
-     * Close a <code>Statement</code>. This implementation avoids closing if
-     * null and does <strong>not</strong> suppress any exceptions. Subclasses
-     * can override to provide special handling like logging.
-     *
-     * @param stmt
-     *            Statement to close
-     * @throws SQLException
-     *             if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected void close(Statement stmt) throws SQLException {
-        DbUtils.close(stmt);
-    }
-
-    /**
-     * Close a <code>ResultSet</code>. This implementation avoids closing if
-     * null and does <strong>not</strong> suppress any exceptions. Subclasses
-     * can override to provide special handling like logging.
-     *
-     * @param rs
-     *            ResultSet to close
-     * @throws SQLException
-     *             if a database access error occurs
-     * @since DbUtils 1.1
-     */
-    protected void close(ResultSet rs) throws SQLException {
-        DbUtils.close(rs);
     }
 
 }
