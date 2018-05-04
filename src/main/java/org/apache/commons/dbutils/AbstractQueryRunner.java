@@ -516,6 +516,7 @@ public abstract class AbstractQueryRunner {
     protected PreparedStatement prepareStatement(Connection conn, String sql)
             throws SQLException {
 
+        @SuppressWarnings("resource")
         PreparedStatement ps = conn.prepareStatement(sql);
         try {
             configureStatement(ps);
@@ -552,6 +553,7 @@ public abstract class AbstractQueryRunner {
     protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
             throws SQLException {
 
+        @SuppressWarnings("resource")
         PreparedStatement ps = conn.prepareStatement(sql, returnedKeys);
         try {
             configureStatement(ps);
