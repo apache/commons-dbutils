@@ -28,7 +28,7 @@ import org.apache.commons.dbutils.TestBean;
 public class BeanHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler<TestBean> h = new BeanHandler<TestBean>(TestBean.class);
+        ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
         TestBean results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -39,7 +39,7 @@ public class BeanHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler<TestBean> h = new BeanHandler<TestBean>(TestBean.class);
+        ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
         TestBean results = h.handle(this.emptyResultSet);
 
         assertNull(results);

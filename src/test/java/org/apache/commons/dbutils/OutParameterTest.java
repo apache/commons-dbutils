@@ -42,7 +42,7 @@ public class OutParameterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);    // init the mocks
 
-        parameter = new OutParameter<Number>(Types.INTEGER, Number.class);
+        parameter = new OutParameter<>(Types.INTEGER, Number.class);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class OutParameterTest {
 
     @Test
     public void testRegisterAlternateConstructor() throws Exception {
-        parameter = new OutParameter<Number>(Types.INTEGER, Number.class, VALUE);
+        parameter = new OutParameter<>(Types.INTEGER, Number.class, VALUE);
         parameter.register(stmt, INDEX);
         verify(stmt, times(1)).registerOutParameter(INDEX, Types.INTEGER);
         verify(stmt, times(1)).setObject(INDEX, VALUE);

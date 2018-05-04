@@ -449,7 +449,7 @@ public class QueryRunnerTest {
             @Override
             public List<Object> handle(ResultSet rs) throws SQLException
             {
-                List<Object> objects = new ArrayList<Object>();
+                List<Object> objects = new ArrayList<>();
                 while (rs.next())
                 {
                     objects.add(new Object());
@@ -574,7 +574,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
         OutParameter<Integer> intParam =
-            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+            new OutParameter<>(Types.INTEGER, Integer.class);
         result = runner.execute(conn, "{?= call my_proc()}", intParam);
 
         Assert.assertEquals(42, intParam.getValue().intValue());
@@ -603,7 +603,7 @@ public class QueryRunnerTest {
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
         OutParameter<String> stringParam =
-            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+            new OutParameter<>(Types.VARCHAR, String.class, "in");
         result = runner.execute(conn, "{?= call my_proc(?, ?)}", intParam, "test", stringParam);
 
         Assert.assertEquals(24, intParam.getValue().intValue());
@@ -642,7 +642,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
         OutParameter<Integer> intParam =
-            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+            new OutParameter<>(Types.INTEGER, Integer.class);
         result = runner.execute("{?= call my_proc()}", intParam);
 
         Assert.assertEquals(42, intParam.getValue().intValue());
@@ -671,7 +671,7 @@ public class QueryRunnerTest {
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
         OutParameter<String> stringParam =
-            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+            new OutParameter<>(Types.VARCHAR, String.class, "in");
         result = runner.execute("{?= call my_proc(?, ?)}", intParam, "test", stringParam);
 
         Assert.assertEquals(24, intParam.getValue().intValue());
@@ -813,7 +813,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
         OutParameter<Integer> intParam =
-            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+            new OutParameter<>(Types.INTEGER, Integer.class);
         runner.execute(conn, "{?= call my_proc()}", handler, intParam);
 
         Assert.assertEquals(42, intParam.getValue().intValue());
@@ -842,7 +842,7 @@ public class QueryRunnerTest {
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
         OutParameter<String> stringParam =
-            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+            new OutParameter<>(Types.VARCHAR, String.class, "in");
         runner.execute(conn, "{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
 
         Assert.assertEquals(24, intParam.getValue().intValue());
@@ -878,7 +878,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
         OutParameter<Integer> intParam =
-            new OutParameter<Integer>(Types.INTEGER, Integer.class);
+            new OutParameter<>(Types.INTEGER, Integer.class);
         runner.execute("{?= call my_proc()}", handler, intParam);
 
         Assert.assertEquals(42, intParam.getValue().intValue());
@@ -907,7 +907,7 @@ public class QueryRunnerTest {
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
         OutParameter<String> stringParam =
-            new OutParameter<String>(Types.VARCHAR, String.class, "in");
+            new OutParameter<>(Types.VARCHAR, String.class, "in");
         runner.execute("{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
 
         Assert.assertEquals(24, intParam.getValue().intValue());

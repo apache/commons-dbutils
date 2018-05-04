@@ -57,32 +57,32 @@ public class BeanMapHandlerTest {
 
     @Test
     public void testBeanMapHandlerClassOfV() throws Exception {
-        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
+        bmh = new BeanMapHandler<>(TestBean.class);
         handle();
     }
 
     @Test
     public void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
-        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, rp);
+        bmh = new BeanMapHandler<>(TestBean.class, rp);
         handle();
     }
 
     @Test
     public void testBeanMapHandlerClassOfVInt() throws Exception {
-        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, 2);
+        bmh = new BeanMapHandler<>(TestBean.class, 2);
         handle();
     }
 
     @Test
     public void testBeanMapHandlerClassOfVString() throws Exception {
-        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class, "id");
+        bmh = new BeanMapHandler<>(TestBean.class, "id");
         handle();
     }
 
     @Test
     public void testEmptyResultSet() throws Exception {
         when(Boolean.valueOf(rs.next())).thenReturn(Boolean.FALSE);
-        bmh = new BeanMapHandler<Long, TestBean>(TestBean.class);
+        bmh = new BeanMapHandler<>(TestBean.class);
         res = bmh.handle(rs);
         assertNull(res.get(Long.valueOf(23L)));
     }
