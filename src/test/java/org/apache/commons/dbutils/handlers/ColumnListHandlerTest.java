@@ -28,7 +28,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class ColumnListHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler<List<String>> h = new ColumnListHandler<String>();
+        ResultSetHandler<List<String>> h = new ColumnListHandler<>();
         List<String> results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -39,7 +39,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
     }
 
     public void testColumnIndexHandle() throws SQLException {
-        ResultSetHandler<List<String>> h = new ColumnListHandler<String>(2);
+        ResultSetHandler<List<String>> h = new ColumnListHandler<>(2);
         List<String> results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -50,7 +50,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
     }
 
     public void testColumnNameHandle() throws SQLException {
-        ResultSetHandler<List<Integer>> h = new ColumnListHandler<Integer>("intTest");
+        ResultSetHandler<List<Integer>> h = new ColumnListHandler<>("intTest");
         List<Integer> results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -61,7 +61,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler<List<String>> h = new ColumnListHandler<String>();
+        ResultSetHandler<List<String>> h = new ColumnListHandler<>();
         List<String> results = h.handle(this.emptyResultSet);
 
         assertNotNull(results);

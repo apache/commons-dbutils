@@ -51,10 +51,10 @@ public final class BaseResultSetHandlerTest extends BaseTestCase {
 
         @Override
         protected Collection<Map<String, Object>> handle() throws SQLException {
-            Collection<Map<String, Object>> result = new LinkedList<Map<String, Object>>();
+            Collection<Map<String, Object>> result = new LinkedList<>();
 
             while (next()) {
-                Map<String, Object> current = new HashMap<String, Object>();
+                Map<String, Object> current = new HashMap<>();
 
                 for (int i = 1; i <= getMetaData().getColumnCount(); i++) {
                     current.put(getMetaData().getColumnName(i), getObject(i));

@@ -114,7 +114,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     public void testMapColumnToPropertiesWithOverrides() throws Exception {
-        Map<String, String> columnToPropertyOverrides = new HashMap<String, String>();
+        Map<String, String> columnToPropertyOverrides = new HashMap<>();
         columnToPropertyOverrides.put("five", "four");
         BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
         String[] columnNames = { "test", "test", "three", "five" };

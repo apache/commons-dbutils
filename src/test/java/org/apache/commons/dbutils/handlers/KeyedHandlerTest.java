@@ -26,7 +26,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class KeyedHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<String>();
+        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
 
         Map<String,Map<String,Object>> results = h.handle(this.rs);
 
@@ -49,7 +49,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testColumnIndexHandle() throws SQLException {
-        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<String>(2);
+        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(2);
         Map<String,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -71,7 +71,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testColumnNameHandle() throws SQLException {
-        ResultSetHandler<Map<Integer,Map<String,Object>>> h = new KeyedHandler<Integer>("intTest");
+        ResultSetHandler<Map<Integer,Map<String,Object>>> h = new KeyedHandler<>("intTest");
         Map<Integer,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -93,7 +93,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<String>();
+        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
         Map<String,Map<String,Object>> results = h.handle(this.emptyResultSet);
         assertNotNull(results);
         assertTrue(results.isEmpty());
