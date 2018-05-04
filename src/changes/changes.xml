@@ -54,6 +54,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="add" issue="DBUTILS-136" due-to="Matthew Hall, Gary Gregory">
         CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int).
       </action>
+      <action dev="ggregory" type="fix" issue="DBUTILS-138" due-to="Stefano Lissa, Gary Gregory">
+        org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler&lt;T>, Object...) Exception in closing statement leave connections open.
+      </action>
     </release>
     
     <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">

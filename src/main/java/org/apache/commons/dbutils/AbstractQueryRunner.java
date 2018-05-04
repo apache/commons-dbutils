@@ -203,6 +203,36 @@ public abstract class AbstractQueryRunner {
         DbUtils.close(stmt);
     }
 
+    /**
+     * Calls {@link DbUtils#closeQuietly(Connection)}.
+     * 
+     * @param conn Connection to close.
+     * @since 2.0
+     */
+    protected void closeQuietly(Connection conn) {
+        DbUtils.closeQuietly(conn);
+    }
+
+    /**
+     * Calls {@link DbUtils#closeQuietly(ResultSet)}.
+     * 
+     * @param rs ResultSet to close.
+     * @since 2.0
+     */
+    protected void closeQuietly(ResultSet rs) {
+        DbUtils.closeQuietly(rs);
+    }
+
+    /**
+     * Calls {@link DbUtils#closeQuietly(Statement)}.
+     * 
+     * @param statement ResultSet to close.
+     * @since 2.0
+     */
+    protected void closeQuietly(Statement statement) {
+        DbUtils.closeQuietly(statement);
+    }
+
     private void configureStatement(Statement stmt) throws SQLException {
 
         if (stmtConfig != null) {
