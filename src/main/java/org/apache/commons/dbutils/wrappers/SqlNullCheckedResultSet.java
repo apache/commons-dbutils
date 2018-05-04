@@ -74,7 +74,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Maps normal method names (ie. "getBigDecimal") to the corresponding null
      * Method object (ie. getNullBigDecimal).
      */
-    private static final Map<String, Method> nullMethods = new HashMap<String, Method>();
+    private static final Map<String, Method> nullMethods = new HashMap<>();
 
     /**
      * The {@code getNull} string prefix.

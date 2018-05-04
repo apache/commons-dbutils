@@ -928,7 +928,7 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         CallableStatement stmt = null;
-        List<T> results = new LinkedList<T>();
+        List<T> results = new LinkedList<>();
 
         try {
             stmt = this.prepareCall(conn, sql);
