@@ -52,7 +52,7 @@ public class QueryLoader {
     /**
      * Maps query set names to Maps of their queries.
      */
-    private final Map<String, Map<String, String>> queries = new HashMap<String, Map<String, String>>();
+    private final Map<String, Map<String, String>> queries = new HashMap<>();
 
     /**
      * QueryLoader constructor.

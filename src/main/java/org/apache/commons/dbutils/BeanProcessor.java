@@ -63,11 +63,11 @@ public class BeanProcessor {
      * is returned.  These are the same as the defaults that ResultSet get*
      * methods return in the event of a NULL column.
      */
-    private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<Class<?>, Object>();
+    private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<>();
 
-    private static final List<ColumnHandler> columnHandlers = new ArrayList<ColumnHandler>();
+    private static final List<ColumnHandler> columnHandlers = new ArrayList<>();
 
-    private static final List<PropertyHandler> propertyHandlers = new ArrayList<PropertyHandler>();
+    private static final List<PropertyHandler> propertyHandlers = new ArrayList<>();
 
     /**
      * ResultSet column to bean property name overrides.
@@ -188,7 +188,7 @@ public class BeanProcessor {
      * @return the newly created List of beans
      */
     public <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException {
-        List<T> results = new ArrayList<T>();
+        List<T> results = new ArrayList<>();
 
         if (!rs.next()) {
             return results;

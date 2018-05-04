@@ -63,7 +63,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
      * @return Map to store records in
      */
     protected Map<K, V> createMap() {
-        return new HashMap<K, V>();
+        return new HashMap<>();
     }
 
     /**

@@ -212,7 +212,7 @@ public class BasicRowProcessor implements RowProcessor {
          * </ul>
          * </p>
          */
-        private final Map<String, String> lowerCaseMap = new HashMap<String, String>();
+        private final Map<String, String> lowerCaseMap = new HashMap<>();
 
         /**
          * Required for serialization support.
