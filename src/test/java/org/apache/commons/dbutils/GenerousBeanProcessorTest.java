@@ -132,7 +132,7 @@ public class GenerousBeanProcessorTest {
             return one;
         }
 
-        public void setOne(String one) {
+        public void setOne(final String one) {
             this.one = one;
         }
 
@@ -140,7 +140,7 @@ public class GenerousBeanProcessorTest {
             return two;
         }
 
-        public void setTwo(int two) {
+        public void setTwo(final int two) {
             this.two = two;
         }
 
@@ -148,7 +148,7 @@ public class GenerousBeanProcessorTest {
             return three;
         }
 
-        public void setThree(long three) {
+        public void setThree(final long three) {
             this.three = three;
         }
     }

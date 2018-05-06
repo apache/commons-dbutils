@@ -23,12 +23,12 @@ import org.apache.commons.dbutils.ColumnHandler;
 
 public class ByteColumnHandler implements ColumnHandler {
     @Override
-    public boolean match(Class<?> propType) {
+    public boolean match(final Class<?> propType) {
         return propType.equals(Byte.TYPE) || propType.equals(Byte.class);
     }
 
     @Override
-    public Object apply(ResultSet rs, int columnIndex) throws SQLException {
+    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return Byte.valueOf(rs.getByte(columnIndex));
     }
 }

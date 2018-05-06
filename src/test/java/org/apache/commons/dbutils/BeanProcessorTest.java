@@ -71,7 +71,7 @@ public class BeanProcessorTest extends BaseTestCase {
             return one;
         }
 
-        public void setOne(String one) {
+        public void setOne(final String one) {
             this.one = one;
         }
 
@@ -79,7 +79,7 @@ public class BeanProcessorTest extends BaseTestCase {
             return two;
         }
 
-        public void setTwo(String two) {
+        public void setTwo(final String two) {
             this.two = two;
         }
 
@@ -87,7 +87,7 @@ public class BeanProcessorTest extends BaseTestCase {
             return three;
         }
 
-        public void setThree(String three) {
+        public void setThree(final String three) {
             this.three = three;
         }
 
@@ -95,7 +95,7 @@ public class BeanProcessorTest extends BaseTestCase {
             return four;
         }
 
-        public void setFour(String four) {
+        public void setFour(final String four) {
             this.four = four;
         }
     }

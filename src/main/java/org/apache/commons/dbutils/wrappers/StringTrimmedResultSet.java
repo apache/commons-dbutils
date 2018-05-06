@@ -60,7 +60,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * @param rs The <code>ResultSet</code> to wrap.
      * @return wrapped ResultSet
      */
-    public static ResultSet wrap(ResultSet rs) {
+    public static ResultSet wrap(final ResultSet rs) {
         return factory.createResultSet(new StringTrimmedResultSet(rs));
     }
 
@@ -74,7 +74,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * to wrap the specified <code>ResultSet</code>.
      * @param rs ResultSet to wrap
      */
-    public StringTrimmedResultSet(ResultSet rs) {
+    public StringTrimmedResultSet(final ResultSet rs) {
         super();
         this.rs = rs;
     }
@@ -92,7 +92,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * @throws Throwable error
      */
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args)
+    public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
         Object result = method.invoke(this.rs, args);

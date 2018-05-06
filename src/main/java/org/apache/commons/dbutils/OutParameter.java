@@ -46,7 +46,7 @@ public class OutParameter<T> {
      * with the type returned by <code>CallableStatement.getObject(int)</code>
      * for the JDBC type given by <code>sqlType</code>.
      */
-    public OutParameter(int sqlType, Class<T> javaType) {
+    public OutParameter(final int sqlType, final Class<T> javaType) {
         this.sqlType = sqlType;
         this.javaType = javaType;
     }
@@ -62,7 +62,7 @@ public class OutParameter<T> {
      * for the JDBC type given by <code>sqlType</code>.
      * @param value the IN value of the parameter
      */
-    public OutParameter(int sqlType, Class<T> javaType, T value) {
+    public OutParameter(final int sqlType, final Class<T> javaType, final T value) {
         this.sqlType = sqlType;
         this.javaType = javaType;
         this.value = value;
@@ -100,7 +100,7 @@ public class OutParameter<T> {
      * INOUT parameter.
      * @param value the new value for the parameter.
      */
-    public void setValue(T value) {
+    public void setValue(final T value) {
         this.value = value;
     }
 
@@ -112,7 +112,7 @@ public class OutParameter<T> {
      * @throws SQLException when the value could not be retrieved from the
      * statement.
      */
-    void setValue(CallableStatement stmt, int index) throws SQLException {
+    void setValue(final CallableStatement stmt, final int index) throws SQLException {
         Object object = stmt.getObject(index);
         value = javaType.cast(object);
     }
@@ -127,7 +127,7 @@ public class OutParameter<T> {
      * @throws SQLException if the parameter could not be registered, or if the
      * value of the parameter could not be set.
      */
-    void register(CallableStatement stmt, int index) throws SQLException {
+    void register(final CallableStatement stmt, final int index) throws SQLException {
         stmt.registerOutParameter(index, sqlType);
         if (value != null) {
             stmt.setObject(index, value);

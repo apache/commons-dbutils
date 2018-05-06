@@ -55,7 +55,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    public ColumnListHandler(int columnIndex) {
+    public ColumnListHandler(final int columnIndex) {
         this(columnIndex, null);
     }
 
@@ -65,7 +65,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    public ColumnListHandler(String columnName) {
+    public ColumnListHandler(final String columnName) {
         this(1, columnName);
     }
 
@@ -75,7 +75,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    private ColumnListHandler(int columnIndex, String columnName) {
+    private ColumnListHandler(final int columnIndex, final String columnName) {
         super();
         this.columnIndex = columnIndex;
         this.columnName = columnName;
@@ -95,7 +95,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    protected T handleRow(ResultSet rs) throws SQLException {
+    protected T handleRow(final ResultSet rs) throws SQLException {
         if (this.columnName == null) {
             return (T) rs.getObject(this.columnIndex);
         }

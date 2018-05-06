@@ -32,7 +32,7 @@ public abstract class ColumnHandlerTestBase {
     protected final ColumnHandler handler;
     protected final Class<?> matchingType;
 
-    public ColumnHandlerTestBase(ColumnHandler handler, Class<?> matchingType) {
+    public ColumnHandlerTestBase(final ColumnHandler handler, final Class<?> matchingType) {
         this.handler = handler;
         this.matchingType = matchingType;
     }

@@ -45,7 +45,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param queryRunner the {@code QueryRunner} instance to use for the queries.
      * @since DbUtils 1.5
      */
-    public AsyncQueryRunner(ExecutorService executorService, QueryRunner queryRunner) {
+    public AsyncQueryRunner(final ExecutorService executorService, final QueryRunner queryRunner) {
         this.executorService = executorService;
         this.queryRunner = queryRunner;
     }
@@ -55,7 +55,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      *
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
-    public AsyncQueryRunner(ExecutorService executorService) {
+    public AsyncQueryRunner(final ExecutorService executorService) {
         this(null, false, executorService);
     }
 
@@ -69,7 +69,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     @Deprecated
-    public AsyncQueryRunner(boolean pmdKnownBroken, ExecutorService executorService) {
+    public AsyncQueryRunner(final boolean pmdKnownBroken, final ExecutorService executorService) {
         this(null, pmdKnownBroken, executorService);
     }
 
@@ -84,7 +84,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     @Deprecated
-    public AsyncQueryRunner(DataSource ds, ExecutorService executorService) {
+    public AsyncQueryRunner(final DataSource ds, final ExecutorService executorService) {
         this(ds, false, executorService);
     }
 
@@ -101,7 +101,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     @Deprecated
-    public AsyncQueryRunner(DataSource ds, boolean pmdKnownBroken, ExecutorService executorService) {
+    public AsyncQueryRunner(final DataSource ds, final boolean pmdKnownBroken, final ExecutorService executorService) {
         super(ds, pmdKnownBroken);
         this.executorService = executorService;
         this.queryRunner = new QueryRunner(ds, pmdKnownBroken);
@@ -129,7 +129,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @param closeConn True if the connection should be closed, false otherwise.
          * @param ps The {@link PreparedStatement} to be executed.
          */
-        public BatchCallableStatement(String sql, Object[][] params, Connection conn, boolean closeConn, PreparedStatement ps) {
+        public BatchCallableStatement(final String sql, final Object[][] params, final Connection conn, final boolean closeConn, final PreparedStatement ps) {
             this.sql = sql;
             this.params = params.clone();
             this.conn = conn;
@@ -231,8 +231,8 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @param params An array of query replacement parameters.  Each row in
          *        this array is one set of batch replacement values.
          */
-        public QueryCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps,
-                ResultSetHandler<T> rsh, String sql, Object... params) {
+        public QueryCallableStatement(final Connection conn, final boolean closeConn, final PreparedStatement ps,
+                final ResultSetHandler<T> rsh, final String sql, final Object... params) {
             this.sql = sql;
             this.params = params;
             this.conn = conn;
@@ -387,7 +387,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          * @param params An array of query replacement parameters.  Each row in
          *        this array is one set of batch replacement values.
          */
-        public UpdateCallableStatement(Connection conn, boolean closeConn, PreparedStatement ps, String sql, Object... params) {
+        public UpdateCallableStatement(final Connection conn, final boolean closeConn, final PreparedStatement ps, final String sql, final Object... params) {
             this.sql = sql;
             this.params = params;
             this.conn = conn;

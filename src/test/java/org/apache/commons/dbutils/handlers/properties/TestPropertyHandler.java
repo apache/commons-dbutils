@@ -21,12 +21,12 @@ import org.apache.commons.dbutils.PropertyHandler;
 public class TestPropertyHandler implements PropertyHandler {
 
     @Override
-    public boolean match(Class<?> parameter, Object value) {
+    public boolean match(final Class<?> parameter, final Object value) {
         return false;
     }
 
     @Override
-    public Object apply(Class<?> parameter, Object value) {
+    public Object apply(final Class<?> parameter, final Object value) {
         return null;
     }
 }

@@ -80,7 +80,7 @@ public class QueryLoader {
      * @return Map of query names to SQL values
      * @see java.util.Properties
      */
-    public synchronized Map<String, String> load(String path) throws IOException {
+    public synchronized Map<String, String> load(final String path) throws IOException {
 
         Map<String, String> queryMap = this.queries.get(path);
 
@@ -108,7 +108,7 @@ public class QueryLoader {
      * @return Map of query names to SQL values
      * @see java.util.Properties
      */
-    protected Map<String, String> loadQueries(String path) throws IOException {
+    protected Map<String, String> loadQueries(final String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
         final Properties props;
         try (InputStream in = getClass().getResourceAsStream(path)) {
@@ -135,7 +135,7 @@ public class QueryLoader {
      * Removes the queries for the given path from the cache.
      * @param path The path that the queries were loaded from.
      */
-    public synchronized void unload(String path) {
+    public synchronized void unload(final String path) {
         this.queries.remove(path);
     }
 

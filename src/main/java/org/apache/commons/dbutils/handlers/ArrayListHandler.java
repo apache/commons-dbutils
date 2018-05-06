@@ -50,7 +50,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Object[]s.
      */
-    public ArrayListHandler(RowProcessor convert) {
+    public ArrayListHandler(final RowProcessor convert) {
         super();
         this.convert = convert;
     }
@@ -65,7 +65,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override
-    protected Object[] handleRow(ResultSet rs) throws SQLException {
+    protected Object[] handleRow(final ResultSet rs) throws SQLException {
         return this.convert.toArray(rs);
     }
 

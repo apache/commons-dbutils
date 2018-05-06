@@ -71,7 +71,7 @@ public class AsyncQueryRunnerTest {
     //
     // Batch test cases
     //
-    private void callGoodBatch(Connection conn, Object[][] params) throws Exception {
+    private void callGoodBatch(final Connection conn, final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         Future<int[]> future = runner.batch(conn, "select * from blah where ? = ?", params);
 
@@ -83,7 +83,7 @@ public class AsyncQueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we closed the connection
     }
 
-    private void callGoodBatch(Object[][] params) throws Exception {
+    private void callGoodBatch(final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         Future<int[]> future = runner.batch("select * from blah where ? = ?", params);
 
@@ -129,7 +129,7 @@ public class AsyncQueryRunnerTest {
 
 
     // helper method for calling batch when an exception is expected
-    private void callBatchWithException(String sql, Object[][] params) throws Exception {
+    private void callBatchWithException(final String sql, final Object[][] params) throws Exception {
         Future<int[]> future = null;
         boolean caught = false;
 
@@ -213,7 +213,7 @@ public class AsyncQueryRunnerTest {
     //
     // Query test cases
     //
-    private void callGoodQuery(Connection conn) throws Exception {
+    private void callGoodQuery(final Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test").get();
 
@@ -271,7 +271,7 @@ public class AsyncQueryRunnerTest {
 
 
     // helper method for calling batch when an exception is expected
-    private void callQueryWithException(Object... params) throws Exception {
+    private void callQueryWithException(final Object... params) throws Exception {
         boolean caught = false;
 
         try {
@@ -339,7 +339,7 @@ public class AsyncQueryRunnerTest {
     //
     // Update test cases
     //
-    private void callGoodUpdate(Connection conn) throws Exception {
+    private void callGoodUpdate(final Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.update(conn, "update blah set ? = ?", "unit", "test").get();
 
@@ -408,7 +408,7 @@ public class AsyncQueryRunnerTest {
     }
 
     // helper method for calling batch when an exception is expected
-    private void callUpdateWithException(Object... params) throws Exception {
+    private void callUpdateWithException(final Object... params) throws Exception {
         boolean caught = false;
 
         try {

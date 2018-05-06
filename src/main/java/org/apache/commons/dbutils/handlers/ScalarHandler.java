@@ -55,7 +55,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * @param columnIndex The index of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    public ScalarHandler(int columnIndex) {
+    public ScalarHandler(final int columnIndex) {
         this(columnIndex, null);
     }
 
@@ -65,7 +65,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    public ScalarHandler(String columnName) {
+    public ScalarHandler(final String columnName) {
         this(1, columnName);
     }
 
@@ -75,7 +75,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * @param columnName The name of the column to retrieve from the
      * <code>ResultSet</code>.
      */
-    private ScalarHandler(int columnIndex, String columnName) {
+    private ScalarHandler(final int columnIndex, final String columnName) {
         this.columnIndex = columnIndex;
         this.columnName = columnName;
     }
@@ -97,7 +97,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    public T handle(ResultSet rs) throws SQLException {
+    public T handle(final ResultSet rs) throws SQLException {
 
         if (rs.next()) {
             if (this.columnName == null) {
