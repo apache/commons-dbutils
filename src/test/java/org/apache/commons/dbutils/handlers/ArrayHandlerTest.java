@@ -31,8 +31,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class ArrayHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler<Object[]> h = new ArrayHandler();
-        Object[] results = h.handle(this.rs);
+        final ResultSetHandler<Object[]> h = new ArrayHandler();
+        final Object[] results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(COLS, results.length);
@@ -42,8 +42,8 @@ public class ArrayHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler<Object[]> h = new ArrayHandler();
-        Object[] results = h.handle(this.emptyResultSet);
+        final ResultSetHandler<Object[]> h = new ArrayHandler();
+        final Object[] results = h.handle(this.emptyResultSet);
 
         assertThat(results, is(emptyArray()));
     }

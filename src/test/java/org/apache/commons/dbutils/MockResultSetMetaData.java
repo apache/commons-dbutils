@@ -62,7 +62,7 @@ public class MockResultSetMetaData implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
-        String methodName = method.getName();
+        final String methodName = method.getName();
 
         if (methodName.equals("getColumnCount")) {
             return Integer.valueOf(this.columnNames.length);
@@ -70,13 +70,13 @@ public class MockResultSetMetaData implements InvocationHandler {
         } else if (
                 methodName.equals("getColumnName")) {
 
-                int col = ((Integer) args[0]).intValue() - 1;
+                final int col = ((Integer) args[0]).intValue() - 1;
                 return this.columnNames[col];
 
         } else if (
                 methodName.equals("getColumnLabel")) {
 
-                int col = ((Integer) args[0]).intValue() - 1;
+                final int col = ((Integer) args[0]).intValue() - 1;
                 return this.columnLabels[col];
 
         } else if (methodName.equals("hashCode")) {

@@ -150,7 +150,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             try {
                 ret = ps.executeBatch();
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 rethrow(e, sql, (Object[])params);
             } finally {
                 close(ps);
@@ -256,7 +256,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             try {
                 rs = wrap(ps.executeQuery());
                 ret = rsh.handle(rs);
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 rethrow(e, sql, params);
             } finally {
                 try {
@@ -409,7 +409,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
             try {
                 rows = ps.executeUpdate();
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 rethrow(e, sql, params);
             } finally {
                 close(ps);

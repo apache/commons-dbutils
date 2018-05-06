@@ -30,13 +30,13 @@ import org.apache.commons.dbutils.TestBean;
 public class BeanListHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
-        List<TestBean> results = h.handle(this.rs);
+        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
+        final List<TestBean> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator<TestBean> iter = results.iterator();
+        final Iterator<TestBean> iter = results.iterator();
         TestBean row = null;
         assertTrue(iter.hasNext());
         row = iter.next();
@@ -57,21 +57,21 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
-        List<TestBean> results = h.handle(this.emptyResultSet);
+        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
+        final List<TestBean> results = h.handle(this.emptyResultSet);
 
         assertNotNull(results);
         assertTrue(results.isEmpty());
     }
 
     public void testHandleToSuperClass() throws SQLException {
-        ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(SubTestBean.class);
-        List<TestBean> results = h.handle(this.rs);
+        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(SubTestBean.class);
+        final List<TestBean> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator<TestBean> iter = results.iterator();
+        final Iterator<TestBean> iter = results.iterator();
         TestBean row = null;
         assertTrue(iter.hasNext());
         row = iter.next();
@@ -95,13 +95,13 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     public void testHandleToInterface() throws SQLException {
-        ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<SubTestBeanInterface>(SubTestBean.class);
-        List<SubTestBeanInterface> results = h.handle(this.rs);
+        final ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<SubTestBeanInterface>(SubTestBean.class);
+        final List<SubTestBeanInterface> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Iterator<SubTestBeanInterface> iter = results.iterator();
+        final Iterator<SubTestBeanInterface> iter = results.iterator();
         SubTestBeanInterface row = null;
         assertTrue(iter.hasNext());
         row = iter.next();

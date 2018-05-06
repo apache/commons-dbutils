@@ -73,7 +73,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     public boolean hasNext() {
         try {
             return !rs.isLast();
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             rethrow(e);
             return false;
         }
@@ -91,7 +91,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
         try {
             rs.next();
             return this.convert.toArray(rs);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             rethrow(e);
             return null;
         }
@@ -106,7 +106,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     public void remove() {
         try {
             this.rs.deleteRow();
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             rethrow(e);
         }
     }

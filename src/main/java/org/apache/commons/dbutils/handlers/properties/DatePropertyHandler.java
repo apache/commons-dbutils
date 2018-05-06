@@ -49,8 +49,8 @@ public class DatePropertyHandler implements PropertyHandler {
             value = new java.sql.Time(((java.util.Date) value).getTime());
         } else
         if ("java.sql.Timestamp".equals(targetType)) {
-            Timestamp tsValue = (Timestamp) value;
-            int nanos = tsValue.getNanos();
+            final Timestamp tsValue = (Timestamp) value;
+            final int nanos = tsValue.getNanos();
             value = new java.sql.Timestamp(tsValue.getTime());
             ((Timestamp) value).setNanos(nanos);
         }

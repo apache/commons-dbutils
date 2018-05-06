@@ -38,7 +38,7 @@ public class ServiceLoaderTest {
     @Test
     public void testFindsLocalColumnHandler() {
         boolean found = false;
-        for (ColumnHandler handler : columns) {
+        for (final ColumnHandler handler : columns) {
             // this class is defined outside of the main classes in dbutils
             if (handler instanceof TestColumnHandler) {
                 found = true;
@@ -51,7 +51,7 @@ public class ServiceLoaderTest {
     @Test
     public void testFindsLocalPropertyHandler() {
         boolean found = false;
-        for (PropertyHandler handler : properties) {
+        for (final PropertyHandler handler : properties) {
             // this class is defined outside of the main classes in dbutils
             if (handler instanceof TestPropertyHandler) {
                 found = true;
@@ -68,7 +68,7 @@ public class ServiceLoaderTest {
     @Test
     public void testFindMoreThanLocalColumns() {
         int count = 0;
-        for (ColumnHandler handler : columns) {
+        for (final ColumnHandler handler : columns) {
             count++;
         }
 
@@ -82,7 +82,7 @@ public class ServiceLoaderTest {
     @Test
     public void testFindMoreThanLocalProperties() {
         int count = 0;
-        for (PropertyHandler handler : properties) {
+        for (final PropertyHandler handler : properties) {
             count++;
         }
 

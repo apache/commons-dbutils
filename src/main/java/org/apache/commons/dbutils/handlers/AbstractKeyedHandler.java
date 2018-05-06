@@ -48,7 +48,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
      */
     @Override
     public Map<K, V> handle(final ResultSet rs) throws SQLException {
-        Map<K, V> result = createMap();
+        final Map<K, V> result = createMap();
         while (rs.next()) {
             result.put(createKey(rs), createRow(rs));
         }

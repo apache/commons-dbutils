@@ -83,12 +83,12 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     private static final String GET_NULL_PREFIX = "getNull";
 
     static {
-        Method[] methods = SqlNullCheckedResultSet.class.getMethods();
+        final Method[] methods = SqlNullCheckedResultSet.class.getMethods();
         for (int i = 0; i < methods.length; i++) {
-            String methodName = methods[i].getName();
+            final String methodName = methods[i].getName();
 
             if (methodName.startsWith(GET_NULL_PREFIX)) {
-                String normalName = "get" + methodName.substring(GET_NULL_PREFIX.length());
+                final String normalName = "get" + methodName.substring(GET_NULL_PREFIX.length());
                 nullMethods.put(normalName, methods[i]);
             }
         }
@@ -221,7 +221,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
         if (this.nullBytes == null) {
             return null;
         }
-        byte[] copy = new byte[this.nullBytes.length];
+        final byte[] copy = new byte[this.nullBytes.length];
         System.arraycopy(this.nullBytes, 0, copy, 0, this.nullBytes.length);
         return copy;
     }
@@ -382,9 +382,9 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
-        Object result = method.invoke(this.rs, args);
+        final Object result = method.invoke(this.rs, args);
 
-        Method nullMethod = nullMethods.get(method.getName());
+        final Method nullMethod = nullMethods.get(method.getName());
 
         // Check nullMethod != null first so that we don't call wasNull()
         // before a true getter method was invoked on the ResultSet.
@@ -460,7 +460,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullBytes the value
      */
     public void setNullBytes(final byte[] nullBytes) {
-        byte[] copy = new byte[nullBytes.length];
+        final byte[] copy = new byte[nullBytes.length];
         System.arraycopy(nullBytes, 0, copy, 0, nullBytes.length);
         this.nullBytes = copy;
     }

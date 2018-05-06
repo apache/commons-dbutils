@@ -73,7 +73,7 @@ public class AsyncQueryRunnerTest {
     //
     private void callGoodBatch(final Connection conn, final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Future<int[]> future = runner.batch(conn, "select * from blah where ? = ?", params);
+        final Future<int[]> future = runner.batch(conn, "select * from blah where ? = ?", params);
 
         future.get();
 
@@ -85,7 +85,7 @@ public class AsyncQueryRunnerTest {
 
     private void callGoodBatch(final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        Future<int[]> future = runner.batch("select * from blah where ? = ?", params);
+        final Future<int[]> future = runner.batch("select * from blah where ? = ?", params);
 
         future.get();
 
@@ -97,7 +97,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testGoodBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -106,7 +106,7 @@ public class AsyncQueryRunnerTest {
     @Test
     public void testGoodBatchPmdTrue() throws Exception {
         runner = new AsyncQueryRunner(dataSource, true, Executors.newFixedThreadPool(1));
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -114,14 +114,14 @@ public class AsyncQueryRunnerTest {
     @Test
     public void testGoodBatchDefaultConstructor() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(conn, params);
     }
 
     @Test
     public void testNullParamsBatch() throws Exception {
-        String[][] params = new String[][] { { null, "unit" }, { "test", null } };
+        final String[][] params = new String[][] { { null, "unit" }, { "test", null } };
 
         callGoodBatch(params);
     }
@@ -142,7 +142,7 @@ public class AsyncQueryRunnerTest {
             verify(stmt, times(1)).executeBatch();
             verify(stmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
-        } catch(Exception e) {
+        } catch(final Exception e) {
             caught = true;
         }
 
@@ -153,21 +153,21 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testTooFewParamsBatch() throws Exception {
-        String[][] params = new String[][] { { "unit" }, { "test" } };
+        final String[][] params = new String[][] { { "unit" }, { "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
     public void testTooManyParamsBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit", "unit" }, { "test", "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit", "unit" }, { "test", "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test(expected=ExecutionException.class)
     public void testNullConnectionBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
@@ -177,7 +177,7 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=ExecutionException.class)
     public void testNullSqlBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         when(meta.getParameterCount()).thenReturn(2);
 
@@ -193,7 +193,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testAddBatchException() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(stmt).addBatch();
 
@@ -202,7 +202,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testExecuteBatchException() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(stmt).executeBatch();
 
@@ -282,7 +282,7 @@ public class AsyncQueryRunnerTest {
             verify(results, times(1)).close();
             verify(stmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(Exception e) {
+        } catch(final Exception e) {
             caught = true;
         }
 
@@ -418,7 +418,7 @@ public class AsyncQueryRunnerTest {
             verify(stmt, times(1)).executeUpdate();
             verify(stmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(Exception e) {
+        } catch(final Exception e) {
             caught = true;
         }
 
@@ -444,7 +444,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testInsertUsesGivenQueryRunner() throws Exception {
-        QueryRunner mockQueryRunner = mock(QueryRunner.class
+        final QueryRunner mockQueryRunner = mock(QueryRunner.class
                 , org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
                 );
         runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);

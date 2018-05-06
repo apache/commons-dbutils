@@ -85,12 +85,12 @@ public class BeanProcessor {
         primitiveDefaults.put(Character.TYPE, Character.valueOf((char) 0));
 
         // Use a ServiceLoader to find implementations
-        for (ColumnHandler handler : ServiceLoader.load(ColumnHandler.class)) {
+        for (final ColumnHandler handler : ServiceLoader.load(ColumnHandler.class)) {
             columnHandlers.add(handler);
         }
 
         // Use a ServiceLoader to find implementations
-        for (PropertyHandler handler : ServiceLoader.load(PropertyHandler.class)) {
+        for (final PropertyHandler handler : ServiceLoader.load(PropertyHandler.class)) {
             propertyHandlers.add(handler);
         }
     }
@@ -150,7 +150,7 @@ public class BeanProcessor {
      * @return the newly created bean
      */
     public <T> T toBean(final ResultSet rs, final Class<? extends T> type) throws SQLException {
-        T bean = this.newInstance(type);
+        final T bean = this.newInstance(type);
         return this.populateBean(rs, bean);
     }
 
@@ -188,15 +188,15 @@ public class BeanProcessor {
      * @return the newly created List of beans
      */
     public <T> List<T> toBeanList(final ResultSet rs, final Class<? extends T> type) throws SQLException {
-        List<T> results = new ArrayList<>();
+        final List<T> results = new ArrayList<>();
 
         if (!rs.next()) {
             return results;
         }
 
-        PropertyDescriptor[] props = this.propertyDescriptors(type);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+        final PropertyDescriptor[] props = this.propertyDescriptors(type);
+        final ResultSetMetaData rsmd = rs.getMetaData();
+        final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
 
         do {
             results.add(this.createBean(rs, type, props, columnToProperty));
@@ -219,7 +219,7 @@ public class BeanProcessor {
                              final PropertyDescriptor[] props, final int[] columnToProperty)
     throws SQLException {
 
-        T bean = this.newInstance(type);
+        final T bean = this.newInstance(type);
         return populateBean(rs, bean, props, columnToProperty);
     }
 
@@ -232,9 +232,9 @@ public class BeanProcessor {
      * @throws SQLException if a database error occurs.
      */
     public <T> T populateBean(final ResultSet rs, final T bean) throws SQLException {
-        PropertyDescriptor[] props = this.propertyDescriptors(bean.getClass());
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+        final PropertyDescriptor[] props = this.propertyDescriptors(bean.getClass());
+        final ResultSetMetaData rsmd = rs.getMetaData();
+        final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
 
         return populateBean(rs, bean, props, columnToProperty);
     }
@@ -260,8 +260,8 @@ public class BeanProcessor {
                 continue;
             }
 
-            PropertyDescriptor prop = props[columnToProperty[i]];
-            Class<?> propType = prop.getPropertyType();
+            final PropertyDescriptor prop = props[columnToProperty[i]];
+            final Class<?> propType = prop.getPropertyType();
 
             Object value = null;
             if(propType != null) {
@@ -289,15 +289,15 @@ public class BeanProcessor {
     private void callSetter(final Object target, final PropertyDescriptor prop, Object value)
             throws SQLException {
 
-        Method setter = getWriteMethod(target, prop, value);
+        final Method setter = getWriteMethod(target, prop, value);
 
         if (setter == null || setter.getParameterTypes().length != 1) {
             return;
         }
 
         try {
-            Class<?> firstParam = setter.getParameterTypes()[0];
-            for (PropertyHandler handler : propertyHandlers) {
+            final Class<?> firstParam = setter.getParameterTypes()[0];
+            for (final PropertyHandler handler : propertyHandlers) {
                 if (handler.match(firstParam, value)) {
                     value = handler.apply(firstParam, value);
                     break;
@@ -314,15 +314,15 @@ public class BeanProcessor {
                   // value cannot be null here because isCompatibleType allows null
             }
 
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             throw new SQLException(
                 "Cannot set " + prop.getName() + ": " + e.getMessage());
 
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new SQLException(
                 "Cannot set " + prop.getName() + ": " + e.getMessage());
 
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             throw new SQLException(
                 "Cannot set " + prop.getName() + ": " + e.getMessage());
         }
@@ -363,16 +363,16 @@ public class BeanProcessor {
 
         try {
             // see if there is a "TYPE" field.  This is present for primitive wrappers.
-            Field typeField = valueType.getField("TYPE");
-            Object primitiveValueType = typeField.get(valueType);
+            final Field typeField = valueType.getField("TYPE");
+            final Object primitiveValueType = typeField.get(valueType);
 
             if (targetType == primitiveValueType) {
                 return true;
             }
-        } catch (NoSuchFieldException e) {
+        } catch (final NoSuchFieldException e) {
             // lacking the TYPE field is a good sign that we're not working with a primitive wrapper.
             // we can't match for compatibility
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             // an inaccessible TYPE field is a good sign that we're not working with a primitive wrapper.
             // nothing to do.  we can't match for compatibility
         }
@@ -389,7 +389,7 @@ public class BeanProcessor {
      *         there is no suitable write method.
      */
     protected Method getWriteMethod(final Object target, final PropertyDescriptor prop, final Object value) {
-        Method method = prop.getWriteMethod();
+        final Method method = prop.getWriteMethod();
         return method;
     }
 
@@ -407,11 +407,11 @@ public class BeanProcessor {
         try {
             return c.newInstance();
 
-        } catch (InstantiationException e) {
+        } catch (final InstantiationException e) {
             throw new SQLException(
                 "Cannot create " + c.getName() + ": " + e.getMessage());
 
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             throw new SQLException(
                 "Cannot create " + c.getName() + ": " + e.getMessage());
         }
@@ -431,7 +431,7 @@ public class BeanProcessor {
         try {
             beanInfo = Introspector.getBeanInfo(c);
 
-        } catch (IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             throw new SQLException(
                 "Bean introspection failed: " + e.getMessage());
         }
@@ -459,8 +459,8 @@ public class BeanProcessor {
     protected int[] mapColumnsToProperties(final ResultSetMetaData rsmd,
             final PropertyDescriptor[] props) throws SQLException {
 
-        int cols = rsmd.getColumnCount();
-        int[] columnToProperty = new int[cols + 1];
+        final int cols = rsmd.getColumnCount();
+        final int[] columnToProperty = new int[cols + 1];
         Arrays.fill(columnToProperty, PROPERTY_NOT_FOUND);
 
         for (int col = 1; col <= cols; col++) {
@@ -520,7 +520,7 @@ public class BeanProcessor {
             return null;
         }
 
-        for (ColumnHandler handler : columnHandlers) {
+        for (final ColumnHandler handler : columnHandlers) {
             if (handler.match(propType)) {
                 retval = handler.apply(rs, index);
                 break;

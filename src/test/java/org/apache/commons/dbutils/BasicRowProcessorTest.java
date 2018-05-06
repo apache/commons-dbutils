@@ -92,7 +92,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToBeanList() throws SQLException, ParseException {
 
-        List<TestBean> list = processor.toBeanList(this.rs, TestBean.class);
+        final List<TestBean> list = processor.toBeanList(this.rs, TestBean.class);
         assertNotNull(list);
         assertEquals(ROWS, list.size());
 
@@ -141,9 +141,9 @@ public class BasicRowProcessorTest extends BaseTestCase {
     public void testToMapOrdering() throws SQLException {
 
         assertTrue(this.rs.next());
-        Map<String, Object> m = processor.toMap(this.rs);
+        final Map<String, Object> m = processor.toMap(this.rs);
 
-        Iterator<String> itr = m.keySet().iterator();
+        final Iterator<String> itr = m.keySet().iterator();
         assertEquals("one", itr.next());
         assertEquals("two", itr.next());
         assertEquals("three", itr.next());
