@@ -340,10 +340,9 @@ public class MockResultSet implements InvocationHandler {
     protected Boolean next() throws SQLException {
         if (!this.iter.hasNext()) {
             return Boolean.FALSE;
-        } else {
-            this.currentRow = iter.next();
-            return Boolean.TRUE;
         }
+        this.currentRow = iter.next();
+        return Boolean.TRUE;
     }
 
     /**
