@@ -48,7 +48,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * Constructor for ResultSetIterator.
      * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
      */
-    public ResultSetIterator(ResultSet rs) {
+    public ResultSetIterator(final ResultSet rs) {
         this(rs, new BasicRowProcessor());
     }
 
@@ -59,7 +59,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * <code>Object[]</code>.  Defaults to a
      * <code>BasicRowProcessor</code>.
      */
-    public ResultSetIterator(ResultSet rs, RowProcessor convert) {
+    public ResultSetIterator(final ResultSet rs, final RowProcessor convert) {
         this.rs = rs;
         this.convert = convert;
     }
@@ -117,7 +117,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * @param e SQLException to rethrow
      * @since DbUtils 1.1
      */
-    protected void rethrow(SQLException e) {
+    protected void rethrow(final SQLException e) {
         throw new RuntimeException(e.getMessage());
     }
 

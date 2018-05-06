@@ -194,7 +194,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
     }
 
-    private static void assertArrayEquals(byte[] expected, byte[] actual) {
+    private static void assertArrayEquals(final byte[] expected, final byte[] actual) {
         if (expected == actual) {
             return;
         }
@@ -820,7 +820,7 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
      */
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args)
+    public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
         Class<?> returnType = method.getReturnType();
@@ -863,7 +863,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     }
 
     @Override
-    public byte[] getBytes(long param, int param1) throws SQLException {
+    public byte[] getBytes(final long param, final int param1) throws SQLException {
         return new byte[0];
     }
 
@@ -873,33 +873,33 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
     }
 
     @Override
-    public long position(byte[] values, long param) throws SQLException {
+    public long position(final byte[] values, final long param) throws SQLException {
         return 0;
     }
 
     @Override
-    public long position(Blob blob, long param) throws SQLException {
+    public long position(final Blob blob, final long param) throws SQLException {
         return 0;
     }
 
     @Override
-    public void truncate(long len) throws SQLException {
+    public void truncate(final long len) throws SQLException {
 
     }
 
     @Override
-    public int setBytes(long pos, byte[] bytes) throws SQLException {
+    public int setBytes(final long pos, final byte[] bytes) throws SQLException {
         return 0;
     }
 
     @Override
-    public int setBytes(long pos, byte[] bytes, int offset, int len)
+    public int setBytes(final long pos, final byte[] bytes, final int offset, final int len)
         throws SQLException {
         return 0;
     }
 
     @Override
-    public OutputStream setBinaryStream(long pos) throws SQLException {
+    public OutputStream setBinaryStream(final long pos) throws SQLException {
         return null;
     }
 
@@ -915,7 +915,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
      * @throws SQLException
      */
     @Override
-    public InputStream getBinaryStream(long pos, long length) throws SQLException {
+    public InputStream getBinaryStream(final long pos, final long length) throws SQLException {
       return null;
     }
 
@@ -934,7 +934,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     }
 
     @Override
-    public String getSubString(long param, int param1) throws SQLException {
+    public String getSubString(final long param, final int param1) throws SQLException {
         return "";
     }
 
@@ -944,37 +944,37 @@ class SqlNullCheckedResultSetMockClob implements Clob {
     }
 
     @Override
-    public long position(Clob clob, long param) throws SQLException {
+    public long position(final Clob clob, final long param) throws SQLException {
         return 0;
     }
 
     @Override
-    public long position(String str, long param) throws SQLException {
+    public long position(final String str, final long param) throws SQLException {
         return 0;
     }
 
     @Override
-    public void truncate(long len) throws SQLException {
+    public void truncate(final long len) throws SQLException {
 
     }
 
     @Override
-    public OutputStream setAsciiStream(long pos) throws SQLException {
+    public OutputStream setAsciiStream(final long pos) throws SQLException {
         return null;
     }
 
     @Override
-    public Writer setCharacterStream(long pos) throws SQLException {
+    public Writer setCharacterStream(final long pos) throws SQLException {
         return null;
     }
 
     @Override
-    public int setString(long pos, String str) throws SQLException {
+    public int setString(final long pos, final String str) throws SQLException {
         return 0;
     }
 
     @Override
-    public int setString(long pos, String str, int offset, int len)
+    public int setString(final long pos, final String str, final int offset, final int len)
         throws SQLException {
         return 0;
     }
@@ -991,7 +991,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
      * @throws SQLException
      */
     @Override
-    public Reader getCharacterStream(long pos, long length) throws SQLException {
+    public Reader getCharacterStream(final long pos, final long length) throws SQLException {
       return null;
     }
 
@@ -1010,12 +1010,12 @@ class SqlNullCheckedResultSetMockRef implements Ref {
     }
 
     @Override
-    public void setObject(Object value) throws SQLException {
+    public void setObject(final Object value) throws SQLException {
 
     }
 
     @Override
-    public Object getObject(Map<String,Class<?>> map) throws SQLException {
+    public Object getObject(final Map<String,Class<?>> map) throws SQLException {
         return null;
     }
 

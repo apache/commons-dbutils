@@ -108,7 +108,7 @@ public class BeanProcessor {
      * @param columnToPropertyOverrides ResultSet column to bean property name overrides
      * @since 1.5
      */
-    public BeanProcessor(Map<String, String> columnToPropertyOverrides) {
+    public BeanProcessor(final Map<String, String> columnToPropertyOverrides) {
         super();
         if (columnToPropertyOverrides == null) {
             throw new IllegalArgumentException("columnToPropertyOverrides map cannot be null");
@@ -149,7 +149,7 @@ public class BeanProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
-    public <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException {
+    public <T> T toBean(final ResultSet rs, final Class<? extends T> type) throws SQLException {
         T bean = this.newInstance(type);
         return this.populateBean(rs, bean);
     }
@@ -187,7 +187,7 @@ public class BeanProcessor {
      * @throws SQLException if a database access error occurs
      * @return the newly created List of beans
      */
-    public <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException {
+    public <T> List<T> toBeanList(final ResultSet rs, final Class<? extends T> type) throws SQLException {
         List<T> results = new ArrayList<>();
 
         if (!rs.next()) {
@@ -215,8 +215,8 @@ public class BeanProcessor {
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    private <T> T createBean(ResultSet rs, Class<T> type,
-                             PropertyDescriptor[] props, int[] columnToProperty)
+    private <T> T createBean(final ResultSet rs, final Class<T> type,
+                             final PropertyDescriptor[] props, final int[] columnToProperty)
     throws SQLException {
 
         T bean = this.newInstance(type);
@@ -231,7 +231,7 @@ public class BeanProcessor {
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    public <T> T populateBean(ResultSet rs, T bean) throws SQLException {
+    public <T> T populateBean(final ResultSet rs, final T bean) throws SQLException {
         PropertyDescriptor[] props = this.propertyDescriptors(bean.getClass());
         ResultSetMetaData rsmd = rs.getMetaData();
         int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
@@ -250,8 +250,8 @@ public class BeanProcessor {
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    private <T> T populateBean(ResultSet rs, T bean,
-            PropertyDescriptor[] props, int[] columnToProperty)
+    private <T> T populateBean(final ResultSet rs, final T bean,
+            final PropertyDescriptor[] props, final int[] columnToProperty)
             throws SQLException {
 
         for (int i = 1; i < columnToProperty.length; i++) {
@@ -286,7 +286,7 @@ public class BeanProcessor {
      * @param value The value to pass into the setter.
      * @throws SQLException if an error occurs setting the property.
      */
-    private void callSetter(Object target, PropertyDescriptor prop, Object value)
+    private void callSetter(final Object target, final PropertyDescriptor prop, Object value)
             throws SQLException {
 
         Method setter = getWriteMethod(target, prop, value);
@@ -339,7 +339,7 @@ public class BeanProcessor {
      * @param type The setter's parameter type (non-null)
      * @return boolean True if the value is compatible (null => true)
      */
-    private boolean isCompatibleType(Object value, Class<?> type) {
+    private boolean isCompatibleType(final Object value, final Class<?> type) {
         // Do object check first, then primitives
         if (value == null || type.isInstance(value) || matchesPrimitive(type, value.getClass())) {
             return true;
@@ -356,7 +356,7 @@ public class BeanProcessor {
      * @param valueType The value to match to the primitive type.
      * @return Whether <code>valueType</code> can be coerced (e.g. autoboxed) into <code>targetType</code>.
      */
-    private boolean matchesPrimitive(Class<?> targetType, Class<?> valueType) {
+    private boolean matchesPrimitive(final Class<?> targetType, final Class<?> valueType) {
         if (!targetType.isPrimitive()) {
             return false;
         }
@@ -388,7 +388,7 @@ public class BeanProcessor {
      * @return The {@link java.lang.reflect.Method} to call on {@code target} to write {@code value} or {@code null} if
      *         there is no suitable write method.
      */
-    protected Method getWriteMethod(Object target, PropertyDescriptor prop, Object value) {
+    protected Method getWriteMethod(final Object target, final PropertyDescriptor prop, final Object value) {
         Method method = prop.getWriteMethod();
         return method;
     }
@@ -403,7 +403,7 @@ public class BeanProcessor {
      * @return A newly created object of the Class.
      * @throws SQLException if creation failed.
      */
-    protected <T> T newInstance(Class<T> c) throws SQLException {
+    protected <T> T newInstance(final Class<T> c) throws SQLException {
         try {
             return c.newInstance();
 
@@ -424,7 +424,7 @@ public class BeanProcessor {
      * @return A PropertyDescriptor[] describing the Class.
      * @throws SQLException if introspection failed.
      */
-    private PropertyDescriptor[] propertyDescriptors(Class<?> c)
+    private PropertyDescriptor[] propertyDescriptors(final Class<?> c)
         throws SQLException {
         // Introspector caches BeanInfo classes for better performance
         BeanInfo beanInfo = null;
@@ -456,8 +456,8 @@ public class BeanProcessor {
      * @return An int[] with column index to property index mappings.  The 0th
      * element is meaningless because JDBC column indexing starts at 1.
      */
-    protected int[] mapColumnsToProperties(ResultSetMetaData rsmd,
-            PropertyDescriptor[] props) throws SQLException {
+    protected int[] mapColumnsToProperties(final ResultSetMetaData rsmd,
+            final PropertyDescriptor[] props) throws SQLException {
 
         int cols = rsmd.getColumnCount();
         int[] columnToProperty = new int[cols + 1];
@@ -511,7 +511,7 @@ public class BeanProcessor {
      * index after optional type processing or <code>null</code> if the column
      * value was SQL NULL.
      */
-    protected Object processColumn(ResultSet rs, int index, Class<?> propType)
+    protected Object processColumn(final ResultSet rs, final int index, final Class<?> propType)
         throws SQLException {
 
         Object retval = rs.getObject(index);

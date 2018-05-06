@@ -39,19 +39,19 @@ public class MockResultSetMetaData implements InvocationHandler {
      * @param columnNames
      * @return the proxy object
      */
-    public static ResultSetMetaData create(String[] columnNames) {
+    public static ResultSetMetaData create(final String[] columnNames) {
         return ProxyFactory.instance().createResultSetMetaData(
             new MockResultSetMetaData(columnNames));
     }
 
-    public MockResultSetMetaData(String[] columnNames) {
+    public MockResultSetMetaData(final String[] columnNames) {
         super();
         this.columnNames = columnNames;
         this.columnLabels = new String[columnNames.length];
 
     }
 
-    public MockResultSetMetaData(String[] columnNames, String[] columnLabels) {
+    public MockResultSetMetaData(final String[] columnNames, final String[] columnLabels) {
         super();
         this.columnNames = columnNames;
         this.columnLabels = columnLabels;
@@ -59,7 +59,7 @@ public class MockResultSetMetaData implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args)
+    public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
         String methodName = method.getName();

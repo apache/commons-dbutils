@@ -64,7 +64,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into arrays.
      */
-    public ArrayHandler(RowProcessor convert) {
+    public ArrayHandler(final RowProcessor convert) {
         super();
         this.convert = convert;
     }
@@ -79,7 +79,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public Object[] handle(ResultSet rs) throws SQLException {
+    public Object[] handle(final ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toArray(rs) : EMPTY_ARRAY;
     }
 

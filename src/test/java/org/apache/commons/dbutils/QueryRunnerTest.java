@@ -86,7 +86,7 @@ public class QueryRunnerTest {
     // Batch test cases
     //
 
-    private void callGoodBatch(Connection conn, Object[][] params) throws Exception {
+    private void callGoodBatch(final Connection conn, final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch(conn, "select * from blah where ? = ?", params);
 
@@ -96,7 +96,7 @@ public class QueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.batch(Connection, String, Object[][]) does not close connections
     }
 
-    private void callGoodBatch(Object[][] params) throws Exception {
+    private void callGoodBatch(final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch("select * from blah where ? = ?", params);
 
@@ -139,7 +139,7 @@ public class QueryRunnerTest {
 
 
     // helper method for calling batch when an exception is expected
-    private void callBatchWithException(String sql, Object[][] params) throws Exception {
+    private void callBatchWithException(final String sql, final Object[][] params) throws Exception {
         boolean caught = false;
 
         try {
@@ -220,7 +220,7 @@ public class QueryRunnerTest {
     //
     // Query test cases
     //
-    private void callGoodQuery(Connection conn) throws Exception {
+    private void callGoodQuery(final Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
 
@@ -277,7 +277,7 @@ public class QueryRunnerTest {
 
 
     // helper method for calling batch when an exception is expected
-    private void callQueryWithException(Object... params) throws Exception {
+    private void callQueryWithException(final Object... params) throws Exception {
         boolean caught = false;
 
         try {
@@ -346,7 +346,7 @@ public class QueryRunnerTest {
     //
     // Update test cases
     //
-    private void callGoodUpdate(Connection conn) throws Exception {
+    private void callGoodUpdate(final Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.update(conn, "update blah set ? = ?", "unit", "test");
 
@@ -447,7 +447,7 @@ public class QueryRunnerTest {
         ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
         {
             @Override
-            public List<Object> handle(ResultSet rs) throws SQLException
+            public List<Object> handle(final ResultSet rs) throws SQLException
             {
                 List<Object> objects = new ArrayList<>();
                 while (rs.next())
@@ -475,7 +475,7 @@ public class QueryRunnerTest {
     }
 
     // helper method for calling batch when an exception is expected
-    private void callUpdateWithException(Object... params) throws Exception {
+    private void callUpdateWithException(final Object... params) throws Exception {
         boolean caught = false;
 
         try {
@@ -547,7 +547,7 @@ public class QueryRunnerTest {
     //
     // Execute tests
     //
-    private void callGoodExecute(Connection conn) throws Exception {
+    private void callGoodExecute(final Connection conn) throws Exception {
         when(call.execute()).thenReturn(false);
         when(call.getUpdateCount()).thenReturn(3);
 
@@ -701,7 +701,7 @@ public class QueryRunnerTest {
     }
 
     // helper method for calling execute when an exception is expected
-    private void callExecuteWithException(Object... params) throws Exception {
+    private void callExecuteWithException(final Object... params) throws Exception {
         boolean caught = false;
 
         try {
@@ -773,7 +773,7 @@ public class QueryRunnerTest {
         {
             int count = 1;
             @Override
-            public Boolean answer(InvocationOnMock invocation)
+            public Boolean answer(final InvocationOnMock invocation)
             {
                 return ++count <= 3;
             }
@@ -789,7 +789,7 @@ public class QueryRunnerTest {
 
     }
 
-    private void callGoodExecuteWithResultSet(Connection conn) throws Exception {
+    private void callGoodExecuteWithResultSet(final Connection conn) throws Exception {
         when(call.execute()).thenReturn(true);
 
         when(meta.getParameterCount()).thenReturn(2);
@@ -937,7 +937,7 @@ public class QueryRunnerTest {
     }
 
     // helper method for calling execute when an exception is expected
-    private void callExecuteWithResultSetWithException(Object... params) throws Exception {
+    private void callExecuteWithResultSetWithException(final Object... params) throws Exception {
         boolean caught = false;
 
         try {
@@ -1007,11 +1007,11 @@ public class QueryRunnerTest {
         private String c;
 
         public int getA() {    return a; }
-        public void setA(int a) { this.a = a; }
+        public void setA(final int a) { this.a = a; }
         public double getB() { return b; }
-        public void setB(double b) { this.b = b; }
+        public void setB(final double b) { this.b = b; }
         public String getC() { return c; }
-        public void setC(String c) { this.c = c; }
+        public void setC(final String c) { this.c = c; }
     }
 
     @Test

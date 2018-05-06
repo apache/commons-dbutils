@@ -52,7 +52,7 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Maps.
      */
-    public MapHandler(RowProcessor convert) {
+    public MapHandler(final RowProcessor convert) {
         super();
         this.convert = convert;
     }
@@ -69,7 +69,7 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public Map<String, Object> handle(ResultSet rs) throws SQLException {
+    public Map<String, Object> handle(final ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toMap(rs) : null;
     }
 

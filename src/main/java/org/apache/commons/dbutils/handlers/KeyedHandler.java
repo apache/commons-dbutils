@@ -83,7 +83,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Maps
      */
-    public KeyedHandler(RowProcessor convert) {
+    public KeyedHandler(final RowProcessor convert) {
         this(convert, 1, null);
     }
 
@@ -93,7 +93,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * @param columnIndex The values to use as keys in the Map are
      * retrieved from the column at this index.
      */
-    public KeyedHandler(int columnIndex) {
+    public KeyedHandler(final int columnIndex) {
         this(ArrayHandler.ROW_PROCESSOR, columnIndex, null);
     }
 
@@ -103,7 +103,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * @param columnName The values to use as keys in the Map are
      * retrieved from the column with this name.
      */
-    public KeyedHandler(String columnName) {
+    public KeyedHandler(final String columnName) {
         this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
@@ -115,8 +115,8 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * @param columnName The values to use as keys in the Map are
      * retrieved from the column with this name.
      */
-    private KeyedHandler(RowProcessor convert, int columnIndex,
-            String columnName) {
+    private KeyedHandler(final RowProcessor convert, final int columnIndex,
+            final String columnName) {
         super();
         this.convert = convert;
         this.columnIndex = columnIndex;
@@ -137,7 +137,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    protected K createKey(ResultSet rs) throws SQLException {
+    protected K createKey(final ResultSet rs) throws SQLException {
         return (columnName == null) ?
                (K) rs.getObject(columnIndex) :
                (K) rs.getObject(columnName);
@@ -154,7 +154,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * @throws SQLException if a database access error occurs
      */
     @Override
-    protected Map<String, Object> createRow(ResultSet rs) throws SQLException {
+    protected Map<String, Object> createRow(final ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);
     }
 

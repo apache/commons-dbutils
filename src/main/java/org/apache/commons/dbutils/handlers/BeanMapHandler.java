@@ -86,7 +86,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      *            The Class that objects returned from <code>createRow()</code>
      *            are created from.
      */
-    public BeanMapHandler(Class<V> type) {
+    public BeanMapHandler(final Class<V> type) {
         this(type, ArrayHandler.ROW_PROCESSOR, 1, null);
     }
 
@@ -101,7 +101,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      *            The <code>RowProcessor</code> implementation to use when
      *            converting rows into Beans
      */
-    public BeanMapHandler(Class<V> type, RowProcessor convert) {
+    public BeanMapHandler(final Class<V> type, final RowProcessor convert) {
         this(type, convert, 1, null);
     }
 
@@ -115,7 +115,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      *            The values to use as keys in the Map are retrieved from the
      *            column at this index.
      */
-    public BeanMapHandler(Class<V> type, int columnIndex) {
+    public BeanMapHandler(final Class<V> type, final int columnIndex) {
         this(type, ArrayHandler.ROW_PROCESSOR, columnIndex, null);
     }
 
@@ -129,7 +129,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      *            The values to use as keys in the Map are retrieved from the
      *            column with this name.
      */
-    public BeanMapHandler(Class<V> type, String columnName) {
+    public BeanMapHandler(final Class<V> type, final String columnName) {
         this(type, ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
@@ -146,8 +146,8 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      *            The values to use as keys in the Map are retrieved from the
      *            column with this name.
      */
-    private BeanMapHandler(Class<V> type, RowProcessor convert,
-            int columnIndex, String columnName) {
+    private BeanMapHandler(final Class<V> type, final RowProcessor convert,
+            final int columnIndex, final String columnName) {
         super();
         this.type = type;
         this.convert = convert;
@@ -171,14 +171,14 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    protected K createKey(ResultSet rs) throws SQLException {
+    protected K createKey(final ResultSet rs) throws SQLException {
         return (columnName == null) ?
                (K) rs.getObject(columnIndex) :
                (K) rs.getObject(columnName);
     }
 
     @Override
-    protected V createRow(ResultSet rs) throws SQLException {
+    protected V createRow(final ResultSet rs) throws SQLException {
         return this.convert.toBean(rs, type);
     }
 

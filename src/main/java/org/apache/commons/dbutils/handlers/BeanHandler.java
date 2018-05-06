@@ -48,7 +48,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
      * @param type The Class that objects returned from <code>handle()</code>
      * are created from.
      */
-    public BeanHandler(Class<? extends T> type) {
+    public BeanHandler(final Class<? extends T> type) {
         this(type, ArrayHandler.ROW_PROCESSOR);
     }
 
@@ -60,7 +60,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into beans.
      */
-    public BeanHandler(Class<? extends T> type, RowProcessor convert) {
+    public BeanHandler(final Class<? extends T> type, final RowProcessor convert) {
         this.type = type;
         this.convert = convert;
     }
@@ -76,7 +76,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public T handle(ResultSet rs) throws SQLException {
+    public T handle(final ResultSet rs) throws SQLException {
         return rs.next() ? this.convert.toBean(rs, this.type) : null;
     }
 

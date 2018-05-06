@@ -22,7 +22,7 @@ import org.apache.commons.dbutils.PropertyHandler;
 
 public class DatePropertyHandler implements PropertyHandler {
     @Override
-    public boolean match(Class<?> parameter, Object value) {
+    public boolean match(final Class<?> parameter, final Object value) {
         if (value instanceof java.util.Date) {
             final String targetType = parameter.getName();
             if ("java.sql.Date".equals(targetType)) {
@@ -40,7 +40,7 @@ public class DatePropertyHandler implements PropertyHandler {
     }
 
     @Override
-    public Object apply(Class<?> parameter, Object value) {
+    public Object apply(final Class<?> parameter, Object value) {
         final String targetType = parameter.getName();
         if ("java.sql.Date".equals(targetType)) {
             value = new java.sql.Date(((java.util.Date) value).getTime());

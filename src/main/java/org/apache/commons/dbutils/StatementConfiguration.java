@@ -35,8 +35,8 @@ public class StatementConfiguration {
      * @param maxRows The maximum number of rows that a <code>ResultSet</code> can produce.
      * @param queryTimeout The number of seconds the driver will wait for execution.
      */
-    public StatementConfiguration(Integer fetchDirection, Integer fetchSize, Integer maxFieldSize, Integer maxRows,
-                                  Integer queryTimeout) {
+    public StatementConfiguration(final Integer fetchDirection, final Integer fetchSize, final Integer maxFieldSize, final Integer maxRows,
+                                  final Integer queryTimeout) {
         this.fetchDirection = fetchDirection;
         this.fetchSize = fetchSize;
         this.maxFieldSize = maxFieldSize;

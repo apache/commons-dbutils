@@ -85,15 +85,15 @@ public class TestBean {
         return two;
     }
 
-    public void setOne(String string) {
+    public void setOne(final String string) {
         one = string;
     }
 
-    public void setThree(Ordinal ordinal) {
+    public void setThree(final Ordinal ordinal) {
         three = ordinal;
     }
 
-    public void setTwo(String string) {
+    public void setTwo(final String string) {
         two = string;
     }
 
@@ -101,7 +101,7 @@ public class TestBean {
         return doNotSet;
     }
 
-    public void setDoNotSet(String string) {
+    public void setDoNotSet(final String string) {
         doNotSet = string;
     }
 
@@ -113,11 +113,11 @@ public class TestBean {
         return intTest;
     }
 
-    public void setIntegerTest(Integer integer) {
+    public void setIntegerTest(final Integer integer) {
         integerTest = integer;
     }
 
-    public void setIntTest(int i) {
+    public void setIntTest(final int i) {
         intTest = i;
     }
 
@@ -129,11 +129,11 @@ public class TestBean {
         return nullPrimitiveTest;
     }
 
-    public void setNullObjectTest(Object object) {
+    public void setNullObjectTest(final Object object) {
         nullObjectTest = object;
     }
 
-    public void setNullPrimitiveTest(int i) {
+    public void setNullPrimitiveTest(final int i) {
         nullPrimitiveTest = i;
     }
 
@@ -141,7 +141,7 @@ public class TestBean {
         return notDate;
     }
 
-    public void setNotDate(String string) {
+    public void setNotDate(final String string) {
         notDate = string;
     }
 
@@ -149,7 +149,7 @@ public class TestBean {
         return columnProcessorDoubleTest;
     }
 
-    public void setColumnProcessorDoubleTest(double d) {
+    public void setColumnProcessorDoubleTest(final double d) {
         columnProcessorDoubleTest = d;
     }
 

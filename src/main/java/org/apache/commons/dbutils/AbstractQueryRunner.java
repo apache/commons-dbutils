@@ -76,7 +76,7 @@ public abstract class AbstractQueryRunner {
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
      */
-    public AbstractQueryRunner(boolean pmdKnownBroken) {
+    public AbstractQueryRunner(final boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
         ds = null;
         this.stmtConfig = null;
@@ -90,7 +90,7 @@ public abstract class AbstractQueryRunner {
      * @param ds
      *            The <code>DataSource</code> to retrieve connections from.
      */
-    public AbstractQueryRunner(DataSource ds) {
+    public AbstractQueryRunner(final DataSource ds) {
         this.ds = ds;
         this.stmtConfig = null;
     }
@@ -110,7 +110,7 @@ public abstract class AbstractQueryRunner {
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
      */
-    public AbstractQueryRunner(DataSource ds, boolean pmdKnownBroken) {
+    public AbstractQueryRunner(final DataSource ds, final boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
         this.ds = ds;
         this.stmtConfig = null;
@@ -127,7 +127,7 @@ public abstract class AbstractQueryRunner {
      * and if it breaks, we'll remember not to use it again.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public AbstractQueryRunner(DataSource ds, boolean pmdKnownBroken, StatementConfiguration stmtConfig) {
+    public AbstractQueryRunner(final DataSource ds, final boolean pmdKnownBroken, final StatementConfiguration stmtConfig) {
         this.pmdKnownBroken = pmdKnownBroken;
         this.ds = ds;
         this.stmtConfig = stmtConfig;
@@ -142,7 +142,7 @@ public abstract class AbstractQueryRunner {
      * @param ds The <code>DataSource</code> to retrieve connections from.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public AbstractQueryRunner(DataSource ds, StatementConfiguration stmtConfig) {
+    public AbstractQueryRunner(final DataSource ds, final StatementConfiguration stmtConfig) {
         this.ds = ds;
         this.stmtConfig = stmtConfig;
     }
@@ -153,7 +153,7 @@ public abstract class AbstractQueryRunner {
      *
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public AbstractQueryRunner(StatementConfiguration stmtConfig) {
+    public AbstractQueryRunner(final StatementConfiguration stmtConfig) {
         this.ds = null;
         this.stmtConfig = stmtConfig;
     }
@@ -169,7 +169,7 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      * @since DbUtils 1.1
      */
-    protected void close(Connection conn) throws SQLException {
+    protected void close(final Connection conn) throws SQLException {
         DbUtils.close(conn);
     }
 
@@ -184,7 +184,7 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      * @since DbUtils 1.1
      */
-    protected void close(ResultSet rs) throws SQLException {
+    protected void close(final ResultSet rs) throws SQLException {
         DbUtils.close(rs);
     }
 
@@ -199,7 +199,7 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      * @since DbUtils 1.1
      */
-    protected void close(Statement stmt) throws SQLException {
+    protected void close(final Statement stmt) throws SQLException {
         DbUtils.close(stmt);
     }
 
@@ -209,7 +209,7 @@ public abstract class AbstractQueryRunner {
      * @param conn Connection to close.
      * @since 2.0
      */
-    protected void closeQuietly(Connection conn) {
+    protected void closeQuietly(final Connection conn) {
         DbUtils.closeQuietly(conn);
     }
 
@@ -219,7 +219,7 @@ public abstract class AbstractQueryRunner {
      * @param rs ResultSet to close.
      * @since 2.0
      */
-    protected void closeQuietly(ResultSet rs) {
+    protected void closeQuietly(final ResultSet rs) {
         DbUtils.closeQuietly(rs);
     }
 
@@ -229,11 +229,11 @@ public abstract class AbstractQueryRunner {
      * @param statement ResultSet to close.
      * @since 2.0
      */
-    protected void closeQuietly(Statement statement) {
+    protected void closeQuietly(final Statement statement) {
         DbUtils.closeQuietly(statement);
     }
 
-    private void configureStatement(Statement stmt) throws SQLException {
+    private void configureStatement(final Statement stmt) throws SQLException {
 
         if (stmtConfig != null) {
             if (stmtConfig.isFetchDirectionSet()) {
@@ -270,7 +270,7 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             if a database access error occurs
      */
-    public void fillStatement(PreparedStatement stmt, Object... params)
+    public void fillStatement(final PreparedStatement stmt, final Object... params)
             throws SQLException {
 
         // check the parameter count, if we can
@@ -349,8 +349,8 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             if a database access error occurs
      */
-    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
-            PropertyDescriptor[] properties) throws SQLException {
+    public void fillStatementWithBean(final PreparedStatement stmt, final Object bean,
+            final PropertyDescriptor[] properties) throws SQLException {
         Object[] params = new Object[properties.length];
         for (int i = 0; i < properties.length; i++) {
             PropertyDescriptor property = properties[i];
@@ -392,8 +392,8 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             If a database access error occurs
      */
-    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
-            String... propertyNames) throws SQLException {
+    public void fillStatementWithBean(final PreparedStatement stmt, final Object bean,
+            final String... propertyNames) throws SQLException {
         PropertyDescriptor[] descriptors;
         try {
             descriptors = Introspector.getBeanInfo(bean.getClass())
@@ -469,7 +469,7 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             if a database access error occurs
      */
-    protected CallableStatement prepareCall(Connection conn, String sql)
+    protected CallableStatement prepareCall(final Connection conn, final String sql)
             throws SQLException {
 
         return conn.prepareCall(sql);
@@ -513,7 +513,7 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             if a database access error occurs
      */
-    protected PreparedStatement prepareStatement(Connection conn, String sql)
+    protected PreparedStatement prepareStatement(final Connection conn, final String sql)
             throws SQLException {
 
         @SuppressWarnings("resource")
@@ -550,7 +550,7 @@ public abstract class AbstractQueryRunner {
      *             if a database access error occurs
      * @since 1.6
      */
-    protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
+    protected PreparedStatement prepareStatement(final Connection conn, final String sql, final int returnedKeys)
             throws SQLException {
 
         @SuppressWarnings("resource")
@@ -581,7 +581,7 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             if a database access error occurs
      */
-    protected void rethrow(SQLException cause, String sql, Object... params)
+    protected void rethrow(final SQLException cause, final String sql, final Object... params)
             throws SQLException {
 
         String causeMessage = cause.getMessage();
@@ -630,7 +630,7 @@ public abstract class AbstractQueryRunner {
      *            <code>null</code>.
      * @return The <code>ResultSet</code> wrapped in some decorator.
      */
-    protected ResultSet wrap(ResultSet rs) {
+    protected ResultSet wrap(final ResultSet rs) {
         return rs;
     }
 

@@ -28,7 +28,7 @@ public class ProxyFactoryTest extends BaseTestCase {
     private static final InvocationHandler stub = new InvocationHandler() {
 
         @Override
-        public Object invoke(Object proxy, Method method, Object[] args)
+        public Object invoke(final Object proxy, final Method method, final Object[] args)
             throws Throwable {
 
             return null;

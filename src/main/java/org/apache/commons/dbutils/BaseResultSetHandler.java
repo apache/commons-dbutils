@@ -62,7 +62,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * {@inheritDoc}
      */
     @Override
-    public final T handle(ResultSet rs) throws SQLException {
+    public final T handle(final ResultSet rs) throws SQLException {
         if (this.rs != null) {
             throw new IllegalStateException("Re-entry not allowed!");
         }
@@ -91,7 +91,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#absolute(int)
      */
-    protected final boolean absolute(int row) throws SQLException {
+    protected final boolean absolute(final int row) throws SQLException {
         return rs.absolute(row);
     }
 
@@ -149,7 +149,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#findColumn(java.lang.String)
      */
-    protected final int findColumn(String columnLabel) throws SQLException {
+    protected final int findColumn(final String columnLabel) throws SQLException {
         return rs.findColumn(columnLabel);
     }
 
@@ -168,7 +168,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getArray(int)
      */
-    protected final Array getArray(int columnIndex) throws SQLException {
+    protected final Array getArray(final int columnIndex) throws SQLException {
         return rs.getArray(columnIndex);
     }
 
@@ -178,7 +178,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getArray(java.lang.String)
      */
-    protected final Array getArray(String columnLabel) throws SQLException {
+    protected final Array getArray(final String columnLabel) throws SQLException {
         return rs.getArray(columnLabel);
     }
 
@@ -188,7 +188,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getAsciiStream(int)
      */
-    protected final InputStream getAsciiStream(int columnIndex) throws SQLException {
+    protected final InputStream getAsciiStream(final int columnIndex) throws SQLException {
         return rs.getAsciiStream(columnIndex);
     }
 
@@ -198,7 +198,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getAsciiStream(java.lang.String)
      */
-    protected final InputStream getAsciiStream(String columnLabel) throws SQLException {
+    protected final InputStream getAsciiStream(final String columnLabel) throws SQLException {
         return rs.getAsciiStream(columnLabel);
     }
 
@@ -211,7 +211,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @see java.sql.ResultSet#getBigDecimal(int, int)
      */
     @Deprecated
-    protected final BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
+    protected final BigDecimal getBigDecimal(final int columnIndex, final int scale) throws SQLException {
         return rs.getBigDecimal(columnIndex, scale);
     }
 
@@ -221,7 +221,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBigDecimal(int)
      */
-    protected final BigDecimal getBigDecimal(int columnIndex) throws SQLException {
+    protected final BigDecimal getBigDecimal(final int columnIndex) throws SQLException {
         return rs.getBigDecimal(columnIndex);
     }
 
@@ -234,7 +234,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @see java.sql.ResultSet#getBigDecimal(java.lang.String, int)
      */
     @Deprecated
-    protected final BigDecimal getBigDecimal(String columnLabel, int scale) throws SQLException {
+    protected final BigDecimal getBigDecimal(final String columnLabel, final int scale) throws SQLException {
         return rs.getBigDecimal(columnLabel, scale);
     }
 
@@ -244,7 +244,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBigDecimal(java.lang.String)
      */
-    protected final BigDecimal getBigDecimal(String columnLabel) throws SQLException {
+    protected final BigDecimal getBigDecimal(final String columnLabel) throws SQLException {
         return rs.getBigDecimal(columnLabel);
     }
 
@@ -254,7 +254,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBinaryStream(int)
      */
-    protected final InputStream getBinaryStream(int columnIndex) throws SQLException {
+    protected final InputStream getBinaryStream(final int columnIndex) throws SQLException {
         return rs.getBinaryStream(columnIndex);
     }
 
@@ -264,7 +264,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBinaryStream(java.lang.String)
      */
-    protected final InputStream getBinaryStream(String columnLabel) throws SQLException {
+    protected final InputStream getBinaryStream(final String columnLabel) throws SQLException {
         return rs.getBinaryStream(columnLabel);
     }
 
@@ -274,7 +274,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBlob(int)
      */
-    protected final Blob getBlob(int columnIndex) throws SQLException {
+    protected final Blob getBlob(final int columnIndex) throws SQLException {
         return rs.getBlob(columnIndex);
     }
 
@@ -284,7 +284,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBlob(java.lang.String)
      */
-    protected final Blob getBlob(String columnLabel) throws SQLException {
+    protected final Blob getBlob(final String columnLabel) throws SQLException {
         return rs.getBlob(columnLabel);
     }
 
@@ -294,7 +294,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBoolean(int)
      */
-    protected final boolean getBoolean(int columnIndex) throws SQLException {
+    protected final boolean getBoolean(final int columnIndex) throws SQLException {
         return rs.getBoolean(columnIndex);
     }
 
@@ -304,7 +304,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBoolean(java.lang.String)
      */
-    protected final boolean getBoolean(String columnLabel) throws SQLException {
+    protected final boolean getBoolean(final String columnLabel) throws SQLException {
         return rs.getBoolean(columnLabel);
     }
 
@@ -314,7 +314,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getByte(int)
      */
-    protected final byte getByte(int columnIndex) throws SQLException {
+    protected final byte getByte(final int columnIndex) throws SQLException {
         return rs.getByte(columnIndex);
     }
 
@@ -324,7 +324,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getByte(java.lang.String)
      */
-    protected final byte getByte(String columnLabel) throws SQLException {
+    protected final byte getByte(final String columnLabel) throws SQLException {
         return rs.getByte(columnLabel);
     }
 
@@ -334,7 +334,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBytes(int)
      */
-    protected final byte[] getBytes(int columnIndex) throws SQLException {
+    protected final byte[] getBytes(final int columnIndex) throws SQLException {
         return rs.getBytes(columnIndex);
     }
 
@@ -344,7 +344,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getBytes(java.lang.String)
      */
-    protected final byte[] getBytes(String columnLabel) throws SQLException {
+    protected final byte[] getBytes(final String columnLabel) throws SQLException {
         return rs.getBytes(columnLabel);
     }
 
@@ -354,7 +354,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getCharacterStream(int)
      */
-    protected final Reader getCharacterStream(int columnIndex) throws SQLException {
+    protected final Reader getCharacterStream(final int columnIndex) throws SQLException {
         return rs.getCharacterStream(columnIndex);
     }
 
@@ -364,7 +364,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getCharacterStream(java.lang.String)
      */
-    protected final Reader getCharacterStream(String columnLabel) throws SQLException {
+    protected final Reader getCharacterStream(final String columnLabel) throws SQLException {
         return rs.getCharacterStream(columnLabel);
     }
 
@@ -374,7 +374,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getClob(int)
      */
-    protected final Clob getClob(int columnIndex) throws SQLException {
+    protected final Clob getClob(final int columnIndex) throws SQLException {
         return rs.getClob(columnIndex);
     }
 
@@ -384,7 +384,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getClob(java.lang.String)
      */
-    protected final Clob getClob(String columnLabel) throws SQLException {
+    protected final Clob getClob(final String columnLabel) throws SQLException {
         return rs.getClob(columnLabel);
     }
 
@@ -413,7 +413,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getDate(int, java.util.Calendar)
      */
-    protected final Date getDate(int columnIndex, Calendar cal) throws SQLException {
+    protected final Date getDate(final int columnIndex, final Calendar cal) throws SQLException {
         return rs.getDate(columnIndex, cal);
     }
 
@@ -423,7 +423,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getDate(int)
      */
-    protected final Date getDate(int columnIndex) throws SQLException {
+    protected final Date getDate(final int columnIndex) throws SQLException {
         return rs.getDate(columnIndex);
     }
 
@@ -434,7 +434,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getDate(java.lang.String, java.util.Calendar)
      */
-    protected final Date getDate(String columnLabel, Calendar cal) throws SQLException {
+    protected final Date getDate(final String columnLabel, final Calendar cal) throws SQLException {
         return rs.getDate(columnLabel, cal);
     }
 
@@ -444,7 +444,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getDate(java.lang.String)
      */
-    protected final Date getDate(String columnLabel) throws SQLException {
+    protected final Date getDate(final String columnLabel) throws SQLException {
         return rs.getDate(columnLabel);
     }
 
@@ -454,7 +454,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getDouble(int)
      */
-    protected final double getDouble(int columnIndex) throws SQLException {
+    protected final double getDouble(final int columnIndex) throws SQLException {
         return rs.getDouble(columnIndex);
     }
 
@@ -464,7 +464,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getDouble(java.lang.String)
      */
-    protected final double getDouble(String columnLabel) throws SQLException {
+    protected final double getDouble(final String columnLabel) throws SQLException {
         return rs.getDouble(columnLabel);
     }
 
@@ -492,7 +492,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getFloat(int)
      */
-    protected final float getFloat(int columnIndex) throws SQLException {
+    protected final float getFloat(final int columnIndex) throws SQLException {
         return rs.getFloat(columnIndex);
     }
 
@@ -502,7 +502,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getFloat(java.lang.String)
      */
-    protected final float getFloat(String columnLabel) throws SQLException {
+    protected final float getFloat(final String columnLabel) throws SQLException {
         return rs.getFloat(columnLabel);
     }
 
@@ -521,7 +521,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getInt(int)
      */
-    protected final int getInt(int columnIndex) throws SQLException {
+    protected final int getInt(final int columnIndex) throws SQLException {
         return rs.getInt(columnIndex);
     }
 
@@ -531,7 +531,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getInt(java.lang.String)
      */
-    protected final int getInt(String columnLabel) throws SQLException {
+    protected final int getInt(final String columnLabel) throws SQLException {
         return rs.getInt(columnLabel);
     }
 
@@ -541,7 +541,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getLong(int)
      */
-    protected final long getLong(int columnIndex) throws SQLException {
+    protected final long getLong(final int columnIndex) throws SQLException {
         return rs.getLong(columnIndex);
     }
 
@@ -551,7 +551,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getLong(java.lang.String)
      */
-    protected final long getLong(String columnLabel) throws SQLException {
+    protected final long getLong(final String columnLabel) throws SQLException {
         return rs.getLong(columnLabel);
     }
 
@@ -570,7 +570,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getNCharacterStream(int)
      */
-    protected final Reader getNCharacterStream(int columnIndex) throws SQLException {
+    protected final Reader getNCharacterStream(final int columnIndex) throws SQLException {
         return rs.getNCharacterStream(columnIndex);
     }
 
@@ -580,7 +580,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getNCharacterStream(java.lang.String)
      */
-    protected final Reader getNCharacterStream(String columnLabel) throws SQLException {
+    protected final Reader getNCharacterStream(final String columnLabel) throws SQLException {
         return rs.getNCharacterStream(columnLabel);
     }
 
@@ -590,7 +590,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getNClob(int)
      */
-    protected final NClob getNClob(int columnIndex) throws SQLException {
+    protected final NClob getNClob(final int columnIndex) throws SQLException {
         return rs.getNClob(columnIndex);
     }
 
@@ -600,7 +600,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getNClob(java.lang.String)
      */
-    protected final NClob getNClob(String columnLabel) throws SQLException {
+    protected final NClob getNClob(final String columnLabel) throws SQLException {
         return rs.getNClob(columnLabel);
     }
 
@@ -610,7 +610,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getNString(int)
      */
-    protected final String getNString(int columnIndex) throws SQLException {
+    protected final String getNString(final int columnIndex) throws SQLException {
         return rs.getNString(columnIndex);
     }
 
@@ -620,7 +620,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getNString(java.lang.String)
      */
-    protected final String getNString(String columnLabel) throws SQLException {
+    protected final String getNString(final String columnLabel) throws SQLException {
         return rs.getNString(columnLabel);
     }
 
@@ -631,7 +631,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getObject(int, java.util.Map)
      */
-    protected final Object getObject(int columnIndex, Map<String, Class<?>> map) throws SQLException {
+    protected final Object getObject(final int columnIndex, final Map<String, Class<?>> map) throws SQLException {
         return rs.getObject(columnIndex, map);
     }
 
@@ -641,7 +641,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getObject(int)
      */
-    protected final Object getObject(int columnIndex) throws SQLException {
+    protected final Object getObject(final int columnIndex) throws SQLException {
         return rs.getObject(columnIndex);
     }
 
@@ -652,7 +652,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getObject(java.lang.String, java.util.Map)
      */
-    protected final Object getObject(String columnLabel, Map<String, Class<?>> map) throws SQLException {
+    protected final Object getObject(final String columnLabel, final Map<String, Class<?>> map) throws SQLException {
         return rs.getObject(columnLabel, map);
     }
 
@@ -662,7 +662,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getObject(java.lang.String)
      */
-    protected final Object getObject(String columnLabel) throws SQLException {
+    protected final Object getObject(final String columnLabel) throws SQLException {
         return rs.getObject(columnLabel);
     }
 
@@ -672,7 +672,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getRef(int)
      */
-    protected final Ref getRef(int columnIndex) throws SQLException {
+    protected final Ref getRef(final int columnIndex) throws SQLException {
         return rs.getRef(columnIndex);
     }
 
@@ -682,7 +682,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getRef(java.lang.String)
      */
-    protected final Ref getRef(String columnLabel) throws SQLException {
+    protected final Ref getRef(final String columnLabel) throws SQLException {
         return rs.getRef(columnLabel);
     }
 
@@ -701,7 +701,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getRowId(int)
      */
-    protected final RowId getRowId(int columnIndex) throws SQLException {
+    protected final RowId getRowId(final int columnIndex) throws SQLException {
         return rs.getRowId(columnIndex);
     }
 
@@ -711,7 +711,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getRowId(java.lang.String)
      */
-    protected final RowId getRowId(String columnLabel) throws SQLException {
+    protected final RowId getRowId(final String columnLabel) throws SQLException {
         return rs.getRowId(columnLabel);
     }
 
@@ -721,7 +721,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getSQLXML(int)
      */
-    protected final SQLXML getSQLXML(int columnIndex) throws SQLException {
+    protected final SQLXML getSQLXML(final int columnIndex) throws SQLException {
         return rs.getSQLXML(columnIndex);
     }
 
@@ -731,7 +731,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getSQLXML(java.lang.String)
      */
-    protected final SQLXML getSQLXML(String columnLabel) throws SQLException {
+    protected final SQLXML getSQLXML(final String columnLabel) throws SQLException {
         return rs.getSQLXML(columnLabel);
     }
 
@@ -741,7 +741,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getShort(int)
      */
-    protected final short getShort(int columnIndex) throws SQLException {
+    protected final short getShort(final int columnIndex) throws SQLException {
         return rs.getShort(columnIndex);
     }
 
@@ -751,7 +751,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getShort(java.lang.String)
      */
-    protected final short getShort(String columnLabel) throws SQLException {
+    protected final short getShort(final String columnLabel) throws SQLException {
         return rs.getShort(columnLabel);
     }
 
@@ -770,7 +770,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getString(int)
      */
-    protected final String getString(int columnIndex) throws SQLException {
+    protected final String getString(final int columnIndex) throws SQLException {
         return rs.getString(columnIndex);
     }
 
@@ -780,7 +780,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getString(java.lang.String)
      */
-    protected final String getString(String columnLabel) throws SQLException {
+    protected final String getString(final String columnLabel) throws SQLException {
         return rs.getString(columnLabel);
     }
 
@@ -791,7 +791,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTime(int, java.util.Calendar)
      */
-    protected final Time getTime(int columnIndex, Calendar cal) throws SQLException {
+    protected final Time getTime(final int columnIndex, final Calendar cal) throws SQLException {
         return rs.getTime(columnIndex, cal);
     }
 
@@ -801,7 +801,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTime(int)
      */
-    protected final Time getTime(int columnIndex) throws SQLException {
+    protected final Time getTime(final int columnIndex) throws SQLException {
         return rs.getTime(columnIndex);
     }
 
@@ -812,7 +812,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTime(java.lang.String, java.util.Calendar)
      */
-    protected final Time getTime(String columnLabel, Calendar cal) throws SQLException {
+    protected final Time getTime(final String columnLabel, final Calendar cal) throws SQLException {
         return rs.getTime(columnLabel, cal);
     }
 
@@ -822,7 +822,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTime(java.lang.String)
      */
-    protected final Time getTime(String columnLabel) throws SQLException {
+    protected final Time getTime(final String columnLabel) throws SQLException {
         return rs.getTime(columnLabel);
     }
 
@@ -833,7 +833,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTimestamp(int, java.util.Calendar)
      */
-    protected final Timestamp getTimestamp(int columnIndex, Calendar cal) throws SQLException {
+    protected final Timestamp getTimestamp(final int columnIndex, final Calendar cal) throws SQLException {
         return rs.getTimestamp(columnIndex, cal);
     }
 
@@ -843,7 +843,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTimestamp(int)
      */
-    protected final Timestamp getTimestamp(int columnIndex) throws SQLException {
+    protected final Timestamp getTimestamp(final int columnIndex) throws SQLException {
         return rs.getTimestamp(columnIndex);
     }
 
@@ -854,7 +854,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTimestamp(java.lang.String, java.util.Calendar)
      */
-    protected final Timestamp getTimestamp(String columnLabel, Calendar cal) throws SQLException {
+    protected final Timestamp getTimestamp(final String columnLabel, final Calendar cal) throws SQLException {
         return rs.getTimestamp(columnLabel, cal);
     }
 
@@ -864,7 +864,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getTimestamp(java.lang.String)
      */
-    protected final Timestamp getTimestamp(String columnLabel) throws SQLException {
+    protected final Timestamp getTimestamp(final String columnLabel) throws SQLException {
         return rs.getTimestamp(columnLabel);
     }
 
@@ -883,7 +883,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getURL(int)
      */
-    protected final URL getURL(int columnIndex) throws SQLException {
+    protected final URL getURL(final int columnIndex) throws SQLException {
         return rs.getURL(columnIndex);
     }
 
@@ -893,7 +893,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#getURL(java.lang.String)
      */
-    protected final URL getURL(String columnLabel) throws SQLException {
+    protected final URL getURL(final String columnLabel) throws SQLException {
         return rs.getURL(columnLabel);
     }
 
@@ -905,7 +905,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @see java.sql.ResultSet#getUnicodeStream(int)
      */
     @Deprecated
-    protected final InputStream getUnicodeStream(int columnIndex) throws SQLException {
+    protected final InputStream getUnicodeStream(final int columnIndex) throws SQLException {
         return rs.getUnicodeStream(columnIndex);
     }
 
@@ -917,7 +917,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @see java.sql.ResultSet#getUnicodeStream(java.lang.String)
      */
     @Deprecated
-    protected final InputStream getUnicodeStream(String columnLabel) throws SQLException {
+    protected final InputStream getUnicodeStream(final String columnLabel) throws SQLException {
         return rs.getUnicodeStream(columnLabel);
     }
 
@@ -989,7 +989,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.Wrapper#isWrapperFor(java.lang.Class)
      */
-    protected final boolean isWrapperFor(Class<?> iface) throws SQLException {
+    protected final boolean isWrapperFor(final Class<?> iface) throws SQLException {
         return rs.isWrapperFor(iface);
     }
 
@@ -1050,7 +1050,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#relative(int)
      */
-    protected final boolean relative(int rows) throws SQLException {
+    protected final boolean relative(final int rows) throws SQLException {
         return rs.relative(rows);
     }
 
@@ -1086,7 +1086,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#setFetchDirection(int)
      */
-    protected final void setFetchDirection(int direction) throws SQLException {
+    protected final void setFetchDirection(final int direction) throws SQLException {
         rs.setFetchDirection(direction);
     }
 
@@ -1095,7 +1095,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#setFetchSize(int)
      */
-    protected final void setFetchSize(int rows) throws SQLException {
+    protected final void setFetchSize(final int rows) throws SQLException {
         rs.setFetchSize(rows);
     }
 
@@ -1105,7 +1105,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.Wrapper#unwrap(java.lang.Class)
      */
-    protected final <E> E unwrap(Class<E> iface) throws SQLException {
+    protected final <E> E unwrap(final Class<E> iface) throws SQLException {
         return rs.unwrap(iface);
     }
 
@@ -1115,7 +1115,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateArray(int, java.sql.Array)
      */
-    protected final void updateArray(int columnIndex, Array x) throws SQLException {
+    protected final void updateArray(final int columnIndex, final Array x) throws SQLException {
         rs.updateArray(columnIndex, x);
     }
 
@@ -1125,7 +1125,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateArray(java.lang.String, java.sql.Array)
      */
-    protected final void updateArray(String columnLabel, Array x) throws SQLException {
+    protected final void updateArray(final String columnLabel, final Array x) throws SQLException {
         rs.updateArray(columnLabel, x);
     }
 
@@ -1136,7 +1136,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream, int)
      */
-    protected final void updateAsciiStream(int columnIndex, InputStream x, int length) throws SQLException {
+    protected final void updateAsciiStream(final int columnIndex, final InputStream x, final int length) throws SQLException {
         rs.updateAsciiStream(columnIndex, x, length);
     }
 
@@ -1147,7 +1147,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream, long)
      */
-    protected final void updateAsciiStream(int columnIndex, InputStream x, long length) throws SQLException {
+    protected final void updateAsciiStream(final int columnIndex, final InputStream x, final long length) throws SQLException {
         rs.updateAsciiStream(columnIndex, x, length);
     }
 
@@ -1157,7 +1157,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream)
      */
-    protected final void updateAsciiStream(int columnIndex, InputStream x) throws SQLException {
+    protected final void updateAsciiStream(final int columnIndex, final InputStream x) throws SQLException {
         rs.updateAsciiStream(columnIndex, x);
     }
 
@@ -1168,7 +1168,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream, int)
      */
-    protected final void updateAsciiStream(String columnLabel, InputStream x, int length) throws SQLException {
+    protected final void updateAsciiStream(final String columnLabel, final InputStream x, final int length) throws SQLException {
         rs.updateAsciiStream(columnLabel, x, length);
     }
 
@@ -1179,7 +1179,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream, long)
      */
-    protected final void updateAsciiStream(String columnLabel, InputStream x, long length) throws SQLException {
+    protected final void updateAsciiStream(final String columnLabel, final InputStream x, final long length) throws SQLException {
         rs.updateAsciiStream(columnLabel, x, length);
     }
 
@@ -1189,7 +1189,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream)
      */
-    protected final void updateAsciiStream(String columnLabel, InputStream x) throws SQLException {
+    protected final void updateAsciiStream(final String columnLabel, final InputStream x) throws SQLException {
         rs.updateAsciiStream(columnLabel, x);
     }
 
@@ -1199,7 +1199,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBigDecimal(int, java.math.BigDecimal)
      */
-    protected final void updateBigDecimal(int columnIndex, BigDecimal x) throws SQLException {
+    protected final void updateBigDecimal(final int columnIndex, final BigDecimal x) throws SQLException {
         rs.updateBigDecimal(columnIndex, x);
     }
 
@@ -1209,7 +1209,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBigDecimal(java.lang.String, java.math.BigDecimal)
      */
-    protected final void updateBigDecimal(String columnLabel, BigDecimal x) throws SQLException {
+    protected final void updateBigDecimal(final String columnLabel, final BigDecimal x) throws SQLException {
         rs.updateBigDecimal(columnLabel, x);
     }
 
@@ -1220,7 +1220,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream, int)
      */
-    protected final void updateBinaryStream(int columnIndex, InputStream x, int length) throws SQLException {
+    protected final void updateBinaryStream(final int columnIndex, final InputStream x, final int length) throws SQLException {
         rs.updateBinaryStream(columnIndex, x, length);
     }
 
@@ -1231,7 +1231,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream, long)
      */
-    protected final void updateBinaryStream(int columnIndex, InputStream x, long length) throws SQLException {
+    protected final void updateBinaryStream(final int columnIndex, final InputStream x, final long length) throws SQLException {
         rs.updateBinaryStream(columnIndex, x, length);
     }
 
@@ -1241,7 +1241,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream)
      */
-    protected final void updateBinaryStream(int columnIndex, InputStream x) throws SQLException {
+    protected final void updateBinaryStream(final int columnIndex, final InputStream x) throws SQLException {
         rs.updateBinaryStream(columnIndex, x);
     }
 
@@ -1252,7 +1252,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream, int)
      */
-    protected final void updateBinaryStream(String columnLabel, InputStream x, int length) throws SQLException {
+    protected final void updateBinaryStream(final String columnLabel, final InputStream x, final int length) throws SQLException {
         rs.updateBinaryStream(columnLabel, x, length);
     }
 
@@ -1263,7 +1263,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream, long)
      */
-    protected final void updateBinaryStream(String columnLabel, InputStream x, long length) throws SQLException {
+    protected final void updateBinaryStream(final String columnLabel, final InputStream x, final long length) throws SQLException {
         rs.updateBinaryStream(columnLabel, x, length);
     }
 
@@ -1273,7 +1273,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream)
      */
-    protected final void updateBinaryStream(String columnLabel, InputStream x) throws SQLException {
+    protected final void updateBinaryStream(final String columnLabel, final InputStream x) throws SQLException {
         rs.updateBinaryStream(columnLabel, x);
     }
 
@@ -1283,7 +1283,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBlob(int, java.sql.Blob)
      */
-    protected final void updateBlob(int columnIndex, Blob x) throws SQLException {
+    protected final void updateBlob(final int columnIndex, final Blob x) throws SQLException {
         rs.updateBlob(columnIndex, x);
     }
 
@@ -1294,7 +1294,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBlob(int, java.io.InputStream, long)
      */
-    protected final void updateBlob(int columnIndex, InputStream inputStream, long length) throws SQLException {
+    protected final void updateBlob(final int columnIndex, final InputStream inputStream, final long length) throws SQLException {
         rs.updateBlob(columnIndex, inputStream, length);
     }
 
@@ -1304,7 +1304,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBlob(int, java.io.InputStream)
      */
-    protected final void updateBlob(int columnIndex, InputStream inputStream) throws SQLException {
+    protected final void updateBlob(final int columnIndex, final InputStream inputStream) throws SQLException {
         rs.updateBlob(columnIndex, inputStream);
     }
 
@@ -1314,7 +1314,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBlob(java.lang.String, java.sql.Blob)
      */
-    protected final void updateBlob(String columnLabel, Blob x) throws SQLException {
+    protected final void updateBlob(final String columnLabel, final Blob x) throws SQLException {
         rs.updateBlob(columnLabel, x);
     }
 
@@ -1325,7 +1325,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBlob(java.lang.String, java.io.InputStream, long)
      */
-    protected final void updateBlob(String columnLabel, InputStream inputStream, long length) throws SQLException {
+    protected final void updateBlob(final String columnLabel, final InputStream inputStream, final long length) throws SQLException {
         rs.updateBlob(columnLabel, inputStream, length);
     }
 
@@ -1335,7 +1335,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBlob(java.lang.String, java.io.InputStream)
      */
-    protected final void updateBlob(String columnLabel, InputStream inputStream) throws SQLException {
+    protected final void updateBlob(final String columnLabel, final InputStream inputStream) throws SQLException {
         rs.updateBlob(columnLabel, inputStream);
     }
 
@@ -1345,7 +1345,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBoolean(int, boolean)
      */
-    protected final void updateBoolean(int columnIndex, boolean x) throws SQLException {
+    protected final void updateBoolean(final int columnIndex, final boolean x) throws SQLException {
         rs.updateBoolean(columnIndex, x);
     }
 
@@ -1355,7 +1355,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBoolean(java.lang.String, boolean)
      */
-    protected final void updateBoolean(String columnLabel, boolean x) throws SQLException {
+    protected final void updateBoolean(final String columnLabel, final boolean x) throws SQLException {
         rs.updateBoolean(columnLabel, x);
     }
 
@@ -1365,7 +1365,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateByte(int, byte)
      */
-    protected final void updateByte(int columnIndex, byte x) throws SQLException {
+    protected final void updateByte(final int columnIndex, final byte x) throws SQLException {
         rs.updateByte(columnIndex, x);
     }
 
@@ -1375,7 +1375,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateByte(java.lang.String, byte)
      */
-    protected final void updateByte(String columnLabel, byte x) throws SQLException {
+    protected final void updateByte(final String columnLabel, final byte x) throws SQLException {
         rs.updateByte(columnLabel, x);
     }
 
@@ -1385,7 +1385,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBytes(int, byte[])
      */
-    protected final void updateBytes(int columnIndex, byte[] x) throws SQLException {
+    protected final void updateBytes(final int columnIndex, final byte[] x) throws SQLException {
         rs.updateBytes(columnIndex, x);
     }
 
@@ -1395,7 +1395,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateBytes(java.lang.String, byte[])
      */
-    protected final void updateBytes(String columnLabel, byte[] x) throws SQLException {
+    protected final void updateBytes(final String columnLabel, final byte[] x) throws SQLException {
         rs.updateBytes(columnLabel, x);
     }
 
@@ -1406,7 +1406,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader, int)
      */
-    protected final void updateCharacterStream(int columnIndex, Reader x, int length) throws SQLException {
+    protected final void updateCharacterStream(final int columnIndex, final Reader x, final int length) throws SQLException {
         rs.updateCharacterStream(columnIndex, x, length);
     }
 
@@ -1417,7 +1417,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader, long)
      */
-    protected final void updateCharacterStream(int columnIndex, Reader x, long length) throws SQLException {
+    protected final void updateCharacterStream(final int columnIndex, final Reader x, final long length) throws SQLException {
         rs.updateCharacterStream(columnIndex, x, length);
     }
 
@@ -1427,7 +1427,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader)
      */
-    protected final void updateCharacterStream(int columnIndex, Reader x) throws SQLException {
+    protected final void updateCharacterStream(final int columnIndex, final Reader x) throws SQLException {
         rs.updateCharacterStream(columnIndex, x);
     }
 
@@ -1438,7 +1438,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader, int)
      */
-    protected final void updateCharacterStream(String columnLabel, Reader reader, int length) throws SQLException {
+    protected final void updateCharacterStream(final String columnLabel, final Reader reader, final int length) throws SQLException {
         rs.updateCharacterStream(columnLabel, reader, length);
     }
 
@@ -1449,7 +1449,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader, long)
      */
-    protected final void updateCharacterStream(String columnLabel, Reader reader, long length) throws SQLException {
+    protected final void updateCharacterStream(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateCharacterStream(columnLabel, reader, length);
     }
 
@@ -1459,7 +1459,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader)
      */
-    protected final void updateCharacterStream(String columnLabel, Reader reader) throws SQLException {
+    protected final void updateCharacterStream(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateCharacterStream(columnLabel, reader);
     }
 
@@ -1469,7 +1469,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateClob(int, java.sql.Clob)
      */
-    protected final void updateClob(int columnIndex, Clob x) throws SQLException {
+    protected final void updateClob(final int columnIndex, final Clob x) throws SQLException {
         rs.updateClob(columnIndex, x);
     }
 
@@ -1480,7 +1480,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateClob(int, java.io.Reader, long)
      */
-    protected final void updateClob(int columnIndex, Reader reader, long length) throws SQLException {
+    protected final void updateClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
         rs.updateClob(columnIndex, reader, length);
     }
 
@@ -1490,7 +1490,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateClob(int, java.io.Reader)
      */
-    protected final void updateClob(int columnIndex, Reader reader) throws SQLException {
+    protected final void updateClob(final int columnIndex, final Reader reader) throws SQLException {
         rs.updateClob(columnIndex, reader);
     }
 
@@ -1500,7 +1500,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateClob(java.lang.String, java.sql.Clob)
      */
-    protected final void updateClob(String columnLabel, Clob x) throws SQLException {
+    protected final void updateClob(final String columnLabel, final Clob x) throws SQLException {
         rs.updateClob(columnLabel, x);
     }
 
@@ -1511,7 +1511,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateClob(java.lang.String, java.io.Reader, long)
      */
-    protected final void updateClob(String columnLabel, Reader reader, long length) throws SQLException {
+    protected final void updateClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateClob(columnLabel, reader, length);
     }
 
@@ -1521,7 +1521,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateClob(java.lang.String, java.io.Reader)
      */
-    protected final void updateClob(String columnLabel, Reader reader) throws SQLException {
+    protected final void updateClob(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateClob(columnLabel, reader);
     }
 
@@ -1531,7 +1531,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateDate(int, java.sql.Date)
      */
-    protected final void updateDate(int columnIndex, Date x) throws SQLException {
+    protected final void updateDate(final int columnIndex, final Date x) throws SQLException {
         rs.updateDate(columnIndex, x);
     }
 
@@ -1541,7 +1541,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateDate(java.lang.String, java.sql.Date)
      */
-    protected final void updateDate(String columnLabel, Date x) throws SQLException {
+    protected final void updateDate(final String columnLabel, final Date x) throws SQLException {
         rs.updateDate(columnLabel, x);
     }
 
@@ -1551,7 +1551,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateDouble(int, double)
      */
-    protected final void updateDouble(int columnIndex, double x) throws SQLException {
+    protected final void updateDouble(final int columnIndex, final double x) throws SQLException {
         rs.updateDouble(columnIndex, x);
     }
 
@@ -1561,7 +1561,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateDouble(java.lang.String, double)
      */
-    protected final void updateDouble(String columnLabel, double x) throws SQLException {
+    protected final void updateDouble(final String columnLabel, final double x) throws SQLException {
         rs.updateDouble(columnLabel, x);
     }
 
@@ -1571,7 +1571,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateFloat(int, float)
      */
-    protected final void updateFloat(int columnIndex, float x) throws SQLException {
+    protected final void updateFloat(final int columnIndex, final float x) throws SQLException {
         rs.updateFloat(columnIndex, x);
     }
 
@@ -1581,7 +1581,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateFloat(java.lang.String, float)
      */
-    protected final void updateFloat(String columnLabel, float x) throws SQLException {
+    protected final void updateFloat(final String columnLabel, final float x) throws SQLException {
         rs.updateFloat(columnLabel, x);
     }
 
@@ -1591,7 +1591,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateInt(int, int)
      */
-    protected final void updateInt(int columnIndex, int x) throws SQLException {
+    protected final void updateInt(final int columnIndex, final int x) throws SQLException {
         rs.updateInt(columnIndex, x);
     }
 
@@ -1601,7 +1601,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateInt(java.lang.String, int)
      */
-    protected final void updateInt(String columnLabel, int x) throws SQLException {
+    protected final void updateInt(final String columnLabel, final int x) throws SQLException {
         rs.updateInt(columnLabel, x);
     }
 
@@ -1611,7 +1611,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateLong(int, long)
      */
-    protected final void updateLong(int columnIndex, long x) throws SQLException {
+    protected final void updateLong(final int columnIndex, final long x) throws SQLException {
         rs.updateLong(columnIndex, x);
     }
 
@@ -1621,7 +1621,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateLong(java.lang.String, long)
      */
-    protected final void updateLong(String columnLabel, long x) throws SQLException {
+    protected final void updateLong(final String columnLabel, final long x) throws SQLException {
         rs.updateLong(columnLabel, x);
     }
 
@@ -1632,7 +1632,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNCharacterStream(int, java.io.Reader, long)
      */
-    protected final void updateNCharacterStream(int columnIndex, Reader x, long length) throws SQLException {
+    protected final void updateNCharacterStream(final int columnIndex, final Reader x, final long length) throws SQLException {
         rs.updateNCharacterStream(columnIndex, x, length);
     }
 
@@ -1642,7 +1642,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNCharacterStream(int, java.io.Reader)
      */
-    protected final void updateNCharacterStream(int columnIndex, Reader x) throws SQLException {
+    protected final void updateNCharacterStream(final int columnIndex, final Reader x) throws SQLException {
         rs.updateNCharacterStream(columnIndex, x);
     }
 
@@ -1653,7 +1653,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNCharacterStream(java.lang.String, java.io.Reader, long)
      */
-    protected final void updateNCharacterStream(String columnLabel, Reader reader, long length) throws SQLException {
+    protected final void updateNCharacterStream(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateNCharacterStream(columnLabel, reader, length);
     }
 
@@ -1663,7 +1663,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNCharacterStream(java.lang.String, java.io.Reader)
      */
-    protected final void updateNCharacterStream(String columnLabel, Reader reader) throws SQLException {
+    protected final void updateNCharacterStream(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateNCharacterStream(columnLabel, reader);
     }
 
@@ -1673,7 +1673,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNClob(int, java.sql.NClob)
      */
-    protected final void updateNClob(int columnIndex, NClob nClob) throws SQLException {
+    protected final void updateNClob(final int columnIndex, final NClob nClob) throws SQLException {
         rs.updateNClob(columnIndex, nClob);
     }
 
@@ -1684,7 +1684,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNClob(int, java.io.Reader, long)
      */
-    protected final void updateNClob(int columnIndex, Reader reader, long length) throws SQLException {
+    protected final void updateNClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
         rs.updateNClob(columnIndex, reader, length);
     }
 
@@ -1694,7 +1694,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNClob(int, java.io.Reader)
      */
-    protected final void updateNClob(int columnIndex, Reader reader) throws SQLException {
+    protected final void updateNClob(final int columnIndex, final Reader reader) throws SQLException {
         rs.updateNClob(columnIndex, reader);
     }
 
@@ -1704,7 +1704,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNClob(java.lang.String, java.sql.NClob)
      */
-    protected final void updateNClob(String columnLabel, NClob nClob) throws SQLException {
+    protected final void updateNClob(final String columnLabel, final NClob nClob) throws SQLException {
         rs.updateNClob(columnLabel, nClob);
     }
 
@@ -1715,7 +1715,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNClob(java.lang.String, java.io.Reader, long)
      */
-    protected final void updateNClob(String columnLabel, Reader reader, long length) throws SQLException {
+    protected final void updateNClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateNClob(columnLabel, reader, length);
     }
 
@@ -1725,7 +1725,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNClob(java.lang.String, java.io.Reader)
      */
-    protected final void updateNClob(String columnLabel, Reader reader) throws SQLException {
+    protected final void updateNClob(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateNClob(columnLabel, reader);
     }
 
@@ -1735,7 +1735,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNString(int, java.lang.String)
      */
-    protected final void updateNString(int columnIndex, String nString) throws SQLException {
+    protected final void updateNString(final int columnIndex, final String nString) throws SQLException {
         rs.updateNString(columnIndex, nString);
     }
 
@@ -1745,7 +1745,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNString(java.lang.String, java.lang.String)
      */
-    protected final void updateNString(String columnLabel, String nString) throws SQLException {
+    protected final void updateNString(final String columnLabel, final String nString) throws SQLException {
         rs.updateNString(columnLabel, nString);
     }
 
@@ -1754,7 +1754,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNull(int)
      */
-    protected final void updateNull(int columnIndex) throws SQLException {
+    protected final void updateNull(final int columnIndex) throws SQLException {
         rs.updateNull(columnIndex);
     }
 
@@ -1763,7 +1763,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateNull(java.lang.String)
      */
-    protected final void updateNull(String columnLabel) throws SQLException {
+    protected final void updateNull(final String columnLabel) throws SQLException {
         rs.updateNull(columnLabel);
     }
 
@@ -1774,7 +1774,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateObject(int, java.lang.Object, int)
      */
-    protected final void updateObject(int columnIndex, Object x, int scaleOrLength) throws SQLException {
+    protected final void updateObject(final int columnIndex, final Object x, final int scaleOrLength) throws SQLException {
         rs.updateObject(columnIndex, x, scaleOrLength);
     }
 
@@ -1784,7 +1784,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateObject(int, java.lang.Object)
      */
-    protected final void updateObject(int columnIndex, Object x) throws SQLException {
+    protected final void updateObject(final int columnIndex, final Object x) throws SQLException {
         rs.updateObject(columnIndex, x);
     }
 
@@ -1795,7 +1795,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateObject(java.lang.String, java.lang.Object, int)
      */
-    protected final void updateObject(String columnLabel, Object x, int scaleOrLength) throws SQLException {
+    protected final void updateObject(final String columnLabel, final Object x, final int scaleOrLength) throws SQLException {
         rs.updateObject(columnLabel, x, scaleOrLength);
     }
 
@@ -1805,7 +1805,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateObject(java.lang.String, java.lang.Object)
      */
-    protected final void updateObject(String columnLabel, Object x) throws SQLException {
+    protected final void updateObject(final String columnLabel, final Object x) throws SQLException {
         rs.updateObject(columnLabel, x);
     }
 
@@ -1815,7 +1815,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateRef(int, java.sql.Ref)
      */
-    protected final void updateRef(int columnIndex, Ref x) throws SQLException {
+    protected final void updateRef(final int columnIndex, final Ref x) throws SQLException {
         rs.updateRef(columnIndex, x);
     }
 
@@ -1825,7 +1825,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateRef(java.lang.String, java.sql.Ref)
      */
-    protected final void updateRef(String columnLabel, Ref x) throws SQLException {
+    protected final void updateRef(final String columnLabel, final Ref x) throws SQLException {
         rs.updateRef(columnLabel, x);
     }
 
@@ -1843,7 +1843,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateRowId(int, java.sql.RowId)
      */
-    protected final void updateRowId(int columnIndex, RowId x) throws SQLException {
+    protected final void updateRowId(final int columnIndex, final RowId x) throws SQLException {
         rs.updateRowId(columnIndex, x);
     }
 
@@ -1853,7 +1853,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateRowId(java.lang.String, java.sql.RowId)
      */
-    protected final void updateRowId(String columnLabel, RowId x) throws SQLException {
+    protected final void updateRowId(final String columnLabel, final RowId x) throws SQLException {
         rs.updateRowId(columnLabel, x);
     }
 
@@ -1863,7 +1863,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateSQLXML(int, java.sql.SQLXML)
      */
-    protected final void updateSQLXML(int columnIndex, SQLXML xmlObject) throws SQLException {
+    protected final void updateSQLXML(final int columnIndex, final SQLXML xmlObject) throws SQLException {
         rs.updateSQLXML(columnIndex, xmlObject);
     }
 
@@ -1873,7 +1873,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateSQLXML(java.lang.String, java.sql.SQLXML)
      */
-    protected final void updateSQLXML(String columnLabel, SQLXML xmlObject) throws SQLException {
+    protected final void updateSQLXML(final String columnLabel, final SQLXML xmlObject) throws SQLException {
         rs.updateSQLXML(columnLabel, xmlObject);
     }
 
@@ -1883,7 +1883,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateShort(int, short)
      */
-    protected final void updateShort(int columnIndex, short x) throws SQLException {
+    protected final void updateShort(final int columnIndex, final short x) throws SQLException {
         rs.updateShort(columnIndex, x);
     }
 
@@ -1893,7 +1893,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateShort(java.lang.String, short)
      */
-    protected final void updateShort(String columnLabel, short x) throws SQLException {
+    protected final void updateShort(final String columnLabel, final short x) throws SQLException {
         rs.updateShort(columnLabel, x);
     }
 
@@ -1903,7 +1903,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateString(int, java.lang.String)
      */
-    protected final void updateString(int columnIndex, String x) throws SQLException {
+    protected final void updateString(final int columnIndex, final String x) throws SQLException {
         rs.updateString(columnIndex, x);
     }
 
@@ -1913,7 +1913,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateString(java.lang.String, java.lang.String)
      */
-    protected final void updateString(String columnLabel, String x) throws SQLException {
+    protected final void updateString(final String columnLabel, final String x) throws SQLException {
         rs.updateString(columnLabel, x);
     }
 
@@ -1923,7 +1923,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateTime(int, java.sql.Time)
      */
-    protected final void updateTime(int columnIndex, Time x) throws SQLException {
+    protected final void updateTime(final int columnIndex, final Time x) throws SQLException {
         rs.updateTime(columnIndex, x);
     }
 
@@ -1933,7 +1933,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateTime(java.lang.String, java.sql.Time)
      */
-    protected final void updateTime(String columnLabel, Time x) throws SQLException {
+    protected final void updateTime(final String columnLabel, final Time x) throws SQLException {
         rs.updateTime(columnLabel, x);
     }
 
@@ -1943,7 +1943,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateTimestamp(int, java.sql.Timestamp)
      */
-    protected final void updateTimestamp(int columnIndex, Timestamp x) throws SQLException {
+    protected final void updateTimestamp(final int columnIndex, final Timestamp x) throws SQLException {
         rs.updateTimestamp(columnIndex, x);
     }
 
@@ -1953,7 +1953,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * @throws SQLException
      * @see java.sql.ResultSet#updateTimestamp(java.lang.String, java.sql.Timestamp)
      */
-    protected final void updateTimestamp(String columnLabel, Timestamp x) throws SQLException {
+    protected final void updateTimestamp(final String columnLabel, final Timestamp x) throws SQLException {
         rs.updateTimestamp(columnLabel, x);
     }
 

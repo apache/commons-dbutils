@@ -51,7 +51,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
      * @param convert The <code>RowProcessor</code> implementation
      * to use when converting rows into Maps.
      */
-    public MapListHandler(RowProcessor convert) {
+    public MapListHandler(final RowProcessor convert) {
         super();
         this.convert = convert;
     }
@@ -66,7 +66,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override
-    protected Map<String, Object> handleRow(ResultSet rs) throws SQLException {
+    protected Map<String, Object> handleRow(final ResultSet rs) throws SQLException {
         return this.convert.toMap(rs);
     }
 
