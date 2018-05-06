@@ -410,8 +410,7 @@ public abstract class AbstractQueryRunner {
                         + i);
             }
             boolean found = false;
-            for (int j = 0; j < descriptors.length; j++) {
-                final PropertyDescriptor descriptor = descriptors[j];
+            for (final PropertyDescriptor descriptor : descriptors) {
                 if (propertyName.equals(descriptor.getName())) {
                     sorted[i] = descriptor;
                     found = true;

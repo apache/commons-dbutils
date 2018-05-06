@@ -84,12 +84,12 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     static {
         final Method[] methods = SqlNullCheckedResultSet.class.getMethods();
-        for (int i = 0; i < methods.length; i++) {
-            final String methodName = methods[i].getName();
+        for (Method method : methods) {
+            final String methodName = method.getName();
 
             if (methodName.startsWith(GET_NULL_PREFIX)) {
                 final String normalName = "get" + methodName.substring(GET_NULL_PREFIX.length());
-                nullMethods.put(normalName, methods[i]);
+                nullMethods.put(normalName, method);
             }
         }
     }

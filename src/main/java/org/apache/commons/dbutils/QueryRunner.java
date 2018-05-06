@@ -185,8 +185,8 @@ public class QueryRunner extends AbstractQueryRunner {
         try {
             stmt = this.prepareStatement(conn, sql);
 
-            for (int i = 0; i < params.length; i++) {
-                this.fillStatement(stmt, params[i]);
+            for (Object[] param : params) {
+                this.fillStatement(stmt, param);
                 stmt.addBatch();
             }
             rows = stmt.executeBatch();
@@ -726,8 +726,8 @@ public class QueryRunner extends AbstractQueryRunner {
         try {
             stmt = this.prepareStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
-            for (int i = 0; i < params.length; i++) {
-                this.fillStatement(stmt, params[i]);
+            for (Object[] param : params) {
+                this.fillStatement(stmt, param);
                 stmt.addBatch();
             }
             stmt.executeBatch();
