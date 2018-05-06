@@ -28,11 +28,11 @@ public final class BaseResultSetHandlerTest extends BaseTestCase {
 
     @Test
     public void handleWithoutExplicitResultSetInvocation() throws Exception {
-        Collection<Map<String, Object>> result = new ToMapCollectionHandler().handle(createMockResultSet());
+        final Collection<Map<String, Object>> result = new ToMapCollectionHandler().handle(createMockResultSet());
 
         assertFalse(result.isEmpty());
 
-        for (Map<String, Object> current : result) {
+        for (final Map<String, Object> current : result) {
             assertTrue(current.containsKey("one"));
             assertTrue(current.containsKey("two"));
             assertTrue(current.containsKey("three"));
@@ -51,10 +51,10 @@ public final class BaseResultSetHandlerTest extends BaseTestCase {
 
         @Override
         protected Collection<Map<String, Object>> handle() throws SQLException {
-            Collection<Map<String, Object>> result = new LinkedList<>();
+            final Collection<Map<String, Object>> result = new LinkedList<>();
 
             while (next()) {
-                Map<String, Object> current = new HashMap<>();
+                final Map<String, Object> current = new HashMap<>();
 
                 for (int i = 1; i <= getMetaData().getColumnCount(); i++) {
                     current.put(getMetaData().getColumnName(i), getObject(i));

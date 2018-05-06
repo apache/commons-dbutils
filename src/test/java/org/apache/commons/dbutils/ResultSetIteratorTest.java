@@ -31,7 +31,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
     public void testNext() {
 
-        Iterator<Object[]> iter = new ResultSetIterator(this.rs);
+        final Iterator<Object[]> iter = new ResultSetIterator(this.rs);
 
         Object[] row = null;
         assertTrue(iter.hasNext());
@@ -55,14 +55,14 @@ public class ResultSetIteratorTest extends BaseTestCase {
     @Test
     public void testRethrowThrowsRuntimeException() {
 
-        ResultSetIterator resultSetIterator = new ResultSetIterator((ResultSet) null);
-        Throwable throwable = new Throwable();
-        SQLException sQLException = new SQLException(throwable);
+        final ResultSetIterator resultSetIterator = new ResultSetIterator((ResultSet) null);
+        final Throwable throwable = new Throwable();
+        final SQLException sQLException = new SQLException(throwable);
 
         try {
             resultSetIterator.rethrow(sQLException);
             fail("Expecting exception: RuntimeException");
-        } catch(RuntimeException e) {
+        } catch(final RuntimeException e) {
             assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
         }
 
@@ -71,8 +71,8 @@ public class ResultSetIteratorTest extends BaseTestCase {
     @Test
     public void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
 
-        ResultSet resultSet = mock(ResultSet.class);
-        ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet,null);
+        final ResultSet resultSet = mock(ResultSet.class);
+        final ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet,null);
         resultSetIterator.remove();
 
     }

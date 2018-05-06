@@ -59,7 +59,7 @@ public class DatePropertyHandlerTest {
 
     @Test
     public void testApplyTypeOfTimestamp() throws Exception {
-        Timestamp ts = new Timestamp(new java.util.Date().getTime());
+        final Timestamp ts = new Timestamp(new java.util.Date().getTime());
         assertEquals(Timestamp.class, handler.apply(java.sql.Timestamp.class, ts).getClass());
     }
 }

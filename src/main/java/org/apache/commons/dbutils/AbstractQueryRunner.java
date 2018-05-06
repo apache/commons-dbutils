@@ -281,15 +281,15 @@ public abstract class AbstractQueryRunner {
                 if (pmd == null) { // can be returned by implementations that don't support the method
                     pmdKnownBroken = true;
                 } else {
-                    int stmtCount = pmd.getParameterCount();
-                    int paramsCount = params == null ? 0 : params.length;
+                    final int stmtCount = pmd.getParameterCount();
+                    final int paramsCount = params == null ? 0 : params.length;
 
                     if (stmtCount != paramsCount) {
                         throw new SQLException("Wrong number of parameters: expected "
                                 + stmtCount + ", was given " + paramsCount);
                     }
                 }
-            } catch (SQLFeatureNotSupportedException ex) {
+            } catch (final SQLFeatureNotSupportedException ex) {
                 pmdKnownBroken = true;
             }
             // TODO see DBUTILS-117: would it make sense to catch any other SQLEx types here?
@@ -326,7 +326,7 @@ public abstract class AbstractQueryRunner {
                          * be null here.
                          */
                         sqlType = pmd.getParameterType(i + 1);
-                    } catch (SQLException e) {
+                    } catch (final SQLException e) {
                         pmdKnownBroken = true;
                     }
                 }
@@ -351,24 +351,24 @@ public abstract class AbstractQueryRunner {
      */
     public void fillStatementWithBean(final PreparedStatement stmt, final Object bean,
             final PropertyDescriptor[] properties) throws SQLException {
-        Object[] params = new Object[properties.length];
+        final Object[] params = new Object[properties.length];
         for (int i = 0; i < properties.length; i++) {
-            PropertyDescriptor property = properties[i];
+            final PropertyDescriptor property = properties[i];
             Object value = null;
-            Method method = property.getReadMethod();
+            final Method method = property.getReadMethod();
             if (method == null) {
                 throw new RuntimeException("No read method for bean property "
                         + bean.getClass() + " " + property.getName());
             }
             try {
                 value = method.invoke(bean, new Object[0]);
-            } catch (InvocationTargetException e) {
+            } catch (final InvocationTargetException e) {
                 throw new RuntimeException("Couldn't invoke method: " + method,
                         e);
-            } catch (IllegalArgumentException e) {
+            } catch (final IllegalArgumentException e) {
                 throw new RuntimeException(
                         "Couldn't invoke method with 0 arguments: " + method, e);
-            } catch (IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 throw new RuntimeException("Couldn't invoke method: " + method,
                         e);
             }
@@ -398,20 +398,20 @@ public abstract class AbstractQueryRunner {
         try {
             descriptors = Introspector.getBeanInfo(bean.getClass())
                     .getPropertyDescriptors();
-        } catch (IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             throw new RuntimeException("Couldn't introspect bean "
                     + bean.getClass().toString(), e);
         }
-        PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
+        final PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
-            String propertyName = propertyNames[i];
+            final String propertyName = propertyNames[i];
             if (propertyName == null) {
                 throw new NullPointerException("propertyName can't be null: "
                         + i);
             }
             boolean found = false;
             for (int j = 0; j < descriptors.length; j++) {
-                PropertyDescriptor descriptor = descriptors[j];
+                final PropertyDescriptor descriptor = descriptors[j];
                 if (propertyName.equals(descriptor.getName())) {
                     sorted[i] = descriptor;
                     found = true;
@@ -517,10 +517,11 @@ public abstract class AbstractQueryRunner {
             throws SQLException {
 
         @SuppressWarnings("resource")
+        final
         PreparedStatement ps = conn.prepareStatement(sql);
         try {
             configureStatement(ps);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             ps.close();
             throw e;
         }
@@ -554,10 +555,11 @@ public abstract class AbstractQueryRunner {
             throws SQLException {
 
         @SuppressWarnings("resource")
+        final
         PreparedStatement ps = conn.prepareStatement(sql, returnedKeys);
         try {
             configureStatement(ps);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             ps.close();
             throw e;
         }
@@ -588,7 +590,7 @@ public abstract class AbstractQueryRunner {
         if (causeMessage == null) {
             causeMessage = "";
         }
-        StringBuffer msg = new StringBuffer(causeMessage);
+        final StringBuffer msg = new StringBuffer(causeMessage);
 
         msg.append(" Query: ");
         msg.append(sql);
@@ -600,7 +602,7 @@ public abstract class AbstractQueryRunner {
             msg.append(Arrays.deepToString(params));
         }
 
-        SQLException e = new SQLException(msg.toString(), cause.getSQLState(),
+        final SQLException e = new SQLException(msg.toString(), cause.getSQLState(),
                 cause.getErrorCode());
         e.setNextException(cause);
 

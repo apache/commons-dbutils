@@ -100,9 +100,9 @@ public class BasicRowProcessor implements RowProcessor {
      */
     @Override
     public Object[] toArray(final ResultSet rs) throws SQLException {
-        ResultSetMetaData meta = rs.getMetaData();
-        int cols = meta.getColumnCount();
-        Object[] result = new Object[cols];
+        final ResultSetMetaData meta = rs.getMetaData();
+        final int cols = meta.getColumnCount();
+        final Object[] result = new Object[cols];
 
         for (int i = 0; i < cols; i++) {
             result[i] = rs.getObject(i + 1);
@@ -161,9 +161,9 @@ public class BasicRowProcessor implements RowProcessor {
      */
     @Override
     public Map<String, Object> toMap(final ResultSet rs) throws SQLException {
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int cols = rsmd.getColumnCount();
-        Map<String, Object> result = createCaseInsensitiveHashMap(cols);
+        final ResultSetMetaData rsmd = rs.getMetaData();
+        final int cols = rsmd.getColumnCount();
+        final Map<String, Object> result = createCaseInsensitiveHashMap(cols);
 
         for (int i = 1; i <= cols; i++) {
             String columnName = rsmd.getColumnLabel(i);
@@ -224,7 +224,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public boolean containsKey(final Object key) {
-            Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
+            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.containsKey(realKey);
             // Possible optimisation here:
             // Since the lowerCaseMap contains a mapping for all the keys,
@@ -235,7 +235,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public Object get(final Object key) {
-            Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
+            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.get(realKey);
         }
 
@@ -249,8 +249,8 @@ public class BasicRowProcessor implements RowProcessor {
              * (That's why we call super.remove(oldKey) and not just
              * super.put(key, value))
              */
-            Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ENGLISH), key);
-            Object oldValue = super.remove(oldKey);
+            final Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ENGLISH), key);
+            final Object oldValue = super.remove(oldKey);
             super.put(key, value);
             return oldValue;
         }
@@ -258,9 +258,9 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public void putAll(final Map<? extends String, ?> m) {
-            for (Map.Entry<? extends String, ?> entry : m.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
+            for (final Map.Entry<? extends String, ?> entry : m.entrySet()) {
+                final String key = entry.getKey();
+                final Object value = entry.getValue();
                 this.put(key, value);
             }
         }
@@ -268,7 +268,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public Object remove(final Object key) {
-            Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));
+            final Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));
             return super.remove(realKey);
         }
     }

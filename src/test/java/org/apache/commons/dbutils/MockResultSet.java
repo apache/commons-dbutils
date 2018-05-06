@@ -63,7 +63,7 @@ public class MockResultSet implements InvocationHandler {
         super();
         this.metaData = metaData;
         if (rows == null) {
-            List<Object[]> empty = Collections.emptyList();
+            final List<Object[]> empty = Collections.emptyList();
             this.iter = empty.iterator();
         } else {
             this.iter = Arrays.asList(rows).iterator();
@@ -98,7 +98,7 @@ public class MockResultSet implements InvocationHandler {
      */
     private int columnNameToIndex(final String columnName) throws SQLException {
         for (int i = 0; i < this.currentRow.length; i++) {
-            int c = i + 1;
+            final int c = i + 1;
             if (this.metaData.getColumnName(c).equalsIgnoreCase(columnName)) {
                 return c;
             }
@@ -113,7 +113,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getBoolean(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
@@ -121,7 +121,7 @@ public class MockResultSet implements InvocationHandler {
                 ? Boolean.FALSE
                 : Boolean.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -132,7 +132,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getByte(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
@@ -140,7 +140,7 @@ public class MockResultSet implements InvocationHandler {
                 ? Byte.valueOf((byte) 0)
                 : Byte.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -151,7 +151,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getDouble(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
@@ -159,7 +159,7 @@ public class MockResultSet implements InvocationHandler {
                 ? new Double(0)
                 : Double.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -170,13 +170,13 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getFloat(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
             return (obj == null) ? new Float(0) : Float.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -187,7 +187,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getInt(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
@@ -195,7 +195,7 @@ public class MockResultSet implements InvocationHandler {
                 ? Integer.valueOf(0)
                 : Integer.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -206,13 +206,13 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getLong(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
             return (obj == null) ? Long.valueOf(0) : Long.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -230,7 +230,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getObject(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
         return obj;
     }
@@ -241,7 +241,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getShort(final int columnIndex) throws SQLException {
-        Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = this.currentRow[columnIndex - 1];
         this.setWasNull(obj);
 
         try {
@@ -249,7 +249,7 @@ public class MockResultSet implements InvocationHandler {
                 ? Short.valueOf((short) 0)
                 : Short.valueOf(obj.toString());
 
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
     }
@@ -260,7 +260,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected String getString(final int columnIndex) throws SQLException {
-        Object obj = this.getObject(columnIndex);
+        final Object obj = this.getObject(columnIndex);
         this.setWasNull(obj);
         return (obj == null) ? null : obj.toString();
     }
@@ -269,7 +269,7 @@ public class MockResultSet implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
-        String methodName = method.getName();
+        final String methodName = method.getName();
 
         if (methodName.equals("getMetaData")) {
             return this.getMetaData();

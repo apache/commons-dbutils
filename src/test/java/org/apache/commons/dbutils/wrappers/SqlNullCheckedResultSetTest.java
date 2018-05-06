@@ -73,7 +73,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getAsciiStream("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        InputStream stream = new ByteArrayInputStream(new byte[0]);
+        final InputStream stream = new ByteArrayInputStream(new byte[0]);
         rs2.setNullAsciiStream(stream);
         assertNotNull(rs.getAsciiStream(1));
         assertEquals(stream, rs.getAsciiStream(1));
@@ -92,7 +92,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getBigDecimal("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        BigDecimal bd = new BigDecimal(5.0);
+        final BigDecimal bd = new BigDecimal(5.0);
         rs2.setNullBigDecimal(bd);
         assertNotNull(rs.getBigDecimal(1));
         assertEquals(bd, rs.getBigDecimal(1));
@@ -111,7 +111,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getBinaryStream("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        InputStream stream = new ByteArrayInputStream(new byte[0]);
+        final InputStream stream = new ByteArrayInputStream(new byte[0]);
         rs2.setNullBinaryStream(stream);
         assertNotNull(rs.getBinaryStream(1));
         assertEquals(stream, rs.getBinaryStream(1));
@@ -130,7 +130,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getBlob("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Blob blob = new SqlNullCheckedResultSetMockBlob();
+        final Blob blob = new SqlNullCheckedResultSetMockBlob();
         rs2.setNullBlob(blob);
         assertNotNull(rs.getBlob(1));
         assertEquals(blob, rs.getBlob(1));
@@ -165,7 +165,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals((byte) 0, rs.getByte("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        byte b = (byte) 10;
+        final byte b = (byte) 10;
         rs2.setNullByte(b);
         assertEquals(b, rs.getByte(1));
         assertEquals(b, rs.getByte("column"));
@@ -182,7 +182,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getBytes("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        byte[] b = new byte[5];
+        final byte[] b = new byte[5];
         for (int i = 0; i < 5; i++) {
             b[0] = (byte) i;
         }
@@ -202,8 +202,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
             failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
         }
         for (int i = 0; i < expected.length; i++) {
-            byte expectedItem = expected[i];
-            byte actualItem = actual[i];
+            final byte expectedItem = expected[i];
+            final byte actualItem = actual[i];
             assertEquals("Array not equal at index " + i, expectedItem, actualItem);
         }
     }
@@ -218,7 +218,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getCharacterStream("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Reader reader = new CharArrayReader("this is a string".toCharArray());
+        final Reader reader = new CharArrayReader("this is a string".toCharArray());
         rs2.setNullCharacterStream(reader);
         assertNotNull(rs.getCharacterStream(1));
         assertEquals(reader, rs.getCharacterStream(1));
@@ -237,7 +237,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getClob("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Clob clob = new SqlNullCheckedResultSetMockClob();
+        final Clob clob = new SqlNullCheckedResultSetMockClob();
         rs2.setNullClob(clob);
         assertNotNull(rs.getClob(1));
         assertEquals(clob, rs.getClob(1));
@@ -260,7 +260,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getDate("column", Calendar.getInstance()));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
+        final java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
         rs2.setNullDate(date);
         assertNotNull(rs.getDate(1));
         assertEquals(date, rs.getDate(1));
@@ -283,7 +283,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(0.0, rs.getDouble("column"), 0.0);
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        double d = 10.0;
+        final double d = 10.0;
         rs2.setNullDouble(d);
         assertEquals(d, rs.getDouble(1), 0.0);
         assertEquals(d, rs.getDouble("column"), 0.0);
@@ -299,7 +299,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(0, rs.getFloat("column"), 0.0);
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        float f = 10;
+        final float f = 10;
         rs2.setNullFloat(f);
         assertEquals(f, rs.getFloat(1), 0.0);
         assertEquals(f, rs.getFloat("column"), 0.0);
@@ -314,7 +314,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(0, rs.getInt("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        int i = 10;
+        final int i = 10;
         rs2.setNullInt(i);
         assertEquals(i, rs.getInt(1));
         assertEquals(i, rs.getInt("column"));
@@ -329,7 +329,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(0, rs.getLong("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        long l = 10;
+        final long l = 10;
         rs2.setNullLong(l);
         assertEquals(l, rs.getLong(1));
         assertEquals(l, rs.getLong("column"));
@@ -349,7 +349,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getObject("column", (Map<String, Class<?>>) null));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Object o = new Object();
+        final Object o = new Object();
         rs2.setNullObject(o);
         assertNotNull(rs.getObject(1));
         assertEquals(o, rs.getObject(1));
@@ -372,7 +372,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getRef("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Ref ref = new SqlNullCheckedResultSetMockRef();
+        final Ref ref = new SqlNullCheckedResultSetMockRef();
         rs2.setNullRef(ref);
         assertNotNull(rs.getRef(1));
         assertEquals(ref, rs.getRef(1));
@@ -391,7 +391,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals((short) 0, rs.getShort("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        short s = (short) 10;
+        final short s = (short) 10;
         rs2.setNullShort(s);
         assertEquals(s, rs.getShort(1));
         assertEquals(s, rs.getShort("column"));
@@ -406,7 +406,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(null, rs.getString("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        String s = "hello, world";
+        final String s = "hello, world";
         rs2.setNullString(s);
         assertEquals(s, rs.getString(1));
         assertEquals(s, rs.getString("column"));
@@ -426,7 +426,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getTime("column", Calendar.getInstance()));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Time time = new Time(new java.util.Date().getTime());
+        final Time time = new Time(new java.util.Date().getTime());
         rs2.setNullTime(time);
         assertNotNull(rs.getTime(1));
         assertEquals(time, rs.getTime(1));
@@ -453,7 +453,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNull(rs.getTimestamp("column", Calendar.getInstance()));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        Timestamp ts = new Timestamp(new java.util.Date().getTime());
+        final Timestamp ts = new Timestamp(new java.util.Date().getTime());
         rs2.setNullTimestamp(ts);
         assertNotNull(rs.getTimestamp(1));
         assertEquals(ts, rs.getTimestamp(1));
@@ -481,9 +481,9 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
                         new Class[] { Integer.TYPE } );
             getUrlString = ResultSet.class.getMethod("getURL",
                            new Class[] { String.class } );
-        } catch(NoSuchMethodException e) {
+        } catch(final NoSuchMethodException e) {
             // ignore
-        } catch(SecurityException e) {
+        } catch(final SecurityException e) {
             // ignore
         }
         if (getUrlInt != null && getUrlString != null) {
@@ -494,7 +494,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
                          new Object[] { "column" } ) );
             assertTrue(rs.wasNull());
             // Set what gets returned to something other than the default
-            URL u = new URL("http://www.apache.org");
+            final URL u = new URL("http://www.apache.org");
             rs2.setNullURL(u);
             assertEquals(u, getUrlInt.invoke(rs,
                          new Object[] { Integer.valueOf(1) } ) );
@@ -510,7 +510,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullAsciiStream());
         // Set what gets returned to something other than the default
-        InputStream stream = new ByteArrayInputStream(new byte[0]);
+        final InputStream stream = new ByteArrayInputStream(new byte[0]);
         rs2.setNullAsciiStream(stream);
         assertNotNull(rs.getAsciiStream(1));
         assertEquals(stream, rs.getAsciiStream(1));
@@ -526,7 +526,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullBigDecimal());
         // Set what gets returned to something other than the default
-        BigDecimal bd = new BigDecimal(5.0);
+        final BigDecimal bd = new BigDecimal(5.0);
         rs2.setNullBigDecimal(bd);
         assertNotNull(rs.getBigDecimal(1));
         assertEquals(bd, rs.getBigDecimal(1));
@@ -542,7 +542,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullBinaryStream());
         // Set what gets returned to something other than the default
-        InputStream stream = new ByteArrayInputStream(new byte[0]);
+        final InputStream stream = new ByteArrayInputStream(new byte[0]);
         rs2.setNullBinaryStream(stream);
         assertNotNull(rs.getBinaryStream(1));
         assertEquals(stream, rs.getBinaryStream(1));
@@ -558,7 +558,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullBlob());
         // Set what gets returned to something other than the default
-        Blob blob = new SqlNullCheckedResultSetMockBlob();
+        final Blob blob = new SqlNullCheckedResultSetMockBlob();
         rs2.setNullBlob(blob);
         assertNotNull(rs.getBlob(1));
         assertEquals(blob, rs.getBlob(1));
@@ -587,7 +587,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertEquals((byte) 0, rs2.getNullByte());
         // Set what gets returned to something other than the default
-        byte b = (byte) 10;
+        final byte b = (byte) 10;
         rs2.setNullByte(b);
         assertEquals(b, rs.getByte(1));
         assertEquals(b, rs.getByte("column"));
@@ -601,7 +601,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullBytes());
         // Set what gets returned to something other than the default
-        byte[] b = new byte[5];
+        final byte[] b = new byte[5];
         for (int i = 0; i < 5; i++) {
             b[0] = (byte) i;
         }
@@ -620,7 +620,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullCharacterStream());
         // Set what gets returned to something other than the default
-        Reader reader = new CharArrayReader("this is a string".toCharArray());
+        final Reader reader = new CharArrayReader("this is a string".toCharArray());
         rs2.setNullCharacterStream(reader);
         assertNotNull(rs.getCharacterStream(1));
         assertEquals(reader, rs.getCharacterStream(1));
@@ -636,7 +636,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullClob());
         // Set what gets returned to something other than the default
-        Clob clob = new SqlNullCheckedResultSetMockClob();
+        final Clob clob = new SqlNullCheckedResultSetMockClob();
         rs2.setNullClob(clob);
         assertNotNull(rs.getClob(1));
         assertEquals(clob, rs.getClob(1));
@@ -652,7 +652,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertNull(rs2.getNullDate());
         // Set what gets returned to something other than the default
-        java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
+        final java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
         rs2.setNullDate(date);
         assertNotNull(rs.getDate(1));
         assertEquals(date, rs.getDate(1));
@@ -671,7 +671,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullDouble() throws SQLException {
         assertEquals(0.0, rs2.getNullDouble(), 0.0);
         // Set what gets returned to something other than the default
-        double d = 10.0;
+        final double d = 10.0;
         rs2.setNullDouble(d);
         assertEquals(d, rs.getDouble(1), 0.0);
         assertEquals(d, rs.getDouble("column"), 0.0);
@@ -683,7 +683,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullFloat() throws SQLException {
         assertEquals((float) 0.0, rs2.getNullFloat(), 0.0);
         // Set what gets returned to something other than the default
-        float f = (float) 10.0;
+        final float f = (float) 10.0;
         rs2.setNullFloat(f);
         assertEquals(f, rs.getFloat(1), 0.0);
         assertEquals(f, rs.getFloat("column"), 0.0);
@@ -699,7 +699,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(0, rs.getInt("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
-        int i = 10;
+        final int i = 10;
         rs2.setNullInt(i);
         assertEquals(i, rs.getInt(1));
         assertEquals(i, rs.getInt("column"));
@@ -711,7 +711,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullLong() throws SQLException {
         assertEquals(0, rs2.getNullLong());
         // Set what gets returned to something other than the default
-        long l = 10;
+        final long l = 10;
         rs2.setNullLong(l);
         assertEquals(l, rs.getLong(1));
         assertEquals(l, rs.getLong("column"));
@@ -723,7 +723,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullObject() throws SQLException {
         assertNull(rs2.getNullObject());
         // Set what gets returned to something other than the default
-        Object o = new Object();
+        final Object o = new Object();
         rs2.setNullObject(o);
         assertNotNull(rs.getObject(1));
         assertEquals(o, rs.getObject(1));
@@ -742,7 +742,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         assertEquals((short) 0, rs2.getNullShort());
         // Set what gets returned to something other than the default
-        short s = (short) 10;
+        final short s = (short) 10;
         rs2.setNullShort(s);
         assertEquals(s, rs.getShort(1));
         assertEquals(s, rs.getShort("column"));
@@ -755,7 +755,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullString() throws SQLException {
         assertEquals(null, rs2.getNullString());
         // Set what gets returned to something other than the default
-        String s = "hello, world";
+        final String s = "hello, world";
         rs2.setNullString(s);
         assertEquals(s, rs.getString(1));
         assertEquals(s, rs.getString("column"));
@@ -767,7 +767,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullRef() throws SQLException {
         assertNull(rs2.getNullRef());
         // Set what gets returned to something other than the default
-        Ref ref = new SqlNullCheckedResultSetMockRef();
+        final Ref ref = new SqlNullCheckedResultSetMockRef();
         rs2.setNullRef(ref);
         assertNotNull(rs.getRef(1));
         assertEquals(ref, rs.getRef(1));
@@ -781,7 +781,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullTime() throws SQLException {
         assertEquals(null, rs2.getNullTime());
         // Set what gets returned to something other than the default
-        Time time = new Time(new java.util.Date().getTime());
+        final Time time = new Time(new java.util.Date().getTime());
         rs2.setNullTime(time);
         assertNotNull(rs.getTime(1));
         assertEquals(time, rs.getTime(1));
@@ -799,7 +799,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void testSetNullTimestamp() throws SQLException {
         assertEquals(null, rs2.getNullTimestamp());
         // Set what gets returned to something other than the default
-        Timestamp ts = new Timestamp(new java.util.Date().getTime());
+        final Timestamp ts = new Timestamp(new java.util.Date().getTime());
         rs2.setNullTimestamp(ts);
         assertNotNull(rs.getTimestamp(1));
         assertEquals(ts, rs.getTimestamp(1));
@@ -823,7 +823,7 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
-        Class<?> returnType = method.getReturnType();
+        final Class<?> returnType = method.getReturnType();
 
         if (method.getName().equals("wasNull")) {
             return Boolean.TRUE;

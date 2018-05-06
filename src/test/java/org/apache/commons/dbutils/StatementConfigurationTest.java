@@ -28,7 +28,7 @@ public class StatementConfigurationTest {
      */
     @Test
     public void testEmptyBuilder() {
-        StatementConfiguration config = new StatementConfiguration.Builder().build();
+        final StatementConfiguration config = new StatementConfiguration.Builder().build();
 
         assertFalse(config.isFetchDirectionSet());
         assertFalse(config.isFetchSizeSet());
@@ -42,13 +42,13 @@ public class StatementConfigurationTest {
      */
     @Test
     public void testBuilder() {
-        StatementConfiguration.Builder builder = new StatementConfiguration.Builder()
+        final StatementConfiguration.Builder builder = new StatementConfiguration.Builder()
                 .fetchDirection(1)
                 .fetchSize(2)
                 .maxFieldSize(3)
                 .maxRows(4)
                 .queryTimeout(5);
-        StatementConfiguration config = builder.build();
+        final StatementConfiguration config = builder.build();
 
         assertTrue(config.isFetchDirectionSet());
         assertEquals(Integer.valueOf(1), config.getFetchDirection());
@@ -71,7 +71,7 @@ public class StatementConfigurationTest {
      */
     @Test
     public void testConstructor() {
-        StatementConfiguration config = new StatementConfiguration(1, 2, 3, 4, 5);
+        final StatementConfiguration config = new StatementConfiguration(1, 2, 3, 4, 5);
 
         assertEquals(Integer.valueOf(1), config.getFetchDirection());
         assertEquals(Integer.valueOf(2), config.getFetchSize());

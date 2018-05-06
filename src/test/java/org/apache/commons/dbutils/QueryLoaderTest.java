@@ -28,25 +28,25 @@ public class QueryLoaderTest extends BaseTestCase {
         "/org/apache/commons/dbutils/TestQueries.properties";
 
     public void testLoad() throws IOException {
-        QueryLoader loader = QueryLoader.instance();
-        Map<String,String> q = loader.load(QUERIES);
-        Map<String,String> q2 = loader.load(QUERIES);
+        final QueryLoader loader = QueryLoader.instance();
+        final Map<String,String> q = loader.load(QUERIES);
+        final Map<String,String> q2 = loader.load(QUERIES);
         assertTrue(q == q2); // pointer comparison should return true
         assertEquals("SELECT * FROM SomeTable", q.get("test.query"));
 
         loader.unload(QUERIES);
-        Map<String,String> q3 = loader.load(QUERIES);
+        final Map<String,String> q3 = loader.load(QUERIES);
         assertTrue(q != q3); // pointer comparison should return false
     }
 
     public void testLoadThrowsIllegalArgumentException() throws IOException {
 
-        QueryLoader queryLoader = QueryLoader.instance();
+        final QueryLoader queryLoader = QueryLoader.instance();
 
         try {
             queryLoader.load("e");
             fail("Expecting exception: IllegalArgumentException");
-        } catch(IllegalArgumentException e) {
+        } catch(final IllegalArgumentException e) {
             assertEquals("e not found.",e.getMessage());
             assertEquals(QueryLoader.class.getName(), e.getStackTrace()[0].getClassName());
         }

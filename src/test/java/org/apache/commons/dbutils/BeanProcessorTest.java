@@ -101,29 +101,29 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     public void testMapColumnToProperties() throws Exception {
-        String[] columnNames = { "test", "test", "three" };
-        String[] columnLabels = { "one", "two", null };
-        ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
+        final String[] columnNames = { "test", "test", "three" };
+        final String[] columnLabels = { "one", "two", null };
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
                 new MockResultSetMetaData(columnNames, columnLabels));
-        PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
+        final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
 
-        int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
         for (int i = 1; i < columns.length; i++) {
             assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
         }
     }
 
     public void testMapColumnToPropertiesWithOverrides() throws Exception {
-        Map<String, String> columnToPropertyOverrides = new HashMap<>();
+        final Map<String, String> columnToPropertyOverrides = new HashMap<>();
         columnToPropertyOverrides.put("five", "four");
-        BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
-        String[] columnNames = { "test", "test", "three", "five" };
-        String[] columnLabels = { "one", "two", null, null };
-        ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
+        final BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
+        final String[] columnNames = { "test", "test", "three", "five" };
+        final String[] columnLabels = { "one", "two", null, null };
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
                 new MockResultSetMetaData(columnNames, columnLabels));
-        PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
+        final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
 
-        int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
         for (int i = 1; i < columns.length; i++) {
             assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
         }

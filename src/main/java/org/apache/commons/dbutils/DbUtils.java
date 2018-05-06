@@ -94,7 +94,7 @@ public final class DbUtils {
     public static void closeQuietly(final Connection conn) {
         try {
             close(conn);
-        } catch (SQLException e) { // NOPMD
+        } catch (final SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -132,7 +132,7 @@ public final class DbUtils {
     public static void closeQuietly(final ResultSet rs) {
         try {
             close(rs);
-        } catch (SQLException e) { // NOPMD
+        } catch (final SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -146,7 +146,7 @@ public final class DbUtils {
     public static void closeQuietly(final Statement stmt) {
         try {
             close(stmt);
-        } catch (SQLException e) { // NOPMD
+        } catch (final SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -176,7 +176,7 @@ public final class DbUtils {
     public static void commitAndCloseQuietly(final Connection conn) {
         try {
             commitAndClose(conn);
-        } catch (SQLException e) { // NOPMD
+        } catch (final SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -203,33 +203,34 @@ public final class DbUtils {
      */
     public static boolean loadDriver(final ClassLoader classLoader, final String driverClassName) {
         try {
-            Class<?> loadedClass = classLoader.loadClass(driverClassName);
+            final Class<?> loadedClass = classLoader.loadClass(driverClassName);
 
             if (!Driver.class.isAssignableFrom(loadedClass)) {
                 return false;
             }
 
             @SuppressWarnings("unchecked") // guarded by previous check
+            final
             Class<Driver> driverClass = (Class<Driver>) loadedClass;
-            Constructor<Driver> driverConstructor = driverClass.getConstructor();
+            final Constructor<Driver> driverConstructor = driverClass.getConstructor();
 
             // make Constructor accessible if it is private
-            boolean isConstructorAccessible = driverConstructor.isAccessible();
+            final boolean isConstructorAccessible = driverConstructor.isAccessible();
             if (!isConstructorAccessible) {
                 driverConstructor.setAccessible(true);
             }
 
             try {
-                Driver driver = driverConstructor.newInstance();
+                final Driver driver = driverConstructor.newInstance();
                 registerDriver(new DriverProxy(driver));
             } finally {
                 driverConstructor.setAccessible(isConstructorAccessible);
             }
 
             return true;
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
             return false;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return false;
         }
     }
@@ -281,7 +282,7 @@ public final class DbUtils {
         if (conn != null) {
             try {
                 printStackTrace(conn.getWarnings(), pw);
-            } catch (SQLException e) {
+            } catch (final SQLException e) {
                 printStackTrace(e, pw);
             }
         }
@@ -326,7 +327,7 @@ public final class DbUtils {
     public static void rollbackAndCloseQuietly(final Connection conn) {
         try {
             rollbackAndClose(conn);
-        } catch (SQLException e) { // NOPMD
+        } catch (final SQLException e) { // NOPMD
             // quiet
         }
     }
@@ -408,15 +409,15 @@ public final class DbUtils {
         public Logger getParentLogger() throws SQLFeatureNotSupportedException {
             if (parentLoggerSupported) {
                 try {
-                    Method method = adapted.getClass().getMethod("getParentLogger", new Class[0]);
+                    final Method method = adapted.getClass().getMethod("getParentLogger", new Class[0]);
                     return (Logger)method.invoke(adapted, new Object[0]);
-                } catch (NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);
-                } catch (IllegalAccessException e) {
+                } catch (final IllegalAccessException e) {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);
-                } catch (InvocationTargetException e) {
+                } catch (final InvocationTargetException e) {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);
                 }

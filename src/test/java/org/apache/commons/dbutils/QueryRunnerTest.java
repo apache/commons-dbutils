@@ -108,7 +108,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testGoodBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -116,7 +116,7 @@ public class QueryRunnerTest {
     @Test
     public void testGoodBatchPmdTrue() throws Exception {
         runner = new QueryRunner(dataSource, true);
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -124,14 +124,14 @@ public class QueryRunnerTest {
     @Test
     public void testGoodBatchDefaultConstructor() throws Exception {
         runner = new QueryRunner();
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(conn, params);
     }
 
     @Test
     public void testNullParamsBatch() throws Exception {
-        String[][] params = new String[][] { { null, "unit" }, { "test", null } };
+        final String[][] params = new String[][] { { null, "unit" }, { "test", null } };
 
         callGoodBatch(params);
     }
@@ -149,7 +149,7 @@ public class QueryRunnerTest {
             verify(stmt, times(1)).executeBatch();
             verify(stmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
-        } catch(SQLException e) {
+        } catch(final SQLException e) {
             caught = true;
         }
 
@@ -160,21 +160,21 @@ public class QueryRunnerTest {
 
     @Test
     public void testTooFewParamsBatch() throws Exception {
-        String[][] params = new String[][] { { "unit" }, { "test" } };
+        final String[][] params = new String[][] { { "unit" }, { "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
     public void testTooManyParamsBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit", "unit" }, { "test", "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit", "unit" }, { "test", "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test(expected=SQLException.class)
     public void testNullConnectionBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
@@ -184,7 +184,7 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullSqlBatch() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         when(meta.getParameterCount()).thenReturn(2);
 
@@ -200,7 +200,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testAddBatchException() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(stmt).addBatch();
 
@@ -209,7 +209,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteBatchException() throws Exception {
-        String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(stmt).executeBatch();
 
@@ -289,7 +289,7 @@ public class QueryRunnerTest {
             verify(results, times(1)).close();
             verify(stmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(SQLException e) {
+        } catch(final SQLException e) {
             caught = true;
         }
 
@@ -423,7 +423,7 @@ public class QueryRunnerTest {
         when(results.next()).thenReturn(true).thenReturn(false);
         when(results.getObject(1)).thenReturn(1L);
 
-        Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<Long>(), "unit", "test");
+        final Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<Long>(), "unit", "test");
 
         verify(stmt, times(1)).executeUpdate();
         verify(stmt, times(1)).close();    // make sure we closed the statement
@@ -444,12 +444,12 @@ public class QueryRunnerTest {
         when(results.getMetaData()).thenReturn(resultsMeta);
         when(resultsMeta.getColumnCount()).thenReturn(1);
 
-        ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
+        final ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
         {
             @Override
             public List<Object> handle(final ResultSet rs) throws SQLException
             {
-                List<Object> objects = new ArrayList<>();
+                final List<Object> objects = new ArrayList<>();
                 while (rs.next())
                 {
                     objects.add(new Object());
@@ -458,13 +458,13 @@ public class QueryRunnerTest {
             }
         };
 
-        Object[][] params = new Object[2][2];
+        final Object[][] params = new Object[2][2];
         params[0][0] = "Test";
         params[0][1] = "Blah";
         params[1][0] = "Test2";
         params[1][1] = "Blah2";
 
-        List<Object> generatedKeys = runner.insertBatch("INSERT INTO blah(col1, col2) VALUES(?,?)", handler, params);
+        final List<Object> generatedKeys = runner.insertBatch("INSERT INTO blah(col1, col2) VALUES(?,?)", handler, params);
 
         verify(stmt, times(2)).addBatch();
         verify(stmt, times(1)).executeBatch();
@@ -485,7 +485,7 @@ public class QueryRunnerTest {
             verify(stmt, times(1)).executeUpdate();
             verify(stmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(SQLException e) {
+        } catch(final SQLException e) {
             caught = true;
         }
 
@@ -533,8 +533,8 @@ public class QueryRunnerTest {
 
     @Test
     public void testStatementConfiguration() throws Exception {
-        StatementConfiguration stmtConfig = new StatementConfiguration(1, 2, 3, 4, 5);
-        QueryRunner queryRunner = new QueryRunner(stmtConfig);
+        final StatementConfiguration stmtConfig = new StatementConfiguration(1, 2, 3, 4, 5);
+        final QueryRunner queryRunner = new QueryRunner(stmtConfig);
         queryRunner.prepareStatement(conn, "select 1");
 
         verify(stmt).setFetchDirection(eq(1));
@@ -573,7 +573,7 @@ public class QueryRunnerTest {
         // Test single OUT parameter
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
-        OutParameter<Integer> intParam =
+        final OutParameter<Integer> intParam =
             new OutParameter<>(Types.INTEGER, Integer.class);
         result = runner.execute(conn, "{?= call my_proc()}", intParam);
 
@@ -602,7 +602,7 @@ public class QueryRunnerTest {
         when(call.getObject(1)).thenReturn(24);
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
-        OutParameter<String> stringParam =
+        final OutParameter<String> stringParam =
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         result = runner.execute(conn, "{?= call my_proc(?, ?)}", intParam, "test", stringParam);
 
@@ -641,7 +641,7 @@ public class QueryRunnerTest {
         // Test single OUT parameter
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
-        OutParameter<Integer> intParam =
+        final OutParameter<Integer> intParam =
             new OutParameter<>(Types.INTEGER, Integer.class);
         result = runner.execute("{?= call my_proc()}", intParam);
 
@@ -670,7 +670,7 @@ public class QueryRunnerTest {
         when(call.getObject(1)).thenReturn(24);
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
-        OutParameter<String> stringParam =
+        final OutParameter<String> stringParam =
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         result = runner.execute("{?= call my_proc(?, ?)}", intParam, "test", stringParam);
 
@@ -709,7 +709,7 @@ public class QueryRunnerTest {
             when(meta.getParameterCount()).thenReturn(2);
             runner.query("{call my_proc(?, ?)}", handler, params);
 
-        } catch(SQLException e) {
+        } catch(final SQLException e) {
             caught = true;
         }
 
@@ -779,7 +779,7 @@ public class QueryRunnerTest {
             }
         });
         when(meta.getParameterCount()).thenReturn(0);
-        List<Object[]> objects = runner.execute("{call my_proc()}", handler);
+        final List<Object[]> objects = runner.execute("{call my_proc()}", handler);
 
         Assert.assertEquals(3, objects.size());
         verify(call, times(1)).execute();
@@ -812,7 +812,7 @@ public class QueryRunnerTest {
         // Test single OUT parameter
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
-        OutParameter<Integer> intParam =
+        final OutParameter<Integer> intParam =
             new OutParameter<>(Types.INTEGER, Integer.class);
         runner.execute(conn, "{?= call my_proc()}", handler, intParam);
 
@@ -841,7 +841,7 @@ public class QueryRunnerTest {
         when(call.getObject(1)).thenReturn(24);
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
-        OutParameter<String> stringParam =
+        final OutParameter<String> stringParam =
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         runner.execute(conn, "{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
 
@@ -877,7 +877,7 @@ public class QueryRunnerTest {
         // Test single OUT parameter
         when(meta.getParameterCount()).thenReturn(1);
         when(call.getObject(1)).thenReturn(42);
-        OutParameter<Integer> intParam =
+        final OutParameter<Integer> intParam =
             new OutParameter<>(Types.INTEGER, Integer.class);
         runner.execute("{?= call my_proc()}", handler, intParam);
 
@@ -906,7 +906,7 @@ public class QueryRunnerTest {
         when(call.getObject(1)).thenReturn(24);
         when(call.getObject(3)).thenReturn("out");
         intParam.setValue(null);
-        OutParameter<String> stringParam =
+        final OutParameter<String> stringParam =
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         runner.execute("{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
 
@@ -945,7 +945,7 @@ public class QueryRunnerTest {
             when(meta.getParameterCount()).thenReturn(2);
             runner.query("{call my_proc(?, ?)}", handler, params);
 
-        } catch(SQLException e) {
+        } catch(final SQLException e) {
             caught = true;
         }
 
@@ -1016,14 +1016,14 @@ public class QueryRunnerTest {
 
     @Test
     public void testFillStatementWithBean() throws Exception {
-        MyBean bean = new MyBean();
+        final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
         runner.fillStatementWithBean(stmt, bean, new String[] { "a", "b", "c" });
     }
 
     @Test(expected=NullPointerException.class)
     public void testFillStatementWithBeanNullNames() throws Exception {
-        MyBean bean = new MyBean();
+        final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
         runner.fillStatementWithBean(stmt, bean, new String[] { "a", "b", null });
     }

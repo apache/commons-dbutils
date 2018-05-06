@@ -26,17 +26,17 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public class KeyedHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
-        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
+        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
 
-        Map<String,Map<String,Object>> results = h.handle(this.rs);
+        final Map<String,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
         Map<String,Object> row = null;
-        for(Entry<String, Map<String, Object>> entry : results.entrySet())
+        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
         {
-            Object key = entry.getKey();
+            final Object key = entry.getKey();
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
@@ -49,16 +49,16 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testColumnIndexHandle() throws SQLException {
-        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(2);
-        Map<String,Map<String,Object>> results = h.handle(this.rs);
+        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(2);
+        final Map<String,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
         Map<String,Object> row = null;
-        for(Entry<String, Map<String, Object>> entry : results.entrySet())
+        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
         {
-            Object key = entry.getKey();
+            final Object key = entry.getKey();
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
@@ -71,16 +71,16 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testColumnNameHandle() throws SQLException {
-        ResultSetHandler<Map<Integer,Map<String,Object>>> h = new KeyedHandler<>("intTest");
-        Map<Integer,Map<String,Object>> results = h.handle(this.rs);
+        final ResultSetHandler<Map<Integer,Map<String,Object>>> h = new KeyedHandler<>("intTest");
+        final Map<Integer,Map<String,Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
         Map<String,Object> row = null;
-        for(Entry<Integer, Map<String, Object>> entry : results.entrySet())
+        for(final Entry<Integer, Map<String, Object>> entry : results.entrySet())
         {
-            Object key = entry.getKey();
+            final Object key = entry.getKey();
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
@@ -93,8 +93,8 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
-        Map<String,Map<String,Object>> results = h.handle(this.emptyResultSet);
+        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
+        final Map<String,Map<String,Object>> results = h.handle(this.emptyResultSet);
         assertNotNull(results);
         assertTrue(results.isEmpty());
     }

@@ -35,7 +35,7 @@ public class PropertyHandlerTest {
     @Test
     public void testServiceLoaderFindsMultipleRegistries() {
         boolean found = false;
-        for (PropertyHandler handler : loader) {
+        for (final PropertyHandler handler : loader) {
             // this class is defined outside of the main classes of dbutils
             if (handler instanceof TestPropertyHandler) {
                 found = true;
@@ -52,7 +52,7 @@ public class PropertyHandlerTest {
     @Test
     public void testFoundMoreThanLocal() {
         int count = 0;
-        for (PropertyHandler handler : loader) {
+        for (final PropertyHandler handler : loader) {
             count++;
         }
 

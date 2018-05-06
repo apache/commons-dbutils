@@ -43,7 +43,7 @@ public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>
      */
     @Override
     public List<T> handle(final ResultSet rs) throws SQLException {
-        List<T> rows = new ArrayList<>();
+        final List<T> rows = new ArrayList<>();
         while (rs.next()) {
             rows.add(this.handleRow(rs));
         }

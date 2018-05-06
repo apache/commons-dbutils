@@ -50,12 +50,12 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
      */
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
-        Object[][] rows = new Object[][] { { null }
+        final Object[][] rows = new Object[][] { { null }
         };
         ResultSet rs = MockResultSet.create(metaData, rows);
 
         // Wrap the ResultSet with a null checked version
-        SqlNullCheckedResultSet ncrs = new SqlNullCheckedResultSet(rs);
+        final SqlNullCheckedResultSet ncrs = new SqlNullCheckedResultSet(rs);
         ncrs.setNullString("   trim this   ");
         rs = ProxyFactory.instance().createResultSet(ncrs);
 
