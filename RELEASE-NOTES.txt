@@ -25,7 +25,7 @@ Changes:
 o DBUTILS-117:  Error handling possible getParameterMetaData() results
         - allow for null return
         - handle SQLFeatureNotSupportedException Thanks to Vadim Smirnov. 
-o DBUTILS-119:  Correct errors in BeanMapHandler JavaDoc Thanks to Michael Akerman. 
+o DBUTILS-119:  Correct errors in BeanMapHandler Javadoc Thanks to Michael Akerman. 
 o PR/1:  Created some Unit Tests to increase code coverage. Thanks to Michael Hausegger. 
 
 
