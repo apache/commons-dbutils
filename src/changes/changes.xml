@@ -69,7 +69,7 @@ The <action> type attribute can be add,update,fix,remove.
         - handle SQLFeatureNotSupportedException
       </action>
       <action dev="britter" type="update" issue="DBUTILS-119" due-to="Michael Akerman">
-        Correct errors in BeanMapHandler JavaDoc
+        Correct errors in BeanMapHandler Javadoc
       </action>
       <action dev="thecarlhall" type="add" issue="DBUTILS-121">
         Add getWriteMethod to BeanProcessor to allow subclasses to influence which write method is used
@@ -125,7 +125,7 @@ The <action> type attribute can be add,update,fix,remove.
         Updated the use of getColumnName to try getColumnLabel first
       </action>
       <action dev="simonetripodi" due-to="Moandji Ezana" type="add" issue="DBUTILS-98">
-        Add missing JavaDoc to QueryRunner#insert
+        Add missing Javadoc to QueryRunner#insert
       </action>
       <action dev="simonetripodi" type="add" issue="DBUTILS-97">
         Add an Abstract ResultSetHandler implementation in order to reduce redundant 'resultSet' variable invocation
