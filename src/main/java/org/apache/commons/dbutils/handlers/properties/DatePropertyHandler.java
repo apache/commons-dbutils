@@ -51,7 +51,7 @@ public class DatePropertyHandler implements PropertyHandler {
         if ("java.sql.Timestamp".equals(targetType)) {
             final Timestamp tsValue = (Timestamp) value;
             final int nanos = tsValue.getNanos();
-            value = new java.sql.Timestamp(tsValue.getTime());
+            value = new Timestamp(tsValue.getTime());
             ((Timestamp) value).setNanos(nanos);
         }
 
