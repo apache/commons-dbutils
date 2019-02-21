@@ -1,0 +1,91 @@
+package org.apache.commons.dbutils.handlers;
+
+import org.apache.commons.dbutils.ResultSetHandler;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class will be useful to get generated keys from the {@code queryRunner.insertBatch} operation.
+ * <br>
+ * <br>
+ * Eg:-
+ * <pre>
+ * ResultSetHandler&lt;List&lt;Long&gt;&gt; rsh = new ScalarListHandler&lt;Long&gt;();
+ * Object[][] params = {{"col1row1", "col2row1"}, {"col1row2", "col2row2"}};
+ * List&lt;Long&gt; ids = queryRunner.insertBatch("INSERT INTO testtable (col1, col2) VALUES (?,?)", rsh, params);
+ * </pre>
+ *
+ * @param <T> correct type to match column type
+ * @author visruth
+ */
+public class ScalarListHandler<T> implements ResultSetHandler<List<T>> {
+
+    /**
+     * The column number to retrieve.
+     */
+    private final int columnIndex;
+
+    /**
+     * The column name to retrieve.  Either columnName or columnIndex
+     * will be used but never both.
+     */
+    private final String columnName;
+
+    /**
+     * Creates a new instance of ScalarHandler.  The first column will
+     * be returned from <code>handle()</code>.
+     */
+    public ScalarListHandler() {
+        this(1, null);
+    }
+
+    /**
+     * Creates a new instance of ScalarHandler.
+     *
+     * @param columnIndex The index of the column to retrieve from the
+     *                    <code>ResultSet</code>.
+     */
+    public ScalarListHandler(int columnIndex) {
+        this(columnIndex, null);
+    }
+
+    /**
+     * Creates a new instance of ScalarHandler.
+     *
+     * @param columnName The name of the column to retrieve from the
+     *                   <code>ResultSet</code>.
+     */
+    public ScalarListHandler(String columnName) {
+        this(1, columnName);
+    }
+
+    /**
+     * Helper constructor
+     *
+     * @param columnIndex The index of the column to retrieve from the
+     *                    <code>ResultSet</code>.
+     * @param columnName  The name of the column to retrieve from the
+     *                    <code>ResultSet</code>.
+     */
+    private ScalarListHandler(int columnIndex, String columnName) {
+        this.columnIndex = columnIndex;
+        this.columnName = columnName;
+    }
+
+
+    public List<T> handle(ResultSet rs) throws SQLException {
+        List<T> list = new ArrayList<>();
+        while (rs.next()) {
+            if (this.columnName == null) {
+                list.add((T) rs.getObject(this.columnIndex));
+            } else {
+                list.add((T) rs.getObject(this.columnName));
+            }
+        }
+        return list;
+    }
+
+}
