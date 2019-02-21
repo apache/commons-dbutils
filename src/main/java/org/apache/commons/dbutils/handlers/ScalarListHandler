@@ -77,7 +77,7 @@ public class ScalarListHandler<T> implements ResultSetHandler<List<T>> {
 
 
     public List<T> handle(ResultSet rs) throws SQLException {
-        List<T> list = new ArrayList<>();
+        List<T> list = new ArrayList<T>();
         while (rs.next()) {
             if (this.columnName == null) {
                 list.add((T) rs.getObject(this.columnIndex));
