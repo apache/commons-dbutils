@@ -16,6 +16,8 @@
  */
 package org.apache.commons.dbutils;
 
+import org.apache.commons.dbutils.annotations.Column;
+
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSetMetaData;
@@ -122,6 +124,62 @@ public class BeanProcessorTest extends BaseTestCase {
         final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
                 new MockResultSetMetaData(columnNames, columnLabels));
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
+
+        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        for (int i = 1; i < columns.length; i++) {
+            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
+        }
+    }
+
+    public static class MapColumnToAnnotationFieldBean {
+        private String one;
+
+        private String two;
+
+        private String three;
+
+        private String four;
+
+        public String getOne() {
+            return one;
+        }
+
+        public void setOne(final String one) {
+            this.one = one;
+        }
+
+        public String getTwo() {
+            return two;
+        }
+
+        public void setTwo(final String two) {
+            this.two = two;
+        }
+
+        @Column(name = "three_")
+        public String getThree() {
+            return three;
+        }
+
+        public void setThree(final String three) {
+            this.three = three;
+        }
+
+        public String getFour() {
+            return four;
+        }
+
+        public void setFour(final String four) {
+            this.four = four;
+        }
+    }
+
+    public void testMapColumnToAnnotationField() throws Exception {
+        final String[] columnNames = { "test", "test", "three_" };
+        final String[] columnLabels = { "one", "two", null };
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
+                new MockResultSetMetaData(columnNames, columnLabels));
+        final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToAnnotationFieldBean.class).getPropertyDescriptors();
 
         final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
         for (int i = 1; i < columns.length; i++) {
