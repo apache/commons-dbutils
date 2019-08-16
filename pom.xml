@@ -39,8 +39,8 @@
 
   <scm>
     <connection>scm:git:git://git.apache.org/commons-dbutils.git</connection>
-    <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/commons-dbutils.git</developerConnection>
-    <url>https://git-wip-us.apache.org/repos/asf?p=commons-dbutils.git</url>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-dbutils.git</developerConnection>
+    <url>https://gitbox.apache.org/repos/asf?p=commons-dbutils.git</url>
   </scm>
 
   <developers>
