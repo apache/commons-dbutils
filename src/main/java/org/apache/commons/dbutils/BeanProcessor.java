@@ -478,12 +478,13 @@ public class BeanProcessor {
 
                 PropertyDescriptor prop = props[i];
                 Column column = prop.getReadMethod().getAnnotation(Column.class);
+                String propertyColumnName = null;
                 if (column != null) {
-                    if (propertyName.equalsIgnoreCase(column.name())){
-                        columnToProperty[col] = i;
-                        break;
-                    }
-                } else if (propertyName.equalsIgnoreCase(prop.getName())) {
+                    propertyColumnName = column.name();
+                } else {
+                    propertyColumnName = prop.getName();
+                }
+                if (propertyName.equalsIgnoreCase(propertyColumnName)) {
                     columnToProperty[col] = i;
                     break;
                 }
