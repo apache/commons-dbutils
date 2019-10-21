@@ -16,6 +16,8 @@
  */
 package org.apache.commons.dbutils;
 
+import org.apache.commons.dbutils.annotations.Column;
+
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -474,7 +476,14 @@ public class BeanProcessor {
             }
             for (int i = 0; i < props.length; i++) {
 
-                if (propertyName.equalsIgnoreCase(props[i].getName())) {
+                PropertyDescriptor prop = props[i];
+                Column column = prop.getReadMethod().getAnnotation(Column.class);
+                if (column != null) {
+                    if (propertyName.equalsIgnoreCase(column.name())){
+                        columnToProperty[col] = i;
+                        break;
+                    }
+                } else if (propertyName.equalsIgnoreCase(prop.getName())) {
                     columnToProperty[col] = i;
                     break;
                 }
