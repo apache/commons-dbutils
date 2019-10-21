@@ -326,12 +326,17 @@
             <configuration>
               <rules>
                 <rule>
-                  <element>PACKAGE</element>
+                  <element>BUNDLE</element>
                   <limits>
                     <limit>
-                      <counter>LINE</counter>
+                      <counter>INSTRUCTION</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.9</minimum>
+                      <minimum>0.6</minimum>
+                    </limit>
+                    <limit>
+                      <counter>CLASS</counter>
+                      <value>MISSEDCOUNT</value>
+                      <maximum>8</maximum>
                     </limit>
                   </limits>
                 </rule>
