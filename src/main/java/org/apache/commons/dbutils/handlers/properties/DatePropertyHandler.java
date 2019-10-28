@@ -16,9 +16,10 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
-import java.sql.Timestamp;
-
 import org.apache.commons.dbutils.PropertyHandler;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class DatePropertyHandler implements PropertyHandler {
     @Override
@@ -31,7 +32,8 @@ public class DatePropertyHandler implements PropertyHandler {
             if ("java.sql.Time".equals(targetType)) {
                 return true;
             } else
-            if ("java.sql.Timestamp".equals(targetType)) {
+            if ("java.sql.Timestamp".equals(targetType)
+                    && !Timestamp.class.isInstance(value)) {
                 return true;
             }
         }
@@ -42,17 +44,17 @@ public class DatePropertyHandler implements PropertyHandler {
     @Override
     public Object apply(final Class<?> parameter, Object value) {
         final String targetType = parameter.getName();
+        final Date dateValue = (java.util.Date) value;
+        final long time = dateValue.getTime();
+
         if ("java.sql.Date".equals(targetType)) {
-            value = new java.sql.Date(((java.util.Date) value).getTime());
+            value = new java.sql.Date(time);
         } else
         if ("java.sql.Time".equals(targetType)) {
-            value = new java.sql.Time(((java.util.Date) value).getTime());
+            value = new java.sql.Time(time);
         } else
         if ("java.sql.Timestamp".equals(targetType)) {
-            final Timestamp tsValue = (Timestamp) value;
-            final int nanos = tsValue.getNanos();
-            value = new Timestamp(tsValue.getTime());
-            ((Timestamp) value).setNanos(nanos);
+            value = new Timestamp(time);
         }
 
         return value;
