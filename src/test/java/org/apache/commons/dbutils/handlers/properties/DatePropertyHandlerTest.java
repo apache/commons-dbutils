@@ -16,50 +16,58 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-
-import org.junit.Before;
-import org.junit.Test;
-
 public class DatePropertyHandlerTest {
     private DatePropertyHandler handler;
+    private Date testValue;
 
     @Before
     public void setUp() {
         this.handler = new DatePropertyHandler();
+        this.testValue = new Date();
     }
 
     @Test
     public void testMatch() {
-        assertTrue(handler.match(java.sql.Date.class, new java.util.Date()));
-        assertTrue(handler.match(java.sql.Time.class, new java.util.Date()));
-        assertTrue(handler.match(java.sql.Timestamp.class, new java.util.Date()));
+        assertTrue(handler.match(java.sql.Date.class, testValue));
+        assertTrue(handler.match(java.sql.Time.class, testValue));
+        assertTrue(handler.match(java.sql.Timestamp.class, testValue));
+    }
+
+    @Test
+    public void testNotMatch() {
+        final Timestamp ts = new Timestamp(testValue.getTime());
+        assertFalse(handler.match(java.sql.Timestamp.class, ts));
     }
 
     @Test
     public void testMatchNegative() {
         assertFalse(handler.match(Float.class, null));
-        assertFalse(handler.match(Float.class, new java.util.Date()));
+        assertFalse(handler.match(Float.class, testValue));
     }
 
     @Test
     public void testApplyTypeOfDate() throws Exception {
-        assertEquals(java.sql.Date.class, handler.apply(java.sql.Date.class, new java.util.Date()).getClass());
+        assertEquals(java.sql.Date.class, handler.apply(java.sql.Date.class, testValue).getClass());
     }
 
     @Test
     public void testApplyTypeOfTime() throws Exception {
-        assertEquals(Time.class, handler.apply(java.sql.Time.class, new java.util.Date()).getClass());
+        assertEquals(Time.class, handler.apply(java.sql.Time.class, testValue).getClass());
     }
 
     @Test
     public void testApplyTypeOfTimestamp() throws Exception {
-        final Timestamp ts = new Timestamp(new java.util.Date().getTime());
-        assertEquals(Timestamp.class, handler.apply(java.sql.Timestamp.class, ts).getClass());
+        assertEquals(Timestamp.class, handler.apply(java.sql.Timestamp.class, testValue).getClass());
     }
 }
