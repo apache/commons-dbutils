@@ -22,8 +22,29 @@ import java.util.Map.Entry;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.RowProcessor;
+
+import static org.mockito.Mockito.mock;
 
 public class KeyedHandlerTest extends BaseTestCase {
+
+    public void testInjectedRowProcess() throws Exception {
+        RowProcessor mockProc = mock(RowProcessor.class);
+        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(mockProc);
+        final Map<String,Map<String,Object>> results = h.handle(this.rs);
+
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
+
+        Map<String,Object> row = null;
+        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
+        {
+            row = entry.getValue();
+            assertNotNull(row);
+            assertTrue(row.isEmpty());
+            assertEquals(0, row.keySet().size());
+        }
+    }
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();

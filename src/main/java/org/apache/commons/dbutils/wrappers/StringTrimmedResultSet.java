@@ -97,9 +97,9 @@ public class StringTrimmedResultSet implements InvocationHandler {
 
         Object result = method.invoke(this.rs, args);
 
-        if ((method.getName().equals("getObject")
-            || method.getName().equals("getString"))
-                && result instanceof String) {
+        if (result instanceof String
+                && (method.getName().equals("getObject")
+                || method.getName().equals("getString"))) {
             result = ((String) result).trim();
         }
 
