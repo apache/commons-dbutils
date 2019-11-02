@@ -337,7 +337,7 @@ public final class DbUtils {
      *
      * @since 1.6
      */
-    private static final class DriverProxy implements Driver {
+    static final class DriverProxy implements Driver {
 
         private boolean parentLoggerSupported = true;
 

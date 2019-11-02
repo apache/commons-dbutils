@@ -16,16 +16,23 @@
  */
 package org.apache.commons.dbutils;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
 
 public class DbUtilsTest {
 
@@ -282,4 +289,39 @@ public class DbUtilsTest {
 
     }
 
+    public static class DriverProxyTest {
+        private static final Driver mockedDriver = mock(Driver.class);
+        private DbUtils.DriverProxy proxy;
+
+        @Before
+        public void setUp() {
+            proxy = new DbUtils.DriverProxy(mockedDriver);
+        }
+
+        @After
+        public void tearDown() {
+            reset(mockedDriver);
+        }
+
+        @Test
+        public void testProxiedMethods() throws Exception {
+            proxy.getMajorVersion();
+            verify(mockedDriver).getMajorVersion();
+            proxy.getMinorVersion();
+            verify(mockedDriver).getMinorVersion();
+            proxy.jdbcCompliant();
+            verify(mockedDriver).jdbcCompliant();
+
+            String url = "testUrl";
+            proxy.acceptsURL(url);
+            verify(mockedDriver).acceptsURL(url);
+
+            Properties props = new Properties();
+            props.setProperty("test", "true");
+            proxy.connect(url, props);
+            verify(mockedDriver).connect(url, props);
+            proxy.getPropertyInfo(url, props);
+            verify(mockedDriver).getPropertyInfo(url, props);
+        }
+    }
 }
