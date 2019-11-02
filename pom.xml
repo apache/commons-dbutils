@@ -214,7 +214,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>1.9.5</version>
+      <version>3.1.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -239,7 +239,6 @@
     <maven.compiler.target>1.7</maven.compiler.target>
 
     <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
-    <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
 
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
@@ -303,46 +302,13 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.plugin.version}</version>
         <executions>
           <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <!-- attached to Maven test phase -->
-          <execution>
-            <id>report</id>
             <phase>test</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-          </execution>
-          <execution>
-            <id>jacoco-check</id>
             <goals>
-              <goal>check</goal>
+              <goal>report</goal>
             </goals>
-            <configuration>
-              <rules>
-                <rule>
-                  <element>BUNDLE</element>
-                  <limits>
-                    <limit>
-                      <counter>INSTRUCTION</counter>
-                      <value>COVEREDRATIO</value>
-                      <minimum>0.6</minimum>
-                    </limit>
-                    <limit>
-                      <counter>CLASS</counter>
-                      <value>MISSEDCOUNT</value>
-                      <maximum>8</maximum>
-                    </limit>
-                  </limits>
-                </rule>
-              </rules>
-            </configuration>
-        </execution>
+          </execution>
         </executions>
       </plugin>
     </plugins>
