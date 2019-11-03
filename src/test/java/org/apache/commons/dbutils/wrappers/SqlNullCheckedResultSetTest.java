@@ -41,6 +41,9 @@ import java.util.Map;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ProxyFactory;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 /**
  * Test cases for <code>SqlNullCheckedResultSet</code> class.
  */
@@ -811,6 +814,14 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
     }
 
+    public void testWrapResultSet() throws SQLException {
+        ResultSet wrappedRs = mock(ResultSet.class);
+        ResultSet rs = SqlNullCheckedResultSet.wrap(wrappedRs);
+        rs.beforeFirst();
+        verify(wrappedRs).beforeFirst();
+        rs.next();
+        verify(wrappedRs).next();
+    }
 }
 
 class SqlNullUncheckedMockResultSet implements InvocationHandler {
