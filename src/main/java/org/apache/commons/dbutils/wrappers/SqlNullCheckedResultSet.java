@@ -343,7 +343,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public Time getNullTime() {
-        return this.nullTime;
+        return this.nullTime != null ? new Time(this.nullTime.getTime()) : null;
     }
 
     /**
@@ -353,7 +353,13 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @return the value
      */
     public Timestamp getNullTimestamp() {
-        return this.nullTimestamp != null ? new Timestamp(this.nullTimestamp.getTime()) : null;
+        if (this.nullTimestamp == null) {
+            return null;
+        }
+
+        Timestamp ts = new Timestamp(this.nullTimestamp.getTime());
+        ts.setNanos(this.nullTimestamp.getNanos());
+        return ts;
     }
 
     /**
@@ -460,9 +466,13 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullBytes the value
      */
     public void setNullBytes(final byte[] nullBytes) {
-        final byte[] copy = new byte[nullBytes.length];
-        System.arraycopy(nullBytes, 0, copy, 0, nullBytes.length);
-        this.nullBytes = copy;
+        if (nullBytes != null) {
+            final byte[] copy = new byte[nullBytes.length];
+            System.arraycopy(nullBytes, 0, copy, 0, nullBytes.length);
+            this.nullBytes = copy;
+        } else {
+            this.nullBytes = null;
+        }
     }
 
     /**
@@ -582,7 +592,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullTime the value
      */
     public void setNullTime(final Time nullTime) {
-        this.nullTime = nullTime;
+        this.nullTime = nullTime != null ? new Time(nullTime.getTime()) : null;
     }
 
     /**
@@ -592,7 +602,12 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param nullTimestamp the value
      */
     public void setNullTimestamp(final Timestamp nullTimestamp) {
-        this.nullTimestamp = nullTimestamp != null ? new Timestamp(nullTimestamp.getTime()) : null;
+        if (nullTimestamp != null) {
+            this.nullTimestamp = new Timestamp(nullTimestamp.getTime());
+            this.nullTimestamp.setNanos(nullTimestamp.getNanos());
+        } else {
+            this.nullTimestamp = null;
+        }
     }
 
     /**
