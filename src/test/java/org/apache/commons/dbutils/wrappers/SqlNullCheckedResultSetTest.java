@@ -601,8 +601,13 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullByte implementation.
      */
     public void testSetNullBytes() throws SQLException {
+        // test the default, unset value
+        assertEquals(null, rs2.getNullBytes());
 
-        assertNull(rs2.getNullBytes());
+        // test that setting null is safe
+        rs2.setNullBytes(null);
+        assertEquals(null, rs2.getNullBytes());
+
         // Set what gets returned to something other than the default
         final byte[] b = new byte[5];
         for (int i = 0; i < 5; i++) {
@@ -652,8 +657,13 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullDate implementation.
      */
     public void testSetNullDate() throws SQLException {
+        // test the default, unset value
+        assertEquals(null, rs2.getNullDate());
 
-        assertNull(rs2.getNullDate());
+        // test that setting null is safe
+        rs2.setNullDate(null);
+        assertEquals(null, rs2.getNullDate());
+
         // Set what gets returned to something other than the default
         final java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
         rs2.setNullDate(date);
@@ -782,7 +792,13 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullTime implementation.
      */
     public void testSetNullTime() throws SQLException {
+        // test the default, unset value
         assertEquals(null, rs2.getNullTime());
+
+        // test that setting null is safe
+        rs2.setNullTime(null);
+        assertEquals(null, rs2.getNullTime());
+
         // Set what gets returned to something other than the default
         final Time time = new Time(new java.util.Date().getTime());
         rs2.setNullTime(time);
@@ -800,7 +816,13 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullTimestamp implementation.
      */
     public void testSetNullTimestamp() throws SQLException {
+        // test the default, unset value
         assertEquals(null, rs2.getNullTimestamp());
+
+        // test that setting null is safe
+        rs2.setNullTimestamp(null);
+        assertEquals(null, rs2.getNullTimestamp());
+
         // Set what gets returned to something other than the default
         final Timestamp ts = new Timestamp(new java.util.Date().getTime());
         rs2.setNullTimestamp(ts);
