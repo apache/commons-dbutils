@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
 /**
- * <code>ResultSetHandler</code> implementation that converts a
- * <code>ResultSet</code> into a <code>List</code> of beans. This class is
+ * {@code ResultSetHandler} implementation that converts a
+ * {@code ResultSet} into a {@code List} of beans. This class is
  * thread safe.
  *
  * @param <T> the target bean type
@@ -47,7 +47,7 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
     /**
      * Creates a new instance of BeanListHandler.
      *
-     * @param type The Class that objects returned from <code>handle()</code>
+     * @param type The Class that objects returned from {@code handle()}
      * are created from.
      */
     public BeanListHandler(final Class<? extends T> type) {
@@ -57,9 +57,9 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
     /**
      * Creates a new instance of BeanListHandler.
      *
-     * @param type The Class that objects returned from <code>handle()</code>
+     * @param type The Class that objects returned from {@code handle()}
      * are created from.
-     * @param convert The <code>RowProcessor</code> implementation
+     * @param convert The {@code RowProcessor} implementation
      * to use when converting rows into beans.
      */
     public BeanListHandler(final Class<? extends T> type, final RowProcessor convert) {
@@ -68,12 +68,12 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
     }
 
     /**
-     * Convert the whole <code>ResultSet</code> into a List of beans with
-     * the <code>Class</code> given in the constructor.
+     * Convert the whole {@code ResultSet} into a List of beans with
+     * the {@code Class} given in the constructor.
      *
-     * @param rs The <code>ResultSet</code> to handle.
+     * @param rs The {@code ResultSet} to handle.
      *
-     * @return A List of beans, never <code>null</code>.
+     * @return A List of beans, never {@code null}.
      *
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(ResultSet, Class)

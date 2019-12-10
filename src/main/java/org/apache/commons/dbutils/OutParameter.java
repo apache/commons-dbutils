@@ -22,15 +22,15 @@ import java.sql.SQLException;
 /**
  * Represents an OUT parameter for a stored procedure.  When running a stored
  * procedure with {@link QueryRunner}, pass an instance of
- * <code>OutParameter</code> to indicate that the parameter at that index is an
+ * {@code OutParameter} to indicate that the parameter at that index is an
  * OUT parameter.  The value of the parameter may be obtained from the
- * <code>OutParameter</code> instance via {@link #getValue() }.
+ * {@code OutParameter} instance via {@link #getValue() }.
  * <p>
- * INOUT parameters are also supported by setting the <code>value</code> of
- * the <code>OutParameter</code> instance before invoking the stored procedure.
+ * INOUT parameters are also supported by setting the {@code value} of
+ * the {@code OutParameter} instance before invoking the stored procedure.
  *
  * @param <T> the class of the parameter; should be compatible via cast with the
- * class returned by the <code>CallableStatement.getObject(int)</code> method.
+ * class returned by the {@code CallableStatement.getObject(int)} method.
  */
 public class OutParameter<T> {
     private final int sqlType;
@@ -38,13 +38,13 @@ public class OutParameter<T> {
     private T value = null;
 
     /**
-     * Construct an <code>OutParameter</code> for the given JDBC SQL type and
+     * Construct an {@code OutParameter} for the given JDBC SQL type and
      * Java type.
      * @param sqlType the JDBC SQL type of the parameter as in
-     * <code>java.sql.Types</code>.
+     * {@code java.sql.Types}.
      * @param javaType the Java class of the parameter value, cast compatible
-     * with the type returned by <code>CallableStatement.getObject(int)</code>
-     * for the JDBC type given by <code>sqlType</code>.
+     * with the type returned by {@code CallableStatement.getObject(int)}
+     * for the JDBC type given by {@code sqlType}.
      */
     public OutParameter(final int sqlType, final Class<T> javaType) {
         this.sqlType = sqlType;
@@ -52,14 +52,14 @@ public class OutParameter<T> {
     }
 
     /**
-     * Construct an <code>OutParameter</code> for the given JDBC SQL type and
+     * Construct an {@code OutParameter} for the given JDBC SQL type and
      * Java type and with the given value.  The parameter will be treated as an
      * INOUT parameter if the value is null.
      * @param sqlType the JDBC SQL type of the parameter as in
-     * <code>java.sql.Types</code>.
+     * {@code java.sql.Types}.
      * @param javaType the Java class of the parameter value, cast compatible
-     * with the type returned by <code>CallableStatement.getObject(int)</code>
-     * for the JDBC type given by <code>sqlType</code>.
+     * with the type returned by {@code CallableStatement.getObject(int)}
+     * for the JDBC type given by {@code sqlType}.
      * @param value the IN value of the parameter
      */
     public OutParameter(final int sqlType, final Class<T> javaType, final T value) {
@@ -106,7 +106,7 @@ public class OutParameter<T> {
 
     /**
      * Set the value using the return value of the parameter an the given index
-     * from the given <code>CallableStatement</code>.
+     * from the given {@code CallableStatement}.
      * @param stmt the already executed statement
      * @param index the (1-based) index of the parameter
      * @throws SQLException when the value could not be retrieved from the
@@ -119,8 +119,8 @@ public class OutParameter<T> {
 
     /**
      * Set up the given statement by registering an OUT parameter at the given
-     * index using the <code>sqlType</code> and <code>value</code> of this
-     * <code>OutParameter</code>.  If the value is not null, the parameter is
+     * index using the {@code sqlType} and {@code value} of this
+     * {@code OutParameter}.  If the value is not null, the parameter is
      * treated like an INOUT parameter and the value is set on the statement.
      * @param stmt the statement the parameter should register on.
      * @param index the (1-based) index of the parameter.

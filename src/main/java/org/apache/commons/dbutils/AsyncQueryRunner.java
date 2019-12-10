@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 
 /**
  * Executes SQL queries with pluggable strategies for handling
- * <code>ResultSet</code>s.  This class is thread safe.
+ * {@code ResultSet}s.  This class is thread safe.
  *
  * @see ResultSetHandler
  * @since 1.4
@@ -61,10 +61,10 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
-     * Constructor for AsyncQueryRunner that controls the use of <code>ParameterMetaData</code>.
+     * Constructor for AsyncQueryRunner that controls the use of {@code ParameterMetaData}.
      *
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
@@ -75,12 +75,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
-     * Constructor for AsyncQueryRunner that takes a <code>DataSource</code>.
+     * Constructor for AsyncQueryRunner that takes a {@code DataSource}.
      *
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     @Deprecated
@@ -90,13 +90,13 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
-     * Constructor for AsyncQueryRunner that take a <code>DataSource</code> and controls the use of <code>ParameterMetaData</code>.
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Constructor for AsyncQueryRunner that take a {@code DataSource} and controls the use of {@code ParameterMetaData}.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
@@ -166,12 +166,12 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
      *
-     * @param conn The <code>Connection</code> to use to run the query.  The caller is
+     * @param conn The {@code Connection} to use to run the query.  The caller is
      * responsible for closing this Connection.
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
-     * @return A <code>Future</code> which returns the number of rows updated per statement.
+     * @return A {@code Future} which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      */
     public Future<int[]> batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
@@ -187,14 +187,14 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the update will not be saved.
      *
      * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
-     * @return A <code>Future</code> which returns the number of rows updated per statement.
+     * @return A {@code Future} which returns the number of rows updated per statement.
      * @throws SQLException if a database access error occurs
      */
     public Future<int[]> batch(final String sql, final Object[][] params) throws SQLException {
@@ -282,7 +282,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
      * @param params The replacement parameters.
-     * @return A <code>Future</code> which returns the result of the query call.
+     * @return A {@code Future} which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params)
@@ -304,7 +304,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
      * @param rsh The handler that converts the results into an object.
-     * @return A <code>Future</code> which returns the result of the query call.
+     * @return A {@code Future} which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
@@ -320,15 +320,15 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given SELECT SQL query and returns a result object.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
+     * the {@code ResultSet}.
      * @param params Initialize the PreparedStatement's IN parameters with
      * this array.
-     * @return A <code>Future</code> which returns the result of the query call.
+     * @return A {@code Future} which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
@@ -344,14 +344,14 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given SELECT SQL without any replacement parameters.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
+     * the {@code ResultSet}.
      *
-     * @return A <code>Future</code> which returns the result of the query call.
+     * @return A {@code Future} which returns the result of the query call.
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
@@ -429,7 +429,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      *
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
-     * @return A <code>Future</code> which returns the number of rows updated.
+     * @return A {@code Future} which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(final Connection conn, final String sql) throws SQLException {
@@ -450,7 +450,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param param The replacement parameter.
-     * @return A <code>Future</code> which returns the number of rows updated.
+     * @return A {@code Future} which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(final Connection conn, final String sql, final Object param) throws SQLException {
@@ -470,7 +470,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param params The query replacement parameters.
-     * @return A <code>Future</code> which returns the number of rows updated.
+     * @return A {@code Future} which returns the number of rows updated.
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(final Connection conn, final String sql, final Object... params) throws SQLException {
@@ -486,14 +486,14 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement without
-     * any replacement parameters. The <code>Connection</code> is retrieved
-     * from the <code>DataSource</code> set in the constructor.  This
-     * <code>Connection</code> must be in auto-commit mode or the update will
+     * any replacement parameters. The {@code Connection} is retrieved
+     * from the {@code DataSource} set in the constructor.  This
+     * {@code Connection} must be in auto-commit mode or the update will
      * not be saved.
      *
      * @param sql The SQL statement to execute.
      * @throws SQLException if a database access error occurs
-     * @return A <code>Future</code> which returns the number of rows updated.
+     * @return A {@code Future} which returns the number of rows updated.
      */
     public Future<Integer> update(final String sql) throws SQLException {
         return executorService.submit(new Callable<Integer>() {
@@ -508,15 +508,15 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement with
-     * a single replacement parameter.  The <code>Connection</code> is
-     * retrieved from the <code>DataSource</code> set in the constructor.
-     * This <code>Connection</code> must be in auto-commit mode or the
+     * a single replacement parameter.  The {@code Connection} is
+     * retrieved from the {@code DataSource} set in the constructor.
+     * This {@code Connection} must be in auto-commit mode or the
      * update will not be saved.
      *
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
      * @throws SQLException if a database access error occurs
-     * @return A <code>Future</code> which returns the number of rows updated.
+     * @return A {@code Future} which returns the number of rows updated.
      */
     public Future<Integer> update(final String sql, final Object param) throws SQLException {
         return executorService.submit(new Callable<Integer>() {
@@ -531,15 +531,15 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the update will not be saved.
      *
      * @param sql The SQL statement to execute.
      * @param params Initializes the PreparedStatement's IN (i.e. '?')
      * parameters.
      * @throws SQLException if a database access error occurs
-     * @return A <code>Future</code> which returns the number of rows updated.
+     * @return A {@code Future} which returns the number of rows updated.
      */
     public Future<Integer> update(final String sql, final Object... params) throws SQLException {
         return executorService.submit(new Callable<Integer>() {

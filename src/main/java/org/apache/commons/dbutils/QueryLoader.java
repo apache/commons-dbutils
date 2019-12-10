@@ -24,7 +24,7 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
- * <code>QueryLoader</code> is a registry for sets of queries so
+ * {@code QueryLoader} is a registry for sets of queries so
  * that multiple copies of the same queries aren't loaded into memory.
  * This implementation loads properties files filled with query name to
  * SQL mappings.  This class is thread safe.
@@ -66,7 +66,7 @@ public class QueryLoader {
      * subsequent request to load queries from the same path will return
      * the cached Map.  The properties file to load can be in either
      * line-oriented or XML format.  XML formatted properties files must use a
-     * <code>.xml</code> file extension.
+     * {@code .xml} file extension.
      *
      * @param path The path that the ClassLoader will use to find the file.
      * This is <strong>not</strong> a file system path.  If you had a jarred
@@ -96,7 +96,7 @@ public class QueryLoader {
      * Loads a set of named queries into a Map object.  This implementation
      * reads a properties file at the given path.  The properties file can be
      * in either line-oriented or XML format.  XML formatted properties files
-     * must use a <code>.xml</code> file extension.
+     * must use a {@code .xml} file extension.
 
      * @param path The path that the ClassLoader will use to find the file.
      * @throws IOException if a file access error occurs

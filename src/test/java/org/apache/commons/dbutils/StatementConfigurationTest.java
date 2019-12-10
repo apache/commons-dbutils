@@ -67,7 +67,7 @@ public class StatementConfigurationTest {
     }
 
     /**
-     * Test that the constructor of <code>StatementConfiguration</code> correctly sets all values.
+     * Test that the constructor of {@code StatementConfiguration} correctly sets all values.
      */
     @Test
     public void testConstructor() {

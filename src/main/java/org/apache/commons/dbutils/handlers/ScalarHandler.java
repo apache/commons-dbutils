@@ -22,8 +22,8 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.ResultSetHandler;
 
 /**
- * <code>ResultSetHandler</code> implementation that converts one
- * <code>ResultSet</code> column into an Object. This class is thread safe.
+ * {@code ResultSetHandler} implementation that converts one
+ * {@code ResultSet} column into an Object. This class is thread safe.
  *
  * @param <T> The type of the scalar
  * @see org.apache.commons.dbutils.ResultSetHandler
@@ -43,7 +43,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
 
     /**
      * Creates a new instance of ScalarHandler.  The first column will
-     * be returned from <code>handle()</code>.
+     * be returned from {@code handle()}.
      */
     public ScalarHandler() {
         this(1, null);
@@ -53,7 +53,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Creates a new instance of ScalarHandler.
      *
      * @param columnIndex The index of the column to retrieve from the
-     * <code>ResultSet</code>.
+     * {@code ResultSet}.
      */
     public ScalarHandler(final int columnIndex) {
         this(columnIndex, null);
@@ -63,7 +63,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Creates a new instance of ScalarHandler.
      *
      * @param columnName The name of the column to retrieve from the
-     * <code>ResultSet</code>.
+     * {@code ResultSet}.
      */
     public ScalarHandler(final String columnName) {
         this(1, columnName);
@@ -71,9 +71,9 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
 
     /** Helper constructor
      * @param columnIndex The index of the column to retrieve from the
-     * <code>ResultSet</code>.
+     * {@code ResultSet}.
      * @param columnName The name of the column to retrieve from the
-     * <code>ResultSet</code>.
+     * {@code ResultSet}.
      */
     private ScalarHandler(final int columnIndex, final String columnName) {
         this.columnIndex = columnIndex;
@@ -81,12 +81,12 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * Returns one <code>ResultSet</code> column as an object via the
-     * <code>ResultSet.getObject()</code> method that performs type
+     * Returns one {@code ResultSet} column as an object via the
+     * {@code ResultSet.getObject()} method that performs type
      * conversions.
-     * @param rs <code>ResultSet</code> to process.
-     * @return The column or <code>null</code> if there are no rows in
-     * the <code>ResultSet</code>.
+     * @param rs {@code ResultSet} to process.
+     * @return The column or {@code null} if there are no rows in
+     * the {@code ResultSet}.
      *
      * @throws SQLException if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type

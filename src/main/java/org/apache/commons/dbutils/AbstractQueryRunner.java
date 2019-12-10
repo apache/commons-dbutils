@@ -67,12 +67,12 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor to control the use of <code>ParameterMetaData</code>.
+     * Constructor to control the use of {@code ParameterMetaData}.
      *
      * @param pmdKnownBroken
      *            Some drivers don't support
      *            {@link ParameterMetaData#getParameterType(int) }; if
-     *            <code>pmdKnownBroken</code> is set to true, we won't even try
+     *            {@code pmdKnownBroken} is set to true, we won't even try
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
      */
@@ -83,12 +83,12 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor to provide a <code>DataSource</code>. Methods that do not
-     * take a <code>Connection</code> parameter will retrieve connections from
-     * this <code>DataSource</code>.
+     * Constructor to provide a {@code DataSource}. Methods that do not
+     * take a {@code Connection} parameter will retrieve connections from
+     * this {@code DataSource}.
      *
      * @param ds
-     *            The <code>DataSource</code> to retrieve connections from.
+     *            The {@code DataSource} to retrieve connections from.
      */
     public AbstractQueryRunner(final DataSource ds) {
         this.ds = ds;
@@ -96,17 +96,17 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor to provide a <code>DataSource</code> and control the use of
-     * <code>ParameterMetaData</code>. Methods that do not take a
-     * <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Constructor to provide a {@code DataSource} and control the use of
+     * {@code ParameterMetaData}. Methods that do not take a
+     * {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
      * @param ds
-     *            The <code>DataSource</code> to retrieve connections from.
+     *            The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken
      *            Some drivers don't support
      *            {@link ParameterMetaData#getParameterType(int) }; if
-     *            <code>pmdKnownBroken</code> is set to true, we won't even try
+     *            {@code pmdKnownBroken} is set to true, we won't even try
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
      */
@@ -117,13 +117,13 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code>, a <code>StatementConfiguration</code>, and
-     * controls the use of <code>ParameterMetaData</code>.  Methods that do not take a <code>Connection</code> parameter
-     * will retrieve connections from this <code>DataSource</code>.
+     * Constructor for QueryRunner that takes a {@code DataSource}, a {@code StatementConfiguration}, and
+     * controls the use of {@code ParameterMetaData}.  Methods that do not take a {@code Connection} parameter
+     * will retrieve connections from this {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
@@ -134,12 +134,12 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and a <code>StatementConfiguration</code>.
+     * Constructor for QueryRunner that takes a {@code DataSource} to use and a {@code StatementConfiguration}.
      *
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
     public AbstractQueryRunner(final DataSource ds, final StatementConfiguration stmtConfig) {
@@ -148,7 +148,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>StatementConfiguration</code> to configure statements when
+     * Constructor for QueryRunner that takes a {@code StatementConfiguration} to configure statements when
      * preparing them.
      *
      * @param stmtConfig The configuration to apply to statements when they are prepared.
@@ -159,7 +159,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Close a <code>Connection</code>. This implementation avoids closing if
+     * Close a {@code Connection}. This implementation avoids closing if
      * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
      *
@@ -174,7 +174,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Close a <code>ResultSet</code>. This implementation avoids closing if
+     * Close a {@code ResultSet}. This implementation avoids closing if
      * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
      *
@@ -189,7 +189,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Close a <code>Statement</code>. This implementation avoids closing if
+     * Close a {@code Statement}. This implementation avoids closing if
      * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
      *
@@ -259,13 +259,13 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with the
+     * Fill the {@code PreparedStatement} replacement parameters with the
      * given objects.
      *
      * @param stmt
      *            PreparedStatement to fill
      * @param params
-     *            Query replacement parameters; <code>null</code> is a valid
+     *            Query replacement parameters; {@code null} is a valid
      *            value to pass in.
      * @throws SQLException
      *             if a database access error occurs
@@ -336,7 +336,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with the
+     * Fill the {@code PreparedStatement} replacement parameters with the
      * given object's bean property values.
      *
      * @param stmt
@@ -378,7 +378,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Fill the <code>PreparedStatement</code> replacement parameters with the
+     * Fill the {@code PreparedStatement} replacement parameters with the
      * given object's bean property values.
      *
      * @param stmt
@@ -426,9 +426,9 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Returns the <code>DataSource</code> this runner is using.
-     * <code>QueryRunner</code> methods always call this method to get the
-     * <code>DataSource</code> so subclasses can provide specialized behavior.
+     * Returns the {@code DataSource} this runner is using.
+     * {@code QueryRunner} methods always call this method to get the
+     * {@code DataSource} so subclasses can provide specialized behavior.
      *
      * @return DataSource the runner is using
      */
@@ -439,7 +439,7 @@ public abstract class AbstractQueryRunner {
     /**
      * Some drivers don't support
      * {@link ParameterMetaData#getParameterType(int) }; if
-     * <code>pmdKnownBroken</code> is set to true, we won't even try it; if
+     * {@code pmdKnownBroken} is set to true, we won't even try it; if
      * false, we'll try it, and if it breaks, we'll remember not to use it
      * again.
      *
@@ -453,18 +453,18 @@ public abstract class AbstractQueryRunner {
 
     /**
      * Factory method that creates and initializes a
-     * <code>CallableStatement</code> object for the given SQL.
-     * <code>QueryRunner</code> methods always call this method to prepare
+     * {@code CallableStatement} object for the given SQL.
+     * {@code QueryRunner} methods always call this method to prepare
      * callable statements for them. Subclasses can override this method to
      * provide special CallableStatement configuration if needed. This
-     * implementation simply calls <code>conn.prepareCall(sql)</code>.
+     * implementation simply calls {@code conn.prepareCall(sql)}.
      *
      * @param conn
-     *            The <code>Connection</code> used to create the
-     *            <code>CallableStatement</code>
+     *            The {@code Connection} used to create the
+     *            {@code CallableStatement}
      * @param sql
      *            The SQL statement to prepare.
-     * @return An initialized <code>CallableStatement</code>.
+     * @return An initialized {@code CallableStatement}.
      * @throws SQLException
      *             if a database access error occurs
      */
@@ -475,13 +475,13 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Factory method that creates and initializes a <code>Connection</code>
-     * object. <code>QueryRunner</code> methods always call this method to
+     * Factory method that creates and initializes a {@code Connection}
+     * object. {@code QueryRunner} methods always call this method to
      * retrieve connections from its DataSource. Subclasses can override this
-     * method to provide special <code>Connection</code> configuration if
-     * needed. This implementation simply calls <code>ds.getConnection()</code>.
+     * method to provide special {@code Connection} configuration if
+     * needed. This implementation simply calls {@code ds.getConnection()}.
      *
-     * @return An initialized <code>Connection</code>.
+     * @return An initialized {@code Connection}.
      * @throws SQLException
      *             if a database access error occurs
      * @since DbUtils 1.1
@@ -497,18 +497,18 @@ public abstract class AbstractQueryRunner {
 
     /**
      * Factory method that creates and initializes a
-     * <code>PreparedStatement</code> object for the given SQL.
-     * <code>QueryRunner</code> methods always call this method to prepare
+     * {@code PreparedStatement} object for the given SQL.
+     * {@code QueryRunner} methods always call this method to prepare
      * statements for them. Subclasses can override this method to provide
      * special PreparedStatement configuration if needed. This implementation
-     * simply calls <code>conn.prepareStatement(sql)</code>.
+     * simply calls {@code conn.prepareStatement(sql)}.
      *
      * @param conn
-     *            The <code>Connection</code> used to create the
-     *            <code>PreparedStatement</code>
+     *            The {@code Connection} used to create the
+     *            {@code PreparedStatement}
      * @param sql
      *            The SQL statement to prepare.
-     * @return An initialized <code>PreparedStatement</code>.
+     * @return An initialized {@code PreparedStatement}.
      * @throws SQLException
      *             if a database access error occurs
      */
@@ -529,23 +529,23 @@ public abstract class AbstractQueryRunner {
 
     /**
      * Factory method that creates and initializes a
-     * <code>PreparedStatement</code> object for the given SQL.
-     * <code>QueryRunner</code> methods always call this method to prepare
+     * {@code PreparedStatement} object for the given SQL.
+     * {@code QueryRunner} methods always call this method to prepare
      * statements for them. Subclasses can override this method to provide
      * special PreparedStatement configuration if needed. This implementation
-     * simply calls <code>conn.prepareStatement(sql, returnedKeys)</code>
+     * simply calls {@code conn.prepareStatement(sql, returnedKeys)}
      * which will result in the ability to retrieve the automatically-generated
      * keys from an auto_increment column.
      *
      * @param conn
-     *            The <code>Connection</code> used to create the
-     *            <code>PreparedStatement</code>
+     *            The {@code Connection} used to create the
+     *            {@code PreparedStatement}
      * @param sql
      *            The SQL statement to prepare.
      * @param returnedKeys
      *            Flag indicating whether to return generated keys or not.
      *
-     * @return An initialized <code>PreparedStatement</code>.
+     * @return An initialized {@code PreparedStatement}.
      * @throws SQLException
      *             if a database access error occurs
      * @since 1.6
@@ -576,7 +576,7 @@ public abstract class AbstractQueryRunner {
      *            The query that was executing when the exception happened.
      *
      * @param params
-     *            The query replacement parameters; <code>null</code> is a valid
+     *            The query replacement parameters; {@code null} is a valid
      *            value to pass in.
      *
      * @throws SQLException
@@ -609,8 +609,8 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Wrap the <code>ResultSet</code> in a decorator before processing it. This
-     * implementation returns the <code>ResultSet</code> it is given without any
+     * Wrap the {@code ResultSet} in a decorator before processing it. This
+     * implementation returns the {@code ResultSet} it is given without any
      * decoration.
      *
      * <p>
@@ -627,9 +627,9 @@ public abstract class AbstractQueryRunner {
      * </pre>
      *
      * @param rs
-     *            The <code>ResultSet</code> to decorate; never
-     *            <code>null</code>.
-     * @return The <code>ResultSet</code> wrapped in some decorator.
+     *            The {@code ResultSet} to decorate; never
+     *            {@code null}.
+     * @return The {@code ResultSet} wrapped in some decorator.
      */
     protected ResultSet wrap(final ResultSet rs) {
         return rs;

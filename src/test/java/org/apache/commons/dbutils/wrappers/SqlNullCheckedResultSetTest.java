@@ -45,7 +45,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
- * Test cases for <code>SqlNullCheckedResultSet</code> class.
+ * Test cases for {@code SqlNullCheckedResultSet} class.
  */
 public class SqlNullCheckedResultSetTest extends BaseTestCase {
 

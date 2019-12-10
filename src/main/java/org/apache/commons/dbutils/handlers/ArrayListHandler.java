@@ -22,8 +22,8 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.RowProcessor;
 
 /**
- * <code>ResultSetHandler</code> implementation that converts the
- * <code>ResultSet</code> into a <code>List</code> of <code>Object[]</code>s.
+ * {@code ResultSetHandler} implementation that converts the
+ * {@code ResultSet} into a {@code List} of {@code Object[]}s.
  * This class is thread safe.
  *
  * @see org.apache.commons.dbutils.ResultSetHandler
@@ -38,7 +38,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
 
     /**
      * Creates a new instance of ArrayListHandler using a
-     * <code>BasicRowProcessor</code> for conversions.
+     * {@code BasicRowProcessor} for conversions.
      */
     public ArrayListHandler() {
         this(ArrayHandler.ROW_PROCESSOR);
@@ -47,7 +47,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
     /**
      * Creates a new instance of ArrayListHandler.
      *
-     * @param convert The <code>RowProcessor</code> implementation
+     * @param convert The {@code RowProcessor} implementation
      * to use when converting rows into Object[]s.
      */
     public ArrayListHandler(final RowProcessor convert) {
@@ -57,9 +57,9 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
 
 
     /**
-     * Convert row's columns into an <code>Object[]</code>.
-     * @param rs <code>ResultSet</code> to process.
-     * @return <code>Object[]</code>, never <code>null</code>.
+     * Convert row's columns into an {@code Object[]}.
+     * @param rs {@code ResultSet} to process.
+     * @return {@code Object[]}, never {@code null}.
      *
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)

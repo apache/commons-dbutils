@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
 /**
- * <code>ResultSetHandler</code> implementation that converts a
- * <code>ResultSet</code> into an <code>Object[]</code>. This class is
+ * {@code ResultSetHandler} implementation that converts a
+ * {@code ResultSet} into an {@code Object[]}. This class is
  * thread safe.
  *
  * @see org.apache.commons.dbutils.ResultSetHandler
@@ -52,7 +52,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Creates a new instance of ArrayHandler using a
-     * <code>BasicRowProcessor</code> for conversion.
+     * {@code BasicRowProcessor} for conversion.
      */
     public ArrayHandler() {
         this(ROW_PROCESSOR);
@@ -61,7 +61,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
     /**
      * Creates a new instance of ArrayHandler.
      *
-     * @param convert The <code>RowProcessor</code> implementation
+     * @param convert The {@code RowProcessor} implementation
      * to use when converting rows into arrays.
      */
     public ArrayHandler(final RowProcessor convert) {
@@ -70,9 +70,9 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
     }
 
     /**
-     * Places the column values from the first row in an <code>Object[]</code>.
-     * @param rs <code>ResultSet</code> to process.
-     * @return An Object[]. If there are no rows in the <code>ResultSet</code>
+     * Places the column values from the first row in an {@code Object[]}.
+     * @param rs {@code ResultSet} to process.
+     * @return An Object[]. If there are no rows in the {@code ResultSet}
      * an empty array will be returned.
      *
      * @throws SQLException if a database access error occurs

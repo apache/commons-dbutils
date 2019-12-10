@@ -32,13 +32,13 @@ import java.util.List;
 public class MockResultSet implements InvocationHandler {
 
     /**
-     * Create a <code>MockResultSet</code> proxy object.  This is equivalent to:
+     * Create a {@code MockResultSet} proxy object.  This is equivalent to:
      * <pre>
      * ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
      * </pre>
      *
      * @param metaData
-     * @param rows A null value indicates an empty <code>ResultSet</code>.
+     * @param rows A null value indicates an empty {@code ResultSet}.
      */
     public static ResultSet create(final ResultSetMetaData metaData,
             final Object[][] rows) {
@@ -57,7 +57,7 @@ public class MockResultSet implements InvocationHandler {
     /**
      * MockResultSet constructor.
      * @param metaData
-     * @param rows A null value indicates an empty <code>ResultSet</code>.
+     * @param rows A null value indicates an empty {@code ResultSet}.
      */
     public MockResultSet(final ResultSetMetaData metaData, final Object[][] rows) {
         super();
