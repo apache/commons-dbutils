@@ -50,7 +50,7 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Connection</code>, avoid closing if null.
+     * Close a {@code Connection}, avoid closing if null.
      *
      * @param conn Connection to close.
      * @throws SQLException if a database access error occurs
@@ -62,7 +62,7 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>ResultSet</code>, avoid closing if null.
+     * Close a {@code ResultSet}, avoid closing if null.
      *
      * @param rs ResultSet to close.
      * @throws SQLException if a database access error occurs
@@ -74,7 +74,7 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Statement</code>, avoid closing if null.
+     * Close a {@code Statement}, avoid closing if null.
      *
      * @param stmt Statement to close.
      * @throws SQLException if a database access error occurs
@@ -86,7 +86,7 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Connection</code>, avoid closing if null and hide
+     * Close a {@code Connection}, avoid closing if null and hide
      * any SQLExceptions that occur.
      *
      * @param conn Connection to close.
@@ -100,8 +100,8 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Connection</code>, <code>Statement</code> and
-     * <code>ResultSet</code>.  Avoid closing if null and hide any
+     * Close a {@code Connection}, {@code Statement} and
+     * {@code ResultSet}.  Avoid closing if null and hide any
      * SQLExceptions that occur.
      *
      * @param conn Connection to close.
@@ -124,7 +124,7 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>ResultSet</code>, avoid closing if null and hide any
+     * Close a {@code ResultSet}, avoid closing if null and hide any
      * SQLExceptions that occur.
      *
      * @param rs ResultSet to close.
@@ -138,7 +138,7 @@ public final class DbUtils {
     }
 
     /**
-     * Close a <code>Statement</code>, avoid closing if null and hide
+     * Close a {@code Statement}, avoid closing if null and hide
      * any SQLExceptions that occur.
      *
      * @param stmt Statement to close.
@@ -152,7 +152,7 @@ public final class DbUtils {
     }
 
     /**
-     * Commits a <code>Connection</code> then closes it, avoid closing if null.
+     * Commits a {@code Connection} then closes it, avoid closing if null.
      *
      * @param conn Connection to close.
      * @throws SQLException if a database access error occurs
@@ -168,7 +168,7 @@ public final class DbUtils {
     }
 
     /**
-     * Commits a <code>Connection</code> then closes it, avoid closing if null
+     * Commits a {@code Connection} then closes it, avoid closing if null
      * and hide any SQLExceptions that occur.
      *
      * @param conn Connection to close.
@@ -186,7 +186,7 @@ public final class DbUtils {
      * If this succeeds, it returns true, else it returns false.
      *
      * @param driverClassName of driver to load
-     * @return boolean <code>true</code> if the driver was found, otherwise <code>false</code>
+     * @return boolean {@code true} if the driver was found, otherwise {@code false}
      */
     public static boolean loadDriver(final String driverClassName) {
         return loadDriver(DbUtils.class.getClassLoader(), driverClassName);
@@ -198,7 +198,7 @@ public final class DbUtils {
      *
      * @param classLoader the class loader used to load the driver class
      * @param driverClassName of driver to load
-     * @return boolean <code>true</code> if the driver was found, otherwise <code>false</code>
+     * @return boolean {@code true} if the driver was found, otherwise {@code false}
      * @since 1.4
      */
     public static boolean loadDriver(final ClassLoader classLoader, final String driverClassName) {
@@ -300,7 +300,7 @@ public final class DbUtils {
     }
 
     /**
-     * Performs a rollback on the <code>Connection</code> then closes it,
+     * Performs a rollback on the {@code Connection} then closes it,
      * avoid closing if null.
      *
      * @param conn Connection to rollback.  A null value is legal.
@@ -318,7 +318,7 @@ public final class DbUtils {
     }
 
     /**
-     * Performs a rollback on the <code>Connection</code> then closes it,
+     * Performs a rollback on the {@code Connection} then closes it,
      * avoid closing if null and hide any SQLExceptions that occur.
      *
      * @param conn Connection to rollback.  A null value is legal.

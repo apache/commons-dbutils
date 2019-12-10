@@ -22,20 +22,20 @@ import java.util.Iterator;
 
 /**
  * <p>
- * Wraps a <code>ResultSet</code> in an <code>Iterator&lt;Object[]&gt;</code>.  This is useful
+ * Wraps a {@code ResultSet} in an {@code Iterator&lt;Object[]&gt;}.  This is useful
  * when you want to present a non-database application layer with domain
  * neutral data.
  * </p>
  *
  * <p>
- * This implementation requires the <code>ResultSet.isLast()</code> method
+ * This implementation requires the {@code ResultSet.isLast()} method
  * to be implemented.
  * </p>
  */
 public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
-     * The wrapped <code>ResultSet</code>.
+     * The wrapped {@code ResultSet}.
      */
     private final ResultSet rs;
 
@@ -46,7 +46,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
-     * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
+     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
      */
     public ResultSetIterator(final ResultSet rs) {
         this(rs, new BasicRowProcessor());
@@ -54,10 +54,10 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
-     * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
+     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
      * @param convert The processor to use when converting a row into an
-     * <code>Object[]</code>.  Defaults to a
-     * <code>BasicRowProcessor</code>.
+     * {@code Object[]}.  Defaults to a
+     * {@code BasicRowProcessor}.
      */
     public ResultSetIterator(final ResultSet rs, final RowProcessor convert) {
         this.rs = rs;
@@ -66,7 +66,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Returns true if there are more rows in the ResultSet.
-     * @return boolean <code>true</code> if there are more rows
+     * @return boolean {@code true} if there are more rows
      * @throws RuntimeException if an SQLException occurs.
      */
     @Override
@@ -80,9 +80,9 @@ public class ResultSetIterator implements Iterator<Object[]> {
     }
 
     /**
-     * Returns the next row as an <code>Object[]</code>.
-     * @return An <code>Object[]</code> with the same number of elements as
-     * columns in the <code>ResultSet</code>.
+     * Returns the next row as an {@code Object[]}.
+     * @return An {@code Object[]} with the same number of elements as
+     * columns in the {@code ResultSet}.
      * @see java.util.Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
      */
@@ -98,7 +98,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     }
 
     /**
-     * Deletes the current row from the <code>ResultSet</code>.
+     * Deletes the current row from the {@code ResultSet}.
      * @see java.util.Iterator#remove()
      * @throws RuntimeException if an SQLException occurs.
      */
@@ -122,10 +122,10 @@ public class ResultSetIterator implements Iterator<Object[]> {
     }
 
     /**
-     * Generates an <code>Iterable</code>, suitable for use in for-each loops.
+     * Generates an {@code Iterable}, suitable for use in for-each loops.
      *
-     * @param rs Wrap this <code>ResultSet</code> in an <code>Iterator</code>.
-     * @return an <code>Iterable</code>, suitable for use in for-each loops.
+     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
+     * @return an {@code Iterable}, suitable for use in for-each loops.
      */
     public static Iterable<Object[]> iterable(final ResultSet rs) {
         return new Iterable<Object[]>() {

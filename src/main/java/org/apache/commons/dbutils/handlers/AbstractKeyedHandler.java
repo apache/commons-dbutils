@@ -25,8 +25,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 /**
  * <p>
- * <code>ResultSetHandler</code> implementation that returns a Map.
- * <code>ResultSet</code> rows are converted into objects (Vs) which are then stored
+ * {@code ResultSetHandler} implementation that returns a Map.
+ * {@code ResultSet} rows are converted into objects (Vs) which are then stored
  * in a Map under the given keys (Ks).
  * </p>
  *
@@ -40,9 +40,9 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
 
     /**
      * Convert each row's columns into a Map and store then
-     * in a <code>Map</code> under <code>ResultSet.getObject(key)</code> key.
-     * @param rs <code>ResultSet</code> to process.
-     * @return A <code>Map</code>, never <code>null</code>.
+     * in a {@code Map} under {@code ResultSet.getObject(key)} key.
+     * @param rs {@code ResultSet} to process.
+     * @return A {@code Map}, never {@code null}.
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
@@ -56,8 +56,8 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     }
 
     /**
-     * This factory method is called by <code>handle()</code> to create the Map
-     * to store records in.  This implementation returns a <code>HashMap</code>
+     * This factory method is called by {@code handle()} to create the Map
+     * to store records in.  This implementation returns a {@code HashMap}
      * instance.
      *
      * @return Map to store records in
@@ -67,8 +67,8 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     }
 
     /**
-     * This factory method is called by <code>handle()</code> to retrieve the
-     * key value from the current <code>ResultSet</code> row.
+     * This factory method is called by {@code handle()} to retrieve the
+     * key value from the current {@code ResultSet} row.
      * @param rs ResultSet to create a key from
      * @return K from the configured key column name/index
      * @throws SQLException if a database access error occurs
@@ -76,8 +76,8 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     protected abstract K createKey(ResultSet rs) throws SQLException;
 
     /**
-     * This factory method is called by <code>handle()</code> to store the
-     * current <code>ResultSet</code> row in some object.
+     * This factory method is called by {@code handle()} to store the
+     * current {@code ResultSet} row in some object.
      * @param rs ResultSet to create a row from
      * @return V object created from the current row
      * @throws SQLException if a database access error occurs

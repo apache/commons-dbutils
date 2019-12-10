@@ -23,8 +23,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 
 /**
- * <code>ResultSetHandler</code> implementation that converts the first
- * <code>ResultSet</code> row into a JavaBean. This class is thread safe.
+ * {@code ResultSetHandler} implementation that converts the first
+ * {@code ResultSet} row into a JavaBean. This class is thread safe.
  *
  * @param <T> the target bean type
  * @see org.apache.commons.dbutils.ResultSetHandler
@@ -45,7 +45,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     /**
      * Creates a new instance of BeanHandler.
      *
-     * @param type The Class that objects returned from <code>handle()</code>
+     * @param type The Class that objects returned from {@code handle()}
      * are created from.
      */
     public BeanHandler(final Class<? extends T> type) {
@@ -55,9 +55,9 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     /**
      * Creates a new instance of BeanHandler.
      *
-     * @param type The Class that objects returned from <code>handle()</code>
+     * @param type The Class that objects returned from {@code handle()}
      * are created from.
-     * @param convert The <code>RowProcessor</code> implementation
+     * @param convert The {@code RowProcessor} implementation
      * to use when converting rows into beans.
      */
     public BeanHandler(final Class<? extends T> type, final RowProcessor convert) {
@@ -66,11 +66,11 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * Convert the first row of the <code>ResultSet</code> into a bean with the
-     * <code>Class</code> given in the constructor.
-     * @param rs <code>ResultSet</code> to process.
-     * @return An initialized JavaBean or <code>null</code> if there were no
-     * rows in the <code>ResultSet</code>.
+     * Convert the first row of the {@code ResultSet} into a bean with the
+     * {@code Class} given in the constructor.
+     * @param rs {@code ResultSet} to process.
+     * @return An initialized JavaBean or {@code null} if there were no
+     * rows in the {@code ResultSet}.
      *
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)

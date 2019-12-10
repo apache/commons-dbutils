@@ -35,11 +35,11 @@ import java.util.Map;
 import org.apache.commons.dbutils.ProxyFactory;
 
 /**
- * Decorates a <code>ResultSet</code> with checks for a SQL NULL value on each
- * <code>getXXX</code> method. If a column value obtained by a
- * <code>getXXX</code> method is not SQL NULL, the column value is returned. If
+ * Decorates a {@code ResultSet} with checks for a SQL NULL value on each
+ * {@code getXXX} method. If a column value obtained by a
+ * {@code getXXX} method is not SQL NULL, the column value is returned. If
  * the column value is SQL null, an alternate value is returned. The alternate
- * value defaults to the Java <code>null</code> value, which can be overridden
+ * value defaults to the Java {@code null} value, which can be overridden
  * for instances of the class.
  *
  * <p>
@@ -100,13 +100,13 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     private static final ProxyFactory factory = ProxyFactory.instance();
 
     /**
-     * Wraps the <code>ResultSet</code> in an instance of this class.  This is
+     * Wraps the {@code ResultSet} in an instance of this class.  This is
      * equivalent to:
      * <pre>
      * ProxyFactory.instance().createResultSet(new SqlNullCheckedResultSet(rs));
      * </pre>
      *
-     * @param rs The <code>ResultSet</code> to wrap.
+     * @param rs The {@code ResultSet} to wrap.
      * @return wrapped ResultSet
      */
     public static ResultSet wrap(final ResultSet rs) {
@@ -142,8 +142,8 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Constructs a new instance of
-     * <code>SqlNullCheckedResultSet</code>
-     * to wrap the specified <code>ResultSet</code>.
+     * {@code SqlNullCheckedResultSet}
+     * to wrap the specified {@code ResultSet}.
      * @param rs ResultSet to wrap
      */
     public SqlNullCheckedResultSet(final ResultSet rs) {
@@ -153,7 +153,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getAsciiStream</code> method.
+     * invoking a {@code getAsciiStream} method.
      *
      * @return the value
      */
@@ -163,7 +163,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getBigDecimal</code> method.
+     * invoking a {@code getBigDecimal} method.
      *
      * @return the value
      */
@@ -173,7 +173,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getBinaryStream</code> method.
+     * invoking a {@code getBinaryStream} method.
      *
      * @return the value
      */
@@ -183,7 +183,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getBlob</code> method.
+     * invoking a {@code getBlob} method.
      *
      * @return the value
      */
@@ -193,7 +193,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getBoolean</code> method.
+     * invoking a {@code getBoolean} method.
      *
      * @return the value
      */
@@ -203,7 +203,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getByte</code> method.
+     * invoking a {@code getByte} method.
      *
      * @return the value
      */
@@ -213,7 +213,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getBytes</code> method.
+     * invoking a {@code getBytes} method.
      *
      * @return the value
      */
@@ -228,7 +228,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getCharacterStream</code> method.
+     * invoking a {@code getCharacterStream} method.
      *
      * @return the value
      */
@@ -238,7 +238,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getClob</code> method.
+     * invoking a {@code getClob} method.
      *
      * @return the value
      */
@@ -248,7 +248,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getDate</code> method.
+     * invoking a {@code getDate} method.
      *
      * @return the value
      */
@@ -258,7 +258,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getDouble</code> method.
+     * invoking a {@code getDouble} method.
      *
      * @return the value
      */
@@ -268,7 +268,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getFloat</code> method.
+     * invoking a {@code getFloat} method.
      *
      * @return the value
      */
@@ -278,7 +278,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getInt</code> method.
+     * invoking a {@code getInt} method.
      *
      * @return the value
      */
@@ -288,7 +288,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getLong</code> method.
+     * invoking a {@code getLong} method.
      *
      * @return the value
      */
@@ -298,7 +298,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getObject</code> method.
+     * invoking a {@code getObject} method.
      *
      * @return the value
      */
@@ -308,7 +308,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getRef</code> method.
+     * invoking a {@code getRef} method.
      *
      * @return the value
      */
@@ -318,7 +318,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getShort</code> method.
+     * invoking a {@code getShort} method.
      *
      * @return the value
      */
@@ -328,7 +328,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getString</code> method.
+     * invoking a {@code getString} method.
      *
      * @return the value
      */
@@ -338,7 +338,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getTime</code> method.
+     * invoking a {@code getTime} method.
      *
      * @return the value
      */
@@ -348,7 +348,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getTimestamp</code> method.
+     * invoking a {@code getTimestamp} method.
      *
      * @return the value
      */
@@ -364,7 +364,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Returns the value when a SQL null is encountered as the result of
-     * invoking a <code>getURL</code> method.
+     * invoking a {@code getURL} method.
      *
      * @return the value
      */
@@ -373,9 +373,9 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     }
 
     /**
-     * Intercepts calls to <code>get*</code> methods and calls the appropriate
-     * <code>getNull*</code> method if the <code>ResultSet</code> returned
-     * <code>null</code>.
+     * Intercepts calls to {@code get*} methods and calls the appropriate
+     * {@code getNull*} method if the {@code ResultSet} returned
+     * {@code null}.
      *
      *  @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
      * @param proxy Not used; all method calls go to the internal result set
@@ -401,7 +401,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getAsciiStream</code> method.
+     * invoking a {@code getAsciiStream} method.
      *
      * @param nullAsciiStream the value
      */
@@ -411,7 +411,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getBigDecimal</code> method.
+     * invoking a {@code getBigDecimal} method.
      *
      * @param nullBigDecimal the value
      */
@@ -421,7 +421,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getBinaryStream</code> method.
+     * invoking a {@code getBinaryStream} method.
      *
      * @param nullBinaryStream the value
      */
@@ -431,7 +431,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getBlob</code> method.
+     * invoking a {@code getBlob} method.
      *
      * @param nullBlob the value
      */
@@ -441,7 +441,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getBoolean</code> method.
+     * invoking a {@code getBoolean} method.
      *
      * @param nullBoolean the value
      */
@@ -451,7 +451,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getByte</code> method.
+     * invoking a {@code getByte} method.
      *
      * @param nullByte the value
      */
@@ -461,7 +461,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getBytes</code> method.
+     * invoking a {@code getBytes} method.
      *
      * @param nullBytes the value
      */
@@ -477,7 +477,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getCharacterStream</code> method.
+     * invoking a {@code getCharacterStream} method.
      *
      * @param nullCharacterStream the value
      */
@@ -487,7 +487,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getClob</code> method.
+     * invoking a {@code getClob} method.
      *
      * @param nullClob the value
      */
@@ -497,7 +497,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getDate</code> method.
+     * invoking a {@code getDate} method.
      *
      * @param nullDate the value
      */
@@ -507,7 +507,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getDouble</code> method.
+     * invoking a {@code getDouble} method.
      *
      * @param nullDouble the value
      */
@@ -517,7 +517,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getFloat</code> method.
+     * invoking a {@code getFloat} method.
      *
      * @param nullFloat the value
      */
@@ -527,7 +527,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getInt</code> method.
+     * invoking a {@code getInt} method.
      *
      * @param nullInt the value
      */
@@ -537,7 +537,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getLong</code> method.
+     * invoking a {@code getLong} method.
      *
      * @param nullLong the value
      */
@@ -547,7 +547,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getObject</code> method.
+     * invoking a {@code getObject} method.
      *
      * @param nullObject the value
      */
@@ -557,7 +557,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getRef</code> method.
+     * invoking a {@code getRef} method.
      *
      * @param nullRef the value
      */
@@ -567,7 +567,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getShort</code> method.
+     * invoking a {@code getShort} method.
      *
      * @param nullShort the value
      */
@@ -577,7 +577,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getString</code> method.
+     * invoking a {@code getString} method.
      *
      * @param nullString the value
      */
@@ -587,7 +587,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getTime</code> method.
+     * invoking a {@code getTime} method.
      *
      * @param nullTime the value
      */
@@ -597,7 +597,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getTimestamp</code> method.
+     * invoking a {@code getTimestamp} method.
      *
      * @param nullTimestamp the value
      */
@@ -612,7 +612,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * Sets the value to return when a SQL null is encountered as the result of
-     * invoking a <code>getURL</code> method.
+     * invoking a {@code getURL} method.
      *
      * @param nullURL the value
      */

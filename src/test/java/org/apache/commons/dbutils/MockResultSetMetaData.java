@@ -30,7 +30,7 @@ public class MockResultSetMetaData implements InvocationHandler {
     private String[] columnLabels = null;
 
     /**
-     * Create a <code>MockResultSetMetaData</code> proxy object.  This is
+     * Create a {@code MockResultSetMetaData} proxy object.  This is
      * equivalent to:
      * <pre>
      * ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames));

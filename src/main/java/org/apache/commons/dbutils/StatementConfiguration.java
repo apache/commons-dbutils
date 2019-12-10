@@ -17,7 +17,7 @@
 package org.apache.commons.dbutils;
 
 /**
- * Configuration options for a {@link java.sql.Statement} when preparing statements in <code>QueryRunner</code>.
+ * Configuration options for a {@link java.sql.Statement} when preparing statements in {@code QueryRunner}.
  */
 public class StatementConfiguration {
     private final Integer fetchDirection;
@@ -27,12 +27,12 @@ public class StatementConfiguration {
     private final Integer queryTimeout;
 
     /**
-     * Constructor for <code>StatementConfiguration</code>.  For more flexibility, use {@link Builder}.
+     * Constructor for {@code StatementConfiguration}.  For more flexibility, use {@link Builder}.
      *
      * @param fetchDirection The direction for fetching rows from database tables.
      * @param fetchSize The number of rows that should be fetched from the database when more rows are needed.
      * @param maxFieldSize The maximum number of bytes that can be returned for character and binary column values.
-     * @param maxRows The maximum number of rows that a <code>ResultSet</code> can produce.
+     * @param maxRows The maximum number of rows that a {@code ResultSet} can produce.
      * @param queryTimeout The number of seconds the driver will wait for execution.
      */
     public StatementConfiguration(final Integer fetchDirection, final Integer fetchSize, final Integer maxFieldSize, final Integer maxRows,
@@ -135,7 +135,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Builder class for <code>StatementConfiguration</code> for more flexible construction.
+     * Builder class for {@code StatementConfiguration} for more flexible construction.
      */
     public static final class Builder {
         private Integer fetchDirection;

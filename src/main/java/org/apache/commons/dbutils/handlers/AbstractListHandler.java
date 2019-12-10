@@ -24,20 +24,20 @@ import java.util.List;
 import org.apache.commons.dbutils.ResultSetHandler;
 
 /**
- * Abstract class that simplify development of <code>ResultSetHandler</code>
- * classes that convert <code>ResultSet</code> into <code>List</code>.
+ * Abstract class that simplify development of {@code ResultSetHandler}
+ * classes that convert {@code ResultSet} into {@code List}.
  *
  * @param <T> the target List generic type
  * @see org.apache.commons.dbutils.ResultSetHandler
  */
 public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>> {
     /**
-     * Whole <code>ResultSet</code> handler. It produce <code>List</code> as
+     * Whole {@code ResultSet} handler. It produce {@code List} as
      * result. To convert individual rows into Java objects it uses
-     * <code>handleRow(ResultSet)</code> method.
+     * {@code handleRow(ResultSet)} method.
      *
      * @see #handleRow(ResultSet)
-     * @param rs <code>ResultSet</code> to process.
+     * @param rs {@code ResultSet} to process.
      * @return a list of all rows in the result set
      * @throws SQLException error occurs
      */
@@ -53,7 +53,7 @@ public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>
     /**
      * Row handler. Method converts current row into some Java object.
      *
-     * @param rs <code>ResultSet</code> to process.
+     * @param rs {@code ResultSet} to process.
      * @return row processing result
      * @throws SQLException error occurs
      */

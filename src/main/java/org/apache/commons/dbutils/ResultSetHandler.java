@@ -27,14 +27,14 @@ import java.sql.SQLException;
 public interface ResultSetHandler<T> {
 
     /**
-     * Turn the <code>ResultSet</code> into an Object.
+     * Turn the {@code ResultSet} into an Object.
      *
-     * @param rs The <code>ResultSet</code> to handle.  It has not been touched
+     * @param rs The {@code ResultSet} to handle.  It has not been touched
      * before being passed to this method.
      *
-     * @return An Object initialized with <code>ResultSet</code> data. It is
-     * legal for implementations to return <code>null</code> if the
-     * <code>ResultSet</code> contained 0 rows.
+     * @return An Object initialized with {@code ResultSet} data. It is
+     * legal for implementations to return {@code null} if the
+     * {@code ResultSet} contained 0 rows.
      *
      * @throws SQLException if a database access error occurs
      */

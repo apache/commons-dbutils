@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.RowProcessor;
 
 /**
  * <p>
- * <code>ResultSetHandler</code> implementation that returns a Map of Maps.
- * <code>ResultSet</code> rows are converted into Maps which are then stored
+ * {@code ResultSetHandler} implementation that returns a Map of Maps.
+ * {@code ResultSet} rows are converted into Maps which are then stored
  * in a Map under the given key.
  * </p>
  * <p>
@@ -80,7 +80,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * Creates a new instance of KeyedHandler.  The value of the first column
      * of each row will be a key in the Map.
      *
-     * @param convert The <code>RowProcessor</code> implementation
+     * @param convert The {@code RowProcessor} implementation
      * to use when converting rows into Maps
      */
     public KeyedHandler(final RowProcessor convert) {
@@ -108,7 +108,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     }
 
     /** Private Helper
-     * @param convert The <code>RowProcessor</code> implementation
+     * @param convert The {@code RowProcessor} implementation
      * to use when converting rows into Maps
      * @param columnIndex The values to use as keys in the Map are
      * retrieved from the column at this index.
@@ -123,9 +123,9 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
         this.columnName = columnName;
     }
     /**
-     * This factory method is called by <code>handle()</code> to retrieve the
-     * key value from the current <code>ResultSet</code> row.  This
-     * implementation returns <code>ResultSet.getObject()</code> for the
+     * This factory method is called by {@code handle()} to retrieve the
+     * key value from the current {@code ResultSet} row.  This
+     * implementation returns {@code ResultSet.getObject()} for the
      * configured key column name or index.
      * @param rs ResultSet to create a key from
      * @return Object from the configured key column name/index
@@ -144,11 +144,11 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     }
 
     /**
-     * This factory method is called by <code>handle()</code> to store the
-     * current <code>ResultSet</code> row in some object. This
-     * implementation returns a <code>Map</code> with case insensitive column
-     * names as keys.  Calls to <code>map.get("COL")</code> and
-     * <code>map.get("col")</code> return the same value.
+     * This factory method is called by {@code handle()} to store the
+     * current {@code ResultSet} row in some object. This
+     * implementation returns a {@code Map} with case insensitive column
+     * names as keys.  Calls to {@code map.get("COL")} and
+     * {@code map.get("col")} return the same value.
      * @param rs ResultSet to create a row from
      * @return Object typed Map containing column names to values
      * @throws SQLException if a database access error occurs

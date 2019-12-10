@@ -23,14 +23,14 @@ import java.sql.ResultSet;
 import org.apache.commons.dbutils.ProxyFactory;
 
 /**
- * Wraps a <code>ResultSet</code> to trim strings returned by the
- * <code>getString()</code> and <code>getObject()</code> methods.
+ * Wraps a {@code ResultSet} to trim strings returned by the
+ * {@code getString()} and {@code getObject()} methods.
  *
  * <p>
  * Usage Example:
  * This example shows how to decorate ResultSets so processing continues as
  * normal but all Strings are trimmed before being returned from the
- * <code>ResultSet</code>.
+ * {@code ResultSet}.
  * </p>
  *
  * <pre>
@@ -51,13 +51,13 @@ public class StringTrimmedResultSet implements InvocationHandler {
     private static final ProxyFactory factory = ProxyFactory.instance();
 
     /**
-     * Wraps the <code>ResultSet</code> in an instance of this class.  This is
+     * Wraps the {@code ResultSet} in an instance of this class.  This is
      * equivalent to:
      * <pre>
      * ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(rs));
      * </pre>
      *
-     * @param rs The <code>ResultSet</code> to wrap.
+     * @param rs The {@code ResultSet} to wrap.
      * @return wrapped ResultSet
      */
     public static ResultSet wrap(final ResultSet rs) {
@@ -70,8 +70,8 @@ public class StringTrimmedResultSet implements InvocationHandler {
     private final ResultSet rs;
 
     /**
-     * Constructs a new instance of <code>StringTrimmedResultSet</code>
-     * to wrap the specified <code>ResultSet</code>.
+     * Constructs a new instance of {@code StringTrimmedResultSet}
+     * to wrap the specified {@code ResultSet}.
      * @param rs ResultSet to wrap
      */
     public StringTrimmedResultSet(final ResultSet rs) {
@@ -80,8 +80,8 @@ public class StringTrimmedResultSet implements InvocationHandler {
     }
 
     /**
-     * Intercept calls to the <code>getString()</code> and
-     * <code>getObject()</code> methods and trim any Strings before they're
+     * Intercept calls to the {@code getString()} and
+     * {@code getObject()} methods and trim any Strings before they're
      * returned.
      *
      * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])

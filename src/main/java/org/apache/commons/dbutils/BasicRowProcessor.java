@@ -26,7 +26,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Basic implementation of the <code>RowProcessor</code> interface.
+ * Basic implementation of the {@code RowProcessor} interface.
  *
  * <p>
  * This class is thread-safe.
@@ -88,10 +88,10 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> row into an <code>Object[]</code>.
+     * Convert a {@code ResultSet} row into an {@code Object[]}.
      * This implementation copies column values into the array in the same
-     * order they're returned from the <code>ResultSet</code>.  Array elements
-     * will be set to <code>null</code> if the column was SQL NULL.
+     * order they're returned from the {@code ResultSet}.  Array elements
+     * will be set to {@code null} if the column was SQL NULL.
      *
      * @see org.apache.commons.dbutils.RowProcessor#toArray(java.sql.ResultSet)
      * @param rs ResultSet that supplies the array data
@@ -112,7 +112,7 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> row into a JavaBean.  This
+     * Convert a {@code ResultSet} row into a JavaBean.  This
      * implementation delegates to a BeanProcessor instance.
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class)
@@ -128,7 +128,7 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> into a <code>List</code> of JavaBeans.
+     * Convert a {@code ResultSet} into a {@code List} of JavaBeans.
      * This implementation delegates to a BeanProcessor instance.
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
@@ -136,8 +136,8 @@ public class BasicRowProcessor implements RowProcessor {
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
-     * @return A <code>List</code> of beans with the given type in the order
-     * they were returned by the <code>ResultSet</code>.
+     * @return A {@code List} of beans with the given type in the order
+     * they were returned by the {@code ResultSet}.
      */
     @Override
     public <T> List<T> toBeanList(final ResultSet rs, final Class<? extends T> type) throws SQLException {
@@ -145,11 +145,11 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> row into a <code>Map</code>.
+     * Convert a {@code ResultSet} row into a {@code Map}.
      *
      * <p>
-     * This implementation returns a <code>Map</code> with case insensitive column names as keys. Calls to
-     * <code>map.get("COL")</code> and <code>map.get("col")</code> return the same value. Furthermore this implementation
+     * This implementation returns a {@code Map} with case insensitive column names as keys. Calls to
+     * {@code map.get("COL")} and {@code map.get("col")} return the same value. Furthermore this implementation
      * will return an ordered map, that preserves the ordering of the columns in the ResultSet, so that iterating over
      * the entry set of the returned map will return the first column of the ResultSet, then the second and so forth.
      * </p>

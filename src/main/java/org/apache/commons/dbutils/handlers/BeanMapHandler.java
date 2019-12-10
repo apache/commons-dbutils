@@ -23,8 +23,8 @@ import org.apache.commons.dbutils.RowProcessor;
 
 /**
  * <p>
- * <code>ResultSetHandler</code> implementation that returns a Map of Beans.
- * <code>ResultSet</code> rows are converted into Beans which are then stored in
+ * {@code ResultSetHandler} implementation that returns a Map of Beans.
+ * {@code ResultSet} rows are converted into Beans which are then stored in
  * a Map under the given key.
  * </p>
  * <p>
@@ -83,7 +83,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * of each row will be a key in the Map.
      *
      * @param type
-     *            The Class that objects returned from <code>createRow()</code>
+     *            The Class that objects returned from {@code createRow()}
      *            are created from.
      */
     public BeanMapHandler(final Class<V> type) {
@@ -95,10 +95,10 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * of each row will be a key in the Map.
      *
      * @param type
-     *            The Class that objects returned from <code>createRow()</code>
+     *            The Class that objects returned from {@code createRow()}
      *            are created from.
      * @param convert
-     *            The <code>RowProcessor</code> implementation to use when
+     *            The {@code RowProcessor} implementation to use when
      *            converting rows into Beans
      */
     public BeanMapHandler(final Class<V> type, final RowProcessor convert) {
@@ -109,7 +109,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * Creates a new instance of BeanMapHandler.
      *
      * @param type
-     *            The Class that objects returned from <code>createRow()</code>
+     *            The Class that objects returned from {@code createRow()}
      *            are created from.
      * @param columnIndex
      *            The values to use as keys in the Map are retrieved from the
@@ -123,7 +123,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * Creates a new instance of BeanMapHandler.
      *
      * @param type
-     *            The Class that objects returned from <code>createRow()</code>
+     *            The Class that objects returned from {@code createRow()}
      *            are created from.
      * @param columnName
      *            The values to use as keys in the Map are retrieved from the
@@ -137,7 +137,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      * Private Helper
      *
      * @param convert
-     *            The <code>RowProcessor</code> implementation to use when
+     *            The {@code RowProcessor} implementation to use when
      *            converting rows into Beans
      * @param columnIndex
      *            The values to use as keys in the Map are retrieved from the
@@ -156,8 +156,8 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     /**
-     * This factory method is called by <code>handle()</code> to retrieve the
-     * key value from the current <code>ResultSet</code> row.
+     * This factory method is called by {@code handle()} to retrieve the
+     * key value from the current {@code ResultSet} row.
      * @param rs ResultSet to create a key from
      *
      * @return K from the configured key column name/index

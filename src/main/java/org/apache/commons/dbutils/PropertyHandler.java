@@ -23,8 +23,8 @@ package org.apache.commons.dbutils;
 public interface PropertyHandler {
 
     /**
-     * Test whether this <code>PropertyHandler</code> wants to handle setting <code>value</code> into something of type
-     * <code>parameter</code>.
+     * Test whether this {@code PropertyHandler} wants to handle setting {@code value} into something of type
+     * {@code parameter}.
      *
      * @param parameter The type of the target parameter.
      * @param value The value to be set.
@@ -33,8 +33,8 @@ public interface PropertyHandler {
     boolean match(Class<?> parameter, Object value);
 
     /**
-     * Do the work required to store <code>value</code> into something of type <code>parameter</code>. This method is
-     * called only if this handler responded <code>true</code> after a call to {@link #match(Class, Object)}.
+     * Do the work required to store {@code value} into something of type {@code parameter}. This method is
+     * called only if this handler responded {@code true} after a call to {@link #match(Class, Object)}.
      *
      * @param parameter The type of the target parameter.
      * @param value The value to be set.

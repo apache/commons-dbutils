@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 
 /**
  * Executes SQL queries with pluggable strategies for handling
- * <code>ResultSet</code>s.  This class is thread safe.
+ * {@code ResultSet}s.  This class is thread safe.
  *
  * @see ResultSetHandler
  */
@@ -42,10 +42,10 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that controls the use of <code>ParameterMetaData</code>.
+     * Constructor for QueryRunner that controls the use of {@code ParameterMetaData}.
      *
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
     public QueryRunner(final boolean pmdKnownBroken) {
@@ -53,19 +53,19 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code> to use.
+     * Constructor for QueryRunner that takes a {@code DataSource} to use.
      *
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      */
     public QueryRunner(final DataSource ds) {
         super(ds);
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>StatementConfiguration</code> to configure statements when
+     * Constructor for QueryRunner that takes a {@code StatementConfiguration} to configure statements when
      * preparing them.
      *
      * @param stmtConfig The configuration to apply to statements when they are prepared.
@@ -75,13 +75,13 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code> and controls the use of <code>ParameterMetaData</code>.
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Constructor for QueryRunner that takes a {@code DataSource} and controls the use of {@code ParameterMetaData}.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
     public QueryRunner(final DataSource ds, final boolean pmdKnownBroken) {
@@ -89,12 +89,12 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code> to use and a <code>StatementConfiguration</code>.
+     * Constructor for QueryRunner that takes a {@code DataSource} to use and a {@code StatementConfiguration}.
      *
-     * Methods that do not take a <code>Connection</code> parameter will retrieve connections from this
-     * <code>DataSource</code>.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
     public QueryRunner(final DataSource ds, final StatementConfiguration stmtConfig) {
@@ -102,13 +102,13 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Constructor for QueryRunner that takes a <code>DataSource</code>, a <code>StatementConfiguration</code>, and
-     * controls the use of <code>ParameterMetaData</code>.  Methods that do not take a <code>Connection</code> parameter
-     * will retrieve connections from this <code>DataSource</code>.
+     * Constructor for QueryRunner that takes a {@code DataSource}, a {@code StatementConfiguration}, and
+     * controls the use of {@code ParameterMetaData}.  Methods that do not take a {@code Connection} parameter
+     * will retrieve connections from this {@code DataSource}.
      *
-     * @param ds The <code>DataSource</code> to retrieve connections from.
+     * @param ds The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
-     * if <code>pmdKnownBroken</code> is set to true, we won't even try it; if false, we'll try it,
+     * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
@@ -134,8 +134,8 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the update will not be saved.
      *
      * @param sql The SQL to execute.
@@ -268,13 +268,13 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given SELECT SQL with a single replacement parameter.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
+     * the {@code ResultSet}.
      *
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -289,15 +289,15 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given SELECT SQL query and returns a result object.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param params Initialize the PreparedStatement's IN parameters with
      * this array.
      *
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
+     * the {@code ResultSet}.
      *
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -312,12 +312,12 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given SELECT SQL query and returns a result object.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
+     * the {@code ResultSet}.
      * @param params Initialize the PreparedStatement's IN parameters with
      * this array.
      * @return An object generated by the handler.
@@ -331,12 +331,12 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given SELECT SQL without any replacement parameters.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code>.
+     * the {@code ResultSet}.
      *
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -443,9 +443,9 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement without
-     * any replacement parameters. The <code>Connection</code> is retrieved
-     * from the <code>DataSource</code> set in the constructor.  This
-     * <code>Connection</code> must be in auto-commit mode or the update will
+     * any replacement parameters. The {@code Connection} is retrieved
+     * from the {@code DataSource} set in the constructor.  This
+     * {@code Connection} must be in auto-commit mode or the update will
      * not be saved.
      *
      * @param sql The SQL statement to execute.
@@ -460,9 +460,9 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement with
-     * a single replacement parameter.  The <code>Connection</code> is
-     * retrieved from the <code>DataSource</code> set in the constructor.
-     * This <code>Connection</code> must be in auto-commit mode or the
+     * a single replacement parameter.  The {@code Connection} is
+     * retrieved from the {@code DataSource} set in the constructor.
+     * This {@code Connection} must be in auto-commit mode or the
      * update will not be saved.
      *
      * @param sql The SQL statement to execute.
@@ -478,8 +478,8 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT, UPDATE, or DELETE SQL statement.  The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the update will not be saved.
      *
      * @param sql The SQL statement to execute.
@@ -539,12 +539,12 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT SQL without any replacement parameters.
-     * The <code>Connection</code> is retrieved from the
-     * <code>DataSource</code> set in the constructor.
+     * The {@code Connection} is retrieved from the
+     * {@code DataSource} set in the constructor.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -555,13 +555,13 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given INSERT SQL statement. The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the insert will not be saved.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @param params Initializes the PreparedStatement's IN (i.e. '?')
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -577,7 +577,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -592,7 +592,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @param params The query replacement parameters.
      * @return An object generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -608,7 +608,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @param params The query replacement parameters.
      * @return An object generated by the handler.
      * @throws SQLException If there are database or parameter errors.
@@ -657,13 +657,13 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given batch of INSERT SQL statements. The
-     * <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the insert will not be saved.
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @param params Initializes the PreparedStatement's IN (i.e. '?')
      * @return The result generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -679,7 +679,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @param params The query replacement parameters.
      * @return The result generated by the handler.
      * @throws SQLException if a database access error occurs
@@ -695,7 +695,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
-     * the <code>ResultSet</code> of auto-generated keys.
+     * the {@code ResultSet} of auto-generated keys.
      * @param params The query replacement parameters.
      * @return The result generated by the handler.
      * @throws SQLException If there are database or parameter errors.
@@ -782,8 +782,8 @@ public class QueryRunner extends AbstractQueryRunner {
      * If the stored procedure returns result sets, use
      * {@link #execute(java.lang.String, org.apache.commons.dbutils.ResultSetHandler, java.lang.Object...) }.
      * <p>
-     * The <code>Connection</code> is retrieved from the <code>DataSource</code>
-     * set in the constructor.  This <code>Connection</code> must be in
+     * The {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the update will not be saved.
      *
      * @param sql The SQL statement to execute.
@@ -964,8 +964,8 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Set the value on all the {@link OutParameter} instances in the
-     * <code>params</code> array using the OUT parameter values from the
-     * <code>stmt</code>.
+     * {@code params} array using the OUT parameter values from the
+     * {@code stmt}.
      * @param stmt the statement from which to retrieve OUT parameter values
      * @param params the parameter array for the statement invocation
      * @throws SQLException when the value could not be retrieved from the

@@ -41,10 +41,10 @@ import java.util.Map;
 /**
  * Extensions of this class convert ResultSets into other objects.
  *
- * According to the <i>DRY</i> principle (Don't Repeat Yourself), repeating <code>resultSet</code>
+ * According to the <i>DRY</i> principle (Don't Repeat Yourself), repeating {@code resultSet}
  * variable inside the {@link ResultSetHandler#handle(ResultSet)} over and over for each iteration
- * can get a little tedious, <code>AbstractResultSetHandler</code> implicitly gives users access to
- * <code>ResultSet</code>'s methods.
+ * can get a little tedious, {@code AbstractResultSetHandler} implicitly gives users access to
+ * {@code ResultSet}'s methods.
  *
  * <b>NOTE</b> This class is <i>NOT</i> thread safe!
  *
@@ -77,9 +77,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * Turn the <code>ResultSet</code> into an Object.
+     * Turn the {@code ResultSet} into an Object.
      *
-     * @return An Object initialized with <code>ResultSet</code> data
+     * @return An Object initialized with {@code ResultSet} data
      * @throws SQLException if a database access error occurs
      * @see ResultSetHandler#handle(ResultSet)
      */

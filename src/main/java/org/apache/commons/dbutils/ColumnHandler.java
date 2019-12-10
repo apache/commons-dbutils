@@ -21,12 +21,12 @@ import java.sql.SQLException;
 
 /**
  * Interface to define how implementations can interact with column handling when constructing a bean from a
- * {@link java.sql.ResultSet}.  ColumnHandlers do the work of retrieving data correctly from the <code>ResultSet</code>.
+ * {@link java.sql.ResultSet}.  ColumnHandlers do the work of retrieving data correctly from the {@code ResultSet}.
  */
 public interface ColumnHandler {
     /**
-     * Test whether this <code>ColumnHandler</code> wants to handle a column targeted for a value type matching
-     * <code>propType</code>.
+     * Test whether this {@code ColumnHandler} wants to handle a column targeted for a value type matching
+     * {@code propType}.
      *
      * @param propType The type of the target parameter.
      * @return true is this property handler can/wants to handle this value; false otherwise.
@@ -34,8 +34,8 @@ public interface ColumnHandler {
     boolean match(Class<?> propType);
 
     /**
-     * Do the work required to retrieve and store a column from <code>ResultSet</code> into something of type
-     * <code>propType</code>. This method is called only if this handler responded <code>true</code> after a call to
+     * Do the work required to retrieve and store a column from {@code ResultSet} into something of type
+     * {@code propType}. This method is called only if this handler responded {@code true} after a call to
      * {@link #match(Class)}.
      *
      * @param rs The result set to get data from. This should be moved to the correct row already.
