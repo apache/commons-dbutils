@@ -361,7 +361,7 @@ public abstract class AbstractQueryRunner {
                         + bean.getClass() + " " + property.getName());
             }
             try {
-                value = method.invoke(bean, new Object[0]);
+                value = method.invoke(bean);
             } catch (final InvocationTargetException e) {
                 throw new RuntimeException("Couldn't invoke method: " + method,
                         e);
