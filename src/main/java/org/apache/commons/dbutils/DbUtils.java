@@ -410,8 +410,8 @@ public final class DbUtils {
         public Logger getParentLogger() throws SQLFeatureNotSupportedException {
             if (parentLoggerSupported) {
                 try {
-                    final Method method = adapted.getClass().getMethod("getParentLogger", new Class[0]);
-                    return (Logger)method.invoke(adapted, new Object[0]);
+                    final Method method = adapted.getClass().getMethod("getParentLogger");
+                    return (Logger)method.invoke(adapted);
                 } catch (final NoSuchMethodException e) {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);

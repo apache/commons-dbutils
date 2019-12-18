@@ -308,7 +308,7 @@ public class BeanProcessor {
 
             // Don't call setter if the value object isn't the right type
             if (this.isCompatibleType(value, firstParam)) {
-                setter.invoke(target, new Object[]{value});
+                setter.invoke(target, value);
             } else {
               throw new SQLException(
                   "Cannot set " + prop.getName() + ": incompatible types, cannot convert "

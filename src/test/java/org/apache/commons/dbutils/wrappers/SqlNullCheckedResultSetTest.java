@@ -480,29 +480,23 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         Method getUrlInt = null;
         Method getUrlString = null;
         try {
-            getUrlInt = ResultSet.class.getMethod("getURL",
-                        new Class[] { Integer.TYPE } );
-            getUrlString = ResultSet.class.getMethod("getURL",
-                           new Class[] { String.class } );
+            getUrlInt = ResultSet.class.getMethod("getURL", Integer.TYPE);
+            getUrlString = ResultSet.class.getMethod("getURL", String.class);
         } catch(final NoSuchMethodException e) {
             // ignore
         } catch(final SecurityException e) {
             // ignore
         }
         if (getUrlInt != null && getUrlString != null) {
-            assertEquals(null, getUrlInt.invoke(rs,
-                         new Object[] { Integer.valueOf(1) } ) );
+            assertEquals(null, getUrlInt.invoke(rs, Integer.valueOf(1)) );
             assertTrue(rs.wasNull());
-            assertEquals(null, getUrlString.invoke(rs,
-                         new Object[] { "column" } ) );
+            assertEquals(null, getUrlString.invoke(rs, "column") );
             assertTrue(rs.wasNull());
             // Set what gets returned to something other than the default
             final URL u = new URL("http://www.apache.org");
             rs2.setNullURL(u);
-            assertEquals(u, getUrlInt.invoke(rs,
-                         new Object[] { Integer.valueOf(1) } ) );
-            assertEquals(u, getUrlString.invoke(rs,
-                         new Object[] { "column" } ) );
+            assertEquals(u, getUrlInt.invoke(rs, Integer.valueOf(1)) );
+            assertEquals(u, getUrlString.invoke(rs, "column") );
         }
     }
 

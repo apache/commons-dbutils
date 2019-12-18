@@ -1018,14 +1018,14 @@ public class QueryRunnerTest {
     public void testFillStatementWithBean() throws Exception {
         final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
-        runner.fillStatementWithBean(stmt, bean, new String[] { "a", "b", "c" });
+        runner.fillStatementWithBean(stmt, bean, "a", "b", "c");
     }
 
     @Test(expected=NullPointerException.class)
     public void testFillStatementWithBeanNullNames() throws Exception {
         final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
-        runner.fillStatementWithBean(stmt, bean, new String[] { "a", "b", null });
+        runner.fillStatementWithBean(stmt, bean, "a", "b", null);
     }
 
     @Test(expected=SQLException.class)
