@@ -266,7 +266,7 @@ public class BeanProcessor {
             final Class<?> propType = prop.getPropertyType();
 
             Object value = null;
-            if(propType != null) {
+            if (propType != null) {
                 value = this.processColumn(rs, i, propType);
 
                 if (value == null && propType.isPrimitive()) {
