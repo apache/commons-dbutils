@@ -86,129 +86,98 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     protected abstract T handle() throws SQLException;
 
     /**
-     * @param row
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#absolute(int)
+     * {@inheritDoc}
      */
     protected final boolean absolute(final int row) throws SQLException {
         return rs.absolute(row);
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#afterLast()
+     * {@inheritDoc}
      */
     protected final void afterLast() throws SQLException {
         rs.afterLast();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#beforeFirst()
+     * {@inheritDoc}
      */
     protected final void beforeFirst() throws SQLException {
         rs.beforeFirst();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#cancelRowUpdates()
+     * {@inheritDoc}
      */
     protected final void cancelRowUpdates() throws SQLException {
         rs.cancelRowUpdates();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#clearWarnings()
+     * {@inheritDoc}
      */
     protected final void clearWarnings() throws SQLException {
         rs.clearWarnings();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#close()
+     * {@inheritDoc}
      */
     protected final void close() throws SQLException {
         rs.close();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#deleteRow()
+     * {@inheritDoc}
      */
     protected final void deleteRow() throws SQLException {
         rs.deleteRow();
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#findColumn(java.lang.String)
+     * {@inheritDoc}
      */
     protected final int findColumn(final String columnLabel) throws SQLException {
         return rs.findColumn(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#first()
+     * {@inheritDoc}
      */
     protected final boolean first() throws SQLException {
         return rs.first();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getArray(int)
+     * {@inheritDoc}
      */
     protected final Array getArray(final int columnIndex) throws SQLException {
         return rs.getArray(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getArray(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Array getArray(final String columnLabel) throws SQLException {
         return rs.getArray(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getAsciiStream(int)
+     * {@inheritDoc}
      */
     protected final InputStream getAsciiStream(final int columnIndex) throws SQLException {
         return rs.getAsciiStream(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getAsciiStream(java.lang.String)
+     * {@inheritDoc}
      */
     protected final InputStream getAsciiStream(final String columnLabel) throws SQLException {
         return rs.getAsciiStream(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @param scale
-     * @return
-     * @throws SQLException
-     * @deprecated
-     * @see java.sql.ResultSet#getBigDecimal(int, int)
+     * {@inheritDoc}
      */
     @Deprecated
     protected final BigDecimal getBigDecimal(final int columnIndex, final int scale) throws SQLException {
@@ -216,22 +185,14 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBigDecimal(int)
+     * {@inheritDoc}
      */
     protected final BigDecimal getBigDecimal(final int columnIndex) throws SQLException {
         return rs.getBigDecimal(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @param scale
-     * @return
-     * @throws SQLException
-     * @deprecated
-     * @see java.sql.ResultSet#getBigDecimal(java.lang.String, int)
+     * {@inheritDoc}
      */
     @Deprecated
     protected final BigDecimal getBigDecimal(final String columnLabel, final int scale) throws SQLException {
@@ -239,670 +200,469 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBigDecimal(java.lang.String)
+     * {@inheritDoc}
      */
     protected final BigDecimal getBigDecimal(final String columnLabel) throws SQLException {
         return rs.getBigDecimal(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBinaryStream(int)
+     * {@inheritDoc}
      */
     protected final InputStream getBinaryStream(final int columnIndex) throws SQLException {
         return rs.getBinaryStream(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBinaryStream(java.lang.String)
+     * {@inheritDoc}
      */
     protected final InputStream getBinaryStream(final String columnLabel) throws SQLException {
         return rs.getBinaryStream(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBlob(int)
+     * {@inheritDoc}
      */
     protected final Blob getBlob(final int columnIndex) throws SQLException {
         return rs.getBlob(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBlob(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Blob getBlob(final String columnLabel) throws SQLException {
         return rs.getBlob(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBoolean(int)
+     * {@inheritDoc}
      */
     protected final boolean getBoolean(final int columnIndex) throws SQLException {
         return rs.getBoolean(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBoolean(java.lang.String)
+     * {@inheritDoc}
      */
     protected final boolean getBoolean(final String columnLabel) throws SQLException {
         return rs.getBoolean(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getByte(int)
+     * {@inheritDoc}
      */
     protected final byte getByte(final int columnIndex) throws SQLException {
         return rs.getByte(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getByte(java.lang.String)
+     * {@inheritDoc}
      */
     protected final byte getByte(final String columnLabel) throws SQLException {
         return rs.getByte(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBytes(int)
+     * {@inheritDoc}
      */
     protected final byte[] getBytes(final int columnIndex) throws SQLException {
         return rs.getBytes(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getBytes(java.lang.String)
+     * {@inheritDoc}
      */
     protected final byte[] getBytes(final String columnLabel) throws SQLException {
         return rs.getBytes(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getCharacterStream(int)
+     * {@inheritDoc}
      */
     protected final Reader getCharacterStream(final int columnIndex) throws SQLException {
         return rs.getCharacterStream(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getCharacterStream(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Reader getCharacterStream(final String columnLabel) throws SQLException {
         return rs.getCharacterStream(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getClob(int)
+     * {@inheritDoc}
      */
     protected final Clob getClob(final int columnIndex) throws SQLException {
         return rs.getClob(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getClob(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Clob getClob(final String columnLabel) throws SQLException {
         return rs.getClob(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getConcurrency()
+     * {@inheritDoc}
      */
     protected final int getConcurrency() throws SQLException {
         return rs.getConcurrency();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getCursorName()
+     * {@inheritDoc}
      */
     protected final String getCursorName() throws SQLException {
         return rs.getCursorName();
     }
 
     /**
-     * @param columnIndex
-     * @param cal
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getDate(int, java.util.Calendar)
+     * {@inheritDoc}
      */
     protected final Date getDate(final int columnIndex, final Calendar cal) throws SQLException {
         return rs.getDate(columnIndex, cal);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getDate(int)
+     * {@inheritDoc}
      */
     protected final Date getDate(final int columnIndex) throws SQLException {
         return rs.getDate(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @param cal
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getDate(java.lang.String, java.util.Calendar)
+     * {@inheritDoc}
      */
     protected final Date getDate(final String columnLabel, final Calendar cal) throws SQLException {
         return rs.getDate(columnLabel, cal);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getDate(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Date getDate(final String columnLabel) throws SQLException {
         return rs.getDate(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getDouble(int)
+     * {@inheritDoc}
      */
     protected final double getDouble(final int columnIndex) throws SQLException {
         return rs.getDouble(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getDouble(java.lang.String)
+     * {@inheritDoc}
      */
     protected final double getDouble(final String columnLabel) throws SQLException {
         return rs.getDouble(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getFetchDirection()
+     * {@inheritDoc}
      */
     protected final int getFetchDirection() throws SQLException {
         return rs.getFetchDirection();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getFetchSize()
+     * {@inheritDoc}
      */
     protected final int getFetchSize() throws SQLException {
         return rs.getFetchSize();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getFloat(int)
+     * {@inheritDoc}
      */
     protected final float getFloat(final int columnIndex) throws SQLException {
         return rs.getFloat(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getFloat(java.lang.String)
+     * {@inheritDoc}
      */
     protected final float getFloat(final String columnLabel) throws SQLException {
         return rs.getFloat(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getHoldability()
+     * {@inheritDoc}
      */
     protected final int getHoldability() throws SQLException {
         return rs.getHoldability();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getInt(int)
+     * {@inheritDoc}
      */
     protected final int getInt(final int columnIndex) throws SQLException {
         return rs.getInt(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getInt(java.lang.String)
+     * {@inheritDoc}
      */
     protected final int getInt(final String columnLabel) throws SQLException {
         return rs.getInt(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getLong(int)
+     * {@inheritDoc}
      */
     protected final long getLong(final int columnIndex) throws SQLException {
         return rs.getLong(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getLong(java.lang.String)
+     * {@inheritDoc}
      */
     protected final long getLong(final String columnLabel) throws SQLException {
         return rs.getLong(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getMetaData()
+     * {@inheritDoc}
      */
     protected final ResultSetMetaData getMetaData() throws SQLException {
         return rs.getMetaData();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getNCharacterStream(int)
+     * {@inheritDoc}
      */
     protected final Reader getNCharacterStream(final int columnIndex) throws SQLException {
         return rs.getNCharacterStream(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getNCharacterStream(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Reader getNCharacterStream(final String columnLabel) throws SQLException {
         return rs.getNCharacterStream(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getNClob(int)
+     * {@inheritDoc}
      */
     protected final NClob getNClob(final int columnIndex) throws SQLException {
         return rs.getNClob(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getNClob(java.lang.String)
+     * {@inheritDoc}
      */
     protected final NClob getNClob(final String columnLabel) throws SQLException {
         return rs.getNClob(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getNString(int)
+     * {@inheritDoc}
      */
     protected final String getNString(final int columnIndex) throws SQLException {
         return rs.getNString(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getNString(java.lang.String)
+     * {@inheritDoc}
      */
     protected final String getNString(final String columnLabel) throws SQLException {
         return rs.getNString(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @param map
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getObject(int, java.util.Map)
+     * {@inheritDoc}
      */
     protected final Object getObject(final int columnIndex, final Map<String, Class<?>> map) throws SQLException {
         return rs.getObject(columnIndex, map);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getObject(int)
+     * {@inheritDoc}
      */
     protected final Object getObject(final int columnIndex) throws SQLException {
         return rs.getObject(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @param map
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getObject(java.lang.String, java.util.Map)
+     * {@inheritDoc}
      */
     protected final Object getObject(final String columnLabel, final Map<String, Class<?>> map) throws SQLException {
         return rs.getObject(columnLabel, map);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getObject(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Object getObject(final String columnLabel) throws SQLException {
         return rs.getObject(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getRef(int)
+     * {@inheritDoc}
      */
     protected final Ref getRef(final int columnIndex) throws SQLException {
         return rs.getRef(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getRef(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Ref getRef(final String columnLabel) throws SQLException {
         return rs.getRef(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getRow()
+     * {@inheritDoc}
      */
     protected final int getRow() throws SQLException {
         return rs.getRow();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getRowId(int)
+     * {@inheritDoc}
      */
     protected final RowId getRowId(final int columnIndex) throws SQLException {
         return rs.getRowId(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getRowId(java.lang.String)
+     * {@inheritDoc}
      */
     protected final RowId getRowId(final String columnLabel) throws SQLException {
         return rs.getRowId(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getSQLXML(int)
+     * {@inheritDoc}
      */
     protected final SQLXML getSQLXML(final int columnIndex) throws SQLException {
         return rs.getSQLXML(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getSQLXML(java.lang.String)
+     * {@inheritDoc}
      */
     protected final SQLXML getSQLXML(final String columnLabel) throws SQLException {
         return rs.getSQLXML(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getShort(int)
+     * {@inheritDoc}
      */
     protected final short getShort(final int columnIndex) throws SQLException {
         return rs.getShort(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getShort(java.lang.String)
+     * {@inheritDoc}
      */
     protected final short getShort(final String columnLabel) throws SQLException {
         return rs.getShort(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getStatement()
+     * {@inheritDoc}
      */
     protected final Statement getStatement() throws SQLException {
         return rs.getStatement();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getString(int)
+     * {@inheritDoc}
      */
     protected final String getString(final int columnIndex) throws SQLException {
         return rs.getString(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getString(java.lang.String)
+     * {@inheritDoc}
      */
     protected final String getString(final String columnLabel) throws SQLException {
         return rs.getString(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @param cal
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTime(int, java.util.Calendar)
+     * {@inheritDoc}
      */
     protected final Time getTime(final int columnIndex, final Calendar cal) throws SQLException {
         return rs.getTime(columnIndex, cal);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTime(int)
+     * {@inheritDoc}
      */
     protected final Time getTime(final int columnIndex) throws SQLException {
         return rs.getTime(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @param cal
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTime(java.lang.String, java.util.Calendar)
+     * {@inheritDoc}
      */
     protected final Time getTime(final String columnLabel, final Calendar cal) throws SQLException {
         return rs.getTime(columnLabel, cal);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTime(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Time getTime(final String columnLabel) throws SQLException {
         return rs.getTime(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @param cal
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTimestamp(int, java.util.Calendar)
+     * {@inheritDoc}
      */
     protected final Timestamp getTimestamp(final int columnIndex, final Calendar cal) throws SQLException {
         return rs.getTimestamp(columnIndex, cal);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTimestamp(int)
+     * {@inheritDoc}
      */
     protected final Timestamp getTimestamp(final int columnIndex) throws SQLException {
         return rs.getTimestamp(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @param cal
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTimestamp(java.lang.String, java.util.Calendar)
+     * {@inheritDoc}
      */
     protected final Timestamp getTimestamp(final String columnLabel, final Calendar cal) throws SQLException {
         return rs.getTimestamp(columnLabel, cal);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getTimestamp(java.lang.String)
+     * {@inheritDoc}
      */
     protected final Timestamp getTimestamp(final String columnLabel) throws SQLException {
         return rs.getTimestamp(columnLabel);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getType()
+     * {@inheritDoc}
      */
     protected final int getType() throws SQLException {
         return rs.getType();
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getURL(int)
+     * {@inheritDoc}
      */
     protected final URL getURL(final int columnIndex) throws SQLException {
         return rs.getURL(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getURL(java.lang.String)
+     * {@inheritDoc}
      */
     protected final URL getURL(final String columnLabel) throws SQLException {
         return rs.getURL(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @return
-     * @throws SQLException
-     * @deprecated
-     * @see java.sql.ResultSet#getUnicodeStream(int)
+     * {@inheritDoc}
      */
     @Deprecated
     protected final InputStream getUnicodeStream(final int columnIndex) throws SQLException {
@@ -910,11 +670,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param columnLabel
-     * @return
-     * @throws SQLException
-     * @deprecated
-     * @see java.sql.ResultSet#getUnicodeStream(java.lang.String)
+     * {@inheritDoc}
      */
     @Deprecated
     protected final InputStream getUnicodeStream(final String columnLabel) throws SQLException {
@@ -922,1045 +678,735 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#getWarnings()
+     * {@inheritDoc}
      */
     protected final SQLWarning getWarnings() throws SQLException {
         return rs.getWarnings();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#insertRow()
+     * {@inheritDoc}
      */
     protected final void insertRow() throws SQLException {
         rs.insertRow();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#isAfterLast()
+     * {@inheritDoc}
      */
     protected final boolean isAfterLast() throws SQLException {
         return rs.isAfterLast();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#isBeforeFirst()
+     * {@inheritDoc}
      */
     protected final boolean isBeforeFirst() throws SQLException {
         return rs.isBeforeFirst();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#isClosed()
+     * {@inheritDoc}
      */
     protected final boolean isClosed() throws SQLException {
         return rs.isClosed();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#isFirst()
+     * {@inheritDoc}
      */
     protected final boolean isFirst() throws SQLException {
         return rs.isFirst();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#isLast()
+     * {@inheritDoc}
      */
     protected final boolean isLast() throws SQLException {
         return rs.isLast();
     }
 
     /**
-     * @param iface
-     * @return
-     * @throws SQLException
-     * @see java.sql.Wrapper#isWrapperFor(java.lang.Class)
+     * {@inheritDoc}
      */
     protected final boolean isWrapperFor(final Class<?> iface) throws SQLException {
         return rs.isWrapperFor(iface);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#last()
+     * {@inheritDoc}
      */
     protected final boolean last() throws SQLException {
         return rs.last();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#moveToCurrentRow()
+     * {@inheritDoc}
      */
     protected final void moveToCurrentRow() throws SQLException {
         rs.moveToCurrentRow();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#moveToInsertRow()
+     * {@inheritDoc}
      */
     protected final void moveToInsertRow() throws SQLException {
         rs.moveToInsertRow();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#next()
+     * {@inheritDoc}
      */
     protected final boolean next() throws SQLException {
         return rs.next();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#previous()
+     * {@inheritDoc}
      */
     protected final boolean previous() throws SQLException {
         return rs.previous();
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#refreshRow()
+     * {@inheritDoc}
      */
     protected final void refreshRow() throws SQLException {
         rs.refreshRow();
     }
 
     /**
-     * @param rows
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#relative(int)
+     * {@inheritDoc}
      */
     protected final boolean relative(final int rows) throws SQLException {
         return rs.relative(rows);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#rowDeleted()
+     * {@inheritDoc}
      */
     protected final boolean rowDeleted() throws SQLException {
         return rs.rowDeleted();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#rowInserted()
+     * {@inheritDoc}
      */
     protected final boolean rowInserted() throws SQLException {
         return rs.rowInserted();
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#rowUpdated()
+     * {@inheritDoc}
      */
     protected final boolean rowUpdated() throws SQLException {
         return rs.rowUpdated();
     }
 
     /**
-     * @param direction
-     * @throws SQLException
-     * @see java.sql.ResultSet#setFetchDirection(int)
+     * {@inheritDoc}
      */
     protected final void setFetchDirection(final int direction) throws SQLException {
         rs.setFetchDirection(direction);
     }
 
     /**
-     * @param rows
-     * @throws SQLException
-     * @see java.sql.ResultSet#setFetchSize(int)
+     * {@inheritDoc}
      */
     protected final void setFetchSize(final int rows) throws SQLException {
         rs.setFetchSize(rows);
     }
 
     /**
-     * @param iface
-     * @return
-     * @throws SQLException
-     * @see java.sql.Wrapper#unwrap(java.lang.Class)
+     * {@inheritDoc}
      */
     protected final <E> E unwrap(final Class<E> iface) throws SQLException {
         return rs.unwrap(iface);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateArray(int, java.sql.Array)
+     * {@inheritDoc}
      */
     protected final void updateArray(final int columnIndex, final Array x) throws SQLException {
         rs.updateArray(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateArray(java.lang.String, java.sql.Array)
+     * {@inheritDoc}
      */
     protected final void updateArray(final String columnLabel, final Array x) throws SQLException {
         rs.updateArray(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream, int)
+     * {@inheritDoc}
      */
     protected final void updateAsciiStream(final int columnIndex, final InputStream x, final int length) throws SQLException {
         rs.updateAsciiStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream, long)
+     * {@inheritDoc}
      */
     protected final void updateAsciiStream(final int columnIndex, final InputStream x, final long length) throws SQLException {
         rs.updateAsciiStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateAsciiStream(int, java.io.InputStream)
+     * {@inheritDoc}
      */
     protected final void updateAsciiStream(final int columnIndex, final InputStream x) throws SQLException {
         rs.updateAsciiStream(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream, int)
+     * {@inheritDoc}
      */
     protected final void updateAsciiStream(final String columnLabel, final InputStream x, final int length) throws SQLException {
         rs.updateAsciiStream(columnLabel, x, length);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream, long)
+     * {@inheritDoc}
      */
     protected final void updateAsciiStream(final String columnLabel, final InputStream x, final long length) throws SQLException {
         rs.updateAsciiStream(columnLabel, x, length);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateAsciiStream(java.lang.String, java.io.InputStream)
+     * {@inheritDoc}
      */
     protected final void updateAsciiStream(final String columnLabel, final InputStream x) throws SQLException {
         rs.updateAsciiStream(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBigDecimal(int, java.math.BigDecimal)
+     * {@inheritDoc}
      */
     protected final void updateBigDecimal(final int columnIndex, final BigDecimal x) throws SQLException {
         rs.updateBigDecimal(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBigDecimal(java.lang.String, java.math.BigDecimal)
+     * {@inheritDoc}
      */
     protected final void updateBigDecimal(final String columnLabel, final BigDecimal x) throws SQLException {
         rs.updateBigDecimal(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream, int)
+     * {@inheritDoc}
      */
     protected final void updateBinaryStream(final int columnIndex, final InputStream x, final int length) throws SQLException {
         rs.updateBinaryStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream, long)
+     * {@inheritDoc}
      */
     protected final void updateBinaryStream(final int columnIndex, final InputStream x, final long length) throws SQLException {
         rs.updateBinaryStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBinaryStream(int, java.io.InputStream)
+     * {@inheritDoc}
      */
     protected final void updateBinaryStream(final int columnIndex, final InputStream x) throws SQLException {
         rs.updateBinaryStream(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream, int)
+     * {@inheritDoc}
      */
     protected final void updateBinaryStream(final String columnLabel, final InputStream x, final int length) throws SQLException {
         rs.updateBinaryStream(columnLabel, x, length);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream, long)
+     * {@inheritDoc}
      */
     protected final void updateBinaryStream(final String columnLabel, final InputStream x, final long length) throws SQLException {
         rs.updateBinaryStream(columnLabel, x, length);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBinaryStream(java.lang.String, java.io.InputStream)
+     * {@inheritDoc}
      */
     protected final void updateBinaryStream(final String columnLabel, final InputStream x) throws SQLException {
         rs.updateBinaryStream(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBlob(int, java.sql.Blob)
+     * {@inheritDoc}
      */
     protected final void updateBlob(final int columnIndex, final Blob x) throws SQLException {
         rs.updateBlob(columnIndex, x);
     }
 
     /**
-     * @param columnIndex
-     * @param inputStream
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBlob(int, java.io.InputStream, long)
+     * {@inheritDoc}
      */
     protected final void updateBlob(final int columnIndex, final InputStream inputStream, final long length) throws SQLException {
         rs.updateBlob(columnIndex, inputStream, length);
     }
 
     /**
-     * @param columnIndex
-     * @param inputStream
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBlob(int, java.io.InputStream)
+     * {@inheritDoc}
      */
     protected final void updateBlob(final int columnIndex, final InputStream inputStream) throws SQLException {
         rs.updateBlob(columnIndex, inputStream);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBlob(java.lang.String, java.sql.Blob)
+     * {@inheritDoc}
      */
     protected final void updateBlob(final String columnLabel, final Blob x) throws SQLException {
         rs.updateBlob(columnLabel, x);
     }
 
     /**
-     * @param columnLabel
-     * @param inputStream
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBlob(java.lang.String, java.io.InputStream, long)
+     * {@inheritDoc}
      */
     protected final void updateBlob(final String columnLabel, final InputStream inputStream, final long length) throws SQLException {
         rs.updateBlob(columnLabel, inputStream, length);
     }
 
     /**
-     * @param columnLabel
-     * @param inputStream
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBlob(java.lang.String, java.io.InputStream)
+     * {@inheritDoc}
      */
     protected final void updateBlob(final String columnLabel, final InputStream inputStream) throws SQLException {
         rs.updateBlob(columnLabel, inputStream);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBoolean(int, boolean)
+     * {@inheritDoc}
      */
     protected final void updateBoolean(final int columnIndex, final boolean x) throws SQLException {
         rs.updateBoolean(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBoolean(java.lang.String, boolean)
+     * {@inheritDoc}
      */
     protected final void updateBoolean(final String columnLabel, final boolean x) throws SQLException {
         rs.updateBoolean(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateByte(int, byte)
+     * {@inheritDoc}
      */
     protected final void updateByte(final int columnIndex, final byte x) throws SQLException {
         rs.updateByte(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateByte(java.lang.String, byte)
+     * {@inheritDoc}
      */
     protected final void updateByte(final String columnLabel, final byte x) throws SQLException {
         rs.updateByte(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBytes(int, byte[])
+     * {@inheritDoc}
      */
     protected final void updateBytes(final int columnIndex, final byte[] x) throws SQLException {
         rs.updateBytes(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateBytes(java.lang.String, byte[])
+     * {@inheritDoc}
      */
     protected final void updateBytes(final String columnLabel, final byte[] x) throws SQLException {
         rs.updateBytes(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader, int)
+     * {@inheritDoc}
      */
     protected final void updateCharacterStream(final int columnIndex, final Reader x, final int length) throws SQLException {
         rs.updateCharacterStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateCharacterStream(final int columnIndex, final Reader x, final long length) throws SQLException {
         rs.updateCharacterStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateCharacterStream(int, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateCharacterStream(final int columnIndex, final Reader x) throws SQLException {
         rs.updateCharacterStream(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader, int)
+     * {@inheritDoc}
      */
     protected final void updateCharacterStream(final String columnLabel, final Reader reader, final int length) throws SQLException {
         rs.updateCharacterStream(columnLabel, reader, length);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateCharacterStream(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateCharacterStream(columnLabel, reader, length);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateCharacterStream(java.lang.String, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateCharacterStream(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateCharacterStream(columnLabel, reader);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateClob(int, java.sql.Clob)
+     * {@inheritDoc}
      */
     protected final void updateClob(final int columnIndex, final Clob x) throws SQLException {
         rs.updateClob(columnIndex, x);
     }
 
     /**
-     * @param columnIndex
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateClob(int, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
         rs.updateClob(columnIndex, reader, length);
     }
 
     /**
-     * @param columnIndex
-     * @param reader
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateClob(int, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateClob(final int columnIndex, final Reader reader) throws SQLException {
         rs.updateClob(columnIndex, reader);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateClob(java.lang.String, java.sql.Clob)
+     * {@inheritDoc}
      */
     protected final void updateClob(final String columnLabel, final Clob x) throws SQLException {
         rs.updateClob(columnLabel, x);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateClob(java.lang.String, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateClob(columnLabel, reader, length);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateClob(java.lang.String, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateClob(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateClob(columnLabel, reader);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateDate(int, java.sql.Date)
+     * {@inheritDoc}
      */
     protected final void updateDate(final int columnIndex, final Date x) throws SQLException {
         rs.updateDate(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateDate(java.lang.String, java.sql.Date)
+     * {@inheritDoc}
      */
     protected final void updateDate(final String columnLabel, final Date x) throws SQLException {
         rs.updateDate(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateDouble(int, double)
+     * {@inheritDoc}
      */
     protected final void updateDouble(final int columnIndex, final double x) throws SQLException {
         rs.updateDouble(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateDouble(java.lang.String, double)
+     * {@inheritDoc}
      */
     protected final void updateDouble(final String columnLabel, final double x) throws SQLException {
         rs.updateDouble(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateFloat(int, float)
+     * {@inheritDoc}
      */
     protected final void updateFloat(final int columnIndex, final float x) throws SQLException {
         rs.updateFloat(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateFloat(java.lang.String, float)
+     * {@inheritDoc}
      */
     protected final void updateFloat(final String columnLabel, final float x) throws SQLException {
         rs.updateFloat(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateInt(int, int)
+     * {@inheritDoc}
      */
     protected final void updateInt(final int columnIndex, final int x) throws SQLException {
         rs.updateInt(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateInt(java.lang.String, int)
+     * {@inheritDoc}
      */
     protected final void updateInt(final String columnLabel, final int x) throws SQLException {
         rs.updateInt(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateLong(int, long)
+     * {@inheritDoc}
      */
     protected final void updateLong(final int columnIndex, final long x) throws SQLException {
         rs.updateLong(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateLong(java.lang.String, long)
+     * {@inheritDoc}
      */
     protected final void updateLong(final String columnLabel, final long x) throws SQLException {
         rs.updateLong(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNCharacterStream(int, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateNCharacterStream(final int columnIndex, final Reader x, final long length) throws SQLException {
         rs.updateNCharacterStream(columnIndex, x, length);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNCharacterStream(int, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateNCharacterStream(final int columnIndex, final Reader x) throws SQLException {
         rs.updateNCharacterStream(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNCharacterStream(java.lang.String, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateNCharacterStream(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateNCharacterStream(columnLabel, reader, length);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNCharacterStream(java.lang.String, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateNCharacterStream(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateNCharacterStream(columnLabel, reader);
     }
 
     /**
-     * @param columnIndex
-     * @param nClob
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNClob(int, java.sql.NClob)
+     * {@inheritDoc}
      */
     protected final void updateNClob(final int columnIndex, final NClob nClob) throws SQLException {
         rs.updateNClob(columnIndex, nClob);
     }
 
     /**
-     * @param columnIndex
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNClob(int, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateNClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
         rs.updateNClob(columnIndex, reader, length);
     }
 
     /**
-     * @param columnIndex
-     * @param reader
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNClob(int, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateNClob(final int columnIndex, final Reader reader) throws SQLException {
         rs.updateNClob(columnIndex, reader);
     }
 
     /**
-     * @param columnLabel
-     * @param nClob
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNClob(java.lang.String, java.sql.NClob)
+     * {@inheritDoc}
      */
     protected final void updateNClob(final String columnLabel, final NClob nClob) throws SQLException {
         rs.updateNClob(columnLabel, nClob);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @param length
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNClob(java.lang.String, java.io.Reader, long)
+     * {@inheritDoc}
      */
     protected final void updateNClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
         rs.updateNClob(columnLabel, reader, length);
     }
 
     /**
-     * @param columnLabel
-     * @param reader
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNClob(java.lang.String, java.io.Reader)
+     * {@inheritDoc}
      */
     protected final void updateNClob(final String columnLabel, final Reader reader) throws SQLException {
         rs.updateNClob(columnLabel, reader);
     }
 
     /**
-     * @param columnIndex
-     * @param nString
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNString(int, java.lang.String)
+     * {@inheritDoc}
      */
     protected final void updateNString(final int columnIndex, final String nString) throws SQLException {
         rs.updateNString(columnIndex, nString);
     }
 
     /**
-     * @param columnLabel
-     * @param nString
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNString(java.lang.String, java.lang.String)
+     * {@inheritDoc}
      */
     protected final void updateNString(final String columnLabel, final String nString) throws SQLException {
         rs.updateNString(columnLabel, nString);
     }
 
     /**
-     * @param columnIndex
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNull(int)
+     * {@inheritDoc}
      */
     protected final void updateNull(final int columnIndex) throws SQLException {
         rs.updateNull(columnIndex);
     }
 
     /**
-     * @param columnLabel
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateNull(java.lang.String)
+     * {@inheritDoc}
      */
     protected final void updateNull(final String columnLabel) throws SQLException {
         rs.updateNull(columnLabel);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @param scaleOrLength
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateObject(int, java.lang.Object, int)
+     * {@inheritDoc}
      */
     protected final void updateObject(final int columnIndex, final Object x, final int scaleOrLength) throws SQLException {
         rs.updateObject(columnIndex, x, scaleOrLength);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateObject(int, java.lang.Object)
+     * {@inheritDoc}
      */
     protected final void updateObject(final int columnIndex, final Object x) throws SQLException {
         rs.updateObject(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @param scaleOrLength
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateObject(java.lang.String, java.lang.Object, int)
+     * {@inheritDoc}
      */
     protected final void updateObject(final String columnLabel, final Object x, final int scaleOrLength) throws SQLException {
         rs.updateObject(columnLabel, x, scaleOrLength);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateObject(java.lang.String, java.lang.Object)
+     * {@inheritDoc}
      */
     protected final void updateObject(final String columnLabel, final Object x) throws SQLException {
         rs.updateObject(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateRef(int, java.sql.Ref)
+     * {@inheritDoc}
      */
     protected final void updateRef(final int columnIndex, final Ref x) throws SQLException {
         rs.updateRef(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateRef(java.lang.String, java.sql.Ref)
+     * {@inheritDoc}
      */
     protected final void updateRef(final String columnLabel, final Ref x) throws SQLException {
         rs.updateRef(columnLabel, x);
     }
 
     /**
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateRow()
+     * {@inheritDoc}
      */
     protected final void updateRow() throws SQLException {
         rs.updateRow();
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateRowId(int, java.sql.RowId)
+     * {@inheritDoc}
      */
     protected final void updateRowId(final int columnIndex, final RowId x) throws SQLException {
         rs.updateRowId(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateRowId(java.lang.String, java.sql.RowId)
+     * {@inheritDoc}
      */
     protected final void updateRowId(final String columnLabel, final RowId x) throws SQLException {
         rs.updateRowId(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param xmlObject
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateSQLXML(int, java.sql.SQLXML)
+     * {@inheritDoc}
      */
     protected final void updateSQLXML(final int columnIndex, final SQLXML xmlObject) throws SQLException {
         rs.updateSQLXML(columnIndex, xmlObject);
     }
 
     /**
-     * @param columnLabel
-     * @param xmlObject
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateSQLXML(java.lang.String, java.sql.SQLXML)
+     * {@inheritDoc}
      */
     protected final void updateSQLXML(final String columnLabel, final SQLXML xmlObject) throws SQLException {
         rs.updateSQLXML(columnLabel, xmlObject);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateShort(int, short)
+     * {@inheritDoc}
      */
     protected final void updateShort(final int columnIndex, final short x) throws SQLException {
         rs.updateShort(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateShort(java.lang.String, short)
+     * {@inheritDoc}
      */
     protected final void updateShort(final String columnLabel, final short x) throws SQLException {
         rs.updateShort(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateString(int, java.lang.String)
+     * {@inheritDoc}
      */
     protected final void updateString(final int columnIndex, final String x) throws SQLException {
         rs.updateString(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateString(java.lang.String, java.lang.String)
+     * {@inheritDoc}
      */
     protected final void updateString(final String columnLabel, final String x) throws SQLException {
         rs.updateString(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateTime(int, java.sql.Time)
+     * {@inheritDoc}
      */
     protected final void updateTime(final int columnIndex, final Time x) throws SQLException {
         rs.updateTime(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateTime(java.lang.String, java.sql.Time)
+     * {@inheritDoc}
      */
     protected final void updateTime(final String columnLabel, final Time x) throws SQLException {
         rs.updateTime(columnLabel, x);
     }
 
     /**
-     * @param columnIndex
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateTimestamp(int, java.sql.Timestamp)
+     * {@inheritDoc}
      */
     protected final void updateTimestamp(final int columnIndex, final Timestamp x) throws SQLException {
         rs.updateTimestamp(columnIndex, x);
     }
 
     /**
-     * @param columnLabel
-     * @param x
-     * @throws SQLException
-     * @see java.sql.ResultSet#updateTimestamp(java.lang.String, java.sql.Timestamp)
+     * {@inheritDoc}
      */
     protected final void updateTimestamp(final String columnLabel, final Timestamp x) throws SQLException {
         rs.updateTimestamp(columnLabel, x);
     }
 
     /**
-     * @return
-     * @throws SQLException
-     * @see java.sql.ResultSet#wasNull()
+     * {@inheritDoc}
      */
     protected final boolean wasNull() throws SQLException {
         return rs.wasNull();

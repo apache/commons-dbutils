@@ -192,7 +192,7 @@ public class BasicRowProcessor implements RowProcessor {
      * key.toString().toLowerCase()
      * </pre>
      */
-    private static class CaseInsensitiveHashMap extends LinkedHashMap<String, Object> {
+    private static final class CaseInsensitiveHashMap extends LinkedHashMap<String, Object> {
 
         private CaseInsensitiveHashMap(final int initialCapacity) {
             super(initialCapacity);
