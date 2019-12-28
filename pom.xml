@@ -208,13 +208,13 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>3.1.0</version>
+      <version>3.2.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -238,7 +238,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+    <checkstyle.version>8.27</checkstyle.version>
 
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
@@ -258,12 +258,20 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>${checkstyle.plugin.version}</version>
+          <version>${commons.checkstyle-plugin.version}</version>
           <configuration>
             <configLocation>${basedir}/checkstyle.xml</configLocation>
             <enableRulesSummary>false</enableRulesSummary>
             <headerLocation>${basedir}/license-header.txt</headerLocation>
+            <failOnViolation>false</failOnViolation>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -335,11 +343,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <configuration>
-          <configLocation>${basedir}/checkstyle.xml</configLocation>
-          <enableRulesSummary>false</enableRulesSummary>
-          <headerLocation>${basedir}/license-header.txt</headerLocation>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -347,7 +350,7 @@
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
-       </configuration>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
