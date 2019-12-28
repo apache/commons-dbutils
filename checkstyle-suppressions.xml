@@ -20,6 +20,7 @@
     <suppress checks="Header" files="NOTICE.txt" />
     <suppress checks="Header" files="LICENSE.txt" />
     <suppress checks="Header" files="target/.*" />
+    <suppress checks="Header" files=".*[/\\]TestQueries.properties" />
     <suppress checks="HideUtilityClassConstructor" files="DbUtils.java" />
     <suppress checks="Javadoc" files=".*[/\\]test[/\\].*" />
     <suppress checks="LineLength" files="AsyncQueryRunner.java" />
