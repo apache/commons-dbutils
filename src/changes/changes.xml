@@ -44,7 +44,19 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="2.0" date="2017-MM-DD" description="New features and bug fixes.">
+    <release version="2.0" date="2020-01-DD" description="New features and bug fixes.">
+      <action dev="thecarlhall" type="update">
+        [BREAKING] Reduced visibility of data source to private in parent of QueryRunner. This has been deprecated since 2012 in rev=c500789f.
+      </action>
+      <action due-to="thecarlhall" type="update">
+        Java 1.7 now required. clirr, checkstyle, and spotbugs configured as part of default build.
+      </action>
+      <action dev="thecarlhall" type="fix">
+        Always copy Date, Time, Timestamp on get and set in SqlNullCheckedResultSet.
+      </action>
+      <action dev="thecarlhall" type="add" due-to="rewerma">
+        Add @Column annotation to hint the field name instead of dissecting the get method name.
+      </action>
       <action dev="ggregory" type="update" issue="DBUTILS-135" due-to="hdevalke">
         BeanProcessor is not thread safe since [DBUTILS-124].
       </action>
