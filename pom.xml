@@ -248,8 +248,6 @@
     <commons.bc.version>1.7</commons.bc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
-
-    <japicmp.skip>false</japicmp.skip>
   </properties>
 
   <build>
