@@ -407,13 +407,9 @@ public class BeanProcessor {
      */
     protected <T> T newInstance(final Class<T> c) throws SQLException {
         try {
-            return c.newInstance();
+            return c.getDeclaredConstructor().newInstance();
 
-        } catch (final InstantiationException e) {
-            throw new SQLException(
-                "Cannot create " + c.getName() + ": " + e.getMessage());
-
-        } catch (final IllegalAccessException e) {
+        } catch (final IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             throw new SQLException(
                 "Cannot create " + c.getName() + ": " + e.getMessage());
         }
