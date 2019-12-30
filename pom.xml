@@ -241,6 +241,10 @@
     <dbutils.spotbugs.version>3.1.12</dbutils.spotbugs.version>
     <dbutils.checkstyle.version>8.27</dbutils.checkstyle.version>
 
+    <!-- generate report even if there are binary incompatible changes -->
+    <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
+    <commons.japicmp.version>0.14.3</commons.japicmp.version>
+
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
     <commons.release.version>2.0</commons.release.version>
@@ -289,6 +293,7 @@
           <artifactId>clirr-maven-plugin</artifactId>
           <version>${commons.clirr.version}</version>
           <configuration>
+            <minSeverity>${minSeverity}</minSeverity>
             <ignoredDifferencesFile>${basedir}/clirr-ignored.xml</ignoredDifferencesFile>
           </configuration>
         </plugin>
@@ -377,10 +382,6 @@
             <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
           </rulesets>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>clirr-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </reporting>
