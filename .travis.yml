@@ -26,4 +26,4 @@ jdk:
   - openjdk-ea
 
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn -B clean test jacoco:report coveralls:report -Ptravis-jacoco
