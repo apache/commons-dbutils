@@ -21,6 +21,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation for BeanProcessor to receive hints of the field name rather than dissecting the method name.
+ *
+ * @since 2.0
+ */
 @Target({ ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Column {
