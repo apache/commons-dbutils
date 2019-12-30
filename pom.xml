@@ -37,6 +37,10 @@
     <url>https://issues.apache.org/jira/browse/DBUTILS</url>
   </issueManagement>
 
+  <prerequisites>
+    <maven>3.3.9</maven>
+  </prerequisites>
+
   <scm>
     <connection>scm:git:git://git.apache.org/commons-dbutils.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-dbutils.git</developerConnection>
@@ -238,8 +242,8 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <dbutils.spotbugs.version>3.1.12</dbutils.spotbugs.version>
-    <dbutils.checkstyle.version>8.27</dbutils.checkstyle.version>
+    <dbutils.spotbugs.version>3.1.12.2</dbutils.spotbugs.version>
+    <dbutils.checkstyle.version>8.28</dbutils.checkstyle.version>
 
     <!-- generate report even if there are binary incompatible changes -->
     <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
