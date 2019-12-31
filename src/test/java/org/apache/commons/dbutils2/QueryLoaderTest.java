@@ -19,15 +19,12 @@ package org.apache.commons.dbutils2;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.commons.dbutils2.QueryLoader;
-
 /**
  * QueryLoaderTest
  */
 public class QueryLoaderTest extends BaseTestCase {
 
-    private static final String QUERIES =
-        "/org/apache/commons/dbutils/TestQueries.properties";
+    private static final String QUERIES = "/TestQueries.properties";
 
     public void testLoad() throws IOException {
         try {

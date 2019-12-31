@@ -59,6 +59,13 @@ public class TestBean {
     private double columnProcessorDoubleTest = -1;
 
     /**
+     * the ResultSet will have a string in this column and the
+     * BeanProcessors should convert that to a enum of type EnumTest
+     * and store the value in this property.
+     */
+    private EnumTest enumTest;
+
+    /**
      * Constructor for TestBean.
      */
     public TestBean() {
@@ -145,4 +152,11 @@ public class TestBean {
         columnProcessorDoubleTest = d;
     }
 
+    public EnumTest getEnumTest() {
+        return enumTest;
+    }
+
+    public void setEnumTest(EnumTest enumTest) {
+        this.enumTest = enumTest;
+    }
 }

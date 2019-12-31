@@ -40,7 +40,6 @@ import java.util.Map;
 
 import org.apache.commons.dbutils2.BaseTestCase;
 import org.apache.commons.dbutils2.ProxyFactory;
-import org.apache.commons.dbutils2.wrappers.SqlNullCheckedResultSet;
 
 /**
  * Test cases for <code>SqlNullCheckedResultSet</code> class.

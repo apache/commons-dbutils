@@ -189,10 +189,27 @@
       <name>Benedikt Ritter</name>
       <email>bene at systemoutprintln dot de</email>
     </contributor>
-  </contributors>
+    <contributor>
+      <name>William Speirs</name>
+      <email>bill.speirs@gmail.com</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+   </contributors>
 
   <dependencies>
     <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.9.4</version>
+    </dependency>
+     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>

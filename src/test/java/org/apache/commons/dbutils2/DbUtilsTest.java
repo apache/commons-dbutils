@@ -27,7 +27,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.commons.dbutils2.DbUtils;
 import org.junit.Test;
 
 public class DbUtilsTest {

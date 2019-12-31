@@ -20,11 +20,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
-import org.apache.commons.dbutils2.QueryRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

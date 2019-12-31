@@ -18,8 +18,6 @@ package org.apache.commons.dbutils2;
 
 import java.util.Iterator;
 
-import org.apache.commons.dbutils2.ResultSetIterator;
-
 /**
  * ResultSetIteratorTest
  */

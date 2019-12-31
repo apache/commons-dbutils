@@ -19,10 +19,10 @@ package org.apache.commons.dbutils2;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
+
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSetMetaData;
 
-import org.apache.commons.dbutils2.GenerousBeanProcessor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

@@ -19,16 +19,11 @@ package org.apache.commons.dbutils2;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
 import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
-import org.apache.commons.dbutils2.AsyncExecutor;
-import org.apache.commons.dbutils2.InsertExecutor;
-import org.apache.commons.dbutils2.QueryExecutor;
-import org.apache.commons.dbutils2.QueryRunner;
-import org.apache.commons.dbutils2.ResultSetHandler;
-import org.apache.commons.dbutils2.UpdateExecutor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.apache.commons.dbutils2.BaseTestCase;
 import org.apache.commons.dbutils2.ResultSetHandler;
-import org.apache.commons.dbutils2.handlers.MapListHandler;
 
 /**
  * MapListHandlerTest

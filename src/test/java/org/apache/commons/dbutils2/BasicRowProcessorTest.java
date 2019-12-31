@@ -24,9 +24,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.dbutils2.BasicRowProcessor;
-import org.apache.commons.dbutils2.RowProcessor;
-
 /**
  * Test the BasicRowProcessor class.
  */

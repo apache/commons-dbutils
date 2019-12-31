@@ -3,6 +3,7 @@ package org.apache.commons.dbutils2;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class BatchInsertExecutor extends BatchExecutor {
@@ -16,7 +17,7 @@ public class BatchInsertExecutor extends BatchExecutor {
      * @throws SQLException thrown if there is an error during execution.
      */
     BatchInsertExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
-        super(conn, sql, closeConnection);
+        super(conn, sql, closeConnection, Statement.RETURN_GENERATED_KEYS);
     }
 
     /**

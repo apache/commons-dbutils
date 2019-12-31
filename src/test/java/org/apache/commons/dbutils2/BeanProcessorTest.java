@@ -23,9 +23,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.dbutils2.BeanProcessor;
-import org.apache.commons.dbutils2.ProxyFactory;
-
 public class BeanProcessorTest extends BaseTestCase {
 
     private static final BeanProcessor beanProc = new BeanProcessor();

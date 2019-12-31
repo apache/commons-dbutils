@@ -18,13 +18,17 @@ package org.apache.commons.dbutils2;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -43,8 +47,8 @@ public class BatchInsertExecutorTest {
     @Before
     public void setup() throws SQLException {
         MockitoAnnotations.initMocks(this);
-        
-        when(conn.prepareStatement(any(String.class))).thenReturn(stmt);
+
+        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmt);
         when(stmt.getGeneratedKeys()).thenReturn(resultSet);
         when(handler.handle(any(ResultSet.class))).thenReturn(new Object());
     }

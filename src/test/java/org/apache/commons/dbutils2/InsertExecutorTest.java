@@ -18,16 +18,17 @@ package org.apache.commons.dbutils2;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import org.apache.commons.dbutils2.InsertExecutor;
-import org.apache.commons.dbutils2.ResultSetHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -41,6 +42,7 @@ public class InsertExecutorTest {
     @Mock private ResultSetHandler<Object> handler;
     @Mock private Connection conn;
     @Mock private PreparedStatement stmt;
+    @Mock private PreparedStatement stmtWithResults;
     @Mock private ResultSet resultSet;
     
     @Before
@@ -48,7 +50,8 @@ public class InsertExecutorTest {
         MockitoAnnotations.initMocks(this);
         
         when(conn.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(stmt.getGeneratedKeys()).thenReturn(resultSet);
+        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmtWithResults);
+        when(stmtWithResults.getGeneratedKeys()).thenReturn(resultSet);
         when(handler.handle(any(ResultSet.class))).thenReturn(new Object());
     }
     
@@ -65,7 +68,8 @@ public class InsertExecutorTest {
         assertNotNull(ret);
         verify(handler, times(1)).handle(resultSet);
         verify(conn, times(1)).close();
-        verify(stmt, times(1)).close();
+        verify(stmt, times(0)).close();
+        verify(stmtWithResults, times(1)).close();
     }
     
     @Test(expected=SQLException.class)

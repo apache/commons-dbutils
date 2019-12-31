@@ -146,7 +146,7 @@ public class BasicRowProcessor implements RowProcessor {
             if (null == columnName || 0 == columnName.length()) {
                 columnName = rsmd.getColumnName(i);
             }
-            result.put(columnName, rs.getObject(i));		
+            result.put(columnName, rs.getObject(i));
         }
 
         return result;

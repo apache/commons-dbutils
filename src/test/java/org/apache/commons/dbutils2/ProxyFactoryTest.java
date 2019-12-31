@@ -19,8 +19,6 @@ package org.apache.commons.dbutils2;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import org.apache.commons.dbutils2.ProxyFactory;
-
 /**
  * ProxyFactoryTest performs simple type checking on proxy objects returned
  * from a ProxyFactory.

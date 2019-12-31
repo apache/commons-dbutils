@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.apache.commons.dbutils2.BaseResultSetHandler;
 import org.junit.Test;
 
 public final class BaseResultSetHandlerTestCase extends BaseTestCase {

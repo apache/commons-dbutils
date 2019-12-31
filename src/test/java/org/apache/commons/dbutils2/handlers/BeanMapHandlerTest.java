@@ -16,7 +16,8 @@
  */
 package org.apache.commons.dbutils2.handlers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.sql.ResultSet;
@@ -25,7 +26,6 @@ import java.util.Map;
 
 import org.apache.commons.dbutils2.RowProcessor;
 import org.apache.commons.dbutils2.TestBean;
-import org.apache.commons.dbutils2.handlers.BeanMapHandler;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

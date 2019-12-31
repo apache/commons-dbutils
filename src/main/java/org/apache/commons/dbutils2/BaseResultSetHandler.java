@@ -78,7 +78,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      *
      * @return An Object initialized with <code>ResultSet</code> data
      * @throws SQLException if a database access error occurs
-     * @see {@link ResultSetHandler#handle(ResultSet)}
      */
     protected abstract T handle() throws SQLException;
 
@@ -321,7 +320,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the Reader.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getCharacterStream(int)
      */
@@ -379,7 +378,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * @param columnIndex the index of the column.
      * @param cal the Calendar.
-     * @return
+     * @return the Date.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getDate(int, java.util.Calendar)
      */
@@ -596,8 +595,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @param map
-     * @return
+     * @param map the map.
+     * @return the Object.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getObject(int, java.util.Map)
      */
@@ -607,7 +606,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the Object.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getObject(int)
      */
@@ -617,8 +616,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @param map
-     * @return
+     * @param map the map.
+     * @return the Object.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getObject(java.lang.String, java.util.Map)
      */
@@ -628,7 +627,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the Object.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getObject(java.lang.String)
      */
@@ -638,7 +637,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the Ref.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRef(int)
      */
@@ -648,7 +647,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the Ref.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRef(java.lang.String)
      */
@@ -657,7 +656,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the row.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRow()
      */
@@ -667,7 +666,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the RowId.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRowId(int)
      */
@@ -677,7 +676,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the RowId.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getRowId(java.lang.String)
      */
@@ -687,7 +686,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the SQLXML.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getSQLXML(int)
      */
@@ -697,7 +696,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the SQLXML.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getSQLXML(java.lang.String)
      */
@@ -707,7 +706,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the short.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getShort(int)
      */
@@ -717,7 +716,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the short.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getShort(java.lang.String)
      */
@@ -726,7 +725,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the Statement.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getStatement()
      */
@@ -736,7 +735,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the String.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getString(int)
      */
@@ -746,7 +745,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the String.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getString(java.lang.String)
      */
@@ -757,7 +756,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * @param columnIndex the index of the column.
      * @param cal the Calendar.
-     * @return
+     * @return the Time.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(int, java.util.Calendar)
      */
@@ -767,7 +766,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the Time.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(int)
      */
@@ -778,7 +777,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * @param columnLabel the column's label.
      * @param cal the Calendar.
-     * @return
+     * @return the Time.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(java.lang.String, java.util.Calendar)
      */
@@ -788,7 +787,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the Time.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTime(java.lang.String)
      */
@@ -799,7 +798,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * @param columnIndex the index of the column.
      * @param cal the Calendar.
-     * @return
+     * @return the Timestamp.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(int, java.util.Calendar)
      */
@@ -809,7 +808,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the Timestamp.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(int)
      */
@@ -820,7 +819,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * @param columnLabel the column's label.
      * @param cal the Calendar.
-     * @return
+     * @return the Timestamp.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(java.lang.String, java.util.Calendar)
      */
@@ -830,7 +829,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the Timestamp.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getTimestamp(java.lang.String)
      */
@@ -839,7 +838,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the type.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getType()
      */
@@ -849,7 +848,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnIndex the index of the column.
-     * @return
+     * @return the URL.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getURL(int)
      */
@@ -859,7 +858,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
 
     /**
      * @param columnLabel the column's label.
-     * @return
+     * @return the URL.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getURL(java.lang.String)
      */
@@ -868,7 +867,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return the SQLWarning.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#getWarnings()
      */
@@ -885,7 +884,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if it is after last.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#isAfterLast()
      */
@@ -894,7 +893,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if it is before first.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#isBeforeFirst()
      */
@@ -903,7 +902,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if closed.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#isClosed()
      */
@@ -912,7 +911,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if first.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#isFirst()
      */
@@ -921,7 +920,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if last.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#isLast()
      */
@@ -930,8 +929,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param iface
-     * @return
+     * @param iface the interface.
+     * @return true if it is a wrapper for the interface.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.Wrapper#isWrapperFor(java.lang.Class)
      */
@@ -940,7 +939,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if last.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#last()
      */
@@ -965,7 +964,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if there is a next.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#next()
      */
@@ -974,7 +973,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if there is a pervious.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#previous()
      */
@@ -991,8 +990,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param rows
-     * @return
+     * @param rows the rows.
+     * @return true if relative.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#relative(int)
      */
@@ -1001,7 +1000,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if row deleted.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#rowDeleted()
      */
@@ -1010,7 +1009,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if the row was inserted.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#rowInserted()
      */
@@ -1019,7 +1018,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if the row was updated.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#rowUpdated()
      */
@@ -1028,7 +1027,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param direction
+     * @param direction the direction to fetch.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#setFetchDirection(int)
      */
@@ -1037,7 +1036,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param rows
+     * @param rows the rows to fetch.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#setFetchSize(int)
      */
@@ -1046,8 +1045,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @param iface
-     * @return
+     * @param iface the interface.
+     * @return the unwrapped object.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.Wrapper#unwrap(java.lang.Class)
      */
@@ -1904,7 +1903,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     }
 
     /**
-     * @return
+     * @return true if it was null.
      * @throws SQLException thrown if there is an SQL error.
      * @see java.sql.ResultSet#wasNull()
      */
@@ -1912,6 +1911,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
         return rs.wasNull();
     }
 
+    /**
+     * @return the adapted ResultSet
+     */
     protected final ResultSet getAdaptedResultSet() {
         return rs;
     }

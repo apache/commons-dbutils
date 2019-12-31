@@ -16,16 +16,16 @@
  */
 package org.apache.commons.dbutils2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.apache.commons.dbutils2.BatchExecutor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -42,8 +42,8 @@ public class BatchExecutorTest {
     @Before
     public void setup() throws SQLException {
         MockitoAnnotations.initMocks(this);
-        
-        when(conn.prepareStatement(any(String.class))).thenReturn(stmt);
+
+        when(conn.prepareStatement(any(String.class), any(Integer.class))).thenReturn(stmt);
         when(stmt.executeBatch()).thenReturn(new int[] { 2, 3, 4 });
     }
     
@@ -53,8 +53,24 @@ public class BatchExecutorTest {
     
     @Test
     public void testGoodSQL() throws Exception {
-        createExecutor("insert into blah");
-        
+        createExecutor("insert into blah where a = :a and b = :b");
+
+        executor.bind("a", "a").bind("b", "b").addBatch();
+        int[] ret = executor.execute();
+
+        assertEquals(3, ret.length);
+        assertEquals(2, ret[0]);
+        assertEquals(3, ret[1]);
+        assertEquals(4, ret[2]);
+        verify(conn, times(1)).close();
+        verify(stmt, times(1)).close();
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNoBinds() throws Exception {
+        createExecutor("insert into blah where a = :a and b = :b");
+
+        // no bindings done
         executor.addBatch();
         int[] ret = executor.execute();
         
@@ -65,5 +81,36 @@ public class BatchExecutorTest {
         verify(conn, times(1)).close();
         verify(stmt, times(1)).close();
     }
-    
+
+    @Test(expected=SQLException.class)
+    public void testNoAddBatch() throws Exception {
+        createExecutor("insert into blah where a = :a and b = :b");
+
+        // never called addBatch
+        int[] ret = executor.execute();
+
+        assertEquals(3, ret.length);
+        assertEquals(2, ret[0]);
+        assertEquals(3, ret[1]);
+        assertEquals(4, ret[2]);
+        verify(conn, times(1)).close();
+        verify(stmt, times(1)).close();
+    }
+
+    @Test(expected=SQLException.class)
+    public void testNotAllBound() throws Exception {
+        createExecutor("insert into blah where a = :a and b = :b");
+
+        // bind only a
+        executor.bind("a", "a").addBatch();
+        int[] ret = executor.execute();
+
+        assertEquals(3, ret.length);
+        assertEquals(2, ret[0]);
+        assertEquals(3, ret[1]);
+        assertEquals(4, ret[2]);
+        verify(conn, times(1)).close();
+        verify(stmt, times(1)).close();
+    }
+
 }

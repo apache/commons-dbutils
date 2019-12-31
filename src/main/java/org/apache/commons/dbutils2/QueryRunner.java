@@ -16,9 +16,23 @@
  */
 package org.apache.commons.dbutils2;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.persistence.Entity;
 import javax.sql.DataSource;
+
+import org.apache.commons.beanutils.PropertyUtils;
+
+import org.apache.commons.dbutils2.handlers.BeanHandler;
+import org.apache.commons.dbutils2.handlers.BeanListHandler;
 
 /**
  * Executes SQL queries with pluggable strategies for handling
@@ -312,4 +326,263 @@ public class QueryRunner {
 
         return new InsertExecutor(conn, sql, closeConn);
     }
+
+    //
+    // Entity methods
+    //
+
+    /**
+     * Creates a new entity in the database by calling insert.
+     * @param entity the entity to insert.
+     * @throws SQLException if there is a problem inserting the entity.
+     */
+    public <T> void create(final Class<? extends T> entityClass, final T entity) throws SQLException {
+        internalEntityCreate(entityClass, entity, new HashSet<String>()).execute();
+    }
+
+    /*
+     * Internal method that returns the InsertExecutor making it easier to extend.
+     */
+    protected <T> InsertExecutor internalEntityCreate(final Class<? extends T> entityClass,
+                                                      final T entity,
+                                                      final Set<String> excludeColumns) throws SQLException {
+        final String tableName = EntityUtils.getTableName(entity.getClass());
+        final Map<String, String> columns = EntityUtils.getColumns(entityClass);
+
+        final StringBuilder sb = new StringBuilder("insert into ");
+
+        // create the SQL command
+        sb.append(tableName);
+        sb.append(" (");
+        sb.append(EntityUtils.joinColumnsWithComma(columns.keySet(), null));
+        sb.append(") values(");
+        sb.append(EntityUtils.joinColumnsWithComma(columns.keySet(), ":"));
+        sb.append(")");
+
+        // create the executor
+        final InsertExecutor exec = new InsertExecutor(this.prepareConnection(), sb.toString(), true);
+
+        for(String column:columns.keySet()) {
+            // don't bind the exclude columns
+            if(excludeColumns.contains(column)) {
+                continue;
+            }
+
+            try {
+                // bind all of the values
+                final Object value = PropertyUtils.getSimpleProperty(entity, columns.get(column));
+
+                if(value == null) {
+                    exec.bindNull(column);
+                } else {
+                    exec.bind(column, value);
+                }
+            } catch (final IllegalAccessException e) {
+                throw new SQLException(e);
+            } catch (final InvocationTargetException e) {
+                throw new SQLException(e);
+            } catch (final NoSuchMethodException e) {
+                throw new SQLException(e);
+            }
+        }
+
+        return exec;
+    }
+
+    /**
+     * Reads all of the entities of a given type.
+     * @param entity an entity marked with the {@link Entity} annotation.
+     * @return a list of the entities read .
+     * @throws SQLException If there are database or parameter errors.
+     */
+    public <T> List<T> read(final Class<T> entityClass) throws SQLException {
+        final Entity annotation = entityClass.getAnnotation(Entity.class);
+
+        if(annotation == null) {
+            throw new IllegalArgumentException(entityClass.getName() + " does not have the Entity annotation");
+        }
+
+        // get the table's name
+        final String tableName = EntityUtils.getTableName(entityClass);
+
+        final StringBuilder sb = new StringBuilder("select * from ");
+
+        sb.append(tableName);
+
+        // setup the QueryExecutor
+        final QueryExecutor exec = new QueryExecutor(prepareConnection(), sb.toString(), true);
+
+        // execute using the BeanHandler
+        return exec.execute(new BeanListHandler<T>(entityClass));
+    }
+
+    /**
+     * Reads a given entity based off the @Id columns.
+     * @param entityClass an entity marked with the {@link Entity} annotation.
+     * @param entity the entity to read.
+     * @return the entity read from the db.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    public <T> T read(final Class<T> entityClass, final T entity) throws SQLException {
+        final Entity annotation = entityClass.getAnnotation(Entity.class);
+        final Map<String, String> idColumns = EntityUtils.getIdColumns(entityClass);
+
+        if(annotation == null) {
+            throw new IllegalArgumentException(entityClass.getName() + " does not have the Entity annotation");
+        }
+
+        if(idColumns.isEmpty()) {
+            throw new SQLException("Cannot read " + entityClass.getName() + " because it does not have any @Id columns");
+        }
+
+        // get the table's name
+        final String tableName = EntityUtils.getTableName(entityClass);
+
+        final StringBuilder sb = new StringBuilder("select * from ");
+
+        sb.append(tableName);
+        sb.append(" where ");
+        sb.append(EntityUtils.joinColumnsEquals(idColumns.keySet(), " and "));
+
+        // setup the QueryExecutor
+        final QueryExecutor exec = new QueryExecutor(prepareConnection(), sb.toString(), true);
+
+        // bind all the id columns
+        bindColumnValues(exec, idColumns, entity, Collections.<String>emptySet());
+
+        // execute using the BeanHandler
+        return exec.execute(new BeanHandler<T>(entityClass));
+    }
+
+    /**
+     * Constructs an {@link UpdateEntityExecutor} used to update entities.
+     * @param entity an entity marked with the {@link Entity} annotation.
+     * @return a {@link UpdateEntityExecutor} used to update entities.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    public <T> int update(final Class<T> classType, final T entity) throws SQLException {
+        return update(classType, entity, Collections.<String>emptySet());
+    }
+
+    /**
+     * Constructs an {@link UpdateEntityExecutor} used to update entities that excludes columns during binding.
+     * @param entity an entity marked with the {@link Entity} annotation.
+     * @param excludeColumns a collection of columns to exclude.
+     * @return a {@link UpdateEntityExecutor} used to update entities.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    public <T> int update(final Class<T> entityClass, final T entity, final Collection<String> excludeColumns) throws SQLException {
+        final Map<String, String> updateColumns = EntityUtils.getColumns(entityClass, true);
+        final Map<String, String> idColumns = EntityUtils.getIdColumns(entityClass);
+        final Entity annotation = entityClass.getAnnotation(Entity.class);
+
+        if(annotation == null) {
+            throw new IllegalArgumentException(entityClass.getName() + " does not have the Entity annotation");
+        }
+
+        if(idColumns.isEmpty()) {
+            throw new SQLException("Cannot update " + entityClass.getName() + " because it does not have any @Id columns");
+        }
+
+        // get the table's name
+        final String tableName = EntityUtils.getTableName(entityClass);
+
+        final StringBuilder sb = new StringBuilder("update ");
+
+        // create the SQL command
+        sb.append(tableName);
+        sb.append(" set ");
+        sb.append(EntityUtils.joinColumnsEquals(updateColumns.keySet(), ", "));
+
+        sb.append(" where ");
+        sb.append(EntityUtils.joinColumnsEquals(idColumns.keySet(), " and "));
+
+        // setup the QueryExecutor
+        final UpdateExecutor exec = new UpdateExecutor(prepareConnection(), sb.toString(), true);
+
+        // bind all the update column values
+        bindColumnValues(exec, updateColumns, entity, excludeColumns);
+
+        // bind all the id columns
+        bindColumnValues(exec, idColumns, entity, Collections.<String>emptySet());
+
+        // execute using the BeanHandler
+        return exec.execute();
+    }
+
+    /**
+     * Constructs an {@link DeleteEntityExecutor} used to delete entities.
+     * @param entity an entity marked with the {@link Entity} annotation.
+     * @return a {@link DeleteEntityExecutor} used to delete entities.
+     * @throws SQLException If there are database or parameter errors.
+     */
+    public <T> int delete(final Class<T> entityClass, final T entity) throws SQLException {
+        final Map<String, String> idColumns = EntityUtils.getIdColumns(entityClass);
+        final Entity annotation = entityClass.getAnnotation(Entity.class);
+
+        if(annotation == null) {
+            throw new IllegalArgumentException(entityClass.getName() + " does not have the Entity annotation");
+        }
+
+        if(idColumns.isEmpty()) {
+            throw new SQLException("Cannot update " + entityClass.getName() + " because it does not have any @Id columns");
+        }
+
+        // get the table's name
+        final String tableName = EntityUtils.getTableName(entityClass);
+
+        final StringBuilder sb = new StringBuilder("delete from ");
+
+        sb.append(tableName);
+
+        sb.append(" where ");
+        sb.append(EntityUtils.joinColumnsEquals(idColumns.keySet(), " and "));
+
+        // setup the QueryExecutor
+        final UpdateExecutor exec = new UpdateExecutor(prepareConnection(), sb.toString(), true);
+
+        // bind all the id columns
+        bindColumnValues(exec, idColumns, entity, Collections.<String>emptySet());
+
+        // execute using the BeanHandler
+        return exec.execute();
+    }
+
+    /**
+     * Binds values to an executor.
+     * @param exec
+     * @param columns
+     * @param entity
+     * @param excludes
+     * @throws SQLException
+     */
+    private <T> void bindColumnValues(final AbstractExecutor<?> exec,
+                                      final Map<String, String> columns,
+                                      final T entity,
+                                      final Collection<String> excludes) throws SQLException {
+        for(String column:columns.keySet()) {
+            // skip anything in the exclude set
+            if(excludes.contains(column)) {
+                continue;
+            }
+
+            try {
+                // bind all of the values
+                final Object value = PropertyUtils.getSimpleProperty(entity, columns.get(column));
+
+                if(value == null) {
+                    exec.bindNull(column);
+                } else {
+                    exec.bind(column, value);
+                }
+            } catch (final IllegalAccessException e) {
+                throw new SQLException(e);
+            } catch (final InvocationTargetException e) {
+                throw new SQLException(e);
+            } catch (final NoSuchMethodException e) {
+                throw new SQLException(e);
+            }
+        }
+    }
+
 }

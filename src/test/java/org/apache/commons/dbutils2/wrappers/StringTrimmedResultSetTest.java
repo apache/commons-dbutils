@@ -22,8 +22,6 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils2.BaseTestCase;
 import org.apache.commons.dbutils2.MockResultSet;
 import org.apache.commons.dbutils2.ProxyFactory;
-import org.apache.commons.dbutils2.wrappers.SqlNullCheckedResultSet;
-import org.apache.commons.dbutils2.wrappers.StringTrimmedResultSet;
 
 /**
  * StringTrimmedResultSetTest

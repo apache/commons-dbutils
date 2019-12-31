@@ -26,8 +26,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.dbutils2.ProxyFactory;
-
 /**
  * MockResultSet dynamically implements the ResultSet interface.
  */
@@ -220,7 +218,7 @@ public class MockResultSet implements InvocationHandler {
     }
 
     /**
-     * @throws SQLException  
+     * @throws SQLException
      */
     protected ResultSetMetaData getMetaData() throws SQLException {
         return this.metaData;

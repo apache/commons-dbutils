@@ -20,7 +20,6 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils2.BaseTestCase;
 import org.apache.commons.dbutils2.ResultSetHandler;
-import org.apache.commons.dbutils2.handlers.ScalarHandler;
 
 public class ScalarHandlerTest extends BaseTestCase {
 

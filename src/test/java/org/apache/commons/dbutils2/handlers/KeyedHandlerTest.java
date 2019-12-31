@@ -22,7 +22,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.dbutils2.BaseTestCase;
 import org.apache.commons.dbutils2.ResultSetHandler;
-import org.apache.commons.dbutils2.handlers.KeyedHandler;
 
 public class KeyedHandlerTest extends BaseTestCase {
 

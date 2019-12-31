@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.apache.commons.dbutils2.BaseTestCase;
 import org.apache.commons.dbutils2.ResultSetHandler;
-import org.apache.commons.dbutils2.handlers.ColumnListHandler;
 
 /**
  * ColumnListHandlerTest

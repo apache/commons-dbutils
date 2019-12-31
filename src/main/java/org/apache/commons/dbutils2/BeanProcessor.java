@@ -248,13 +248,14 @@ public class BeanProcessor {
     private void callSetter(Object target, PropertyDescriptor prop, Object value)
             throws SQLException {
 
-        Method setter = prop.getWriteMethod();
+        final Method setter = prop.getWriteMethod();
 
         if (setter == null) {
             return;
         }
 
-        Class<?>[] params = setter.getParameterTypes();
+        final Class<?>[] params = setter.getParameterTypes();
+
         try {
             // convert types for some popular ones
             if (value instanceof java.util.Date) {
@@ -270,8 +271,18 @@ public class BeanProcessor {
                 }
             }
 
-            // Don't call setter if the value object isn't the right type
-            if (this.isCompatibleType(value, params[0])) {
+            // see if we can make it work with an enum
+
+            if(params[0].isEnum() && value != null) {
+                try {
+                    final Class cz = Class.forName(params[0].getName());
+                    setter.invoke(target, Enum.valueOf(cz, (String) value));
+                } catch(final ClassNotFoundException e) {
+                    throw new SQLException("Attempted to set an Enum, but class "
+                            + params[0].getName() + " was not found: " + e.getMessage());
+                }
+            } else if (this.isCompatibleType(value, params[0])) {
+                // Don't call setter if the value object isn't the right type
                 setter.invoke(target, new Object[]{value});
             } else {
               throw new SQLException(

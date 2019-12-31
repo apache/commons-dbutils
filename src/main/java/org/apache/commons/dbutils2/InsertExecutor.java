@@ -19,6 +19,7 @@ package org.apache.commons.dbutils2;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 /**
@@ -39,7 +40,7 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
      * @throws SQLException thrown if there is an error during execution.
      */
     InsertExecutor(final Connection conn, final String sql, final boolean closeConnection) throws SQLException {
-        super(conn, sql);
+        super(conn, sql, Statement.RETURN_GENERATED_KEYS);
         this.closeConn = closeConnection;
     }
 
@@ -99,7 +100,12 @@ public class InsertExecutor extends AbstractExecutor<InsertExecutor> {
 
         try {
             // execute the insert
-            return getStatement().executeUpdate();
+            int ret = getStatement().executeUpdate();
+
+            // get any generated keys, and just close the ResultSet
+            getStatement().getGeneratedKeys().close();
+
+            return ret;
         } catch (SQLException e) {
             this.rethrow(e);
         } finally {
