@@ -17,9 +17,9 @@
 package org.apache.commons.dbutils;
 
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -46,6 +46,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -57,7 +58,8 @@ public class QueryRunnerTest {
 
     @Mock DataSource dataSource;
     @Mock Connection conn;
-    @Mock PreparedStatement stmt;
+    @Mock PreparedStatement prepStmt;
+    @Mock Statement stmt;
     @Mock CallableStatement call;
     @Mock ParameterMetaData meta;
     @Mock ResultSet results;
@@ -68,14 +70,21 @@ public class QueryRunnerTest {
         MockitoAnnotations.initMocks(this);    // init the mocks
 
         when(dataSource.getConnection()).thenReturn(conn);
-        when(conn.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(stmt.getParameterMetaData()).thenReturn(meta);
+
+        when(conn.prepareStatement(any(String.class))).thenReturn(prepStmt);
+        when(prepStmt.getParameterMetaData()).thenReturn(meta);
+        when(prepStmt.getResultSet()).thenReturn(results);
+        when(prepStmt.executeQuery()).thenReturn(results);
+
+        when(conn.createStatement()).thenReturn(stmt);
         when(stmt.getResultSet()).thenReturn(results);
-        when(stmt.executeQuery()).thenReturn(results);
+        when(stmt.executeQuery(any(String.class))).thenReturn(results);
+
         when(conn.prepareCall(any(String.class))).thenReturn(call);
         when(call.getParameterMetaData()).thenReturn(meta);
         when(call.getResultSet()).thenReturn(results);
         when(call.getMoreResults()).thenReturn(false);
+
         when(results.next()).thenReturn(false);
 
          handler = new ArrayHandler();
@@ -90,9 +99,9 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch(conn, "select * from blah where ? = ?", params);
 
-        verify(stmt, times(2)).addBatch();
-        verify(stmt, times(1)).executeBatch();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(2)).addBatch();
+        verify(prepStmt, times(1)).executeBatch();
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.batch(Connection, String, Object[][]) does not close connections
     }
 
@@ -100,9 +109,9 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch("select * from blah where ? = ?", params);
 
-        verify(stmt, times(2)).addBatch();
-        verify(stmt, times(1)).executeBatch();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(2)).addBatch();
+        verify(prepStmt, times(1)).executeBatch();
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
     }
 
@@ -145,9 +154,9 @@ public class QueryRunnerTest {
         try {
             runner.batch(sql, params);
 
-            verify(stmt, times(2)).addBatch();
-            verify(stmt, times(1)).executeBatch();
-            verify(stmt, times(1)).close();    // make sure the statement is closed
+            verify(prepStmt, times(2)).addBatch();
+            verify(prepStmt, times(1)).executeBatch();
+            verify(prepStmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
         } catch(final SQLException e) {
             caught = true;
@@ -202,7 +211,7 @@ public class QueryRunnerTest {
     public void testAddBatchException() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        doThrow(new SQLException()).when(stmt).addBatch();
+        doThrow(new SQLException()).when(prepStmt).addBatch();
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -211,7 +220,7 @@ public class QueryRunnerTest {
     public void testExecuteBatchException() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        doThrow(new SQLException()).when(stmt).executeBatch();
+        doThrow(new SQLException()).when(prepStmt).executeBatch();
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -222,39 +231,43 @@ public class QueryRunnerTest {
     //
     private void callGoodQuery(final Connection conn) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        runner.query(conn, "select * from blah where ? = ?", handler, "unit", "test");
+        String sql = "select * from blah where ? = ?";
+        runner.query(conn, sql, handler, "unit", "test");
 
-        verify(stmt, times(1)).executeQuery();
+        verify(prepStmt, times(1)).executeQuery();
         verify(results, times(1)).close();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.query(Connection, String, ResultSetHandler<T>, Object...) does not close connections
 
         // call the other variation of query
         when(meta.getParameterCount()).thenReturn(0);
-        runner.query(conn, "select * from blah", handler);
+        sql = "select * from blah";
+        runner.query(conn, sql, handler);
 
-        verify(stmt, times(2)).executeQuery();
+        verify(stmt, times(1)).executeQuery(sql);
         verify(results, times(2)).close();
-        verify(stmt, times(2)).close();    // make sure we closed the statement
+        verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
 
     private void callGoodQuery() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        runner.query("select * from blah where ? = ?", handler, "unit", "test");
+        String sql = "select * from blah where ? = ?";
+        runner.query(sql, handler, "unit", "test");
 
-        verify(stmt, times(1)).executeQuery();
+        verify(prepStmt, times(1)).executeQuery();
         verify(results, times(1)).close();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
 
         // call the other variation of query
         when(meta.getParameterCount()).thenReturn(0);
-        runner.query("select * from blah", handler);
+        sql = "select * from blah";
+        runner.query(sql, handler);
 
-        verify(stmt, times(2)).executeQuery();
+        verify(stmt, times(1)).executeQuery(sql);
         verify(results, times(2)).close();
-        verify(stmt, times(2)).close();    // make sure we closed the statement
+        verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(2)).close();    // make sure we closed the connection
     }
 
@@ -282,12 +295,13 @@ public class QueryRunnerTest {
 
         try {
             when(meta.getParameterCount()).thenReturn(2);
-            runner.query("select * from blah where ? = ?", handler, params);
+            String sql = "select * from blah where ? = ?";
+            runner.query(sql, handler, params);
 
-            verify(stmt, never()).close();    // make sure the statement is still open
-            verify(stmt, times(1)).executeQuery();
+            verify(prepStmt, never()).close();    // make sure the statement is still open
+            verify(prepStmt, times(1)).executeQuery();
+            verify(prepStmt, times(1)).close();    // make sure we closed the statement
             verify(results, times(1)).close();
-            verify(stmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
         } catch(final SQLException e) {
             caught = true;
@@ -300,7 +314,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testNoParamsQuery() throws Exception {
-        callQueryWithException();
+        callGoodQuery();
     }
 
     @Test
@@ -337,7 +351,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteQueryException() throws Exception {
-        doThrow(new SQLException()).when(stmt).executeQuery();
+        doThrow(new SQLException()).when(prepStmt).executeQuery();
 
         callQueryWithException(handler, "unit", "test");
     }
@@ -350,49 +364,53 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         runner.update(conn, "update blah set ? = ?", "unit", "test");
 
-        verify(stmt, times(1)).executeUpdate();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(1)).executeUpdate();
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.update(Connection, String, Object...) does not close connections
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
-        runner.update(conn, "update blah set unit = test");
+        String sql = "update blah set unit = test";
+        runner.update(conn, sql);
 
-        verify(stmt, times(2)).executeUpdate();
-        verify(stmt, times(2)).close();    // make sure we closed the statement
+        verify(stmt, times(1)).executeUpdate(sql);
+        verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, see above
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
         runner.update(conn, "update blah set unit = ?", "test");
 
-        verify(stmt, times(3)).executeUpdate();
-        verify(stmt, times(3)).close();    // make sure we closed the statement
+        verify(prepStmt, times(2)).executeUpdate();
+        verify(prepStmt, times(2)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
 
     private void callGoodUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
-        runner.update("update blah set ? = ?", "unit", "test");
+        String sql = "update blah set ? = ?";
+        runner.update(sql, "unit", "test");
 
-        verify(stmt, times(1)).executeUpdate();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(1)).executeUpdate();
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
-        runner.update("update blah set unit = test");
+        sql = "update blah set unit = test";
+        runner.update(sql);
 
-        verify(stmt, times(2)).executeUpdate();
-        verify(stmt, times(2)).close();    // make sure we closed the statement
+        verify(stmt, times(1)).executeUpdate(sql);
+        verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(2)).close();    // make sure we closed the connection
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(1);
-        runner.update("update blah set unit = ?", "test");
+        sql = "update blah set unit = ?";
+        runner.update(sql, "test");
 
-        verify(stmt, times(3)).executeUpdate();
-        verify(stmt, times(3)).close();    // make sure we closed the statement
+        verify(prepStmt, times(2)).executeUpdate();
+        verify(prepStmt, times(2)).close();    // make sure we closed the statement
         verify(conn, times(3)).close();    // make sure we closed the connection
     }
 
@@ -418,15 +436,15 @@ public class QueryRunnerTest {
         results = mock(ResultSet.class);
 
         when(meta.getParameterCount()).thenReturn(2);
-        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmt);
-        when(stmt.getGeneratedKeys()).thenReturn(results);
+        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(prepStmt);
+        when(prepStmt.getGeneratedKeys()).thenReturn(results);
         when(results.next()).thenReturn(true).thenReturn(false);
         when(results.getObject(1)).thenReturn(1L);
 
         final Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<Long>(), "unit", "test");
 
-        verify(stmt, times(1)).executeUpdate();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(1)).executeUpdate();
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
 
         Assert.assertEquals(1L, generatedKey.longValue());
@@ -438,8 +456,8 @@ public class QueryRunnerTest {
         resultsMeta = mock(ResultSetMetaData.class);
 
         when(meta.getParameterCount()).thenReturn(2);
-        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(stmt);
-        when(stmt.getGeneratedKeys()).thenReturn(results);
+        when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(prepStmt);
+        when(prepStmt.getGeneratedKeys()).thenReturn(results);
         when(results.next()).thenReturn(true).thenReturn(true).thenReturn(false);
         when(results.getMetaData()).thenReturn(resultsMeta);
         when(resultsMeta.getColumnCount()).thenReturn(1);
@@ -466,9 +484,9 @@ public class QueryRunnerTest {
 
         final List<Object> generatedKeys = runner.insertBatch("INSERT INTO blah(col1, col2) VALUES(?,?)", handler, params);
 
-        verify(stmt, times(2)).addBatch();
-        verify(stmt, times(1)).executeBatch();
-        verify(stmt, times(1)).close();    // make sure we closed the statement
+        verify(prepStmt, times(2)).addBatch();
+        verify(prepStmt, times(1)).executeBatch();
+        verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
 
         Assert.assertEquals(2, generatedKeys.size());
@@ -480,10 +498,11 @@ public class QueryRunnerTest {
 
         try {
             when(meta.getParameterCount()).thenReturn(2);
-            runner.update("select * from blah where ? = ?", params);
+            String sql = "select * from blah where ? = ?";
+            runner.update(sql, params);
 
-            verify(stmt, times(1)).executeUpdate();
-            verify(stmt, times(1)).close();    // make sure we closed the statement
+            verify(prepStmt, times(1)).executeUpdate();
+            verify(prepStmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
         } catch(final SQLException e) {
             caught = true;
@@ -496,7 +515,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testNoParamsUpdate() throws Exception {
-        callUpdateWithException();
+        callGoodUpdate();
     }
 
     @Test
@@ -526,7 +545,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteUpdateException() throws Exception {
-        doThrow(new SQLException()).when(stmt).executeUpdate();
+        doThrow(new SQLException()).when(prepStmt).executeUpdate();
 
         callUpdateWithException("unit", "test");
     }
@@ -537,11 +556,11 @@ public class QueryRunnerTest {
         final QueryRunner queryRunner = new QueryRunner(stmtConfig);
         queryRunner.prepareStatement(conn, "select 1");
 
-        verify(stmt).setFetchDirection(eq(1));
-        verify(stmt).setFetchSize(eq(2));
-        verify(stmt).setMaxFieldSize(eq(3));
-        verify(stmt).setMaxRows(eq(4));
-        verify(stmt).setQueryTimeout(eq(5));
+        verify(prepStmt).setFetchDirection(eq(1));
+        verify(prepStmt).setFetchSize(eq(2));
+        verify(prepStmt).setMaxFieldSize(eq(3));
+        verify(prepStmt).setMaxRows(eq(4));
+        verify(prepStmt).setQueryTimeout(eq(5));
     }
 
     //
@@ -720,7 +739,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testNoParamsExecute() throws Exception {
-        callExecuteWithException();
+        callGoodExecute();
     }
 
     @Test
@@ -757,7 +776,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteException() throws Exception {
-        doThrow(new SQLException()).when(stmt).execute();
+        doThrow(new SQLException()).when(prepStmt).execute();
 
         callExecuteWithException(handler, "unit", "test");
     }
@@ -943,7 +962,7 @@ public class QueryRunnerTest {
         try {
             when(call.execute()).thenReturn(true);
             when(meta.getParameterCount()).thenReturn(2);
-            runner.query("{call my_proc(?, ?)}", handler, params);
+            runner.execute("{call my_proc(?, ?)}", handler, params);
 
         } catch(final SQLException e) {
             caught = true;
@@ -993,7 +1012,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteWithResultSetException() throws Exception {
-        doThrow(new SQLException()).when(stmt).execute();
+        doThrow(new SQLException()).when(prepStmt).execute();
 
         callExecuteWithResultSetWithException(handler, "unit", "test");
     }
@@ -1018,14 +1037,14 @@ public class QueryRunnerTest {
     public void testFillStatementWithBean() throws Exception {
         final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
-        runner.fillStatementWithBean(stmt, bean, "a", "b", "c");
+        runner.fillStatementWithBean(prepStmt, bean, "a", "b", "c");
     }
 
     @Test(expected=NullPointerException.class)
     public void testFillStatementWithBeanNullNames() throws Exception {
         final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
-        runner.fillStatementWithBean(stmt, bean, "a", "b", null);
+        runner.fillStatementWithBean(prepStmt, bean, "a", "b", null);
     }
 
     @Test(expected=SQLException.class)
