@@ -377,14 +377,20 @@ public class QueryRunner extends AbstractQueryRunner {
             throw new SQLException("Null ResultSetHandler");
         }
 
-        PreparedStatement stmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
         T result = null;
 
         try {
-            stmt = this.prepareStatement(conn, sql);
-            this.fillStatement(stmt, params);
-            rs = this.wrap(stmt.executeQuery());
+            if (params != null && params.length > 0) {
+                PreparedStatement ps = this.prepareStatement(conn, sql);
+                stmt = ps;
+                this.fillStatement(ps, params);
+                rs = this.wrap(ps.executeQuery());
+            } else {
+                stmt = conn.createStatement();
+                rs = this.wrap(stmt.executeQuery(sql));
+            }
             result = rsh.handle(rs);
 
         } catch (final SQLException e) {
@@ -516,13 +522,19 @@ public class QueryRunner extends AbstractQueryRunner {
             throw new SQLException("Null SQL statement");
         }
 
-        PreparedStatement stmt = null;
+        Statement stmt = null;
         int rows = 0;
 
         try {
-            stmt = this.prepareStatement(conn, sql);
-            this.fillStatement(stmt, params);
-            rows = stmt.executeUpdate();
+            if (params != null && params.length > 0) {
+                PreparedStatement ps = this.prepareStatement(conn, sql);
+                stmt = ps;
+                this.fillStatement(ps, params);
+                rows = ps.executeUpdate();
+            } else {
+                stmt = conn.createStatement();
+                rows = stmt.executeUpdate(sql);
+            }
 
         } catch (final SQLException e) {
             this.rethrow(e, sql, params);
@@ -634,13 +646,19 @@ public class QueryRunner extends AbstractQueryRunner {
             throw new SQLException("Null ResultSetHandler");
         }
 
-        PreparedStatement stmt = null;
+        Statement stmt = null;
         T generatedKeys = null;
 
         try {
-            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            this.fillStatement(stmt, params);
-            stmt.executeUpdate();
+            if (params != null && params.length > 0) {
+                PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                stmt = ps;
+                this.fillStatement(ps, params);
+                ps.executeUpdate();
+            } else {
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            }
             final ResultSet resultSet = stmt.getGeneratedKeys();
             generatedKeys = rsh.handle(resultSet);
         } catch (final SQLException e) {
