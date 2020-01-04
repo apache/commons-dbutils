@@ -51,7 +51,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="thecarlhall" type="fix">
         Always copy Date, Time, Timestamp on get and set in SqlNullCheckedResultSet.
       </action>
-      <action dev="thecarlhall" type="add" due-to="rewerma">
+      <action dev="thecarlhall" type="add" issue="PR/9" due-to="rewerma">
         Add @Column annotation to hint the field name instead of dissecting the get method name.
       </action>
       <action dev="ggregory" type="update" issue="DBUTILS-135" due-to="hdevalke">

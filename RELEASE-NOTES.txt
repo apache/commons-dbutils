@@ -1,32 +1,30 @@
 
               Apache Commons DbUtils
-                     Version 1.7
+                     Version 1.8
                     RELEASE NOTES
 
-The Apache Commons DbUtils team is pleased to announce the release of Apache Commons DbUtils 1.7
+The Apache Commons DbUtils team is pleased to announce the release of Apache Commons DbUtils 1.8
 
 The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.
 
-Bugfixes and separate column & property handlers using SPI
+New features and bug fixes.
 
 Changes in this version include:
 
 New features:
-o DBUTILS-121:  Add getWriteMethod to BeanProcessor to allow subclasses to influence which write method is used 
-o DBUTILS-50:  Support CallableStatement "out" parameters Thanks to Dan Fabulich. 
-o DBUTILS-124:  Implement column and property handlers using Java's service interfaces. 
+o PR/9:         Add @Column annotation to hint the field name instead of dissecting the get method name. Thanks to rewerma.
+o DBUTILS-136:  CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int). Thanks to Matthew Hall, Gary Gregory. 
 
 Fixed Bugs:
-o DBUTILS-82:  Change method contracts to allow extended class types when returning a bean populated from a query Thanks to Kenshi Toriumi. 
-o DBUTILS-89:  Add method in BeanProcessor to populate an existing bean Thanks to Adam Dyga. 
-o DBUTILS-70:  Add ability to configure statements used in QueryRunner Thanks to Michael Akerman. 
+o DBUTILS-131:  Speedup query calls without parameters; Use PreparedStatement only when parameters are present. Thanks to yairlenga. 
+o           Always copy Date, Time, Timestamp on get and set in SqlNullCheckedResultSet. 
+o DBUTILS-138:  org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler<T>, Object...) Exception in closing statement leave connections open. Thanks to Stefano Lissa, Gary Gregory. 
+o DBUTILS-139:  Update Java requirement from version 6 to 7. Thanks to Gary Gregory. 
 
 Changes:
-o DBUTILS-117:  Error handling possible getParameterMetaData() results
-        - allow for null return
-        - handle SQLFeatureNotSupportedException Thanks to Vadim Smirnov. 
-o DBUTILS-119:  Correct errors in BeanMapHandler Javadoc Thanks to Michael Akerman. 
-o PR/1:  Created some Unit Tests to increase code coverage. Thanks to Michael Hausegger. 
+o DBUTILS-135:  BeanProcessor is not thread safe since [DBUTILS-124]. Thanks to hdevalke. 
+o DBUTILS-137:  Inefficient allocation of Maps in org.apache.commons.dbutils.BasicRowProcessor.toMap(ResultSet). Thanks to Gary Gregory. 
+o           clirr, checkstyle, and spotbugs configured as part of default build. Thanks to thecarlhall. 
 
 
 For complete information on Apache Commons DbUtils, including instructions on how to submit bug reports,
