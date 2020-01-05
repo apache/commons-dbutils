@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.8-RC1</version>
+  <version>2.0-SNAPSHOT</version>
   <name>Apache Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
@@ -45,7 +45,7 @@
     <connection>scm:git:git://git.apache.org/commons-dbutils.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-dbutils.git</developerConnection>
     <url>https://gitbox.apache.org/repos/asf?p=commons-dbutils.git</url>
-    <tag>DBUTILS_1_8_RC1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
