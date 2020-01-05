@@ -25,7 +25,7 @@
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons:readme-md                          |
+ | 1) Re-generate using: mvn commons-build:readme-md                    |
  |                                                                      |
  | 2) Set the following properties in the component's pom:              |
  |    - commons.componentid (required, alphabetic, lower case)          |
@@ -43,8 +43,10 @@
 Apache Commons DbUtils
 ===================
 
-[![Build Status](https://travis-ci.org/apache/commons-dbutils.svg?branch=master)](https://travis-ci.org/apache/commons-dbutils)
+[![Build Status](https://travis-ci.org/apache/commons-dbutils.svg)](https://travis-ci.org/apache/commons-dbutils)
+[![Coverage Status](https://coveralls.io/repos/apache/commons-dbutils/badge.svg)](https://coveralls.io/r/apache/commons-dbutils)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/)
+[![Javadocs](https://javadoc.io/badge/commons-dbutils/commons-dbutils/1.8.svg)](https://javadoc.io/doc/commons-dbutils/commons-dbutils/1.8)
 
 The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.
 
@@ -52,7 +54,7 @@ Documentation
 -------------
 
 More information can be found on the [Apache Commons DbUtils homepage](https://commons.apache.org/proper/commons-dbutils).
-The [Javadoc](https://commons.apache.org/proper/commons-dbutils/javadocs/api-release) can be browsed.
+The [Javadoc](https://commons.apache.org/proper/commons-dbutils/apidocs) can be browsed.
 Questions related to the usage of Apache Commons DbUtils should be posted to the [user mailing list][ml].
 
 Where can I get the latest release?
@@ -65,7 +67,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.7</version>
+  <version>1.8</version>
 </dependency>
 ```
 
