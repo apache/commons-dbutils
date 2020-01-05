@@ -256,6 +256,7 @@
     <commons.bc.version>1.7</commons.bc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
+    <commons.release.isDistModule>true</commons.release.isDistModule>
     <commons.releaseManagerName>Carl Hall</commons.releaseManagerName>
     <commons.releaseManagerKey>1e5ab6d3cf8ebf5f</commons.releaseManagerKey>
   </properties>
