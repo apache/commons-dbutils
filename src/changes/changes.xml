@@ -45,6 +45,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.8" date="2020-01-10" description="New features and bug fixes.">
+      <action dev="thecarlhall" type="fix" issue="DBUTILS-143">
+        Methods in QueryRunner and AsyncQueryRunner only close connections if they create them.
+      </action>
       <action dev="thecarlhall" type="fix" issue="DBUTILS-131" due-to="yairlenga">
         Speedup query calls without parameters; Use PreparedStatement only when parameters are present.
       </action>

@@ -13,7 +13,8 @@ Changes in this version include:
 
 New features:
 o PR/9:         Add @Column annotation to hint the field name instead of dissecting the get method name. Thanks to rewerma.
-o DBUTILS-136:  CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int). Thanks to Matthew Hall, Gary Gregory. 
+o DBUTILS-143:  Only close connection if created in query runners. Thanks to thecarlhall.
+o DBUTILS-136:  CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int). Thanks to Matthew Hall, Gary Gregory.
 
 Fixed Bugs:
 o Always copy Date, Time, Timestamp on get and set in SqlNullCheckedResultSet.

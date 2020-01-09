@@ -146,9 +146,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since DbUtils 1.1
      */
     public int[] batch(final String sql, final Object[][] params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.batch(conn, true, sql, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.batch(conn, true, sql, params);
+        }
     }
 
     /**
@@ -167,16 +167,10 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (params == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
         }
 
@@ -195,9 +189,6 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return rows;
@@ -282,9 +273,9 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(final String sql, final Object param, final ResultSetHandler<T> rsh) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, param);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, true, sql, rsh, param);
+        }
     }
 
     /**
@@ -305,9 +296,9 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(final String sql, final Object[] params, final ResultSetHandler<T> rsh) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, true, sql, rsh, params);
+        }
     }
 
     /**
@@ -324,9 +315,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> T query(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, true, sql, rsh, params);
+        }
     }
 
     /**
@@ -342,9 +333,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> T query(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, (Object[]) null);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, true, sql, rsh, (Object[]) null);
+        }
     }
 
     /**
@@ -364,16 +355,10 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (rsh == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null ResultSetHandler");
         }
 
@@ -399,9 +384,6 @@ public class QueryRunner extends AbstractQueryRunner {
         } finally {
             closeQuietly(rs);
             closeQuietly(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return result;
@@ -459,9 +441,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int update(final String sql) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.update(conn, true, sql, (Object[]) null);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.update(conn, true, sql, (Object[]) null);
+        }
     }
 
     /**
@@ -477,9 +459,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int update(final String sql, final Object param) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.update(conn, true, sql, param);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.update(conn, true, sql, param);
+        }
     }
 
     /**
@@ -495,9 +477,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int update(final String sql, final Object... params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.update(conn, true, sql, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.update(conn, true, sql, params);
+        }
     }
 
     /**
@@ -516,9 +498,6 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
@@ -541,9 +520,6 @@ public class QueryRunner extends AbstractQueryRunner {
 
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return rows;
@@ -562,7 +538,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> T insert(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return insert(this.prepareConnection(), true, sql, rsh, (Object[]) null);
+        try (final Connection conn = this.prepareConnection()) {
+            return insert(conn, true, sql, rsh, (Object[]) null);
+        }
     }
 
     /**
@@ -580,7 +558,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> T insert(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return insert(this.prepareConnection(), true, sql, rsh, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return insert(conn, true, sql, rsh, params);
+        }
     }
 
     /**
@@ -633,16 +613,10 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (rsh == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null ResultSetHandler");
         }
 
@@ -665,9 +639,6 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, params);
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return generatedKeys;
@@ -688,7 +659,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> T insertBatch(final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
-        return insertBatch(this.prepareConnection(), true, sql, rsh, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return insertBatch(conn, true, sql, rsh, params);
+        }
     }
 
     /**
@@ -726,16 +699,10 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (params == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
         }
 
@@ -756,9 +723,6 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return generatedKeys;
@@ -810,9 +774,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int execute(final String sql, final Object... params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.execute(conn, true, sql, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.execute(conn, true, sql, params);
+        }
     }
 
     /**
@@ -863,9 +827,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> List<T> execute(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.execute(conn, true, sql, rsh, params);
+        try (final Connection conn = this.prepareConnection()) {
+            return this.execute(conn, true, sql, rsh, params);
+        }
     }
 
     /**
@@ -885,9 +849,6 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
@@ -906,9 +867,6 @@ public class QueryRunner extends AbstractQueryRunner {
 
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return rows;
@@ -932,16 +890,10 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (rsh == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null ResultSetHandler");
         }
 
@@ -972,9 +924,6 @@ public class QueryRunner extends AbstractQueryRunner {
 
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return results;

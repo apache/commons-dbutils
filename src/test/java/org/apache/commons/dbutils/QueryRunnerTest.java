@@ -46,7 +46,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -645,7 +644,7 @@ public class QueryRunnerTest {
 
         verify(call, times(1)).execute();
         verify(call, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(1)).close();    // make sure we do not close the connection
+        verify(conn, times(1)).close();    // make sure we closed the connection
 
         // call the other variation of query
         when(meta.getParameterCount()).thenReturn(0);
@@ -655,7 +654,7 @@ public class QueryRunnerTest {
 
         verify(call, times(2)).execute();
         verify(call, times(2)).close();    // make sure we closed the statement
-        verify(conn, times(2)).close();    // make sure we do not close the connection
+        verify(conn, times(2)).close();    // make sure we closed the connection
 
         // Test single OUT parameter
         when(meta.getParameterCount()).thenReturn(1);
@@ -669,7 +668,7 @@ public class QueryRunnerTest {
 
         verify(call, times(3)).execute();
         verify(call, times(3)).close();    // make sure we closed the statement
-        verify(conn, times(3)).close();    // make sure we do not close the connection
+        verify(conn, times(3)).close();    // make sure we closed the connection
 
         // Test OUT parameters with IN parameters
         when(meta.getParameterCount()).thenReturn(3);
@@ -682,7 +681,7 @@ public class QueryRunnerTest {
 
         verify(call, times(4)).execute();
         verify(call, times(4)).close();    // make sure we closed the statement
-        verify(conn, times(4)).close();    // make sure we do not close the connection
+        verify(conn, times(4)).close();    // make sure we closed the connection
 
         // Test INOUT parameters
         when(meta.getParameterCount()).thenReturn(3);
@@ -699,7 +698,7 @@ public class QueryRunnerTest {
 
         verify(call, times(5)).execute();
         verify(call, times(5)).close();    // make sure we closed the statement
-        verify(conn, times(5)).close();    // make sure we do not close the connection
+        verify(conn, times(5)).close();    // make sure we closed the connection
     }
 
     @Test
