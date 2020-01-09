@@ -211,7 +211,10 @@ public final class DbUtils {
             Constructor<Driver> driverConstructor = driverClass.getConstructor();
 
             // make Constructor accessible if it is private
-            boolean isConstructorAccessible = driverConstructor.isAccessible();
+            @SuppressWarnings("deprecation")
+            // TODO This is deprecated in Java9 and canAccess() should be used. Adding suppression for building on
+            //      later JDKs without a warning.
+            final boolean isConstructorAccessible = driverConstructor.isAccessible();
             if (!isConstructorAccessible) {
                 driverConstructor.setAccessible(true);
             }

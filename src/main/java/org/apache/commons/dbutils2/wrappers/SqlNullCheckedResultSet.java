@@ -458,10 +458,14 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      *
      * @param nullBytes the value
      */
-    public void setNullBytes(byte[] nullBytes) {
-        byte[] copy = new byte[nullBytes.length];
-        System.arraycopy(nullBytes, 0, copy, 0, nullBytes.length);
-        this.nullBytes = copy;
+    public void setNullBytes(final byte[] nullBytes) {
+        if (nullBytes != null) {
+            final byte[] copy = new byte[nullBytes.length];
+            System.arraycopy(nullBytes, 0, copy, 0, nullBytes.length);
+            this.nullBytes = copy;
+        } else {
+            this.nullBytes = null;
+        }
     }
 
     /**
@@ -580,8 +584,8 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      *
      * @param nullTime the value
      */
-    public void setNullTime(Time nullTime) {
-        this.nullTime = nullTime;
+    public void setNullTime(final Time nullTime) {
+        this.nullTime = nullTime != null ? new Time(nullTime.getTime()) : null;
     }
 
     /**
@@ -590,8 +594,13 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      *
      * @param nullTimestamp the value
      */
-    public void setNullTimestamp(Timestamp nullTimestamp) {
-        this.nullTimestamp = nullTimestamp != null ? new Timestamp(nullTimestamp.getTime()) : null;
+    public void setNullTimestamp(final Timestamp nullTimestamp) {
+        if (nullTimestamp != null) {
+            this.nullTimestamp = new Timestamp(nullTimestamp.getTime());
+            this.nullTimestamp.setNanos(nullTimestamp.getNanos());
+        } else {
+            this.nullTimestamp = null;
+        }
     }
 
     /**

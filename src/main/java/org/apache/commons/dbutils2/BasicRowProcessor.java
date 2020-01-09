@@ -125,32 +125,37 @@ public class BasicRowProcessor implements RowProcessor {
     }
 
     /**
-     * Convert a <code>ResultSet</code> row into a <code>Map</code>.  This
-     * implementation returns a <code>Map</code> with case insensitive column
-     * names as keys.  Calls to <code>map.get("COL")</code> and
-     * <code>map.get("col")</code> return the same value.
-     * 
-     * @see org.apache.commons.dbutils2.RowProcessor#toMap(java.sql.ResultSet)
+     * Convert a {@code ResultSet} row into a {@code Map}.
+     *
+     * <p>
+     * This implementation returns a {@code Map} with case insensitive column names as keys. Calls to
+     * {@code map.get("COL")} and {@code map.get("col")} return the same value. Furthermore this implementation
+     * will return an ordered map, that preserves the ordering of the columns in the ResultSet, so that iterating over
+     * the entry set of the returned map will return the first column of the ResultSet, then the second and so forth.
+     * </p>
+     *
      * @param rs ResultSet that supplies the map data
-     * @throws SQLException if a database access error occurs
      * @return the newly created Map
+     * @throws SQLException if a database access error occurs
+     * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
      */
     @Override
-    public Map<String, Object> toMap(ResultSet rs) throws SQLException {
-        Map<String, Object> result = new CaseInsensitiveHashMap();
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int cols = rsmd.getColumnCount();
+    public Map<String, Object> toMap(final ResultSet rs) throws SQLException {
+        final ResultSetMetaData rsmd = rs.getMetaData();
+        final int cols = rsmd.getColumnCount();
+        final Map<String, Object> result = createCaseInsensitiveHashMap(cols);
 
         for (int i = 1; i <= cols; i++) {
             String columnName = rsmd.getColumnLabel(i);
             if (null == columnName || 0 == columnName.length()) {
-                columnName = rsmd.getColumnName(i);
+              columnName = rsmd.getColumnName(i);
             }
             result.put(columnName, rs.getObject(i));
         }
 
         return result;
     }
+
 
     /**
      * A Map that converts all keys to lowercase Strings for case insensitive
@@ -161,13 +166,18 @@ public class BasicRowProcessor implements RowProcessor {
      * an internal mapping from lowercase keys to the real keys in order to
      * achieve the case insensitive lookup.
      *
-     * <p>Note: This implementation does not allow <tt>null</tt>
-     * for key, whereas {@link HashMap} does, because of the code:
+     * <p>Note: This implementation does not allow {@code null}
+     * for key, whereas {@link LinkedHashMap} does, because of the code:
      * <pre>
      * key.toString().toLowerCase()
      * </pre>
      */
-    private static class CaseInsensitiveHashMap extends HashMap<String, Object> {
+    private static final class CaseInsensitiveHashMap extends LinkedHashMap<String, Object> {
+
+        private CaseInsensitiveHashMap(final int initialCapacity) {
+            super(initialCapacity);
+        }
+
         /**
          * The internal mapping from lowercase keys to the real keys.
          *
@@ -182,7 +192,7 @@ public class BasicRowProcessor implements RowProcessor {
          * </ul>
          * </p>
          */
-        private final Map<String, String> lowerCaseMap = new HashMap<String, String>();
+        private final Map<String, String> lowerCaseMap = new HashMap<>();
 
         /**
          * Required for serialization support.
@@ -191,9 +201,10 @@ public class BasicRowProcessor implements RowProcessor {
          */
         private static final long serialVersionUID = -2848100435296897392L;
 
+        /** {@inheritDoc} */
         @Override
-        public boolean containsKey(Object key) {
-            Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
+        public boolean containsKey(final Object key) {
+            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.containsKey(realKey);
             // Possible optimisation here:
             // Since the lowerCaseMap contains a mapping for all the keys,
@@ -201,14 +212,16 @@ public class BasicRowProcessor implements RowProcessor {
             // return lowerCaseMap.containsKey(key.toString().toLowerCase());
         }
 
+        /** {@inheritDoc} */
         @Override
-        public Object get(Object key) {
-            Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
+        public Object get(final Object key) {
+            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.get(realKey);
         }
 
+        /** {@inheritDoc} */
         @Override
-        public Object put(String key, Object value) {
+        public Object put(final String key, final Object value) {
             /*
              * In order to keep the map and lowerCaseMap synchronized,
              * we have to remove the old mapping before putting the
@@ -216,24 +229,26 @@ public class BasicRowProcessor implements RowProcessor {
              * (That's why we call super.remove(oldKey) and not just
              * super.put(key, value))
              */
-            Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ENGLISH), key);
-            Object oldValue = super.remove(oldKey);
+            final Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ENGLISH), key);
+            final Object oldValue = super.remove(oldKey);
             super.put(key, value);
             return oldValue;
         }
 
+        /** {@inheritDoc} */
         @Override
-        public void putAll(Map<? extends String, ?> m) {
-            for (Map.Entry<? extends String, ?> entry : m.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
+        public void putAll(final Map<? extends String, ?> m) {
+            for (final Map.Entry<? extends String, ?> entry : m.entrySet()) {
+                final String key = entry.getKey();
+                final Object value = entry.getValue();
                 this.put(key, value);
             }
         }
 
+        /** {@inheritDoc} */
         @Override
-        public Object remove(Object key) {
-            Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));
+        public Object remove(final Object key) {
+            final Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));
             return super.remove(realKey);
         }
     }

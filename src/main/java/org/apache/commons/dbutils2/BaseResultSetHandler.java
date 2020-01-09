@@ -58,6 +58,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     private ResultSet rs;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final T handle(ResultSet rs) throws SQLException {
         if (this.rs != null) {
@@ -78,6 +81,7 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      *
      * @return An Object initialized with <code>ResultSet</code> data
      * @throws SQLException if a database access error occurs
+     * @see ResultSetHandler#handle(ResultSet)
      */
     protected abstract T handle() throws SQLException;
 
