@@ -44,7 +44,7 @@ Apache Commons DbUtils
 ===================
 
 [![Build Status](https://travis-ci.org/apache/commons-dbutils.svg)](https://travis-ci.org/apache/commons-dbutils)
-[![Coverage Status](https://coveralls.io/repos/apache/commons-dbutils/badge.svg)](https://coveralls.io/r/apache/commons-dbutils)
+[![Coverage Status](https://coveralls.io/repos/github/apache/commons-dbutils/badge.svg?branch=master)](https://coveralls.io/github/apache/commons-dbutils?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/)
 [![Javadocs](https://javadoc.io/badge/commons-dbutils/commons-dbutils/1.8.svg)](https://javadoc.io/doc/commons-dbutils/commons-dbutils/1.8)
 
