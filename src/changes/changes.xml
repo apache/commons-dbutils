@@ -72,6 +72,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action due-to="thecarlhall" type="update">
         clirr, checkstyle, and spotbugs configured as part of default build.
       </action>
+      <action dev="ggregory" due-to="Amey Jadiye" type="fix">
+        Correction of coverage badge #10.
+      </action>
     </release>
     
     <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">
