@@ -40,14 +40,14 @@ public class MapListHandlerTest extends BaseTestCase {
         Map<String,Object> row = null;
         assertTrue(iter.hasNext());
         row = iter.next();
-        assertEquals(COLS, row.keySet().size());
+        assertEquals(COLS, row.size());
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));
         assertEquals("THREE", row.get("Three"));
 
         assertTrue(iter.hasNext());
         row = iter.next();
-        assertEquals(COLS, row.keySet().size());
+        assertEquals(COLS, row.size());
 
         assertEquals("4", row.get("one"));
         assertEquals("5", row.get("TWO"));

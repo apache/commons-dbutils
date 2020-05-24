@@ -122,14 +122,14 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         assertTrue(this.rs.next());
         Map<String, Object> m = processor.toMap(this.rs);
-        assertEquals(COLS, m.keySet().size());
+        assertEquals(COLS, m.size());
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));
         assertEquals("THREE", m.get("Three"));
 
         assertTrue(this.rs.next());
         m = processor.toMap(this.rs);
-        assertEquals(COLS, m.keySet().size());
+        assertEquals(COLS, m.size());
 
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));

@@ -32,7 +32,7 @@ public class MapHandlerTest extends BaseTestCase {
         final Map<String,Object> results = h.handle(this.rs);
 
         assertNotNull(results);
-        assertEquals(COLS, results.keySet().size());
+        assertEquals(COLS, results.size());
         assertEquals("1", results.get("ONE"));
         assertEquals("2", results.get("two"));
         assertEquals("THREE", results.get("Three"));

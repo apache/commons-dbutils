@@ -42,7 +42,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             row = entry.getValue();
             assertNotNull(row);
             assertTrue(row.isEmpty());
-            assertEquals(0, row.keySet().size());
+            assertEquals(0, row.size());
         }
     }
 
@@ -61,7 +61,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
-            assertEquals(COLS, row.keySet().size());
+            assertEquals(COLS, row.size());
         }
         row = results.get("1");
         assertEquals("1", row.get("one"));
@@ -83,7 +83,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
-            assertEquals(COLS, row.keySet().size());
+            assertEquals(COLS, row.size());
         }
         row = results.get("5");
         assertEquals("4", row.get("one"));
@@ -105,7 +105,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
-            assertEquals(COLS, row.keySet().size());
+            assertEquals(COLS, row.size());
         }
         row = results.get(Integer.valueOf(3));
         assertEquals("4", row.get("one"));
