@@ -243,7 +243,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
 
     <dbutils.spotbugs.version>4.0.4</dbutils.spotbugs.version>
-    <dbutils.checkstyle.version>8.28</dbutils.checkstyle.version>
+    <dbutils.checkstyle.version>8.29</dbutils.checkstyle.version>
 
     <!-- generate report even if there are binary incompatible changes -->
     <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
