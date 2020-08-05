@@ -27,4 +27,4 @@ jdk:
   - openjdk-ea
 
 after_success:
-  - mvn -B clean test jacoco:report coveralls:report -Ptravis-jacoco
+  - mvn -V -B clean test jacoco:report coveralls:report -Ptravis-jacoco --no-transfer-progress
