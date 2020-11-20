@@ -45,14 +45,12 @@ public class MockResultSetMetaData implements InvocationHandler {
     }
 
     public MockResultSetMetaData(final String[] columnNames) {
-        super();
         this.columnNames = columnNames;
         this.columnLabels = new String[columnNames.length];
 
     }
 
     public MockResultSetMetaData(final String[] columnNames, final String[] columnLabels) {
-        super();
         this.columnNames = columnNames;
         this.columnLabels = columnLabels;
 

@@ -53,7 +53,6 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      * to use when converting rows into Maps.
      */
     public MapHandler(final RowProcessor convert) {
-        super();
         this.convert = convert;
     }
 

@@ -38,7 +38,6 @@ public class QueryRunner extends AbstractQueryRunner {
      * Constructor for QueryRunner.
      */
     public QueryRunner() {
-        super();
     }
 
     /**

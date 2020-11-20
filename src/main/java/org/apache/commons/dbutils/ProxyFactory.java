@@ -54,7 +54,6 @@ public class ProxyFactory {
      * Protected constructor for ProxyFactory subclasses to use.
      */
     protected ProxyFactory() {
-        super();
     }
 
     /**

@@ -76,7 +76,6 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * {@code ResultSet}.
      */
     private ColumnListHandler(final int columnIndex, final String columnName) {
-        super();
         this.columnIndex = columnIndex;
         this.columnName = columnName;
     }

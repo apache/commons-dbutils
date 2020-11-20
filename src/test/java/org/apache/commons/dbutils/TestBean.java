@@ -70,7 +70,6 @@ public class TestBean {
      * Constructor for TestBean.
      */
     public TestBean() {
-        super();
     }
 
     public String getOne() {

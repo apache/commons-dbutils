@@ -75,7 +75,6 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * @param rs ResultSet to wrap
      */
     public StringTrimmedResultSet(final ResultSet rs) {
-        super();
         this.rs = rs;
     }
 

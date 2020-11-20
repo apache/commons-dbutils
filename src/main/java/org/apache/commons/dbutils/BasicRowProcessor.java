@@ -83,7 +83,6 @@ public class BasicRowProcessor implements RowProcessor {
      * @since DbUtils 1.1
      */
     public BasicRowProcessor(final BeanProcessor convert) {
-        super();
         this.convert = convert;
     }
 

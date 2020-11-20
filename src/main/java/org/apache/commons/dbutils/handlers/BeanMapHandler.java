@@ -148,7 +148,6 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
      */
     private BeanMapHandler(final Class<V> type, final RowProcessor convert,
             final int columnIndex, final String columnName) {
-        super();
         this.type = type;
         this.convert = convert;
         this.columnIndex = columnIndex;

@@ -52,7 +52,6 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
      * to use when converting rows into Maps.
      */
     public MapListHandler(final RowProcessor convert) {
-        super();
         this.convert = convert;
     }
 

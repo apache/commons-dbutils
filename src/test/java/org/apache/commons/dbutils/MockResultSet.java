@@ -60,7 +60,6 @@ public class MockResultSet implements InvocationHandler {
      * @param rows A null value indicates an empty {@code ResultSet}.
      */
     public MockResultSet(final ResultSetMetaData metaData, final Object[][] rows) {
-        super();
         this.metaData = metaData;
         if (rows == null) {
             final List<Object[]> empty = Collections.emptyList();

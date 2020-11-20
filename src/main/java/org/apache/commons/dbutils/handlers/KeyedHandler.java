@@ -117,7 +117,6 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      */
     private KeyedHandler(final RowProcessor convert, final int columnIndex,
             final String columnName) {
-        super();
         this.convert = convert;
         this.columnIndex = columnIndex;
         this.columnName = columnName;

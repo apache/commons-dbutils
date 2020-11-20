@@ -111,7 +111,6 @@ public class BeanProcessor {
      * @since 1.5
      */
     public BeanProcessor(final Map<String, String> columnToPropertyOverrides) {
-        super();
         if (columnToPropertyOverrides == null) {
             throw new IllegalArgumentException("columnToPropertyOverrides map cannot be null");
         }

@@ -51,7 +51,6 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
      * to use when converting rows into Object[]s.
      */
     public ArrayListHandler(final RowProcessor convert) {
-        super();
         this.convert = convert;
     }
 

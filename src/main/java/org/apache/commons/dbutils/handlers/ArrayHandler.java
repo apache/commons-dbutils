@@ -65,7 +65,6 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
      * to use when converting rows into arrays.
      */
     public ArrayHandler(final RowProcessor convert) {
-        super();
         this.convert = convert;
     }
 

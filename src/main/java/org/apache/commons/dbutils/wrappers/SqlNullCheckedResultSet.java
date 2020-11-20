@@ -147,7 +147,6 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * @param rs ResultSet to wrap
      */
     public SqlNullCheckedResultSet(final ResultSet rs) {
-        super();
         this.rs = rs;
     }
 
