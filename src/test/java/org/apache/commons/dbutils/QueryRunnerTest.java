@@ -295,7 +295,7 @@ public class QueryRunnerTest {
 
         try {
             when(meta.getParameterCount()).thenReturn(2);
-            String sql = "select * from blah where ? = ?";
+            final String sql = "select * from blah where ? = ?";
             runner.query(sql, handler, params);
 
             verify(prepStmt, never()).close();    // make sure the statement is still open
@@ -370,7 +370,7 @@ public class QueryRunnerTest {
 
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
-        String sql = "update blah set unit = test";
+        final String sql = "update blah set unit = test";
         runner.update(conn, sql);
 
         verify(stmt, times(1)).executeUpdate(sql);
@@ -498,7 +498,7 @@ public class QueryRunnerTest {
 
         try {
             when(meta.getParameterCount()).thenReturn(2);
-            String sql = "select * from blah where ? = ?";
+            final String sql = "select * from blah where ? = ?";
             runner.update(sql, params);
 
             verify(prepStmt, times(1)).executeUpdate();

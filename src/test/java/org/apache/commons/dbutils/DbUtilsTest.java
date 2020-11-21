@@ -312,11 +312,11 @@ public class DbUtilsTest {
             proxy.jdbcCompliant();
             verify(mockedDriver).jdbcCompliant();
 
-            String url = "testUrl";
+            final String url = "testUrl";
             proxy.acceptsURL(url);
             verify(mockedDriver).acceptsURL(url);
 
-            Properties props = new Properties();
+            final Properties props = new Properties();
             props.setProperty("test", "true");
             proxy.connect(url, props);
             verify(mockedDriver).connect(url, props);

@@ -84,7 +84,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     static {
         final Method[] methods = SqlNullCheckedResultSet.class.getMethods();
-        for (Method method : methods) {
+        for (final Method method : methods) {
             final String methodName = method.getName();
 
             if (methodName.startsWith(GET_NULL_PREFIX)) {
@@ -356,7 +356,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
             return null;
         }
 
-        Timestamp ts = new Timestamp(this.nullTimestamp.getTime());
+        final Timestamp ts = new Timestamp(this.nullTimestamp.getTime());
         ts.setNanos(this.nullTimestamp.getNanos());
         return ts;
     }

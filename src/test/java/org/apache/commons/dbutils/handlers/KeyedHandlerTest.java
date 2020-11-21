@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 public class KeyedHandlerTest extends BaseTestCase {
 
     public void testInjectedRowProcess() throws Exception {
-        RowProcessor mockProc = mock(RowProcessor.class);
+        final RowProcessor mockProc = mock(RowProcessor.class);
         final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(mockProc);
         final Map<String,Map<String,Object>> results = h.handle(this.rs);
 

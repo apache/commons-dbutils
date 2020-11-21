@@ -831,8 +831,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     public void testWrapResultSet() throws SQLException {
-        ResultSet wrappedRs = mock(ResultSet.class);
-        ResultSet rs = SqlNullCheckedResultSet.wrap(wrappedRs);
+        final ResultSet wrappedRs = mock(ResultSet.class);
+        final ResultSet rs = SqlNullCheckedResultSet.wrap(wrappedRs);
         rs.beforeFirst();
         verify(wrappedRs).beforeFirst();
         rs.next();

@@ -184,7 +184,7 @@ public class QueryRunner extends AbstractQueryRunner {
         try {
             stmt = this.prepareStatement(conn, sql);
 
-            for (Object[] param : params) {
+            for (final Object[] param : params) {
                 this.fillStatement(stmt, param);
                 stmt.addBatch();
             }
@@ -382,7 +382,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
         try {
             if (params != null && params.length > 0) {
-                PreparedStatement ps = this.prepareStatement(conn, sql);
+                final PreparedStatement ps = this.prepareStatement(conn, sql);
                 stmt = ps;
                 this.fillStatement(ps, params);
                 rs = this.wrap(ps.executeQuery());
@@ -526,7 +526,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
         try {
             if (params != null && params.length > 0) {
-                PreparedStatement ps = this.prepareStatement(conn, sql);
+                final PreparedStatement ps = this.prepareStatement(conn, sql);
                 stmt = ps;
                 this.fillStatement(ps, params);
                 rows = ps.executeUpdate();
@@ -650,7 +650,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
         try {
             if (params != null && params.length > 0) {
-                PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                final PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stmt = ps;
                 this.fillStatement(ps, params);
                 ps.executeUpdate();
@@ -743,7 +743,7 @@ public class QueryRunner extends AbstractQueryRunner {
         try {
             stmt = this.prepareStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
 
-            for (Object[] param : params) {
+            for (final Object[] param : params) {
                 this.fillStatement(stmt, param);
                 stmt.addBatch();
             }
