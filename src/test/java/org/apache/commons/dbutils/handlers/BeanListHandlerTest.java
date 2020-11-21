@@ -123,14 +123,14 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertFalse(iter.hasNext());
     }
 
-    public static interface SubTestBeanInterface {
-        public String getOne();
+    public interface SubTestBeanInterface {
+        String getOne();
 
-        public TestBean.Ordinal getThree();
+        TestBean.Ordinal getThree();
 
-        public String getTwo();
+        String getTwo();
 
-        public String getDoNotSet();
+        String getDoNotSet();
     }
 
     public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
