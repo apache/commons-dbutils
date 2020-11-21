@@ -37,9 +37,8 @@ public class MapListHandlerTest extends BaseTestCase {
         assertEquals(ROWS, results.size());
 
         final Iterator<Map<String,Object>> iter = results.iterator();
-        Map<String,Object> row = null;
         assertTrue(iter.hasNext());
-        row = iter.next();
+        Map<String,Object> row = iter.next();
         assertEquals(COLS, row.size());
         assertEquals("1", row.get("one"));
         assertEquals("2", row.get("TWO"));

@@ -30,9 +30,8 @@ public class BeanProcessorTest extends BaseTestCase {
     private static final BeanProcessor beanProc = new BeanProcessor();
 
     public void testProcessWithToBean() throws SQLException {
-        TestBean b = null;
         assertTrue(this.rs.next());
-        b = beanProc.toBean(this.rs, TestBean.class);
+        TestBean b = beanProc.toBean(this.rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
         assertEquals(b.getThree(), TestBean.Ordinal.THREE);
 

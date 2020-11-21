@@ -33,9 +33,8 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
         final Iterator<Object[]> iter = new ResultSetIterator(this.rs);
 
-        Object[] row = null;
         assertTrue(iter.hasNext());
-        row = iter.next();
+        Object[] row = iter.next();
         assertEquals(COLS, row.length);
         assertEquals("1", row[0]);
         assertEquals("2", row[1]);

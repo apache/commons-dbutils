@@ -37,7 +37,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertEquals(ROWS, results.size());
 
         final Iterator<TestBean> iter = results.iterator();
-        TestBean row = null;
+        TestBean row;
         assertTrue(iter.hasNext());
         row = iter.next();
         assertEquals("1", row.getOne());
@@ -72,9 +72,8 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertEquals(ROWS, results.size());
 
         final Iterator<TestBean> iter = results.iterator();
-        TestBean row = null;
         assertTrue(iter.hasNext());
-        row = iter.next();
+        TestBean row = iter.next();
         assertSame(SubTestBean.class, row.getClass());
 
         assertEquals("1", row.getOne());
@@ -102,7 +101,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertEquals(ROWS, results.size());
 
         final Iterator<SubTestBeanInterface> iter = results.iterator();
-        SubTestBeanInterface row = null;
+        SubTestBeanInterface row;
         assertTrue(iter.hasNext());
         row = iter.next();
         assertSame(SubTestBean.class, row.getClass());

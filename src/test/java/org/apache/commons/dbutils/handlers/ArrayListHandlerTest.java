@@ -36,9 +36,8 @@ public class ArrayListHandlerTest extends BaseTestCase {
         assertEquals(ROWS, results.size());
 
         final Iterator<Object[]> iter = results.iterator();
-        Object[] row = null;
         assertTrue(iter.hasNext());
-        row = iter.next();
+        Object[] row = iter.next();
         assertEquals(COLS, row.length);
         assertEquals("1", row[0]);
         assertEquals("2", row[1]);

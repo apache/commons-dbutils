@@ -41,7 +41,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToArray() throws SQLException {
 
-        Object[] a = null;
+        Object[] a;
         assertTrue(this.rs.next());
         a = processor.toArray(this.rs);
         assertEquals(COLS, a.length);
@@ -62,9 +62,8 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToBean() throws SQLException, ParseException {
 
-        TestBean row = null;
         assertTrue(this.rs.next());
-        row = processor.toBean(this.rs, TestBean.class);
+        TestBean row = processor.toBean(this.rs, TestBean.class);
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
         assertEquals(TestBean.Ordinal.THREE, row.getThree());
