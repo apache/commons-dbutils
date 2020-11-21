@@ -99,6 +99,12 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump actions/setup-java from v1.4.0 to v1.4.3 #40.
       </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump checkstyle from 8.35 to 8.37 #47.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump mockito-core from 3.4.6 to 3.6.0 #46.
+      </action>
     </release>
     
     <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">
