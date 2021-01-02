@@ -245,11 +245,7 @@
     <dbutils.spotbugs.version>4.1.4</dbutils.spotbugs.version>
     <commons.checkstyle-plugin.version>3.1.1</commons.checkstyle-plugin.version>
     <dbutils.checkstyle.version>8.37</dbutils.checkstyle.version>
-
-    <!-- generate report even if there are binary incompatible changes -->
-    <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
     <commons.japicmp.version>0.15.1</commons.japicmp.version>
-
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
     <commons.release.version>1.8</commons.release.version>
@@ -262,7 +258,7 @@
   </properties>
 
   <build>
-    <defaultGoal>clean verify apache-rat:check clirr:check checkstyle:check spotbugs:check javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean install apache-rat:check japicmp:cmp checkstyle:check spotbugs:check javadoc:javadoc</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
