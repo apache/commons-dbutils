@@ -102,8 +102,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump checkstyle from 8.35 to 8.37 #47.
       </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump mockito-core from 3.4.6 to 3.6.0 #46.
+      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
+        Bump mockito-core from 3.4.6 to 3.6.28 #46.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update commons.japicmp.version 0.14.3 -> 0.15.1.
