@@ -220,9 +220,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
         if (this.nullBytes == null) {
             return null;
         }
-        final byte[] copy = new byte[this.nullBytes.length];
-        System.arraycopy(this.nullBytes, 0, copy, 0, this.nullBytes.length);
-        return copy;
+        return this.nullBytes.clone();
     }
 
     /**
@@ -466,9 +464,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      */
     public void setNullBytes(final byte[] nullBytes) {
         if (nullBytes != null) {
-            final byte[] copy = new byte[nullBytes.length];
-            System.arraycopy(nullBytes, 0, copy, 0, nullBytes.length);
-            this.nullBytes = copy;
+            this.nullBytes = nullBytes.clone();
         } else {
             this.nullBytes = null;
         }
