@@ -315,15 +315,7 @@ public class BeanProcessor {
                   // value cannot be null here because isCompatibleType allows null
             }
 
-        } catch (final IllegalArgumentException e) {
-            throw new SQLException(
-                "Cannot set " + prop.getName() + ": " + e.getMessage());
-
-        } catch (final IllegalAccessException e) {
-            throw new SQLException(
-                "Cannot set " + prop.getName() + ": " + e.getMessage());
-
-        } catch (final InvocationTargetException e) {
+        } catch (final IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
             throw new SQLException(
                 "Cannot set " + prop.getName() + ": " + e.getMessage());
         }
@@ -370,10 +362,7 @@ public class BeanProcessor {
             if (targetType == primitiveValueType) {
                 return true;
             }
-        } catch (final NoSuchFieldException e) {
-            // lacking the TYPE field is a good sign that we're not working with a primitive wrapper.
-            // we can't match for compatibility
-        } catch (final IllegalAccessException e) {
+        } catch (final NoSuchFieldException | IllegalAccessException e) {
             // an inaccessible TYPE field is a good sign that we're not working with a primitive wrapper.
             // nothing to do.  we can't match for compatibility
         }
@@ -408,9 +397,9 @@ public class BeanProcessor {
         try {
             return c.getDeclaredConstructor().newInstance();
 
-        } catch (final IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
-            throw new SQLException(
-                "Cannot create " + c.getName() + ": " + e.getMessage());
+        } catch (final IllegalAccessException | InstantiationException | InvocationTargetException |
+            NoSuchMethodException e) {
+            throw new SQLException("Cannot create " + c.getName() + ": " + e.getMessage());
         }
     }
 

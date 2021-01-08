@@ -362,13 +362,10 @@ public abstract class AbstractQueryRunner {
             }
             try {
                 value = method.invoke(bean);
-            } catch (final InvocationTargetException e) {
-                throw new RuntimeException("Couldn't invoke method: " + method,
-                        e);
             } catch (final IllegalArgumentException e) {
                 throw new RuntimeException(
                         "Couldn't invoke method with 0 arguments: " + method, e);
-            } catch (final IllegalAccessException e) {
+            } catch (final InvocationTargetException | IllegalAccessException e) {
                 throw new RuntimeException("Couldn't invoke method: " + method,
                         e);
             }

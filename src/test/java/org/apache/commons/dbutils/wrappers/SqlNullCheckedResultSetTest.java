@@ -482,9 +482,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         try {
             getUrlInt = ResultSet.class.getMethod("getURL", Integer.TYPE);
             getUrlString = ResultSet.class.getMethod("getURL", String.class);
-        } catch(final NoSuchMethodException e) {
-            // ignore
-        } catch(final SecurityException e) {
+        } catch(final NoSuchMethodException | SecurityException e) {
             // ignore
         }
         if (getUrlInt != null && getUrlString != null) {

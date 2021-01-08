@@ -231,8 +231,6 @@ public final class DbUtils {
             }
 
             return true;
-        } catch (final RuntimeException e) {
-            return false;
         } catch (final Exception e) {
             return false;
         }
@@ -415,13 +413,7 @@ public final class DbUtils {
                 try {
                     final Method method = adapted.getClass().getMethod("getParentLogger");
                     return (Logger)method.invoke(adapted);
-                } catch (final NoSuchMethodException e) {
-                    parentLoggerSupported = false;
-                    throw new SQLFeatureNotSupportedException(e);
-                } catch (final IllegalAccessException e) {
-                    parentLoggerSupported = false;
-                    throw new SQLFeatureNotSupportedException(e);
-                } catch (final InvocationTargetException e) {
+                } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                     parentLoggerSupported = false;
                     throw new SQLFeatureNotSupportedException(e);
                 }
