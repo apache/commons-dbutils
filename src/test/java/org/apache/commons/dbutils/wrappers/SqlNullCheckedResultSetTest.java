@@ -853,30 +853,36 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
         if (method.getName().equals("wasNull")) {
             return Boolean.TRUE;
 
-        } else if (returnType.equals(Boolean.TYPE)) {
+        }
+        if (returnType.equals(Boolean.TYPE)) {
             return Boolean.FALSE;
 
-        } else if (returnType.equals(Integer.TYPE)) {
+        }
+        if (returnType.equals(Integer.TYPE)) {
             return Integer.valueOf(0);
 
-        } else if (returnType.equals(Short.TYPE)) {
+        }
+        if (returnType.equals(Short.TYPE)) {
             return Short.valueOf((short) 0);
 
-        } else if (returnType.equals(Double.TYPE)) {
+        }
+        if (returnType.equals(Double.TYPE)) {
             return new Double(0);
 
-        } else if (returnType.equals(Long.TYPE)) {
+        }
+        if (returnType.equals(Long.TYPE)) {
             return Long.valueOf(0);
 
-        } else if (returnType.equals(Byte.TYPE)) {
+        }
+        if (returnType.equals(Byte.TYPE)) {
             return Byte.valueOf((byte) 0);
 
-        } else if (returnType.equals(Float.TYPE)) {
+        }
+        if (returnType.equals(Float.TYPE)) {
             return new Float(0);
 
-        } else {
-            return null;
         }
+        return null;
     }
 }
 

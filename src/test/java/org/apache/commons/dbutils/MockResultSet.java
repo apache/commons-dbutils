@@ -82,12 +82,12 @@ public class MockResultSet implements InvocationHandler {
         if (args[0] instanceof Integer) {
             return ((Integer) args[0]).intValue();
 
-        } else if (args[0] instanceof String) {
+        }
+        if (args[0] instanceof String) {
             return this.columnNameToIndex((String) args[0]);
 
-        } else {
-            throw new SQLException(args[0] + " must be Integer or String");
         }
+        throw new SQLException(args[0] + " must be Integer or String");
     }
 
     /**
@@ -273,10 +273,12 @@ public class MockResultSet implements InvocationHandler {
         if (methodName.equals("getMetaData")) {
             return this.getMetaData();
 
-        } else if (methodName.equals("next")) {
+        }
+        if (methodName.equals("next")) {
             return this.next();
 
-        } else if (methodName.equals("previous")) {
+        }
+        if (methodName.equals("previous")) {
 
         } else if (methodName.equals("close")) {
 

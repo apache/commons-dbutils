@@ -65,29 +65,33 @@ public class MockResultSetMetaData implements InvocationHandler {
         if (methodName.equals("getColumnCount")) {
             return Integer.valueOf(this.columnNames.length);
 
-        } else if (
+        }
+        if (
                 methodName.equals("getColumnName")) {
 
                 final int col = ((Integer) args[0]).intValue() - 1;
                 return this.columnNames[col];
 
-        } else if (
+        }
+        if (
                 methodName.equals("getColumnLabel")) {
 
                 final int col = ((Integer) args[0]).intValue() - 1;
                 return this.columnLabels[col];
 
-        } else if (methodName.equals("hashCode")) {
+        }
+        if (methodName.equals("hashCode")) {
             return Integer.valueOf(System.identityHashCode(proxy));
 
-        } else if (methodName.equals("toString")) {
+        }
+        if (methodName.equals("toString")) {
             return "MockResultSetMetaData " + System.identityHashCode(proxy);
 
-        } else if (methodName.equals("equals")) {
+        }
+        if (methodName.equals("equals")) {
             return Boolean.valueOf(proxy == args[0]);
 
-        } else {
-            throw new UnsupportedOperationException("Unsupported method: " + methodName);
         }
+        throw new UnsupportedOperationException("Unsupported method: " + methodName);
     }
 }
