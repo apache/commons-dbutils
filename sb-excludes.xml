@@ -28,7 +28,7 @@
         <Method name="printWarnings" />
         <Bug pattern="DM_DEFAULT_ENCODING" />
     </Match>
-    <!-- The javadocs state and the called code shows that null can be returned. -->
+    <!-- The Javadocs state and the called code shows that null can be returned. -->
     <Match>
         <Class name="org.apache.commons.dbutils.QueryLoader" />
         <Method name="loadQueries" />
