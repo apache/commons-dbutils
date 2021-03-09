@@ -247,7 +247,6 @@
     <dbutils.checkstyle.version>8.37</dbutils.checkstyle.version>
     <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
     <checkstyle.config.file>${basedir}/src/site/resources/checkstyle/checkstyle.xml</checkstyle.config.file>
-    <checkstyle.resourceExcludes>LICENSE.txt, NOTICE.txt</checkstyle.resourceExcludes>
 
     <commons.japicmp.version>0.15.2</commons.japicmp.version>
     <commons.componentid>dbutils</commons.componentid>
@@ -273,8 +272,8 @@
             <configLocation>${checkstyle.config.file}</configLocation>
             <enableRulesSummary>false</enableRulesSummary>
             <headerLocation>${checkstyle.header.file}</headerLocation>
-            <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
-            <suppressionsFileExpression>${basedir}/checkstyle-suppressions.xml</suppressionsFileExpression>
+            <suppressionsLocation>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+            <suppressionsFileExpression>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
             <failOnViolation>false</failOnViolation>
           </configuration>
           <dependencies>
@@ -292,7 +291,7 @@
           <configuration>
             <threshold>Normal</threshold>
             <effort>Default</effort>
-            <excludeFilterFile>sb-excludes.xml</excludeFilterFile>
+            <excludeFilterFile>${basedir}/src/site/resources/spotbugs/sb-excludes.xml</excludeFilterFile>
           </configuration>
         </plugin>
       </plugins>
@@ -369,11 +368,18 @@
           <configLocation>${checkstyle.config.file}</configLocation>
           <enableRulesSummary>false</enableRulesSummary>
           <headerLocation>${checkstyle.header.file}</headerLocation>
+          <suppressionsLocation>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+          <suppressionsFileExpression>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
         </configuration>
       </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <threshold>Normal</threshold>
+          <effort>Default</effort>
+          <excludeFilterFile>${basedir}/src/site/resources/spotbugs/sb-excludes.xml</excludeFilterFile>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
