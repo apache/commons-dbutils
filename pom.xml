@@ -245,6 +245,10 @@
     <dbutils.spotbugs.version>4.2.0</dbutils.spotbugs.version>
     <commons.checkstyle-plugin.version>3.1.1</commons.checkstyle-plugin.version>
     <dbutils.checkstyle.version>8.37</dbutils.checkstyle.version>
+    <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
+    <checkstyle.config.file>${basedir}/src/site/resources/checkstyle/checkstyle.xml</checkstyle.config.file>
+    <checkstyle.resourceExcludes>LICENSE.txt, NOTICE.txt</checkstyle.resourceExcludes>
+
     <commons.japicmp.version>0.15.2</commons.japicmp.version>
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
@@ -266,9 +270,9 @@
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>${commons.checkstyle-plugin.version}</version>
           <configuration>
-            <configLocation>${basedir}/checkstyle.xml</configLocation>
+            <configLocation>${checkstyle.config.file}</configLocation>
             <enableRulesSummary>false</enableRulesSummary>
-            <headerLocation>${basedir}/license-header.txt</headerLocation>
+            <headerLocation>${checkstyle.header.file}</headerLocation>
             <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
             <suppressionsFileExpression>${basedir}/checkstyle-suppressions.xml</suppressionsFileExpression>
             <failOnViolation>false</failOnViolation>
@@ -361,6 +365,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <configLocation>${checkstyle.config.file}</configLocation>
+          <enableRulesSummary>false</enableRulesSummary>
+          <headerLocation>${checkstyle.header.file}</headerLocation>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
@@ -373,7 +382,7 @@
         <configuration>
           <targetJdk>${maven.compiler.source}</targetJdk>
           <rulesets>
-            <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
+            <ruleset>${basedir}/src/site/resources/pmd/pmd-ruleset.xml</ruleset>
           </rulesets>
         </configuration>
       </plugin>

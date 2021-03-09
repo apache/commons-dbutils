@@ -24,11 +24,8 @@
     <fileSets>
         <fileSet>
             <includes>
-                <include>checkstyle.xml</include>
-                <include>license-header.txt</include>
                 <include>LICENSE.txt</include>
                 <include>NOTICE.txt</include>
-                <include>pmd-ruleset.xml</include>
                 <include>pom.xml</include>
                 <include>RELEASE-NOTES.txt</include>
             </includes>
