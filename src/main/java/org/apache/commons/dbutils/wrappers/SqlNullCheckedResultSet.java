@@ -113,27 +113,27 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
         return factory.createResultSet(new SqlNullCheckedResultSet(rs));
     }
 
-    private InputStream nullAsciiStream = null;
-    private BigDecimal nullBigDecimal = null;
-    private InputStream nullBinaryStream = null;
-    private Blob nullBlob = null;
-    private boolean nullBoolean = false;
-    private byte nullByte = 0;
-    private byte[] nullBytes = null;
-    private Reader nullCharacterStream = null;
-    private Clob nullClob = null;
-    private Date nullDate = null;
-    private double nullDouble = 0.0;
-    private float nullFloat = 0.0f;
-    private int nullInt = 0;
-    private long nullLong = 0;
-    private Object nullObject = null;
-    private Ref nullRef = null;
-    private short nullShort = 0;
-    private String nullString = null;
-    private Time nullTime = null;
-    private Timestamp nullTimestamp = null;
-    private URL nullURL = null;
+    private InputStream nullAsciiStream;
+    private BigDecimal nullBigDecimal;
+    private InputStream nullBinaryStream;
+    private Blob nullBlob;
+    private boolean nullBoolean;
+    private byte nullByte;
+    private byte[] nullBytes;
+    private Reader nullCharacterStream;
+    private Clob nullClob;
+    private Date nullDate;
+    private double nullDouble;
+    private float nullFloat;
+    private int nullInt;
+    private long nullLong;
+    private Object nullObject;
+    private Ref nullRef;
+    private short nullShort;
+    private String nullString;
+    private Time nullTime;
+    private Timestamp nullTimestamp;
+    private URL nullURL;
 
     /**
      * The wrapped result.

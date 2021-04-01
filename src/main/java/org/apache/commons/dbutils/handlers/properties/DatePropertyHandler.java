@@ -36,10 +36,8 @@ public class DatePropertyHandler implements PropertyHandler {
             if ("java.sql.Time".equals(targetType)) {
                 return true;
             }
-            if ("java.sql.Timestamp".equals(targetType)
-                    && !Timestamp.class.isInstance(value)) {
-                return true;
-            }
+            return "java.sql.Timestamp".equals(targetType)
+                    && !Timestamp.class.isInstance(value);
         }
 
         return false;

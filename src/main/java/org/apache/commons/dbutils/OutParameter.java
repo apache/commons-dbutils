@@ -36,7 +36,7 @@ import java.sql.SQLException;
 public class OutParameter<T> {
     private final int sqlType;
     private final Class<T> javaType;
-    private T value = null;
+    private T value;
 
     /**
      * Construct an {@code OutParameter} for the given JDBC SQL type and
