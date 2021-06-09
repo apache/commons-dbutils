@@ -450,9 +450,6 @@ public class BeanProcessor {
 
         for (int col = 1; col <= cols; col++) {
             String columnName = rsmd.getColumnLabel(col);
-            if (null == columnName || 0 == columnName.length()) {
-              columnName = rsmd.getColumnName(col);
-            }
             String propertyName = columnToPropertyOverrides.get(columnName);
             if (propertyName == null) {
                 propertyName = columnName;
