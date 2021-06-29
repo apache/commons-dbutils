@@ -293,6 +293,13 @@
             <effort>Default</effort>
             <excludeFilterFile>${basedir}/src/site/resources/spotbugs/sb-excludes.xml</excludeFilterFile>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.ow2.asm</groupId>
+              <artifactId>asm</artifactId>
+              <version>9.1</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
