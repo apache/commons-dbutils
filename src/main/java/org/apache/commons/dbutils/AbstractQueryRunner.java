@@ -586,7 +586,7 @@ public abstract class AbstractQueryRunner {
         if (causeMessage == null) {
             causeMessage = "";
         }
-        final StringBuffer msg = new StringBuffer(causeMessage);
+        final StringBuilder msg = new StringBuilder(causeMessage);
 
         msg.append(" Query: ");
         msg.append(sql);
