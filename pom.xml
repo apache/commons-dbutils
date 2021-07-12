@@ -242,7 +242,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <dbutils.spotbugs.version>4.2.0</dbutils.spotbugs.version>
+    <dbutils.spotbugs.version>4.3.0</dbutils.spotbugs.version>
     <commons.checkstyle-plugin.version>3.1.1</commons.checkstyle-plugin.version>
     <dbutils.checkstyle.version>8.37</dbutils.checkstyle.version>
     <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
