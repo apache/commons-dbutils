@@ -18,6 +18,7 @@ package org.apache.commons.dbutils;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -121,6 +122,45 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param conn The Connection to use to run the query.  The caller is
      * responsible for closing this Connection.
      * @param sql The SQL to execute.
+     * @param prefetchPmd True if the {@code ParameterMetaData} are fetched
+     * before filling the elements.
+     * @param params An array of query replacement parameters.  Each row in
+     * this array is one set of batch replacement values.
+     * @return The number of rows updated per statement.
+     * @throws SQLException if a database access error occurs
+     * @since DbUtils 1.1
+     */
+    public int[] batch(final Connection conn, final String sql, final boolean prefetchPmd, final Object[][] params) throws SQLException {
+        return this.batch(conn, false, prefetchPmd, sql, params);
+    }
+
+    /**
+     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.  The
+     * {@code Connection} is retrieved from the {@code DataSource}
+     * set in the constructor.  This {@code Connection} must be in
+     * auto-commit mode or the update will not be saved.
+     *
+     * @param sql The SQL to execute.
+     * @param prefetchPmd True if the {@code ParameterMetaData} are fetched
+     * before filling the elements.
+     * @param params An array of query replacement parameters.  Each row in
+     * this array is one set of batch replacement values.
+     * @return The number of rows updated per statement.
+     * @throws SQLException if a database access error occurs
+     * @since DbUtils 1.1
+     */
+    public int[] batch(final String sql, final boolean prefetchPmd, final Object[][] params) throws SQLException {
+        final Connection conn = this.prepareConnection();
+
+        return this.batch(conn, true, prefetchPmd, sql, params);
+    }
+
+    /**
+     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
+     *
+     * @param conn The Connection to use to run the query.  The caller is
+     * responsible for closing this Connection.
+     * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
      * @return The number of rows updated per statement.
@@ -128,7 +168,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since DbUtils 1.1
      */
     public int[] batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
-        return this.batch(conn, false, sql, params);
+        return this.batch(conn, false, false, sql, params);
     }
 
     /**
@@ -147,20 +187,22 @@ public class QueryRunner extends AbstractQueryRunner {
     public int[] batch(final String sql, final Object[][] params) throws SQLException {
         final Connection conn = this.prepareConnection();
 
-        return this.batch(conn, true, sql, params);
+        return this.batch(conn, true, false, sql, params);
     }
 
     /**
      * Calls update after checking the parameters to ensure nothing is null.
      * @param conn The connection to use for the batch call.
      * @param closeConn True if the connection should be closed, false otherwise.
+     * @param prefetchPmd True if the {@code ParameterMetaData} are fetched before
+     * filling the elements.
      * @param sql The SQL statement to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
      * @return The number of rows updated in the batch.
      * @throws SQLException If there are database or parameter errors.
      */
-    private int[] batch(final Connection conn, final boolean closeConn, final String sql, final Object[][] params) throws SQLException {
+    private int[] batch(final Connection conn, final boolean closeConn, final boolean prefetchPmd, final String sql, final Object[][] params) throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
         }
@@ -180,12 +222,22 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         PreparedStatement stmt = null;
+        ParameterMetaData pmd = null;
         int[] rows = null;
         try {
             stmt = this.prepareStatement(conn, sql);
+            // When the batch size is large, prefetching parameter metadata before filling
+            // the statement can reduce lots of JDBC communications.
+            if (prefetchPmd) {
+                pmd = this.getParameterMetaData(stmt);
+            }
 
             for (final Object[] param : params) {
-                this.fillStatement(stmt, param);
+                if (prefetchPmd) {
+                    this.fillStatement(stmt, pmd, param);
+                } else {
+                    this.fillStatement(stmt, params);
+                }
                 stmt.addBatch();
             }
             rows = stmt.executeBatch();
