@@ -44,7 +44,7 @@ public abstract class AbstractQueryRunner {
      * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried
      * it yet)?
      */
-    private volatile boolean pmdKnownBroken = false;
+    private volatile boolean pmdKnownBroken;
 
     /**
      * The DataSource to retrieve connections from.
@@ -354,7 +354,7 @@ public abstract class AbstractQueryRunner {
         final Object[] params = new Object[properties.length];
         for (int i = 0; i < properties.length; i++) {
             final PropertyDescriptor property = properties[i];
-            Object value = null;
+            Object value;
             final Method method = property.getReadMethod();
             if (method == null) {
                 throw new RuntimeException("No read method for bean property "

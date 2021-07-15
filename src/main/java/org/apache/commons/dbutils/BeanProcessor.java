@@ -333,11 +333,7 @@ public class BeanProcessor {
      */
     private boolean isCompatibleType(final Object value, final Class<?> type) {
         // Do object check first, then primitives
-        if (value == null || type.isInstance(value) || matchesPrimitive(type, value.getClass())) {
-            return true;
-
-        }
-        return false;
+        return value == null || type.isInstance(value) || matchesPrimitive(type, value.getClass());
 
     }
 
@@ -378,8 +374,7 @@ public class BeanProcessor {
      *         there is no suitable write method.
      */
     protected Method getWriteMethod(final Object target, final PropertyDescriptor prop, final Object value) {
-        final Method method = prop.getWriteMethod();
-        return method;
+        return prop.getWriteMethod();
     }
 
     /**
@@ -412,7 +407,7 @@ public class BeanProcessor {
     private PropertyDescriptor[] propertyDescriptors(final Class<?> c)
         throws SQLException {
         // Introspector caches BeanInfo classes for better performance
-        BeanInfo beanInfo = null;
+        BeanInfo beanInfo;
         try {
             beanInfo = Introspector.getBeanInfo(c);
 
@@ -461,7 +456,7 @@ public class BeanProcessor {
 
                 final PropertyDescriptor prop = props[i];
                 final Column column = prop.getReadMethod().getAnnotation(Column.class);
-                String propertyColumnName = null;
+                String propertyColumnName;
                 if (column != null) {
                     propertyColumnName = column.name();
                 } else {
