@@ -76,7 +76,7 @@ The <action> type attribute can be add,update,fix,remove.
         Correction of coverage badge #10.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update actions/checkout from v1 to v2.3.4, #44, #23, #48.
+        Update actions/checkout from v1 to v2.4.0, #44, #23, #48, #93.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update commons-parent from 50 to 51 #14.
