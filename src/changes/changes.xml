@@ -82,7 +82,7 @@ The <action> type attribute can be add,update,fix,remove.
         Update commons-parent from 50 to 51 #14.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update junit from 4.12 to 4.13.1 #16, #42.
+        Update junit from 4.12 to 4.13.2 #16, #42, #58.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update mockito-core from 3.2.4 to 3.4.6 #18, #21.
