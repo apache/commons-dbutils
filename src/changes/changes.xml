@@ -93,8 +93,8 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update spotbugs from 3.1.12.2 to 4.2.3.
       </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update maven-checkstyle-plugin from 3.1.0 to 3.1.1.
+      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
+        Update maven-checkstyle-plugin from 3.1.0 to 3.1.2 #56.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
         Update checkstyle from 8.28 to 8.35, #20.
