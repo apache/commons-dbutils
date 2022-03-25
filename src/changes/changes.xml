@@ -114,6 +114,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Bump checkstyle from 8.37 to 9.2.1.
       </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump actions/cache from 2 to 3 #109.
+      </action>
     </release>
     
     <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">
