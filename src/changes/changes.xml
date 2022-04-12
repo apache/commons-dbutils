@@ -75,32 +75,36 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" due-to="Amey Jadiye" type="fix">
         Correction of coverage badge #10.
       </action>
+      <!--  UPDATE -->
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update actions/checkout from 1 to 3, #44, #23, #48, #93, #75.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Update commons-parent from 50 to 51 #14.
+        Bump actions/checkout from 1 to 3, #44, #23, #48, #93, #75.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update junit from 4.12 to 4.13.2 #16, #42, #58.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Update mockito-core from 3.2.4 to 3.4.6 #18, #21.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
-        Update spotbugs-maven-plugin from 3.1.12.2 to 4.4.2, #17, #45, #52.
-      </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update spotbugs from 3.1.12.2 to 4.2.3.
-      </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update maven-checkstyle-plugin from 3.1.0 to 3.1.2 #56.
-      </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update checkstyle from 8.28 to 8.35, #20.
+        Bump actions/cache from 2 to 3 #109.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/setup-java from v1.4.0 to v2 #40.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump commons-parent from 50 to 51 #14.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump junit from 4.12 to 4.13.2 #16, #42, #58.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump mockito-core from 3.2.4 to 3.4.6 #18, #21.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
+        Bump spotbugs-maven-plugin from 3.1.12.2 to 4.4.2, #17, #45, #52.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Bump spotbugs from 3.1.12.2 to 4.2.3.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
+        Bump maven-checkstyle-plugin from 3.1.0 to 3.1.2 #56.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
+        Bump checkstyle from 8.28 to 8.35, #20.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump checkstyle from 8.35 to 8.37 #47.
@@ -109,13 +113,10 @@ The <action> type attribute can be add,update,fix,remove.
         Bump mockito-core from 3.4.6 to 4.4.0 #46, #53, #97, #103, #111.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update commons.japicmp.version 0.14.3 -> 0.15.2.
+        Bump commons.japicmp.version 0.14.3 -> 0.15.2.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Bump checkstyle from 8.37 to 9.2.1.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump actions/cache from 2 to 3 #109.
       </action>
     </release>
     
