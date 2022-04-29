@@ -118,7 +118,7 @@ The <action> type attribute can be add,update,fix,remove.
         Bump commons.japicmp.version 0.14.3 -> 0.15.2.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Bump checkstyle from 8.37 to 9.2.1.
+        Bump checkstyle from 8.37 to 9.3.
       </action>
     </release>
     
