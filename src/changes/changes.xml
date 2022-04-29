@@ -75,6 +75,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" due-to="Amey Jadiye" type="fix">
         Correction of coverage badge #10.
       </action>
+      <!-- ADD -->
+      <action dev="ggregory" type="add">
+        Add github/codeql-action #115.
+      </action>
       <!--  UPDATE -->
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump actions/checkout from 1 to 3, #44, #23, #48, #93, #75.
