@@ -45,23 +45,18 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="2.0" date="2020-MM-DD" description="New features and bug fixes.">
+      <!--  FIX -->
       <action dev="thecarlhall" type="fix" issue="DBUTILS-131" due-to="yairlenga">
         Speedup query calls without parameters; Use PreparedStatement only when parameters are present.
       </action>
       <action dev="thecarlhall" type="fix">
         Always copy Date, Time, Timestamp on get and set in SqlNullCheckedResultSet.
       </action>
-      <action dev="thecarlhall" type="add" issue="PR/9" due-to="rewerma">
-        Add @Column annotation to hint the field name instead of dissecting the get method name.
-      </action>
       <action dev="ggregory" type="update" issue="DBUTILS-135" due-to="hdevalke">
         BeanProcessor is not thread safe since [DBUTILS-124].
       </action>
       <action dev="ggregory" type="update" issue="DBUTILS-137" due-to="Gary Gregory">
         Inefficient allocation of Maps in org.apache.commons.dbutils.BasicRowProcessor.toMap(ResultSet).
-      </action>
-      <action dev="ggregory" type="add" issue="DBUTILS-136" due-to="Matthew Hall, Gary Gregory">
-        CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int).
       </action>
       <action dev="ggregory" type="fix" issue="DBUTILS-138" due-to="Stefano Lissa, Gary Gregory">
         org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler&lt;T>, Object...) Exception in closing statement leave connections open.
@@ -76,6 +71,12 @@ The <action> type attribute can be add,update,fix,remove.
         Correction of coverage badge #10.
       </action>
       <!-- ADD -->
+      <action dev="thecarlhall" type="add" issue="PR/9" due-to="rewerma">
+        Add @Column annotation to hint the field name instead of dissecting the get method name.
+      </action>
+      <action dev="ggregory" type="add" issue="DBUTILS-136" due-to="Matthew Hall, Gary Gregory">
+        CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int).
+      </action>
       <action dev="ggregory" type="add">
         Add github/codeql-action #115.
       </action>
