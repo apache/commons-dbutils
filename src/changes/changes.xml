@@ -97,7 +97,7 @@ The <action> type attribute can be add,update,fix,remove.
         Bump junit from 4.12 to 4.13.2 #16, #42, #58.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump mockito-core from 3.2.4 to 4.6.1 #18, #21, #46, #53, #97, #103, #111, #116, #122.
+        Bump mockito-core from 3.2.4 to 4.7.0 #18, #21, #46, #53, #97, #103, #111, #116, #122, #131.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump spotbugs-maven-plugin from 3.1.12.2 to 4.4.2, #17, #45, #52.
