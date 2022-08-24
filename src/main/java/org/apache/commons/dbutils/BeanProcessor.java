@@ -361,7 +361,7 @@ public class BeanProcessor {
             if (targetType == primitiveValueType) {
                 return true;
             }
-        } catch (final NoSuchFieldException | IllegalAccessException e) {
+        } catch (final NoSuchFieldException | IllegalAccessException ignored) {
             // an inaccessible TYPE field is a good sign that we're not working with a primitive wrapper.
             // nothing to do.  we can't match for compatibility
         }

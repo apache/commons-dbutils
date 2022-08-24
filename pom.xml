@@ -262,7 +262,7 @@
   </properties>
 
   <build>
-    <defaultGoal>clean install apache-rat:check japicmp:cmp checkstyle:check spotbugs:check javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean install apache-rat:check japicmp:cmp checkstyle:check spotbugs:check pmd:cpd-check javadoc:javadoc</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
