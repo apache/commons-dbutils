@@ -113,8 +113,8 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a {@code ResultSet} row into a JavaBean.  This
      * implementation delegates to a BeanProcessor instance.
-     * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, java.lang.Class)
-     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, java.lang.Class)
+     * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, Class)
+     * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, Class)
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
@@ -129,8 +129,8 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a {@code ResultSet} into a {@code List} of JavaBeans.
      * This implementation delegates to a BeanProcessor instance.
-     * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
-     * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, java.lang.Class)
+     * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, Class)
+     * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, Class)
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance

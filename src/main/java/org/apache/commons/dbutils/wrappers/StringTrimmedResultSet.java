@@ -83,7 +83,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * {@code getObject()} methods and trim any Strings before they're
      * returned.
      *
-     * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+     * @see java.lang.reflect.InvocationHandler#invoke(Object, java.lang.reflect.Method, Object[])
      * @param proxy Not used; all method calls go to the internal result set
      * @param method The method to invoke on the result set
      * @param args The arguments to pass to the result set
