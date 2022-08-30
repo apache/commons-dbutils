@@ -53,7 +53,7 @@ import org.apache.commons.dbutils.RowProcessor;
  * @param <V>
  *            the type of the bean
  * @see org.apache.commons.dbutils.ResultSetHandler
- * @since DbUtils 1.5
+ * @since 1.5
  */
 public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
 

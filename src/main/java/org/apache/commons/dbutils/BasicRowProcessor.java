@@ -80,7 +80,7 @@ public class BasicRowProcessor implements RowProcessor {
      * BasicRowProcessor constructor.
      * @param convert The BeanProcessor to use when converting columns to
      * bean properties.
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     public BasicRowProcessor(final BeanProcessor convert) {
         this.convert = convert;

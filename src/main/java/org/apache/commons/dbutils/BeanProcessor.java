@@ -49,7 +49,7 @@ import java.util.ServiceLoader;
  *
  * @see BasicRowProcessor
  *
- * @since DbUtils 1.1
+ * @since 1.1
  */
 public class BeanProcessor {
 

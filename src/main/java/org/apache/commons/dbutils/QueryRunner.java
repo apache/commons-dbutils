@@ -125,7 +125,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * this array is one set of batch replacement values.
      * @return The number of rows updated per statement.
      * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     public int[] batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
         return this.batch(conn, false, sql, params);
@@ -142,7 +142,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * this array is one set of batch replacement values.
      * @return The number of rows updated per statement.
      * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     public int[] batch(final String sql, final Object[][] params) throws SQLException {
         final Connection conn = this.prepareConnection();

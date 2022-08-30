@@ -167,7 +167,7 @@ public abstract class AbstractQueryRunner {
      *            Connection to close
      * @throws SQLException
      *             if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     protected void close(final Connection conn) throws SQLException {
         DbUtils.close(conn);
@@ -182,7 +182,7 @@ public abstract class AbstractQueryRunner {
      *            ResultSet to close
      * @throws SQLException
      *             if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     protected void close(final ResultSet rs) throws SQLException {
         DbUtils.close(rs);
@@ -197,7 +197,7 @@ public abstract class AbstractQueryRunner {
      *            Statement to close
      * @throws SQLException
      *             if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     protected void close(final Statement stmt) throws SQLException {
         DbUtils.close(stmt);
@@ -481,7 +481,7 @@ public abstract class AbstractQueryRunner {
      * @return An initialized {@code Connection}.
      * @throws SQLException
      *             if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     protected Connection prepareConnection() throws SQLException {
         if (this.getDataSource() == null) {

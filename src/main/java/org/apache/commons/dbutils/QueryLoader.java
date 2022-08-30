@@ -103,7 +103,7 @@ public class QueryLoader {
      * the given path.
      * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
      * invalid
-     * @since DbUtils 1.1
+     * @since 1.1
      * @return Map of query names to SQL values
      * @see java.util.Properties
      */

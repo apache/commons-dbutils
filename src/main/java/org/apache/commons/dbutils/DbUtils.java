@@ -306,7 +306,7 @@ public final class DbUtils {
      *
      * @param conn Connection to rollback.  A null value is legal.
      * @throws SQLException if a database access error occurs
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     public static void rollbackAndClose(final Connection conn) throws SQLException {
         if (conn != null) {
@@ -323,7 +323,7 @@ public final class DbUtils {
      * avoid closing if null and hide any SQLExceptions that occur.
      *
      * @param conn Connection to rollback.  A null value is legal.
-     * @since DbUtils 1.1
+     * @since 1.1
      */
     public static void rollbackAndCloseQuietly(final Connection conn) {
         try {
