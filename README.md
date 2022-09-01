@@ -45,7 +45,7 @@ Apache Commons DbUtils
 
 [![CI Status](https://github.com/apache/commons-dbutils/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-dbutils/actions/workflows/maven.yml)
 [![Coverage Status](https://coveralls.io/repos/github/apache/commons-dbutils/badge.svg?branch=master)](https://coveralls.io/github/apache/commons-dbutils?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/?gav=true)
 [![Javadocs](https://javadoc.io/badge/commons-dbutils/commons-dbutils/1.8.svg)](https://javadoc.io/doc/commons-dbutils/commons-dbutils/1.8)
 [![CodeQL](https://github.com/apache/commons-dbutils/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-dbutils/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
 
