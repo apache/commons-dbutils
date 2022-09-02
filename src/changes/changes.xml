@@ -106,19 +106,13 @@ The <action> type attribute can be add,update,fix,remove.
         Bump spotbugs from 3.1.12.2 to 4.2.3.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Bump maven-checkstyle-plugin from 3.1.0 to 3.1.2 #56.
+        Bump maven-checkstyle-plugin from 3.1.0 to 3.2.0 #56, #132.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Bump checkstyle from 8.28 to 8.35, #20.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump checkstyle from 8.35 to 8.37 #47.
+        Bump checkstyle from 8.28 to 9.3 #20, #47.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Bump commons.japicmp.version 0.14.3 -> 0.15.2.
-      </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Bump checkstyle from 8.37 to 9.3.
       </action>
     </release>
     
