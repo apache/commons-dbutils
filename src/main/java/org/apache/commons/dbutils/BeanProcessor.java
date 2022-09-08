@@ -504,7 +504,7 @@ public class BeanProcessor {
      * index after optional type processing or {@code null} if the column
      * value was SQL NULL.
      */
-    protected Object processColumn(final ResultSet rs, final int index, final Class<?> propType)
+    protected synchronized Object processColumn(final ResultSet rs, final int index, final Class<?> propType)
         throws SQLException {
 
         Object retval = rs.getObject(index);
