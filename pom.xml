@@ -210,9 +210,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -242,6 +241,7 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
+    <commons.junit.version>5.9.1</commons.junit.version>
     <commons.spotbugs.version>4.4.2</commons.spotbugs.version>
     <commons.spotbugs.impl.version>4.2.3</commons.spotbugs.impl.version>
     <commons.checkstyle-plugin.version>3.2.0</commons.checkstyle-plugin.version>
