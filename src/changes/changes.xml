@@ -285,7 +285,7 @@ The <action> type attribute can be add,update,fix,remove.
         BeanListHandler#handle(ResultSet) is not optimal
       </action>
       <action dev="dfabulich" type="fix" issue="DBUTILS-40">
-        NullPointerException occured at rethrow method
+        NullPointerException occurred at rethrow method
       </action>
       <action dev="dfabulich" type="update" issue="DBUTILS-42">
         Object with Long or Decimal got initial zero value while database field is null
