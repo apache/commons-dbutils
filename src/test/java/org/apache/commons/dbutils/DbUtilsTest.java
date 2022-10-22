@@ -247,7 +247,7 @@ public class DbUtilsTest {
             DbUtils.rollbackAndClose(mockConnection);
             fail("DbUtils.rollbackAndClose() swallowed SQLException!");
         } catch (final SQLException e) {
-            // we expect this exeption
+            // we expect this exception
         }
         verify(mockConnection).rollback();
         verify(mockConnection).close();
