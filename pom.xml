@@ -242,7 +242,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
 
     <commons.junit.version>5.9.1</commons.junit.version>
-    <commons.spotbugs.version>4.4.2</commons.spotbugs.version>
+    <commons.spotbugs.version>4.7.2.1</commons.spotbugs.version>
     <commons.spotbugs.impl.version>4.2.3</commons.spotbugs.impl.version>
     <commons.checkstyle-plugin.version>3.2.0</commons.checkstyle-plugin.version>
     <dbutils.checkstyle.version>9.3</dbutils.checkstyle.version>
