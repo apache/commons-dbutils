@@ -245,7 +245,7 @@
     <commons.spotbugs.version>4.4.2</commons.spotbugs.version>
     <commons.spotbugs.impl.version>4.2.3</commons.spotbugs.impl.version>
     <commons.checkstyle-plugin.version>3.2.0</commons.checkstyle-plugin.version>
-    <dbutils.checkstyle.version>9.3</dbutils.checkstyle.version>
+    <dbutils.checkstyle.version>10.4</dbutils.checkstyle.version>
     <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
     <checkstyle.config.file>${basedir}/src/site/resources/checkstyle/checkstyle.xml</checkstyle.config.file>
 
