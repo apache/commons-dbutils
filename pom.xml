@@ -217,7 +217,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>4.8.1</version>
+      <version>4.9.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -242,10 +242,11 @@
     <maven.compiler.target>1.7</maven.compiler.target>
 
     <commons.junit.version>5.9.1</commons.junit.version>
+
     <commons.spotbugs.version>4.7.3.0</commons.spotbugs.version>
-    <commons.spotbugs.impl.version>4.2.3</commons.spotbugs.impl.version>
+    <commons.spotbugs.impl.version>4.7.3</commons.spotbugs.impl.version>
     <commons.checkstyle-plugin.version>3.2.0</commons.checkstyle-plugin.version>
-    <dbutils.checkstyle.version>9.3</dbutils.checkstyle.version>
+    <dbutils.checkstyle.version>10.5.0</dbutils.checkstyle.version>
     <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
     <checkstyle.config.file>${basedir}/src/site/resources/checkstyle/checkstyle.xml</checkstyle.config.file>
 
