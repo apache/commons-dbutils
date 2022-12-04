@@ -52,7 +52,9 @@ public class GenerousBeanProcessor extends BeanProcessor {
                 columnName = rsmd.getColumnName(col);
             }
 
-            final String generousColumnName = columnName.replace("_", "").replace(" ", "");
+            final String generousColumnName = columnName
+                    .replace("_", "")   // more idiomatic to Java
+                    .replace(" ", "");  // can't have spaces in property names
 
             for (int i = 0; i < props.length; i++) {
                 final String propName = props[i].getName();

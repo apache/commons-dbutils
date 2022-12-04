@@ -28,7 +28,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
-
 public class GenerousBeanProcessorTest {
 
     GenerousBeanProcessor processor = new GenerousBeanProcessor();
@@ -105,21 +104,35 @@ public class GenerousBeanProcessorTest {
 
     @SuppressWarnings("boxing") // test code
     @Test
+    public void testMapColumnsToPropertiesWithSpaces() throws Exception {
+        when(metaData.getColumnCount()).thenReturn(3);
+
+        when(metaData.getColumnLabel(1)).thenReturn("th ree");
+        when(metaData.getColumnLabel(2)).thenReturn("o n e");
+        when(metaData.getColumnLabel(3)).thenReturn("t wo");
+
+        final int[] ret = processor.mapColumnsToProperties(metaData, propDescriptors);
+
+        assertNotNull(ret);
+        assertEquals(4, ret.length);
+        assertEquals(-1, ret[0]);
+        assertEquals(2, ret[1]);
+        assertEquals(0, ret[2]);
+        assertEquals(1, ret[3]);
+    }
+
+    @SuppressWarnings("boxing") // test code
+    @Test
     public void testMapColumnsToPropertiesColumnLabelIsNull() throws Exception {
         when(metaData.getColumnCount()).thenReturn(1);
         when(metaData.getColumnName(1)).thenReturn("juhu");
-
         when(metaData.getColumnLabel(1)).thenReturn(null);
-        when(metaData.getColumnLabel(2)).thenReturn("One");
-        when(metaData.getColumnLabel(3)).thenReturn("tWO");
 
         final int[] ret = processor.mapColumnsToProperties(metaData, propDescriptors);
 
         assertNotNull(ret);
         assertEquals(2, ret.length);
         assertEquals(-1, ret[0]);
-        assertEquals(-1, ret[1]);
-        assertEquals(-1, ret[1]);
         assertEquals(-1, ret[1]);
     }
 
