@@ -41,7 +41,9 @@ public class BaseTestCase extends TestCase {
             "nullObjectTest",
             "nullPrimitiveTest",
             "notDate",
-            "columnProcessorDoubleTest" };
+            "columnProcessorDoubleTest",
+            null
+        };
 
     /**
      * The number of columns in the MockResultSet.
@@ -72,7 +74,9 @@ public class BaseTestCase extends TestCase {
             null,
             null,
             new Date(),
-            BigInteger.valueOf(13)};
+            BigInteger.valueOf(13),
+            null
+        };
 
     private static final Object[] row2 =
         new Object[] {
@@ -85,7 +89,9 @@ public class BaseTestCase extends TestCase {
             null,
             null,
             ts789456123,
-            BigInteger.valueOf(13)};
+            BigInteger.valueOf(13),
+            null
+        };
 
     private static final Object[][] rows = new Object[][] { row1, row2 };
 

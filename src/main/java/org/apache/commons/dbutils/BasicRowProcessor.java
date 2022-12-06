@@ -165,11 +165,15 @@ public class BasicRowProcessor implements RowProcessor {
         final Map<String, Object> result = createCaseInsensitiveHashMap(cols);
 
         for (int i = 1; i <= cols; i++) {
-            String columnName = rsmd.getColumnLabel(i);
-            if (null == columnName || 0 == columnName.length()) {
-              columnName = rsmd.getColumnName(i);
+            String propKey = rsmd.getColumnLabel(i);
+            if (null == propKey || 0 == propKey.length()) {
+              propKey = rsmd.getColumnName(i);
             }
-            result.put(columnName, rs.getObject(i));
+            if (null == propKey || 0 == propKey.length()) {
+              // The column index can't be null
+              propKey = Integer.toString(i);
+            }
+            result.put(propKey, rs.getObject(i));
         }
 
         return result;

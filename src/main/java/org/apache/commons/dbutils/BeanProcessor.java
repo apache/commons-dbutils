@@ -457,8 +457,11 @@ public class BeanProcessor {
             if (propertyName == null) {
                 propertyName = columnName;
             }
-            for (int i = 0; i < props.length; i++) {
+            if (propertyName == null) {
+                propertyName = Integer.toString(col);
+            }
 
+            for (int i = 0; i < props.length; i++) {
                 final PropertyDescriptor prop = props[i];
                 final Column column = prop.getReadMethod().getAnnotation(Column.class);
                 String propertyColumnName = null;

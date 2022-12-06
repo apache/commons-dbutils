@@ -153,6 +153,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("nullPrimitiveTest", itr.next());
         assertEquals("notDate", itr.next());
         assertEquals("columnProcessorDoubleTest", itr.next());
+        assertEquals("11", itr.next());
 
         assertFalse(itr.hasNext());
     }
