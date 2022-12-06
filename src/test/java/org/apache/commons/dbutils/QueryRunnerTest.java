@@ -73,11 +73,9 @@ public class QueryRunnerTest {
 
         when(conn.prepareStatement(any(String.class))).thenReturn(prepStmt);
         when(prepStmt.getParameterMetaData()).thenReturn(meta);
-        when(prepStmt.getResultSet()).thenReturn(results);
         when(prepStmt.executeQuery()).thenReturn(results);
 
         when(conn.createStatement()).thenReturn(stmt);
-        when(stmt.getResultSet()).thenReturn(results);
         when(stmt.executeQuery(any(String.class))).thenReturn(results);
 
         when(conn.prepareCall(any(String.class))).thenReturn(call);
@@ -185,7 +183,6 @@ public class QueryRunnerTest {
     public void testNullConnectionBatch() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.batch("select * from blah where ? = ?", params);
@@ -195,15 +192,11 @@ public class QueryRunnerTest {
     public void testNullSqlBatch() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.batch(null, params);
     }
 
     @Test(expected=SQLException.class)
     public void testNullParamsArgBatch() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.batch("select * from blah where ? = ?", null);
     }
 
@@ -211,16 +204,12 @@ public class QueryRunnerTest {
     public void testAddBatchException() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        doThrow(new SQLException()).when(prepStmt).addBatch();
-
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
     public void testExecuteBatchException() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
-
-        doThrow(new SQLException()).when(prepStmt).executeBatch();
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -240,7 +229,6 @@ public class QueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.query(Connection, String, ResultSetHandler<T>, Object...) does not close connections
 
         // call the other variation of query
-        when(meta.getParameterCount()).thenReturn(0);
         sql = "select * from blah";
         runner.query(conn, sql, handler);
 
@@ -261,7 +249,6 @@ public class QueryRunnerTest {
         verify(conn, times(1)).close();    // make sure we closed the connection
 
         // call the other variation of query
-        when(meta.getParameterCount()).thenReturn(0);
         sql = "select * from blah";
         runner.query(sql, handler);
 
@@ -329,7 +316,6 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullConnectionQuery() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.query("select * from blah where ? = ?", handler, "unit", "test");
@@ -337,22 +323,16 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullSqlQuery() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.query(null, handler);
     }
 
     @Test(expected=SQLException.class)
     public void testNullHandlerQuery() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.query("select * from blah where ? = ?", null);
     }
 
     @Test
     public void testExecuteQueryException() throws Exception {
-        doThrow(new SQLException()).when(prepStmt).executeQuery();
-
         callQueryWithException(handler, "unit", "test");
     }
 
@@ -459,8 +439,6 @@ public class QueryRunnerTest {
         when(conn.prepareStatement(any(String.class), eq(Statement.RETURN_GENERATED_KEYS))).thenReturn(prepStmt);
         when(prepStmt.getGeneratedKeys()).thenReturn(results);
         when(results.next()).thenReturn(true).thenReturn(true).thenReturn(false);
-        when(results.getMetaData()).thenReturn(resultsMeta);
-        when(resultsMeta.getColumnCount()).thenReturn(1);
 
         final ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
         {
@@ -530,7 +508,6 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullConnectionUpdate() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.update("select * from blah where ? = ?", "unit", "test");
@@ -538,8 +515,6 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullSqlUpdate() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.update(null);
     }
 
@@ -724,7 +699,6 @@ public class QueryRunnerTest {
         boolean caught = false;
 
         try {
-            when(call.execute()).thenReturn(false);
             when(meta.getParameterCount()).thenReturn(2);
             runner.query("{call my_proc(?, ?)}", handler, params);
 
@@ -754,7 +728,6 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullConnectionExecute() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.execute("{call my_proc(?, ?)}", "unit", "test");
@@ -762,8 +735,6 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullSqlExecute() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.execute(null);
     }
 
@@ -776,8 +747,6 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteException() throws Exception {
-        doThrow(new SQLException()).when(prepStmt).execute();
-
         callExecuteWithException(handler, "unit", "test");
     }
 
@@ -960,7 +929,6 @@ public class QueryRunnerTest {
         boolean caught = false;
 
         try {
-            when(call.execute()).thenReturn(true);
             when(meta.getParameterCount()).thenReturn(2);
             runner.execute("{call my_proc(?, ?)}", handler, params);
 
@@ -990,7 +958,6 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullConnectionExecuteWithResultSet() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.execute("{call my_proc(?, ?)}", handler, "unit", "test");
@@ -998,22 +965,16 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullSqlExecuteWithResultSet() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.execute(null, handler);
     }
 
     @Test(expected=SQLException.class)
     public void testNullHandlerExecuteWithResultSet() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.execute("{call my_proc(?, ?)}", (ResultSetHandler)null);
     }
 
     @Test
     public void testExecuteWithResultSetException() throws Exception {
-        doThrow(new SQLException()).when(prepStmt).execute();
-
         callExecuteWithResultSetWithException(handler, "unit", "test");
     }
 
@@ -1043,7 +1004,6 @@ public class QueryRunnerTest {
     @Test(expected=NullPointerException.class)
     public void testFillStatementWithBeanNullNames() throws Exception {
         final MyBean bean = new MyBean();
-        when(meta.getParameterCount()).thenReturn(3);
         runner.fillStatementWithBean(prepStmt, bean, "a", "b", null);
     }
 

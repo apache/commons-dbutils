@@ -64,11 +64,9 @@ public class AsyncQueryRunnerTest {
 
         when(conn.prepareStatement(any(String.class))).thenReturn(prepStmt);
         when(prepStmt.getParameterMetaData()).thenReturn(meta);
-        when(prepStmt.getResultSet()).thenReturn(results);
         when(prepStmt.executeQuery()).thenReturn(results);
 
         when(conn.createStatement()).thenReturn(stmt);
-        when(stmt.getResultSet()).thenReturn(results);
         when(stmt.executeQuery(any(String.class))).thenReturn(results);
 
         when(results.next()).thenReturn(false);
@@ -178,7 +176,6 @@ public class AsyncQueryRunnerTest {
     public void testNullConnectionBatch() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.batch("select * from blah where ? = ?", params).get();
@@ -188,15 +185,11 @@ public class AsyncQueryRunnerTest {
     public void testNullSqlBatch() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.batch(null, params).get();
     }
 
     @Test(expected=ExecutionException.class)
     public void testNullParamsArgBatch() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.batch("select * from blah where ? = ?", null).get();
     }
 
@@ -204,16 +197,12 @@ public class AsyncQueryRunnerTest {
     public void testAddBatchException() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        doThrow(new SQLException()).when(prepStmt).addBatch();
-
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
     public void testExecuteBatchException() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
-
-        doThrow(new SQLException()).when(prepStmt).executeBatch();
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -233,7 +222,6 @@ public class AsyncQueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we closed the connection
 
         // call the other variation of query
-        when(meta.getParameterCount()).thenReturn(0);
         sql = "select * from blah";
         runner.query(conn, sql, handler).get();
 
@@ -254,7 +242,6 @@ public class AsyncQueryRunnerTest {
         verify(conn, times(1)).close();    // make sure we closed the connection
 
         // call the other variation of query
-        when(meta.getParameterCount()).thenReturn(0);
         sql = "select * from blah";
         runner.query(sql, handler).get();
 
@@ -321,7 +308,6 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=ExecutionException.class)
     public void testNullConnectionQuery() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.query("select * from blah where ? = ?", handler, "unit", "test").get();
@@ -329,22 +315,16 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=ExecutionException.class)
     public void testNullSqlQuery() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.query(null, handler).get();
     }
 
     @Test(expected=ExecutionException.class)
     public void testNullHandlerQuery() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.query("select * from blah where ? = ?", null).get();
     }
 
     @Test
     public void testExecuteQueryException() throws Exception {
-        doThrow(new SQLException()).when(prepStmt).executeQuery();
-
         callQueryWithException(handler, "unit", "test");
     }
 
@@ -483,7 +463,6 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=ExecutionException.class)
     public void testNullConnectionUpdate() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.update("select * from blah where ? = ?", "unit", "test").get();
@@ -491,8 +470,6 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=ExecutionException.class)
     public void testNullSqlUpdate() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
-
         runner.update(null).get();
     }
 
