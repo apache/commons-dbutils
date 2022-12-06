@@ -28,9 +28,11 @@ import java.sql.CallableStatement;
 import java.sql.Types;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class OutParameterTest {
     private static final int INDEX = 2;
     private static final int VALUE = 42;
@@ -41,8 +43,6 @@ public class OutParameterTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);    // init the mocks
-
         parameter = new OutParameter<>(Types.INTEGER, Number.class);
     }
 

@@ -27,9 +27,12 @@ import org.apache.commons.dbutils.RowProcessor;
 import org.apache.commons.dbutils.TestBean;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BeanMapHandlerTest {
 
     private BeanMapHandler<Long, TestBean> bmh;
@@ -40,8 +43,6 @@ public class BeanMapHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
         when(Boolean.valueOf(rs.next())).thenReturn(Boolean.TRUE, Boolean.FALSE);
         when(rs.getObject(1)).thenReturn(Long.valueOf(23L));
         when(rs.getObject(2)).thenReturn(Long.valueOf(23L));

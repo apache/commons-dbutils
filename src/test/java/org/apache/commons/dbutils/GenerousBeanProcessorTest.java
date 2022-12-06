@@ -18,8 +18,9 @@ package org.apache.commons.dbutils;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSetMetaData;
@@ -28,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class GenerousBeanProcessorTest {
 
     GenerousBeanProcessor processor = new GenerousBeanProcessor();
@@ -36,8 +38,6 @@ public class GenerousBeanProcessorTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
         propDescriptors = new PropertyDescriptor[3];
 
         propDescriptors[0] = new PropertyDescriptor("one", TestBean.class);

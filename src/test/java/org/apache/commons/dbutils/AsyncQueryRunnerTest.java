@@ -40,10 +40,13 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @SuppressWarnings("boxing") // test code
+@RunWith(MockitoJUnitRunner.class)
 public class AsyncQueryRunnerTest {
     AsyncQueryRunner runner;
     ArrayHandler handler;
@@ -57,8 +60,6 @@ public class AsyncQueryRunnerTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
         when(dataSource.getConnection()).thenReturn(conn);
 
         when(conn.prepareStatement(any(String.class))).thenReturn(prepStmt);

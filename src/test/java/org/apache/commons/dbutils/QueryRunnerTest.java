@@ -45,12 +45,15 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 @SuppressWarnings("boxing") // test code
+@RunWith(MockitoJUnitRunner.class)
 public class QueryRunnerTest {
     QueryRunner runner;
     ArrayHandler handler;
@@ -66,8 +69,6 @@ public class QueryRunnerTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);    // init the mocks
-
         when(dataSource.getConnection()).thenReturn(conn);
 
         when(conn.prepareStatement(any(String.class))).thenReturn(prepStmt);
