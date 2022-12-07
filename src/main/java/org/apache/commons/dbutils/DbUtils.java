@@ -300,6 +300,22 @@ public final class DbUtils {
         }
     }
 
+
+    /**
+     * Performs a rollback on the <code>Connection</code>, avoid
+     * closing if null and hide any SQLExceptions that occur.
+     *
+     * @param conn Connection to rollback.  A null value is legal.
+     * @since DbUtils 2.0
+     */
+    public static void rollbackQuietly(Connection conn) {
+        try {
+            rollback(conn);
+        } catch (SQLException e) { // NOPMD
+            // quiet
+        }
+    }
+
     /**
      * Performs a rollback on the {@code Connection} then closes it,
      * avoid closing if null.

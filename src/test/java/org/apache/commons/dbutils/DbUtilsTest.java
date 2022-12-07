@@ -227,6 +227,26 @@ public class DbUtilsTest {
     }
 
     @Test
+    public void rollbackQuietlyNull() throws Exception {
+        DbUtils.rollbackQuietly(null);
+    }
+
+    @Test
+    public void rollbackQuietly() throws Exception {
+        Connection mockConnection = mock(Connection.class);
+        DbUtils.rollbackQuietly(mockConnection);
+        verify(mockConnection).rollback();
+    }
+    
+    @Test
+    public void rollbackQuietlyWithException() throws Exception {
+        Connection mockConnection = mock(Connection.class);
+        doThrow(SQLException.class).when(mockConnection).rollback();
+        DbUtils.rollbackQuietly(mockConnection);
+        verify(mockConnection).rollback();
+    }
+    
+    @Test
     public void rollbackAndCloseNull() throws Exception {
         DbUtils.rollbackAndClose(null);
     }
