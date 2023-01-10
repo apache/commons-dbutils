@@ -241,8 +241,6 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <commons.junit.version>5.9.1</commons.junit.version>
-
     <!-- Pin Spotbugs to these versions. Upgrading breaks the build due to new analysis rules. -->
     <!-- See https://issues.apache.org/jira/browse/DBUTILS-149 -->
     <commons.spotbugs.plugin.version>4.4.2</commons.spotbugs.plugin.version>
