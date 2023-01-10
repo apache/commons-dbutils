@@ -250,7 +250,6 @@
     <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
     <checkstyle.config.file>${basedir}/src/site/resources/checkstyle/checkstyle.xml</checkstyle.config.file>
 
-    <commons.japicmp.version>0.16.0</commons.japicmp.version>
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
     <commons.release.version>1.8</commons.release.version>
