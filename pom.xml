@@ -387,7 +387,6 @@
           <threshold>Normal</threshold>
           <effort>Default</effort>
           <excludeFilterFile>${basedir}/src/site/resources/spotbugs/sb-excludes.xml</excludeFilterFile>
-          <failOnError>false</failOnError>
         </configuration>
       </plugin>
       <plugin>
