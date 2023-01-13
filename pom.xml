@@ -243,7 +243,7 @@
 
     <!-- Pin Spotbugs to these versions. Upgrading breaks the build due to new analysis rules. -->
     <!-- See https://issues.apache.org/jira/browse/DBUTILS-149 -->
-    <commons.spotbugs.plugin.version>4.4.2</commons.spotbugs.plugin.version>
+    <commons.spotbugs.plugin.version>4.7.3.0</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.2.3</commons.spotbugs.impl.version>
 
     <dbutils.checkstyle.version>9.3</dbutils.checkstyle.version>
