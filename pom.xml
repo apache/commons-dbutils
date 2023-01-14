@@ -241,7 +241,6 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <dbutils.checkstyle.version>9.3</dbutils.checkstyle.version>
     <checkstyle.header.file>${basedir}/src/site/resources/checkstyle/checkstyle-header.txt</checkstyle.header.file>
     <checkstyle.config.file>${basedir}/src/site/resources/checkstyle/checkstyle.xml</checkstyle.config.file>
 
@@ -272,13 +271,6 @@
             <suppressionsFileExpression>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
             <failOnViolation>false</failOnViolation>
           </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>com.puppycrawl.tools</groupId>
-              <artifactId>checkstyle</artifactId>
-              <version>${dbutils.checkstyle.version}</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
