@@ -136,7 +136,7 @@ o#if($!issue != "") $issue: #else$indent#end ${action} #if($!dueto != "")Thanks 
 #end
 
 For complete information on ${project.name}, including instructions on how to submit bug reports,
-patches, or suggestions for improvement, see the Apache ${project.name} website:
+patches, or suggestions for improvement, see the ${project.name} website:
 
 ${project.url}
 
