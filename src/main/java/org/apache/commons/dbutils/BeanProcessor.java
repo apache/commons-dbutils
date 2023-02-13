@@ -19,6 +19,7 @@ package org.apache.commons.dbutils;
 import org.apache.commons.dbutils.annotations.Column;
 
 import java.beans.BeanInfo;
+import java.beans.IndexedPropertyDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -262,7 +263,12 @@ public class BeanProcessor {
             }
 
             final PropertyDescriptor prop = props[columnToProperty[i]];
-            final Class<?> propType = prop.getPropertyType();
+            Class<?> propType;
+            if (prop instanceof IndexedPropertyDescriptor) {
+                propType = ((IndexedPropertyDescriptor) prop).getIndexedPropertyType();
+            } else {
+                propType = prop.getPropertyType();
+            }
 
             Object value = null;
             if (propType != null) {
