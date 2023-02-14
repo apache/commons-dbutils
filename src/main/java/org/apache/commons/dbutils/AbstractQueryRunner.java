@@ -259,6 +259,28 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
+     * Get the {@code ParameterMetaData} of the prepared statement, if the {@code pmdKnownBroken}
+     * is set to false.
+     *
+     * @param stmt
+     *            PreparedStatement of which to query the metadata of parameters
+     * @return the metadata of parameters
+     * @throws SQLException
+     *            if a database access error occurs
+     */
+    public ParameterMetaData getParameterMetaData(final PreparedStatement stmt) throws SQLException {
+        ParameterMetaData pmd = null;
+        if (!pmdKnownBroken) {
+            try {
+                pmd = stmt.getParameterMetaData();
+            } catch (final SQLFeatureNotSupportedException ex) {
+                pmdKnownBroken = true;
+            }
+        }
+        return pmd;
+    }
+
+    /**
      * Fill the {@code PreparedStatement} replacement parameters with the
      * given objects.
      *
@@ -270,29 +292,48 @@ public abstract class AbstractQueryRunner {
      * @throws SQLException
      *             if a database access error occurs
      */
-    public void fillStatement(final PreparedStatement stmt, final Object... params)
-            throws SQLException {
-
-        // check the parameter count, if we can
+    public void fillStatement(final PreparedStatement stmt, final Object... params) throws SQLException {
         ParameterMetaData pmd = null;
         if (!pmdKnownBroken) {
             try {
-                pmd = stmt.getParameterMetaData();
+                pmd = this.getParameterMetaData(stmt);
                 if (pmd == null) { // can be returned by implementations that don't support the method
                     pmdKnownBroken = true;
-                } else {
-                    final int stmtCount = pmd.getParameterCount();
-                    final int paramsCount = params == null ? 0 : params.length;
-
-                    if (stmtCount != paramsCount) {
-                        throw new SQLException("Wrong number of parameters: expected "
-                                + stmtCount + ", was given " + paramsCount);
-                    }
                 }
             } catch (final SQLFeatureNotSupportedException ex) {
                 pmdKnownBroken = true;
             }
             // TODO see DBUTILS-117: would it make sense to catch any other SQLEx types here?
+        }
+        fillStatement(stmt, pmd, params);
+    }
+
+    /**
+     * Fill the {@code PreparedStatement} replacement parameters with the
+     * given objects, and prefetched parameter metadata.
+     *
+     * @param stmt
+     *            PreparedStatement to fill
+     * @param pmd
+     *            Prefetched parameter metadata
+     * @param params
+     *            Query replacement parameters; {@code null} is a valid
+     *            value to pass in.
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    public void fillStatement(final PreparedStatement stmt, final ParameterMetaData pmd, final Object... params)
+            throws SQLException {
+
+        // check the parameter count, if we can
+        if (!pmdKnownBroken && pmd != null) {
+            final int stmtCount = pmd.getParameterCount();
+            final int paramsCount = params == null ? 0 : params.length;
+
+            if (stmtCount != paramsCount) {
+                throw new SQLException("Wrong number of parameters: expected "
+                        + stmtCount + ", was given " + paramsCount);
+            }
         }
 
         // nothing to do here

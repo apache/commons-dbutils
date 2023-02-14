@@ -18,6 +18,7 @@ package org.apache.commons.dbutils;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -180,12 +181,16 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         PreparedStatement stmt = null;
+        ParameterMetaData pmd = null;
         int[] rows = null;
         try {
             stmt = this.prepareStatement(conn, sql);
+            // When the batch size is large, prefetching parameter metadata before filling
+            // the statement can reduce lots of JDBC communications.
+            pmd = this.getParameterMetaData(stmt);
 
             for (final Object[] param : params) {
-                this.fillStatement(stmt, param);
+                this.fillStatement(stmt, pmd, param);
                 stmt.addBatch();
             }
             rows = stmt.executeBatch();

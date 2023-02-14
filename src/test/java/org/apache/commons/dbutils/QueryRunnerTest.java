@@ -47,7 +47,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -97,6 +96,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch(conn, "select * from blah where ? = ?", params);
 
+        verify(prepStmt, times(1)).getParameterMetaData();
         verify(prepStmt, times(2)).addBatch();
         verify(prepStmt, times(1)).executeBatch();
         verify(prepStmt, times(1)).close();    // make sure we closed the statement
@@ -104,14 +104,20 @@ public class QueryRunnerTest {
     }
 
     private void callGoodBatch(final Object[][] params) throws Exception {
+        callGoodBatch(params, true);
+    }
+
+    private void callGoodBatch(final Object[][] params, boolean pmdCheck) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch("select * from blah where ? = ?", params);
 
+        verify(prepStmt, times(pmdCheck ? 1 : 0)).getParameterMetaData();
         verify(prepStmt, times(2)).addBatch();
         verify(prepStmt, times(1)).executeBatch();
         verify(prepStmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(1)).close();    // make sure we closed the connection
     }
+
 
     @Test
     public void testGoodBatch() throws Exception {
@@ -125,7 +131,7 @@ public class QueryRunnerTest {
         runner = new QueryRunner(dataSource, true);
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
 
-        callGoodBatch(params);
+        callGoodBatch(params, false);
     }
 
     @Test
@@ -144,19 +150,22 @@ public class QueryRunnerTest {
     }
 
 
-
     // helper method for calling batch when an exception is expected
     private void callBatchWithException(final String sql, final Object[][] params) throws Exception {
+        when(meta.getParameterCount()).thenReturn(2);
         boolean caught = false;
 
         try {
             runner.batch(sql, params);
 
+            verify(prepStmt, times(1)).getParameterMetaData();
             verify(prepStmt, times(2)).addBatch();
             verify(prepStmt, times(1)).executeBatch();
             verify(prepStmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
         } catch(final SQLException e) {
+            System.out.println("[TEST] The following exception is expected:");
+            System.out.println(e);
             caught = true;
         }
 
@@ -188,6 +197,7 @@ public class QueryRunnerTest {
         runner.batch("select * from blah where ? = ?", params);
     }
 
+
     @Test(expected=SQLException.class)
     public void testNullSqlBatch() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
@@ -195,24 +205,30 @@ public class QueryRunnerTest {
         runner.batch(null, params);
     }
 
+
     @Test(expected=SQLException.class)
     public void testNullParamsArgBatch() throws Exception {
         runner.batch("select * from blah where ? = ?", null);
     }
 
     @Test
-    public void testAddBatchException() throws Exception {
+    public void testAddBatchExceptionOnAdd() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+
+        doThrow(new SQLException()).when(prepStmt).addBatch();
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
-    public void testExecuteBatchException() throws Exception {
+    public void testExecuteBatchExceptionOnExec() throws Exception {
         final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+
+        doThrow(new SQLException()).when(prepStmt).executeBatch();
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
+
 
 
     //
