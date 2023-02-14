@@ -295,7 +295,15 @@ public abstract class AbstractQueryRunner {
     public void fillStatement(final PreparedStatement stmt, final Object... params) throws SQLException {
         ParameterMetaData pmd = null;
         if (!pmdKnownBroken) {
-            pmd = this.getParameterMetaData(stmt);
+            try {
+                pmd = this.getParameterMetaData(stmt);
+                if (pmd == null) { // can be returned by implementations that don't support the method
+                    pmdKnownBroken = true;
+                }
+            } catch (final SQLFeatureNotSupportedException ex) {
+                pmdKnownBroken = true;
+            }
+            // TODO see DBUTILS-117: would it make sense to catch any other SQLEx types here?
         }
         fillStatement(stmt, pmd, params);
     }
@@ -318,23 +326,14 @@ public abstract class AbstractQueryRunner {
             throws SQLException {
 
         // check the parameter count, if we can
-        if (!pmdKnownBroken) {
-            try {
-                if (pmd == null) { // can be returned by implementations that don't support the method
-                    pmdKnownBroken = true;
-                } else {
-                    final int stmtCount = pmd.getParameterCount();
-                    final int paramsCount = params == null ? 0 : params.length;
+        if (!pmdKnownBroken && pmd != null) {
+            final int stmtCount = pmd.getParameterCount();
+            final int paramsCount = params == null ? 0 : params.length;
 
-                    if (stmtCount != paramsCount) {
-                        throw new SQLException("Wrong number of parameters: expected "
-                                + stmtCount + ", was given " + paramsCount);
-                    }
-                }
-            } catch (final SQLFeatureNotSupportedException ex) {
-                pmdKnownBroken = true;
+            if (stmtCount != paramsCount) {
+                throw new SQLException("Wrong number of parameters: expected "
+                        + stmtCount + ", was given " + paramsCount);
             }
-            // TODO see DBUTILS-117: would it make sense to catch any other SQLEx types here?
         }
 
         // nothing to do here
