@@ -175,6 +175,77 @@ public class BeanProcessorTest extends BaseTestCase {
         }
     }
 
+    private static final class TestNoGetter {
+        public String testField;
+
+        /**
+         * Add setter to trigger JavaBeans to populate a PropertyDescriptor
+         *
+         * @param testField The new testField value
+         */
+        public void setTestField(String testField) {
+            this.testField = testField;
+        }
+    }
+
+    public void testCheckAnnotationOnMissingReadMethod() throws Exception {
+        String[] colNames = new String[] {"testField"};
+        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+
+        String testField = "first";
+        Object[][] rows = new Object[][] {
+                new Object[] {testField}
+        };
+
+        ResultSet rs = MockResultSet.create(metaData, rows);
+        assertTrue(rs.next());
+        TestNoGetter testCls = new TestNoGetter();
+        testCls = beanProc.populateBean(rs, testCls);
+        assertEquals(testCls.testField, "first");
+    }
+
+    private static final class TestWrongSetter {
+        public Integer testField;
+
+        public Integer getTestField() {
+            return testField;
+        }
+
+        /**
+         * dbutils checks for a setter with exactly 1 param. This tests resilience
+         * to a found setter that doesn't match expectations.
+         * @param idx
+         * @param testField
+         */
+        public void setTestField(int idx, Integer testField) {
+            this.testField = testField;
+        }
+    }
+
+    public void testWrongSetterParamCount() throws Exception {
+        String[] colNames = new String[] {"testField"};
+        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+
+        Integer testField = 1;
+        Object[][] rows = new Object[][] {
+                new Object[] {testField}
+        };
+
+        ResultSet rs = MockResultSet.create(metaData, rows);
+        assertTrue(rs.next());
+        TestWrongSetter testCls = new TestWrongSetter();
+        testCls = beanProc.populateBean(rs, testCls);
+        assertNull(testCls.testField);
+    }
+
+    /**
+     * Based on the report in DBUTILS-150. This test validates that indexed
+     * property descriptors are not used, and indexed getter/setter methods
+     * are not inspected.
+     *
+     * @throws Exception
+     * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
+     */
     public void testIndexedPropertyDescriptor() throws Exception {
         String[] colNames = new String[] {"name", "things", "stuff"};
         ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
