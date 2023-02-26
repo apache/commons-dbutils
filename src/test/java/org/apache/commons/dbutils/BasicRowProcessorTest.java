@@ -20,10 +20,13 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Test the BasicRowProcessor class.
@@ -158,4 +161,19 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertFalse(itr.hasNext());
     }
 
+    public void testPutAllContainsKeyAndRemove() throws Exception {
+        Map<String, Object> test = new HashMap<>(3);
+        test.put("fiRst", "thing");
+        test.put("seCond", "another");
+        test.put("thIrd", "more");
+        Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(3);
+        brpMap.putAll(test);
+
+        assertEquals(test, brpMap);
+        assertTrue(brpMap.containsKey("fiRst"));
+        assertTrue(brpMap.containsKey("first"));
+
+        brpMap.remove("first");
+        assertFalse(brpMap.containsKey("first"));
+    }
 }
