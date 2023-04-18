@@ -163,7 +163,7 @@ public class QueryRunnerTest {
             verify(prepStmt, times(1)).executeBatch();
             verify(prepStmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
-        } catch(final SQLException e) {
+        } catch (final SQLException e) {
             System.out.println("[TEST] The following exception is expected:");
             System.out.println(e);
             caught = true;
@@ -306,7 +306,7 @@ public class QueryRunnerTest {
             verify(prepStmt, times(1)).close();    // make sure we closed the statement
             verify(results, times(1)).close();
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(final SQLException e) {
+        } catch (final SQLException e) {
             caught = true;
         }
 
@@ -498,7 +498,7 @@ public class QueryRunnerTest {
             verify(prepStmt, times(1)).executeUpdate();
             verify(prepStmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(final SQLException e) {
+        } catch (final SQLException e) {
             caught = true;
         }
 
@@ -718,7 +718,7 @@ public class QueryRunnerTest {
             when(meta.getParameterCount()).thenReturn(2);
             runner.query("{call my_proc(?, ?)}", handler, params);
 
-        } catch(final SQLException e) {
+        } catch (final SQLException e) {
             caught = true;
         }
 
@@ -948,7 +948,7 @@ public class QueryRunnerTest {
             when(meta.getParameterCount()).thenReturn(2);
             runner.execute("{call my_proc(?, ?)}", handler, params);
 
-        } catch(final SQLException e) {
+        } catch (final SQLException e) {
             caught = true;
         }
 

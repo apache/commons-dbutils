@@ -61,7 +61,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
         try {
             resultSetIterator.rethrow(sQLException);
             fail("Expecting exception: RuntimeException");
-        } catch(final RuntimeException e) {
+        } catch (final RuntimeException e) {
             assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
         }
 

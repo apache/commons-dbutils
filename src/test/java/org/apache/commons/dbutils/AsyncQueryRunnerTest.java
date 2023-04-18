@@ -149,7 +149,7 @@ public class AsyncQueryRunnerTest {
             verify(prepStmt, times(1)).executeBatch();
             verify(prepStmt, times(1)).close();    // make sure the statement is closed
             verify(conn, times(1)).close();    // make sure the connection is closed
-        } catch(final Exception e) {
+        } catch (final Exception e) {
             caught = true;
         }
 
@@ -282,7 +282,7 @@ public class AsyncQueryRunnerTest {
             verify(results, times(1)).close();
             verify(prepStmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(final Exception e) {
+        } catch (final Exception e) {
             caught = true;
         }
 
@@ -416,7 +416,7 @@ public class AsyncQueryRunnerTest {
             verify(prepStmt, times(1)).executeUpdate();
             verify(prepStmt, times(1)).close();    // make sure we closed the statement
             verify(conn, times(1)).close();    // make sure we closed the connection
-        } catch(final Exception e) {
+        } catch (final Exception e) {
             caught = true;
         }
 

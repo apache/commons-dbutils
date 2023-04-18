@@ -46,7 +46,7 @@ public class QueryLoaderTest extends BaseTestCase {
         try {
             queryLoader.load("e");
             fail("Expecting exception: IllegalArgumentException");
-        } catch(final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             assertEquals("e not found.",e.getMessage());
             assertEquals(QueryLoader.class.getName(), e.getStackTrace()[0].getClassName());
         }
