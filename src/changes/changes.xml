@@ -93,7 +93,7 @@ The <action> type attribute can be add,update,fix,remove.
         Bump actions/upload-artifact from 3.1.0 to 3.1.1 #150.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump commons-parent from 50 to 57 #14, #113, #139, #168, #189.
+        Bump commons-parent from 50 to 58 #14, #113, #139, #168, #189.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump junit from 4.12 to 5.9.1 vintage #16, #42, #58.
