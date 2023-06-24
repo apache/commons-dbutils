@@ -79,6 +79,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="add">
         Add github/codeql-action #115.
       </action>
+      <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">
+        [StepSecurity] ci: Harden GitHub Actions #191.
+      </action>            
       <!--  UPDATE -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.11 #109, #141, #145.
