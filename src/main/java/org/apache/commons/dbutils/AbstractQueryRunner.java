@@ -398,17 +398,14 @@ public abstract class AbstractQueryRunner {
             Object value = null;
             final Method method = property.getReadMethod();
             if (method == null) {
-                throw new RuntimeException("No read method for bean property "
-                        + bean.getClass() + " " + property.getName());
+                throw new IllegalArgumentException("No read method for bean property " + bean.getClass() + " " + property.getName());
             }
             try {
                 value = method.invoke(bean);
             } catch (final IllegalArgumentException e) {
-                throw new RuntimeException(
-                        "Couldn't invoke method with 0 arguments: " + method, e);
+                throw new IllegalArgumentException("Couldn't invoke method with 0 arguments: " + method, e);
             } catch (final InvocationTargetException | IllegalAccessException e) {
-                throw new RuntimeException("Couldn't invoke method: " + method,
-                        e);
+                throw new IllegalArgumentException("Couldn't invoke method: " + method, e);
             }
             params[i] = value;
         }
