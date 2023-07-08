@@ -71,7 +71,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
     public void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
 
         final ResultSet resultSet = mock(ResultSet.class);
-        final ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet,null);
+        final ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet, null);
         resultSetIterator.remove();
 
     }
