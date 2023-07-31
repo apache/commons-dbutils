@@ -47,7 +47,7 @@ public class BeanProcessorTest extends BaseTestCase {
             return stuff;
         }
 
-        public String getThing(int idx) {
+        public String getThing(final int idx) {
             return things.get(idx);
         }
 
@@ -55,19 +55,19 @@ public class BeanProcessorTest extends BaseTestCase {
             return things;
         }
 
-        public void setName(String name) {
+        public void setName(final String name) {
             this.name = name;
         }
 
-        public void setStuff(List<String> stuff) {
+        public void setStuff(final List<String> stuff) {
             this.stuff = stuff;
         }
 
-        public void setThing(int idx, String thing) {
+        public void setThing(final int idx, final String thing) {
             this.things.set(idx, thing);
         }
 
-        public void setThings(List<String> things) {
+        public void setThings(final List<String> things) {
             this.things = things;
         }
     }
@@ -165,7 +165,7 @@ public class BeanProcessorTest extends BaseTestCase {
          *
          * @param testField The new testField value
          */
-        public void setTestField(String testField) {
+        public void setTestField(final String testField) {
             this.testField = testField;
         }
     }
@@ -183,7 +183,7 @@ public class BeanProcessorTest extends BaseTestCase {
          * @param idx
          * @param testField
          */
-        public void setTestField(int idx, Integer testField) {
+        public void setTestField(final int idx, final Integer testField) {
             this.testField = testField;
         }
     }
@@ -191,15 +191,15 @@ public class BeanProcessorTest extends BaseTestCase {
     private static final BeanProcessor beanProc = new BeanProcessor();
 
     public void testCheckAnnotationOnMissingReadMethod() throws Exception {
-        String[] colNames = new String[] {"testField"};
-        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+        final String[] colNames = {"testField"};
+        final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
-        String testField = "first";
-        Object[][] rows = new Object[][] {
+        final String testField = "first";
+        final Object[][] rows = {
                 new Object[] {testField}
         };
 
-        ResultSet rs = MockResultSet.create(metaData, rows);
+        final ResultSet rs = MockResultSet.create(metaData, rows);
         assertTrue(rs.next());
         TestNoGetter testCls = new TestNoGetter();
         testCls = beanProc.populateBean(rs, testCls);
@@ -215,17 +215,17 @@ public class BeanProcessorTest extends BaseTestCase {
      * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
      */
     public void testIndexedPropertyDescriptor() throws Exception {
-        String[] colNames = new String[] {"name", "things", "stuff"};
-        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+        final String[] colNames = {"name", "things", "stuff"};
+        final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
-        String name = "first";
-        List<String> things = Arrays.asList("1", "2", "3", "4");
-        List<String> stuff = things;
-        Object[][] rows = new Object[][] {
+        final String name = "first";
+        final List<String> things = Arrays.asList("1", "2", "3", "4");
+        final List<String> stuff = things;
+        final Object[][] rows = {
                 new Object[] {name, things, stuff}
         };
 
-        ResultSet rs = MockResultSet.create(metaData, rows);
+        final ResultSet rs = MockResultSet.create(metaData, rows);
         assertTrue(rs.next());
         IndexedPropertyTestClass testCls = new IndexedPropertyTestClass();
         testCls = beanProc.populateBean(rs, testCls);
@@ -307,15 +307,15 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     public void testWrongSetterParamCount() throws Exception {
-        String[] colNames = new String[] {"testField"};
-        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+        final String[] colNames = {"testField"};
+        final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
-        Integer testField = 1;
-        Object[][] rows = new Object[][] {
+        final Integer testField = 1;
+        final Object[][] rows = {
                 new Object[] {testField}
         };
 
-        ResultSet rs = MockResultSet.create(metaData, rows);
+        final ResultSet rs = MockResultSet.create(metaData, rows);
         assertTrue(rs.next());
         TestWrongSetter testCls = new TestWrongSetter();
         testCls = beanProc.populateBean(rs, testCls);
