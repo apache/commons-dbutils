@@ -171,7 +171,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     @SuppressWarnings("unchecked")
     @Override
     protected K createKey(final ResultSet rs) throws SQLException {
-        return (columnName == null) ?
+        return columnName == null ?
                (K) rs.getObject(columnIndex) :
                (K) rs.getObject(columnName);
     }
