@@ -31,19 +31,19 @@ import junit.framework.TestCase;
 public class BaseTestCase extends TestCase {
 
     private static final String[] columnNames =
-        new String[] {
-            "one",
-            "two",
-            "three",
-            "notInBean",
-            "intTest",
-            "integerTest",
-            "nullObjectTest",
-            "nullPrimitiveTest",
-            "notDate",
-            "columnProcessorDoubleTest",
-            null
-        };
+        {
+        "one",
+        "two",
+        "three",
+        "notInBean",
+        "intTest",
+        "integerTest",
+        "nullObjectTest",
+        "nullPrimitiveTest",
+        "notDate",
+        "columnProcessorDoubleTest",
+        null
+    };
 
     /**
      * The number of columns in the MockResultSet.
@@ -64,36 +64,36 @@ public class BaseTestCase extends TestCase {
     }
 
     private static final Object[] row1 =
-        new Object[] {
-            "1",
-            "2",
-            "THREE",
-            "  notInBean  ",
-            Integer.valueOf(1),
-            Integer.valueOf(2),
-            null,
-            null,
-            new Date(),
-            BigInteger.valueOf(13),
-            null
-        };
+        {
+        "1",
+        "2",
+        "THREE",
+        "  notInBean  ",
+        Integer.valueOf(1),
+        Integer.valueOf(2),
+        null,
+        null,
+        new Date(),
+        BigInteger.valueOf(13),
+        null
+    };
 
     private static final Object[] row2 =
-        new Object[] {
-            "4",
-            "5",
-            "SIX",
-            "  notInBean  ",
-            Integer.valueOf(3),
-            Integer.valueOf(4),
-            null,
-            null,
-            ts789456123,
-            BigInteger.valueOf(13),
-            null
-        };
+        {
+        "4",
+        "5",
+        "SIX",
+        "  notInBean  ",
+        Integer.valueOf(3),
+        Integer.valueOf(4),
+        null,
+        null,
+        ts789456123,
+        BigInteger.valueOf(13),
+        null
+    };
 
-    private static final Object[][] rows = new Object[][] { row1, row2 };
+    private static final Object[][] rows = { row1, row2 };
 
     /**
      * The number of rows in the MockResultSet.
