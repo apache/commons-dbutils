@@ -419,10 +419,10 @@ public final class DbUtils {
      * @param conn Connection to rollback.  A null value is legal.
      * @since DbUtils 2.0
      */
-    public static void rollbackQuietly(Connection conn) {
+    public static void rollbackQuietly(final Connection conn) {
         try {
             rollback(conn);
-        } catch (SQLException e) { // NOPMD
+        } catch (final SQLException e) { // NOPMD
             // quiet
         }
     }
