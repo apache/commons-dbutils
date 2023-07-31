@@ -55,8 +55,8 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * @param resultSet The {@code ResultSet} to wrap.
      * @return wrapped ResultSet
      */
-    public static ResultSet wrap(final ResultSet rs) {
-        return ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(rs));
+    public static ResultSet wrap(final ResultSet resultSet) {
+        return ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(resultSet));
     }
 
     /**
