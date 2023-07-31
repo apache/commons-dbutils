@@ -327,7 +327,7 @@ public abstract class AbstractQueryRunner {
         for (int i = 0; i < params.length; i++) {
             if (params[i] != null) {
                 if (call != null && params[i] instanceof OutParameter) {
-                    ((OutParameter) params[i]).register(call, i + 1);
+                    ((OutParameter<?>) params[i]).register(call, i + 1);
                 } else {
                     stmt.setObject(i + 1, params[i]);
                 }
