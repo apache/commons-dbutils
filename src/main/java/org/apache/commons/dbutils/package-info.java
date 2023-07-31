@@ -19,8 +19,9 @@
  * DbUtils is a small set of classes designed to make working with JDBC  easier. JDBC resource cleanup code is mundane,
  * error prone work so these classes abstract out all of the cleanup tasks from your code leaving you with what you
  * really wanted to do with JDBC in the first place: query and update data.
- *
+ * <p>
  * This package contains the core classes and interfaces - DbUtils, QueryRunner and the ResultSetHandler interface
  * should be your first items of interest.
+ * </p>
  */
 package org.apache.commons.dbutils;

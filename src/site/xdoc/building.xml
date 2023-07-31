@@ -34,11 +34,11 @@
 <section name="Maven Goals">
   <p>
     To build a jar file, change into DBUtils's root directory and run 
-    <strong><code>maven jar</code></strong>.
+    <strong><code>maven package</code></strong>.
     The result will be in the "target" subdirectory.
   </p>
   <p>
-    To build the Javadocs, run <strong><code>maven javadoc</code></strong>.
+    To build the Javadocs, run <strong><code>maven javadoc:javadoc</code></strong>.
     The result will be in "target/docs/apidocs".
   </p>
   <p>
@@ -49,24 +49,6 @@
   <p>
     Further details can be found in the
     <a href="https://commons.apache.org/building.html">commons build instructions</a>.
-  </p>
-</section>
-<!-- ================================================== -->
-<section name="Ant Goals">
-  <p>
-    To build a jar file and the javadocs, change into DBUtils's root directory
-    and run <strong><code>ant dist</code></strong>.
-    The result will be in the "dist" subdirectory.
-  </p>
-</section>
-
-<!-- ================================================== -->
-<section name="Nightly Builds">
-  <p>
-      <a href="http://people.apache.org/builds/commons/nightly/commons-dbutils/">Nightly Builds</a>
-      are built once a day from the current SVN HEAD. These are provided purely for test purposes and are <b>NOT
-      official releases</b> of the Apache Software Foundation - Released versions of Commons DBUtils are
-      available <a href="https://commons.apache.org/dbutils/download_dbutils.cgi">here</a>.
   </p>
 </section>
 

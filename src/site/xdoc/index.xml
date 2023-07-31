@@ -115,7 +115,7 @@ Please see <a href="examples.html">Examples Page</a>.
 <section name="Dependencies">
     <p>
     DbUtils is intentionally a single jar distribution and relies only on 
-    a standard Java 1.6 or later JRE.
+    a standard Java 8 or later JRE.
     </p> 
 </section>
 

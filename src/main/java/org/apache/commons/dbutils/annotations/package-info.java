@@ -16,6 +16,6 @@
  */
 
 /**
- * Annotations used in DbUtils
+ * Annotations used in DbUtils.
  */
 package org.apache.commons.dbutils.annotations;
