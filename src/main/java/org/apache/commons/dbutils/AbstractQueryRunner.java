@@ -327,7 +327,7 @@ public abstract class AbstractQueryRunner {
         for (int i = 0; i < params.length; i++) {
             if (params[i] != null) {
                 if (call != null && params[i] instanceof OutParameter) {
-                    ((OutParameter)params[i]).register(call, i + 1);
+                    ((OutParameter) params[i]).register(call, i + 1);
                 } else {
                     stmt.setObject(i + 1, params[i]);
                 }
@@ -340,9 +340,7 @@ public abstract class AbstractQueryRunner {
                     // TODO see DBUTILS-117: does it make sense to catch SQLEx here?
                     try {
                         /*
-                         * It's not possible for pmdKnownBroken to change from
-                         * true to false, (once true, always true) so pmd cannot
-                         * be null here.
+                         * It's not possible for pmdKnownBroken to change from true to false, (once true, always true) so pmd cannot be null here.
                          */
                         sqlType = pmd.getParameterType(i + 1);
                     } catch (final SQLException e) {
