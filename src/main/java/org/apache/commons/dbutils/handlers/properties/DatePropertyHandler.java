@@ -16,10 +16,10 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
-import org.apache.commons.dbutils.PropertyHandler;
-
 import java.sql.Timestamp;
 import java.util.Date;
+
+import org.apache.commons.dbutils.PropertyHandler;
 
 /**
  * {@link PropertyHandler} for date fields. Will convert {@link java.sql.Date}, {@link java.sql.Time}, and

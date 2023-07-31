@@ -16,6 +16,8 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.mockito.Mockito.mock;
+
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,8 +25,6 @@ import java.util.Map.Entry;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
-
-import static org.mockito.Mockito.mock;
 
 public class KeyedHandlerTest extends BaseTestCase {
 

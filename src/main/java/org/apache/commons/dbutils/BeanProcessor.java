@@ -16,8 +16,6 @@
  */
 package org.apache.commons.dbutils;
 
-import org.apache.commons.dbutils.annotations.Column;
-
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -34,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
+
+import org.apache.commons.dbutils.annotations.Column;
 
 /**
  * <p>

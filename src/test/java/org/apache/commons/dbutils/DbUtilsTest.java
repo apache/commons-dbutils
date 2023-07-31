@@ -16,9 +16,12 @@
  */
 package org.apache.commons.dbutils;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -27,12 +30,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class DbUtilsTest {
 

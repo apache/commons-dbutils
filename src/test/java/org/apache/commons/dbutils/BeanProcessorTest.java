@@ -16,7 +16,7 @@
  */
 package org.apache.commons.dbutils;
 
-import org.apache.commons.dbutils.annotations.Column;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertArrayEquals;
+import org.apache.commons.dbutils.annotations.Column;
 
 public class BeanProcessorTest extends BaseTestCase {
 

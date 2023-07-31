@@ -16,13 +16,13 @@
  */
 package org.apache.commons.dbutils;
 
-import org.junit.Test;
+import static org.mockito.Mockito.mock;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 
-import static org.mockito.Mockito.mock;
+import org.junit.Test;
 
 /**
  * ResultSetIteratorTest

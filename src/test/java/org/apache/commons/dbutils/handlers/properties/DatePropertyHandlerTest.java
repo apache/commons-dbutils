@@ -16,16 +16,16 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 public class DatePropertyHandlerTest {
     private DatePropertyHandler handler;

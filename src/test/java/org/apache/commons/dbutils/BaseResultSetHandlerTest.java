@@ -16,13 +16,13 @@
  */
 package org.apache.commons.dbutils;
 
-import org.junit.Test;
-
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+
+import org.junit.Test;
 
 public final class BaseResultSetHandlerTest extends BaseTestCase {
 

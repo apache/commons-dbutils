@@ -29,8 +29,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
-import java.util.logging.Logger;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * A collection of JDBC helper methods.  This class is thread safe.

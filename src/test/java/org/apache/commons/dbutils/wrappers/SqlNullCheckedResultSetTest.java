@@ -16,6 +16,9 @@
  */
 package org.apache.commons.dbutils.wrappers;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import java.io.ByteArrayInputStream;
 import java.io.CharArrayReader;
 import java.io.InputStream;
@@ -40,9 +43,6 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ProxyFactory;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * Test cases for {@code SqlNullCheckedResultSet} class.
