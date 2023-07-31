@@ -74,7 +74,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Maps normal method names (ie. "getBigDecimal") to the corresponding null
      * Method object (ie. getNullBigDecimal).
      */
-    private static final Map<String, Method> nullMethods = new HashMap<>();
+    private static final Map<String, Method> NULL_METHODS = new HashMap<>();
 
     /**
      * The {@code getNull} string prefix.
@@ -89,7 +89,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
             if (methodName.startsWith(GET_NULL_PREFIX)) {
                 final String normalName = "get" + methodName.substring(GET_NULL_PREFIX.length());
-                nullMethods.put(normalName, method);
+                NULL_METHODS.put(normalName, method);
             }
         }
     }
@@ -387,7 +387,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
         final Object result = method.invoke(this.rs, args);
 
-        final Method nullMethod = nullMethods.get(method.getName());
+        final Method nullMethod = NULL_METHODS.get(method.getName());
 
         // Check nullMethod != null first so that we don't call wasNull()
         // before a true getter method was invoked on the ResultSet.
