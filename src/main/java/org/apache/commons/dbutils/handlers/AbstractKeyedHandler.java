@@ -40,11 +40,11 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.
-     * @param rs ResultSet to create a key from
+     * @param resultSet ResultSet to create a key from
      * @return K from the configured key column name/index
      * @throws SQLException if a database access error occurs
      */
-    protected abstract K createKey(ResultSet rs) throws SQLException;
+    protected abstract K createKey(ResultSet resultSet) throws SQLException;
 
     /**
      * This factory method is called by {@code handle()} to create the Map
@@ -60,25 +60,25 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * This factory method is called by {@code handle()} to store the
      * current {@code ResultSet} row in some object.
-     * @param rs ResultSet to create a row from
+     * @param resultSet ResultSet to create a row from
      * @return V object created from the current row
      * @throws SQLException if a database access error occurs
      */
-    protected abstract V createRow(ResultSet rs) throws SQLException;
+    protected abstract V createRow(ResultSet resultSet) throws SQLException;
 
     /**
      * Convert each row's columns into a Map and store then
      * in a {@code Map} under {@code ResultSet.getObject(key)} key.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return A {@code Map}, never {@code null}.
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public Map<K, V> handle(final ResultSet rs) throws SQLException {
+    public Map<K, V> handle(final ResultSet resultSet) throws SQLException {
         final Map<K, V> result = createMap();
-        while (rs.next()) {
-            result.put(createKey(rs), createRow(rs));
+        while (resultSet.next()) {
+            result.put(createKey(resultSet), createRow(resultSet));
         }
         return result;
     }
