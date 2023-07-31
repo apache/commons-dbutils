@@ -118,31 +118,27 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Calls update after checking the parameters to ensure nothing is null.
-     * @param conn The connection to use for the batch call.
-     * @param closeConn True if the connection should be closed, false otherwise.
-     * @param sql The SQL statement to execute.
+     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
+     *
+     * @param conn The Connection to use to run the query.  The caller is
+     * responsible for closing this Connection.
+     * @param sql The SQL to execute.
      * @param params An array of query replacement parameters.  Each row in
      * this array is one set of batch replacement values.
-     * @return The number of rows updated in the batch.
-     * @throws SQLException If there are database or parameter errors.
+     * @return The number of rows updated per statement.
+     * @throws SQLException if a database access error occurs
+     * @since 1.1
      */
-    private int[] batch(final Connection conn, final boolean closeConn, final String sql, final Object[][] params) throws SQLException {
+    public int[] batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (params == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
         }
 
@@ -165,28 +161,9 @@ public class QueryRunner extends AbstractQueryRunner {
             this.rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return rows;
-    }
-
-    /**
-     * Execute a batch of SQL INSERT, UPDATE, or DELETE queries.
-     *
-     * @param conn The Connection to use to run the query.  The caller is
-     * responsible for closing this Connection.
-     * @param sql The SQL to execute.
-     * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values.
-     * @return The number of rows updated per statement.
-     * @throws SQLException if a database access error occurs
-     * @since 1.1
-     */
-    public int[] batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
-        return this.batch(conn, false, sql, params);
     }
 
     /**
@@ -203,9 +180,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.1
      */
     public int[] batch(final String sql, final Object[][] params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.batch(conn, true, sql, params);
+        try (Connection conn = this.prepareConnection()) {
+            return this.batch(conn, sql, params);
+        }
     }
 
     /**
