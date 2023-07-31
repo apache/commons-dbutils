@@ -17,7 +17,6 @@
 package org.apache.commons.dbutils;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 
 /**
  * ProxyFactoryTest performs simple type checking on proxy objects returned
@@ -25,15 +24,7 @@ import java.lang.reflect.Method;
  */
 public class ProxyFactoryTest extends BaseTestCase {
 
-    private static final InvocationHandler stub = new InvocationHandler() {
-
-        @Override
-        public Object invoke(final Object proxy, final Method method, final Object[] args)
-            throws Throwable {
-
-            return null;
-        }
-    };
+    private static final InvocationHandler stub = (proxy, method, args) -> null;
 
     public void testCreateCallableStatement() {
         assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
