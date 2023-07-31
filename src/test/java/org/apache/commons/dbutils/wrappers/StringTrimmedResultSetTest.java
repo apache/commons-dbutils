@@ -50,7 +50,7 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
      */
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
-        final Object[][] rows = new Object[][] { { null }
+        final Object[][] rows = { { null }
         };
         ResultSet rs = MockResultSet.create(metaData, rows);
 
