@@ -42,7 +42,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
     /**
      * An empty array to return when no more rows are available in the ResultSet.
      */
-    private static final Object[] EMPTY_ARRAY = new Object[0];
+    private static final Object[] EMPTY_ARRAY = {};
 
     /**
      * The RowProcessor implementation to use when converting rows
