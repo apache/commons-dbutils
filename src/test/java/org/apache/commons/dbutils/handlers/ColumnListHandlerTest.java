@@ -45,8 +45,8 @@ public class ColumnListHandlerTest extends BaseTestCase {
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        assertEquals(new Integer(1), results.get(0));
-        assertEquals(new Integer(3), results.get(1));
+        assertEquals(Integer.valueOf(1), results.get(0));
+        assertEquals(Integer.valueOf(3), results.get(1));
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
