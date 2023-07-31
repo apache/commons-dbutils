@@ -271,15 +271,12 @@ public class QueryRunner extends AbstractQueryRunner {
             boolean moreResultSets = stmt.execute();
             // Handle multiple result sets by passing them through the handler
             // retaining the final result
-            ResultSet rs = null;
             while (moreResultSets) {
-                try {
-                    rs = this.wrap(stmt.getResultSet());
+                try (@SuppressWarnings("resource")
+                // assume the ResultSet wrapper properly closes
+                ResultSet rs = this.wrap(stmt.getResultSet())) {
                     results.add(rsh.handle(rs));
                     moreResultSets = stmt.getMoreResults();
-
-                } finally {
-                    close(rs);
                 }
             }
             this.retrieveOutParameters(stmt, params);
