@@ -61,7 +61,7 @@ The <action> type attribute can be add,update,fix,remove.
         org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler&lt;T>, Object...) Exception in closing statement leave connections open.
       </action>
       <action dev="ggregory" type="fix" issue="DBUTILS-139" due-to="Gary Gregory">
-        Update Java requirement from version 6 to 7.
+        Update Java requirement from version 6 to 8.
       </action>
       <action due-to="thecarlhall" type="update">
         clirr, checkstyle, and spotbugs configured as part of default build.
