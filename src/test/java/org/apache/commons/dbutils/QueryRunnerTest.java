@@ -160,7 +160,7 @@ public class QueryRunnerTest {
         callGoodBatch(params, true);
     }
 
-    private void callGoodBatch(final Object[][] params, boolean pmdCheck) throws Exception {
+    private void callGoodBatch(final Object[][] params, final boolean pmdCheck) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch("select * from blah where ? = ?", params);
 
@@ -613,7 +613,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testAddBatchExceptionOnAdd() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(prepStmt).addBatch();
 
@@ -628,7 +628,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testExecuteBatchExceptionOnExec() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(prepStmt).executeBatch();
 
@@ -696,7 +696,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testGoodBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -705,7 +705,7 @@ public class QueryRunnerTest {
     @Test
     public void testGoodBatchDefaultConstructor() throws Exception {
         runner = new QueryRunner();
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(conn, params);
     }
@@ -720,18 +720,13 @@ public class QueryRunnerTest {
         when(prepStmt.getGeneratedKeys()).thenReturn(results);
         when(results.next()).thenReturn(true).thenReturn(true).thenReturn(false);
 
-        final ResultSetHandler<List<Object>> handler = new ResultSetHandler<List<Object>>()
-        {
-            @Override
-            public List<Object> handle(final ResultSet rs) throws SQLException
+        final ResultSetHandler<List<Object>> handler = rs -> {
+            final List<Object> objects = new ArrayList<>();
+            while (rs.next())
             {
-                final List<Object> objects = new ArrayList<>();
-                while (rs.next())
-                {
-                    objects.add(new Object());
-                }
-                return objects;
+                objects.add(new Object());
             }
+            return objects;
         };
 
         final Object[][] params = new Object[2][2];
@@ -753,7 +748,7 @@ public class QueryRunnerTest {
     @Test
     public void testGoodBatchPmdTrue() throws Exception {
         runner = new QueryRunner(dataSource, true);
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params, false);
     }
@@ -802,7 +797,7 @@ public class QueryRunnerTest {
         when(results.next()).thenReturn(true).thenReturn(false);
         when(results.getObject(1)).thenReturn(1L);
 
-        final Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<Long>(), "unit", "test");
+        final Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<>(), "unit", "test");
 
         verify(prepStmt, times(1)).executeUpdate();
         verify(prepStmt, times(1)).close();    // make sure we closed the statement
@@ -867,7 +862,7 @@ public class QueryRunnerTest {
 
     @Test(expected=SQLException.class)
     public void testNullConnectionBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         when(dataSource.getConnection()).thenReturn(null);
 
@@ -930,14 +925,14 @@ public class QueryRunnerTest {
 
     @Test
     public void testNullParamsBatch() throws Exception {
-        final String[][] params = new String[][] { { null, "unit" }, { "test", null } };
+        final String[][] params = { { null, "unit" }, { "test", null } };
 
         callGoodBatch(params);
     }
 
     @Test(expected=SQLException.class)
     public void testNullSqlBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         runner.batch(null, params);
     }
@@ -977,7 +972,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testTooFewParamsBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit" }, { "test" } };
+        final String[][] params = { { "unit" }, { "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -1004,7 +999,7 @@ public class QueryRunnerTest {
 
     @Test
     public void testTooManyParamsBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit", "unit" }, { "test", "test", "test" } };
+        final String[][] params = { { "unit", "unit", "unit" }, { "test", "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
