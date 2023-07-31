@@ -91,21 +91,6 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     /**
-     * Creates a new instance of BeanMapHandler. The value of the first column
-     * of each row will be a key in the Map.
-     *
-     * @param type
-     *            The Class that objects returned from {@code createRow()}
-     *            are created from.
-     * @param convert
-     *            The {@code RowProcessor} implementation to use when
-     *            converting rows into Beans
-     */
-    public BeanMapHandler(final Class<V> type, final RowProcessor convert) {
-        this(type, convert, 1, null);
-    }
-
-    /**
      * Creates a new instance of BeanMapHandler.
      *
      * @param type
@@ -120,17 +105,18 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     /**
-     * Creates a new instance of BeanMapHandler.
+     * Creates a new instance of BeanMapHandler. The value of the first column
+     * of each row will be a key in the Map.
      *
      * @param type
      *            The Class that objects returned from {@code createRow()}
      *            are created from.
-     * @param columnName
-     *            The values to use as keys in the Map are retrieved from the
-     *            column with this name.
+     * @param convert
+     *            The {@code RowProcessor} implementation to use when
+     *            converting rows into Beans
      */
-    public BeanMapHandler(final Class<V> type, final String columnName) {
-        this(type, ArrayHandler.ROW_PROCESSOR, 1, columnName);
+    public BeanMapHandler(final Class<V> type, final RowProcessor convert) {
+        this(type, convert, 1, null);
     }
 
     /**
@@ -152,6 +138,20 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
         this.convert = convert;
         this.columnIndex = columnIndex;
         this.columnName = columnName;
+    }
+
+    /**
+     * Creates a new instance of BeanMapHandler.
+     *
+     * @param type
+     *            The Class that objects returned from {@code createRow()}
+     *            are created from.
+     * @param columnName
+     *            The values to use as keys in the Map are retrieved from the
+     *            column with this name.
+     */
+    public BeanMapHandler(final Class<V> type, final String columnName) {
+        this(type, ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
     /**

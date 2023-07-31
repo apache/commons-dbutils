@@ -24,20 +24,6 @@ import org.junit.Test;
 
 public class StatementConfigurationTest {
     /**
-     * Test that an empty builder yields null values for all configuration settings.
-     */
-    @Test
-    public void testEmptyBuilder() {
-        final StatementConfiguration config = new StatementConfiguration.Builder().build();
-
-        assertFalse(config.isFetchDirectionSet());
-        assertFalse(config.isFetchSizeSet());
-        assertFalse(config.isMaxFieldSizeSet());
-        assertFalse(config.isMaxRowsSet());
-        assertFalse(config.isQueryTimeoutSet());
-    }
-
-    /**
      * Test that a builder with all values set yields like values in the constructed configuration.
      */
     @Test
@@ -78,5 +64,19 @@ public class StatementConfigurationTest {
         assertEquals(Integer.valueOf(3), config.getMaxFieldSize());
         assertEquals(Integer.valueOf(4), config.getMaxRows());
         assertEquals(Integer.valueOf(5), config.getQueryTimeout());
+    }
+
+    /**
+     * Test that an empty builder yields null values for all configuration settings.
+     */
+    @Test
+    public void testEmptyBuilder() {
+        final StatementConfiguration config = new StatementConfiguration.Builder().build();
+
+        assertFalse(config.isFetchDirectionSet());
+        assertFalse(config.isFetchSizeSet());
+        assertFalse(config.isMaxFieldSizeSet());
+        assertFalse(config.isMaxRowsSet());
+        assertFalse(config.isQueryTimeoutSet());
     }
 }

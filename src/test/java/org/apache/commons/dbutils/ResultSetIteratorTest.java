@@ -29,6 +29,15 @@ import org.junit.Test;
  */
 public class ResultSetIteratorTest extends BaseTestCase {
 
+    @Test
+    public void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
+
+        final ResultSet resultSet = mock(ResultSet.class);
+        final ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet, null);
+        resultSetIterator.remove();
+
+    }
+
     public void testNext() {
 
         final Iterator<Object[]> iter = new ResultSetIterator(this.rs);
@@ -64,15 +73,6 @@ public class ResultSetIteratorTest extends BaseTestCase {
         } catch (final RuntimeException e) {
             assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
         }
-
-    }
-
-    @Test
-    public void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
-
-        final ResultSet resultSet = mock(ResultSet.class);
-        final ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet, null);
-        resultSetIterator.remove();
 
     }
 

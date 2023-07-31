@@ -23,13 +23,13 @@ import org.apache.commons.dbutils.PropertyHandler;
  */
 public class StringEnumPropertyHandler implements PropertyHandler {
     @Override
-    public boolean match(final Class<?> parameter, final Object value) {
-        return value instanceof String && parameter.isEnum();
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public Object apply(final Class<?> parameter, final Object value) {
         return Enum.valueOf(parameter.asSubclass(Enum.class), (String) value);
+    }
+
+    @Override
+    public boolean match(final Class<?> parameter, final Object value) {
+        return value instanceof String && parameter.isEnum();
     }
 }

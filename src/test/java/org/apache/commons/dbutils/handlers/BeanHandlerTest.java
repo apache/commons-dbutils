@@ -27,15 +27,16 @@ import org.apache.commons.dbutils.TestBean;
  */
 public class BeanHandlerTest extends BaseTestCase {
 
-    public void testHandle() throws SQLException {
-        final ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
-        final TestBean results = h.handle(this.rs);
+    public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
 
-        assertNotNull(results);
-        assertEquals("1", results.getOne());
-        assertEquals("2", results.getTwo());
-        assertEquals(TestBean.Ordinal.THREE, results.getThree());
-        assertEquals("not set", results.getDoNotSet());
+    public interface SubTestBeanInterface {
+        String getDoNotSet();
+
+        String getOne();
+
+        TestBean.Ordinal getThree();
+
+        String getTwo();
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
@@ -45,8 +46,8 @@ public class BeanHandlerTest extends BaseTestCase {
         assertNull(results);
     }
 
-    public void testHandleToSuperClass() throws SQLException {
-        final ResultSetHandler<TestBean> h = new BeanHandler<TestBean>(SubTestBean.class);
+    public void testHandle() throws SQLException {
+        final ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
         final TestBean results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -67,15 +68,14 @@ public class BeanHandlerTest extends BaseTestCase {
         assertEquals("not set", results.getDoNotSet());
     }
 
-    public interface SubTestBeanInterface {
-        String getOne();
+    public void testHandleToSuperClass() throws SQLException {
+        final ResultSetHandler<TestBean> h = new BeanHandler<TestBean>(SubTestBean.class);
+        final TestBean results = h.handle(this.rs);
 
-        TestBean.Ordinal getThree();
-
-        String getTwo();
-
-        String getDoNotSet();
+        assertNotNull(results);
+        assertEquals("1", results.getOne());
+        assertEquals("2", results.getTwo());
+        assertEquals(TestBean.Ordinal.THREE, results.getThree());
+        assertEquals("not set", results.getDoNotSet());
     }
-
-    public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
 }

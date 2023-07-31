@@ -26,9 +26,6 @@ import java.sql.ResultSetMetaData;
  */
 public class MockResultSetMetaData implements InvocationHandler {
 
-    private String[] columnNames = null;
-    private String[] columnLabels = null;
-
     /**
      * Create a {@code MockResultSetMetaData} proxy object.  This is
      * equivalent to:
@@ -43,6 +40,9 @@ public class MockResultSetMetaData implements InvocationHandler {
         return ProxyFactory.instance().createResultSetMetaData(
             new MockResultSetMetaData(columnNames));
     }
+    private String[] columnNames = null;
+
+    private String[] columnLabels = null;
 
     public MockResultSetMetaData(final String[] columnNames) {
         this.columnNames = columnNames;

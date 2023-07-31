@@ -29,6 +29,14 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class MapListHandlerTest extends BaseTestCase {
 
+    public void testEmptyResultSetHandle() throws SQLException {
+        final ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
+        final List<Map<String,Object>> results = h.handle(this.emptyResultSet);
+
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
+
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
         final List<Map<String,Object>> results = h.handle(this.rs);
@@ -53,14 +61,6 @@ public class MapListHandlerTest extends BaseTestCase {
         assertEquals("SIX", row.get("Three"));
 
         assertFalse(iter.hasNext());
-    }
-
-    public void testEmptyResultSetHandle() throws SQLException {
-        final ResultSetHandler<List<Map<String,Object>>> h = new MapListHandler();
-        final List<Map<String,Object>> results = h.handle(this.emptyResultSet);
-
-        assertNotNull(results);
-        assertTrue(results.isEmpty());
     }
 
 }

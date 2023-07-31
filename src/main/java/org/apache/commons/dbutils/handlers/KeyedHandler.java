@@ -77,17 +77,6 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     }
 
     /**
-     * Creates a new instance of KeyedHandler.  The value of the first column
-     * of each row will be a key in the Map.
-     *
-     * @param convert The {@code RowProcessor} implementation
-     * to use when converting rows into Maps
-     */
-    public KeyedHandler(final RowProcessor convert) {
-        this(convert, 1, null);
-    }
-
-    /**
      * Creates a new instance of KeyedHandler.
      *
      * @param columnIndex The values to use as keys in the Map are
@@ -98,13 +87,14 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     }
 
     /**
-     * Creates a new instance of KeyedHandler.
+     * Creates a new instance of KeyedHandler.  The value of the first column
+     * of each row will be a key in the Map.
      *
-     * @param columnName The values to use as keys in the Map are
-     * retrieved from the column with this name.
+     * @param convert The {@code RowProcessor} implementation
+     * to use when converting rows into Maps
      */
-    public KeyedHandler(final String columnName) {
-        this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
+    public KeyedHandler(final RowProcessor convert) {
+        this(convert, 1, null);
     }
 
     /** Private Helper
@@ -120,6 +110,16 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
         this.convert = convert;
         this.columnIndex = columnIndex;
         this.columnName = columnName;
+    }
+
+    /**
+     * Creates a new instance of KeyedHandler.
+     *
+     * @param columnName The values to use as keys in the Map are
+     * retrieved from the column with this name.
+     */
+    public KeyedHandler(final String columnName) {
+        this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
     /**
      * This factory method is called by {@code handle()} to retrieve the

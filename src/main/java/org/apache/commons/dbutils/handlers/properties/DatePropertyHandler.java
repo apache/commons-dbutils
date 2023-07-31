@@ -27,25 +27,6 @@ import org.apache.commons.dbutils.PropertyHandler;
  */
 public class DatePropertyHandler implements PropertyHandler {
     @Override
-    public boolean match(final Class<?> parameter, final Object value) {
-        if (value instanceof Date) {
-            final String targetType = parameter.getName();
-            if ("java.sql.Date".equals(targetType)) {
-                return true;
-            }
-            if ("java.sql.Time".equals(targetType)) {
-                return true;
-            }
-            if ("java.sql.Timestamp".equals(targetType)
-                    && !Timestamp.class.isInstance(value)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     public Object apply(final Class<?> parameter, Object value) {
         final String targetType = parameter.getName();
         final Date dateValue = (Date) value;
@@ -62,5 +43,24 @@ public class DatePropertyHandler implements PropertyHandler {
         }
 
         return value;
+    }
+
+    @Override
+    public boolean match(final Class<?> parameter, final Object value) {
+        if (value instanceof Date) {
+            final String targetType = parameter.getName();
+            if ("java.sql.Date".equals(targetType)) {
+                return true;
+            }
+            if ("java.sql.Time".equals(targetType)) {
+                return true;
+            }
+            if ("java.sql.Timestamp".equals(targetType)
+                    && !Timestamp.class.isInstance(value)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

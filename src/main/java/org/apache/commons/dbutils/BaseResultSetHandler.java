@@ -61,33 +61,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public final T handle(final ResultSet rs) throws SQLException {
-        if (this.rs != null) {
-            throw new IllegalStateException("Re-entry not allowed!");
-        }
-
-        this.rs = rs;
-
-        try {
-            return handle();
-        } finally {
-            this.rs = null;
-        }
-    }
-
-    /**
-     * Turn the {@code ResultSet} into an Object.
-     *
-     * @return An Object initialized with {@code ResultSet} data
-     * @throws SQLException if a database access error occurs
-     * @see ResultSetHandler#handle(ResultSet)
-     */
-    protected abstract T handle() throws SQLException;
-
-    /**
-     * {@inheritDoc}
-     */
     protected final boolean absolute(final int row) throws SQLException {
         return rs.absolute(row);
     }
@@ -148,6 +121,10 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
         return rs.first();
     }
 
+    protected final ResultSet getAdaptedResultSet() {
+        return rs;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -179,14 +156,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    @Deprecated
-    protected final BigDecimal getBigDecimal(final int columnIndex, final int scale) throws SQLException {
-        return rs.getBigDecimal(columnIndex, scale);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final BigDecimal getBigDecimal(final int columnIndex) throws SQLException {
         return rs.getBigDecimal(columnIndex);
     }
@@ -195,8 +164,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      * {@inheritDoc}
      */
     @Deprecated
-    protected final BigDecimal getBigDecimal(final String columnLabel, final int scale) throws SQLException {
-        return rs.getBigDecimal(columnLabel, scale);
+    protected final BigDecimal getBigDecimal(final int columnIndex, final int scale) throws SQLException {
+        return rs.getBigDecimal(columnIndex, scale);
     }
 
     /**
@@ -204,6 +173,14 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final BigDecimal getBigDecimal(final String columnLabel) throws SQLException {
         return rs.getBigDecimal(columnLabel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Deprecated
+    protected final BigDecimal getBigDecimal(final String columnLabel, final int scale) throws SQLException {
+        return rs.getBigDecimal(columnLabel, scale);
     }
 
     /**
@@ -321,13 +298,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Date getDate(final int columnIndex, final Calendar cal) throws SQLException {
-        return rs.getDate(columnIndex, cal);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final Date getDate(final int columnIndex) throws SQLException {
         return rs.getDate(columnIndex);
     }
@@ -335,8 +305,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Date getDate(final String columnLabel, final Calendar cal) throws SQLException {
-        return rs.getDate(columnLabel, cal);
+    protected final Date getDate(final int columnIndex, final Calendar cal) throws SQLException {
+        return rs.getDate(columnIndex, cal);
     }
 
     /**
@@ -344,6 +314,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final Date getDate(final String columnLabel) throws SQLException {
         return rs.getDate(columnLabel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final Date getDate(final String columnLabel, final Calendar cal) throws SQLException {
+        return rs.getDate(columnLabel, cal);
     }
 
     /**
@@ -475,13 +452,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Object getObject(final int columnIndex, final Map<String, Class<?>> map) throws SQLException {
-        return rs.getObject(columnIndex, map);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final Object getObject(final int columnIndex) throws SQLException {
         return rs.getObject(columnIndex);
     }
@@ -489,8 +459,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Object getObject(final String columnLabel, final Map<String, Class<?>> map) throws SQLException {
-        return rs.getObject(columnLabel, map);
+    protected final Object getObject(final int columnIndex, final Map<String, Class<?>> map) throws SQLException {
+        return rs.getObject(columnIndex, map);
     }
 
     /**
@@ -498,6 +468,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final Object getObject(final String columnLabel) throws SQLException {
         return rs.getObject(columnLabel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final Object getObject(final String columnLabel, final Map<String, Class<?>> map) throws SQLException {
+        return rs.getObject(columnLabel, map);
     }
 
     /**
@@ -538,20 +515,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final SQLXML getSQLXML(final int columnIndex) throws SQLException {
-        return rs.getSQLXML(columnIndex);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected final SQLXML getSQLXML(final String columnLabel) throws SQLException {
-        return rs.getSQLXML(columnLabel);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final short getShort(final int columnIndex) throws SQLException {
         return rs.getShort(columnIndex);
     }
@@ -561,6 +524,20 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final short getShort(final String columnLabel) throws SQLException {
         return rs.getShort(columnLabel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final SQLXML getSQLXML(final int columnIndex) throws SQLException {
+        return rs.getSQLXML(columnIndex);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final SQLXML getSQLXML(final String columnLabel) throws SQLException {
+        return rs.getSQLXML(columnLabel);
     }
 
     /**
@@ -587,13 +564,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Time getTime(final int columnIndex, final Calendar cal) throws SQLException {
-        return rs.getTime(columnIndex, cal);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final Time getTime(final int columnIndex) throws SQLException {
         return rs.getTime(columnIndex);
     }
@@ -601,8 +571,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Time getTime(final String columnLabel, final Calendar cal) throws SQLException {
-        return rs.getTime(columnLabel, cal);
+    protected final Time getTime(final int columnIndex, final Calendar cal) throws SQLException {
+        return rs.getTime(columnIndex, cal);
     }
 
     /**
@@ -615,8 +585,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Timestamp getTimestamp(final int columnIndex, final Calendar cal) throws SQLException {
-        return rs.getTimestamp(columnIndex, cal);
+    protected final Time getTime(final String columnLabel, final Calendar cal) throws SQLException {
+        return rs.getTime(columnLabel, cal);
     }
 
     /**
@@ -629,8 +599,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final Timestamp getTimestamp(final String columnLabel, final Calendar cal) throws SQLException {
-        return rs.getTimestamp(columnLabel, cal);
+    protected final Timestamp getTimestamp(final int columnIndex, final Calendar cal) throws SQLException {
+        return rs.getTimestamp(columnIndex, cal);
     }
 
     /**
@@ -643,22 +613,15 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final Timestamp getTimestamp(final String columnLabel, final Calendar cal) throws SQLException {
+        return rs.getTimestamp(columnLabel, cal);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final int getType() throws SQLException {
         return rs.getType();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected final URL getURL(final int columnIndex) throws SQLException {
-        return rs.getURL(columnIndex);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected final URL getURL(final String columnLabel) throws SQLException {
-        return rs.getURL(columnLabel);
     }
 
     /**
@@ -680,8 +643,49 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final URL getURL(final int columnIndex) throws SQLException {
+        return rs.getURL(columnIndex);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final URL getURL(final String columnLabel) throws SQLException {
+        return rs.getURL(columnLabel);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final SQLWarning getWarnings() throws SQLException {
         return rs.getWarnings();
+    }
+
+    /**
+     * Turn the {@code ResultSet} into an Object.
+     *
+     * @return An Object initialized with {@code ResultSet} data
+     * @throws SQLException if a database access error occurs
+     * @see ResultSetHandler#handle(ResultSet)
+     */
+    protected abstract T handle() throws SQLException;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final T handle(final ResultSet rs) throws SQLException {
+        if (this.rs != null) {
+            throw new IllegalStateException("Re-entry not allowed!");
+        }
+
+        this.rs = rs;
+
+        try {
+            return handle();
+        } finally {
+            this.rs = null;
+        }
     }
 
     /**
@@ -841,6 +845,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final void updateAsciiStream(final int columnIndex, final InputStream x) throws SQLException {
+        rs.updateAsciiStream(columnIndex, x);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final void updateAsciiStream(final int columnIndex, final InputStream x, final int length) throws SQLException {
         rs.updateAsciiStream(columnIndex, x, length);
     }
@@ -855,8 +866,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateAsciiStream(final int columnIndex, final InputStream x) throws SQLException {
-        rs.updateAsciiStream(columnIndex, x);
+    protected final void updateAsciiStream(final String columnLabel, final InputStream x) throws SQLException {
+        rs.updateAsciiStream(columnLabel, x);
     }
 
     /**
@@ -876,13 +887,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateAsciiStream(final String columnLabel, final InputStream x) throws SQLException {
-        rs.updateAsciiStream(columnLabel, x);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final void updateBigDecimal(final int columnIndex, final BigDecimal x) throws SQLException {
         rs.updateBigDecimal(columnIndex, x);
     }
@@ -892,6 +896,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final void updateBigDecimal(final String columnLabel, final BigDecimal x) throws SQLException {
         rs.updateBigDecimal(columnLabel, x);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final void updateBinaryStream(final int columnIndex, final InputStream x) throws SQLException {
+        rs.updateBinaryStream(columnIndex, x);
     }
 
     /**
@@ -911,8 +922,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateBinaryStream(final int columnIndex, final InputStream x) throws SQLException {
-        rs.updateBinaryStream(columnIndex, x);
+    protected final void updateBinaryStream(final String columnLabel, final InputStream x) throws SQLException {
+        rs.updateBinaryStream(columnLabel, x);
     }
 
     /**
@@ -932,22 +943,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateBinaryStream(final String columnLabel, final InputStream x) throws SQLException {
-        rs.updateBinaryStream(columnLabel, x);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final void updateBlob(final int columnIndex, final Blob x) throws SQLException {
         rs.updateBlob(columnIndex, x);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected final void updateBlob(final int columnIndex, final InputStream inputStream, final long length) throws SQLException {
-        rs.updateBlob(columnIndex, inputStream, length);
     }
 
     /**
@@ -960,6 +957,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final void updateBlob(final int columnIndex, final InputStream inputStream, final long length) throws SQLException {
+        rs.updateBlob(columnIndex, inputStream, length);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final void updateBlob(final String columnLabel, final Blob x) throws SQLException {
         rs.updateBlob(columnLabel, x);
     }
@@ -967,15 +971,15 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateBlob(final String columnLabel, final InputStream inputStream, final long length) throws SQLException {
-        rs.updateBlob(columnLabel, inputStream, length);
+    protected final void updateBlob(final String columnLabel, final InputStream inputStream) throws SQLException {
+        rs.updateBlob(columnLabel, inputStream);
     }
 
     /**
      * {@inheritDoc}
      */
-    protected final void updateBlob(final String columnLabel, final InputStream inputStream) throws SQLException {
-        rs.updateBlob(columnLabel, inputStream);
+    protected final void updateBlob(final String columnLabel, final InputStream inputStream, final long length) throws SQLException {
+        rs.updateBlob(columnLabel, inputStream, length);
     }
 
     /**
@@ -1023,6 +1027,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final void updateCharacterStream(final int columnIndex, final Reader x) throws SQLException {
+        rs.updateCharacterStream(columnIndex, x);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final void updateCharacterStream(final int columnIndex, final Reader x, final int length) throws SQLException {
         rs.updateCharacterStream(columnIndex, x, length);
     }
@@ -1037,8 +1048,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateCharacterStream(final int columnIndex, final Reader x) throws SQLException {
-        rs.updateCharacterStream(columnIndex, x);
+    protected final void updateCharacterStream(final String columnLabel, final Reader reader) throws SQLException {
+        rs.updateCharacterStream(columnLabel, reader);
     }
 
     /**
@@ -1058,22 +1069,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateCharacterStream(final String columnLabel, final Reader reader) throws SQLException {
-        rs.updateCharacterStream(columnLabel, reader);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final void updateClob(final int columnIndex, final Clob x) throws SQLException {
         rs.updateClob(columnIndex, x);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected final void updateClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
-        rs.updateClob(columnIndex, reader, length);
     }
 
     /**
@@ -1086,6 +1083,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final void updateClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
+        rs.updateClob(columnIndex, reader, length);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final void updateClob(final String columnLabel, final Clob x) throws SQLException {
         rs.updateClob(columnLabel, x);
     }
@@ -1093,15 +1097,15 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
-        rs.updateClob(columnLabel, reader, length);
+    protected final void updateClob(final String columnLabel, final Reader reader) throws SQLException {
+        rs.updateClob(columnLabel, reader);
     }
 
     /**
      * {@inheritDoc}
      */
-    protected final void updateClob(final String columnLabel, final Reader reader) throws SQLException {
-        rs.updateClob(columnLabel, reader);
+    protected final void updateClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
+        rs.updateClob(columnLabel, reader, length);
     }
 
     /**
@@ -1177,13 +1181,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateNCharacterStream(final int columnIndex, final Reader x, final long length) throws SQLException {
-        rs.updateNCharacterStream(columnIndex, x, length);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final void updateNCharacterStream(final int columnIndex, final Reader x) throws SQLException {
         rs.updateNCharacterStream(columnIndex, x);
     }
@@ -1191,8 +1188,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateNCharacterStream(final String columnLabel, final Reader reader, final long length) throws SQLException {
-        rs.updateNCharacterStream(columnLabel, reader, length);
+    protected final void updateNCharacterStream(final int columnIndex, final Reader x, final long length) throws SQLException {
+        rs.updateNCharacterStream(columnIndex, x, length);
     }
 
     /**
@@ -1205,15 +1202,15 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateNClob(final int columnIndex, final NClob nClob) throws SQLException {
-        rs.updateNClob(columnIndex, nClob);
+    protected final void updateNCharacterStream(final String columnLabel, final Reader reader, final long length) throws SQLException {
+        rs.updateNCharacterStream(columnLabel, reader, length);
     }
 
     /**
      * {@inheritDoc}
      */
-    protected final void updateNClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
-        rs.updateNClob(columnIndex, reader, length);
+    protected final void updateNClob(final int columnIndex, final NClob nClob) throws SQLException {
+        rs.updateNClob(columnIndex, nClob);
     }
 
     /**
@@ -1226,6 +1223,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
+    protected final void updateNClob(final int columnIndex, final Reader reader, final long length) throws SQLException {
+        rs.updateNClob(columnIndex, reader, length);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected final void updateNClob(final String columnLabel, final NClob nClob) throws SQLException {
         rs.updateNClob(columnLabel, nClob);
     }
@@ -1233,15 +1237,15 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateNClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
-        rs.updateNClob(columnLabel, reader, length);
+    protected final void updateNClob(final String columnLabel, final Reader reader) throws SQLException {
+        rs.updateNClob(columnLabel, reader);
     }
 
     /**
      * {@inheritDoc}
      */
-    protected final void updateNClob(final String columnLabel, final Reader reader) throws SQLException {
-        rs.updateNClob(columnLabel, reader);
+    protected final void updateNClob(final String columnLabel, final Reader reader, final long length) throws SQLException {
+        rs.updateNClob(columnLabel, reader, length);
     }
 
     /**
@@ -1275,13 +1279,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateObject(final int columnIndex, final Object x, final int scaleOrLength) throws SQLException {
-        rs.updateObject(columnIndex, x, scaleOrLength);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final void updateObject(final int columnIndex, final Object x) throws SQLException {
         rs.updateObject(columnIndex, x);
     }
@@ -1289,8 +1286,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateObject(final String columnLabel, final Object x, final int scaleOrLength) throws SQLException {
-        rs.updateObject(columnLabel, x, scaleOrLength);
+    protected final void updateObject(final int columnIndex, final Object x, final int scaleOrLength) throws SQLException {
+        rs.updateObject(columnIndex, x, scaleOrLength);
     }
 
     /**
@@ -1298,6 +1295,13 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final void updateObject(final String columnLabel, final Object x) throws SQLException {
         rs.updateObject(columnLabel, x);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final void updateObject(final String columnLabel, final Object x, final int scaleOrLength) throws SQLException {
+        rs.updateObject(columnLabel, x, scaleOrLength);
     }
 
     /**
@@ -1338,20 +1342,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     /**
      * {@inheritDoc}
      */
-    protected final void updateSQLXML(final int columnIndex, final SQLXML xmlObject) throws SQLException {
-        rs.updateSQLXML(columnIndex, xmlObject);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected final void updateSQLXML(final String columnLabel, final SQLXML xmlObject) throws SQLException {
-        rs.updateSQLXML(columnLabel, xmlObject);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     protected final void updateShort(final int columnIndex, final short x) throws SQLException {
         rs.updateShort(columnIndex, x);
     }
@@ -1361,6 +1351,20 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final void updateShort(final String columnLabel, final short x) throws SQLException {
         rs.updateShort(columnLabel, x);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final void updateSQLXML(final int columnIndex, final SQLXML xmlObject) throws SQLException {
+        rs.updateSQLXML(columnIndex, xmlObject);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected final void updateSQLXML(final String columnLabel, final SQLXML xmlObject) throws SQLException {
+        rs.updateSQLXML(columnLabel, xmlObject);
     }
 
     /**
@@ -1410,10 +1414,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
      */
     protected final boolean wasNull() throws SQLException {
         return rs.wasNull();
-    }
-
-    protected final ResultSet getAdaptedResultSet() {
-        return rs;
     }
 
 }

@@ -48,15 +48,6 @@ public class OutParameterTest {
     }
 
     @Test
-    public void testSetValue() throws Exception {
-        when(stmt.getObject(INDEX)).thenReturn(VALUE);
-
-        parameter.setValue(stmt, INDEX);
-
-        assertEquals(VALUE, parameter.getValue());
-    }
-
-    @Test
     public void testRegister() throws Exception {
         parameter.register(stmt, INDEX);
         verify(stmt, times(1)).registerOutParameter(INDEX, Types.INTEGER);
@@ -74,6 +65,15 @@ public class OutParameterTest {
         parameter.register(stmt, INDEX);
         verify(stmt, times(1)).registerOutParameter(INDEX, Types.INTEGER);
         verify(stmt, times(1)).setObject(INDEX, VALUE);
+    }
+
+    @Test
+    public void testSetValue() throws Exception {
+        when(stmt.getObject(INDEX)).thenReturn(VALUE);
+
+        parameter.setValue(stmt, INDEX);
+
+        assertEquals(VALUE, parameter.getValue());
     }
 
 }

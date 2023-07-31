@@ -259,28 +259,6 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Get the {@code ParameterMetaData} of the prepared statement, if the {@code pmdKnownBroken}
-     * is set to false.
-     *
-     * @param stmt
-     *            PreparedStatement of which to query the metadata of parameters
-     * @return the metadata of parameters
-     * @throws SQLException
-     *            if a database access error occurs
-     */
-    public ParameterMetaData getParameterMetaData(final PreparedStatement stmt) throws SQLException {
-        ParameterMetaData pmd = null;
-        if (!pmdKnownBroken) {
-            try {
-                pmd = stmt.getParameterMetaData();
-            } catch (final SQLFeatureNotSupportedException ex) {
-                pmdKnownBroken = true;
-            }
-        }
-        return pmd;
-    }
-
-    /**
      * Fill the {@code PreparedStatement} replacement parameters with the
      * given objects.
      *
@@ -469,6 +447,28 @@ public abstract class AbstractQueryRunner {
      */
     public DataSource getDataSource() {
         return this.ds;
+    }
+
+    /**
+     * Get the {@code ParameterMetaData} of the prepared statement, if the {@code pmdKnownBroken}
+     * is set to false.
+     *
+     * @param stmt
+     *            PreparedStatement of which to query the metadata of parameters
+     * @return the metadata of parameters
+     * @throws SQLException
+     *            if a database access error occurs
+     */
+    public ParameterMetaData getParameterMetaData(final PreparedStatement stmt) throws SQLException {
+        ParameterMetaData pmd = null;
+        if (!pmdKnownBroken) {
+            try {
+                pmd = stmt.getParameterMetaData();
+            } catch (final SQLFeatureNotSupportedException ex) {
+                pmdKnownBroken = true;
+            }
+        }
+        return pmd;
     }
 
     /**

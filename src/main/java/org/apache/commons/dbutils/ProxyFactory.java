@@ -57,18 +57,6 @@ public class ProxyFactory {
     }
 
     /**
-     * Convenience method to generate a single-interface proxy using the handler's classloader
-     *
-     * @param <T> The type of object to proxy
-     * @param type The type of object to proxy
-     * @param handler The handler that intercepts/overrides method calls.
-     * @return proxied object
-     */
-    public <T> T newProxyInstance(final Class<T> type, final InvocationHandler handler) {
-        return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] {type}, handler));
-    }
-
-    /**
      * Creates a new proxy {@code CallableStatement} object.
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied CallableStatement
@@ -129,6 +117,18 @@ public class ProxyFactory {
      */
     public Statement createStatement(final InvocationHandler handler) {
         return newProxyInstance(Statement.class, handler);
+    }
+
+    /**
+     * Convenience method to generate a single-interface proxy using the handler's classloader
+     *
+     * @param <T> The type of object to proxy
+     * @param type The type of object to proxy
+     * @param handler The handler that intercepts/overrides method calls.
+     * @return proxied object
+     */
+    public <T> T newProxyInstance(final Class<T> type, final InvocationHandler handler) {
+        return type.cast(Proxy.newProxyInstance(handler.getClass().getClassLoader(), new Class<?>[] {type}, handler));
     }
 
 }

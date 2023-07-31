@@ -38,15 +38,93 @@ import java.util.logging.Logger;
 public final class DbUtils {
 
     /**
-     * Default constructor.
+     * Simple {@link Driver} proxy class that proxies a JDBC Driver loaded dynamically.
      *
-     * Utility classes should not have a public or default constructor,
-     * but this one preserves retro-compatibility.
-     *
-     * @since 1.4
+     * @since 1.6
      */
-    public DbUtils() {
-        // do nothing
+    static final class DriverProxy implements Driver {
+
+        private boolean parentLoggerSupported = true;
+
+        /**
+         * The adapted JDBC Driver loaded dynamically.
+         */
+        private final Driver adapted;
+
+        /**
+         * Creates a new JDBC Driver that adapts a JDBC Driver loaded dynamically.
+         *
+         * @param adapted the adapted JDBC Driver loaded dynamically.
+         */
+        public DriverProxy(final Driver adapted) {
+            this.adapted = adapted;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean acceptsURL(final String url) throws SQLException {
+            return adapted.acceptsURL(url);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Connection connect(final String url, final Properties info) throws SQLException {
+            return adapted.connect(url, info);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getMajorVersion() {
+            return adapted.getMajorVersion();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getMinorVersion() {
+            return adapted.getMinorVersion();
+        }
+
+        /**
+         * Java 1.7 method.
+         */
+        @Override
+        public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+            if (parentLoggerSupported) {
+                try {
+                    final Method method = adapted.getClass().getMethod("getParentLogger");
+                    return (Logger)method.invoke(adapted);
+                } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    parentLoggerSupported = false;
+                    throw new SQLFeatureNotSupportedException(e);
+                }
+            }
+            throw new SQLFeatureNotSupportedException();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public DriverPropertyInfo[] getPropertyInfo(final String url, final Properties info) throws SQLException {
+            return adapted.getPropertyInfo(url, info);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean jdbcCompliant() {
+            return adapted.jdbcCompliant();
+        }
+
     }
 
     /**
@@ -185,17 +263,6 @@ public final class DbUtils {
      * Loads and registers a database driver class.
      * If this succeeds, it returns true, else it returns false.
      *
-     * @param driverClassName of driver to load
-     * @return boolean {@code true} if the driver was found, otherwise {@code false}
-     */
-    public static boolean loadDriver(final String driverClassName) {
-        return loadDriver(DbUtils.class.getClassLoader(), driverClassName);
-    }
-
-    /**
-     * Loads and registers a database driver class.
-     * If this succeeds, it returns true, else it returns false.
-     *
      * @param classLoader the class loader used to load the driver class
      * @param driverClassName of driver to load
      * @return boolean {@code true} if the driver was found, otherwise {@code false}
@@ -234,6 +301,17 @@ public final class DbUtils {
         } catch (final Exception e) {
             return false;
         }
+    }
+
+    /**
+     * Loads and registers a database driver class.
+     * If this succeeds, it returns true, else it returns false.
+     *
+     * @param driverClassName of driver to load
+     * @return boolean {@code true} if the driver was found, otherwise {@code false}
+     */
+    public static boolean loadDriver(final String driverClassName) {
+        return loadDriver(DbUtils.class.getClassLoader(), driverClassName);
     }
 
     /**
@@ -302,21 +380,6 @@ public final class DbUtils {
 
 
     /**
-     * Performs a rollback on the <code>Connection</code>, avoid
-     * closing if null and hide any SQLExceptions that occur.
-     *
-     * @param conn Connection to rollback.  A null value is legal.
-     * @since DbUtils 2.0
-     */
-    public static void rollbackQuietly(Connection conn) {
-        try {
-            rollback(conn);
-        } catch (SQLException e) { // NOPMD
-            // quiet
-        }
-    }
-
-    /**
      * Performs a rollback on the {@code Connection} then closes it,
      * avoid closing if null.
      *
@@ -350,93 +413,30 @@ public final class DbUtils {
     }
 
     /**
-     * Simple {@link Driver} proxy class that proxies a JDBC Driver loaded dynamically.
+     * Performs a rollback on the <code>Connection</code>, avoid
+     * closing if null and hide any SQLExceptions that occur.
      *
-     * @since 1.6
+     * @param conn Connection to rollback.  A null value is legal.
+     * @since DbUtils 2.0
      */
-    static final class DriverProxy implements Driver {
-
-        private boolean parentLoggerSupported = true;
-
-        /**
-         * The adapted JDBC Driver loaded dynamically.
-         */
-        private final Driver adapted;
-
-        /**
-         * Creates a new JDBC Driver that adapts a JDBC Driver loaded dynamically.
-         *
-         * @param adapted the adapted JDBC Driver loaded dynamically.
-         */
-        public DriverProxy(final Driver adapted) {
-            this.adapted = adapted;
+    public static void rollbackQuietly(Connection conn) {
+        try {
+            rollback(conn);
+        } catch (SQLException e) { // NOPMD
+            // quiet
         }
+    }
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean acceptsURL(final String url) throws SQLException {
-            return adapted.acceptsURL(url);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Connection connect(final String url, final Properties info) throws SQLException {
-            return adapted.connect(url, info);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int getMajorVersion() {
-            return adapted.getMajorVersion();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public int getMinorVersion() {
-            return adapted.getMinorVersion();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public DriverPropertyInfo[] getPropertyInfo(final String url, final Properties info) throws SQLException {
-            return adapted.getPropertyInfo(url, info);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean jdbcCompliant() {
-            return adapted.jdbcCompliant();
-        }
-
-        /**
-         * Java 1.7 method.
-         */
-        @Override
-        public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-            if (parentLoggerSupported) {
-                try {
-                    final Method method = adapted.getClass().getMethod("getParentLogger");
-                    return (Logger)method.invoke(adapted);
-                } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    parentLoggerSupported = false;
-                    throw new SQLFeatureNotSupportedException(e);
-                }
-            }
-            throw new SQLFeatureNotSupportedException();
-        }
-
+    /**
+     * Default constructor.
+     *
+     * Utility classes should not have a public or default constructor,
+     * but this one preserves retro-compatibility.
+     *
+     * @since 1.4
+     */
+    public DbUtils() {
+        // do nothing
     }
 
 }

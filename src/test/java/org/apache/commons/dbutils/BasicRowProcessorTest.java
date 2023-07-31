@@ -40,6 +40,22 @@ public class BasicRowProcessorTest extends BaseTestCase {
     private static final DateFormat datef =
         new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
+    public void testPutAllContainsKeyAndRemove() throws Exception {
+        Map<String, Object> test = new HashMap<>(3);
+        test.put("fiRst", "thing");
+        test.put("seCond", "another");
+        test.put("thIrd", "more");
+        Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(3);
+        brpMap.putAll(test);
+
+        assertEquals(test, brpMap);
+        assertTrue(brpMap.containsKey("fiRst"));
+        assertTrue(brpMap.containsKey("first"));
+
+        brpMap.remove("first");
+        assertFalse(brpMap.containsKey("first"));
+    }
+
     public void testToArray() throws SQLException {
 
         Object[] a;
@@ -157,21 +173,5 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("11", itr.next());
 
         assertFalse(itr.hasNext());
-    }
-
-    public void testPutAllContainsKeyAndRemove() throws Exception {
-        Map<String, Object> test = new HashMap<>(3);
-        test.put("fiRst", "thing");
-        test.put("seCond", "another");
-        test.put("thIrd", "more");
-        Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(3);
-        brpMap.putAll(test);
-
-        assertEquals(test, brpMap);
-        assertTrue(brpMap.containsKey("fiRst"));
-        assertTrue(brpMap.containsKey("first"));
-
-        brpMap.remove("first");
-        assertFalse(brpMap.containsKey("first"));
     }
 }

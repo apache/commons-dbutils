@@ -111,6 +111,13 @@ public class BaseTestCase extends TestCase {
     protected ResultSet emptyResultSet = null;
 
     /**
+     * Creates a freshly initialized ResultSet.
+     */
+    protected ResultSet createMockResultSet() {
+        return MockResultSet.create(metaData, rows);
+    }
+
+    /**
      * This is called before each test method so ResultSet will be fresh each
      * time.
      * @see junit.framework.TestCase#setUp()
@@ -121,13 +128,6 @@ public class BaseTestCase extends TestCase {
 
         rs = this.createMockResultSet();
         emptyResultSet = MockResultSet.create(metaData, null);
-    }
-
-    /**
-     * Creates a freshly initialized ResultSet.
-     */
-    protected ResultSet createMockResultSet() {
-        return MockResultSet.create(metaData, rows);
     }
 
     // Test which allows Eclipse to be run on full project (avoids no tests found)

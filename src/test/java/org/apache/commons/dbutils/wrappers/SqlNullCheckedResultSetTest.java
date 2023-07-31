@@ -44,10 +44,190 @@ import java.util.Map;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ProxyFactory;
 
+class SqlNullCheckedResultSetMockBlob implements Blob {
+
+    /**
+     * @throws SQLException
+     */
+    @Override
+    public void free() throws SQLException {
+
+    }
+
+    @Override
+    public InputStream getBinaryStream() throws SQLException {
+        return new ByteArrayInputStream(new byte[0]);
+    }
+
+    /**
+     * @throws SQLException
+     */
+    @Override
+    public InputStream getBinaryStream(final long pos, final long length) throws SQLException {
+      return null;
+    }
+
+    @Override
+    public byte[] getBytes(final long param, final int param1) throws SQLException {
+        return new byte[0];
+    }
+
+    @Override
+    public long length() throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public long position(final Blob blob, final long param) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public long position(final byte[] values, final long param) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public OutputStream setBinaryStream(final long pos) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public int setBytes(final long pos, final byte[] bytes) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int setBytes(final long pos, final byte[] bytes, final int offset, final int len)
+        throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public void truncate(final long len) throws SQLException {
+
+    }
+
+}
+
+class SqlNullCheckedResultSetMockClob implements Clob {
+
+    /**
+     * @throws SQLException
+     */
+    @Override
+    public void free() throws SQLException {
+
+    }
+
+    @Override
+    public InputStream getAsciiStream() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Reader getCharacterStream() throws SQLException {
+        return null;
+    }
+
+    /**
+     * @throws SQLException
+     */
+    @Override
+    public Reader getCharacterStream(final long pos, final long length) throws SQLException {
+      return null;
+    }
+
+    @Override
+    public String getSubString(final long param, final int param1) throws SQLException {
+        return "";
+    }
+
+    @Override
+    public long length() throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public long position(final Clob clob, final long param) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public long position(final String str, final long param) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public OutputStream setAsciiStream(final long pos) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Writer setCharacterStream(final long pos) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public int setString(final long pos, final String str) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int setString(final long pos, final String str, final int offset, final int len)
+        throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public void truncate(final long len) throws SQLException {
+
+    }
+
+}
+
+class SqlNullCheckedResultSetMockRef implements Ref {
+
+    @Override
+    public String getBaseTypeName() throws SQLException {
+        return "";
+    }
+
+    @Override
+    public Object getObject() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Object getObject(final Map<String,Class<?>> map) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void setObject(final Object value) throws SQLException {
+
+    }
+
+}
+
 /**
  * Test cases for {@code SqlNullCheckedResultSet} class.
  */
 public class SqlNullCheckedResultSetTest extends BaseTestCase {
+
+    private static void assertArrayEquals(final byte[] expected, final byte[] actual) {
+        if (expected == actual) {
+            return;
+        }
+        if (expected.length != actual.length) {
+            failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
+        }
+        for (int i = 0; i < expected.length; i++) {
+            final byte expectedItem = expected[i];
+            final byte actualItem = actual[i];
+            assertEquals("Array not equal at index " + i, expectedItem, actualItem);
+        }
+    }
 
     private SqlNullCheckedResultSet rs2 = null;
 
@@ -195,20 +375,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertNotNull(rs.getBytes("column"));
         assertArrayEquals(b, rs.getBytes("column"));
 
-    }
-
-    private static void assertArrayEquals(final byte[] expected, final byte[] actual) {
-        if (expected == actual) {
-            return;
-        }
-        if (expected.length != actual.length) {
-            failNotEquals(null, Arrays.toString(expected), Arrays.toString(actual));
-        }
-        for (int i = 0; i < expected.length; i++) {
-            final byte expectedItem = expected[i];
-            final byte actualItem = actual[i];
-            assertEquals("Array not equal at index " + i, expectedItem, actualItem);
-        }
     }
 
     /**
@@ -469,36 +635,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     /**
-     * Tests the getURL and setNullURL implementations.
-     *
-     * Uses reflection to allow for building under JDK 1.3.
-     */
-    public void testURL() throws SQLException, MalformedURLException,
-            IllegalAccessException, IllegalArgumentException,
-            java.lang.reflect.InvocationTargetException
-    {
-        Method getUrlInt = null;
-        Method getUrlString = null;
-        try {
-            getUrlInt = ResultSet.class.getMethod("getURL", Integer.TYPE);
-            getUrlString = ResultSet.class.getMethod("getURL", String.class);
-        } catch (final NoSuchMethodException | SecurityException e) {
-            // ignore
-        }
-        if (getUrlInt != null && getUrlString != null) {
-            assertEquals(null, getUrlInt.invoke(rs, Integer.valueOf(1)) );
-            assertTrue(rs.wasNull());
-            assertEquals(null, getUrlString.invoke(rs, "column") );
-            assertTrue(rs.wasNull());
-            // Set what gets returned to something other than the default
-            final URL u = new URL("http://www.apache.org");
-            rs2.setNullURL(u);
-            assertEquals(u, getUrlInt.invoke(rs, Integer.valueOf(1)) );
-            assertEquals(u, getUrlString.invoke(rs, "column") );
-        }
-    }
-
-    /**
      * Tests the setNullAsciiStream implementation.
      */
     public void testSetNullAsciiStream() throws SQLException {
@@ -741,6 +877,20 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     /**
+     * Tests the setNullRef implementation.
+     */
+    public void testSetNullRef() throws SQLException {
+        assertNull(rs2.getNullRef());
+        // Set what gets returned to something other than the default
+        final Ref ref = new SqlNullCheckedResultSetMockRef();
+        rs2.setNullRef(ref);
+        assertNotNull(rs.getRef(1));
+        assertEquals(ref, rs.getRef(1));
+        assertNotNull(rs.getRef("column"));
+        assertEquals(ref, rs.getRef("column"));
+    }
+
+    /**
      * Tests the setNullShort implementation.
      */
     public void testSetNullShort() throws SQLException {
@@ -764,20 +914,6 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         rs2.setNullString(s);
         assertEquals(s, rs.getString(1));
         assertEquals(s, rs.getString("column"));
-    }
-
-    /**
-     * Tests the setNullRef implementation.
-     */
-    public void testSetNullRef() throws SQLException {
-        assertNull(rs2.getNullRef());
-        // Set what gets returned to something other than the default
-        final Ref ref = new SqlNullCheckedResultSetMockRef();
-        rs2.setNullRef(ref);
-        assertNotNull(rs.getRef(1));
-        assertEquals(ref, rs.getRef(1));
-        assertNotNull(rs.getRef("column"));
-        assertEquals(ref, rs.getRef("column"));
     }
 
     /**
@@ -826,6 +962,36 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(ts, rs.getTimestamp(1, Calendar.getInstance()));
         assertNotNull(rs.getTimestamp("column", Calendar.getInstance()));
         assertEquals(ts, rs.getTimestamp("column", Calendar.getInstance()));
+    }
+
+    /**
+     * Tests the getURL and setNullURL implementations.
+     *
+     * Uses reflection to allow for building under JDK 1.3.
+     */
+    public void testURL() throws SQLException, MalformedURLException,
+            IllegalAccessException, IllegalArgumentException,
+            java.lang.reflect.InvocationTargetException
+    {
+        Method getUrlInt = null;
+        Method getUrlString = null;
+        try {
+            getUrlInt = ResultSet.class.getMethod("getURL", Integer.TYPE);
+            getUrlString = ResultSet.class.getMethod("getURL", String.class);
+        } catch (final NoSuchMethodException | SecurityException e) {
+            // ignore
+        }
+        if (getUrlInt != null && getUrlString != null) {
+            assertEquals(null, getUrlInt.invoke(rs, Integer.valueOf(1)) );
+            assertTrue(rs.wasNull());
+            assertEquals(null, getUrlString.invoke(rs, "column") );
+            assertTrue(rs.wasNull());
+            // Set what gets returned to something other than the default
+            final URL u = new URL("http://www.apache.org");
+            rs2.setNullURL(u);
+            assertEquals(u, getUrlInt.invoke(rs, Integer.valueOf(1)) );
+            assertEquals(u, getUrlString.invoke(rs, "column") );
+        }
     }
 
     public void testWrapResultSet() throws SQLException {
@@ -884,170 +1050,4 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
         }
         return null;
     }
-}
-
-class SqlNullCheckedResultSetMockBlob implements Blob {
-
-    @Override
-    public InputStream getBinaryStream() throws SQLException {
-        return new ByteArrayInputStream(new byte[0]);
-    }
-
-    @Override
-    public byte[] getBytes(final long param, final int param1) throws SQLException {
-        return new byte[0];
-    }
-
-    @Override
-    public long length() throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public long position(final byte[] values, final long param) throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public long position(final Blob blob, final long param) throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public void truncate(final long len) throws SQLException {
-
-    }
-
-    @Override
-    public int setBytes(final long pos, final byte[] bytes) throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public int setBytes(final long pos, final byte[] bytes, final int offset, final int len)
-        throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public OutputStream setBinaryStream(final long pos) throws SQLException {
-        return null;
-    }
-
-    /**
-     * @throws SQLException
-     */
-    @Override
-    public void free() throws SQLException {
-
-    }
-
-    /**
-     * @throws SQLException
-     */
-    @Override
-    public InputStream getBinaryStream(final long pos, final long length) throws SQLException {
-      return null;
-    }
-
-}
-
-class SqlNullCheckedResultSetMockClob implements Clob {
-
-    @Override
-    public InputStream getAsciiStream() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Reader getCharacterStream() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public String getSubString(final long param, final int param1) throws SQLException {
-        return "";
-    }
-
-    @Override
-    public long length() throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public long position(final Clob clob, final long param) throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public long position(final String str, final long param) throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public void truncate(final long len) throws SQLException {
-
-    }
-
-    @Override
-    public OutputStream setAsciiStream(final long pos) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public Writer setCharacterStream(final long pos) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public int setString(final long pos, final String str) throws SQLException {
-        return 0;
-    }
-
-    @Override
-    public int setString(final long pos, final String str, final int offset, final int len)
-        throws SQLException {
-        return 0;
-    }
-
-    /**
-     * @throws SQLException
-     */
-    @Override
-    public void free() throws SQLException {
-
-    }
-
-    /**
-     * @throws SQLException
-     */
-    @Override
-    public Reader getCharacterStream(final long pos, final long length) throws SQLException {
-      return null;
-    }
-
-}
-
-class SqlNullCheckedResultSetMockRef implements Ref {
-
-    @Override
-    public String getBaseTypeName() throws SQLException {
-        return "";
-    }
-
-    @Override
-    public Object getObject() throws SQLException {
-        return null;
-    }
-
-    @Override
-    public void setObject(final Object value) throws SQLException {
-
-    }
-
-    @Override
-    public Object getObject(final Map<String,Class<?>> map) throws SQLException {
-        return null;
-    }
-
 }

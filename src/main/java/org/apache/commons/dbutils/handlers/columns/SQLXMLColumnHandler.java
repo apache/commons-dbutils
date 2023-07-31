@@ -24,12 +24,12 @@ import org.apache.commons.dbutils.ColumnHandler;
 
 public class SQLXMLColumnHandler implements ColumnHandler {
     @Override
-    public boolean match(final Class<?> propType) {
-        return propType.equals(SQLXML.class);
+    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+        return rs.getSQLXML(columnIndex);
     }
 
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return rs.getSQLXML(columnIndex);
+    public boolean match(final Class<?> propType) {
+        return propType.equals(SQLXML.class);
     }
 }

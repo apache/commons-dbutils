@@ -41,6 +41,11 @@ public class BeanMapHandlerTest {
     @Mock private ResultSetMetaData rsmd;
     @Mock private RowProcessor rp;
 
+    private void handle() throws Exception {
+        res = bmh.handle(rs);
+        assertNotNull(res.get(Long.valueOf(23L)));
+    }
+
     @Before
     public void setUp() throws Exception {
         when(Boolean.valueOf(rs.next())).thenReturn(Boolean.TRUE, Boolean.FALSE);
@@ -51,11 +56,6 @@ public class BeanMapHandlerTest {
         when(rp.toBean(rs, TestBean.class)).thenReturn(new TestBean());
     }
 
-    private void handle() throws Exception {
-        res = bmh.handle(rs);
-        assertNotNull(res.get(Long.valueOf(23L)));
-    }
-
     @Test
     public void testBeanMapHandlerClassOfV() throws Exception {
         bmh = new BeanMapHandler<>(TestBean.class);
@@ -63,14 +63,14 @@ public class BeanMapHandlerTest {
     }
 
     @Test
-    public void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
-        bmh = new BeanMapHandler<>(TestBean.class, rp);
+    public void testBeanMapHandlerClassOfVInt() throws Exception {
+        bmh = new BeanMapHandler<>(TestBean.class, 2);
         handle();
     }
 
     @Test
-    public void testBeanMapHandlerClassOfVInt() throws Exception {
-        bmh = new BeanMapHandler<>(TestBean.class, 2);
+    public void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
+        bmh = new BeanMapHandler<>(TestBean.class, rp);
         handle();
     }
 

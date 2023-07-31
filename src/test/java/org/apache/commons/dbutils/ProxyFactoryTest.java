@@ -35,6 +35,10 @@ public class ProxyFactoryTest extends BaseTestCase {
         }
     };
 
+    public void testCreateCallableStatement() {
+        assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
+    }
+
     public void testCreateConnection() {
         assertNotNull(ProxyFactory.instance().createConnection(stub));
     }
@@ -57,10 +61,6 @@ public class ProxyFactoryTest extends BaseTestCase {
 
     public void testCreateStatement() {
         assertNotNull(ProxyFactory.instance().createStatement(stub));
-    }
-
-    public void testCreateCallableStatement() {
-        assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
     }
 
 }

@@ -70,19 +70,19 @@ public class OutParameter<T> {
     }
 
     /**
-     * Get the JDBC SQL type for this OUT parameter.
-     * @return the JDBC SQL type for this OUT parameter.
-     */
-    public int getSqlType() {
-        return sqlType;
-    }
-
-    /**
      * Get the Java class for this OUT parameter.
      * @return the Java class for this OUT parameter.
      */
     public Class<T> getJavaType() {
         return javaType;
+    }
+
+    /**
+     * Get the JDBC SQL type for this OUT parameter.
+     * @return the JDBC SQL type for this OUT parameter.
+     */
+    public int getSqlType() {
+        return sqlType;
     }
 
     /**
@@ -92,29 +92,6 @@ public class OutParameter<T> {
      */
     public T getValue() {
         return value;
-    }
-
-    /**
-     * Set the value of the OUT parameter.  If the value is not null when the
-     * stored procedure is executed, then the parameter will be treated like an
-     * INOUT parameter.
-     * @param value the new value for the parameter.
-     */
-    public void setValue(final T value) {
-        this.value = value;
-    }
-
-    /**
-     * Set the value using the return value of the parameter an the given index
-     * from the given {@code CallableStatement}.
-     * @param stmt the already executed statement
-     * @param index the (1-based) index of the parameter
-     * @throws SQLException when the value could not be retrieved from the
-     * statement.
-     */
-    void setValue(final CallableStatement stmt, final int index) throws SQLException {
-        final Object object = stmt.getObject(index);
-        value = javaType.cast(object);
     }
 
     /**
@@ -132,6 +109,29 @@ public class OutParameter<T> {
         if (value != null) {
             stmt.setObject(index, value);
         }
+    }
+
+    /**
+     * Set the value using the return value of the parameter an the given index
+     * from the given {@code CallableStatement}.
+     * @param stmt the already executed statement
+     * @param index the (1-based) index of the parameter
+     * @throws SQLException when the value could not be retrieved from the
+     * statement.
+     */
+    void setValue(final CallableStatement stmt, final int index) throws SQLException {
+        final Object object = stmt.getObject(index);
+        value = javaType.cast(object);
+    }
+
+    /**
+     * Set the value of the OUT parameter.  If the value is not null when the
+     * stored procedure is executed, then the parameter will be treated like an
+     * INOUT parameter.
+     * @param value the new value for the parameter.
+     */
+    public void setValue(final T value) {
+        this.value = value;
     }
 
     @Override

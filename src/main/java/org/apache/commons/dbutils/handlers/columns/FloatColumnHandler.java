@@ -23,12 +23,12 @@ import org.apache.commons.dbutils.ColumnHandler;
 
 public class FloatColumnHandler implements ColumnHandler {
     @Override
-    public boolean match(final Class<?> propType) {
-        return propType.equals(Float.TYPE) || propType.equals(Float.class);
+    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+        return Float.valueOf(rs.getFloat(columnIndex));
     }
 
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return Float.valueOf(rs.getFloat(columnIndex));
+    public boolean match(final Class<?> propType) {
+        return propType.equals(Float.TYPE) || propType.equals(Float.class);
     }
 }

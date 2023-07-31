@@ -38,6 +38,9 @@ public abstract class ColumnHandlerTestBase {
     }
 
     @Test
+    public abstract void testApplyType() throws Exception;
+
+    @Test
     public void testMatch() {
         assertTrue(handler.match(matchingType));
     }
@@ -46,7 +49,4 @@ public abstract class ColumnHandlerTestBase {
     public void testMatchNegative() {
         assertFalse(handler.match(Integer.class));
     }
-
-    @Test
-    public abstract void testApplyType() throws Exception;
 }

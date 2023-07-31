@@ -27,17 +27,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class ColumnListHandlerTest extends BaseTestCase {
 
-    public void testHandle() throws SQLException {
-        final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
-        final List<String> results = h.handle(this.rs);
-
-        assertNotNull(results);
-        assertEquals(ROWS, results.size());
-
-        assertEquals("1", results.get(0));
-        assertEquals("4", results.get(1));
-    }
-
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>(2);
         final List<String> results = h.handle(this.rs);
@@ -66,6 +55,17 @@ public class ColumnListHandlerTest extends BaseTestCase {
 
         assertNotNull(results);
         assertTrue(results.isEmpty());
+    }
+
+    public void testHandle() throws SQLException {
+        final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
+        final List<String> results = h.handle(this.rs);
+
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
+
+        assertEquals("1", results.get(0));
+        assertEquals("4", results.get(1));
     }
 
 }

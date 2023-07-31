@@ -32,36 +32,87 @@ import org.apache.commons.dbutils.annotations.Column;
 
 public class BeanProcessorTest extends BaseTestCase {
 
-    private static final BeanProcessor beanProc = new BeanProcessor();
+    private static class IndexedPropertyTestClass {
+        private String name;
+        // Indexed variable with indexed getter and setter
+        private List<String> things;
+        // Indexed variable without indexed getter or setter
+        private List<String> stuff;
 
-    public void testProcessWithToBean() throws SQLException {
-        assertTrue(this.rs.next());
-        TestBean b = beanProc.toBean(this.rs, TestBean.class);
-        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
+        public String getName() {
+            return name;
+        }
 
-        assertTrue(this.rs.next());
-        b = beanProc.toBean(this.rs, TestBean.class);
-        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
+        public List<String> getStuff() {
+            return stuff;
+        }
 
-        assertFalse(this.rs.next());
+        public String getThing(int idx) {
+            return things.get(idx);
+        }
+
+        public List<String> getThings() {
+            return things;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setStuff(List<String> stuff) {
+            this.stuff = stuff;
+        }
+
+        public void setThing(int idx, String thing) {
+            this.things.set(idx, thing);
+        }
+
+        public void setThings(List<String> things) {
+            this.things = things;
+        }
     }
 
-    public void testProcessWithPopulateBean() throws SQLException {
-        TestBean b = new TestBean();
+    public static class MapColumnToAnnotationFieldBean {
+        private String one;
 
-        assertTrue(this.rs.next());
-        b = beanProc.populateBean(this.rs, b);
-        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
+        private String two;
 
-        assertTrue(this.rs.next());
-        b = beanProc.populateBean(this.rs, b);
-        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
+        private String three;
 
-        assertFalse(this.rs.next());
+        private String four;
+
+        public String getFour() {
+            return four;
+        }
+
+        public String getOne() {
+            return one;
+        }
+
+        @Column(name = "three_")
+        public String getThree() {
+            return three;
+        }
+
+        public String getTwo() {
+            return two;
+        }
+
+        public void setFour(final String four) {
+            this.four = four;
+        }
+
+        public void setOne(final String one) {
+            this.one = one;
+        }
+
+        public void setThree(final String three) {
+            this.three = three;
+        }
+
+        public void setTwo(final String two) {
+            this.two = two;
+        }
     }
 
     public static class MapColumnToPropertiesBean {
@@ -73,36 +124,126 @@ public class BeanProcessorTest extends BaseTestCase {
 
         private String four;
 
+        public String getFour() {
+            return four;
+        }
+
         public String getOne() {
             return one;
-        }
-
-        public void setOne(final String one) {
-            this.one = one;
-        }
-
-        public String getTwo() {
-            return two;
-        }
-
-        public void setTwo(final String two) {
-            this.two = two;
         }
 
         public String getThree() {
             return three;
         }
 
-        public void setThree(final String three) {
-            this.three = three;
-        }
-
-        public String getFour() {
-            return four;
+        public String getTwo() {
+            return two;
         }
 
         public void setFour(final String four) {
             this.four = four;
+        }
+
+        public void setOne(final String one) {
+            this.one = one;
+        }
+
+        public void setThree(final String three) {
+            this.three = three;
+        }
+
+        public void setTwo(final String two) {
+            this.two = two;
+        }
+    }
+
+    private static final class TestNoGetter {
+        public String testField;
+
+        /**
+         * Add setter to trigger JavaBeans to populate a PropertyDescriptor
+         *
+         * @param testField The new testField value
+         */
+        public void setTestField(String testField) {
+            this.testField = testField;
+        }
+    }
+
+    private static final class TestWrongSetter {
+        public Integer testField;
+
+        public Integer getTestField() {
+            return testField;
+        }
+
+        /**
+         * dbutils checks for a setter with exactly 1 param. This tests resilience
+         * to a found setter that doesn't match expectations.
+         * @param idx
+         * @param testField
+         */
+        public void setTestField(int idx, Integer testField) {
+            this.testField = testField;
+        }
+    }
+
+    private static final BeanProcessor beanProc = new BeanProcessor();
+
+    public void testCheckAnnotationOnMissingReadMethod() throws Exception {
+        String[] colNames = new String[] {"testField"};
+        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+
+        String testField = "first";
+        Object[][] rows = new Object[][] {
+                new Object[] {testField}
+        };
+
+        ResultSet rs = MockResultSet.create(metaData, rows);
+        assertTrue(rs.next());
+        TestNoGetter testCls = new TestNoGetter();
+        testCls = beanProc.populateBean(rs, testCls);
+        assertEquals(testCls.testField, "first");
+    }
+
+    /**
+     * Based on the report in DBUTILS-150. This test validates that indexed
+     * property descriptors are not used, and indexed getter/setter methods
+     * are not inspected.
+     *
+     * @throws Exception
+     * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
+     */
+    public void testIndexedPropertyDescriptor() throws Exception {
+        String[] colNames = new String[] {"name", "things", "stuff"};
+        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
+
+        String name = "first";
+        List<String> things = Arrays.asList("1", "2", "3", "4");
+        List<String> stuff = things;
+        Object[][] rows = new Object[][] {
+                new Object[] {name, things, stuff}
+        };
+
+        ResultSet rs = MockResultSet.create(metaData, rows);
+        assertTrue(rs.next());
+        IndexedPropertyTestClass testCls = new IndexedPropertyTestClass();
+        testCls = beanProc.populateBean(rs, testCls);
+        assertEquals(name, testCls.getName());
+        assertArrayEquals(things.toArray(), testCls.getThings().toArray());
+        assertArrayEquals(stuff.toArray(), testCls.getStuff().toArray());
+    }
+
+    public void testMapColumnToAnnotationField() throws Exception {
+        final String[] columnNames = { "test", "test", "three_" };
+        final String[] columnLabels = { "one", "two", null };
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
+                new MockResultSetMetaData(columnNames, columnLabels));
+        final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToAnnotationFieldBean.class).getPropertyDescriptors();
+
+        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        for (int i = 1; i < columns.length; i++) {
+            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
         }
     }
 
@@ -135,91 +276,34 @@ public class BeanProcessorTest extends BaseTestCase {
         }
     }
 
-    private static class IndexedPropertyTestClass {
-        private String name;
-        // Indexed variable with indexed getter and setter
-        private List<String> things;
-        // Indexed variable without indexed getter or setter
-        private List<String> stuff;
+    public void testProcessWithPopulateBean() throws SQLException {
+        TestBean b = new TestBean();
 
-        public String getName() {
-            return name;
-        }
+        assertTrue(this.rs.next());
+        b = beanProc.populateBean(this.rs, b);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
 
-        public void setName(String name) {
-            this.name = name;
-        }
+        assertTrue(this.rs.next());
+        b = beanProc.populateBean(this.rs, b);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
 
-        public List<String> getThings() {
-            return things;
-        }
-
-        public String getThing(int idx) {
-            return things.get(idx);
-        }
-
-        public void setThings(List<String> things) {
-            this.things = things;
-        }
-
-        public void setThing(int idx, String thing) {
-            this.things.set(idx, thing);
-        }
-
-        public List<String> getStuff() {
-            return stuff;
-        }
-
-        public void setStuff(List<String> stuff) {
-            this.stuff = stuff;
-        }
+        assertFalse(this.rs.next());
     }
 
-    private static final class TestNoGetter {
-        public String testField;
+    public void testProcessWithToBean() throws SQLException {
+        assertTrue(this.rs.next());
+        TestBean b = beanProc.toBean(this.rs, TestBean.class);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
 
-        /**
-         * Add setter to trigger JavaBeans to populate a PropertyDescriptor
-         *
-         * @param testField The new testField value
-         */
-        public void setTestField(String testField) {
-            this.testField = testField;
-        }
-    }
+        assertTrue(this.rs.next());
+        b = beanProc.toBean(this.rs, TestBean.class);
+        assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
+        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
 
-    public void testCheckAnnotationOnMissingReadMethod() throws Exception {
-        String[] colNames = new String[] {"testField"};
-        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
-
-        String testField = "first";
-        Object[][] rows = new Object[][] {
-                new Object[] {testField}
-        };
-
-        ResultSet rs = MockResultSet.create(metaData, rows);
-        assertTrue(rs.next());
-        TestNoGetter testCls = new TestNoGetter();
-        testCls = beanProc.populateBean(rs, testCls);
-        assertEquals(testCls.testField, "first");
-    }
-
-    private static final class TestWrongSetter {
-        public Integer testField;
-
-        public Integer getTestField() {
-            return testField;
-        }
-
-        /**
-         * dbutils checks for a setter with exactly 1 param. This tests resilience
-         * to a found setter that doesn't match expectations.
-         * @param idx
-         * @param testField
-         */
-        public void setTestField(int idx, Integer testField) {
-            this.testField = testField;
-        }
+        assertFalse(this.rs.next());
     }
 
     public void testWrongSetterParamCount() throws Exception {
@@ -236,89 +320,5 @@ public class BeanProcessorTest extends BaseTestCase {
         TestWrongSetter testCls = new TestWrongSetter();
         testCls = beanProc.populateBean(rs, testCls);
         assertNull(testCls.testField);
-    }
-
-    /**
-     * Based on the report in DBUTILS-150. This test validates that indexed
-     * property descriptors are not used, and indexed getter/setter methods
-     * are not inspected.
-     *
-     * @throws Exception
-     * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
-     */
-    public void testIndexedPropertyDescriptor() throws Exception {
-        String[] colNames = new String[] {"name", "things", "stuff"};
-        ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
-
-        String name = "first";
-        List<String> things = Arrays.asList("1", "2", "3", "4");
-        List<String> stuff = things;
-        Object[][] rows = new Object[][] {
-                new Object[] {name, things, stuff}
-        };
-
-        ResultSet rs = MockResultSet.create(metaData, rows);
-        assertTrue(rs.next());
-        IndexedPropertyTestClass testCls = new IndexedPropertyTestClass();
-        testCls = beanProc.populateBean(rs, testCls);
-        assertEquals(name, testCls.getName());
-        assertArrayEquals(things.toArray(), testCls.getThings().toArray());
-        assertArrayEquals(stuff.toArray(), testCls.getStuff().toArray());
-    }
-
-    public static class MapColumnToAnnotationFieldBean {
-        private String one;
-
-        private String two;
-
-        private String three;
-
-        private String four;
-
-        public String getOne() {
-            return one;
-        }
-
-        public void setOne(final String one) {
-            this.one = one;
-        }
-
-        public String getTwo() {
-            return two;
-        }
-
-        public void setTwo(final String two) {
-            this.two = two;
-        }
-
-        @Column(name = "three_")
-        public String getThree() {
-            return three;
-        }
-
-        public void setThree(final String three) {
-            this.three = three;
-        }
-
-        public String getFour() {
-            return four;
-        }
-
-        public void setFour(final String four) {
-            this.four = four;
-        }
-    }
-
-    public void testMapColumnToAnnotationField() throws Exception {
-        final String[] columnNames = { "test", "test", "three_" };
-        final String[] columnLabels = { "one", "two", null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
-        final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToAnnotationFieldBean.class).getPropertyDescriptors();
-
-        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
-        for (int i = 1; i < columns.length; i++) {
-            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
-        }
     }
 }

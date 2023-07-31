@@ -29,6 +29,26 @@ import org.apache.commons.dbutils.TestBean;
  */
 public class BeanListHandlerTest extends BaseTestCase {
 
+    public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
+
+    public interface SubTestBeanInterface {
+        String getDoNotSet();
+
+        String getOne();
+
+        TestBean.Ordinal getThree();
+
+        String getTwo();
+    }
+
+    public void testEmptyResultSetHandle() throws SQLException {
+        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
+        final List<TestBean> results = h.handle(this.emptyResultSet);
+
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
+
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
         final List<TestBean> results = h.handle(this.rs);
@@ -47,43 +67,6 @@ public class BeanListHandlerTest extends BaseTestCase {
 
         assertTrue(iter.hasNext());
         row = iter.next();
-
-        assertEquals("4", row.getOne());
-        assertEquals("5", row.getTwo());
-        assertEquals(TestBean.Ordinal.SIX, row.getThree());
-        assertEquals("not set", row.getDoNotSet());
-
-        assertFalse(iter.hasNext());
-    }
-
-    public void testEmptyResultSetHandle() throws SQLException {
-        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
-        final List<TestBean> results = h.handle(this.emptyResultSet);
-
-        assertNotNull(results);
-        assertTrue(results.isEmpty());
-    }
-
-    public void testHandleToSuperClass() throws SQLException {
-        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(SubTestBean.class);
-        final List<TestBean> results = h.handle(this.rs);
-
-        assertNotNull(results);
-        assertEquals(ROWS, results.size());
-
-        final Iterator<TestBean> iter = results.iterator();
-        assertTrue(iter.hasNext());
-        TestBean row = iter.next();
-        assertSame(SubTestBean.class, row.getClass());
-
-        assertEquals("1", row.getOne());
-        assertEquals("2", row.getTwo());
-        assertEquals(TestBean.Ordinal.THREE, row.getThree());
-        assertEquals("not set", row.getDoNotSet());
-
-        assertTrue(iter.hasNext());
-        row = iter.next();
-        assertSame(SubTestBean.class, row.getClass());
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());
@@ -123,15 +106,32 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertFalse(iter.hasNext());
     }
 
-    public interface SubTestBeanInterface {
-        String getOne();
+    public void testHandleToSuperClass() throws SQLException {
+        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(SubTestBean.class);
+        final List<TestBean> results = h.handle(this.rs);
 
-        TestBean.Ordinal getThree();
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
 
-        String getTwo();
+        final Iterator<TestBean> iter = results.iterator();
+        assertTrue(iter.hasNext());
+        TestBean row = iter.next();
+        assertSame(SubTestBean.class, row.getClass());
 
-        String getDoNotSet();
+        assertEquals("1", row.getOne());
+        assertEquals("2", row.getTwo());
+        assertEquals(TestBean.Ordinal.THREE, row.getThree());
+        assertEquals("not set", row.getDoNotSet());
+
+        assertTrue(iter.hasNext());
+        row = iter.next();
+        assertSame(SubTestBean.class, row.getClass());
+
+        assertEquals("4", row.getOne());
+        assertEquals("5", row.getTwo());
+        assertEquals(TestBean.Ordinal.SIX, row.getThree());
+        assertEquals("not set", row.getDoNotSet());
+
+        assertFalse(iter.hasNext());
     }
-
-    public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
 }

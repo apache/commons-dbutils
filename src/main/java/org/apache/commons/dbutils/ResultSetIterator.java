@@ -35,6 +35,23 @@ import java.util.Iterator;
 public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
+     * Generates an {@code Iterable}, suitable for use in for-each loops.
+     *
+     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
+     * @return an {@code Iterable}, suitable for use in for-each loops.
+     */
+    public static Iterable<Object[]> iterable(final ResultSet rs) {
+        return new Iterable<Object[]>() {
+
+            @Override
+            public Iterator<Object[]> iterator() {
+                return new ResultSetIterator(rs);
+            }
+
+        };
+    }
+
+    /**
      * The wrapped {@code ResultSet}.
      */
     private final ResultSet rs;
@@ -119,23 +136,6 @@ public class ResultSetIterator implements Iterator<Object[]> {
      */
     protected void rethrow(final SQLException e) {
         throw new RuntimeException(e.getMessage());
-    }
-
-    /**
-     * Generates an {@code Iterable}, suitable for use in for-each loops.
-     *
-     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
-     * @return an {@code Iterable}, suitable for use in for-each loops.
-     */
-    public static Iterable<Object[]> iterable(final ResultSet rs) {
-        return new Iterable<Object[]>() {
-
-            @Override
-            public Iterator<Object[]> iterator() {
-                return new ResultSetIterator(rs);
-            }
-
-        };
     }
 
 }

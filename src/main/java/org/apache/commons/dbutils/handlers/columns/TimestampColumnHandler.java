@@ -24,12 +24,12 @@ import org.apache.commons.dbutils.ColumnHandler;
 
 public class TimestampColumnHandler implements ColumnHandler {
     @Override
-    public boolean match(final Class<?> propType) {
-        return propType.equals(Timestamp.class);
+    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+        return rs.getTimestamp(columnIndex);
     }
 
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return rs.getTimestamp(columnIndex);
+    public boolean match(final Class<?> propType) {
+        return propType.equals(Timestamp.class);
     }
 }

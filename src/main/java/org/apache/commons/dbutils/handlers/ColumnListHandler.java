@@ -59,16 +59,6 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
         this(columnIndex, null);
     }
 
-    /**
-     * Creates a new instance of ColumnListHandler.
-     *
-     * @param columnName The name of the column to retrieve from the
-     * {@code ResultSet}.
-     */
-    public ColumnListHandler(final String columnName) {
-        this(1, columnName);
-    }
-
     /** Private Helper
      * @param columnIndex The index of the column to retrieve from the
      * {@code ResultSet}.
@@ -78,6 +68,16 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
     private ColumnListHandler(final int columnIndex, final String columnName) {
         this.columnIndex = columnIndex;
         this.columnName = columnName;
+    }
+
+    /**
+     * Creates a new instance of ColumnListHandler.
+     *
+     * @param columnName The name of the column to retrieve from the
+     * {@code ResultSet}.
+     */
+    public ColumnListHandler(final String columnName) {
+        this(1, columnName);
     }
 
     /**

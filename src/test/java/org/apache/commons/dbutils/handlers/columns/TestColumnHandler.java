@@ -24,12 +24,12 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class TestColumnHandler implements ColumnHandler {
 
     @Override
-    public boolean match(final Class<?> propType) {
-        return false;
+    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+        return null;
     }
 
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return null;
+    public boolean match(final Class<?> propType) {
+        return false;
     }
 }

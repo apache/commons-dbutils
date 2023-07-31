@@ -35,32 +35,6 @@ public class ServiceLoaderTest {
         properties = ServiceLoader.load(PropertyHandler.class);
     }
 
-    @Test
-    public void testFindsLocalColumnHandler() {
-        boolean found = false;
-        for (final ColumnHandler handler : columns) {
-            // this class is defined outside of the main classes in dbutils
-            if (handler instanceof TestColumnHandler) {
-                found = true;
-            }
-        }
-
-        assertTrue(found);
-    }
-
-    @Test
-    public void testFindsLocalPropertyHandler() {
-        boolean found = false;
-        for (final PropertyHandler handler : properties) {
-            // this class is defined outside of the main classes in dbutils
-            if (handler instanceof TestPropertyHandler) {
-                found = true;
-            }
-        }
-
-        assertTrue(found);
-    }
-
     /**
      * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers
      * were loaded, too.
@@ -87,6 +61,32 @@ public class ServiceLoaderTest {
         }
 
         assertTrue(count > 1);
+    }
+
+    @Test
+    public void testFindsLocalColumnHandler() {
+        boolean found = false;
+        for (final ColumnHandler handler : columns) {
+            // this class is defined outside of the main classes in dbutils
+            if (handler instanceof TestColumnHandler) {
+                found = true;
+            }
+        }
+
+        assertTrue(found);
+    }
+
+    @Test
+    public void testFindsLocalPropertyHandler() {
+        boolean found = false;
+        for (final PropertyHandler handler : properties) {
+            // this class is defined outside of the main classes in dbutils
+            if (handler instanceof TestPropertyHandler) {
+                found = true;
+            }
+        }
+
+        assertTrue(found);
     }
 
 }

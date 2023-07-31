@@ -28,47 +28,6 @@ import org.apache.commons.dbutils.RowProcessor;
 
 public class KeyedHandlerTest extends BaseTestCase {
 
-    public void testInjectedRowProcess() throws Exception {
-        final RowProcessor mockProc = mock(RowProcessor.class);
-        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(mockProc);
-        final Map<String,Map<String,Object>> results = h.handle(this.rs);
-
-        assertNotNull(results);
-        assertEquals(ROWS, results.size());
-
-        Map<String,Object> row = null;
-        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
-        {
-            row = entry.getValue();
-            assertNotNull(row);
-            assertTrue(row.isEmpty());
-            assertEquals(0, row.size());
-        }
-    }
-
-    public void testHandle() throws SQLException {
-        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
-
-        final Map<String,Map<String,Object>> results = h.handle(this.rs);
-
-        assertNotNull(results);
-        assertEquals(ROWS, results.size());
-
-        Map<String,Object> row = null;
-        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
-        {
-            final Object key = entry.getKey();
-            assertNotNull(key);
-            row = entry.getValue();
-            assertNotNull(row);
-            assertEquals(COLS, row.size());
-        }
-        row = results.get("1");
-        assertEquals("1", row.get("one"));
-        assertEquals("2", row.get("TWO"));
-        assertEquals("THREE", row.get("Three"));
-    }
-
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(2);
         final Map<String,Map<String,Object>> results = h.handle(this.rs);
@@ -118,5 +77,46 @@ public class KeyedHandlerTest extends BaseTestCase {
         final Map<String,Map<String,Object>> results = h.handle(this.emptyResultSet);
         assertNotNull(results);
         assertTrue(results.isEmpty());
+    }
+
+    public void testHandle() throws SQLException {
+        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
+
+        final Map<String,Map<String,Object>> results = h.handle(this.rs);
+
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
+
+        Map<String,Object> row = null;
+        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
+        {
+            final Object key = entry.getKey();
+            assertNotNull(key);
+            row = entry.getValue();
+            assertNotNull(row);
+            assertEquals(COLS, row.size());
+        }
+        row = results.get("1");
+        assertEquals("1", row.get("one"));
+        assertEquals("2", row.get("TWO"));
+        assertEquals("THREE", row.get("Three"));
+    }
+
+    public void testInjectedRowProcess() throws Exception {
+        final RowProcessor mockProc = mock(RowProcessor.class);
+        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(mockProc);
+        final Map<String,Map<String,Object>> results = h.handle(this.rs);
+
+        assertNotNull(results);
+        assertEquals(ROWS, results.size());
+
+        Map<String,Object> row = null;
+        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
+        {
+            row = entry.getValue();
+            assertNotNull(row);
+            assertTrue(row.isEmpty());
+            assertEquals(0, row.size());
+        }
     }
 }

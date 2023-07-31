@@ -59,16 +59,6 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
         this(columnIndex, null);
     }
 
-    /**
-     * Creates a new instance of ScalarHandler.
-     *
-     * @param columnName The name of the column to retrieve from the
-     * {@code ResultSet}.
-     */
-    public ScalarHandler(final String columnName) {
-        this(1, columnName);
-    }
-
     /** Helper constructor
      * @param columnIndex The index of the column to retrieve from the
      * {@code ResultSet}.
@@ -78,6 +68,16 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
     private ScalarHandler(final int columnIndex, final String columnName) {
         this.columnIndex = columnIndex;
         this.columnName = columnName;
+    }
+
+    /**
+     * Creates a new instance of ScalarHandler.
+     *
+     * @param columnName The name of the column to retrieve from the
+     * {@code ResultSet}.
+     */
+    public ScalarHandler(final String columnName) {
+        this(1, columnName);
     }
 
     /**

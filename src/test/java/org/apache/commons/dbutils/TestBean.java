@@ -72,6 +72,34 @@ public class TestBean {
     public TestBean() {
     }
 
+    public double getColumnProcessorDoubleTest() {
+        return columnProcessorDoubleTest;
+    }
+
+    public String getDoNotSet() {
+        return doNotSet;
+    }
+
+    public Integer getIntegerTest() {
+        return integerTest;
+    }
+
+    public int getIntTest() {
+        return intTest;
+    }
+
+    public String getNotDate() {
+        return notDate;
+    }
+
+    public Object getNullObjectTest() {
+        return nullObjectTest;
+    }
+
+    public int getNullPrimitiveTest() {
+        return nullPrimitiveTest;
+    }
+
     public String getOne() {
         return one;
     }
@@ -84,32 +112,12 @@ public class TestBean {
         return two;
     }
 
-    public void setOne(final String string) {
-        one = string;
-    }
-
-    public void setThree(final Ordinal ordinal) {
-        three = ordinal;
-    }
-
-    public void setTwo(final String string) {
-        two = string;
-    }
-
-    public String getDoNotSet() {
-        return doNotSet;
+    public void setColumnProcessorDoubleTest(final double d) {
+        columnProcessorDoubleTest = d;
     }
 
     public void setDoNotSet(final String string) {
         doNotSet = string;
-    }
-
-    public Integer getIntegerTest() {
-        return integerTest;
-    }
-
-    public int getIntTest() {
-        return intTest;
     }
 
     public void setIntegerTest(final Integer integer) {
@@ -120,12 +128,8 @@ public class TestBean {
         intTest = i;
     }
 
-    public Object getNullObjectTest() {
-        return nullObjectTest;
-    }
-
-    public int getNullPrimitiveTest() {
-        return nullPrimitiveTest;
+    public void setNotDate(final String string) {
+        notDate = string;
     }
 
     public void setNullObjectTest(final Object object) {
@@ -136,20 +140,16 @@ public class TestBean {
         nullPrimitiveTest = i;
     }
 
-    public String getNotDate() {
-        return notDate;
+    public void setOne(final String string) {
+        one = string;
     }
 
-    public void setNotDate(final String string) {
-        notDate = string;
+    public void setThree(final Ordinal ordinal) {
+        three = ordinal;
     }
 
-    public double getColumnProcessorDoubleTest() {
-        return columnProcessorDoubleTest;
-    }
-
-    public void setColumnProcessorDoubleTest(final double d) {
-        columnProcessorDoubleTest = d;
+    public void setTwo(final String string) {
+        two = string;
     }
 
 }

@@ -39,6 +39,35 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
 
 
     /**
+     * This factory method is called by {@code handle()} to retrieve the
+     * key value from the current {@code ResultSet} row.
+     * @param rs ResultSet to create a key from
+     * @return K from the configured key column name/index
+     * @throws SQLException if a database access error occurs
+     */
+    protected abstract K createKey(ResultSet rs) throws SQLException;
+
+    /**
+     * This factory method is called by {@code handle()} to create the Map
+     * to store records in.  This implementation returns a {@code HashMap}
+     * instance.
+     *
+     * @return Map to store records in
+     */
+    protected Map<K, V> createMap() {
+        return new HashMap<>();
+    }
+
+    /**
+     * This factory method is called by {@code handle()} to store the
+     * current {@code ResultSet} row in some object.
+     * @param rs ResultSet to create a row from
+     * @return V object created from the current row
+     * @throws SQLException if a database access error occurs
+     */
+    protected abstract V createRow(ResultSet rs) throws SQLException;
+
+    /**
      * Convert each row's columns into a Map and store then
      * in a {@code Map} under {@code ResultSet.getObject(key)} key.
      * @param rs {@code ResultSet} to process.
@@ -54,34 +83,5 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
         }
         return result;
     }
-
-    /**
-     * This factory method is called by {@code handle()} to create the Map
-     * to store records in.  This implementation returns a {@code HashMap}
-     * instance.
-     *
-     * @return Map to store records in
-     */
-    protected Map<K, V> createMap() {
-        return new HashMap<>();
-    }
-
-    /**
-     * This factory method is called by {@code handle()} to retrieve the
-     * key value from the current {@code ResultSet} row.
-     * @param rs ResultSet to create a key from
-     * @return K from the configured key column name/index
-     * @throws SQLException if a database access error occurs
-     */
-    protected abstract K createKey(ResultSet rs) throws SQLException;
-
-    /**
-     * This factory method is called by {@code handle()} to store the
-     * current {@code ResultSet} row in some object.
-     * @param rs ResultSet to create a row from
-     * @return V object created from the current row
-     * @throws SQLException if a database access error occurs
-     */
-    protected abstract V createRow(ResultSet rs) throws SQLException;
 
 }

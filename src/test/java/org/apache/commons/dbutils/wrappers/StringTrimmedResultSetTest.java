@@ -34,14 +34,14 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
         this.rs = StringTrimmedResultSet.wrap(this.rs);
     }
 
-    public void testGetString() throws SQLException {
-        this.rs.next();
-        assertEquals("notInBean", rs.getString(4));
-    }
-
     public void testGetObject() throws SQLException {
         this.rs.next();
         assertEquals("notInBean", rs.getObject(4));
+    }
+
+    public void testGetString() throws SQLException {
+        this.rs.next();
+        assertEquals("notInBean", rs.getString(4));
     }
 
     /**
