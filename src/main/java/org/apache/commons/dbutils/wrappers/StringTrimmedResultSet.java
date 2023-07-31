@@ -46,11 +46,6 @@ import org.apache.commons.dbutils.ProxyFactory;
 public class StringTrimmedResultSet implements InvocationHandler {
 
     /**
-     * The factory to create proxies with.
-     */
-    private static final ProxyFactory factory = ProxyFactory.instance();
-
-    /**
      * Wraps the {@code ResultSet} in an instance of this class.  This is
      * equivalent to:
      * <pre>
@@ -61,7 +56,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * @return wrapped ResultSet
      */
     public static ResultSet wrap(final ResultSet rs) {
-        return factory.createResultSet(new StringTrimmedResultSet(rs));
+        return ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(rs));
     }
 
     /**
