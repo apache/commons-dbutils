@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.dbutils.annotations;
+package org.apache.commons.dbutils;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 /**
  * Annotation for BeanProcessor to receive hints of the field name rather than dissecting the method name.
  *
- * @since 2.0
+ * @since 1.8.0
  */
 @Target({ ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

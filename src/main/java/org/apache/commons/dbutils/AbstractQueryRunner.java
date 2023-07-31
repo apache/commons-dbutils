@@ -207,7 +207,7 @@ public abstract class AbstractQueryRunner {
      * Calls {@link DbUtils#closeQuietly(Connection)}.
      *
      * @param conn Connection to close.
-     * @since 2.0
+     * @since 1.8.0
      */
     protected void closeQuietly(final Connection conn) {
         DbUtils.closeQuietly(conn);
@@ -217,7 +217,7 @@ public abstract class AbstractQueryRunner {
      * Calls {@link DbUtils#closeQuietly(ResultSet)}.
      *
      * @param rs ResultSet to close.
-     * @since 2.0
+     * @since 1.8.0
      */
     protected void closeQuietly(final ResultSet rs) {
         DbUtils.closeQuietly(rs);
@@ -227,7 +227,7 @@ public abstract class AbstractQueryRunner {
      * Calls {@link DbUtils#closeQuietly(Statement)}.
      *
      * @param statement ResultSet to close.
-     * @since 2.0
+     * @since 1.8.0
      */
     protected void closeQuietly(final Statement statement) {
         DbUtils.closeQuietly(statement);

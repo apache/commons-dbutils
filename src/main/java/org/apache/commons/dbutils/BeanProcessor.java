@@ -33,8 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 
-import org.apache.commons.dbutils.annotations.Column;
-
 /**
  * <p>
  * {@code BeanProcessor} matches column names to bean property names

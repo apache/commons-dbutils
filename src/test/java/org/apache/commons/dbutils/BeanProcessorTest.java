@@ -28,8 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.dbutils.annotations.Column;
-
 public class BeanProcessorTest extends BaseTestCase {
 
     private static class IndexedPropertyTestClass {
