@@ -137,7 +137,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     @SuppressWarnings("unchecked")
     @Override
     protected K createKey(final ResultSet rs) throws SQLException {
-        return (columnName == null) ?
+        return columnName == null ?
                (K) rs.getObject(columnIndex) :
                (K) rs.getObject(columnName);
     }
