@@ -48,21 +48,21 @@ import org.apache.commons.dbutils.ProxyFactory;
  * <pre>
  * Connection conn = // somehow get a connection
  * Statement stmt = conn.createStatement();
- * ResultSet rs = stmt.executeQuery("SELECT col1, col2 FROM table1");
+ * ResultSet resultSet = stmt.executeQuery("SELECT col1, col2 FROM table1");
  *
  * // Wrap the result set for SQL NULL checking
- * SqlNullCheckedResultSet wrapper = new SqlNullCheckedResultSet(rs);
+ * SqlNullCheckedResultSet wrapper = new SqlNullCheckedResultSet(resultSet);
  * wrapper.setNullString("---N/A---"); // Set null string
  * wrapper.setNullInt(-999); // Set null integer
- * rs = ProxyFactory.instance().createResultSet(wrapper);
+ * resultSet = ProxyFactory.instance().createResultSet(wrapper);
  *
- * while (rs.next()) {
+ * while (resultSet.next()) {
  *     // If col1 is SQL NULL, value returned will be "---N/A---"
- *     String col1 = rs.getString("col1");
+ *     String col1 = resultSet.getString("col1");
  *     // If col2 is SQL NULL, value returned will be -999
- *     int col2 = rs.getInt("col2");
+ *     int col2 = resultSet.getInt("col2");
  * }
- * rs.close();
+ * resultSet.close();
  * </pre>
  * </blockquote>
  * &lt;/p&gt;
@@ -103,14 +103,14 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Wraps the {@code ResultSet} in an instance of this class.  This is
      * equivalent to:
      * <pre>
-     * ProxyFactory.instance().createResultSet(new SqlNullCheckedResultSet(rs));
+     * ProxyFactory.instance().createResultSet(new SqlNullCheckedResultSet(resultSet));
      * </pre>
      *
-     * @param rs The {@code ResultSet} to wrap.
+     * @param resultSet The {@code ResultSet} to wrap.
      * @return wrapped ResultSet
      */
-    public static ResultSet wrap(final ResultSet rs) {
-        return factory.createResultSet(new SqlNullCheckedResultSet(rs));
+    public static ResultSet wrap(final ResultSet resultSet) {
+        return factory.createResultSet(new SqlNullCheckedResultSet(resultSet));
     }
 
     private InputStream nullAsciiStream;
@@ -138,16 +138,16 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     /**
      * The wrapped result.
      */
-    private final ResultSet rs;
+    private final ResultSet resultSet;
 
     /**
      * Constructs a new instance of
      * {@code SqlNullCheckedResultSet}
      * to wrap the specified {@code ResultSet}.
-     * @param rs ResultSet to wrap
+     * @param resultSet ResultSet to wrap
      */
-    public SqlNullCheckedResultSet(final ResultSet rs) {
-        this.rs = rs;
+    public SqlNullCheckedResultSet(final ResultSet resultSet) {
+        this.resultSet = resultSet;
     }
 
     /**
@@ -385,13 +385,13 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
-        final Object result = method.invoke(this.rs, args);
+        final Object result = method.invoke(this.resultSet, args);
 
         final Method nullMethod = NULL_METHODS.get(method.getName());
 
         // Check nullMethod != null first so that we don't call wasNull()
         // before a true getter method was invoked on the ResultSet.
-        return nullMethod != null && this.rs.wasNull()
+        return nullMethod != null && this.resultSet.wasNull()
             ? nullMethod.invoke(this, (Object[]) null)
             : result;
     }
