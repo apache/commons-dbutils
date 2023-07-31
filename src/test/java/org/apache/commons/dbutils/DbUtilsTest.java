@@ -269,7 +269,7 @@ public class DbUtilsTest {
     public void rollbackAndCloseNull() throws Exception {
         DbUtils.rollbackAndClose(null);
     }
-    
+
     @Test
     public void rollbackAndCloseQuietly() throws Exception {
         final Connection mockConnection = mock(Connection.class);
@@ -277,7 +277,7 @@ public class DbUtilsTest {
         verify(mockConnection).rollback();
         verify(mockConnection).close();
     }
-    
+
     @Test
     public void rollbackAndCloseQuietlyNull() throws Exception {
         DbUtils.rollbackAndCloseQuietly(null);
@@ -313,7 +313,7 @@ public class DbUtilsTest {
 
     @Test
     public void rollbackQuietly() throws Exception {
-        Connection mockConnection = mock(Connection.class);
+        final Connection mockConnection = mock(Connection.class);
         DbUtils.rollbackQuietly(mockConnection);
         verify(mockConnection).rollback();
     }
@@ -325,7 +325,7 @@ public class DbUtilsTest {
 
     @Test
     public void rollbackQuietlyWithException() throws Exception {
-        Connection mockConnection = mock(Connection.class);
+        final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).rollback();
         DbUtils.rollbackQuietly(mockConnection);
         verify(mockConnection).rollback();
