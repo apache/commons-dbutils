@@ -490,9 +490,9 @@ public class QueryRunner extends AbstractQueryRunner {
                 stmt.addBatch();
             }
             stmt.executeBatch();
-            final ResultSet rs = stmt.getGeneratedKeys();
-            generatedKeys = rsh.handle(rs);
-
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                generatedKeys = rsh.handle(rs);
+            }
         } catch (final SQLException e) {
             this.rethrow(e, sql, (Object[])params);
         } finally {
