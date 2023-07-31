@@ -26,6 +26,7 @@ import org.apache.commons.dbutils.PropertyHandler;
  * {@link java.sql.Timestamp} from SQL types to java types.
  */
 public class DatePropertyHandler implements PropertyHandler {
+
     @Override
     public Object apply(final Class<?> parameter, Object value) {
         final String targetType = parameter.getName();
