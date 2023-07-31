@@ -299,14 +299,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Future<int[]> batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
-        return executorService.submit(new Callable<int[]>() {
-
-            @Override
-            public int[] call() throws Exception {
-                return queryRunner.batch(conn, sql, params);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.batch(conn, sql, params));
     }
 
     /**
@@ -322,14 +315,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Future<int[]> batch(final String sql, final Object[][] params) throws SQLException {
-        return executorService.submit(new Callable<int[]>() {
-
-            @Override
-            public int[] call() throws Exception {
-                return queryRunner.batch(sql, params);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.batch(sql, params));
     }
 
     /**
@@ -345,13 +331,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> Future<T> insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(conn, sql, rsh);
-            }
-        });
+        return executorService.submit(() -> queryRunner.insert(conn, sql, rsh));
     }
 
     /**
@@ -368,13 +348,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> Future<T> insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(conn, sql, rsh, params);
-            }
-        });
+        return executorService.submit(() -> queryRunner.insert(conn, sql, rsh, params));
     }
 
     /**
@@ -389,14 +363,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> Future<T> insert(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(sql, rsh);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.insert(sql, rsh));
     }
 
     /**
@@ -412,13 +379,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> Future<T> insert(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insert(sql, rsh, params);
-            }
-        });
+        return executorService.submit(() -> queryRunner.insert(sql, rsh, params));
     }
 
     /**
@@ -436,13 +397,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> Future<T> insertBatch(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insertBatch(conn, sql, rsh, params);
-            }
-        });
+        return executorService.submit(() -> queryRunner.insertBatch(conn, sql, rsh, params));
     }
 
     /**
@@ -459,13 +414,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> Future<T> insertBatch(final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.insertBatch(sql, rsh, params);
-            }
-        });
+        return executorService.submit(() -> queryRunner.insertBatch(sql, rsh, params));
     }
 
     /**
@@ -479,14 +428,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.query(conn, sql, rsh);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.query(conn, sql, rsh));
     }
 
     /**
@@ -502,14 +444,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      */
     public <T> Future<T> query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params)
             throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.query(conn, sql, rsh, params);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.query(conn, sql, rsh, params));
     }
 
     /**
@@ -525,14 +460,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.query(sql, rsh);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.query(sql, rsh));
     }
 
     /**
@@ -549,14 +477,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> Future<T> query(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<T>() {
-
-            @Override
-            public T call() throws Exception {
-                return queryRunner.query(sql, rsh, params);
-            }
-
-        });
+        return executorService.submit(() -> queryRunner.query(sql, rsh, params));
     }
 
     /**
@@ -569,14 +490,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(final Connection conn, final String sql) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return Integer.valueOf(queryRunner.update(conn, sql));
-            }
-
-        });
+        return executorService.submit(() -> Integer.valueOf(queryRunner.update(conn, sql)));
     }
 
     /**
@@ -590,14 +504,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(final Connection conn, final String sql, final Object param) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return Integer.valueOf(queryRunner.update(conn, sql, param));
-            }
-
-        });
+        return executorService.submit(() -> Integer.valueOf(queryRunner.update(conn, sql, param)));
     }
 
     /**
@@ -610,14 +517,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public Future<Integer> update(final Connection conn, final String sql, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return Integer.valueOf(queryRunner.update(conn, sql, params));
-            }
-
-        });
+        return executorService.submit(() -> Integer.valueOf(queryRunner.update(conn, sql, params)));
     }
 
     /**
@@ -632,14 +532,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @return A {@code Future} which returns the number of rows updated.
      */
     public Future<Integer> update(final String sql) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return Integer.valueOf(queryRunner.update(sql));
-            }
-
-        });
+        return executorService.submit(() -> Integer.valueOf(queryRunner.update(sql)));
     }
 
     /**
@@ -655,14 +548,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @return A {@code Future} which returns the number of rows updated.
      */
     public Future<Integer> update(final String sql, final Object param) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return Integer.valueOf(queryRunner.update(sql, param));
-            }
-
-        });
+        return executorService.submit(() -> Integer.valueOf(queryRunner.update(sql, param)));
     }
 
     /**
@@ -678,14 +564,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @return A {@code Future} which returns the number of rows updated.
      */
     public Future<Integer> update(final String sql, final Object... params) throws SQLException {
-        return executorService.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer call() throws Exception {
-                return Integer.valueOf(queryRunner.update(sql, params));
-            }
-
-        });
+        return executorService.submit(() -> Integer.valueOf(queryRunner.update(sql, params)));
     }
 
 }
