@@ -34,13 +34,13 @@ import org.apache.commons.dbutils.ProxyFactory;
  * </p>
  *
  * <pre>
- * ResultSet rs = // somehow get a ResultSet;
+ * ResultSet resultSet = // somehow get a ResultSet;
  *
  * // Substitute wrapped ResultSet with additional behavior for real ResultSet
- * rs = StringTrimmedResultSet.wrap(rs);
+ * resultSet = StringTrimmedResultSet.wrap(resultSet);
  *
  * // Pass wrapped ResultSet to processor
- * List list = new BasicRowProcessor().toBeanList(rs);
+ * List list = new BasicRowProcessor().toBeanList(resultSet);
  * </pre>
  */
 public class StringTrimmedResultSet implements InvocationHandler {
@@ -49,10 +49,10 @@ public class StringTrimmedResultSet implements InvocationHandler {
      * Wraps the {@code ResultSet} in an instance of this class.  This is
      * equivalent to:
      * <pre>
-     * ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(rs));
+     * ProxyFactory.instance().createResultSet(new StringTrimmedResultSet(resultSet));
      * </pre>
      *
-     * @param rs The {@code ResultSet} to wrap.
+     * @param resultSet The {@code ResultSet} to wrap.
      * @return wrapped ResultSet
      */
     public static ResultSet wrap(final ResultSet rs) {
@@ -62,15 +62,15 @@ public class StringTrimmedResultSet implements InvocationHandler {
     /**
      * The wrapped result.
      */
-    private final ResultSet rs;
+    private final ResultSet resultSet;
 
     /**
      * Constructs a new instance of {@code StringTrimmedResultSet}
      * to wrap the specified {@code ResultSet}.
-     * @param rs ResultSet to wrap
+     * @param resultSet ResultSet to wrap
      */
-    public StringTrimmedResultSet(final ResultSet rs) {
-        this.rs = rs;
+    public StringTrimmedResultSet(final ResultSet resultSet) {
+        this.resultSet = resultSet;
     }
 
     /**
@@ -89,7 +89,7 @@ public class StringTrimmedResultSet implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
 
-        Object result = method.invoke(this.rs, args);
+        Object result = method.invoke(this.resultSet, args);
 
         if (result instanceof String
                 && (method.getName().equals("getObject")
