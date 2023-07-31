@@ -22,6 +22,7 @@ import org.apache.commons.dbutils.PropertyHandler;
  * {@link PropertyHandler} for enums. Will convert strings to enums.
  */
 public class StringEnumPropertyHandler implements PropertyHandler {
+
     @Override
     @SuppressWarnings("unchecked")
     public Object apply(final Class<?> parameter, final Object value) {
