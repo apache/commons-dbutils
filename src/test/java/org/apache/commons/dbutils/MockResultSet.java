@@ -116,7 +116,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null)
+            return obj == null
                 ? Boolean.FALSE
                 : Boolean.valueOf(obj.toString());
 
@@ -135,7 +135,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null)
+            return obj == null
                 ? Byte.valueOf((byte) 0)
                 : Byte.valueOf(obj.toString());
 
@@ -154,7 +154,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null)
+            return obj == null
                 ? Double.valueOf(0)
                 : Double.valueOf(obj.toString());
 
@@ -173,7 +173,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null) ? Float.valueOf(0) : Float.valueOf(obj.toString());
+            return obj == null ? Float.valueOf(0) : Float.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -190,7 +190,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null)
+            return obj == null
                 ? Integer.valueOf(0)
                 : Integer.valueOf(obj.toString());
 
@@ -209,7 +209,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null) ? Long.valueOf(0) : Long.valueOf(obj.toString());
+            return obj == null ? Long.valueOf(0) : Long.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -244,7 +244,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null)
+            return obj == null
                 ? Short.valueOf((short) 0)
                 : Short.valueOf(obj.toString());
 
@@ -261,7 +261,7 @@ public class MockResultSet implements InvocationHandler {
     protected String getString(final int columnIndex) throws SQLException {
         final Object obj = this.getObject(columnIndex);
         this.setWasNull(obj);
-        return (obj == null) ? null : obj.toString();
+        return obj == null ? null : obj.toString();
     }
 
     @Override
@@ -351,7 +351,7 @@ public class MockResultSet implements InvocationHandler {
      * @param isNull
      */
     private void setWasNull(final Object isNull) {
-        this.wasNull = (isNull == null) ? Boolean.TRUE : Boolean.FALSE;
+        this.wasNull = isNull == null ? Boolean.TRUE : Boolean.FALSE;
     }
 
     /**
