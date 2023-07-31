@@ -37,7 +37,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map<K, V>> {
 
-
     /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.
