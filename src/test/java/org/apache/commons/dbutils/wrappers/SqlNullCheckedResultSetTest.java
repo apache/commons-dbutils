@@ -1033,7 +1033,7 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
 
         }
         if (returnType.equals(Double.TYPE)) {
-            return new Double(0);
+            return Double.valueOf(0);
 
         }
         if (returnType.equals(Long.TYPE)) {
@@ -1045,7 +1045,7 @@ class SqlNullUncheckedMockResultSet implements InvocationHandler {
 
         }
         if (returnType.equals(Float.TYPE)) {
-            return new Float(0);
+            return Float.valueOf(0);
 
         }
         return null;
