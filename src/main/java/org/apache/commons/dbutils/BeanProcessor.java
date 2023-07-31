@@ -101,7 +101,7 @@ public class BeanProcessor {
      * Constructor for BeanProcessor.
      */
     public BeanProcessor() {
-        this(new HashMap<String, String>());
+        this(new HashMap<>());
     }
 
     /**
