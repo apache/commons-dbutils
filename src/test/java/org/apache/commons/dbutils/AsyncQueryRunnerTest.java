@@ -270,7 +270,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testAddBatchException() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -286,7 +286,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testExecuteBatchException() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -306,7 +306,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testGoodBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -314,7 +314,7 @@ public class AsyncQueryRunnerTest {
     @Test
     public void testGoodBatchDefaultConstructor() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(conn, params);
     }
@@ -323,7 +323,7 @@ public class AsyncQueryRunnerTest {
     @Test
     public void testGoodBatchPmdTrue() throws Exception {
         runner = new AsyncQueryRunner(dataSource, true, Executors.newFixedThreadPool(1));
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
@@ -398,7 +398,7 @@ public class AsyncQueryRunnerTest {
 
     @Test(expected=ExecutionException.class)
     public void testNullConnectionBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         when(dataSource.getConnection()).thenReturn(null);
 
@@ -432,14 +432,14 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testNullParamsBatch() throws Exception {
-        final String[][] params = new String[][] { { null, "unit" }, { "test", null } };
+        final String[][] params = { { null, "unit" }, { "test", null } };
 
         callGoodBatch(params);
     }
 
     @Test(expected=ExecutionException.class)
     public void testNullSqlBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit" }, { "test", "test" } };
+        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         runner.batch(null, params).get();
     }
@@ -456,7 +456,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testTooFewParamsBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit" }, { "test" } };
+        final String[][] params = { { "unit" }, { "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
@@ -473,7 +473,7 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testTooManyParamsBatch() throws Exception {
-        final String[][] params = new String[][] { { "unit", "unit", "unit" }, { "test", "test", "test" } };
+        final String[][] params = { { "unit", "unit", "unit" }, { "test", "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
