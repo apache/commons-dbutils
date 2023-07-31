@@ -405,8 +405,9 @@ public class QueryRunner extends AbstractQueryRunner {
                 stmt = conn.createStatement();
                 stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             }
-            final ResultSet resultSet = stmt.getGeneratedKeys();
-            generatedKeys = rsh.handle(resultSet);
+            try (ResultSet resultSet = stmt.getGeneratedKeys()) {
+                generatedKeys = rsh.handle(resultSet);
+            }
         } catch (final SQLException e) {
             this.rethrow(e, sql, params);
         } finally {

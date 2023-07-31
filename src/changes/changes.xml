@@ -69,6 +69,12 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" due-to="Amey Jadiye" type="fix">
         Correction of coverage badge #10.
       </action>
+      <action dev="ggregory" due-to="Gary Gregory" type="fix">
+        Manage JDBC objects using try-with-resources.
+      </action>
+      <action dev="ggregory" due-to="Gary Gregory" type="fix">
+        ResultSet not closed in QueryRunner.insert(Connection, String, ResultSetHandler, Object...).
+      </action>
       <!-- ADD -->
       <action dev="thecarlhall" type="add" issue="PR/9" due-to="rewerma">
         Add @Column annotation to hint the field name instead of dissecting the get method name.
