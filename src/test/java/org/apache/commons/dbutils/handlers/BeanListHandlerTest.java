@@ -77,7 +77,7 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     public void testHandleToInterface() throws SQLException {
-        final ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<SubTestBeanInterface>(SubTestBean.class);
+        final ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<>(SubTestBean.class);
         final List<SubTestBeanInterface> results = h.handle(this.rs);
 
         assertNotNull(results);
@@ -107,7 +107,7 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     public void testHandleToSuperClass() throws SQLException {
-        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<TestBean>(SubTestBean.class);
+        final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(SubTestBean.class);
         final List<TestBean> results = h.handle(this.rs);
 
         assertNotNull(results);
