@@ -522,32 +522,74 @@ public class QueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * Calls query after checking the parameters to ensure nothing is null.
-     * @param conn The connection to use for the query call.
-     * @param closeConn True if the connection should be closed, false otherwise.
-     * @param sql The SQL statement to execute.
-     * @param params An array of query replacement parameters.  Each row in
-     * this array is one set of batch replacement values.
-     * @return The results of the query.
-     * @throws SQLException If there are database or parameter errors.
+     * Execute an SQL SELECT query with a single replacement parameter. The
+     * caller is responsible for closing the connection.
+     * @param <T> The type of object that the handler returns
+     * @param conn The connection to execute the query in.
+     * @param sql The query to execute.
+     * @param param The replacement parameter.
+     * @param rsh The handler that converts the results into an object.
+     * @return The object returned by the handler.
+     * @throws SQLException if a database access error occurs
+     * @deprecated Use {@link #query(Connection, String, ResultSetHandler, Object...)}
      */
-    private <T> T query(final Connection conn, final boolean closeConn, final String sql, final ResultSetHandler<T> rsh, final Object... params)
-            throws SQLException {
+    @Deprecated
+    public <T> T query(final Connection conn, final String sql, final Object param, final ResultSetHandler<T> rsh) throws SQLException {
+        return this.<T>query(conn, sql, rsh, param);
+    }
+
+    /**
+     * Execute an SQL SELECT query with replacement parameters.  The
+     * caller is responsible for closing the connection.
+     * @param <T> The type of object that the handler returns
+     * @param conn The connection to execute the query in.
+     * @param sql The query to execute.
+     * @param params The replacement parameters.
+     * @param rsh The handler that converts the results into an object.
+     * @return The object returned by the handler.
+     * @throws SQLException if a database access error occurs
+     * @deprecated Use {@link #query(Connection,String,ResultSetHandler,Object...)} instead
+     */
+    @Deprecated
+    public <T> T query(final Connection conn, final String sql, final Object[] params, final ResultSetHandler<T> rsh) throws SQLException {
+        return this.<T>query(conn, sql, rsh, params);
+    }
+
+    /**
+     * Execute an SQL SELECT query without any replacement parameters.  The
+     * caller is responsible for closing the connection.
+     * @param <T> The type of object that the handler returns
+     * @param conn The connection to execute the query in.
+     * @param sql The query to execute.
+     * @param rsh The handler that converts the results into an object.
+     * @return The object returned by the handler.
+     * @throws SQLException if a database access error occurs
+     */
+    public <T> T query(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
+        return this.<T>query(conn, sql, rsh, (Object[]) null);
+    }
+
+    /**
+     * Execute an SQL SELECT query with replacement parameters.  The
+     * caller is responsible for closing the connection.
+     * @param <T> The type of object that the handler returns
+     * @param conn The connection to execute the query in.
+     * @param sql The query to execute.
+     * @param rsh The handler that converts the results into an object.
+     * @param params The replacement parameters.
+     * @return The object returned by the handler.
+     * @throws SQLException if a database access error occurs
+     */
+    public <T> T query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
         }
 
         if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null SQL statement");
         }
 
         if (rsh == null) {
-            if (closeConn) {
-                close(conn);
-            }
             throw new SQLException("Null ResultSetHandler");
         }
 
@@ -573,75 +615,9 @@ public class QueryRunner extends AbstractQueryRunner {
         } finally {
             closeQuietly(rs);
             closeQuietly(stmt);
-            if (closeConn) {
-                close(conn);
-            }
         }
 
         return result;
-    }
-
-    /**
-     * Execute an SQL SELECT query with a single replacement parameter. The
-     * caller is responsible for closing the connection.
-     * @param <T> The type of object that the handler returns
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param param The replacement parameter.
-     * @param rsh The handler that converts the results into an object.
-     * @return The object returned by the handler.
-     * @throws SQLException if a database access error occurs
-     * @deprecated Use {@link #query(Connection, String, ResultSetHandler, Object...)}
-     */
-    @Deprecated
-    public <T> T query(final Connection conn, final String sql, final Object param, final ResultSetHandler<T> rsh) throws SQLException {
-        return this.<T>query(conn, false, sql, rsh, param);
-    }
-
-    /**
-     * Execute an SQL SELECT query with replacement parameters.  The
-     * caller is responsible for closing the connection.
-     * @param <T> The type of object that the handler returns
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param params The replacement parameters.
-     * @param rsh The handler that converts the results into an object.
-     * @return The object returned by the handler.
-     * @throws SQLException if a database access error occurs
-     * @deprecated Use {@link #query(Connection,String,ResultSetHandler,Object...)} instead
-     */
-    @Deprecated
-    public <T> T query(final Connection conn, final String sql, final Object[] params, final ResultSetHandler<T> rsh) throws SQLException {
-        return this.<T>query(conn, false, sql, rsh, params);
-    }
-
-    /**
-     * Execute an SQL SELECT query without any replacement parameters.  The
-     * caller is responsible for closing the connection.
-     * @param <T> The type of object that the handler returns
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param rsh The handler that converts the results into an object.
-     * @return The object returned by the handler.
-     * @throws SQLException if a database access error occurs
-     */
-    public <T> T query(final Connection conn, final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        return this.<T>query(conn, false, sql, rsh, (Object[]) null);
-    }
-
-    /**
-     * Execute an SQL SELECT query with replacement parameters.  The
-     * caller is responsible for closing the connection.
-     * @param <T> The type of object that the handler returns
-     * @param conn The connection to execute the query in.
-     * @param sql The query to execute.
-     * @param rsh The handler that converts the results into an object.
-     * @param params The replacement parameters.
-     * @return The object returned by the handler.
-     * @throws SQLException if a database access error occurs
-     */
-    public <T> T query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        return this.<T>query(conn, false, sql, rsh, params);
     }
 
     /**
@@ -660,9 +636,9 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(final String sql, final Object param, final ResultSetHandler<T> rsh) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, param);
+        try (Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, sql, rsh, param);
+        }
     }
 
     /**
@@ -683,9 +659,9 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(final String sql, final Object[] params, final ResultSetHandler<T> rsh) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, params);
+        try (Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, sql, rsh, params);
+        }
     }
 
     /**
@@ -701,9 +677,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> T query(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, (Object[]) null);
+        try (Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, sql, rsh, (Object[]) null);
+        }
     }
 
     /**
@@ -720,9 +696,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> T query(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.<T>query(conn, true, sql, rsh, params);
+        try (Connection conn = this.prepareConnection()) {
+            return this.<T>query(conn, sql, rsh, params);
+        }
     }
 
     /**
