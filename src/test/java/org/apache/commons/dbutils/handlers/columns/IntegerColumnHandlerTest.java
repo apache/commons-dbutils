@@ -25,7 +25,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IntegerColumnHandlerTest extends ColumnHandlerTestBase {
+public class IntegerColumnHandlerTest extends AbstractTestColumnHandler<Integer> {
+
     public IntegerColumnHandlerTest() {
         super(new IntegerColumnHandler(), Integer.class);
     }

@@ -21,9 +21,10 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class BooleanColumnHandler implements ColumnHandler {
+public class BooleanColumnHandler implements ColumnHandler<Boolean> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public Boolean apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return Boolean.valueOf(rs.getBoolean(columnIndex));
     }
 

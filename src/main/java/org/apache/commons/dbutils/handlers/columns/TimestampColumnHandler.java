@@ -22,9 +22,10 @@ import java.sql.Timestamp;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class TimestampColumnHandler implements ColumnHandler {
+public class TimestampColumnHandler implements ColumnHandler<Timestamp> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public Timestamp apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return rs.getTimestamp(columnIndex);
     }
 

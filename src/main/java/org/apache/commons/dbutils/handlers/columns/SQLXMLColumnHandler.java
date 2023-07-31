@@ -22,9 +22,10 @@ import java.sql.SQLXML;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class SQLXMLColumnHandler implements ColumnHandler {
+public class SQLXMLColumnHandler implements ColumnHandler<SQLXML> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public SQLXML apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return rs.getSQLXML(columnIndex);
     }
 

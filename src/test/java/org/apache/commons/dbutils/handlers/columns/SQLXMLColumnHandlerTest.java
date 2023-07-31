@@ -27,7 +27,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SQLXMLColumnHandlerTest extends ColumnHandlerTestBase {
+public class SQLXMLColumnHandlerTest extends AbstractTestColumnHandler<SQLXML> {
+
     @Mock
     private SQLXML sqlxml;
 

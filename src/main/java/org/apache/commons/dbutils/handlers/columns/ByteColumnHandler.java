@@ -21,9 +21,10 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class ByteColumnHandler implements ColumnHandler {
+public class ByteColumnHandler implements ColumnHandler<Byte> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public Byte apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return Byte.valueOf(rs.getByte(columnIndex));
     }
 

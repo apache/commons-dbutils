@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FloatColumnHandlerTest extends ColumnHandlerTestBase {
+public class FloatColumnHandlerTest extends AbstractTestColumnHandler<Float> {
+
     public FloatColumnHandlerTest() {
         super(new FloatColumnHandler(), Float.class);
     }

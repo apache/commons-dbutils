@@ -21,9 +21,10 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class DoubleColumnHandler implements ColumnHandler {
+public class DoubleColumnHandler implements ColumnHandler<Double> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public Double apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return Double.valueOf(rs.getDouble(columnIndex));
     }
 

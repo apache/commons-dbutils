@@ -25,14 +25,14 @@ import org.apache.commons.dbutils.ColumnHandler;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public abstract class ColumnHandlerTestBase {
+public abstract class AbstractTestColumnHandler<T> {
 
     @Mock
     protected ResultSet rs;
-    protected final ColumnHandler handler;
+    protected final ColumnHandler<T> handler;
     protected final Class<?> matchingType;
 
-    public ColumnHandlerTestBase(final ColumnHandler handler, final Class<?> matchingType) {
+    public AbstractTestColumnHandler(final ColumnHandler<T> handler, final Class<?> matchingType) {
         this.handler = handler;
         this.matchingType = matchingType;
     }

@@ -22,8 +22,10 @@ import java.sql.SQLException;
 /**
  * Interface to define how implementations can interact with column handling when constructing a bean from a
  * {@link java.sql.ResultSet}.  ColumnHandlers do the work of retrieving data correctly from the {@code ResultSet}.
+ *
+ * @param <T> The return type. 
  */
-public interface ColumnHandler {
+public interface ColumnHandler<T> {
     /**
      * Do the work required to retrieve and store a column from {@code ResultSet} into something of type
      * {@code propType}. This method is called only if this handler responded {@code true} after a call to
@@ -35,7 +37,7 @@ public interface ColumnHandler {
      * @throws SQLException if the columnIndex is not valid; if a database access error occurs or this method is
      *                called on a closed result set
      */
-    Object apply(ResultSet rs, int columnIndex) throws SQLException;
+    T apply(ResultSet rs, int columnIndex) throws SQLException;
 
     /**
      * Test whether this {@code ColumnHandler} wants to handle a column targeted for a value type matching

@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DoubleColumnHandlerTest extends ColumnHandlerTestBase {
+public class DoubleColumnHandlerTest extends AbstractTestColumnHandler<Double> {
+
     public DoubleColumnHandlerTest() {
         super(new DoubleColumnHandler(), Double.class);
     }

@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BooleanColumnHandlerTest extends ColumnHandlerTestBase {
+public class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean> {
+
     public BooleanColumnHandlerTest() {
         super(new BooleanColumnHandler(), Boolean.class);
     }

@@ -21,9 +21,10 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class FloatColumnHandler implements ColumnHandler {
+public class FloatColumnHandler implements ColumnHandler<Float> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public Float apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return Float.valueOf(rs.getFloat(columnIndex));
     }
 

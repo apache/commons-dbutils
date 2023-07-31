@@ -21,9 +21,10 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class IntegerColumnHandler implements ColumnHandler {
+public class IntegerColumnHandler implements ColumnHandler<Integer> {
+
     @Override
-    public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
+    public Integer apply(final ResultSet rs, final int columnIndex) throws SQLException {
         return Integer.valueOf(rs.getInt(columnIndex));
     }
 

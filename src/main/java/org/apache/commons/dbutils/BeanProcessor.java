@@ -67,7 +67,7 @@ public class BeanProcessor {
      */
     private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<>();
 
-    private static final List<ColumnHandler> columnHandlers = new ArrayList<>();
+    private static final List<ColumnHandler<?>> columnHandlers = new ArrayList<>();
 
     private static final List<PropertyHandler> propertyHandlers = new ArrayList<>();
 
@@ -82,7 +82,7 @@ public class BeanProcessor {
         primitiveDefaults.put(Character.TYPE, Character.valueOf((char) 0));
 
         // Use a ServiceLoader to find implementations
-        for (final ColumnHandler handler : ServiceLoader.load(ColumnHandler.class)) {
+        for (final ColumnHandler<?> handler : ServiceLoader.load(ColumnHandler.class)) {
             columnHandlers.add(handler);
         }
 
@@ -414,7 +414,7 @@ public class BeanProcessor {
             return null;
         }
 
-        for (final ColumnHandler handler : columnHandlers) {
+        for (final ColumnHandler<?> handler : columnHandlers) {
             if (handler.match(propType)) {
                 retval = handler.apply(rs, index);
                 break;

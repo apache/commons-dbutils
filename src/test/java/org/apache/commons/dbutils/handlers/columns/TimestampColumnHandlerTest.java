@@ -27,7 +27,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TimestampColumnHandlerTest extends ColumnHandlerTestBase {
+public class TimestampColumnHandlerTest extends AbstractTestColumnHandler<Timestamp> {
+
     public TimestampColumnHandlerTest() {
         super(new TimestampColumnHandler(), Timestamp.class);
     }

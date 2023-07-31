@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LongColumnHandlerTest extends ColumnHandlerTestBase {
+public class LongColumnHandlerTest extends AbstractTestColumnHandler<Long> {
+
     public LongColumnHandlerTest() {
         super(new LongColumnHandler(), Long.class);
     }

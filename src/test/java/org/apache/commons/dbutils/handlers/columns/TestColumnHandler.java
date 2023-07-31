@@ -21,7 +21,7 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
-public class TestColumnHandler implements ColumnHandler {
+public class TestColumnHandler implements ColumnHandler<Object> {
 
     @Override
     public Object apply(final ResultSet rs, final int columnIndex) throws SQLException {
