@@ -41,11 +41,11 @@ public class BasicRowProcessorTest extends BaseTestCase {
         new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
     public void testPutAllContainsKeyAndRemove() throws Exception {
-        Map<String, Object> test = new HashMap<>(3);
+        final Map<String, Object> test = new HashMap<>(3);
         test.put("fiRst", "thing");
         test.put("seCond", "another");
         test.put("thIrd", "more");
-        Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(3);
+        final Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(3);
         brpMap.putAll(test);
 
         assertEquals(test, brpMap);
