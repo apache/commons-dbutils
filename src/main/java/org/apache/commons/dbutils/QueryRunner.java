@@ -191,52 +191,6 @@ public class QueryRunner extends AbstractQueryRunner {
      * @param conn The connection to use for the update call.
      * @param closeConn True if the connection should be closed, false otherwise.
      * @param sql The SQL statement to execute.
-     * @param params An array of update replacement parameters.  Each row in
-     * this array is one set of update replacement values.
-     * @return The number of rows updated.
-     * @throws SQLException If there are database or parameter errors.
-     */
-    private int execute(final Connection conn, final boolean closeConn, final String sql, final Object... params) throws SQLException {
-        if (conn == null) {
-            throw new SQLException("Null connection");
-        }
-
-        if (sql == null) {
-            if (closeConn) {
-                close(conn);
-            }
-            throw new SQLException("Null SQL statement");
-        }
-
-        CallableStatement stmt = null;
-        int rows = 0;
-
-        try {
-            stmt = this.prepareCall(conn, sql);
-            this.fillStatement(stmt, params);
-            stmt.execute();
-            rows = stmt.getUpdateCount();
-            this.retrieveOutParameters(stmt, params);
-
-        } catch (final SQLException e) {
-            this.rethrow(e, sql, params);
-
-        } finally {
-            close(stmt);
-            if (closeConn) {
-                close(conn);
-            }
-        }
-
-        return rows;
-    }
-
-    /**
-     * Invokes the stored procedure via update after checking the parameters to
-     * ensure nothing is null.
-     * @param conn The connection to use for the update call.
-     * @param closeConn True if the connection should be closed, false otherwise.
-     * @param sql The SQL statement to execute.
      * @param rsh The result set handler
      * @param params An array of update replacement parameters.  Each row in
      * this array is one set of update replacement values.
@@ -314,7 +268,32 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public int execute(final Connection conn, final String sql, final Object... params) throws SQLException {
-        return this.execute(conn, false, sql, params);
+        if (conn == null) {
+            throw new SQLException("Null connection");
+        }
+
+        if (sql == null) {
+            throw new SQLException("Null SQL statement");
+        }
+
+        CallableStatement stmt = null;
+        int rows = 0;
+
+        try {
+            stmt = this.prepareCall(conn, sql);
+            this.fillStatement(stmt, params);
+            stmt.execute();
+            rows = stmt.getUpdateCount();
+            this.retrieveOutParameters(stmt, params);
+
+        } catch (final SQLException e) {
+            this.rethrow(e, sql, params);
+
+        } finally {
+            close(stmt);
+        }
+
+        return rows;
     }
 
     /**
@@ -366,9 +345,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int execute(final String sql, final Object... params) throws SQLException {
-        final Connection conn = this.prepareConnection();
-
-        return this.execute(conn, true, sql, params);
+        try (Connection conn = this.prepareConnection()) {
+            return this.execute(conn, sql, params);
+        }
     }
 
     /**
