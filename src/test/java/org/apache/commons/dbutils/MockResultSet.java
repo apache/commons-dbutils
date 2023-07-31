@@ -155,7 +155,7 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return (obj == null)
-                ? new Double(0)
+                ? Double.valueOf(0)
                 : Double.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
@@ -173,7 +173,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return (obj == null) ? new Float(0) : Float.valueOf(obj.toString());
+            return (obj == null) ? Float.valueOf(0) : Float.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
