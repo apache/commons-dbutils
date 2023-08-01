@@ -91,7 +91,6 @@ public class StatementConfiguration {
     private final Integer fetchSize;
     private final Integer maxFieldSize;
     private final Integer maxRows;
-
     private final Integer queryTimeout;
 
     /**
