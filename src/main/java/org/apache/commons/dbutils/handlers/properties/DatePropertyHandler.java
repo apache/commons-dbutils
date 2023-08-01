@@ -22,8 +22,8 @@ import java.util.Date;
 import org.apache.commons.dbutils.PropertyHandler;
 
 /**
- * {@link PropertyHandler} for date fields. Will convert {@link java.sql.Date}, {@link java.sql.Time}, and
- * {@link java.sql.Timestamp} from SQL types to java types.
+ * {@link PropertyHandler} for date fields. Will convert {@link java.sql.Date}, {@link java.sql.Time}, and {@link java.sql.Timestamp} from SQL types to java
+ * types.
  */
 public class DatePropertyHandler implements PropertyHandler {
 
@@ -39,11 +39,9 @@ public class DatePropertyHandler implements PropertyHandler {
 
         if (JAVA_SQL_DATE.equals(targetType)) {
             value = new java.sql.Date(time);
-        } else
-        if (JAVA_SQL_TIME.equals(targetType)) {
+        } else if (JAVA_SQL_TIME.equals(targetType)) {
             value = new java.sql.Time(time);
-        } else
-        if (JAVA_SQL_TIMESTAMP.equals(targetType)) {
+        } else if (JAVA_SQL_TIMESTAMP.equals(targetType)) {
             value = new Timestamp(time);
         }
 
@@ -60,8 +58,7 @@ public class DatePropertyHandler implements PropertyHandler {
             if (JAVA_SQL_TIME.equals(targetType)) {
                 return true;
             }
-            if (JAVA_SQL_TIMESTAMP.equals(targetType)
-                    && !Timestamp.class.isInstance(value)) {
+            if (JAVA_SQL_TIMESTAMP.equals(targetType) && !Timestamp.class.isInstance(value)) {
                 return true;
             }
         }
