@@ -32,9 +32,9 @@ import java.util.regex.Pattern;
 public class QueryLoader {
 
     /**
-     * The Singleton instance of this class.
+     * The Singleton INSTANCE of this class.
      */
-    private static final QueryLoader instance = new QueryLoader();
+    private static final QueryLoader INSTANCE = new QueryLoader();
 
     /**
      * Matches .xml file extensions.
@@ -42,11 +42,11 @@ public class QueryLoader {
     private static final Pattern dotXml = Pattern.compile(".+\\.[xX][mM][lL]");
 
     /**
-     * Return an instance of this class.
-     * @return The Singleton instance.
+     * Return an INSTANCE of this class.
+     * @return The Singleton INSTANCE.
      */
     public static QueryLoader instance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
