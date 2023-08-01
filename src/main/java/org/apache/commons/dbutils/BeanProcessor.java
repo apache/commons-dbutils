@@ -63,30 +63,30 @@ public class BeanProcessor {
      * is returned.  These are the same as the defaults that ResultSet get*
      * methods return in the event of a NULL column.
      */
-    private static final Map<Class<?>, Object> primitiveDefaults = new HashMap<>();
+    private static final Map<Class<?>, Object> PRIMITIVE_DEFAULTS = new HashMap<>();
 
-    private static final List<ColumnHandler<?>> columnHandlers = new ArrayList<>();
+    private static final List<ColumnHandler<?>> COLUMN_HANDLERS = new ArrayList<>();
 
-    private static final List<PropertyHandler> propertyHandlers = new ArrayList<>();
+    private static final List<PropertyHandler> PROPERTY_HANDLERS = new ArrayList<>();
 
     static {
-        primitiveDefaults.put(Integer.TYPE, Integer.valueOf(0));
-        primitiveDefaults.put(Short.TYPE, Short.valueOf((short) 0));
-        primitiveDefaults.put(Byte.TYPE, Byte.valueOf((byte) 0));
-        primitiveDefaults.put(Float.TYPE, Float.valueOf(0f));
-        primitiveDefaults.put(Double.TYPE, Double.valueOf(0d));
-        primitiveDefaults.put(Long.TYPE, Long.valueOf(0L));
-        primitiveDefaults.put(Boolean.TYPE, Boolean.FALSE);
-        primitiveDefaults.put(Character.TYPE, Character.valueOf((char) 0));
+        PRIMITIVE_DEFAULTS.put(Integer.TYPE, Integer.valueOf(0));
+        PRIMITIVE_DEFAULTS.put(Short.TYPE, Short.valueOf((short) 0));
+        PRIMITIVE_DEFAULTS.put(Byte.TYPE, Byte.valueOf((byte) 0));
+        PRIMITIVE_DEFAULTS.put(Float.TYPE, Float.valueOf(0f));
+        PRIMITIVE_DEFAULTS.put(Double.TYPE, Double.valueOf(0d));
+        PRIMITIVE_DEFAULTS.put(Long.TYPE, Long.valueOf(0L));
+        PRIMITIVE_DEFAULTS.put(Boolean.TYPE, Boolean.FALSE);
+        PRIMITIVE_DEFAULTS.put(Character.TYPE, Character.valueOf((char) 0));
 
         // Use a ServiceLoader to find implementations
         for (final ColumnHandler<?> handler : ServiceLoader.load(ColumnHandler.class)) {
-            columnHandlers.add(handler);
+            COLUMN_HANDLERS.add(handler);
         }
 
         // Use a ServiceLoader to find implementations
         for (final PropertyHandler handler : ServiceLoader.load(PropertyHandler.class)) {
-            propertyHandlers.add(handler);
+            PROPERTY_HANDLERS.add(handler);
         }
     }
 
@@ -134,7 +134,7 @@ public class BeanProcessor {
 
         try {
             final Class<?> firstParam = setter.getParameterTypes()[0];
-            for (final PropertyHandler handler : propertyHandlers) {
+            for (final PropertyHandler handler : PROPERTY_HANDLERS) {
                 if (handler.match(firstParam, value)) {
                     value = handler.apply(firstParam, value);
                     break;
@@ -366,7 +366,7 @@ public class BeanProcessor {
                 value = this.processColumn(resultSet, i, propType);
 
                 if (value == null && propType.isPrimitive()) {
-                    value = primitiveDefaults.get(propType);
+                    value = PRIMITIVE_DEFAULTS.get(propType);
                 }
             }
 
@@ -412,7 +412,7 @@ public class BeanProcessor {
             return null;
         }
 
-        for (final ColumnHandler<?> handler : columnHandlers) {
+        for (final ColumnHandler<?> handler : COLUMN_HANDLERS) {
             if (handler.match(propType)) {
                 retval = handler.apply(resultSet, index);
                 break;
