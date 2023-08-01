@@ -20,32 +20,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Interface to define how implementations can interact with column handling when constructing a bean from a
- * {@link java.sql.ResultSet}.  ColumnHandlers do the work of retrieving data correctly from the {@code ResultSet}.
+ * Defines how to process columns when constructing a bean from a {@link ResultSet}. Instances do the work of retrieving data from a {@code ResultSet}.
  *
- * @param <T> The return type. 
+ * @param <T> The return type.
  */
 public interface ColumnHandler<T> {
 
     /**
-     * Do the work required to retrieve and store a column from {@code ResultSet} into something of type
-     * {@code propType}. This method is called only if this handler responded {@code true} after a call to
-     * {@link #match(Class)}.
+     * Retrieves the current row's column value from a {@link ResultSet} and stores it into an instance of {@code propType}. This method is only called if
+     * {@link #match(Class)} returns true.
      *
-     * @param resultSet The result set to get data from. This should be moved to the correct row already.
-     * @param columnIndex The position of the column to retrieve.
+     * @param resultSet   The source result set. This must be on the correct row.
+     * @param columnIndex The position of the column to retrieve, a 1-based index.
      * @return The converted value or the original value if something doesn't work out.
-     * @throws SQLException if the columnIndex is not valid; if a database access error occurs or this method is
-     *                called on a closed result set
+     * @throws SQLException if the columnIndex is not valid; if a database access error occurs or this method is called on a closed result set
      */
     T apply(ResultSet resultSet, int columnIndex) throws SQLException;
 
     /**
-     * Test whether this {@code ColumnHandler} wants to handle a column targeted for a value type matching
-     * {@code propType}.
+     * Tests whether to handle a column targeted for a value type matching {@code propType}.
      *
      * @param propType The type of the target parameter.
-     * @return true is this property handler can/wants to handle this value; false otherwise.
+     * @return true is this property handler handles this {@code propType}; false otherwise.
      */
     boolean match(Class<?> propType);
 }
