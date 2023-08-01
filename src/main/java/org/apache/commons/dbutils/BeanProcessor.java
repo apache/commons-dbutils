@@ -191,12 +191,7 @@ public class BeanProcessor {
      */
     private boolean isCompatibleType(final Object value, final Class<?> type) {
         // Do object check first, then primitives
-        if (value == null || type.isInstance(value) || matchesPrimitive(type, value.getClass())) {
-            return true;
-
-        }
-        return false;
-
+        return value == null || type.isInstance(value) || matchesPrimitive(type, value.getClass());
     }
 
     /**
