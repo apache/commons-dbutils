@@ -20,8 +20,6 @@ import static java.sql.DriverManager.registerDriver;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverPropertyInfo;
@@ -43,8 +41,6 @@ public final class DbUtils {
      * @since 1.6
      */
     static final class DriverProxy implements Driver {
-
-        private boolean parentLoggerSupported = true;
 
         /**
          * The adapted JDBC Driver loaded dynamically.
@@ -97,16 +93,7 @@ public final class DbUtils {
          */
         @Override
         public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-            if (parentLoggerSupported) {
-                try {
-                    final Method method = adapted.getClass().getMethod("getParentLogger");
-                    return (Logger)method.invoke(adapted);
-                } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    parentLoggerSupported = false;
-                    throw new SQLFeatureNotSupportedException(e);
-                }
-            }
-            throw new SQLFeatureNotSupportedException();
+            return adapted.getParentLogger();
         }
 
         /**
