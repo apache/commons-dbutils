@@ -78,6 +78,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" due-to="Gary Gregory" type="fix">
         ResultSet not closed in QueryRunner.insertBatch(Connection, String, ResultSetHandler, Object[][]).
       </action>
+      <action dev="ggregory" due-to="Gary Gregory" type="fix">
+        AbstractQueryRunner.fillStatementWithBean(PreparedStatement, Object, String...) now throws IllegalStateException instead of RuntimeException.
+      </action>
       <!-- ADD -->
       <action dev="thecarlhall" type="add" issue="PR/9" due-to="rewerma">
         Add @Column annotation to hint the field name instead of dissecting the get method name.

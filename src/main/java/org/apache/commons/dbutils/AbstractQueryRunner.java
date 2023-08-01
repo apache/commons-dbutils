@@ -407,18 +407,15 @@ public abstract class AbstractQueryRunner {
             final String... propertyNames) throws SQLException {
         PropertyDescriptor[] descriptors;
         try {
-            descriptors = Introspector.getBeanInfo(bean.getClass())
-                    .getPropertyDescriptors();
+            descriptors = Introspector.getBeanInfo(bean.getClass()).getPropertyDescriptors();
         } catch (final IntrospectionException e) {
-            throw new RuntimeException("Couldn't introspect bean "
-                    + bean.getClass().toString(), e);
+            throw new RuntimeException("Couldn't introspect bean " + bean.getClass().toString(), e);
         }
         final PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
             final String propertyName = propertyNames[i];
             if (propertyName == null) {
-                throw new NullPointerException("propertyName can't be null: "
-                        + i);
+                throw new NullPointerException("propertyName can't be null: " + i);
             }
             boolean found = false;
             for (final PropertyDescriptor descriptor : descriptors) {
@@ -429,8 +426,7 @@ public abstract class AbstractQueryRunner {
                 }
             }
             if (!found) {
-                throw new RuntimeException("Couldn't find bean property: "
-                        + bean.getClass() + " " + propertyName);
+                throw new IllegalStateException("Couldn't find bean property: " + bean.getClass() + " " + propertyName);
             }
         }
         fillStatementWithBean(stmt, bean, sorted);
