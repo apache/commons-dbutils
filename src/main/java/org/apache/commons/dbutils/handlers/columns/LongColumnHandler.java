@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class LongColumnHandler implements ColumnHandler<Long> {
 
     @Override
-    public Long apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return Long.valueOf(rs.getLong(columnIndex));
+    public Long apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return Long.valueOf(resultSet.getLong(columnIndex));
     }
 
     @Override

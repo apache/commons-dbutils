@@ -25,8 +25,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class SQLXMLColumnHandler implements ColumnHandler<SQLXML> {
 
     @Override
-    public SQLXML apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return rs.getSQLXML(columnIndex);
+    public SQLXML apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return resultSet.getSQLXML(columnIndex);
     }
 
     @Override

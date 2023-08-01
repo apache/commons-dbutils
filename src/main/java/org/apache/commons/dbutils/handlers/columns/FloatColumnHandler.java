@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class FloatColumnHandler implements ColumnHandler<Float> {
 
     @Override
-    public Float apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return Float.valueOf(rs.getFloat(columnIndex));
+    public Float apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return Float.valueOf(resultSet.getFloat(columnIndex));
     }
 
     @Override

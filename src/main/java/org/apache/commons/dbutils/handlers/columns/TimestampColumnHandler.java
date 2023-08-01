@@ -25,8 +25,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class TimestampColumnHandler implements ColumnHandler<Timestamp> {
 
     @Override
-    public Timestamp apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return rs.getTimestamp(columnIndex);
+    public Timestamp apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return resultSet.getTimestamp(columnIndex);
     }
 
     @Override

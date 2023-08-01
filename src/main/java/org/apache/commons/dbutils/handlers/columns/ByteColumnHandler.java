@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class ByteColumnHandler implements ColumnHandler<Byte> {
 
     @Override
-    public Byte apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return Byte.valueOf(rs.getByte(columnIndex));
+    public Byte apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return Byte.valueOf(resultSet.getByte(columnIndex));
     }
 
     @Override

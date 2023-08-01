@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class IntegerColumnHandler implements ColumnHandler<Integer> {
 
     @Override
-    public Integer apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return Integer.valueOf(rs.getInt(columnIndex));
+    public Integer apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return Integer.valueOf(resultSet.getInt(columnIndex));
     }
 
     @Override

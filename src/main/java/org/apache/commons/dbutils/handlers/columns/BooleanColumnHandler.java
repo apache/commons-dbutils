@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class BooleanColumnHandler implements ColumnHandler<Boolean> {
 
     @Override
-    public Boolean apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return Boolean.valueOf(rs.getBoolean(columnIndex));
+    public Boolean apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return Boolean.valueOf(resultSet.getBoolean(columnIndex));
     }
 
     @Override

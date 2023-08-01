@@ -24,8 +24,8 @@ import org.apache.commons.dbutils.ColumnHandler;
 public class StringColumnHandler implements ColumnHandler<String> {
 
     @Override
-    public String apply(final ResultSet rs, final int columnIndex) throws SQLException {
-        return rs.getString(columnIndex);
+    public String apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
+        return resultSet.getString(columnIndex);
     }
 
     @Override
