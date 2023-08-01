@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.Duration;
+
 import org.junit.Test;
 
 public class StatementConfigurationTest {
@@ -50,6 +52,17 @@ public class StatementConfigurationTest {
 
         assertTrue(config.isQueryTimeoutSet());
         assertEquals(Integer.valueOf(5), config.getQueryTimeout());
+
+        assertTrue(config.isQueryTimeoutSet());
+        assertEquals(Duration.ofSeconds(5), config.getQueryTimeoutDuration());
+        
+        final StatementConfiguration config2 = builder.queryTimeout(Duration.ofSeconds(3)).build();
+
+        assertTrue(config2.isQueryTimeoutSet());
+        assertEquals(Integer.valueOf(3), config2.getQueryTimeout());
+
+        assertTrue(config2.isQueryTimeoutSet());
+        assertEquals(Duration.ofSeconds(3), config2.getQueryTimeoutDuration());
     }
 
     /**

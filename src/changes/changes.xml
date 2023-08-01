@@ -90,7 +90,16 @@ The <action> type attribute can be add,update,fix,remove.
       </action>
       <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">
         [StepSecurity] ci: Harden GitHub Actions #191.
-      </action>            
+      </action>
+      <action dev="ggregory" type="add" due-to="Gary Gregory">
+        Add StatementConfiguration.StatementConfiguration(Integer, Integer, Integer, Integer, Duration).
+      </action>
+      <action dev="ggregory" type="add" due-to="Gary Gregory">
+        Add StatementConfiguration.getQueryTimeoutDuration().
+      </action>
+      <action dev="ggregory" type="add" due-to="Gary Gregory">
+        Add StatementConfiguration.Builder.queryTimeout(Duration).
+      </action>
       <!--  UPDATE -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.11 #109, #141, #145.

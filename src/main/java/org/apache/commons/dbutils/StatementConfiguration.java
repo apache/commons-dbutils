@@ -16,6 +16,8 @@
  */
 package org.apache.commons.dbutils;
 
+import java.time.Duration;
+
 /**
  * Configuration options for a {@link java.sql.Statement} when preparing statements in {@code QueryRunner}.
  */
@@ -27,7 +29,7 @@ public class StatementConfiguration {
         private Integer fetchDirection;
         private Integer fetchSize;
         private Integer maxRows;
-        private Integer queryTimeout;
+        private Duration queryTimeout;
         private Integer maxFieldSize;
 
         /**
@@ -80,18 +82,32 @@ public class StatementConfiguration {
         /**
          * @param queryTimeout The number of seconds the driver will wait for execution.
          * @return This builder for chaining.
-         * @see StatementConfiguration#getQueryTimeout()
+         * @see StatementConfiguration#getQueryTimeoutDuration()
+         * @since 1.8.0
          */
-        public Builder queryTimeout(final Integer queryTimeout) {
+        public Builder queryTimeout(final Duration queryTimeout) {
             this.queryTimeout = queryTimeout;
             return this;
         }
+
+        /**
+         * @param queryTimeout The number of seconds the driver will wait for execution.
+         * @return This builder for chaining.
+         * @see StatementConfiguration#getQueryTimeout()
+         * @deprecated Use {@link #queryTimeout(Duration)}.
+         */
+        @Deprecated
+        public Builder queryTimeout(final Integer queryTimeout) {
+            this.queryTimeout = queryTimeout != null ? Duration.ofSeconds(queryTimeout) : null;
+            return this;
+        }
     }
+
     private final Integer fetchDirection;
     private final Integer fetchSize;
     private final Integer maxFieldSize;
     private final Integer maxRows;
-    private final Integer queryTimeout;
+    private final Duration queryTimeout;
 
     /**
      * Constructor for {@code StatementConfiguration}.  For more flexibility, use {@link Builder}.
@@ -101,15 +117,36 @@ public class StatementConfiguration {
      * @param maxFieldSize The maximum number of bytes that can be returned for character and binary column values.
      * @param maxRows The maximum number of rows that a {@code ResultSet} can produce.
      * @param queryTimeout The number of seconds the driver will wait for execution.
+     * @since 1.8.0
      */
     public StatementConfiguration(final Integer fetchDirection, final Integer fetchSize,
                                   final Integer maxFieldSize, final Integer maxRows,
-                                  final Integer queryTimeout) {
+                                  final Duration queryTimeout) {
         this.fetchDirection = fetchDirection;
         this.fetchSize = fetchSize;
         this.maxFieldSize = maxFieldSize;
         this.maxRows = maxRows;
+        if (queryTimeout != null && queryTimeout.getSeconds() > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException(String.format("queryTimeout overflow: %d > %,d", queryTimeout.getSeconds(), Integer.MAX_VALUE));
+        }
         this.queryTimeout = queryTimeout;
+    }
+
+    /**
+     * Constructor for {@code StatementConfiguration}.  For more flexibility, use {@link Builder}.
+     *
+     * @param fetchDirection The direction for fetching rows from database tables.
+     * @param fetchSize The number of rows that should be fetched from the database when more rows are needed.
+     * @param maxFieldSize The maximum number of bytes that can be returned for character and binary column values.
+     * @param maxRows The maximum number of rows that a {@code ResultSet} can produce.
+     * @param queryTimeout The number of seconds the driver will wait for execution.
+     * @deprecated Use {@link StatementConfiguration#StatementConfiguration(Integer, Integer, Integer, Integer, Duration)}.
+     */
+    @Deprecated
+    public StatementConfiguration(final Integer fetchDirection, final Integer fetchSize,
+                                  final Integer maxFieldSize, final Integer maxRows,
+                                  final Integer queryTimeout) {
+        this(fetchDirection, fetchSize, maxFieldSize, maxRows, Duration.ofSeconds(queryTimeout));
     }
 
     /**
@@ -152,8 +189,20 @@ public class StatementConfiguration {
      * Get the query timeout.
      *
      * @return The query timeout or null if not set.
+     * @deprecated Use {@link #getQueryTimeoutDuration()}.
      */
+    @Deprecated
     public Integer getQueryTimeout() {
+        return queryTimeout != null ? (int) queryTimeout.getSeconds() : null;
+    }
+
+    /**
+     * Get the query timeout.
+     *
+     * @return The query timeout or null if not set.
+     * @since 1.8.0
+     */
+    public Duration getQueryTimeoutDuration() {
         return queryTimeout;
     }
 
