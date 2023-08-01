@@ -162,12 +162,9 @@ public class BeanProcessor {
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    private <T> T createBean(final ResultSet resultSet, final Class<T> type,
-                             final PropertyDescriptor[] props, final int[] columnToProperty)
-    throws SQLException {
-
-        final T bean = this.newInstance(type);
-        return populateBean(resultSet, bean, props, columnToProperty);
+    private <T> T createBean(final ResultSet resultSet, final Class<T> type, final PropertyDescriptor[] props, final int[] columnToProperty)
+            throws SQLException {
+        return populateBean(resultSet, this.newInstance(type), props, columnToProperty);
     }
 
     /**
@@ -180,8 +177,7 @@ public class BeanProcessor {
      *         there is no suitable write method.
      */
     protected Method getWriteMethod(final Object target, final PropertyDescriptor prop, final Object value) {
-        final Method method = prop.getWriteMethod();
-        return method;
+        return prop.getWriteMethod();
     }
 
     /**
