@@ -120,8 +120,7 @@ public class OutParameter<T> {
      * statement.
      */
     void setValue(final CallableStatement stmt, final int index) throws SQLException {
-        final Object object = stmt.getObject(index);
-        value = javaType.cast(object);
+        value = javaType.cast(stmt.getObject(index));
     }
 
     /**
