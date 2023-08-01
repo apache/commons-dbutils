@@ -104,7 +104,7 @@ public class BasicRowProcessor implements RowProcessor {
             /*
              * In order to keep the map and lowerCaseMap synchronized,
              * we have to remove the old mapping before putting the
-             * new one. Indeed, oldKey and key are not necessaliry equals.
+             * new one. Indeed, oldKey and key are not necessarily equals.
              * (That's why we call super.remove(oldKey) and not just
              * super.put(key, value))
              */
