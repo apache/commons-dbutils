@@ -117,11 +117,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public void putAll(final Map<? extends String, ?> m) {
-            for (final Map.Entry<? extends String, ?> entry : m.entrySet()) {
-                final String key = entry.getKey();
-                final Object value = entry.getValue();
-                this.put(key, value);
-            }
+            m.forEach(this::put);
         }
 
         /** {@inheritDoc} */
