@@ -139,16 +139,14 @@ public class BeanProcessor {
 
             // Don't call setter if the value object isn't the right type
             if (!this.isCompatibleType(value, firstParam)) {
-              throw new SQLException(
-                  "Cannot set " + prop.getName() + ": incompatible types, cannot convert "
-                  + value.getClass().getName() + " to " + firstParam.getName());
-                  // value cannot be null here because isCompatibleType allows null
+                throw new SQLException(
+                        "Cannot set " + prop.getName() + ": incompatible types, cannot convert " + value.getClass().getName() + " to " + firstParam.getName());
+                // value cannot be null here because isCompatibleType allows null
             }
             setter.invoke(target, value);
 
         } catch (final IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-            throw new SQLException(
-                "Cannot set " + prop.getName() + ": " + e.getMessage());
+            throw new SQLException("Cannot set " + prop.getName() + ": " + e.getMessage());
         }
     }
 
