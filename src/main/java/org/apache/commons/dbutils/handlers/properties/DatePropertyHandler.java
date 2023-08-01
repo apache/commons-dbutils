@@ -27,19 +27,23 @@ import org.apache.commons.dbutils.PropertyHandler;
  */
 public class DatePropertyHandler implements PropertyHandler {
 
+    private static final String JAVA_SQL_TIMESTAMP = "java.sql.Timestamp";
+    private static final String JAVA_SQL_TIME = "java.sql.Time";
+    private static final String JAVA_SQL_DATE = "java.sql.Date";
+
     @Override
     public Object apply(final Class<?> parameter, Object value) {
         final String targetType = parameter.getName();
         final Date dateValue = (Date) value;
         final long time = dateValue.getTime();
 
-        if ("java.sql.Date".equals(targetType)) {
+        if (JAVA_SQL_DATE.equals(targetType)) {
             value = new java.sql.Date(time);
         } else
-        if ("java.sql.Time".equals(targetType)) {
+        if (JAVA_SQL_TIME.equals(targetType)) {
             value = new java.sql.Time(time);
         } else
-        if ("java.sql.Timestamp".equals(targetType)) {
+        if (JAVA_SQL_TIMESTAMP.equals(targetType)) {
             value = new Timestamp(time);
         }
 
@@ -50,13 +54,13 @@ public class DatePropertyHandler implements PropertyHandler {
     public boolean match(final Class<?> parameter, final Object value) {
         if (value instanceof Date) {
             final String targetType = parameter.getName();
-            if ("java.sql.Date".equals(targetType)) {
+            if (JAVA_SQL_DATE.equals(targetType)) {
                 return true;
             }
-            if ("java.sql.Time".equals(targetType)) {
+            if (JAVA_SQL_TIME.equals(targetType)) {
                 return true;
             }
-            if ("java.sql.Timestamp".equals(targetType)
+            if (JAVA_SQL_TIMESTAMP.equals(targetType)
                     && !Timestamp.class.isInstance(value)) {
                 return true;
             }
