@@ -26,6 +26,7 @@ import java.sql.SQLException;
  * @param <T> The return type. 
  */
 public interface ColumnHandler<T> {
+
     /**
      * Do the work required to retrieve and store a column from {@code ResultSet} into something of type
      * {@code propType}. This method is called only if this handler responded {@code true} after a call to
