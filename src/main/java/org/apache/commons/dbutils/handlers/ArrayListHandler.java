@@ -57,15 +57,15 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
 
     /**
      * Convert row's columns into an {@code Object[]}.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return {@code Object[]}, never {@code null}.
      *
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override
-    protected Object[] handleRow(final ResultSet rs) throws SQLException {
-        return this.convert.toArray(rs);
+    protected Object[] handleRow(final ResultSet resultSet) throws SQLException {
+        return this.convert.toArray(resultSet);
     }
 
 }

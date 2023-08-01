@@ -31,13 +31,13 @@ public interface ColumnHandler<T> {
      * {@code propType}. This method is called only if this handler responded {@code true} after a call to
      * {@link #match(Class)}.
      *
-     * @param rs The result set to get data from. This should be moved to the correct row already.
+     * @param resultSet The result set to get data from. This should be moved to the correct row already.
      * @param columnIndex The position of the column to retrieve.
      * @return The converted value or the original value if something doesn't work out.
      * @throws SQLException if the columnIndex is not valid; if a database access error occurs or this method is
      *                called on a closed result set
      */
-    T apply(ResultSet rs, int columnIndex) throws SQLException;
+    T apply(ResultSet resultSet, int columnIndex) throws SQLException;
 
     /**
      * Test whether this {@code ColumnHandler} wants to handle a column targeted for a value type matching

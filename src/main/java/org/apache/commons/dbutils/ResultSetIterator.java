@@ -37,17 +37,17 @@ public class ResultSetIterator implements Iterator<Object[]> {
     /**
      * Generates an {@code Iterable}, suitable for use in for-each loops.
      *
-     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
+     * @param resultSet Wrap this {@code ResultSet} in an {@code Iterator}.
      * @return an {@code Iterable}, suitable for use in for-each loops.
      */
-    public static Iterable<Object[]> iterable(final ResultSet rs) {
-        return () -> new ResultSetIterator(rs);
+    public static Iterable<Object[]> iterable(final ResultSet resultSet) {
+        return () -> new ResultSetIterator(resultSet);
     }
 
     /**
      * The wrapped {@code ResultSet}.
      */
-    private final ResultSet rs;
+    private final ResultSet resultSet;
 
     /**
      * The processor to use when converting a row into an Object[].
@@ -56,21 +56,21 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
-     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
+     * @param resultSet Wrap this {@code ResultSet} in an {@code Iterator}.
      */
-    public ResultSetIterator(final ResultSet rs) {
-        this(rs, new BasicRowProcessor());
+    public ResultSetIterator(final ResultSet resultSet) {
+        this(resultSet, new BasicRowProcessor());
     }
 
     /**
      * Constructor for ResultSetIterator.
-     * @param rs Wrap this {@code ResultSet} in an {@code Iterator}.
+     * @param resultSet Wrap this {@code ResultSet} in an {@code Iterator}.
      * @param convert The processor to use when converting a row into an
      * {@code Object[]}.  Defaults to a
      * {@code BasicRowProcessor}.
      */
-    public ResultSetIterator(final ResultSet rs, final RowProcessor convert) {
-        this.rs = rs;
+    public ResultSetIterator(final ResultSet resultSet, final RowProcessor convert) {
+        this.resultSet = resultSet;
         this.convert = convert;
     }
 
@@ -82,7 +82,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     @Override
     public boolean hasNext() {
         try {
-            return !rs.isLast();
+            return !resultSet.isLast();
         } catch (final SQLException e) {
             rethrow(e);
             return false;
@@ -99,8 +99,8 @@ public class ResultSetIterator implements Iterator<Object[]> {
     @Override
     public Object[] next() {
         try {
-            rs.next();
-            return this.convert.toArray(rs);
+            resultSet.next();
+            return this.convert.toArray(resultSet);
         } catch (final SQLException e) {
             rethrow(e);
             return null;
@@ -115,7 +115,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     @Override
     public void remove() {
         try {
-            this.rs.deleteRow();
+            this.resultSet.deleteRow();
         } catch (final SQLException e) {
             rethrow(e);
         }

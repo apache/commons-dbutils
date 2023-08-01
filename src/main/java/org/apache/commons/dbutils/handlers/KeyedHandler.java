@@ -148,13 +148,13 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * implementation returns a {@code Map} with case insensitive column
      * names as keys.  Calls to {@code map.get("COL")} and
      * {@code map.get("col")} return the same value.
-     * @param rs ResultSet to create a row from
+     * @param resultSet ResultSet to create a row from
      * @return Object typed Map containing column names to values
      * @throws SQLException if a database access error occurs
      */
     @Override
-    protected Map<String, Object> createRow(final ResultSet rs) throws SQLException {
-        return this.convert.toMap(rs);
+    protected Map<String, Object> createRow(final ResultSet resultSet) throws SQLException {
+        return this.convert.toMap(resultSet);
     }
 
 }

@@ -57,7 +57,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
 
     /**
      * Converts the {@code ResultSet} row into a {@code Map} object.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return A {@code Map}, never null.
      *
      * @throws SQLException if a database access error occurs
@@ -65,8 +65,8 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     @Override
-    protected Map<String, Object> handleRow(final ResultSet rs) throws SQLException {
-        return this.convert.toMap(rs);
+    protected Map<String, Object> handleRow(final ResultSet resultSet) throws SQLException {
+        return this.convert.toMap(resultSet);
     }
 
 }

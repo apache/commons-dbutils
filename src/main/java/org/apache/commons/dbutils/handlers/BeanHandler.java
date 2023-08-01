@@ -68,7 +68,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     /**
      * Convert the first row of the {@code ResultSet} into a bean with the
      * {@code Class} given in the constructor.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return An initialized JavaBean or {@code null} if there were no
      * rows in the {@code ResultSet}.
      *
@@ -76,8 +76,8 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public T handle(final ResultSet rs) throws SQLException {
-        return rs.next() ? this.convert.toBean(rs, this.type) : null;
+    public T handle(final ResultSet resultSet) throws SQLException {
+        return resultSet.next() ? this.convert.toBean(resultSet, this.type) : null;
     }
 
 }

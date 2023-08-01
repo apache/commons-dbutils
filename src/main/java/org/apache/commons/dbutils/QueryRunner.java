@@ -280,8 +280,8 @@ public class QueryRunner extends AbstractQueryRunner {
             while (moreResultSets) {
                 try (@SuppressWarnings("resource")
                 // assume the ResultSet wrapper properly closes
-                ResultSet rs = this.wrap(stmt.getResultSet())) {
-                    results.add(rsh.handle(rs));
+                ResultSet resultSet = this.wrap(stmt.getResultSet())) {
+                    results.add(rsh.handle(resultSet));
                     moreResultSets = stmt.getMoreResults();
                 }
             }
@@ -490,8 +490,8 @@ public class QueryRunner extends AbstractQueryRunner {
                 stmt.addBatch();
             }
             stmt.executeBatch();
-            try (ResultSet rs = stmt.getGeneratedKeys()) {
-                generatedKeys = rsh.handle(rs);
+            try (ResultSet resultSet = stmt.getGeneratedKeys()) {
+                generatedKeys = rsh.handle(resultSet);
             }
         } catch (final SQLException e) {
             this.rethrow(e, sql, (Object[])params);
@@ -595,7 +595,7 @@ public class QueryRunner extends AbstractQueryRunner {
         }
 
         Statement stmt = null;
-        ResultSet rs = null;
+        ResultSet resultSet = null;
         T result = null;
 
         try {
@@ -603,18 +603,18 @@ public class QueryRunner extends AbstractQueryRunner {
                 final PreparedStatement ps = this.prepareStatement(conn, sql);
                 stmt = ps;
                 this.fillStatement(ps, params);
-                rs = this.wrap(ps.executeQuery());
+                resultSet = this.wrap(ps.executeQuery());
             } else {
                 stmt = conn.createStatement();
-                rs = this.wrap(stmt.executeQuery(sql));
+                resultSet = this.wrap(stmt.executeQuery(sql));
             }
-            result = rsh.handle(rs);
+            result = rsh.handle(resultSet);
 
         } catch (final SQLException e) {
             this.rethrow(e, sql, params);
 
         } finally {
-            closeQuietly(rs);
+            closeQuietly(resultSet);
             closeQuietly(stmt);
         }
 

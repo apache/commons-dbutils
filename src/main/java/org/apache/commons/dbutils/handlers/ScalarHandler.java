@@ -84,7 +84,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Returns one {@code ResultSet} column as an object via the
      * {@code ResultSet.getObject()} method that performs type
      * conversions.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return The column or {@code null} if there are no rows in
      * the {@code ResultSet}.
      *
@@ -97,13 +97,13 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    public T handle(final ResultSet rs) throws SQLException {
+    public T handle(final ResultSet resultSet) throws SQLException {
 
-        if (rs.next()) {
+        if (resultSet.next()) {
             if (this.columnName == null) {
-                return (T) rs.getObject(this.columnIndex);
+                return (T) resultSet.getObject(this.columnIndex);
             }
-            return (T) rs.getObject(this.columnName);
+            return (T) resultSet.getObject(this.columnName);
         }
         return null;
     }

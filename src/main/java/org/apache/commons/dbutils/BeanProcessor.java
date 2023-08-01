@@ -159,19 +159,19 @@ public class BeanProcessor {
     /**
      * Creates a new object and initializes its fields from the ResultSet.
      * @param <T> The type of bean to create
-     * @param rs The result set.
+     * @param resultSet The result set.
      * @param type The bean type (the return type of the object).
      * @param props The property descriptors.
      * @param columnToProperty The column indices in the result set.
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    private <T> T createBean(final ResultSet rs, final Class<T> type,
+    private <T> T createBean(final ResultSet resultSet, final Class<T> type,
                              final PropertyDescriptor[] props, final int[] columnToProperty)
     throws SQLException {
 
         final T bean = this.newInstance(type);
-        return populateBean(rs, bean, props, columnToProperty);
+        return populateBean(resultSet, bean, props, columnToProperty);
     }
 
     /**
@@ -324,31 +324,31 @@ public class BeanProcessor {
     /**
      * Initializes the fields of the provided bean from the ResultSet.
      * @param <T> The type of bean
-     * @param rs The result set.
+     * @param resultSet The result set.
      * @param bean The bean to be populated.
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    public <T> T populateBean(final ResultSet rs, final T bean) throws SQLException {
+    public <T> T populateBean(final ResultSet resultSet, final T bean) throws SQLException {
         final PropertyDescriptor[] props = this.propertyDescriptors(bean.getClass());
-        final ResultSetMetaData rsmd = rs.getMetaData();
+        final ResultSetMetaData rsmd = resultSet.getMetaData();
         final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
 
-        return populateBean(rs, bean, props, columnToProperty);
+        return populateBean(resultSet, bean, props, columnToProperty);
     }
 
     /**
      * This method populates a bean from the ResultSet based upon the underlying meta-data.
      *
      * @param <T> The type of bean
-     * @param rs The result set.
+     * @param resultSet The result set.
      * @param bean The bean to be populated.
      * @param props The property descriptors.
      * @param columnToProperty The column indices in the result set.
      * @return An initialized object.
      * @throws SQLException if a database error occurs.
      */
-    private <T> T populateBean(final ResultSet rs, final T bean,
+    private <T> T populateBean(final ResultSet resultSet, final T bean,
             final PropertyDescriptor[] props, final int[] columnToProperty)
             throws SQLException {
 
@@ -363,7 +363,7 @@ public class BeanProcessor {
 
             Object value = null;
             if (propType != null) {
-                value = this.processColumn(rs, i, propType);
+                value = this.processColumn(resultSet, i, propType);
 
                 if (value == null && propType.isPrimitive()) {
                     value = primitiveDefaults.get(propType);
@@ -389,7 +389,7 @@ public class BeanProcessor {
      * {@code ResultSet} types, {@code getObject} is called.
      * </p>
      *
-     * @param rs The {@code ResultSet} currently being processed.  It is
+     * @param resultSet The {@code ResultSet} currently being processed.  It is
      * positioned on a valid row before being passed into this method.
      *
      * @param index The current column index being processed.
@@ -403,10 +403,10 @@ public class BeanProcessor {
      * index after optional type processing or {@code null} if the column
      * value was SQL NULL.
      */
-    protected Object processColumn(final ResultSet rs, final int index, final Class<?> propType)
+    protected Object processColumn(final ResultSet resultSet, final int index, final Class<?> propType)
         throws SQLException {
 
-        Object retval = rs.getObject(index);
+        Object retval = resultSet.getObject(index);
 
         if ( !propType.isPrimitive() && retval == null ) {
             return null;
@@ -414,7 +414,7 @@ public class BeanProcessor {
 
         for (final ColumnHandler<?> handler : columnHandlers) {
             if (handler.match(propType)) {
-                retval = handler.apply(rs, index);
+                retval = handler.apply(resultSet, index);
                 break;
             }
         }
@@ -511,25 +511,25 @@ public class BeanProcessor {
      * as the {@code ResultSet} get* methods.
      * &lt;/p&gt;
      * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     * @param resultSet ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
      * @return the newly created List of beans
      */
-    public <T> List<T> toBeanList(final ResultSet rs, final Class<? extends T> type) throws SQLException {
+    public <T> List<T> toBeanList(final ResultSet resultSet, final Class<? extends T> type) throws SQLException {
         final List<T> results = new ArrayList<>();
 
-        if (!rs.next()) {
+        if (!resultSet.next()) {
             return results;
         }
 
         final PropertyDescriptor[] props = this.propertyDescriptors(type);
-        final ResultSetMetaData rsmd = rs.getMetaData();
+        final ResultSetMetaData rsmd = resultSet.getMetaData();
         final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
 
         do {
-            results.add(this.createBean(rs, type, props, columnToProperty));
-        } while (rs.next());
+            results.add(this.createBean(resultSet, type, props, columnToProperty));
+        } while (resultSet.next());
 
         return results;
     }

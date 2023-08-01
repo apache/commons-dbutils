@@ -70,7 +70,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Places the column values from the first row in an {@code Object[]}.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return An Object[]. If there are no rows in the {@code ResultSet}
      * an empty array will be returned.
      *
@@ -78,8 +78,8 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public Object[] handle(final ResultSet rs) throws SQLException {
-        return rs.next() ? this.convert.toArray(rs) : EMPTY_ARRAY;
+    public Object[] handle(final ResultSet resultSet) throws SQLException {
+        return resultSet.next() ? this.convert.toArray(resultSet) : EMPTY_ARRAY;
     }
 
 }

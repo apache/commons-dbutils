@@ -142,12 +142,12 @@ public final class DbUtils {
     /**
      * Close a {@code ResultSet}, avoid closing if null.
      *
-     * @param rs ResultSet to close.
+     * @param resultSet ResultSet to close.
      * @throws SQLException if a database access error occurs
      */
-    public static void close(final ResultSet rs) throws SQLException {
-        if (rs != null) {
-            rs.close();
+    public static void close(final ResultSet resultSet) throws SQLException {
+        if (resultSet != null) {
+            resultSet.close();
         }
     }
 
@@ -205,11 +205,11 @@ public final class DbUtils {
      * Close a {@code ResultSet}, avoid closing if null and hide any
      * SQLExceptions that occur.
      *
-     * @param rs ResultSet to close.
+     * @param resultSet ResultSet to close.
      */
-    public static void closeQuietly(final ResultSet rs) {
+    public static void closeQuietly(final ResultSet resultSet) {
         try {
-            close(rs);
+            close(resultSet);
         } catch (final SQLException e) { // NOPMD
             // quiet
         }

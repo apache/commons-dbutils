@@ -126,8 +126,7 @@ public class QueryLoader {
         // Copy to HashMap for better performance
 
         @SuppressWarnings({"rawtypes", "unchecked" }) // load() always creates <String,String> entries
-        final
-        HashMap<String, String> hashMap = new HashMap(props);
+        final HashMap<String, String> hashMap = new HashMap(props);
         return hashMap;
     }
 

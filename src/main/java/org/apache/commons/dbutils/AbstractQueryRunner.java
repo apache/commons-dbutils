@@ -178,14 +178,14 @@ public abstract class AbstractQueryRunner {
      * null and does <strong>not</strong> suppress any exceptions. Subclasses
      * can override to provide special handling like logging.
      *
-     * @param rs
+     * @param resultSet
      *            ResultSet to close
      * @throws SQLException
      *             if a database access error occurs
      * @since 1.1
      */
-    protected void close(final ResultSet rs) throws SQLException {
-        DbUtils.close(rs);
+    protected void close(final ResultSet resultSet) throws SQLException {
+        DbUtils.close(resultSet);
     }
 
     /**
@@ -216,11 +216,11 @@ public abstract class AbstractQueryRunner {
     /**
      * Calls {@link DbUtils#closeQuietly(ResultSet)}.
      *
-     * @param rs ResultSet to close.
+     * @param resultSet ResultSet to close.
      * @since 1.8.0
      */
-    protected void closeQuietly(final ResultSet rs) {
-        DbUtils.closeQuietly(rs);
+    protected void closeQuietly(final ResultSet resultSet) {
+        DbUtils.closeQuietly(resultSet);
     }
 
     /**

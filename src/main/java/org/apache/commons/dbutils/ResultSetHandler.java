@@ -29,7 +29,7 @@ public interface ResultSetHandler<T> {
     /**
      * Turn the {@code ResultSet} into an Object.
      *
-     * @param rs The {@code ResultSet} to handle.  It has not been touched
+     * @param resultSet The {@code ResultSet} to handle.  It has not been touched
      * before being passed to this method.
      *
      * @return An Object initialized with {@code ResultSet} data. It is
@@ -38,6 +38,6 @@ public interface ResultSetHandler<T> {
      *
      * @throws SQLException if a database access error occurs
      */
-    T handle(ResultSet rs) throws SQLException;
+    T handle(ResultSet resultSet) throws SQLException;
 
 }

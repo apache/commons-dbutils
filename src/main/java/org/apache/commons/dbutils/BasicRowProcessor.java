@@ -189,18 +189,18 @@ public class BasicRowProcessor implements RowProcessor {
      * will be set to {@code null} if the column was SQL NULL.
      *
      * @see org.apache.commons.dbutils.RowProcessor#toArray(java.sql.ResultSet)
-     * @param rs ResultSet that supplies the array data
+     * @param resultSet ResultSet that supplies the array data
      * @throws SQLException if a database access error occurs
      * @return the newly created array
      */
     @Override
-    public Object[] toArray(final ResultSet rs) throws SQLException {
-        final ResultSetMetaData meta = rs.getMetaData();
+    public Object[] toArray(final ResultSet resultSet) throws SQLException {
+        final ResultSetMetaData meta = resultSet.getMetaData();
         final int cols = meta.getColumnCount();
         final Object[] result = new Object[cols];
 
         for (int i = 0; i < cols; i++) {
-            result[i] = rs.getObject(i + 1);
+            result[i] = resultSet.getObject(i + 1);
         }
 
         return result;
@@ -212,14 +212,14 @@ public class BasicRowProcessor implements RowProcessor {
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, Class)
      * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     * @param resultSet ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
     @Override
-    public <T> T toBean(final ResultSet rs, final Class<? extends T> type) throws SQLException {
-        return this.convert.toBean(rs, type);
+    public <T> T toBean(final ResultSet resultSet, final Class<? extends T> type) throws SQLException {
+        return this.convert.toBean(resultSet, type);
     }
 
     /**
@@ -228,15 +228,15 @@ public class BasicRowProcessor implements RowProcessor {
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, Class)
      * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     * @param resultSet ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
      * @return A {@code List} of beans with the given type in the order
      * they were returned by the {@code ResultSet}.
      */
     @Override
-    public <T> List<T> toBeanList(final ResultSet rs, final Class<? extends T> type) throws SQLException {
-        return this.convert.toBeanList(rs, type);
+    public <T> List<T> toBeanList(final ResultSet resultSet, final Class<? extends T> type) throws SQLException {
+        return this.convert.toBeanList(resultSet, type);
     }
 
 
@@ -250,14 +250,14 @@ public class BasicRowProcessor implements RowProcessor {
      * the entry set of the returned map will return the first column of the ResultSet, then the second and so forth.
      * </p>
      *
-     * @param rs ResultSet that supplies the map data
+     * @param resultSet ResultSet that supplies the map data
      * @return the newly created Map
      * @throws SQLException if a database access error occurs
      * @see org.apache.commons.dbutils.RowProcessor#toMap(java.sql.ResultSet)
      */
     @Override
-    public Map<String, Object> toMap(final ResultSet rs) throws SQLException {
-        final ResultSetMetaData rsmd = rs.getMetaData();
+    public Map<String, Object> toMap(final ResultSet resultSet) throws SQLException {
+        final ResultSetMetaData rsmd = resultSet.getMetaData();
         final int cols = rsmd.getColumnCount();
         final Map<String, Object> result = createCaseInsensitiveHashMap(cols);
 
@@ -270,7 +270,7 @@ public class BasicRowProcessor implements RowProcessor {
               // The column index can't be null
               propKey = Integer.toString(i);
             }
-            result.put(propKey, rs.getObject(i));
+            result.put(propKey, resultSet.getObject(i));
         }
 
         return result;

@@ -59,7 +59,7 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
     /**
      * Converts the first row in the {@code ResultSet} into a
      * {@code Map}.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return A {@code Map} with the values from the first row or
      * {@code null} if there are no rows in the {@code ResultSet}.
      *
@@ -68,8 +68,8 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override
-    public Map<String, Object> handle(final ResultSet rs) throws SQLException {
-        return rs.next() ? this.convert.toMap(rs) : null;
+    public Map<String, Object> handle(final ResultSet resultSet) throws SQLException {
+        return resultSet.next() ? this.convert.toMap(resultSet) : null;
     }
 
 }

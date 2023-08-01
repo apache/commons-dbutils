@@ -132,17 +132,17 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
          */
         @Override
         public T call() throws SQLException {
-            ResultSet rs = null;
+            ResultSet resultSet = null;
             T ret = null;
 
             try {
-                rs = wrap(ps.executeQuery());
-                ret = rsh.handle(rs);
+                resultSet = wrap(ps.executeQuery());
+                ret = rsh.handle(resultSet);
             } catch (final SQLException e) {
                 rethrow(e, sql, params);
             } finally {
                 try {
-                    close(rs);
+                    close(resultSet);
                 } finally {
                     close(ps);
                     if (closeConn) {

@@ -71,7 +71,7 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
      * Convert the whole {@code ResultSet} into a List of beans with
      * the {@code Class} given in the constructor.
      *
-     * @param rs The {@code ResultSet} to handle.
+     * @param resultSet The {@code ResultSet} to handle.
      *
      * @return A List of beans, never {@code null}.
      *
@@ -79,7 +79,7 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(ResultSet, Class)
      */
     @Override
-    public List<T> handle(final ResultSet rs) throws SQLException {
-        return this.convert.toBeanList(rs, type);
+    public List<T> handle(final ResultSet resultSet) throws SQLException {
+        return this.convert.toBeanList(resultSet, type);
     }
 }

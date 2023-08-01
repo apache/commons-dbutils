@@ -38,11 +38,11 @@ public interface RowProcessor {
      * Implementations of this method must not alter the row position of
      * the {@code ResultSet}.
      *
-     * @param rs ResultSet that supplies the array data
+     * @param resultSet ResultSet that supplies the array data
      * @throws SQLException if a database access error occurs
      * @return the newly created array
      */
-    Object[] toArray(ResultSet rs) throws SQLException;
+    Object[] toArray(ResultSet resultSet) throws SQLException;
 
     /**
      * Create a JavaBean from the column values in one {@code ResultSet}
@@ -50,25 +50,25 @@ public interface RowProcessor {
      * passing it to this method.  Implementations of this method must not
      * alter the row position of the {@code ResultSet}.
      * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     * @param resultSet ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
      * @return the newly created bean
      */
-    <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException;
+    <T> T toBean(ResultSet resultSet, Class<? extends T> type) throws SQLException;
 
     /**
      * Create a {@code List} of JavaBeans from the column values in all
      * {@code ResultSet} rows.  {@code ResultSet.next()} should
      * <strong>not</strong> be called before passing it to this method.
      * @param <T> The type of bean to create
-     * @param rs ResultSet that supplies the bean data
+     * @param resultSet ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
      * @throws SQLException if a database access error occurs
      * @return A {@code List} of beans with the given type in the order
      * they were returned by the {@code ResultSet}.
      */
-    <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException;
+    <T> List<T> toBeanList(ResultSet resultSet, Class<? extends T> type) throws SQLException;
 
     /**
      * Create a {@code Map} from the column values in one
@@ -77,10 +77,10 @@ public interface RowProcessor {
      * passing it to this method.  Implementations of this method must not
      * alter the row position of the {@code ResultSet}.
      *
-     * @param rs ResultSet that supplies the map data
+     * @param resultSet ResultSet that supplies the map data
      * @throws SQLException if a database access error occurs
      * @return the newly created Map
      */
-    Map<String, Object> toMap(ResultSet rs) throws SQLException;
+    Map<String, Object> toMap(ResultSet resultSet) throws SQLException;
 
 }

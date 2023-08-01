@@ -82,7 +82,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
 
     /**
      * Returns one {@code ResultSet} column value as {@code Object}.
-     * @param rs {@code ResultSet} to process.
+     * @param resultSet {@code ResultSet} to process.
      * @return {@code Object}, never {@code null}.
      *
      * @throws SQLException if a database access error occurs
@@ -94,11 +94,11 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    protected T handleRow(final ResultSet rs) throws SQLException {
+    protected T handleRow(final ResultSet resultSet) throws SQLException {
         if (this.columnName == null) {
-            return (T) rs.getObject(this.columnIndex);
+            return (T) resultSet.getObject(this.columnIndex);
         }
-        return (T) rs.getObject(this.columnName);
+        return (T) resultSet.getObject(this.columnName);
    }
 
 }

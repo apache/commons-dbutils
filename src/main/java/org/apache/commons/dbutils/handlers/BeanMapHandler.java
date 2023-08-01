@@ -157,7 +157,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.
-     * @param rs ResultSet to create a key from
+     * @param resultSet ResultSet to create a key from
      *
      * @return K from the configured key column name/index
      *
@@ -170,15 +170,15 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
-    protected K createKey(final ResultSet rs) throws SQLException {
+    protected K createKey(final ResultSet resultSet) throws SQLException {
         return columnName == null ?
-               (K) rs.getObject(columnIndex) :
-               (K) rs.getObject(columnName);
+               (K) resultSet.getObject(columnIndex) :
+               (K) resultSet.getObject(columnName);
     }
 
     @Override
-    protected V createRow(final ResultSet rs) throws SQLException {
-        return this.convert.toBean(rs, type);
+    protected V createRow(final ResultSet resultSet) throws SQLException {
+        return this.convert.toBean(resultSet, type);
     }
 
 }
