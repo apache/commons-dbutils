@@ -26,6 +26,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
@@ -971,7 +972,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      */
     public void testURL() throws SQLException, MalformedURLException,
             IllegalAccessException, IllegalArgumentException,
-            java.lang.reflect.InvocationTargetException
+            InvocationTargetException
     {
         Method getUrlInt = null;
         Method getUrlString = null;
