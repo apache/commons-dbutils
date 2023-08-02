@@ -43,7 +43,7 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Apache Commons DBUtils Release Notes</title>
   </properties>
   <body>
-    <release version="1.8.0" date="2020-MM-DD" description="New features and bug fixes.">
+    <release version="1.8.0" date="2023-08-01" description="New features and bug fixes.">
       <!--  FIX -->
       <action dev="thecarlhall" type="fix" issue="DBUTILS-131" due-to="yairlenga">
         Speedup query calls without parameters; Use PreparedStatement only when parameters are present.
@@ -58,7 +58,7 @@ The <action> type attribute can be add,update,fix,remove.
         Inefficient allocation of Maps in org.apache.commons.dbutils.BasicRowProcessor.toMap(ResultSet).
       </action>
       <action dev="ggregory" type="fix" issue="DBUTILS-138" due-to="Stefano Lissa, Gary Gregory">
-        org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler&lt;T>, Object...) Exception in closing statement leave connections open.
+        org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler, Object...) Exception in closing statement leave connections open.
       </action>
       <action dev="ggregory" type="fix" issue="DBUTILS-139" due-to="Gary Gregory">
         Update Java requirement from version 6 to 8.

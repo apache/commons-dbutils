@@ -266,8 +266,9 @@
     <commons.bc.version>1.7</commons.bc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
-    <commons.releaseManagerName>Carl Hall</commons.releaseManagerName>
-    <commons.releaseManagerKey>1e5ab6d3cf8ebf5f</commons.releaseManagerKey>
+    <commons.release.isDistModule>true</commons.release.isDistModule>
+    <commons.releaseManagerName>Gary Gregory</commons.releaseManagerName>    
+    <commons.releaseManagerKey>86fdc7e2a11262cb</commons.releaseManagerKey>
   </properties>
 
   <build>

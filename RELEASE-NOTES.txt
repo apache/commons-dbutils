@@ -1,9 +1,9 @@
 
               Apache Commons DbUtils
-                     Version 1.8
-                    RELEASE NOTES
+              Version 1.8.0
+              RELEASE NOTES
 
-The Apache Commons DbUtils team is pleased to announce the release of Apache Commons DbUtils 1.8
+The Apache Commons DbUtils team is pleased to announce the release of Apache Commons DbUtils 1.8.0
 
 The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.
 
@@ -12,19 +12,41 @@ New features and bug fixes.
 Changes in this version include:
 
 New features:
-o PR/9:         Add @Column annotation to hint the field name instead of dissecting the get method name. Thanks to rewerma.
+o PR/9:  Add @Column annotation to hint the field name instead of dissecting the get method name. Thanks to rewerma. 
 o DBUTILS-136:  CaseInsensitiveHashMap cannot be accessed by subclasses of BasicRowProcessor; add org.apache.commons.dbutils.BasicRowProcessor.createCaseInsensitiveHashMap(int). Thanks to Matthew Hall, Gary Gregory. 
+o           Add github/codeql-action #115. 
+o           Add StatementConfiguration.StatementConfiguration(Integer, Integer, Integer, Integer, Duration). Thanks to Gary Gregory. 
+o           Add StatementConfiguration.getQueryTimeoutDuration(). Thanks to Gary Gregory. 
+o           Add StatementConfiguration.Builder.queryTimeout(Duration). Thanks to Gary Gregory. 
 
 Fixed Bugs:
 o DBUTILS-131:  Speedup query calls without parameters; Use PreparedStatement only when parameters are present. Thanks to yairlenga. 
 o           Always copy Date, Time, Timestamp on get and set in SqlNullCheckedResultSet. 
-o DBUTILS-138:  org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler<T>, Object...) Exception in closing statement leave connections open. Thanks to Stefano Lissa, Gary Gregory. 
-o DBUTILS-139:  Update Java requirement from version 6 to 7. Thanks to Gary Gregory. 
+o DBUTILS-138:  org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler, Object...) Exception in closing statement leave connections open. Thanks to Stefano Lissa, Gary Gregory. 
+o DBUTILS-139:  Update Java requirement from version 6 to 8. Thanks to Gary Gregory. 
+o           Correction of coverage badge #10. Thanks to Amey Jadiye. 
+o           Manage JDBC objects using try-with-resources. Thanks to Gary Gregory. 
+o           ResultSet not closed in QueryRunner.insert(Connection, String, ResultSetHandler, Object...). Thanks to Gary Gregory. 
+o           ResultSet not closed in QueryRunner.insertBatch(Connection, String, ResultSetHandler, Object[][]). Thanks to Gary Gregory. 
+o           AbstractQueryRunner.fillStatementWithBean(PreparedStatement, Object, String...) now throws IllegalStateException instead of RuntimeException. Thanks to Gary Gregory. 
+o           [StepSecurity] ci: Harden GitHub Actions #191. Thanks to step-security-bot, Gary Gregory. 
 
 Changes:
 o DBUTILS-135:  BeanProcessor is not thread safe since [DBUTILS-124]. Thanks to hdevalke. 
 o DBUTILS-137:  Inefficient allocation of Maps in org.apache.commons.dbutils.BasicRowProcessor.toMap(ResultSet). Thanks to Gary Gregory. 
 o           clirr, checkstyle, and spotbugs configured as part of default build. Thanks to thecarlhall. 
+o           Bump actions/cache from 2 to 3.0.11 #109, #141, #145. Thanks to Dependabot, Gary Gregory. 
+o           Bump actions/checkout from 1 to 3.1.10, #44, #23, #48, #75, #93, #143. Thanks to Dependabot, Gary Gregory. 
+o           Bump actions/setup-java from 1.4.0 to 3.5.1 #40. Thanks to Dependabot, Gary Gregory. 
+o           Bump actions/upload-artifact from 3.1.0 to 3.1.1 #150. Thanks to Gary Gregory. 
+o           Bump commons-parent from 50 to 59 #14, #113, #139, #168, #189. Thanks to Dependabot. 
+o           Bump junit from 4.12 to 5.9.1 vintage #16, #42, #58. Thanks to Dependabot, Gary Gregory. 
+o           Bump mockito-core from 3.2.4 to 4.8.1 #18, #21, #46, #53, #97, #103, #111, #116, #122, #131. #137, #151. Thanks to Dependabot. 
+o           Bump spotbugs-maven-plugin from 3.1.12.2 to 4.4.2, #17, #45, #52. Thanks to Dependabot, Gary Gregory. 
+o           Bump spotbugs from 3.1.12.2 to 4.2.3. Thanks to Gary Gregory. 
+o           Bump maven-checkstyle-plugin from 3.1.0 to 3.2.0 #56, #132. Thanks to Gary Gregory, Dependabot. 
+o           Bump checkstyle from 8.28 to 9.3 #20, #47. Thanks to Gary Gregory, Dependabot. 
+o           Bump commons.japicmp.version from 0.14.3 to 0.16.0. Thanks to Gary Gregory. 
 
 
 For complete information on Apache Commons DbUtils, including instructions on how to submit bug reports,
@@ -32,4 +54,4 @@ patches, or suggestions for improvement, see the Apache Commons DbUtils website:
 
 https://commons.apache.org/proper/commons-dbutils/
 
-
+-----------------------------------------------------------------------------
