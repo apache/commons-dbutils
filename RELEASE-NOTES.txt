@@ -54,4 +54,6 @@ patches, or suggestions for improvement, see the Apache Commons DbUtils website:
 
 https://commons.apache.org/proper/commons-dbutils/
 
+Download it from https://commons.apache.org/proper/commons-dbutils/download_dbcp.cgi
+
 -----------------------------------------------------------------------------
