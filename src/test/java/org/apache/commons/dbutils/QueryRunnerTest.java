@@ -105,7 +105,7 @@ public class QueryRunnerTest {
             caught = true;
         }
 
-        if(!caught) {
+        if (!caught) {
             fail("Exception never thrown, but expected");
         }
     }
@@ -122,7 +122,7 @@ public class QueryRunnerTest {
             caught = true;
         }
 
-        if(!caught) {
+        if (!caught) {
             fail("Exception never thrown, but expected");
         }
     }
@@ -139,7 +139,7 @@ public class QueryRunnerTest {
             caught = true;
         }
 
-        if(!caught) {
+        if (!caught) {
             fail("Exception never thrown, but expected");
         }
     }
@@ -561,7 +561,7 @@ public class QueryRunnerTest {
             caught = true;
         }
 
-        if(!caught) {
+        if (!caught) {
             fail("Exception never thrown, but expected");
         }
     }
@@ -584,7 +584,7 @@ public class QueryRunnerTest {
             caught = true;
         }
 
-        if(!caught) {
+        if (!caught) {
             fail("Exception never thrown, but expected");
         }
     }
