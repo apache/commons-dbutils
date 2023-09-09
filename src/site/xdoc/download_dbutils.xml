@@ -113,32 +113,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons DbUtils 1.8.0 ">
+    <section name="Apache Commons DbUtils 1.8.1 ">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.8.0-bin.tar.gz">commons-dbutils-1.8.0-bin.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.0-bin.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.0-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.8.1-bin.tar.gz">commons-dbutils-1.8.1-bin.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.1-bin.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.1-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.8.0-bin.zip">commons-dbutils-1.8.0-bin.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.0-bin.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.0-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/dbutils/binaries/commons-dbutils-1.8.1-bin.zip">commons-dbutils-1.8.1-bin.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.1-bin.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/binaries/commons-dbutils-1.8.1-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/dbutils/source/commons-dbutils-1.8.0-src.tar.gz">commons-dbutils-1.8.0-src.tar.gz</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.0-src.tar.gz.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.0-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/dbutils/source/commons-dbutils-1.8.1-src.tar.gz">commons-dbutils-1.8.1-src.tar.gz</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.1-src.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.1-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/dbutils/source/commons-dbutils-1.8.0-src.zip">commons-dbutils-1.8.0-src.zip</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.0-src.zip.sha512">sha512</a></td>
-              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.0-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/dbutils/source/commons-dbutils-1.8.1-src.zip">commons-dbutils-1.8.1-src.zip</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.1-src.zip.sha512">sha512</a></td>
+              <td><a href="https://downloads.apache.org/commons/dbutils/source/commons-dbutils-1.8.1-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>

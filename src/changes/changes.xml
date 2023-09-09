@@ -43,7 +43,7 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Apache Commons DBUtils Release Notes</title>
   </properties>
   <body>
-    <release version="1.8.1" date="2023-MM-DD" description="New features and bug fixes.">
+    <release version="1.8.1" date="2023-09-09" description="New features and bug fixes.">
       <!--  FIX -->
       <action dev="ggregory" type="fix" issue="DBUTILS-151" due-to="mark, Gary Gregory">
         Module org.apache.commons.dbutils does not declare `uses`.

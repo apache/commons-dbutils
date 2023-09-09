@@ -261,9 +261,9 @@
 
     <commons.componentid>dbutils</commons.componentid>
     <commons.module.name>org.apache.commons.dbutils</commons.module.name>
-    <commons.release.version>1.8.0</commons.release.version>
+    <commons.release.version>1.8.1</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>1.7</commons.bc.version>
+    <commons.bc.version>1.8.0</commons.bc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
     <commons.release.isDistModule>true</commons.release.isDistModule>

@@ -46,7 +46,7 @@ Apache Commons DbUtils
 [![GitHub Actions Status](https://github.com/apache/commons-dbutils/workflows/Java%20CI/badge.svg)](https://github.com/apache/commons-dbutils/actions)
 [![Coverage Status](https://codecov.io/gh/apache/commons-dbutils/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-dbutils)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/commons-dbutils/commons-dbutils/?gav=true)
-[![Javadocs](https://javadoc.io/badge/commons-dbutils/commons-dbutils/1.8.0.svg)](https://javadoc.io/doc/commons-dbutils/commons-dbutils/1.8.0)
+[![Javadocs](https://javadoc.io/badge/commons-dbutils/commons-dbutils/1.8.1.svg)](https://javadoc.io/doc/commons-dbutils/commons-dbutils/1.8.1)
 [![CodeQL](https://github.com/apache/commons-dbutils/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-dbutils/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-dbutils/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-dbutils)
 
@@ -69,7 +69,7 @@ Alternatively, you can pull it from  the central Maven repositories:
 <dependency>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.8.0</version>
+  <version>1.8.1</version>
 </dependency>
 ```
 

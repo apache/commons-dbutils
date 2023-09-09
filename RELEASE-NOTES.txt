@@ -1,3 +1,31 @@
+              Apache Commons DbUtils
+              Version 1.8.1
+              RELEASE NOTES
+
+The Apache Commons DbUtils team is pleased to announce the release of Apache Commons DbUtils 1.8.1
+
+The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.
+
+New features and bug fixes.
+
+Changes in this version include:
+
+
+Fixed Bugs:
+o DBUTILS-151:  Module org.apache.commons.dbutils does not declare `uses`. Thanks to mark, Gary Gregory. 
+
+Changes:
+o           Bump commons-parent from 61 to 62. Thanks to Gary Gregory. 
+
+
+For complete information on Apache Commons DbUtils, including instructions on how to submit bug reports,
+patches, or suggestions for improvement, see the Apache Commons DbUtils website:
+
+https://commons.apache.org/proper/commons-dbutils/
+
+Download it from https://commons.apache.org/proper/commons-dbutils/download_dbcp.cgi
+
+-----------------------------------------------------------------------------
 
               Apache Commons DbUtils
               Version 1.8.0

@@ -16,8 +16,8 @@
 ## under the License.
 
               ${project.name}
-                     Version ${version}
-                    RELEASE NOTES
+              Version ${version}
+              RELEASE NOTES
 
 The ${developmentTeam} is pleased to announce the release of ${project.name} ${version}
 
@@ -140,6 +140,6 @@ patches, or suggestions for improvement, see the ${project.name} website:
 
 ${project.url}
 
-Download it from ${project.url}/download_dbcp.cgi
+Download it from ${project.url}download_dbcp.cgi
 
 -----------------------------------------------------------------------------
