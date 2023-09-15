@@ -44,23 +44,23 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
     <release version="1.8.2" date="20YY-MM-DD" description="New features and bug fixes.">
-      <!--  FIX -->
-      <!--  ADD -->
-      <!--  UPDATE -->
+      <!-- FIX -->
+      <!-- ADD -->
+      <!-- UPDATE -->
     </release>
     <release version="1.8.1" date="2023-09-09" description="New features and bug fixes.">
-      <!--  FIX -->
+      <!-- FIX -->
       <action dev="ggregory" type="fix" issue="DBUTILS-151" due-to="mark, Gary Gregory">
         Module org.apache.commons.dbutils does not declare `uses`.
       </action>
-      <!--  ADD -->
-      <!--  UPDATE -->
+      <!-- ADD -->
+      <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Bump commons-parent from 61 to 62.
       </action>
     </release>
     <release version="1.8.0" date="2023-08-01" description="New features and bug fixes.">
-      <!--  FIX -->
+      <!-- FIX -->
       <action dev="thecarlhall" type="fix" issue="DBUTILS-131" due-to="yairlenga">
         Speedup query calls without parameters; Use PreparedStatement only when parameters are present.
       </action>
@@ -119,7 +119,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="add" due-to="Gary Gregory">
         Add StatementConfiguration.Builder.queryTimeout(Duration).
       </action>
-      <!--  UPDATE -->
+      <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.11 #109, #141, #145.
       </action>
