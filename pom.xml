@@ -267,8 +267,6 @@
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
     <commons.release.isDistModule>true</commons.release.isDistModule>
-    <commons.releaseManagerName>Gary Gregory</commons.releaseManagerName>    
-    <commons.releaseManagerKey>86fdc7e2a11262cb</commons.releaseManagerKey>
   </properties>
 
   <build>
