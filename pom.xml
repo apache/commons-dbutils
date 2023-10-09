@@ -283,7 +283,6 @@
             <headerLocation>${checkstyle.header.file}</headerLocation>
             <suppressionsLocation>${basedir}/src/conf/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
             <suppressionsFileExpression>${basedir}/src/conf/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
-            <failOnViolation>false</failOnViolation>
           </configuration>
         </plugin>
         <plugin>

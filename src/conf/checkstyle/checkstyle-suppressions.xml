@@ -19,7 +19,8 @@
 <suppressions>
     <suppress checks="Header" files="NOTICE.txt" />
     <suppress checks="Header" files="LICENSE.txt" />
-    <suppress checks="Header" files="target/.*" />
+    <suppress checks="Header" files="target[/\\]classes[/\\]META-INF[/\\]maven[/\\]commons-dbutils[/\\]commons-dbutils[/\\]pom.properties" />
+    <suppress checks="Header" files="target[/\\]maven-archiver[/\\]pom.properties" />
     <suppress checks="Header" files=".*[/\\]TestQueries.properties" />
     <suppress checks="HideUtilityClassConstructor" files="DbUtils.java" />
     <suppress checks="Javadoc" files=".*[/\\]test[/\\].*" />
@@ -28,4 +29,6 @@
     <suppress checks="LineLength" files="QueryRunner.java" />
     <suppress checks="MagicNumber" files=".*[/\\]test[/\\].*" />
     <suppress checks="MethodName" files=".*[/\\]test[/\\].*" />
+    <suppress checks="VisibilityModifier" files="AbstractQueryRunner" lines="54"/>
+    <suppress checks="VisibilityModifier" files="KeyedHandler" lines="58, 63, 69"/>
 </suppressions>
