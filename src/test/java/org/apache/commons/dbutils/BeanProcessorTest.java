@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class BeanProcessorTest extends BaseTestCase {
 
-    private static class IndexedPropertyTestClass {
+    private static final class IndexedPropertyTestClass {
         private String name;
         // Indexed variable with indexed getter and setter
         private List<String> things;
