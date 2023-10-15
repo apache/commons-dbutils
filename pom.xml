@@ -256,7 +256,7 @@
     <checkstyle.config.file>${basedir}/src/conf/checkstyle/checkstyle.xml</checkstyle.config.file>
 
     <commons.componentid>dbutils</commons.componentid>
-    <commons.module.name>org.apache.commons.dbutils</commons.module.name>
+    <commons.packageId>dbutils</commons.packageId>
     <commons.release.version>1.8.1</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
     <commons.bc.version>1.8.0</commons.bc.version>
