@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-dbutils</groupId>
   <artifactId>commons-dbutils</artifactId>
-  <version>1.8.2-SNAPSHOT</version>
+  <version>1.9.0-SNAPSHOT</version>
   <name>Apache Commons DbUtils</name>
 
   <inceptionYear>2002</inceptionYear>
@@ -249,24 +249,26 @@
   </distributionManagement>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
 
     <checkstyle.header.file>${basedir}/src/conf/checkstyle/checkstyle-header.txt</checkstyle.header.file>
     <checkstyle.config.file>${basedir}/src/conf/checkstyle/checkstyle.xml</checkstyle.config.file>
 
     <commons.componentid>dbutils</commons.componentid>
     <commons.packageId>dbutils</commons.packageId>
-    <commons.release.version>1.8.1</commons.release.version>
+    <commons.release.version>1.9.0</commons.release.version>
     <commons.rc.version>RC1</commons.rc.version>
-    <commons.bc.version>1.8.0</commons.bc.version>
+    <commons.bc.version>1.8.1</commons.bc.version>
     <commons.jira.id>DBUTILS</commons.jira.id>
     <commons.jira.pid>12310470</commons.jira.pid>
     <commons.release.isDistModule>true</commons.release.isDistModule>
   </properties>
 
   <build>
-    <defaultGoal>clean install apache-rat:check japicmp:cmp checkstyle:check spotbugs:check pmd:check pmd:cpd-check javadoc:javadoc</defaultGoal>
+	<!-- clean before javadoc:javadoc somehow help javadoc not blow up. -->
+    <defaultGoal>clean install apache-rat:check japicmp:cmp checkstyle:check spotbugs:check pmd:check pmd:cpd-check clean javadoc:javadoc</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
