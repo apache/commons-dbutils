@@ -157,8 +157,9 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * @deprecated No longer used by this class. Will be removed in a future version.
      * Class that encapsulates the continuation for update calls.
+     *
+     * @deprecated No longer used by this class. Will be removed in a future version.
      */
     @Deprecated
     protected class UpdateCallableStatement implements Callable<Integer> {
@@ -169,7 +170,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
         private final PreparedStatement ps;
 
         /**
-         *
+         * Constructs a new instance.
          *
          * @param conn The connection to use for the batch call.
          * @param closeConn True if the connection should be closed, false otherwise.
