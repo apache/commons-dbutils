@@ -59,8 +59,8 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     private ResultSet resultSet;
 
     /**
-     * 
-     */
+     * TODO.
+A     */
     protected final boolean absolute(final int row) throws SQLException {
         return resultSet.absolute(row);
     }
