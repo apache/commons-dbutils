@@ -268,7 +268,7 @@
 
   <build>
 	<!-- clean before javadoc:javadoc somehow help javadoc not blow up. -->
-    <defaultGoal>clean install apache-rat:check japicmp:cmp checkstyle:check spotbugs:check pmd:check pmd:cpd-check clean javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean verify apache-rat:check japicmp:cmp checkstyle:check spotbugs:check pmd:check pmd:cpd-check clean javadoc:javadoc</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
