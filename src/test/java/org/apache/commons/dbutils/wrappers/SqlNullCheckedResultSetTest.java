@@ -230,7 +230,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         }
     }
 
-    private SqlNullCheckedResultSet rs2 = null;
+    private SqlNullCheckedResultSet rs2;
 
     /**
      * Sets up instance variables required by this test case.

@@ -27,17 +27,17 @@ public class TestBean {
 
     }
 
-    private String one = null;
+    private String one;
 
-    private String two = null;
+    private String two;
 
-    private Ordinal three = null;
+    private Ordinal three;
 
-    private int intTest = 0;
+    private int intTest;
 
     private Integer integerTest = Integer.valueOf(0);
 
-    // UNUSED private Timestamp timestamp = null;
+    // UNUSED private Timestamp timestamp;
 
     private String doNotSet = "not set";
 

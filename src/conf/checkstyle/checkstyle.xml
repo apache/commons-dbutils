@@ -59,6 +59,7 @@
 
   <module name="TreeWalker">
 
+    <module name="ExplicitInitializationCheck" />
     <!-- ************************************************************** -->
     <!-- Checks that are different from the sun coding conventions ones -->
     <!-- ************************************************************** -->

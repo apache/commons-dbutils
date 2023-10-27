@@ -48,9 +48,9 @@ public class MockResultSet implements InvocationHandler {
 
     private Object[] currentRow = null;
 
-    private Iterator<Object[]> iter = null;
+    private Iterator<Object[]> iter;
 
-    private ResultSetMetaData metaData = null;
+    private ResultSetMetaData metaData;
 
     private Boolean wasNull = Boolean.FALSE;
 

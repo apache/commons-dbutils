@@ -103,12 +103,12 @@ public class BaseTestCase extends TestCase {
     /**
      * The ResultSet all test methods will use.
      */
-    protected ResultSet rs = null;
+    protected ResultSet rs;
 
     /**
      * A ResultSet with 0 rows.
      */
-    protected ResultSet emptyResultSet = null;
+    protected ResultSet emptyResultSet;
 
     /**
      * Creates a freshly initialized ResultSet.
