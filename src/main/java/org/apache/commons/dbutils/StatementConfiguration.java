@@ -150,7 +150,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Get the fetch direction.
+     * Gets the fetch direction.
      *
      * @return The direction to fetch or null if not set.
      */
@@ -159,7 +159,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Get the fetch size.
+     * Gets the fetch size.
      *
      * @return The fetch size or null if not set.
      */
@@ -168,7 +168,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Get the max field size.
+     * Gets the max field size.
      *
      * @return The max field size or null if not set.
      */
@@ -177,7 +177,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Get the max rows.
+     * Gets the max rows.
      *
      * @return The max rows or null if not set.
      */
@@ -186,7 +186,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Get the query timeout.
+     * Gets the query timeout.
      *
      * @return The query timeout or null if not set.
      * @deprecated Use {@link #getQueryTimeoutDuration()}.
@@ -197,7 +197,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Get the query timeout.
+     * Gets the query timeout.
      *
      * @return The query timeout or null if not set.
      * @since 1.8.0

@@ -166,7 +166,7 @@ public class BeanProcessor {
     }
 
     /**
-     * Get the write method to use when setting {@code value} to the {@code target}.
+     * Gets the write method to use when setting {@code value} to the {@code target}.
      *
      * @param target Object where the write method will be called.
      * @param prop   BeanUtils information.

@@ -444,7 +444,7 @@ public abstract class AbstractQueryRunner {
     }
 
     /**
-     * Get the {@code ParameterMetaData} of the prepared statement, if the {@code pmdKnownBroken}
+     * Gets the {@code ParameterMetaData} of the prepared statement, if the {@code pmdKnownBroken}
      * is set to false.
      *
      * @param stmt
