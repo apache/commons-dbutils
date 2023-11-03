@@ -238,6 +238,13 @@ public class DbUtilsTest {
     }
 
     @Test
+    public void testCommitAndCloseQuietlyWithNullDoesNotThrowAnSQLException() {
+
+        DbUtils.commitAndCloseQuietly(null);
+
+    }
+
+    @Test
     public void testCommitAndCloseWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).commit();
@@ -248,6 +255,13 @@ public class DbUtilsTest {
             // we expect this exception
         }
         verify(mockConnection).close();
+    }
+
+    @Test
+    public void testLoadDriverReturnsFalse() {
+
+        assertFalse(DbUtils.loadDriver(""));
+
     }
 
     @Test
@@ -329,19 +343,5 @@ public class DbUtilsTest {
         doThrow(SQLException.class).when(mockConnection).rollback();
         DbUtils.rollbackQuietly(mockConnection);
         verify(mockConnection).rollback();
-    }
-
-    @Test
-    public void testCommitAndCloseQuietlyWithNullDoesNotThrowAnSQLException() {
-
-        DbUtils.commitAndCloseQuietly(null);
-
-    }
-
-    @Test
-    public void testLoadDriverReturnsFalse() {
-
-        assertFalse(DbUtils.loadDriver(""));
-
     }
 }
