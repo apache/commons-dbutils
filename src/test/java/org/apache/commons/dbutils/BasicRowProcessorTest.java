@@ -32,6 +32,7 @@ import java.util.Map;
 public class BasicRowProcessorTest extends BaseTestCase {
 
     private static final RowProcessor processor = new BasicRowProcessor();
+    private static final int HASH_MAP_SIZE = 3;
 
     /**
      * Format that matches Date.toString().
@@ -41,11 +42,11 @@ public class BasicRowProcessorTest extends BaseTestCase {
         new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
     public void testPutAllContainsKeyAndRemove() throws Exception {
-        final Map<String, Object> test = new HashMap<>(3);
+        final Map<String, Object> test = new HashMap<>(HASH_MAP_SIZE);
         test.put("fiRst", "thing");
         test.put("seCond", "another");
         test.put("thIrd", "more");
-        final Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(3);
+        final Map<String, Object> brpMap = BasicRowProcessor.createCaseInsensitiveHashMap(HASH_MAP_SIZE);
         brpMap.putAll(test);
 
         assertEquals(test, brpMap);
