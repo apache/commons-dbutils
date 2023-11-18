@@ -17,7 +17,9 @@
 package org.apache.commons.dbutils;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotEquals;
 
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSet;
@@ -235,42 +237,39 @@ public class BeanProcessorTest extends BaseTestCase {
     public void testMapColumnToAnnotationField() throws Exception {
         final String[] columnNames = { "test", "test", "three_" };
         final String[] columnLabels = { "one", "two", null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
+        final ResultSetMetaData resultSetMetaData = buildResultSetMetaData(columnNames, columnLabels);
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToAnnotationFieldBean.class).getPropertyDescriptors();
 
-        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        final int[] columns = beanProc.mapColumnsToProperties(resultSetMetaData, props);
         for (int i = 1; i < columns.length; i++) {
-            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
+            assertNotEquals(columns[i], BeanProcessor.PROPERTY_NOT_FOUND);
         }
     }
 
     public void testMapColumnToProperties() throws Exception {
         final String[] columnNames = { "test", "test", "three" };
         final String[] columnLabels = { "one", "two", null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
+        final ResultSetMetaData resultSetMetaData = buildResultSetMetaData(columnNames, columnLabels);
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
 
-        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        final int[] columns = beanProc.mapColumnsToProperties(resultSetMetaData, props);
         for (int i = 1; i < columns.length; i++) {
-            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
+            assertNotEquals(columns[i], BeanProcessor.PROPERTY_NOT_FOUND);
         }
     }
 
     public void testMapColumnToPropertiesWithOverrides() throws Exception {
         final Map<String, String> columnToPropertyOverrides = new HashMap<>();
         columnToPropertyOverrides.put("five", "four");
-        final BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
+        final BeanProcessor beanProcessor = new BeanProcessor(columnToPropertyOverrides);
         final String[] columnNames = { "test", "test", "three", "five" };
         final String[] columnLabels = { "one", "two", null, null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
+        final ResultSetMetaData resultSetMetaData = buildResultSetMetaData(columnNames, columnLabels);
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
 
-        final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
+        final int[] columns = beanProcessor.mapColumnsToProperties(resultSetMetaData, props);
         for (int i = 1; i < columns.length; i++) {
-            assertTrue(columns[i] != BeanProcessor.PROPERTY_NOT_FOUND);
+            assertNotEquals(columns[i], BeanProcessor.PROPERTY_NOT_FOUND);
         }
     }
 
@@ -318,5 +317,11 @@ public class BeanProcessorTest extends BaseTestCase {
         TestWrongSetter testCls = new TestWrongSetter();
         testCls = beanProc.populateBean(rs, testCls);
         assertNull(testCls.testField);
+    }
+
+    private ResultSetMetaData buildResultSetMetaData(String[] columnNames, String[] columnLabels) {
+        ProxyFactory proxyFactory = ProxyFactory.instance();
+        MockResultSetMetaData mockResultSetMetaData = new MockResultSetMetaData(columnNames, columnLabels);
+        return proxyFactory.createResultSetMetaData(mockResultSetMetaData);
     }
 }
