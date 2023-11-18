@@ -16,8 +16,7 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -248,20 +247,13 @@ public class DbUtilsTest {
     public void testCommitAndCloseWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).commit();
-        try {
-            DbUtils.commitAndClose(mockConnection);
-            fail("DbUtils.commitAndClose() swallowed SQLEception!");
-        } catch (final SQLException e) {
-            // we expect this exception
-        }
-        verify(mockConnection).close();
+        assertThrows(SQLException.class, () ->
+                DbUtils.commitAndClose(mockConnection));
     }
 
     @Test
     public void testLoadDriverReturnsFalse() {
-
         assertFalse(DbUtils.loadDriver(""));
-
     }
 
     @Test
@@ -310,14 +302,8 @@ public class DbUtilsTest {
     public void testRollbackAndCloseWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).rollback();
-        try {
-            DbUtils.rollbackAndClose(mockConnection);
-            fail("DbUtils.rollbackAndClose() swallowed SQLException!");
-        } catch (final SQLException e) {
-            // we expect this exception
-        }
-        verify(mockConnection).rollback();
-        verify(mockConnection).close();
+        assertThrows(SQLException.class, () ->
+                DbUtils.rollbackAndClose(mockConnection));
     }
 
     @Test
