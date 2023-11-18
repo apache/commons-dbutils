@@ -92,12 +92,25 @@ public class StringTrimmedResultSet implements InvocationHandler {
         Object result = method.invoke(this.resultSet, args);
 
         if (result instanceof String
-                && (method.getName().equals("getObject")
-                || method.getName().equals("getString"))) {
+                && isMethodNameGetObjectOrString(method.getName())) {
             result = ((String) result).trim();
         }
 
         return result;
+    }
+
+    private boolean isMethodNameGetObjectOrString(String name) {
+        return isMethodNameGetObject(name) || isMethodNameGetString(name);
+    }
+
+    private boolean isMethodNameGetObject(String name) {
+        final String getObjectName = "getObject";
+        return name.equals(getObjectName);
+    }
+
+    private boolean isMethodNameGetString(String name) {
+        final String getStringName = "getString";
+        return name.equals(getStringName);
     }
 
 }
