@@ -49,7 +49,7 @@ public final class BaseResultSetHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void handleWithoutExplicitResultSetInvocation() throws Exception {
+    public void testHandleWithoutExplicitResultSetInvocation() throws Exception {
         final Collection<Map<String, Object>> result = new ToMapCollectionHandler().handle(createMockResultSet());
 
         assertFalse(result.isEmpty());

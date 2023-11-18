@@ -45,7 +45,7 @@ import java.util.Map;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ProxyFactory;
 
-class SqlNullCheckedResultSetMockBlob implements Blob {
+final class SqlNullCheckedResultSetMockBlob implements Blob {
 
     /**
      * @throws SQLException
@@ -111,7 +111,7 @@ class SqlNullCheckedResultSetMockBlob implements Blob {
 
 }
 
-class SqlNullCheckedResultSetMockClob implements Clob {
+final class SqlNullCheckedResultSetMockClob implements Clob {
 
     /**
      * @throws SQLException
@@ -187,7 +187,7 @@ class SqlNullCheckedResultSetMockClob implements Clob {
 
 }
 
-class SqlNullCheckedResultSetMockRef implements Ref {
+final class SqlNullCheckedResultSetMockRef implements Ref {
 
     @Override
     public String getBaseTypeName() throws SQLException {
@@ -990,7 +990,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 }
 
-class SqlNullUncheckedMockResultSet implements InvocationHandler {
+final class SqlNullUncheckedMockResultSet implements InvocationHandler {
 
     /**
      * Always return false for booleans, 0 for numerics, and null for Objects.

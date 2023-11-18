@@ -39,7 +39,7 @@ public class OutParameter<T> {
     private T value;
 
     /**
-     * Construct an {@code OutParameter} for the given JDBC SQL type and
+     * Constructs an {@code OutParameter} for the given JDBC SQL type and
      * Java type.
      * @param sqlType the JDBC SQL type of the parameter as in
      * {@code java.sql.Types}.
@@ -53,7 +53,7 @@ public class OutParameter<T> {
     }
 
     /**
-     * Construct an {@code OutParameter} for the given JDBC SQL type and
+     * Constructs an {@code OutParameter} for the given JDBC SQL type and
      * Java type and with the given value.  The parameter will be treated as an
      * INOUT parameter if the value is null.
      * @param sqlType the JDBC SQL type of the parameter as in

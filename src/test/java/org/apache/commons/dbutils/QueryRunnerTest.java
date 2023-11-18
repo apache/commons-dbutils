@@ -57,7 +57,7 @@ public class QueryRunnerTest {
     //
     // Random tests
     //
-    class MyBean {
+    final class MyBean {
         private int a;
         private double b;
         private String c;
