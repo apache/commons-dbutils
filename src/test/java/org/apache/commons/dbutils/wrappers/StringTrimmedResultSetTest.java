@@ -28,6 +28,9 @@ import org.apache.commons.dbutils.ProxyFactory;
  */
 public class StringTrimmedResultSetTest extends BaseTestCase {
 
+    private final static int COLUMN_INDEX = 4;
+    private final static String EXPECTED_VALUE = "notInBean";
+
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -36,12 +39,12 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
 
     public void testGetObject() throws SQLException {
         this.rs.next();
-        assertEquals("notInBean", rs.getObject(4));
+        assertEquals(EXPECTED_VALUE, rs.getObject(COLUMN_INDEX));
     }
 
     public void testGetString() throws SQLException {
         this.rs.next();
-        assertEquals("notInBean", rs.getString(4));
+        assertEquals(EXPECTED_VALUE, rs.getString(COLUMN_INDEX));
     }
 
     /**
