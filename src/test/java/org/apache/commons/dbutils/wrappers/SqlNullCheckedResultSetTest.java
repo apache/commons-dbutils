@@ -40,7 +40,9 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ProxyFactory;
@@ -1001,39 +1003,28 @@ final class SqlNullUncheckedMockResultSet implements InvocationHandler {
         throws Throwable {
 
         final Class<?> returnType = method.getReturnType();
-
-        if (method.getName().equals("wasNull")) {
-            return Boolean.TRUE;
-
-        }
-        if (returnType.equals(Boolean.TYPE)) {
-            return Boolean.FALSE;
-
-        }
-        if (returnType.equals(Integer.TYPE)) {
-            return Integer.valueOf(0);
-
-        }
-        if (returnType.equals(Short.TYPE)) {
-            return Short.valueOf((short) 0);
-
-        }
-        if (returnType.equals(Double.TYPE)) {
-            return Double.valueOf(0);
-
-        }
-        if (returnType.equals(Long.TYPE)) {
-            return Long.valueOf(0);
-
-        }
-        if (returnType.equals(Byte.TYPE)) {
-            return Byte.valueOf((byte) 0);
-
-        }
-        if (returnType.equals(Float.TYPE)) {
-            return Float.valueOf(0);
-
-        }
-        return null;
+        return new ReturnTypeHandler().handleReturnType(method.getName(), returnType);
     }
+
+    public static class ReturnTypeHandler {
+        private static final Map<Class<?>, Supplier<Object>> handlers = new HashMap<>();
+
+        static {
+            handlers.put(Boolean.TYPE, () -> Boolean.FALSE);
+            handlers.put(Integer.TYPE, () -> Integer.valueOf(0));
+            handlers.put(Short.TYPE, () -> Short.valueOf((short) 0));
+            handlers.put(Double.TYPE, () -> Double.valueOf(0));
+            handlers.put(Long.TYPE, () -> Long.valueOf(0));
+            handlers.put(Byte.TYPE, () -> Byte.valueOf((byte) 0));
+            handlers.put(Float.TYPE, () -> Float.valueOf(0));
+        }
+
+        public Object handleReturnType(String methodName, Class<?> returnType) {
+            if ("wasNull".equals(methodName)) {
+                return Boolean.TRUE;
+            }
+            return handlers.getOrDefault(returnType, () -> null).get();
+        }
+    }
+
 }
