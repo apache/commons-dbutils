@@ -54,6 +54,8 @@ public class MockResultSet implements InvocationHandler {
 
     private Boolean wasNull = Boolean.FALSE;
 
+    private static final Set<String> METHOD_NAMES = Set.of("isLast", "hashCode", "toString", "equals");
+
     /**
      * MockResultSet constructor.
      *
@@ -282,7 +284,7 @@ public class MockResultSet implements InvocationHandler {
             // Handle close method
         } else if (isColumnMethod(methodName)) {
             return handleColumnMethod(methodName, args);
-        } else if (isNonColumnMethod(methodName)) {
+        } else if (METHOD_NAMES.contains(methodName)) {
             return handleNonColumnMethod(methodName, proxy, args);
         }
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
@@ -317,11 +319,6 @@ public class MockResultSet implements InvocationHandler {
             default:
                 throw new UnsupportedOperationException("Unsupported column method: " + methodName);
         }
-    }
-
-    private boolean isNonColumnMethod(String methodName) {
-        Set<String> methodNames = Set.of("isLast", "hashCode", "toString", "equals");
-        return methodNames.contains(methodName);
     }
 
     private Object handleNonColumnMethod(String methodName, Object proxy, Object[] args) throws SQLException {
