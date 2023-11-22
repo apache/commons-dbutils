@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * MockResultSet dynamically implements the ResultSet interface.
@@ -52,6 +53,8 @@ public class MockResultSet implements InvocationHandler {
     private ResultSetMetaData metaData;
 
     private Boolean wasNull = Boolean.FALSE;
+
+    private static final Set<String> METHOD_NAMES = Set.of("isLast", "hashCode", "toString", "equals");
 
     /**
      * MockResultSet constructor.
@@ -265,64 +268,72 @@ public class MockResultSet implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    public Object invoke(final Object proxy, final Method method, final Object[] args)
+        throws Throwable {
 
         final String methodName = method.getName();
-
         if (methodName.equals("getMetaData")) {
             return this.getMetaData();
-
         }
         if (methodName.equals("next")) {
             return this.next();
-
         }
-        if (methodName.equals("previous") || methodName.equals("close")) {
-
-        } else if (methodName.equals("getBoolean")) {
-            return this.getBoolean(columnIndex(args));
-
-        } else if (methodName.equals("getByte")) {
-            return this.getByte(columnIndex(args));
-
-        } else if (methodName.equals("getDouble")) {
-            return this.getDouble(columnIndex(args));
-
-        } else if (methodName.equals("getFloat")) {
-            return this.getFloat(columnIndex(args));
-
-        } else if (methodName.equals("getInt")) {
-            return this.getInt(columnIndex(args));
-
-        } else if (methodName.equals("getLong")) {
-            return this.getLong(columnIndex(args));
-
-        } else if (methodName.equals("getObject")) {
-            return this.getObject(columnIndex(args));
-
-        } else if (methodName.equals("getShort")) {
-            return this.getShort(columnIndex(args));
-
-        } else if (methodName.equals("getString")) {
-            return this.getString(columnIndex(args));
-
-        } else if (methodName.equals("wasNull")) {
-            return this.wasNull();
-
-        } else if (methodName.equals("isLast")) {
-            return this.isLast();
-
-        } else if (methodName.equals("hashCode")) {
-            return Integer.valueOf(System.identityHashCode(proxy));
-
-        } else if (methodName.equals("toString")) {
-            return "MockResultSet " + System.identityHashCode(proxy);
-
-        } else if (methodName.equals("equals")) {
-            return Boolean.valueOf(proxy == args[0]);
+        if (methodName.equals("previous")) {
+            // Handle previous method
+        } else if (methodName.equals("close")) {
+            // Handle close method
+        } else if (isColumnMethod(methodName)) {
+            return handleColumnMethod(methodName, args);
+        } else if (METHOD_NAMES.contains(methodName)) {
+            return handleNonColumnMethod(methodName, proxy, args);
         }
-
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
+    }
+
+    private boolean isColumnMethod(String methodName) {
+        return methodName.startsWith("get") || methodName.equals("wasNull");
+    }
+
+    private Object handleColumnMethod(String methodName, final Object[] args) throws SQLException {
+        switch (methodName) {
+            case "getBoolean":
+                return this.getBoolean(columnIndex(args));
+            case "getByte":
+                return this.getByte(columnIndex(args));
+            case "getDouble":
+                return this.getDouble(columnIndex(args));
+            case "getFloat":
+                return this.getFloat(columnIndex(args));
+            case "getInt":
+                return this.getInt(columnIndex(args));
+            case "getLong":
+                return this.getLong(columnIndex(args));
+            case "getObject":
+                return this.getObject(columnIndex(args));
+            case "getShort":
+                return this.getShort(columnIndex(args));
+            case "getString":
+                return this.getString(columnIndex(args));
+            case "wasNull":
+                return this.wasNull();
+            default:
+                throw new UnsupportedOperationException("Unsupported column method: " + methodName);
+        }
+    }
+
+    private Object handleNonColumnMethod(String methodName, Object proxy, Object[] args) throws SQLException {
+        switch (methodName) {
+            case "isLast":
+                return this.isLast();
+            case "hashCode":
+                return Integer.valueOf(System.identityHashCode(proxy));
+            case "toString":
+                return "MockResultSet " + System.identityHashCode(proxy);
+            case "equals":
+                return Boolean.valueOf(proxy == args[0]);
+            default:
+                throw new UnsupportedOperationException("Unsupported non-column method: " + methodName);
+        }
     }
 
     /**
