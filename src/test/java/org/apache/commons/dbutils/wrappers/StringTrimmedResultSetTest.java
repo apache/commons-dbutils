@@ -31,17 +31,17 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        this.rs = StringTrimmedResultSet.wrap(this.rs);
+        this.setResultSet(StringTrimmedResultSet.wrap(this.getResultSet()));
     }
 
     public void testGetObject() throws SQLException {
-        this.rs.next();
-        assertEquals("notInBean", rs.getObject(4));
+        this.getResultSet().next();
+        assertEquals("notInBean", getResultSet().getObject(4));
     }
 
     public void testGetString() throws SQLException {
-        this.rs.next();
-        assertEquals("notInBean", rs.getString(4));
+        this.getResultSet().next();
+        assertEquals("notInBean", getResultSet().getString(4));
     }
 
     /**

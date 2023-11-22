@@ -44,7 +44,7 @@ public class BeanListHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
-        final List<TestBean> results = h.handle(this.emptyResultSet);
+        final List<TestBean> results = h.handle(this.getEmptyResultSet());
 
         assertNotNull(results);
         assertTrue(results.isEmpty());
@@ -52,7 +52,7 @@ public class BeanListHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
-        final List<TestBean> results = h.handle(this.rs);
+        final List<TestBean> results = h.handle(this.getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -79,7 +79,7 @@ public class BeanListHandlerTest extends BaseTestCase {
 
     public void testHandleToInterface() throws SQLException {
         final ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<>(SubTestBean.class);
-        final List<SubTestBeanInterface> results = h.handle(this.rs);
+        final List<SubTestBeanInterface> results = h.handle(this.getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -109,7 +109,7 @@ public class BeanListHandlerTest extends BaseTestCase {
 
     public void testHandleToSuperClass() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(SubTestBean.class);
-        final List<TestBean> results = h.handle(this.rs);
+        final List<TestBean> results = h.handle(this.getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());

@@ -229,6 +229,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     private SqlNullCheckedResultSet rs2;
+    private static ResultSet rs;
 
     /**
      * Sets up instance variables required by this test case.
@@ -239,7 +240,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         rs2 = new SqlNullCheckedResultSet(ProxyFactory.instance().createResultSet(new SqlNullUncheckedMockResultSet()));
 
-        rs = ProxyFactory.instance().createResultSet(rs2); // Override superclass field
+        setResultSet(ProxyFactory.instance().createResultSet(rs2)); // Override superclass field
+        rs = getResultSet();
     }
 
     /**
