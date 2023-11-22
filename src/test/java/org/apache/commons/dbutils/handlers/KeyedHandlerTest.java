@@ -29,15 +29,14 @@ import org.apache.commons.dbutils.RowProcessor;
 public class KeyedHandlerTest extends BaseTestCase {
 
     public void testColumnIndexHandle() throws SQLException {
-        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(2);
-        final Map<String,Map<String,Object>> results = h.handle(this.rs);
+        final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(2);
+        final Map<String, Map<String, Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Map<String,Object> row = null;
-        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
-        {
+        Map<String, Object> row = null;
+        for (final Entry<String, Map<String, Object>> entry : results.entrySet()) {
             final Object key = entry.getKey();
             assertNotNull(key);
             row = entry.getValue();
@@ -51,15 +50,14 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testColumnNameHandle() throws SQLException {
-        final ResultSetHandler<Map<Integer,Map<String,Object>>> h = new KeyedHandler<>("intTest");
-        final Map<Integer,Map<String,Object>> results = h.handle(this.rs);
+        final ResultSetHandler<Map<Integer, Map<String, Object>>> h = new KeyedHandler<>("intTest");
+        final Map<Integer, Map<String, Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Map<String,Object> row = null;
-        for(final Entry<Integer, Map<String, Object>> entry : results.entrySet())
-        {
+        Map<String, Object> row = null;
+        for (final Entry<Integer, Map<String, Object>> entry : results.entrySet()) {
             final Object key = entry.getKey();
             assertNotNull(key);
             row = entry.getValue();
@@ -73,23 +71,22 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
-        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
-        final Map<String,Map<String,Object>> results = h.handle(this.emptyResultSet);
+        final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
+        final Map<String, Map<String, Object>> results = h.handle(this.emptyResultSet);
         assertNotNull(results);
         assertTrue(results.isEmpty());
     }
 
     public void testHandle() throws SQLException {
-        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>();
+        final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
 
-        final Map<String,Map<String,Object>> results = h.handle(this.rs);
+        final Map<String, Map<String, Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Map<String,Object> row = null;
-        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
-        {
+        Map<String, Object> row = null;
+        for (final Entry<String, Map<String, Object>> entry : results.entrySet()) {
             final Object key = entry.getKey();
             assertNotNull(key);
             row = entry.getValue();
@@ -104,15 +101,14 @@ public class KeyedHandlerTest extends BaseTestCase {
 
     public void testInjectedRowProcess() throws Exception {
         final RowProcessor mockProc = mock(RowProcessor.class);
-        final ResultSetHandler<Map<String,Map<String,Object>>> h = new KeyedHandler<>(mockProc);
-        final Map<String,Map<String,Object>> results = h.handle(this.rs);
+        final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(mockProc);
+        final Map<String, Map<String, Object>> results = h.handle(this.rs);
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
 
-        Map<String,Object> row = null;
-        for(final Entry<String, Map<String, Object>> entry : results.entrySet())
-        {
+        Map<String, Object> row = null;
+        for (final Entry<String, Map<String, Object>> entry : results.entrySet()) {
             row = entry.getValue();
             assertNotNull(row);
             assertTrue(row.isEmpty());

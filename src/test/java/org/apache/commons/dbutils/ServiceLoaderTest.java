@@ -36,8 +36,7 @@ public class ServiceLoaderTest {
     }
 
     /**
-     * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers
-     * were loaded, too.
+     * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers were loaded, too.
      */
     @Test
     public void testFindMoreThanLocalColumns() {
@@ -50,8 +49,7 @@ public class ServiceLoaderTest {
     }
 
     /**
-     * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers
-     * were loaded, too.
+     * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers were loaded, too.
      */
     @Test
     public void testFindMoreThanLocalProperties() {
