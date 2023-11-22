@@ -34,13 +34,13 @@ public class IntegerColumnHandlerTest extends AbstractTestColumnHandler<Integer>
     @Override
     @Test
     public void testApplyType() throws Exception {
-        when(rs.getInt(1)).thenReturn(Integer.MIN_VALUE);
-        assertEquals(Integer.class, handler.apply(rs, 1).getClass());
+        when(getResultSet().getInt(1)).thenReturn(Integer.MIN_VALUE);
+        assertEquals(Integer.class, getColumnHandler().apply(getResultSet(), 1).getClass());
     }
 
     @Override
     @Test
     public void testMatchNegative() {
-        assertFalse(handler.match(Float.class));
+        assertFalse(getColumnHandler().match(Float.class));
     }
 }
