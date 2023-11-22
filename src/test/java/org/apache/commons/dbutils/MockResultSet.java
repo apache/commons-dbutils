@@ -270,10 +270,10 @@ public class MockResultSet implements InvocationHandler {
         throws Throwable {
         final String methodName = method.getName();
         if (methodName.equals("getMetaData")) {
-            return handleGetMetaData();
+            return this.getMetaData();
         }
         if (methodName.equals("next")) {
-            return handleNext();
+            return this.next();
         }
         if (methodName.equals("previous")) {
             // Handle previous method
@@ -285,15 +285,6 @@ public class MockResultSet implements InvocationHandler {
             return handleNonColumnMethod(methodName, proxy, args);
         }
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
-    }
-
-    // Define methods for handling specific cases
-    private Object handleGetMetaData() throws SQLException {
-        return this.getMetaData();
-    }
-
-    private Object handleNext() throws SQLException {
-        return this.next();
     }
 
     private boolean isColumnMethod(String methodName) {
