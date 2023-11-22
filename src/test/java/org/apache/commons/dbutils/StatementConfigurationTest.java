@@ -30,11 +30,7 @@ public class StatementConfigurationTest {
      */
     @Test
     public void testBuilder() {
-        final StatementConfiguration.Builder builder = new StatementConfiguration.Builder()
-                .fetchDirection(1)
-                .fetchSize(2)
-                .maxFieldSize(3)
-                .maxRows(4)
+        final StatementConfiguration.Builder builder = new StatementConfiguration.Builder().fetchDirection(1).fetchSize(2).maxFieldSize(3).maxRows(4)
                 .queryTimeout(5);
         final StatementConfiguration config = builder.build();
 
@@ -55,7 +51,7 @@ public class StatementConfigurationTest {
 
         assertTrue(config.isQueryTimeoutSet());
         assertEquals(Duration.ofSeconds(5), config.getQueryTimeoutDuration());
-        
+
         final StatementConfiguration config2 = builder.queryTimeout(Duration.ofSeconds(3)).build();
 
         assertTrue(config2.isQueryTimeoutSet());

@@ -61,8 +61,10 @@ public class GenerousBeanProcessorTest {
             this.two = two;
         }
     }
+
     GenerousBeanProcessor processor = new GenerousBeanProcessor();
-    @Mock ResultSetMetaData metaData;
+    @Mock
+    ResultSetMetaData metaData;
 
     PropertyDescriptor[] propDescriptors;
 

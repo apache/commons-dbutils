@@ -62,25 +62,58 @@ public class QueryRunnerTest {
         private double b;
         private String c;
 
-        public int getA() {    return a; }
-        public double getB() { return b; }
-        public String getC() { return c; }
-        public void setA(final int a) { this.a = a; }
-        public void setB(final double b) { this.b = b; }
-        public void setC(final String c) { this.c = c; }
+        public int getA() {
+            return a;
+        }
+
+        public double getB() {
+            return b;
+        }
+
+        public String getC() {
+            return c;
+        }
+
+        public void setA(final int a) {
+            this.a = a;
+        }
+
+        public void setB(final double b) {
+            this.b = b;
+        }
+
+        public void setC(final String c) {
+            this.c = c;
+        }
     }
+
     QueryRunner runner;
 
     ArrayHandler handler;
-    @Mock DataSource dataSource;
-    @Mock Connection conn;
-    @Mock PreparedStatement prepStmt;
-    @Mock Statement stmt;
-    @Mock CallableStatement call;
-    @Mock ParameterMetaData meta;
-    @Mock ResultSet results;
 
-    @Mock ResultSetMetaData resultsMeta;
+    @Mock
+    DataSource dataSource;
+
+    @Mock
+    Connection conn;
+
+    @Mock
+    PreparedStatement prepStmt;
+
+    @Mock
+    Statement stmt;
+
+    @Mock
+    CallableStatement call;
+
+    @Mock
+    ParameterMetaData meta;
+
+    @Mock
+    ResultSet results;
+
+    @Mock
+    ResultSetMetaData resultsMeta;
 
     //
     // Batch test cases
@@ -144,7 +177,6 @@ public class QueryRunnerTest {
         }
     }
 
-
     private void callGoodBatch(final Connection conn, final Object[][] params) throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
         runner.batch(conn, "select * from blah where ? = ?", params);
@@ -152,8 +184,10 @@ public class QueryRunnerTest {
         verify(prepStmt, times(1)).getParameterMetaData();
         verify(prepStmt, times(2)).addBatch();
         verify(prepStmt, times(1)).executeBatch();
-        verify(prepStmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.batch(Connection, String, Object[][]) does not close connections
+        // make sure we closed the statement
+        verify(prepStmt, times(1)).close();
+        // make sure we do not close the connection, since QueryRunner.batch(Connection, String, Object[][]) does not close connections
+        verify(conn, times(0)).close();
     }
 
     private void callGoodBatch(final Object[][] params) throws Exception {
@@ -238,7 +272,6 @@ public class QueryRunnerTest {
         verify(call, times(5)).close();    // make sure we closed the statement
         verify(conn, times(5)).close();    // make sure we do not close the connection
     }
-
 
     //
     // Execute tests
@@ -461,7 +494,6 @@ public class QueryRunnerTest {
         verify(conn, times(2)).close();    // make sure we closed the connection
     }
 
-
     //
     // Query test cases
     //
@@ -473,8 +505,8 @@ public class QueryRunnerTest {
         verify(prepStmt, times(1)).executeQuery();
         verify(results, times(1)).close();
         verify(prepStmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.query(Connection, String, ResultSetHandler<T>, Object...) does not close connections
-
+        // make sure we do not close the connection, since QueryRunner.query(Connection, String, ResultSetHandler<T>, Object...) does not close connections
+        verify(conn, times(0)).close();
         // call the other variation of query
         sql = "select * from blah";
         runner.query(conn, sql, handler);
@@ -484,7 +516,6 @@ public class QueryRunnerTest {
         verify(stmt, times(1)).close();    // make sure we closed the statement
         verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
-
 
     private void callGoodUpdate() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
@@ -523,8 +554,8 @@ public class QueryRunnerTest {
 
         verify(prepStmt, times(1)).executeUpdate();
         verify(prepStmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(0)).close();    // make sure we do not close the connection, since QueryRunner.update(Connection, String, Object...) does not close connections
-
+        // make sure we do not close the connection, since QueryRunner.update(Connection, String, Object...) does not close connections
+        verify(conn, times(0)).close();
         // call the other variation
         when(meta.getParameterCount()).thenReturn(0);
         final String sql = "update blah set unit = test";
@@ -543,7 +574,7 @@ public class QueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
 
-    // helper method for calling batch when an exception is expected
+    /** helper method for calling batch when an exception is expected. */
     private void callQueryWithException(final Object... params) throws Exception {
         boolean caught = false;
 
@@ -552,11 +583,11 @@ public class QueryRunnerTest {
             final String sql = "select * from blah where ? = ?";
             runner.query(sql, handler, params);
 
-            verify(prepStmt, never()).close();    // make sure the statement is still open
+            verify(prepStmt, never()).close(); // make sure the statement is still open
             verify(prepStmt, times(1)).executeQuery();
-            verify(prepStmt, times(1)).close();    // make sure we closed the statement
+            verify(prepStmt, times(1)).close(); // make sure we closed the statement
             verify(results, times(1)).close();
-            verify(conn, times(1)).close();    // make sure we closed the connection
+            verify(conn, times(1)).close(); // make sure we closed the connection
         } catch (final SQLException e) {
             caught = true;
         }
@@ -565,8 +596,6 @@ public class QueryRunnerTest {
             fail("Exception never thrown, but expected");
         }
     }
-
-
 
     // helper method for calling batch when an exception is expected
     private void callUpdateWithException(final Object... params) throws Exception {
@@ -578,8 +607,8 @@ public class QueryRunnerTest {
             runner.update(sql, params);
 
             verify(prepStmt, times(1)).executeUpdate();
-            verify(prepStmt, times(1)).close();    // make sure we closed the statement
-            verify(conn, times(1)).close();    // make sure we closed the connection
+            verify(prepStmt, times(1)).close(); // make sure we closed the statement
+            verify(conn, times(1)).close(); // make sure we closed the connection
         } catch (final SQLException e) {
             caught = true;
         }
@@ -620,7 +649,7 @@ public class QueryRunnerTest {
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testBadPrepareConnection() throws Exception {
         runner = new QueryRunner();
         runner.update("update blah set unit = test");
@@ -634,7 +663,6 @@ public class QueryRunnerTest {
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
-
 
     @Test
     public void testExecuteException() throws Exception {
@@ -656,12 +684,10 @@ public class QueryRunnerTest {
     @Test
     public void testExecuteWithMultipleResultSets() throws Exception {
         when(call.execute()).thenReturn(true);
-        when(call.getMoreResults()).thenAnswer(new Answer<Boolean>()
-        {
+        when(call.getMoreResults()).thenAnswer(new Answer<Boolean>() {
             int count = 1;
             @Override
-            public Boolean answer(final InvocationOnMock invocation)
-            {
+            public Boolean answer(final InvocationOnMock invocation) {
                 return ++count <= 3;
             }
         });
@@ -688,7 +714,7 @@ public class QueryRunnerTest {
         runner.fillStatementWithBean(prepStmt, bean, "a", "b", "c");
     }
 
-    @Test(expected=NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testFillStatementWithBeanNullNames() throws Exception {
         final MyBean bean = new MyBean();
         runner.fillStatementWithBean(prepStmt, bean, "a", "b", null);
@@ -700,7 +726,6 @@ public class QueryRunnerTest {
 
         callGoodBatch(params);
     }
-
 
     @Test
     public void testGoodBatchDefaultConstructor() throws Exception {
@@ -722,8 +747,7 @@ public class QueryRunnerTest {
 
         final ResultSetHandler<List<Object>> handler = rs -> {
             final List<Object> objects = new ArrayList<>();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 objects.add(new Object());
             }
             return objects;
@@ -739,8 +763,8 @@ public class QueryRunnerTest {
 
         verify(prepStmt, times(2)).addBatch();
         verify(prepStmt, times(1)).executeBatch();
-        verify(prepStmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(1)).close();    // make sure we closed the connection
+        verify(prepStmt, times(1)).close(); // make sure we closed the statement
+        verify(conn, times(1)).close(); // make sure we closed the connection
 
         Assert.assertEquals(2, generatedKeys.size());
     }
@@ -800,8 +824,8 @@ public class QueryRunnerTest {
         final Long generatedKey = runner.insert("INSERT INTO blah(col1, col2) VALUES(?,?)", new ScalarHandler<>(), "unit", "test");
 
         verify(prepStmt, times(1)).executeUpdate();
-        verify(prepStmt, times(1)).close();    // make sure we closed the statement
-        verify(conn, times(1)).close();    // make sure we closed the connection
+        verify(prepStmt, times(1)).close(); // make sure we closed the statement
+        verify(conn, times(1)).close(); // make sure we closed the connection
 
         Assert.assertEquals(1L, generatedKey.longValue());
     }
@@ -860,7 +884,7 @@ public class QueryRunnerTest {
         callGoodUpdate();
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullConnectionBatch() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
@@ -869,47 +893,47 @@ public class QueryRunnerTest {
         runner.batch("select * from blah where ? = ?", params);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullConnectionExecute() throws Exception {
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.execute("{call my_proc(?, ?)}", "unit", "test");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullConnectionExecuteWithResultSet() throws Exception {
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.execute("{call my_proc(?, ?)}", handler, "unit", "test");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullConnectionQuery() throws Exception {
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.query("select * from blah where ? = ?", handler, "unit", "test");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullConnectionUpdate() throws Exception {
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.update("select * from blah where ? = ?", "unit", "test");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullHandlerExecute() throws Exception {
         when(meta.getParameterCount()).thenReturn(2);
 
         runner.execute("{call my_proc(?, ?)}");
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullHandlerExecuteWithResultSet() throws Exception {
-        runner.execute("{call my_proc(?, ?)}", (ResultSetHandler)null);
+        runner.execute("{call my_proc(?, ?)}", (ResultSetHandler) null);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullHandlerQuery() throws Exception {
         runner.query("select * from blah where ? = ?", null);
     }
@@ -918,7 +942,7 @@ public class QueryRunnerTest {
     // Execute with ResultSetHandler
     //
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullParamsArgBatch() throws Exception {
         runner.batch("select * from blah where ? = ?", null);
     }
@@ -930,29 +954,29 @@ public class QueryRunnerTest {
         callGoodBatch(params);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullSqlBatch() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         runner.batch(null, params);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullSqlExecute() throws Exception {
         runner.execute(null);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullSqlExecuteWithResultSet() throws Exception {
         runner.execute(null, handler);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullSqlQuery() throws Exception {
         runner.query(null, handler);
     }
 
-    @Test(expected=SQLException.class)
+    @Test(expected = SQLException.class)
     public void testNullSqlUpdate() throws Exception {
         runner.update(null);
     }

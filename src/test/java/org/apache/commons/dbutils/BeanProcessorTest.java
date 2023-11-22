@@ -176,8 +176,8 @@ public class BeanProcessorTest extends BaseTestCase {
         }
 
         /**
-         * dbutils checks for a setter with exactly 1 param. This tests resilience
-         * to a found setter that doesn't match expectations.
+         * dbutils checks for a setter with exactly 1 param. This tests resilience to a found setter that doesn't match expectations.
+         *
          * @param idx
          * @param testField
          */
@@ -189,13 +189,11 @@ public class BeanProcessorTest extends BaseTestCase {
     private static final BeanProcessor beanProc = new BeanProcessor();
 
     public void testCheckAnnotationOnMissingReadMethod() throws Exception {
-        final String[] colNames = {"testField"};
+        final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
         final String testField = "first";
-        final Object[][] rows = {
-                new Object[] {testField}
-        };
+        final Object[][] rows = { new Object[] { testField } };
 
         final ResultSet rs = MockResultSet.create(metaData, rows);
         assertTrue(rs.next());
@@ -205,23 +203,20 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     /**
-     * Based on the report in DBUTILS-150. This test validates that indexed
-     * property descriptors are not used, and indexed getter/setter methods
-     * are not inspected.
+     * Based on the report in DBUTILS-150. This test validates that indexed property descriptors are not used, and indexed getter/setter methods are not
+     * inspected.
      *
      * @throws Exception
      * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
      */
     public void testIndexedPropertyDescriptor() throws Exception {
-        final String[] colNames = {"name", "things", "stuff"};
+        final String[] colNames = { "name", "things", "stuff" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
         final String name = "first";
         final List<String> things = Arrays.asList("1", "2", "3", "4");
         final List<String> stuff = things;
-        final Object[][] rows = {
-                new Object[] {name, things, stuff}
-        };
+        final Object[][] rows = { new Object[] { name, things, stuff } };
 
         final ResultSet rs = MockResultSet.create(metaData, rows);
         assertTrue(rs.next());
@@ -235,8 +230,7 @@ public class BeanProcessorTest extends BaseTestCase {
     public void testMapColumnToAnnotationField() throws Exception {
         final String[] columnNames = { "test", "test", "three_" };
         final String[] columnLabels = { "one", "two", null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames, columnLabels));
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToAnnotationFieldBean.class).getPropertyDescriptors();
 
         final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
@@ -248,8 +242,7 @@ public class BeanProcessorTest extends BaseTestCase {
     public void testMapColumnToProperties() throws Exception {
         final String[] columnNames = { "test", "test", "three" };
         final String[] columnLabels = { "one", "two", null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames, columnLabels));
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
 
         final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
@@ -264,8 +257,7 @@ public class BeanProcessorTest extends BaseTestCase {
         final BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
         final String[] columnNames = { "test", "test", "three", "five" };
         final String[] columnLabels = { "one", "two", null, null };
-        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(
-                new MockResultSetMetaData(columnNames, columnLabels));
+        final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames, columnLabels));
         final PropertyDescriptor[] props = Introspector.getBeanInfo(MapColumnToPropertiesBean.class).getPropertyDescriptors();
 
         final int[] columns = beanProc.mapColumnsToProperties(rsmd, props);
@@ -305,13 +297,11 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     public void testWrongSetterParamCount() throws Exception {
-        final String[] colNames = {"testField"};
+        final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
         final Integer testField = 1;
-        final Object[][] rows = {
-                new Object[] {testField}
-        };
+        final Object[][] rows = { new Object[] { testField } };
 
         final ResultSet rs = MockResultSet.create(metaData, rows);
         assertTrue(rs.next());
