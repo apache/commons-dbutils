@@ -61,7 +61,7 @@ public abstract class AbstractQueryRunner {
     /**
      * Default constructor, sets pmdKnownBroken to false, ds to null and stmtConfig to null.
      */
-    public AbstractQueryRunner() {
+    protected AbstractQueryRunner() {
         ds = null;
         this.stmtConfig = null;
     }
@@ -76,7 +76,7 @@ public abstract class AbstractQueryRunner {
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
      */
-    public AbstractQueryRunner(final boolean pmdKnownBroken) {
+    protected AbstractQueryRunner(final boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
         ds = null;
         this.stmtConfig = null;
@@ -90,7 +90,7 @@ public abstract class AbstractQueryRunner {
      * @param ds
      *            The {@code DataSource} to retrieve connections from.
      */
-    public AbstractQueryRunner(final DataSource ds) {
+    protected AbstractQueryRunner(final DataSource ds) {
         this.ds = ds;
         this.stmtConfig = null;
     }
@@ -110,7 +110,7 @@ public abstract class AbstractQueryRunner {
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
      */
-    public AbstractQueryRunner(final DataSource ds, final boolean pmdKnownBroken) {
+    protected AbstractQueryRunner(final DataSource ds, final boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
         this.ds = ds;
         this.stmtConfig = null;
@@ -127,7 +127,7 @@ public abstract class AbstractQueryRunner {
      * and if it breaks, we'll remember not to use it again.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public AbstractQueryRunner(final DataSource ds, final boolean pmdKnownBroken, final StatementConfiguration stmtConfig) {
+    protected AbstractQueryRunner(final DataSource ds, final boolean pmdKnownBroken, final StatementConfiguration stmtConfig) {
         this.pmdKnownBroken = pmdKnownBroken;
         this.ds = ds;
         this.stmtConfig = stmtConfig;
@@ -142,7 +142,7 @@ public abstract class AbstractQueryRunner {
      * @param ds The {@code DataSource} to retrieve connections from.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public AbstractQueryRunner(final DataSource ds, final StatementConfiguration stmtConfig) {
+    protected AbstractQueryRunner(final DataSource ds, final StatementConfiguration stmtConfig) {
         this.ds = ds;
         this.stmtConfig = stmtConfig;
     }
@@ -153,7 +153,7 @@ public abstract class AbstractQueryRunner {
      *
      * @param stmtConfig The configuration to apply to statements when they are prepared.
      */
-    public AbstractQueryRunner(final StatementConfiguration stmtConfig) {
+    protected AbstractQueryRunner(final StatementConfiguration stmtConfig) {
         this.ds = null;
         this.stmtConfig = stmtConfig;
     }
