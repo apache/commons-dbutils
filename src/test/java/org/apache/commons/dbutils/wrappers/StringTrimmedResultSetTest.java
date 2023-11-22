@@ -46,12 +46,12 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
 
     /**
      * Make sure 2 wrappers work together.
+     *
      * @throws SQLException if a database access error occurs
      */
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
-        final Object[][] rows = { { null }
-        };
+        final Object[][] rows = { { null } };
         ResultSet rs = MockResultSet.create(metaData, rows);
 
         // Wrap the ResultSet with a null checked version

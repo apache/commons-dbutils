@@ -29,7 +29,8 @@ import org.apache.commons.dbutils.TestBean;
  */
 public class BeanListHandlerTest extends BaseTestCase {
 
-    public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
+    public static class SubTestBean extends TestBean implements SubTestBeanInterface {
+    }
 
     public interface SubTestBeanInterface {
         String getDoNotSet();
