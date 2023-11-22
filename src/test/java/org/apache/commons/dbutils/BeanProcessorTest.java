@@ -156,7 +156,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     private static final class TestNoGetter {
-        public String testField;
+        private String testField;
 
         /**
          * Add setter to trigger JavaBeans to populate a PropertyDescriptor
@@ -169,7 +169,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     private static final class TestWrongSetter {
-        public Integer testField;
+        private Integer testField;
 
         public Integer getTestField() {
             return testField;
