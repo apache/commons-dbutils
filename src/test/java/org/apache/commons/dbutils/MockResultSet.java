@@ -21,10 +21,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * MockResultSet dynamically implements the ResultSet interface.
@@ -327,8 +324,8 @@ public class MockResultSet implements InvocationHandler {
     }
 
     private boolean isNonColumnMethod(String methodName) {
-        return methodName.equals("isLast") || methodName.equals("hashCode")
-                || methodName.equals("toString") || methodName.equals("equals");
+        Set<String> methodNames = Set.of("isLast", "hashCode", "toString", "equals");
+        return methodNames.contains(methodName);
     }
 
     private Object handleNonColumnMethod(String methodName, Object proxy, Object[] args) throws SQLException {
