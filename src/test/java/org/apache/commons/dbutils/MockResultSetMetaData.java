@@ -21,14 +21,13 @@ import java.lang.reflect.Method;
 import java.sql.ResultSetMetaData;
 
 /**
- * MockResultSetMetaData dynamically implements the ResultSetMetaData
- * interface.
+ * MockResultSetMetaData dynamically implements the ResultSetMetaData interface.
  */
 public class MockResultSetMetaData implements InvocationHandler {
 
     /**
-     * Create a {@code MockResultSetMetaData} proxy object.  This is
-     * equivalent to:
+     * Create a {@code MockResultSetMetaData} proxy object. This is equivalent to:
+     *
      * <pre>
      * ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames));
      * </pre>
@@ -37,12 +36,12 @@ public class MockResultSetMetaData implements InvocationHandler {
      * @return the proxy object
      */
     public static ResultSetMetaData create(final String[] columnNames) {
-        return ProxyFactory.instance().createResultSetMetaData(
-            new MockResultSetMetaData(columnNames));
+        return ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames));
     }
-    private String[] columnNames = null;
 
-    private String[] columnLabels = null;
+    private String[] columnNames;
+
+    private String[] columnLabels;
 
     public MockResultSetMetaData(final String[] columnNames) {
         this.columnNames = columnNames;
@@ -53,12 +52,10 @@ public class MockResultSetMetaData implements InvocationHandler {
     public MockResultSetMetaData(final String[] columnNames, final String[] columnLabels) {
         this.columnNames = columnNames;
         this.columnLabels = columnLabels;
-
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args)
-        throws Throwable {
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
 
         final String methodName = method.getName();
 
@@ -66,18 +63,16 @@ public class MockResultSetMetaData implements InvocationHandler {
             return Integer.valueOf(this.columnNames.length);
 
         }
-        if (
-                methodName.equals("getColumnName")) {
+        if (methodName.equals("getColumnName")) {
 
-                final int col = ((Integer) args[0]).intValue() - 1;
-                return this.columnNames[col];
+            final int col = ((Integer) args[0]).intValue() - 1;
+            return this.columnNames[col];
 
         }
-        if (
-                methodName.equals("getColumnLabel")) {
+        if (methodName.equals("getColumnLabel")) {
 
-                final int col = ((Integer) args[0]).intValue() - 1;
-                return this.columnLabels[col];
+            final int col = ((Integer) args[0]).intValue() - 1;
+            return this.columnLabels[col];
 
         }
         if (methodName.equals("hashCode")) {

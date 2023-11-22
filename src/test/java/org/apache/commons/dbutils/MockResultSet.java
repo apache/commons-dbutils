@@ -33,21 +33,20 @@ import java.util.Set;
 public class MockResultSet implements InvocationHandler {
 
     /**
-     * Create a {@code MockResultSet} proxy object.  This is equivalent to:
+     * Create a {@code MockResultSet} proxy object. This is equivalent to:
+     *
      * <pre>
      * ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
      * </pre>
      *
      * @param metaData
-     * @param rows A null value indicates an empty {@code ResultSet}.
+     * @param rows     A null value indicates an empty {@code ResultSet}.
      */
-    public static ResultSet create(final ResultSetMetaData metaData,
-            final Object[][] rows) {
-        return ProxyFactory.instance().createResultSet(
-            new MockResultSet(metaData, rows));
+    public static ResultSet create(final ResultSetMetaData metaData, final Object[][] rows) {
+        return ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
     }
 
-    private Object[] currentRow = null;
+    private Object[] currentRow;
 
     private Iterator<Object[]> iter;
 
@@ -57,8 +56,9 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * MockResultSet constructor.
+     *
      * @param metaData
-     * @param rows A null value indicates an empty {@code ResultSet}.
+     * @param rows     A null value indicates an empty {@code ResultSet}.
      */
     public MockResultSet(final ResultSetMetaData metaData, final Object[][] rows) {
         this.metaData = metaData;
@@ -71,9 +71,9 @@ public class MockResultSet implements InvocationHandler {
     }
 
     /**
-     * The get* methods can have an int column index or a String column name as
-     * the parameter.  This method handles both cases and returns the column
-     * index that the client is trying to get at.
+     * The get* methods can have an int column index or a String column name as the parameter. This method handles both cases and returns the column index that
+     * the client is trying to get at.
+     *
      * @param args
      * @return A column index.
      * @throws SQLException if a database access error occurs
@@ -93,6 +93,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Returns the column index for the given column name.
+     *
      * @return A 1 based index
      * @throws SQLException if the column name is invalid
      */
@@ -109,6 +110,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the boolean value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -117,9 +119,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return obj == null
-                ? Boolean.FALSE
-                : Boolean.valueOf(obj.toString());
+            return obj == null ? Boolean.FALSE : Boolean.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -128,6 +128,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the byte value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -136,9 +137,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return obj == null
-                ? Byte.valueOf((byte) 0)
-                : Byte.valueOf(obj.toString());
+            return obj == null ? Byte.valueOf((byte) 0) : Byte.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -147,6 +146,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the double value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -155,9 +155,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return obj == null
-                ? Double.valueOf(0)
-                : Double.valueOf(obj.toString());
+            return obj == null ? Double.valueOf(0) : Double.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -166,6 +164,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the float value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -183,6 +182,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the int value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -191,9 +191,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return obj == null
-                ? Integer.valueOf(0)
-                : Integer.valueOf(obj.toString());
+            return obj == null ? Integer.valueOf(0) : Integer.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -202,6 +200,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the long value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -226,6 +225,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the object at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -237,6 +237,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the short value at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -245,9 +246,7 @@ public class MockResultSet implements InvocationHandler {
         this.setWasNull(obj);
 
         try {
-            return obj == null
-                ? Short.valueOf((short) 0)
-                : Short.valueOf(obj.toString());
+            return obj == null ? Short.valueOf((short) 0) : Short.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -256,6 +255,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Gets the String at the given column index.
+     *
      * @param columnIndex A 1 based index.
      * @throws SQLException if a database access error occurs
      */
@@ -268,6 +268,7 @@ public class MockResultSet implements InvocationHandler {
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args)
         throws Throwable {
+
         final String methodName = method.getName();
         if (methodName.equals("getMetaData")) {
             return this.getMetaData();
@@ -358,6 +359,7 @@ public class MockResultSet implements InvocationHandler {
 
     /**
      * Assigns this.wasNull a Boolean value based on the object passed in.
+     *
      * @param isNull
      */
     private void setWasNull(final Object isNull) {

@@ -50,12 +50,18 @@ public class AsyncQueryRunnerTest {
     AsyncQueryRunner runner;
     ArrayHandler handler;
 
-    @Mock DataSource dataSource;
-    @Mock Connection conn;
-    @Mock PreparedStatement prepStmt;
-    @Mock Statement stmt;
-    @Mock ParameterMetaData meta;
-    @Mock ResultSet results;
+    @Mock
+    DataSource dataSource;
+    @Mock
+    Connection conn;
+    @Mock
+    PreparedStatement prepStmt;
+    @Mock
+    Statement stmt;
+    @Mock
+    ParameterMetaData meta;
+    @Mock
+    ResultSet results;
 
     // helper method for calling batch when an exception is expected
     private void callBatchWithException(final String sql, final Object[][] params) throws Exception {
@@ -69,8 +75,8 @@ public class AsyncQueryRunnerTest {
 
             verify(prepStmt, times(2)).addBatch();
             verify(prepStmt, times(1)).executeBatch();
-            verify(prepStmt, times(1)).close();    // make sure the statement is closed
-            verify(conn, times(1)).close();    // make sure the connection is closed
+            verify(prepStmt, times(1)).close(); // make sure the statement is closed
+            verify(conn, times(1)).close(); // make sure the connection is closed
         } catch (final Exception e) {
             caught = true;
         }
@@ -208,8 +214,6 @@ public class AsyncQueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we closed the connection
     }
 
-
-
     // helper method for calling batch when an exception is expected
     private void callQueryWithException(final Object... params) throws Exception {
         boolean caught = false;
@@ -220,8 +224,8 @@ public class AsyncQueryRunnerTest {
 
             verify(prepStmt, times(1)).executeQuery();
             verify(results, times(1)).close();
-            verify(prepStmt, times(1)).close();    // make sure we closed the statement
-            verify(conn, times(1)).close();    // make sure we closed the connection
+            verify(prepStmt, times(1)).close(); // make sure we closed the statement
+            verify(conn, times(1)).close(); // make sure we closed the connection
         } catch (final Exception e) {
             caught = true;
         }
@@ -240,8 +244,8 @@ public class AsyncQueryRunnerTest {
             runner.update("select * from blah where ? = ?", params).get();
 
             verify(prepStmt, times(1)).executeUpdate();
-            verify(prepStmt, times(1)).close();    // make sure we closed the statement
-            verify(conn, times(1)).close();    // make sure we closed the connection
+            verify(prepStmt, times(1)).close(); // make sure we closed the statement
+            verify(conn, times(1)).close(); // make sure we closed the connection
         } catch (final Exception e) {
             caught = true;
         }
@@ -278,7 +282,7 @@ public class AsyncQueryRunnerTest {
     //
     // Random tests
     //
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testBadPrepareConnection() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         runner.update("update blah set unit = test").get();
@@ -302,7 +306,6 @@ public class AsyncQueryRunnerTest {
 
         callUpdateWithException("unit", "test");
     }
-
 
     @Test
     public void testGoodBatch() throws Exception {
@@ -339,7 +342,6 @@ public class AsyncQueryRunnerTest {
         callGoodQuery(conn);
     }
 
-
     @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
     public void testGoodQueryPmdTrue() throws Exception {
@@ -367,9 +369,8 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testInsertUsesGivenQueryRunner() throws Exception {
-        final QueryRunner mockQueryRunner = mock(QueryRunner.class
-                , org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
-                );
+        final QueryRunner mockQueryRunner = mock(QueryRunner.class, org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
+        );
         runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
 
         runner.insert("1", handler);
@@ -396,7 +397,7 @@ public class AsyncQueryRunnerTest {
         callGoodUpdate();
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullConnectionBatch() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
@@ -405,27 +406,26 @@ public class AsyncQueryRunnerTest {
         runner.batch("select * from blah where ? = ?", params).get();
     }
 
-
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullConnectionQuery() throws Exception {
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.query("select * from blah where ? = ?", handler, "unit", "test").get();
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullConnectionUpdate() throws Exception {
         when(dataSource.getConnection()).thenReturn(null);
 
         runner.update("select * from blah where ? = ?", "unit", "test").get();
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullHandlerQuery() throws Exception {
         runner.query("select * from blah where ? = ?", null).get();
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullParamsArgBatch() throws Exception {
         runner.batch("select * from blah where ? = ?", null).get();
     }
@@ -437,19 +437,19 @@ public class AsyncQueryRunnerTest {
         callGoodBatch(params);
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullSqlBatch() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         runner.batch(null, params).get();
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullSqlQuery() throws Exception {
         runner.query(null, handler).get();
     }
 
-    @Test(expected=ExecutionException.class)
+    @Test(expected = ExecutionException.class)
     public void testNullSqlUpdate() throws Exception {
         runner.update(null).get();
     }

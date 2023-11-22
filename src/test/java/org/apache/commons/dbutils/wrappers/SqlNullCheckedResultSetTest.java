@@ -65,7 +65,7 @@ final class SqlNullCheckedResultSetMockBlob implements Blob {
      */
     @Override
     public InputStream getBinaryStream(final long pos, final long length) throws SQLException {
-      return null;
+        return null;
     }
 
     @Override
@@ -99,8 +99,7 @@ final class SqlNullCheckedResultSetMockBlob implements Blob {
     }
 
     @Override
-    public int setBytes(final long pos, final byte[] bytes, final int offset, final int len)
-        throws SQLException {
+    public int setBytes(final long pos, final byte[] bytes, final int offset, final int len) throws SQLException {
         return 0;
     }
 
@@ -136,7 +135,7 @@ final class SqlNullCheckedResultSetMockClob implements Clob {
      */
     @Override
     public Reader getCharacterStream(final long pos, final long length) throws SQLException {
-      return null;
+        return null;
     }
 
     @Override
@@ -175,8 +174,7 @@ final class SqlNullCheckedResultSetMockClob implements Clob {
     }
 
     @Override
-    public int setString(final long pos, final String str, final int offset, final int len)
-        throws SQLException {
+    public int setString(final long pos, final String str, final int offset, final int len) throws SQLException {
         return 0;
     }
 
@@ -200,13 +198,13 @@ final class SqlNullCheckedResultSetMockRef implements Ref {
     }
 
     @Override
-    public Object getObject(final Map<String,Class<?>> map) throws SQLException {
+    public Object getObject(final Map<String, Class<?>> map) throws SQLException {
         return null;
     }
 
     @Override
     public void setObject(final Object value) throws SQLException {
-
+        // no-op
     }
 
 }
@@ -239,10 +237,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     public void setUp() throws Exception {
         super.setUp();
 
-        rs2 =
-            new SqlNullCheckedResultSet(
-                ProxyFactory.instance().createResultSet(
-                    new SqlNullUncheckedMockResultSet()));
+        rs2 = new SqlNullCheckedResultSet(ProxyFactory.instance().createResultSet(new SqlNullUncheckedMockResultSet()));
 
         rs = ProxyFactory.instance().createResultSet(rs2); // Override superclass field
     }
@@ -994,11 +989,11 @@ final class SqlNullUncheckedMockResultSet implements InvocationHandler {
 
     /**
      * Always return false for booleans, 0 for numerics, and null for Objects.
+     *
      * @see java.lang.reflect.InvocationHandler#invoke(Object, java.lang.reflect.Method, Object[])
      */
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args)
-        throws Throwable {
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
 
         final Class<?> returnType = method.getReturnType();
 
