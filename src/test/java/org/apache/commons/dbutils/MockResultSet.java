@@ -38,9 +38,9 @@ public class MockResultSet implements InvocationHandler {
      * @param rows A null value indicates an empty {@code ResultSet}.
      */
     public static ResultSet create(final ResultSetMetaData metaData,
-                                   final Object[][] rows) {
+            final Object[][] rows) {
         return ProxyFactory.instance().createResultSet(
-                new MockResultSet(metaData, rows));
+            new MockResultSet(metaData, rows));
     }
 
     private Object[] currentRow = null;
@@ -114,8 +114,8 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return obj == null
-                    ? Boolean.FALSE
-                    : Boolean.valueOf(obj.toString());
+                ? Boolean.FALSE
+                : Boolean.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -133,8 +133,8 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return obj == null
-                    ? Byte.valueOf((byte) 0)
-                    : Byte.valueOf(obj.toString());
+                ? Byte.valueOf((byte) 0)
+                : Byte.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -152,8 +152,8 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return obj == null
-                    ? Double.valueOf(0)
-                    : Double.valueOf(obj.toString());
+                ? Double.valueOf(0)
+                : Double.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -188,8 +188,8 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return obj == null
-                    ? Integer.valueOf(0)
-                    : Integer.valueOf(obj.toString());
+                ? Integer.valueOf(0)
+                : Integer.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -242,8 +242,8 @@ public class MockResultSet implements InvocationHandler {
 
         try {
             return obj == null
-                    ? Short.valueOf((short) 0)
-                    : Short.valueOf(obj.toString());
+                ? Short.valueOf((short) 0)
+                : Short.valueOf(obj.toString());
 
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
@@ -263,7 +263,7 @@ public class MockResultSet implements InvocationHandler {
 
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args)
-            throws Throwable {
+        throws Throwable {
         final String methodName = method.getName();
         if (methodName.equals("getMetaData")) {
             return handleGetMetaData();
