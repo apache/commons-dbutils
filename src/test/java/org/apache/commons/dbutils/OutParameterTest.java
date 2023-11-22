@@ -38,7 +38,8 @@ public class OutParameterTest {
     private static final int INDEX = 2;
     private static final int VALUE = 42;
 
-    @Mock CallableStatement stmt;
+    @Mock
+    CallableStatement stmt;
 
     OutParameter<Number> parameter;
 

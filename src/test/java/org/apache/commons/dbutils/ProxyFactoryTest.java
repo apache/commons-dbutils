@@ -19,8 +19,7 @@ package org.apache.commons.dbutils;
 import java.lang.reflect.InvocationHandler;
 
 /**
- * ProxyFactoryTest performs simple type checking on proxy objects returned
- * from a ProxyFactory.
+ * ProxyFactoryTest performs simple type checking on proxy objects returned from a ProxyFactory.
  */
 public class ProxyFactoryTest extends BaseTestCase {
 

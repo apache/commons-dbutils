@@ -34,11 +34,9 @@ public class BasicRowProcessorTest extends BaseTestCase {
     private static final RowProcessor processor = new BasicRowProcessor();
 
     /**
-     * Format that matches Date.toString().
-     * Sun Mar 14 15:19:15 MST 2004
+     * Format that matches Date.toString(). Sun Mar 14 15:19:15 MST 2004
      */
-    private static final DateFormat datef =
-        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+    private static final DateFormat datef = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
     public void testPutAllContainsKeyAndRemove() throws Exception {
         final Map<String, Object> test = new HashMap<>(3);

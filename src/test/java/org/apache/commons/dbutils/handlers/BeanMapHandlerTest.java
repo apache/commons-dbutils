@@ -37,9 +37,12 @@ public class BeanMapHandlerTest {
 
     private BeanMapHandler<Long, TestBean> bmh;
     private Map<Long, TestBean> res;
-    @Mock private ResultSet rs;
-    @Mock private ResultSetMetaData rsmd;
-    @Mock private RowProcessor rp;
+    @Mock
+    private ResultSet rs;
+    @Mock
+    private ResultSetMetaData rsmd;
+    @Mock
+    private RowProcessor rp;
 
     private void handle() throws Exception {
         res = bmh.handle(rs);
