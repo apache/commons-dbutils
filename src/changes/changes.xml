@@ -47,6 +47,8 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- FIX -->
       <action dev="ggregory" type="update" due-to="sanjanarampurkottur01, Gary Gregory">Switch on String instead of cascading if-else in MockResultSet #220.</action>
       <action dev="ggregory" type="update" due-to="sanjanarampurkottur01, Gary Gregory">Encapsulate test fields #222.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Fix BeanProcessor SpotBugs CT: Be wary of letting constructors throw exceptions. (CT_CONSTRUCTOR_THROW).</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Fix StatementConfiguration SpotBugs CT: Be wary of letting constructors throw exceptions. (CT_CONSTRUCTOR_THROW).</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java from 8 to 11.</action>
