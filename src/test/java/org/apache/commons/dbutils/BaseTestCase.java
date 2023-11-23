@@ -79,6 +79,18 @@ public class BaseTestCase extends TestCase {
         return MockResultSet.create(metaData, rows);
     }
 
+    public ResultSet getEmptyResultSet() {
+        return this.emptyResultSet;
+    }
+
+    public ResultSet getResultSet() {
+        return this.rs;
+    }
+
+    public void setResultSet(ResultSet resultSet) {
+        this.rs = resultSet;
+    }
+
     /**
      * This is called before each test method so ResultSet will be fresh each time.
      *
@@ -90,18 +102,6 @@ public class BaseTestCase extends TestCase {
 
         rs = this.createMockResultSet();
         emptyResultSet = MockResultSet.create(metaData, null);
-    }
-
-    public ResultSet getResultSet() {
-        return this.rs;
-    }
-
-    public ResultSet getEmptyResultSet() {
-        return this.emptyResultSet;
-    }
-
-    public void setResultSet(ResultSet resultSet) {
-        this.rs = resultSet;
     }
 
     // Test which allows Eclipse to be run on full project (avoids no tests found)

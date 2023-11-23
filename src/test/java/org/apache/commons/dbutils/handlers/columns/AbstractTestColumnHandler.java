@@ -37,16 +37,16 @@ public abstract class AbstractTestColumnHandler<T> {
         this.matchingType = matchingType;
     }
 
-    public ResultSet getResultSet() {
-        return this.rs;
-    }
-
     public ColumnHandler<T> getColumnHandler() {
         return this.handler;
     }
 
     public Class<?> getMatchingType() {
         return this.matchingType;
+    }
+
+    public ResultSet getResultSet() {
+        return this.rs;
     }
 
     @Test

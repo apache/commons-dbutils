@@ -214,6 +214,8 @@ final class SqlNullCheckedResultSetMockRef implements Ref {
  */
 public class SqlNullCheckedResultSetTest extends BaseTestCase {
 
+    private static ResultSet rs;
+
     private static void assertArrayEquals(final byte[] expected, final byte[] actual) {
         if (expected == actual) {
             return;
@@ -227,9 +229,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
             assertEquals("Array not equal at index " + i, expectedItem, actualItem);
         }
     }
-
     private SqlNullCheckedResultSet rs2;
-    private static ResultSet rs;
 
     /**
      * Sets up instance variables required by this test case.

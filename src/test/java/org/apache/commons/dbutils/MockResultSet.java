@@ -32,6 +32,8 @@ import java.util.Set;
  */
 public class MockResultSet implements InvocationHandler {
 
+    private static final Set<String> METHOD_NAMES = Set.of("isLast", "hashCode", "toString", "equals");
+
     /**
      * Create a {@code MockResultSet} proxy object. This is equivalent to:
      *
@@ -53,8 +55,6 @@ public class MockResultSet implements InvocationHandler {
     private ResultSetMetaData metaData;
 
     private Boolean wasNull = Boolean.FALSE;
-
-    private static final Set<String> METHOD_NAMES = Set.of("isLast", "hashCode", "toString", "equals");
 
     /**
      * MockResultSet constructor.
@@ -267,33 +267,6 @@ public class MockResultSet implements InvocationHandler {
         return obj == null ? null : obj.toString();
     }
 
-    @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args)
-        throws Throwable {
-
-        final String methodName = method.getName();
-        if (methodName.equals("getMetaData")) {
-            return this.getMetaData();
-        }
-        if (methodName.equals("next")) {
-            return this.next();
-        }
-        if (methodName.equals("previous")) {
-            // Handle previous method
-        } else if (methodName.equals("close")) {
-            // Handle close method
-        } else if (isColumnMethod(methodName)) {
-            return handleColumnMethod(methodName, args);
-        } else if (METHOD_NAMES.contains(methodName)) {
-            return handleNonColumnMethod(methodName, proxy, args);
-        }
-        throw new UnsupportedOperationException("Unsupported method: " + methodName);
-    }
-
-    private boolean isColumnMethod(String methodName) {
-        return methodName.startsWith("get") || methodName.equals("wasNull");
-    }
-
     private Object handleColumnMethod(String methodName, final Object[] args) throws SQLException {
         switch (methodName) {
             case "getBoolean":
@@ -334,6 +307,33 @@ public class MockResultSet implements InvocationHandler {
             default:
                 throw new UnsupportedOperationException("Unsupported non-column method: " + methodName);
         }
+    }
+
+    @Override
+    public Object invoke(final Object proxy, final Method method, final Object[] args)
+        throws Throwable {
+
+        final String methodName = method.getName();
+        if (methodName.equals("getMetaData")) {
+            return this.getMetaData();
+        }
+        if (methodName.equals("next")) {
+            return this.next();
+        }
+        if (methodName.equals("previous")) {
+            // Handle previous method
+        } else if (methodName.equals("close")) {
+            // Handle close method
+        } else if (isColumnMethod(methodName)) {
+            return handleColumnMethod(methodName, args);
+        } else if (METHOD_NAMES.contains(methodName)) {
+            return handleNonColumnMethod(methodName, proxy, args);
+        }
+        throw new UnsupportedOperationException("Unsupported method: " + methodName);
+    }
+
+    private boolean isColumnMethod(String methodName) {
+        return methodName.startsWith("get") || methodName.equals("wasNull");
     }
 
     /**
