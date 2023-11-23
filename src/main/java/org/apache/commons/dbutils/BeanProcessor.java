@@ -165,6 +165,12 @@ public class BeanProcessor {
         return populateBean(resultSet, this.newInstance(type), props, columnToProperty);
     }
 
+    /** Does nothing. */
+    @Override
+    protected final void finalize() {
+        // SpotBugs CT_CONSTRUCTOR_THROW
+    }
+
     /**
      * Gets the write method to use when setting {@code value} to the {@code target}.
      *
