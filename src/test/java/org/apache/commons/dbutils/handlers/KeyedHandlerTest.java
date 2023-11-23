@@ -18,7 +18,6 @@ package org.apache.commons.dbutils.handlers;
 
 import static org.mockito.Mockito.mock;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.Map.Entry;

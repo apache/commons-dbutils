@@ -279,7 +279,7 @@
             <configLocation>${checkstyle.config.file}</configLocation>
             <enableRulesSummary>false</enableRulesSummary>
             <headerLocation>${checkstyle.header.file}</headerLocation>
-            <includeTestSourceDirectory>false</includeTestSourceDirectory> <!-- TODO -->
+            <includeTestSourceDirectory>true</includeTestSourceDirectory> <!-- TODO -->
             <suppressionsLocation>${basedir}/src/conf/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
             <suppressionsFileExpression>${basedir}/src/conf/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
           </configuration>

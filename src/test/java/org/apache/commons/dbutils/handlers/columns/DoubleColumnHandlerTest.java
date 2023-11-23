@@ -19,11 +19,11 @@ package org.apache.commons.dbutils.handlers.columns;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.sql.ResultSet;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.sql.ResultSet;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DoubleColumnHandlerTest extends AbstractTestColumnHandler<Double> {
