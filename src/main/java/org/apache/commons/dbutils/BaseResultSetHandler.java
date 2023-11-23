@@ -47,7 +47,7 @@ import java.util.Map;
  * <p>
  * <b>NOTE</b> This class is <i>NOT</i> thread safe!
  * </p>
- * 
+ *
  * @param <T> the target type the input ResultSet will be converted to.
  * @since 1.6
  */
