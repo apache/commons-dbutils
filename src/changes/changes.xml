@@ -46,6 +46,7 @@ The <action> type attribute can be add,update,fix,remove.
     <release version="1.9.0" date="20YY-MM-DD" description="New features and bug fixes.">
       <!-- FIX -->
       <action dev="ggregory" type="update" due-to="sanjanarampurkottur01, Gary Gregory">Switch on String instead of cascading if-else in MockResultSet #220.</action>
+      <action dev="ggregory" type="update" due-to="sanjanarampurkottur01, Gary Gregory">Encapsulate test fields #222.</action>
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java from 8 to 11.</action>
