@@ -25,27 +25,27 @@ public class ScalarHandlerTest extends BaseTestCase {
 
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>(2);
-        final Object results = h.handle(this.rs);
+        final Object results = h.handle(this.getResultSet());
         assertNotNull(results);
         assertEquals("2", results);
     }
 
     public void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<Integer> h = new ScalarHandler<>("intTest");
-        final Object results = h.handle(this.rs);
+        final Object results = h.handle(this.getResultSet());
         assertNotNull(results);
         assertEquals(Integer.valueOf(1), results);
     }
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>();
-        final Object results = h.handle(this.emptyResultSet);
+        final Object results = h.handle(this.getEmptyResultSet());
         assertNull(results);
     }
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>();
-        final Object results = h.handle(this.rs);
+        final Object results = h.handle(this.getResultSet());
         assertNotNull(results);
         assertEquals("1", results);
     }

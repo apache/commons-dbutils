@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.sql.ResultSet;
+
 @RunWith(MockitoJUnitRunner.class)
 public class ByteColumnHandlerTest extends AbstractTestColumnHandler<Byte> {
 
@@ -33,7 +35,8 @@ public class ByteColumnHandlerTest extends AbstractTestColumnHandler<Byte> {
     @Override
     @Test
     public void testApplyType() throws Exception {
+        ResultSet rs = getResultSet();
         when(rs.getByte(1)).thenReturn(Byte.MIN_VALUE);
-        assertEquals(Byte.class, handler.apply(rs, 1).getClass());
+        assertEquals(Byte.class, getColumnHandler().apply(rs, 1).getClass());
     }
 }

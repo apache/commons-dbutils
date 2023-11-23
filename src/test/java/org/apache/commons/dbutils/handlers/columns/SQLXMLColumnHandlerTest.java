@@ -39,7 +39,7 @@ public class SQLXMLColumnHandlerTest extends AbstractTestColumnHandler<SQLXML> {
     @Override
     @Test
     public void testApplyType() throws Exception {
-        when(rs.getSQLXML(1)).thenReturn(sqlxml);
-        assertTrue(SQLXML.class.isAssignableFrom(handler.apply(rs, 1).getClass()));
+        when(getResultSet().getSQLXML(1)).thenReturn(sqlxml);
+        assertTrue(SQLXML.class.isAssignableFrom(getColumnHandler().apply(getResultSet(), 1).getClass()));
     }
 }

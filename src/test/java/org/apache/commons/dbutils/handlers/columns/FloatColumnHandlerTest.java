@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.sql.ResultSet;
+
 @RunWith(MockitoJUnitRunner.class)
 public class FloatColumnHandlerTest extends AbstractTestColumnHandler<Float> {
 
@@ -33,7 +35,8 @@ public class FloatColumnHandlerTest extends AbstractTestColumnHandler<Float> {
     @Override
     @Test
     public void testApplyType() throws Exception {
+        ResultSet rs = getResultSet();
         when(rs.getFloat(1)).thenReturn(Float.MIN_VALUE);
-        assertEquals(Float.class, handler.apply(rs, 1).getClass());
+        assertEquals(Float.class, getColumnHandler().apply(rs, 1).getClass());
     }
 }

@@ -33,7 +33,7 @@ public class ShortColumnHandlerTest extends AbstractTestColumnHandler<Short> {
     @Override
     @Test
     public void testApplyType() throws Exception {
-        when(rs.getShort(1)).thenReturn(Short.MIN_VALUE);
-        assertEquals(Short.class, handler.apply(rs, 1).getClass());
+        when(getResultSet().getShort(1)).thenReturn(Short.MIN_VALUE);
+        assertEquals(Short.class, getColumnHandler().apply(getResultSet(), 1).getClass());
     }
 }

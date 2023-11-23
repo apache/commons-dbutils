@@ -39,9 +39,9 @@ public class OutParameterTest {
     private static final int VALUE = 42;
 
     @Mock
-    CallableStatement stmt;
+    private CallableStatement stmt;
 
-    OutParameter<Number> parameter;
+    private OutParameter<Number> parameter;
 
     @Before
     public void setUp() throws Exception {

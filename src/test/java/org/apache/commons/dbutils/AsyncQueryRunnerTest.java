@@ -47,21 +47,21 @@ import org.mockito.junit.MockitoJUnitRunner;
 @SuppressWarnings("boxing") // test code
 @RunWith(MockitoJUnitRunner.class)
 public class AsyncQueryRunnerTest {
-    AsyncQueryRunner runner;
-    ArrayHandler handler;
+    private AsyncQueryRunner runner;
+    private ArrayHandler handler;
 
     @Mock
-    DataSource dataSource;
+    private DataSource dataSource;
     @Mock
-    Connection conn;
+    private Connection conn;
     @Mock
-    PreparedStatement prepStmt;
+    private PreparedStatement prepStmt;
     @Mock
-    Statement stmt;
+    private Statement stmt;
     @Mock
-    ParameterMetaData meta;
+    private ParameterMetaData meta;
     @Mock
-    ResultSet results;
+    private ResultSet results;
 
     // helper method for calling batch when an exception is expected
     private void callBatchWithException(final String sql, final Object[][] params) throws Exception {

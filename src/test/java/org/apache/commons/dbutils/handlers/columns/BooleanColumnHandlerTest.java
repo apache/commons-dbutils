@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.sql.ResultSet;
+
 @RunWith(MockitoJUnitRunner.class)
 public class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean> {
 
@@ -33,7 +35,8 @@ public class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean>
     @Override
     @Test
     public void testApplyType() throws Exception {
+        ResultSet rs = getResultSet();
         when(rs.getBoolean(1)).thenReturn(Boolean.TRUE);
-        assertEquals(Boolean.class, handler.apply(rs, 1).getClass());
+        assertEquals(Boolean.class, getColumnHandler().apply(rs, 1).getClass());
     }
 }

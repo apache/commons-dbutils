@@ -62,11 +62,11 @@ public class GenerousBeanProcessorTest {
         }
     }
 
-    GenerousBeanProcessor processor = new GenerousBeanProcessor();
+    private GenerousBeanProcessor processor = new GenerousBeanProcessor();
     @Mock
-    ResultSetMetaData metaData;
+    private ResultSetMetaData metaData;
 
-    PropertyDescriptor[] propDescriptors;
+    private PropertyDescriptor[] propDescriptors;
 
     @Before
     public void setUp() throws Exception {

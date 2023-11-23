@@ -87,33 +87,33 @@ public class QueryRunnerTest {
         }
     }
 
-    QueryRunner runner;
+    private QueryRunner runner;
 
-    ArrayHandler handler;
-
-    @Mock
-    DataSource dataSource;
+    private ArrayHandler handler;
 
     @Mock
-    Connection conn;
+    private DataSource dataSource;
 
     @Mock
-    PreparedStatement prepStmt;
+    private Connection conn;
 
     @Mock
-    Statement stmt;
+    private PreparedStatement prepStmt;
 
     @Mock
-    CallableStatement call;
+    private Statement stmt;
 
     @Mock
-    ParameterMetaData meta;
+    private CallableStatement call;
 
     @Mock
-    ResultSet results;
+    private ParameterMetaData meta;
 
     @Mock
-    ResultSetMetaData resultsMeta;
+    private ResultSet results;
+
+    @Mock
+    private ResultSetMetaData resultsMeta;
 
     //
     // Batch test cases
@@ -685,7 +685,7 @@ public class QueryRunnerTest {
     public void testExecuteWithMultipleResultSets() throws Exception {
         when(call.execute()).thenReturn(true);
         when(call.getMoreResults()).thenAnswer(new Answer<Boolean>() {
-            int count = 1;
+            private int count = 1;
             @Override
             public Boolean answer(final InvocationOnMock invocation) {
                 return ++count <= 3;
