@@ -39,17 +39,12 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
 
     public void testGetObject() throws SQLException {
         this.getResultSet().next();
-        assertEquals(EXPECTED_VALUE, rs.getObject(COLUMN_INDEX));
+        assertEquals(EXPECTED_VALUE, this.getResultSet().getObject(COLUMN_INDEX));
     }
 
     public void testGetString() throws SQLException {
         this.getResultSet().next();
-        assertEquals("notInBean", getResultSet().getObject(4));
-    }
-
-    public void testGetString() throws SQLException {
-        this.getResultSet().next();
-        assertEquals("notInBean", getResultSet().getString(4));
+        assertEquals("notInBean", getResultSet().getObject(COLUMN_INDEX));
     }
 
     /**
@@ -60,18 +55,18 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
         final Object[][] rows = { { null } };
-        ResultSet rs = MockResultSet.create(metaData, rows);
+        ResultSet resultSet = MockResultSet.create(metaData, rows);
 
         // Wrap the ResultSet with a null checked version
-        final SqlNullCheckedResultSet ncrs = new SqlNullCheckedResultSet(rs);
+        final SqlNullCheckedResultSet ncrs = new SqlNullCheckedResultSet(resultSet);
         ncrs.setNullString("   trim this   ");
-        rs = ProxyFactory.instance().createResultSet(ncrs);
+        resultSet = ProxyFactory.instance().createResultSet(ncrs);
 
         // Wrap the wrapper with a string trimmed version
-        rs = StringTrimmedResultSet.wrap(rs);
+        resultSet = StringTrimmedResultSet.wrap(resultSet);
 
-        rs.next();
-        assertEquals("trim this", rs.getString(1));
+        resultSet.next();
+        assertEquals("trim this", resultSet.getString(1));
     }
 
 }

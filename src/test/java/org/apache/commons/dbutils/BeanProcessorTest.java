@@ -274,31 +274,31 @@ public class BeanProcessorTest extends BaseTestCase {
     public void testProcessWithPopulateBean() throws SQLException {
         TestBean testBean = new TestBean();
 
-        assertTrue(this.rs.next());
-        testBean = BEAN_PROCESSOR.populateBean(this.rs, testBean);
+        assertTrue(this.getResultSet().next());
+        testBean = BEAN_PROCESSOR.populateBean(this.getResultSet(), testBean);
         assertEquals(13.0, testBean.getColumnProcessorDoubleTest(), 0);
         assertEquals(testBean.getThree(), TestBean.Ordinal.THREE);
 
-        assertTrue(this.rs.next());
-        testBean = BEAN_PROCESSOR.populateBean(this.rs, testBean);
+        assertTrue(this.getResultSet().next());
+        testBean = BEAN_PROCESSOR.populateBean(this.getResultSet(), testBean);
         assertEquals(13.0, testBean.getColumnProcessorDoubleTest(), 0);
         assertEquals(testBean.getThree(), TestBean.Ordinal.SIX);
 
-        assertFalse(rs.next());
+        assertFalse(getResultSet().next());
     }
 
     public void testProcessWithToBean() throws SQLException {
-        assertTrue(this.rs.next());
-        TestBean testBean = BEAN_PROCESSOR.toBean(this.rs, TestBean.class);
+        assertTrue(this.getResultSet().next());
+        TestBean testBean = BEAN_PROCESSOR.toBean(this.getResultSet(), TestBean.class);
         assertEquals(13.0, testBean.getColumnProcessorDoubleTest(), 0);
         assertEquals(testBean.getThree(), TestBean.Ordinal.THREE);
 
-        assertTrue(this.rs.next());
-        testBean = BEAN_PROCESSOR.toBean(this.rs, TestBean.class);
+        assertTrue(this.getResultSet().next());
+        testBean = BEAN_PROCESSOR.toBean(this.getResultSet(), TestBean.class);
         assertEquals(13.0, testBean.getColumnProcessorDoubleTest(), 0);
         assertEquals(testBean.getThree(), TestBean.Ordinal.SIX);
 
-        assertFalse(rs.next());
+        assertFalse(getResultSet().next());
     }
 
     public void testWrongSetterParamCount() throws Exception {
