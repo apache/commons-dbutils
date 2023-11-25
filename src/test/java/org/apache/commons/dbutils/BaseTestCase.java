@@ -25,33 +25,19 @@ import java.util.Date;
 import junit.framework.TestCase;
 
 /**
- * BaseTestCase is the base class for all test cases as well as the "all tests"
- * runner.
+ * BaseTestCase is the base class for all test cases as well as the "all tests" runner.
  */
 public class BaseTestCase extends TestCase {
 
-    private static final String[] columnNames =
-        {
-        "one",
-        "two",
-        "three",
-        "notInBean",
-        "intTest",
-        "integerTest",
-        "nullObjectTest",
-        "nullPrimitiveTest",
-        "notDate",
-        "columnProcessorDoubleTest",
-        null
-    };
+    private static final String[] columnNames = { "one", "two", "three", "notInBean", "intTest", "integerTest", "nullObjectTest", "nullPrimitiveTest",
+            "notDate", "columnProcessorDoubleTest", null };
 
     /**
      * The number of columns in the MockResultSet.
      */
     protected static final int COLS = columnNames.length;
 
-    protected static final ResultSetMetaData metaData =
-        MockResultSetMetaData.create(columnNames);
+    protected static final ResultSetMetaData metaData = MockResultSetMetaData.create(columnNames);
 
     /**
      * A Timestamp for test purposes having 9 decimals
@@ -63,35 +49,11 @@ public class BaseTestCase extends TestCase {
         ts789456123.setNanos(789456123);
     }
 
-    private static final Object[] row1 =
-        {
-        "1",
-        "2",
-        "THREE",
-        "  notInBean  ",
-        Integer.valueOf(1),
-        Integer.valueOf(2),
-        null,
-        null,
-        new Date(),
-        BigInteger.valueOf(13),
-        null
-    };
+    private static final Object[] row1 = { "1", "2", "THREE", "  notInBean  ", Integer.valueOf(1), Integer.valueOf(2), null, null, new Date(),
+            BigInteger.valueOf(13), null };
 
-    private static final Object[] row2 =
-        {
-        "4",
-        "5",
-        "SIX",
-        "  notInBean  ",
-        Integer.valueOf(3),
-        Integer.valueOf(4),
-        null,
-        null,
-        ts789456123,
-        BigInteger.valueOf(13),
-        null
-    };
+    private static final Object[] row2 = { "4", "5", "SIX", "  notInBean  ", Integer.valueOf(3), Integer.valueOf(4), null, null, ts789456123,
+            BigInteger.valueOf(13), null };
 
     private static final Object[][] rows = { row1, row2 };
 
@@ -103,12 +65,12 @@ public class BaseTestCase extends TestCase {
     /**
      * The ResultSet all test methods will use.
      */
-    protected ResultSet rs;
+    private ResultSet rs;
 
     /**
      * A ResultSet with 0 rows.
      */
-    protected ResultSet emptyResultSet;
+    private ResultSet emptyResultSet;
 
     /**
      * Creates a freshly initialized ResultSet.
@@ -117,9 +79,21 @@ public class BaseTestCase extends TestCase {
         return MockResultSet.create(metaData, rows);
     }
 
+    public ResultSet getEmptyResultSet() {
+        return this.emptyResultSet;
+    }
+
+    public ResultSet getResultSet() {
+        return this.rs;
+    }
+
+    public void setResultSet(ResultSet resultSet) {
+        this.rs = resultSet;
+    }
+
     /**
-     * This is called before each test method so ResultSet will be fresh each
-     * time.
+     * This is called before each test method so ResultSet will be fresh each time.
+     *
      * @see junit.framework.TestCase#setUp()
      */
     @Override

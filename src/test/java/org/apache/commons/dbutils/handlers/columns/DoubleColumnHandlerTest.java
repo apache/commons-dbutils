@@ -19,6 +19,8 @@ package org.apache.commons.dbutils.handlers.columns;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.sql.ResultSet;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -33,7 +35,8 @@ public class DoubleColumnHandlerTest extends AbstractTestColumnHandler<Double> {
     @Override
     @Test
     public void testApplyType() throws Exception {
+        ResultSet rs = getResultSet();
         when(rs.getDouble(1)).thenReturn(Double.MIN_VALUE);
-        assertEquals(Double.class, handler.apply(rs, 1).getClass());
+        assertEquals(Double.class, getColumnHandler().apply(rs, 1).getClass());
     }
 }

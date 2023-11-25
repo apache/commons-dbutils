@@ -36,7 +36,7 @@ public class TimestampColumnHandlerTest extends AbstractTestColumnHandler<Timest
     @Override
     @Test
     public void testApplyType() throws Exception {
-        when(rs.getTimestamp(1)).thenReturn(new Timestamp(new Date().getTime()));
-        assertEquals(Timestamp.class, handler.apply(rs, 1).getClass());
+        when(getResultSet().getTimestamp(1)).thenReturn(new Timestamp(new Date().getTime()));
+        assertEquals(Timestamp.class, getColumnHandler().apply(getResultSet(), 1).getClass());
     }
 }

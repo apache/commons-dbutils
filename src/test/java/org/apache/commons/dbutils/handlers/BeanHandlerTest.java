@@ -27,7 +27,8 @@ import org.apache.commons.dbutils.TestBean;
  */
 public class BeanHandlerTest extends BaseTestCase {
 
-    public static class SubTestBean extends TestBean implements SubTestBeanInterface { }
+    public static class SubTestBean extends TestBean implements SubTestBeanInterface {
+    }
 
     public interface SubTestBeanInterface {
         String getDoNotSet();
@@ -41,14 +42,14 @@ public class BeanHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
-        final TestBean results = h.handle(this.emptyResultSet);
+        final TestBean results = h.handle(this.getEmptyResultSet());
 
         assertNull(results);
     }
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
-        final TestBean results = h.handle(this.rs);
+        final TestBean results = h.handle(this.getResultSet());
 
         assertNotNull(results);
         assertEquals("1", results.getOne());
@@ -59,7 +60,7 @@ public class BeanHandlerTest extends BaseTestCase {
 
     public void testHandleToInterface() throws SQLException {
         final ResultSetHandler<SubTestBeanInterface> h = new BeanHandler<>(SubTestBean.class);
-        final SubTestBeanInterface results = h.handle(this.rs);
+        final SubTestBeanInterface results = h.handle(this.getResultSet());
 
         assertNotNull(results);
         assertEquals("1", results.getOne());
@@ -70,7 +71,7 @@ public class BeanHandlerTest extends BaseTestCase {
 
     public void testHandleToSuperClass() throws SQLException {
         final ResultSetHandler<TestBean> h = new BeanHandler<>(SubTestBean.class);
-        final TestBean results = h.handle(this.rs);
+        final TestBean results = h.handle(this.getResultSet());
 
         assertNotNull(results);
         assertEquals("1", results.getOne());

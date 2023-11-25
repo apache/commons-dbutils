@@ -28,13 +28,25 @@ import org.mockito.Mock;
 public abstract class AbstractTestColumnHandler<T> {
 
     @Mock
-    protected ResultSet rs;
-    protected final ColumnHandler<T> handler;
-    protected final Class<?> matchingType;
+    private ResultSet rs;
+    private final ColumnHandler<T> handler;
+    private final Class<?> matchingType;
 
     public AbstractTestColumnHandler(final ColumnHandler<T> handler, final Class<?> matchingType) {
         this.handler = handler;
         this.matchingType = matchingType;
+    }
+
+    public ColumnHandler<T> getColumnHandler() {
+        return this.handler;
+    }
+
+    public Class<?> getMatchingType() {
+        return this.matchingType;
+    }
+
+    public ResultSet getResultSet() {
+        return this.rs;
     }
 
     @Test

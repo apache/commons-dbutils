@@ -149,6 +149,12 @@ public class StatementConfiguration {
         this(fetchDirection, fetchSize, maxFieldSize, maxRows, Duration.ofSeconds(queryTimeout));
     }
 
+    /** Does nothing. */
+    @Override
+    protected final void finalize() {
+        // SpotBugs CT_CONSTRUCTOR_THROW
+    }
+
     /**
      * Gets the fetch direction.
      *

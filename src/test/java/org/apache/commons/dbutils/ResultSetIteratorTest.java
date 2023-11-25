@@ -40,7 +40,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
     public void testNext() {
 
-        final Iterator<Object[]> iter = new ResultSetIterator(this.rs);
+        final Iterator<Object[]> iter = new ResultSetIterator(this.getResultSet());
 
         assertTrue(iter.hasNext());
         Object[] row = iter.next();
@@ -75,6 +75,5 @@ public class ResultSetIteratorTest extends BaseTestCase {
         }
 
     }
-
 
 }

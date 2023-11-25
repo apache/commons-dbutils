@@ -35,11 +35,9 @@ public class BasicRowProcessorTest extends BaseTestCase {
     private static final int HASH_MAP_SIZE = 3;
 
     /**
-     * Format that matches Date.toString().
-     * Sun Mar 14 15:19:15 MST 2004
+     * Format that matches Date.toString(). Sun Mar 14 15:19:15 MST 2004
      */
-    private static final DateFormat datef =
-        new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+    private static final DateFormat datef = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
     public void testPutAllContainsKeyAndRemove() throws Exception {
         final Map<String, Object> test = new HashMap<>(HASH_MAP_SIZE);
@@ -60,35 +58,35 @@ public class BasicRowProcessorTest extends BaseTestCase {
     public void testToArray() throws SQLException {
 
         Object[] a;
-        assertTrue(this.rs.next());
-        a = processor.toArray(this.rs);
+        assertTrue(this.getResultSet().next());
+        a = processor.toArray(this.getResultSet());
         assertEquals(COLS, a.length);
         assertEquals("1", a[0]);
         assertEquals("2", a[1]);
         assertEquals("THREE", a[2]);
 
-        assertTrue(this.rs.next());
-        a = processor.toArray(this.rs);
+        assertTrue(this.getResultSet().next());
+        a = processor.toArray(this.getResultSet());
         assertEquals(COLS, a.length);
 
         assertEquals("4", a[0]);
         assertEquals("5", a[1]);
         assertEquals("SIX", a[2]);
 
-        assertFalse(this.rs.next());
+        assertFalse(this.getResultSet().next());
     }
 
     public void testToBean() throws SQLException, ParseException {
 
-        assertTrue(this.rs.next());
-        TestBean row = processor.toBean(this.rs, TestBean.class);
+        assertTrue(this.getResultSet().next());
+        TestBean row = processor.toBean(this.getResultSet(), TestBean.class);
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
         assertEquals(TestBean.Ordinal.THREE, row.getThree());
         assertEquals("not set", row.getDoNotSet());
 
-        assertTrue(this.rs.next());
-        row = processor.toBean(this.rs, TestBean.class);
+        assertTrue(this.getResultSet().next());
+        row = processor.toBean(this.getResultSet(), TestBean.class);
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());
@@ -103,13 +101,13 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertTrue(!"not a date".equals(row.getNotDate()));
         assertTrue(row.getNotDate().endsWith("789456123"));
 
-        assertFalse(this.rs.next());
+        assertFalse(this.getResultSet().next());
 
     }
 
     public void testToBeanList() throws SQLException, ParseException {
 
-        final List<TestBean> list = processor.toBeanList(this.rs, TestBean.class);
+        final List<TestBean> list = processor.toBeanList(this.getResultSet(), TestBean.class);
         assertNotNull(list);
         assertEquals(ROWS, list.size());
 
@@ -137,28 +135,28 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToMap() throws SQLException {
 
-        assertTrue(this.rs.next());
-        Map<String, Object> m = processor.toMap(this.rs);
+        assertTrue(this.getResultSet().next());
+        Map<String, Object> m = processor.toMap(this.getResultSet());
         assertEquals(COLS, m.size());
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));
         assertEquals("THREE", m.get("Three"));
 
-        assertTrue(this.rs.next());
-        m = processor.toMap(this.rs);
+        assertTrue(this.getResultSet().next());
+        m = processor.toMap(this.getResultSet());
         assertEquals(COLS, m.size());
 
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));
         assertEquals("SIX", m.get("THREE"));
 
-        assertFalse(this.rs.next());
+        assertFalse(this.getResultSet().next());
     }
 
     public void testToMapOrdering() throws SQLException {
 
-        assertTrue(this.rs.next());
-        final Map<String, Object> m = processor.toMap(this.rs);
+        assertTrue(this.getResultSet().next());
+        final Map<String, Object> m = processor.toMap(this.getResultSet());
 
         final Iterator<String> itr = m.keySet().iterator();
         assertEquals("one", itr.next());

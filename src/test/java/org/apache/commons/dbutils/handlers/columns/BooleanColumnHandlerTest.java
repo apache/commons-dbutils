@@ -19,6 +19,8 @@ package org.apache.commons.dbutils.handlers.columns;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.sql.ResultSet;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -33,7 +35,8 @@ public class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean>
     @Override
     @Test
     public void testApplyType() throws Exception {
+        ResultSet rs = getResultSet();
         when(rs.getBoolean(1)).thenReturn(Boolean.TRUE);
-        assertEquals(Boolean.class, handler.apply(rs, 1).getClass());
+        assertEquals(Boolean.class, getColumnHandler().apply(rs, 1).getClass());
     }
 }

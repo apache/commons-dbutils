@@ -42,27 +42,22 @@ public class TestBean {
     private String doNotSet = "not set";
 
     /**
-     * toBean() should set primitive fields to their defaults (ie. 0) when
-     * null is returned from the ResultSet.
+     * toBean() should set primitive fields to their defaults (ie. 0) when null is returned from the ResultSet.
      */
     private int nullPrimitiveTest = 7;
 
     /**
-     * toBean() should set Object fields to null when null is returned from the
-     * ResultSet
+     * toBean() should set Object fields to null when null is returned from the ResultSet
      */
     private Object nullObjectTest = "overwrite";
 
     /**
-     * A Date will be returned from the ResultSet but the property is a String.
-     * BeanProcessor should create a String from the Date and set this property.
+     * A Date will be returned from the ResultSet but the property is a String. BeanProcessor should create a String from the Date and set this property.
      */
     private String notDate = "not a date";
 
     /**
-     * The ResultSet will have a BigDecimal in this column and the
-     * BasicColumnProcessor should convert that to a double and store the value
-     * in this property.
+     * The ResultSet will have a BigDecimal in this column and the BasicColumnProcessor should convert that to a double and store the value in this property.
      */
     private double columnProcessorDoubleTest = -1;
 

@@ -34,27 +34,32 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        this.rs = StringTrimmedResultSet.wrap(this.rs);
+        this.setResultSet(StringTrimmedResultSet.wrap(this.getResultSet()));
     }
 
     public void testGetObject() throws SQLException {
-        this.rs.next();
+        this.getResultSet().next();
         assertEquals(EXPECTED_VALUE, rs.getObject(COLUMN_INDEX));
     }
 
     public void testGetString() throws SQLException {
-        this.rs.next();
-        assertEquals(EXPECTED_VALUE, rs.getString(COLUMN_INDEX));
+        this.getResultSet().next();
+        assertEquals("notInBean", getResultSet().getObject(4));
+    }
+
+    public void testGetString() throws SQLException {
+        this.getResultSet().next();
+        assertEquals("notInBean", getResultSet().getString(4));
     }
 
     /**
      * Make sure 2 wrappers work together.
+     *
      * @throws SQLException if a database access error occurs
      */
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
-        final Object[][] rows = { { null }
-        };
+        final Object[][] rows = { { null } };
         ResultSet rs = MockResultSet.create(metaData, rows);
 
         // Wrap the ResultSet with a null checked version

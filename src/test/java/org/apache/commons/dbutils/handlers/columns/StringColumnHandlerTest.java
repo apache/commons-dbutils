@@ -33,7 +33,7 @@ public class StringColumnHandlerTest extends AbstractTestColumnHandler<String> {
     @Override
     @Test
     public void testApplyType() throws Exception {
-        when(rs.getString(1)).thenReturn("tester");
-        assertEquals(String.class, handler.apply(rs, 1).getClass());
+        when(getResultSet().getString(1)).thenReturn("tester");
+        assertEquals(String.class, getColumnHandler().apply(getResultSet(), 1).getClass());
     }
 }

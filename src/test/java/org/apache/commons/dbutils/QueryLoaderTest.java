@@ -24,18 +24,17 @@ import java.util.Map;
  */
 public class QueryLoaderTest extends BaseTestCase {
 
-    private static final String QUERIES =
-        "/org/apache/commons/dbutils/TestQueries.properties";
+    private static final String QUERIES = "/org/apache/commons/dbutils/TestQueries.properties";
 
     public void testLoad() throws IOException {
         final QueryLoader loader = QueryLoader.instance();
-        final Map<String,String> q = loader.load(QUERIES);
-        final Map<String,String> q2 = loader.load(QUERIES);
+        final Map<String, String> q = loader.load(QUERIES);
+        final Map<String, String> q2 = loader.load(QUERIES);
         assertSame(q, q2); // pointer comparison should return true
         assertEquals("SELECT * FROM SomeTable", q.get("test.query"));
 
         loader.unload(QUERIES);
-        final Map<String,String> q3 = loader.load(QUERIES);
+        final Map<String, String> q3 = loader.load(QUERIES);
         assertTrue(q != q3); // pointer comparison should return false
     }
 

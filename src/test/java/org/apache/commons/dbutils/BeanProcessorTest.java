@@ -157,7 +157,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     private static final class TestNoGetter {
-        public String testField;
+        private String testField;
 
         /**
          * Add setter to trigger JavaBeans to populate a PropertyDescriptor
@@ -170,15 +170,15 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     private static final class TestWrongSetter {
-        public Integer testField;
+        private Integer testField;
 
         public Integer getTestField() {
             return testField;
         }
 
         /**
-         * dbutils checks for a setter with exactly 1 param. This tests resilience
-         * to a found setter that doesn't match expectations.
+         * dbutils checks for a setter with exactly 1 param. This tests resilience to a found setter that doesn't match expectations.
+         *
          * @param idx
          * @param testField
          */
@@ -190,7 +190,7 @@ public class BeanProcessorTest extends BaseTestCase {
     private static final BeanProcessor BEAN_PROCESSOR = new BeanProcessor();
 
     public void testCheckAnnotationOnMissingReadMethod() throws Exception {
-        final String[] colNames = {"testField"};
+        final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
         final String testFieldRowValues = "first";
@@ -206,9 +206,8 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     /**
-     * Based on the report in DBUTILS-150. This test validates that indexed
-     * property descriptors are not used, and indexed getter/setter methods
-     * are not inspected.
+     * Based on the report in DBUTILS-150. This test validates that indexed property descriptors are not used, and indexed getter/setter methods are not
+     * inspected.
      *
      * @throws Exception
      * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
@@ -285,7 +284,7 @@ public class BeanProcessorTest extends BaseTestCase {
         assertEquals(13.0, testBean.getColumnProcessorDoubleTest(), 0);
         assertEquals(testBean.getThree(), TestBean.Ordinal.SIX);
 
-        assertFalse(this.rs.next());
+        assertFalse(rs.next());
     }
 
     public void testProcessWithToBean() throws SQLException {
@@ -299,11 +298,11 @@ public class BeanProcessorTest extends BaseTestCase {
         assertEquals(13.0, testBean.getColumnProcessorDoubleTest(), 0);
         assertEquals(testBean.getThree(), TestBean.Ordinal.SIX);
 
-        assertFalse(this.rs.next());
+        assertFalse(rs.next());
     }
 
     public void testWrongSetterParamCount() throws Exception {
-        final String[] colNames = {"testField"};
+        final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
         final Integer testFieldRowValue = 1;

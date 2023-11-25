@@ -26,8 +26,7 @@ import org.junit.Test;
 
 public final class BaseResultSetHandlerTest extends BaseTestCase {
 
-    private static final class ToMapCollectionHandler
-        extends BaseResultSetHandler<Collection<Map<String, Object>>> {
+    private static final class ToMapCollectionHandler extends BaseResultSetHandler<Collection<Map<String, Object>>> {
 
         @Override
         protected Collection<Map<String, Object>> handle() throws SQLException {
