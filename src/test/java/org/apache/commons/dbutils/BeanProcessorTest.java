@@ -267,7 +267,7 @@ public class BeanProcessorTest extends BaseTestCase {
 
         final int[] columns = beanProcessor.mapColumnsToProperties(resultSetMetaData, props);
         for (int i = 1; i < columns.length; i++) {
-            assertNotEquals(columns[i], BeanProcessor.PROPERTY_NOT_FOUND);
+            assertNotEquals(BeanProcessor.PROPERTY_NOT_FOUND, columns[i]);
         }
     }
 
