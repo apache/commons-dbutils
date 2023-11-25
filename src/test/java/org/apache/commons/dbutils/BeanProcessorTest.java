@@ -193,9 +193,9 @@ public class BeanProcessorTest extends BaseTestCase {
         final String[] colNames = {"testField"};
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
-        final String testFieldHeaderData = "first";
+        final String testFieldRowValues = "first";
         final Object[][] rows = {
-                new Object[] {testFieldHeaderData}
+                new Object[] {testFieldRowValues}
         };
 
         final ResultSet resultSet = MockResultSet.create(metaData, rows);
@@ -217,20 +217,20 @@ public class BeanProcessorTest extends BaseTestCase {
         final String[] columnNames = {"name", "things", "stuff"};
         final ResultSetMetaData metaData = MockResultSetMetaData.create(columnNames);
 
-        final String nameHeaderData = "first";
-        final List<String> thingsHeaderData = Arrays.asList("1", "2", "3", "4");
-        final List<String> stuffHeaderData = thingsHeaderData;
+        final String nameHeader = "first";
+        final List<String> thingsRowValues = Arrays.asList("1", "2", "3", "4");
+        final List<String> stuffRowValues = thingsRowValues;
         final Object[][] rows = {
-                new Object[] {nameHeaderData, thingsHeaderData, stuffHeaderData}
+                new Object[] {nameHeader, thingsRowValues, stuffRowValues}
         };
 
         final ResultSet resultSet = MockResultSet.create(metaData, rows);
         assertTrue(resultSet.next());
         IndexedPropertyTestClass indexedPropertyTestClass = new IndexedPropertyTestClass();
         indexedPropertyTestClass = BEAN_PROCESSOR.populateBean(resultSet, indexedPropertyTestClass);
-        assertEquals(nameHeaderData, indexedPropertyTestClass.getName());
-        assertArrayEquals(thingsHeaderData.toArray(), indexedPropertyTestClass.getThings().toArray());
-        assertArrayEquals(stuffHeaderData.toArray(), indexedPropertyTestClass.getStuff().toArray());
+        assertEquals(nameHeader, indexedPropertyTestClass.getName());
+        assertArrayEquals(thingsRowValues.toArray(), indexedPropertyTestClass.getThings().toArray());
+        assertArrayEquals(stuffRowValues.toArray(), indexedPropertyTestClass.getStuff().toArray());
     }
 
     public void testMapColumnToAnnotationField() throws Exception {
@@ -306,9 +306,9 @@ public class BeanProcessorTest extends BaseTestCase {
         final String[] colNames = {"testField"};
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
-        final Integer testFieldHeaderData = 1;
+        final Integer testFieldRowValue = 1;
         final Object[][] rows = {
-                new Object[] {testFieldHeaderData}
+                new Object[] {testFieldRowValue}
         };
 
         final ResultSet resultSet = MockResultSet.create(metaData, rows);
