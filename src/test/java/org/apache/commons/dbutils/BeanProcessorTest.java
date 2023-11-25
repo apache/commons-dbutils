@@ -193,10 +193,8 @@ public class BeanProcessorTest extends BaseTestCase {
         final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
-        final String testFieldRowValues = "first";
-        final Object[][] rows = {
-                new Object[] {testFieldRowValues}
-        };
+        final String testField = "first";
+        final Object[][] rows = { new Object[] { testField } };
 
         final ResultSet resultSet = MockResultSet.create(metaData, rows);
         assertTrue(resultSet.next());
