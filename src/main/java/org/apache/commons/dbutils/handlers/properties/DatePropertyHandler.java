@@ -22,7 +22,7 @@ import java.util.Date;
 import org.apache.commons.dbutils.PropertyHandler;
 
 /**
- * {@link PropertyHandler} for date fields. Will convert {@link java.sql.Date}, {@link java.sql.Time}, and {@link java.sql.Timestamp} from SQL types to java
+ * {@link PropertyHandler} for date fields. Will convert {@link java.sql.Date}, {@link java.sql.Time}, and {@link java.sql.Timestamp} from SQL types to Java
  * types.
  */
 public class DatePropertyHandler implements PropertyHandler {
