@@ -85,7 +85,7 @@ public class BasicRowProcessor implements RowProcessor {
         public boolean containsKey(final Object key) {
             final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
             return super.containsKey(realKey);
-            // Possible optimisation here:
+            // Possible optimization here:
             // Since the lowerCaseMap contains a mapping for all the keys,
             // we could just do this:
             // return lowerCaseMap.containsKey(key.toString().toLowerCase());
