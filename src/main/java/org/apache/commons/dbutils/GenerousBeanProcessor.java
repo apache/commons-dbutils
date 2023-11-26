@@ -16,12 +16,10 @@
  */
 package org.apache.commons.dbutils;
 
-
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Arrays;
-
 
 /**
  * Provides generous name matching (e.g. underscore-aware) from DB

@@ -365,7 +365,6 @@ public final class DbUtils {
         }
     }
 
-
     /**
      * Performs a rollback on the {@code Connection} then closes it,
      * avoid closing if null.

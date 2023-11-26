@@ -28,7 +28,6 @@ import org.apache.commons.dbutils.RowProcessor;
 
 public class KeyedHandlerTest extends BaseTestCase {
 
-
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(2);
         final Map<String, Map<String, Object>> results = h.handle(this.getResultSet());

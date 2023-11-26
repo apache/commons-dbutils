@@ -235,7 +235,6 @@ public class BasicRowProcessor implements RowProcessor {
         return this.convert.toBeanList(resultSet, type);
     }
 
-
     /**
      * Convert a {@code ResultSet} row into a {@code Map}.
      *

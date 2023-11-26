@@ -27,7 +27,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
  */
 public class ColumnListHandlerTest extends BaseTestCase {
 
-
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>(2);
         final List<String> results = h.handle(this.getResultSet());

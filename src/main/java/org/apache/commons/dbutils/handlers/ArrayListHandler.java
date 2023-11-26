@@ -54,7 +54,6 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
         this.convert = convert;
     }
 
-
     /**
      * Convert row's columns into an {@code Object[]}.
      * @param resultSet {@code ResultSet} to process.
