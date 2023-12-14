@@ -574,7 +574,7 @@ public class QueryRunnerTest {
         verify(conn, times(0)).close();    // make sure we do not close the connection, see above
     }
 
-    /** helper method for calling batch when an exception is expected. */
+    /** Helper method for calling batch when an exception is expected. */
     private void callQueryWithException(final Object... params) throws Exception {
         boolean caught = false;
 
