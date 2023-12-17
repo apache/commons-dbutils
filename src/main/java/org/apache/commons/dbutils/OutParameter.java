@@ -42,7 +42,7 @@ public class OutParameter<T> {
      * Constructs an {@code OutParameter} for the given JDBC SQL type and
      * Java type.
      * @param sqlType the JDBC SQL type of the parameter as in
-     * {@code java.sql.Types}.
+     * {@link java.sql.Types}.
      * @param javaType the Java class of the parameter value, cast compatible
      * with the type returned by {@code CallableStatement.getObject(int)}
      * for the JDBC type given by {@code sqlType}.
@@ -57,7 +57,7 @@ public class OutParameter<T> {
      * Java type and with the given value.  The parameter will be treated as an
      * INOUT parameter if the value is null.
      * @param sqlType the JDBC SQL type of the parameter as in
-     * {@code java.sql.Types}.
+     * {@link java.sql.Types}.
      * @param javaType the Java class of the parameter value, cast compatible
      * with the type returned by {@code CallableStatement.getObject(int)}
      * for the JDBC type given by {@code sqlType}.
