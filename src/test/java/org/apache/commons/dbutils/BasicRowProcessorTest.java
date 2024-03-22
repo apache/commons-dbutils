@@ -93,7 +93,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("not set", row.getDoNotSet());
         assertEquals(3, row.getIntTest());
         assertEquals(Integer.valueOf(4), row.getIntegerTest());
-        assertEquals(null, row.getNullObjectTest());
+        assertNull(row.getNullObjectTest());
         assertEquals(0, row.getNullPrimitiveTest());
         // test date -> string handling
         assertNotNull(row.getNotDate());
@@ -124,7 +124,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals("not set", b.getDoNotSet());
         assertEquals(3, b.getIntTest());
         assertEquals(Integer.valueOf(4), b.getIntegerTest());
-        assertEquals(null, b.getNullObjectTest());
+        assertNull(b.getNullObjectTest());
         assertEquals(0, b.getNullPrimitiveTest());
         // test date -> string handling
         assertNotNull(b.getNotDate());

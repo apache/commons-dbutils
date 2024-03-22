@@ -568,9 +568,9 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getString implementation.
      */
     public void testGetString() throws SQLException {
-        assertEquals(null, rs.getString(1));
+        assertNull(rs.getString(1));
         assertTrue(rs.wasNull());
-        assertEquals(null, rs.getString("column"));
+        assertNull(rs.getString("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
         final String s = "hello, world";
@@ -728,11 +728,11 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      */
     public void testSetNullBytes() throws SQLException {
         // test the default, unset value
-        assertEquals(null, rs2.getNullBytes());
+        assertNull(rs2.getNullBytes());
 
         // test that setting null is safe
         rs2.setNullBytes(null);
-        assertEquals(null, rs2.getNullBytes());
+        assertNull(rs2.getNullBytes());
 
         // Set what gets returned to something other than the default
         final byte[] b = new byte[5];
@@ -784,11 +784,11 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      */
     public void testSetNullDate() throws SQLException {
         // test the default, unset value
-        assertEquals(null, rs2.getNullDate());
+        assertNull(rs2.getNullDate());
 
         // test that setting null is safe
         rs2.setNullDate(null);
-        assertEquals(null, rs2.getNullDate());
+        assertNull(rs2.getNullDate());
 
         // Set what gets returned to something other than the default
         final java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
@@ -906,7 +906,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullString implementation.
      */
     public void testSetNullString() throws SQLException {
-        assertEquals(null, rs2.getNullString());
+        assertNull(rs2.getNullString());
         // Set what gets returned to something other than the default
         final String s = "hello, world";
         rs2.setNullString(s);
@@ -919,11 +919,11 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      */
     public void testSetNullTime() throws SQLException {
         // test the default, unset value
-        assertEquals(null, rs2.getNullTime());
+        assertNull(rs2.getNullTime());
 
         // test that setting null is safe
         rs2.setNullTime(null);
-        assertEquals(null, rs2.getNullTime());
+        assertNull(rs2.getNullTime());
 
         // Set what gets returned to something other than the default
         final Time time = new Time(new java.util.Date().getTime());
@@ -943,11 +943,11 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      */
     public void testSetNullTimestamp() throws SQLException {
         // test the default, unset value
-        assertEquals(null, rs2.getNullTimestamp());
+        assertNull(rs2.getNullTimestamp());
 
         // test that setting null is safe
         rs2.setNullTimestamp(null);
-        assertEquals(null, rs2.getNullTimestamp());
+        assertNull(rs2.getNullTimestamp());
 
         // Set what gets returned to something other than the default
         final Timestamp ts = new Timestamp(new java.util.Date().getTime());
@@ -966,9 +966,9 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getURL and setNullURL implementations.
      */
     public void testURL() throws SQLException, MalformedURLException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        assertEquals(null, rs.getURL(1));
+        assertNull(rs.getURL(1));
         assertTrue(rs.wasNull());
-        assertEquals(null, rs.getURL("column"));
+        assertNull(rs.getURL("column"));
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
         final URL u = new URL("http://www.apache.org");
