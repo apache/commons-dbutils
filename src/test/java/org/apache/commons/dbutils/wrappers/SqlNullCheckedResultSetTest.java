@@ -331,8 +331,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
         rs2.setNullBoolean(true);
-        assertEquals(true, rs.getBoolean(1));
-        assertEquals(true, rs.getBoolean("column"));
+        assertTrue( rs.getBoolean(1));
+        assertTrue( rs.getBoolean("column"));
 
     }
 
@@ -704,8 +704,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertEquals(false, rs2.getNullBoolean());
         // Set what gets returned to something other than the default
         rs2.setNullBoolean(true);
-        assertEquals(true, rs.getBoolean(1));
-        assertEquals(true, rs.getBoolean("column"));
+        assertTrue( rs.getBoolean(1));
+        assertTrue( rs.getBoolean("column"));
 
     }
 
