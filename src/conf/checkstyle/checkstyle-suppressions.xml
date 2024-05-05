@@ -1,7 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE suppressions PUBLIC
-        "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
-        "https://checkstyle.org/dtds/suppressions_1_0.dtd">
 <!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
@@ -16,19 +13,22 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 <suppressions>
-    <suppress checks="Header" files="NOTICE.txt" />
-    <suppress checks="Header" files="LICENSE.txt" />
-    <suppress checks="Header" files="target[/\\]classes[/\\]META-INF[/\\]maven[/\\]commons-dbutils[/\\]commons-dbutils[/\\]pom.properties" />
-    <suppress checks="Header" files="target[/\\]maven-archiver[/\\]pom.properties" />
-    <suppress checks="Header" files=".*[/\\]TestQueries.properties" />
-    <suppress checks="HideUtilityClassConstructor" files="DbUtils.java" />
-    <suppress checks="Javadoc" files=".*[/\\]test[/\\].*" />
-    <suppress checks="LineLength" files="AsyncQueryRunner.java" />
-    <suppress checks="LineLength" files="BaseResultSetHandler.java" />
-    <suppress checks="LineLength" files="QueryRunner.java" />
-    <suppress checks="MagicNumber" files=".*[/\\]test[/\\].*" />
-    <suppress checks="MethodName" files=".*[/\\]test[/\\].*" />
-    <suppress checks="VisibilityModifier" files="AbstractQueryRunner" lines="54"/>
-    <suppress checks="VisibilityModifier" files="KeyedHandler" lines="58, 63, 69"/>
+  <suppress checks="Header" files="NOTICE.txt" />
+  <suppress checks="Header" files="LICENSE.txt" />
+  <suppress checks="Header" files="target[/\\]classes[/\\]META-INF[/\\]maven[/\\]commons-dbutils[/\\]commons-dbutils[/\\]pom.properties" />
+  <suppress checks="Header" files="target[/\\]maven-archiver[/\\]pom.properties" />
+  <suppress checks="Header" files=".*[/\\]TestQueries.properties" />
+  <suppress checks="HideUtilityClassConstructor" files="DbUtils.java" />
+  <suppress checks="Javadoc" files=".*[/\\]test[/\\].*" />
+  <suppress checks="LineLength" files="AsyncQueryRunner.java" />
+  <suppress checks="LineLength" files="BaseResultSetHandler.java" />
+  <suppress checks="LineLength" files="QueryRunner.java" />
+  <suppress checks="MagicNumber" files=".*[/\\]test[/\\].*" />
+  <suppress checks="MethodName" files=".*[/\\]test[/\\].*" />
+  <suppress checks="VisibilityModifier" files="AbstractQueryRunner" lines="54"/>
+  <suppress checks="VisibilityModifier" files="KeyedHandler" lines="58, 63, 69"/>
 </suppressions>
