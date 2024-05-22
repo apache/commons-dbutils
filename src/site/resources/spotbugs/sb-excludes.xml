@@ -51,4 +51,19 @@
         <Method name="loadDriver" />
         <Bug pattern="REC_CATCH_EXCEPTION" />
     </Match>
+    <!-- Compatibility -->
+    <Match>
+        <Class name="org.apache.commons.dbutils.BasicRowProcessor" />
+        <Bug pattern="SING_SINGLETON_HAS_NONPRIVATE_CONSTRUCTOR" />
+    </Match>
+    <!-- Compatibility -->
+    <Match>
+        <Class name="org.apache.commons.dbutils.ProxyFactory" />
+        <Bug pattern="SING_SINGLETON_HAS_NONPRIVATE_CONSTRUCTOR" />
+    </Match>
+    <!-- Compatibility -->
+    <Match>
+        <Class name="org.apache.commons.dbutils.QueryLoader" />
+        <Bug pattern="SING_SINGLETON_HAS_NONPRIVATE_CONSTRUCTOR" />
+    </Match>
 </FindBugsFilter>
