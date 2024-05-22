@@ -58,6 +58,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
         assertEquals("SIX", row[2]);
 
         assertFalse(iter.hasNext());
+        assertTrue(iter.next().length == 0);
     }
 
     @Test
