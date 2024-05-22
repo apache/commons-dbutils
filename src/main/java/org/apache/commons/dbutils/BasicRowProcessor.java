@@ -132,7 +132,7 @@ public class BasicRowProcessor implements RowProcessor {
      * The default BeanProcessor instance to use if not supplied in the
      * constructor.
      */
-    private static final BeanProcessor defaultConvert = new BeanProcessor();
+    private static final BeanProcessor DEFAULT_CONVERTER = new BeanProcessor();
 
     /**
      * The Singleton instance of this class.
@@ -165,7 +165,7 @@ public class BasicRowProcessor implements RowProcessor {
      * BeanProcessor instance.
      */
     public BasicRowProcessor() {
-        this(defaultConvert);
+        this(DEFAULT_CONVERTER);
     }
 
     /**
