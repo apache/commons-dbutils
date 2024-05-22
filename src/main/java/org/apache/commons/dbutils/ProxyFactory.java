@@ -39,7 +39,7 @@ public class ProxyFactory {
     /**
      * The Singleton instance of this class.
      */
-    private static final ProxyFactory instance = new ProxyFactory();
+    private static final ProxyFactory INSTANCE = new ProxyFactory();
 
     /**
      * Returns the Singleton instance of this class.
@@ -47,7 +47,7 @@ public class ProxyFactory {
      * @return singleton instance
      */
     public static ProxyFactory instance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
