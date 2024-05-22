@@ -99,8 +99,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     @Override
     public Object[] next() {
         try {
-            resultSet.next();
-            return this.convert.toArray(resultSet);
+            return resultSet.next() ? this.convert.toArray(resultSet) : new Object[0];
         } catch (final SQLException e) {
             rethrow(e);
             return null;
