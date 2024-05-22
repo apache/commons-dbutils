@@ -42,183 +42,6 @@
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-dbutils.git</developerConnection>
     <url>https://gitbox.apache.org/repos/asf?p=commons-dbutils.git</url>
   </scm>
-
-  <developers>
-    <developer>
-      <name>Juozas Baliuka</name>
-      <id>baliuka</id>
-      <email>baliuka@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Steven Caswell</name>
-      <id>scaswell</id>
-      <email>steven@caswell.name</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Dan Fabulich</name>
-      <id>dfabulich</id>
-      <email>dan@fabulich.com</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>David Graham</name>
-      <id>dgraham</id>
-      <email>dgraham@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Yoav Shapira</name>
-      <id>yoavs</id>
-      <email>yoavs@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>William Speirs</name>
-      <id>wspeirs</id>
-      <email>wspeirs@apache.org</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Simone Tripodi</name>
-      <id>simonetripodi</id>
-      <email>simonetripodi at apache dot org</email>
-    </developer>
-    <developer>
-      <name>Henri Yandell</name>
-      <id>bayard</id>
-      <email>bayard@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Benedikt Ritter</name>
-      <id>britter</id>
-      <email>britter@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Carl Hall</name>
-      <id>thecarlhall</id>
-      <email>thecarlhall@apache.org</email>
-      <organization />
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <id>ggregory</id>
-      <name>Gary Gregory</name>
-      <email>ggregory at apache.org</email>
-      <url>https://www.garygregory.com</url>
-      <organization>The Apache Software Foundation</organization>
-      <organizationUrl>https://www.apache.org/</organizationUrl>      
-      <roles>
-        <role>PMC Member</role>
-      </roles>
-      <timezone>America/New_York</timezone>
-      <properties>
-        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
-      </properties>
-    </developer>
-  </developers>
-
-  <contributors>
-    <contributor>
-      <name>Péter Bagyinszki</name>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Alan Canon</name>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Stefan Fleiter</name>
-      <email>stefan.fleiter@web.de</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Adkins Kendall</name>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Markus Khouri</name>
-      <email>mkhouri.list@gmail.com</email>
-      <roles>
-        <role>Documentation</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Uli Kleeberger</name>
-      <email>ukleeberger@web.de</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Piotr Lakomy</name>
-      <email>piotrl@cft-inc.net</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Corby Page</name>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Michael Schuerig</name>
-      <email>michael@schuerig.de</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Norris Shelton</name>
-      <email>norrisshelton@yahoo.com</email>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </contributor>
-    <contributor>
-      <name>Stevo Slavic</name>
-      <email>sslavic at gmail dot com</email>
-    </contributor>
-  </contributors>
-
   <dependencies>
     <dependency>
       <groupId>org.junit.vintage</groupId>
@@ -414,5 +237,179 @@
       </distributionManagement>
     </profile>
   </profiles>
+  <developers>
+    <developer>
+      <name>Juozas Baliuka</name>
+      <id>baliuka</id>
+      <email>baliuka@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Steven Caswell</name>
+      <id>scaswell</id>
+      <email>steven@caswell.name</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Dan Fabulich</name>
+      <id>dfabulich</id>
+      <email>dan@fabulich.com</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>David Graham</name>
+      <id>dgraham</id>
+      <email>dgraham@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Yoav Shapira</name>
+      <id>yoavs</id>
+      <email>yoavs@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>William Speirs</name>
+      <id>wspeirs</id>
+      <email>wspeirs@apache.org</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Simone Tripodi</name>
+      <id>simonetripodi</id>
+      <email>simonetripodi at apache dot org</email>
+    </developer>
+    <developer>
+      <name>Henri Yandell</name>
+      <id>bayard</id>
+      <email>bayard@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Benedikt Ritter</name>
+      <id>britter</id>
+      <email>britter@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Carl Hall</name>
+      <id>thecarlhall</id>
+      <email>thecarlhall@apache.org</email>
+      <organization />
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>ggregory</id>
+      <name>Gary Gregory</name>
+      <email>ggregory at apache.org</email>
+      <url>https://www.garygregory.com</url>
+      <organization>The Apache Software Foundation</organization>
+      <organizationUrl>https://www.apache.org/</organizationUrl>      
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+      <properties>
+        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
+      </properties>
+    </developer>
+  </developers>
 
+  <contributors>
+    <contributor>
+      <name>Péter Bagyinszki</name>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Alan Canon</name>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Stefan Fleiter</name>
+      <email>stefan.fleiter@web.de</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Adkins Kendall</name>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Markus Khouri</name>
+      <email>mkhouri.list@gmail.com</email>
+      <roles>
+        <role>Documentation</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Uli Kleeberger</name>
+      <email>ukleeberger@web.de</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Piotr Lakomy</name>
+      <email>piotrl@cft-inc.net</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Corby Page</name>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Michael Schuerig</name>
+      <email>michael@schuerig.de</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Norris Shelton</name>
+      <email>norrisshelton@yahoo.com</email>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Stevo Slavic</name>
+      <email>sslavic at gmail dot com</email>
+    </contributor>
+  </contributors>
 </project>
