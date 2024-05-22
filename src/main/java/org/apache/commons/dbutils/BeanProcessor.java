@@ -509,19 +509,15 @@ public class BeanProcessor {
      */
     public <T> List<T> toBeanList(final ResultSet resultSet, final Class<? extends T> type) throws SQLException {
         final List<T> results = new ArrayList<>();
-
         if (!resultSet.next()) {
             return results;
         }
-
         final PropertyDescriptor[] props = this.propertyDescriptors(type);
         final ResultSetMetaData rsmd = resultSet.getMetaData();
         final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
-
         do {
             results.add(this.createBean(resultSet, type, props, columnToProperty));
-        } while (resultSet.next());
-
+        } while (resultSet.next()); // NOPMD False positive CheckResultSet
         return results;
     }
 
