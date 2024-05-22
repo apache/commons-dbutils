@@ -137,7 +137,7 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * The Singleton instance of this class.
      */
-    private static final BasicRowProcessor instance = new BasicRowProcessor();
+    private static final BasicRowProcessor INSTANCE = new BasicRowProcessor();
 
     protected static Map<String, Object> createCaseInsensitiveHashMap(final int cols) {
         return new CaseInsensitiveHashMap(cols);
@@ -152,7 +152,7 @@ public class BasicRowProcessor implements RowProcessor {
      */
     @Deprecated
     public static BasicRowProcessor instance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
