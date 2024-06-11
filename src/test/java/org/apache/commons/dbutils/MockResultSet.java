@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -264,7 +265,7 @@ public class MockResultSet implements InvocationHandler {
     protected String getString(final int columnIndex) throws SQLException {
         final Object obj = this.getObject(columnIndex);
         this.setWasNull(obj);
-        return obj == null ? null : obj.toString();
+        return Objects.toString(obj, null);
     }
 
     private Object handleColumnMethod(String methodName, final Object[] args) throws SQLException {
