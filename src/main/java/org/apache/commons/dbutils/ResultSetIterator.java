@@ -95,16 +95,12 @@ public class ResultSetIterator implements Iterator<Object[]> {
      * columns in the {@code ResultSet}.
      * @see java.util.Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
-     * @throws NoSuchElementException if there are no more rows in the {@code ResultSet}.
      */
     @Override
     public Object[] next() {
         try {
-            if (!resultSet.next()) {
-                throw new NoSuchElementException("No more rows in the ResultSet");
-            }
-            return this.convert.toArray(resultSet);
-        }  catch (final SQLException e) {
+            return resultSet.next() ? this.convert.toArray(resultSet) : new Object[0];
+        } catch (final SQLException e) {
             rethrow(e);
             return null;
         }
