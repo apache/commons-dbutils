@@ -62,7 +62,7 @@ public class GenerousBeanProcessorTest {
         }
     }
 
-    private GenerousBeanProcessor processor = new GenerousBeanProcessor();
+    private final GenerousBeanProcessor processor = new GenerousBeanProcessor();
     @Mock
     private ResultSetMetaData metaData;
 
