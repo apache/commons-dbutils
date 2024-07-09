@@ -268,7 +268,7 @@ public class BeanProcessorTest extends BaseTestCase {
 
     public void testProcessWithPopulateBean() throws SQLException {
         TestBean b = new TestBean();
-        ResultSet rs = this.getResultSet();
+        final ResultSet rs = getResultSet();
         assertTrue(rs.next());
         b = beanProc.populateBean(rs, b);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
@@ -283,7 +283,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     public void testProcessWithToBean() throws SQLException {
-        ResultSet rs = this.getResultSet();
+        final ResultSet rs = getResultSet();
         assertTrue(rs.next());
         TestBean b = beanProc.toBean(rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
