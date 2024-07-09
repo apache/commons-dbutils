@@ -30,7 +30,7 @@ public class KeyedHandlerTest extends BaseTestCase {
 
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(2);
-        final Map<String, Map<String, Object>> results = h.handle(this.getResultSet());
+        final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -51,7 +51,7 @@ public class KeyedHandlerTest extends BaseTestCase {
 
     public void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<Map<Integer, Map<String, Object>>> h = new KeyedHandler<>("intTest");
-        final Map<Integer, Map<String, Object>> results = h.handle(this.getResultSet());
+        final Map<Integer, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -72,7 +72,7 @@ public class KeyedHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
-        final Map<String, Map<String, Object>> results = h.handle(this.getEmptyResultSet());
+        final Map<String, Map<String, Object>> results = h.handle(getEmptyResultSet());
         assertNotNull(results);
         assertTrue(results.isEmpty());
     }
@@ -80,7 +80,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     public void testHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
 
-        final Map<String, Map<String, Object>> results = h.handle(this.getResultSet());
+        final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -102,7 +102,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     public void testInjectedRowProcess() throws Exception {
         final RowProcessor mockProc = mock(RowProcessor.class);
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(mockProc);
-        final Map<String, Map<String, Object>> results = h.handle(this.getResultSet());
+        final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
