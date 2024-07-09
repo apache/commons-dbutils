@@ -35,7 +35,7 @@ public class DoubleColumnHandlerTest extends AbstractTestColumnHandler<Double> {
     @Override
     @Test
     public void testApplyType() throws Exception {
-        ResultSet rs = getResultSet();
+        final ResultSet rs = getResultSet();
         when(rs.getDouble(1)).thenReturn(Double.MIN_VALUE);
         assertEquals(Double.class, getColumnHandler().apply(rs, 1).getClass());
     }
