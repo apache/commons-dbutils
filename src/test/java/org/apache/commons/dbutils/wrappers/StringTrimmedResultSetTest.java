@@ -31,16 +31,16 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        this.setResultSet(StringTrimmedResultSet.wrap(this.getResultSet()));
+        setResultSet(StringTrimmedResultSet.wrap(getResultSet()));
     }
 
     public void testGetObject() throws SQLException {
-        this.getResultSet().next();
+        getResultSet().next();
         assertEquals("notInBean", getResultSet().getObject(4));
     }
 
     public void testGetString() throws SQLException {
-        this.getResultSet().next();
+        getResultSet().next();
         assertEquals("notInBean", getResultSet().getString(4));
     }
 
