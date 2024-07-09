@@ -138,7 +138,7 @@ public class BeanProcessor {
             }
 
             // Don't call setter if the value object isn't the right type
-            if (!this.isCompatibleType(value, firstParam)) {
+            if (!isCompatibleType(value, firstParam)) {
                 throw new SQLException(
                         "Cannot set " + prop.getName() + ": incompatible types, cannot convert " + value.getClass().getName() + " to " + firstParam.getName());
                 // value cannot be null here because isCompatibleType allows null
@@ -321,9 +321,9 @@ public class BeanProcessor {
      * @throws SQLException if a database error occurs.
      */
     public <T> T populateBean(final ResultSet resultSet, final T bean) throws SQLException {
-        final PropertyDescriptor[] props = this.propertyDescriptors(bean.getClass());
+        final PropertyDescriptor[] props = propertyDescriptors(bean.getClass());
         final ResultSetMetaData rsmd = resultSet.getMetaData();
-        final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+        final int[] columnToProperty = mapColumnsToProperties(rsmd, props);
 
         return populateBean(resultSet, bean, props, columnToProperty);
     }
@@ -354,14 +354,14 @@ public class BeanProcessor {
 
             Object value = null;
             if (propType != null) {
-                value = this.processColumn(resultSet, i, propType);
+                value = processColumn(resultSet, i, propType);
 
                 if (value == null && propType.isPrimitive()) {
                     value = PRIMITIVE_DEFAULTS.get(propType);
                 }
             }
 
-            this.callSetter(bean, prop, value);
+            callSetter(bean, prop, value);
         }
 
         return bean;
@@ -512,9 +512,9 @@ public class BeanProcessor {
         if (!resultSet.next()) {
             return results;
         }
-        final PropertyDescriptor[] props = this.propertyDescriptors(type);
+        final PropertyDescriptor[] props = propertyDescriptors(type);
         final ResultSetMetaData rsmd = resultSet.getMetaData();
-        final int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
+        final int[] columnToProperty = mapColumnsToProperties(rsmd, props);
         do {
             results.add(this.createBean(resultSet, type, props, columnToProperty));
         } while (resultSet.next()); // NOPMD False positive CheckResultSet
