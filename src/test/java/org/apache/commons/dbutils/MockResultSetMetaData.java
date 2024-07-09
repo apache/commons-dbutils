@@ -39,9 +39,9 @@ public class MockResultSetMetaData implements InvocationHandler {
         return ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames));
     }
 
-    private String[] columnNames;
+    private final String[] columnNames;
 
-    private String[] columnLabels;
+    private final String[] columnLabels;
 
     public MockResultSetMetaData(final String[] columnNames) {
         this.columnNames = columnNames;
