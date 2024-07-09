@@ -274,7 +274,7 @@ public abstract class AbstractQueryRunner {
         ParameterMetaData pmd = null;
         if (!pmdKnownBroken) {
             try {
-                pmd = this.getParameterMetaData(stmt);
+                pmd = getParameterMetaData(stmt);
                 if (pmd == null) { // can be returned by implementations that don't support the method
                     pmdKnownBroken = true;
                 }
@@ -516,12 +516,12 @@ public abstract class AbstractQueryRunner {
      * @since 1.1
      */
     protected Connection prepareConnection() throws SQLException {
-        if (this.getDataSource() == null) {
+        if (getDataSource() == null) {
             throw new SQLException(
                     "QueryRunner requires a DataSource to be "
                             + "invoked in this way, or a Connection should be passed in");
         }
-        return this.getDataSource().getConnection();
+        return getDataSource().getConnection();
     }
 
     /**
