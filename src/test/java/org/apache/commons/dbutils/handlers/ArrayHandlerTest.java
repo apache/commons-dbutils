@@ -32,14 +32,14 @@ public class ArrayHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Object[]> h = new ArrayHandler();
-        final Object[] results = h.handle(this.getEmptyResultSet());
+        final Object[] results = h.handle(getEmptyResultSet());
 
         assertThat(results, is(emptyArray()));
     }
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<Object[]> h = new ArrayHandler();
-        final Object[] results = h.handle(this.getResultSet());
+        final Object[] results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(COLS, results.length);
