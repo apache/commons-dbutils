@@ -35,7 +35,7 @@ public class ByteColumnHandlerTest extends AbstractTestColumnHandler<Byte> {
     @Override
     @Test
     public void testApplyType() throws Exception {
-        ResultSet rs = getResultSet();
+        final ResultSet rs = getResultSet();
         when(rs.getByte(1)).thenReturn(Byte.MIN_VALUE);
         assertEquals(Byte.class, getColumnHandler().apply(rs, 1).getClass());
     }
