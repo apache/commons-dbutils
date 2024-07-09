@@ -35,7 +35,7 @@ public class FloatColumnHandlerTest extends AbstractTestColumnHandler<Float> {
     @Override
     @Test
     public void testApplyType() throws Exception {
-        ResultSet rs = getResultSet();
+        final ResultSet rs = getResultSet();
         when(rs.getFloat(1)).thenReturn(Float.MIN_VALUE);
         assertEquals(Float.class, getColumnHandler().apply(rs, 1).getClass());
     }
