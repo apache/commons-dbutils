@@ -84,7 +84,7 @@ public class QueryLoader {
         Map<String, String> queryMap = this.queries.get(path);
 
         if (queryMap == null) {
-            queryMap = this.loadQueries(path);
+            queryMap = loadQueries(path);
             this.queries.put(path, queryMap);
         }
 
