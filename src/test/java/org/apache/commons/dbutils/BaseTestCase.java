@@ -87,7 +87,7 @@ public class BaseTestCase extends TestCase {
         return this.rs;
     }
 
-    public void setResultSet(ResultSet resultSet) {
+    public void setResultSet(final ResultSet resultSet) {
         this.rs = resultSet;
     }
 
@@ -100,7 +100,7 @@ public class BaseTestCase extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        rs = this.createMockResultSet();
+        rs = createMockResultSet();
         emptyResultSet = MockResultSet.create(metaData, null);
     }
 
