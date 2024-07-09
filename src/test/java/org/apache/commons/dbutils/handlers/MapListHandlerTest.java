@@ -31,7 +31,7 @@ public class MapListHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<Map<String, Object>>> h = new MapListHandler();
-        final List<Map<String, Object>> results = h.handle(this.getEmptyResultSet());
+        final List<Map<String, Object>> results = h.handle(getEmptyResultSet());
 
         assertNotNull(results);
         assertTrue(results.isEmpty());
@@ -39,7 +39,7 @@ public class MapListHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<Map<String, Object>>> h = new MapListHandler();
-        final List<Map<String, Object>> results = h.handle(this.getResultSet());
+        final List<Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
