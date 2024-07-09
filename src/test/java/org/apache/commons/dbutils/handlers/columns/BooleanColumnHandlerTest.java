@@ -35,7 +35,7 @@ public class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean>
     @Override
     @Test
     public void testApplyType() throws Exception {
-        ResultSet rs = getResultSet();
+        final ResultSet rs = getResultSet();
         when(rs.getBoolean(1)).thenReturn(Boolean.TRUE);
         assertEquals(Boolean.class, getColumnHandler().apply(rs, 1).getClass());
     }
