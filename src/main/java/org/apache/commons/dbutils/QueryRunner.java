@@ -149,7 +149,7 @@ public class QueryRunner extends AbstractQueryRunner {
             stmt = this.prepareStatement(conn, sql);
             // When the batch size is large, prefetching parameter metadata before filling
             // the statement can reduce lots of JDBC communications.
-            pmd = this.getParameterMetaData(stmt);
+            pmd = getParameterMetaData(stmt);
 
             for (final Object[] param : params) {
                 this.fillStatement(stmt, pmd, param);
@@ -158,7 +158,7 @@ public class QueryRunner extends AbstractQueryRunner {
             rows = stmt.executeBatch();
 
         } catch (final SQLException e) {
-            this.rethrow(e, sql, (Object[])params);
+            rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
         }
@@ -180,7 +180,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.1
      */
     public int[] batch(final String sql, final Object[][] params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.batch(conn, sql, params);
         }
     }
@@ -217,14 +217,14 @@ public class QueryRunner extends AbstractQueryRunner {
         int rows = 0;
 
         try {
-            stmt = this.prepareCall(conn, sql);
+            stmt = prepareCall(conn, sql);
             this.fillStatement(stmt, params);
             stmt.execute();
             rows = stmt.getUpdateCount();
-            this.retrieveOutParameters(stmt, params);
+            retrieveOutParameters(stmt, params);
 
         } catch (final SQLException e) {
-            this.rethrow(e, sql, params);
+            rethrow(e, sql, params);
 
         } finally {
             close(stmt);
@@ -272,7 +272,7 @@ public class QueryRunner extends AbstractQueryRunner {
         final List<T> results = new LinkedList<>();
 
         try {
-            stmt = this.prepareCall(conn, sql);
+            stmt = prepareCall(conn, sql);
             this.fillStatement(stmt, params);
             boolean moreResultSets = stmt.execute();
             // Handle multiple result sets by passing them through the handler
@@ -280,15 +280,15 @@ public class QueryRunner extends AbstractQueryRunner {
             while (moreResultSets) {
                 try (@SuppressWarnings("resource")
                 // assume the ResultSet wrapper properly closes
-                ResultSet resultSet = this.wrap(stmt.getResultSet())) {
+                ResultSet resultSet = wrap(stmt.getResultSet())) {
                     results.add(rsh.handle(resultSet));
                     moreResultSets = stmt.getMoreResults();
                 }
             }
-            this.retrieveOutParameters(stmt, params);
+            retrieveOutParameters(stmt, params);
 
         } catch (final SQLException e) {
-            this.rethrow(e, sql, params);
+            rethrow(e, sql, params);
 
         } finally {
             close(stmt);
@@ -320,7 +320,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int execute(final String sql, final Object... params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.execute(conn, sql, params);
         }
     }
@@ -347,7 +347,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> List<T> execute(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.execute(conn, sql, rsh, params);
         }
     }
@@ -409,7 +409,7 @@ public class QueryRunner extends AbstractQueryRunner {
                 generatedKeys = rsh.handle(resultSet);
             }
         } catch (final SQLException e) {
-            this.rethrow(e, sql, params);
+            rethrow(e, sql, params);
         } finally {
             close(stmt);
         }
@@ -430,7 +430,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> T insert(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return insert(conn, sql, rsh, (Object[]) null);
         }
     }
@@ -450,7 +450,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> T insert(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return insert(conn, sql, rsh, params);
         }
     }
@@ -494,7 +494,7 @@ public class QueryRunner extends AbstractQueryRunner {
                 generatedKeys = rsh.handle(resultSet);
             }
         } catch (final SQLException e) {
-            this.rethrow(e, sql, (Object[])params);
+            rethrow(e, sql, (Object[])params);
         } finally {
             close(stmt);
         }
@@ -517,7 +517,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @since 1.6
      */
     public <T> T insertBatch(final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return insertBatch(conn, sql, rsh, params);
         }
     }
@@ -603,15 +603,15 @@ public class QueryRunner extends AbstractQueryRunner {
                 final PreparedStatement ps = this.prepareStatement(conn, sql);
                 stmt = ps;
                 this.fillStatement(ps, params);
-                resultSet = this.wrap(ps.executeQuery());
+                resultSet = wrap(ps.executeQuery());
             } else {
                 stmt = conn.createStatement();
-                resultSet = this.wrap(stmt.executeQuery(sql));
+                resultSet = wrap(stmt.executeQuery(sql));
             }
             result = rsh.handle(resultSet);
 
         } catch (final SQLException e) {
-            this.rethrow(e, sql, params);
+            rethrow(e, sql, params);
 
         } finally {
             closeQuietly(resultSet);
@@ -637,7 +637,7 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(final String sql, final Object param, final ResultSetHandler<T> rsh) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.<T>query(conn, sql, rsh, param);
         }
     }
@@ -660,7 +660,7 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     @Deprecated
     public <T> T query(final String sql, final Object[] params, final ResultSetHandler<T> rsh) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.<T>query(conn, sql, rsh, params);
         }
     }
@@ -678,7 +678,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> T query(final String sql, final ResultSetHandler<T> rsh) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.<T>query(conn, sql, rsh, (Object[]) null);
         }
     }
@@ -697,7 +697,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @throws SQLException if a database access error occurs
      */
     public <T> T query(final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.<T>query(conn, sql, rsh, params);
         }
     }
@@ -781,7 +781,7 @@ public class QueryRunner extends AbstractQueryRunner {
             }
 
         } catch (final SQLException e) {
-            this.rethrow(e, sql, params);
+            rethrow(e, sql, params);
 
         } finally {
             close(stmt);
@@ -802,7 +802,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int update(final String sql) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.update(conn, sql, (Object[]) null);
         }
     }
@@ -820,7 +820,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int update(final String sql, final Object param) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.update(conn, sql, param);
         }
     }
@@ -838,7 +838,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * @return The number of rows updated.
      */
     public int update(final String sql, final Object... params) throws SQLException {
-        try (Connection conn = this.prepareConnection()) {
+        try (Connection conn = prepareConnection()) {
             return this.update(conn, sql, params);
         }
     }
