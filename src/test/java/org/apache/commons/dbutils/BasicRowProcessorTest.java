@@ -57,35 +57,35 @@ public class BasicRowProcessorTest extends BaseTestCase {
     public void testToArray() throws SQLException {
 
         Object[] a;
-        assertTrue(this.getResultSet().next());
-        a = processor.toArray(this.getResultSet());
+        assertTrue(getResultSet().next());
+        a = processor.toArray(getResultSet());
         assertEquals(COLS, a.length);
         assertEquals("1", a[0]);
         assertEquals("2", a[1]);
         assertEquals("THREE", a[2]);
 
-        assertTrue(this.getResultSet().next());
-        a = processor.toArray(this.getResultSet());
+        assertTrue(getResultSet().next());
+        a = processor.toArray(getResultSet());
         assertEquals(COLS, a.length);
 
         assertEquals("4", a[0]);
         assertEquals("5", a[1]);
         assertEquals("SIX", a[2]);
 
-        assertFalse(this.getResultSet().next());
+        assertFalse(getResultSet().next());
     }
 
     public void testToBean() throws SQLException, ParseException {
 
-        assertTrue(this.getResultSet().next());
-        TestBean row = processor.toBean(this.getResultSet(), TestBean.class);
+        assertTrue(getResultSet().next());
+        TestBean row = processor.toBean(getResultSet(), TestBean.class);
         assertEquals("1", row.getOne());
         assertEquals("2", row.getTwo());
         assertEquals(TestBean.Ordinal.THREE, row.getThree());
         assertEquals("not set", row.getDoNotSet());
 
-        assertTrue(this.getResultSet().next());
-        row = processor.toBean(this.getResultSet(), TestBean.class);
+        assertTrue(getResultSet().next());
+        row = processor.toBean(getResultSet(), TestBean.class);
 
         assertEquals("4", row.getOne());
         assertEquals("5", row.getTwo());
@@ -100,13 +100,13 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertTrue(!"not a date".equals(row.getNotDate()));
         assertTrue(row.getNotDate().endsWith("789456123"));
 
-        assertFalse(this.getResultSet().next());
+        assertFalse(getResultSet().next());
 
     }
 
     public void testToBeanList() throws SQLException, ParseException {
 
-        final List<TestBean> list = processor.toBeanList(this.getResultSet(), TestBean.class);
+        final List<TestBean> list = processor.toBeanList(getResultSet(), TestBean.class);
         assertNotNull(list);
         assertEquals(ROWS, list.size());
 
@@ -134,28 +134,28 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
     public void testToMap() throws SQLException {
 
-        assertTrue(this.getResultSet().next());
-        Map<String, Object> m = processor.toMap(this.getResultSet());
+        assertTrue(getResultSet().next());
+        Map<String, Object> m = processor.toMap(getResultSet());
         assertEquals(COLS, m.size());
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));
         assertEquals("THREE", m.get("Three"));
 
-        assertTrue(this.getResultSet().next());
-        m = processor.toMap(this.getResultSet());
+        assertTrue(getResultSet().next());
+        m = processor.toMap(getResultSet());
         assertEquals(COLS, m.size());
 
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));
         assertEquals("SIX", m.get("THREE"));
 
-        assertFalse(this.getResultSet().next());
+        assertFalse(getResultSet().next());
     }
 
     public void testToMapOrdering() throws SQLException {
 
-        assertTrue(this.getResultSet().next());
-        final Map<String, Object> m = processor.toMap(this.getResultSet());
+        assertTrue(getResultSet().next());
+        final Map<String, Object> m = processor.toMap(getResultSet());
 
         final Iterator<String> itr = m.keySet().iterator();
         assertEquals("one", itr.next());
