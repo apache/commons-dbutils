@@ -29,14 +29,14 @@ public class MapHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Map<String, Object>> h = new MapHandler();
-        final Map<String, Object> results = h.handle(this.getEmptyResultSet());
+        final Map<String, Object> results = h.handle(getEmptyResultSet());
 
         assertNull(results);
     }
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<Map<String, Object>> h = new MapHandler();
-        final Map<String, Object> results = h.handle(this.getResultSet());
+        final Map<String, Object> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(COLS, results.size());
