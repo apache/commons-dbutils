@@ -29,7 +29,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
 
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>(2);
-        final List<String> results = h.handle(this.getResultSet());
+        final List<String> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -40,7 +40,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
 
     public void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<List<Integer>> h = new ColumnListHandler<>("intTest");
-        final List<Integer> results = h.handle(this.getResultSet());
+        final List<Integer> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
@@ -51,7 +51,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
-        final List<String> results = h.handle(this.getEmptyResultSet());
+        final List<String> results = h.handle(getEmptyResultSet());
 
         assertNotNull(results);
         assertTrue(results.isEmpty());
@@ -59,7 +59,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
-        final List<String> results = h.handle(this.getResultSet());
+        final List<String> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
