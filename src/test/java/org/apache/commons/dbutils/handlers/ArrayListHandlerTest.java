@@ -30,7 +30,7 @@ public class ArrayListHandlerTest extends BaseTestCase {
 
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
-        final List<Object[]> results = h.handle(this.getEmptyResultSet());
+        final List<Object[]> results = h.handle(getEmptyResultSet());
 
         assertNotNull(results);
         assertTrue(results.isEmpty());
@@ -38,7 +38,7 @@ public class ArrayListHandlerTest extends BaseTestCase {
 
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
-        final List<Object[]> results = h.handle(this.getResultSet());
+        final List<Object[]> results = h.handle(getResultSet());
 
         assertNotNull(results);
         assertEquals(ROWS, results.size());
