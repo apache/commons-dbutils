@@ -41,11 +41,11 @@ import java.util.Map;
 /**
  * Extensions of this class convert ResultSets into other objects.
  * <p>
- * According to the <i>DRY</i> principle (Don't Repeat Yourself), repeating {@code resultSet} variable inside the {@link ResultSetHandler#handle(ResultSet)}
+ * According to the <em>DRY</em> principle (Don't Repeat Yourself), repeating {@code resultSet} variable inside the {@link ResultSetHandler#handle(ResultSet)}
  * over and over for each iteration can get a little tedious, {@code AbstractResultSetHandler} implicitly gives users access to {@code ResultSet}'s methods.
  * </p>
  * <p>
- * <b>NOTE</b> This class is <i>NOT</i> thread safe!
+ * <b>NOTE</b> This class is <em>NOT</em> thread safe!
  * </p>
  *
  * @param <T> the target type the input ResultSet will be converted to.
