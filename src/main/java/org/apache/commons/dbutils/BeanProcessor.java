@@ -217,44 +217,19 @@ public class BeanProcessor {
      * @return An int[] with column index to property index mappings.  The 0th
      * element is meaningless because JDBC column indexing starts at 1.
      */
-    protected int[] mapColumnsToProperties(final ResultSetMetaData rsmd,
-            final PropertyDescriptor[] props) throws SQLException {
-
+    protected int[] mapColumnsToProperties(final ResultSetMetaData rsmd, final PropertyDescriptor[] props) throws SQLException {
         final int cols = rsmd.getColumnCount();
         final int[] columnToProperty = new int[cols + 1];
         Arrays.fill(columnToProperty, PROPERTY_NOT_FOUND);
 
         for (int col = 1; col <= cols; col++) {
-            String columnName = rsmd.getColumnLabel(col);
-            if (null == columnName || 0 == columnName.length()) {
-              columnName = rsmd.getColumnName(col);
-            }
-            String propertyName = columnToPropertyOverrides.get(columnName);
-            if (propertyName == null) {
-                propertyName = columnName;
-            }
-            if (propertyName == null) {
-                propertyName = Integer.toString(col);
-            }
+            String columnName = getColumnLabel(rsmd, col);
+            String propertyName = getPropertyName(columnName);
 
             for (int i = 0; i < props.length; i++) {
                 final PropertyDescriptor prop = props[i];
-                final Method reader = prop.getReadMethod();
+                final String propertyColumnName = getPropertyColumnName(prop);
 
-                // Check for @Column annotations as explicit marks
-                final Column column;
-                if (reader != null) {
-                    column = reader.getAnnotation(Column.class);
-                } else {
-                    column = null;
-                }
-
-                final String propertyColumnName;
-                if (column != null) {
-                    propertyColumnName = column.name();
-                } else {
-                    propertyColumnName = prop.getName();
-                }
                 if (propertyName.equalsIgnoreCase(propertyColumnName)) {
                     columnToProperty[col] = i;
                     break;
@@ -263,6 +238,27 @@ public class BeanProcessor {
         }
 
         return columnToProperty;
+    }
+
+    private String getColumnLabel(ResultSetMetaData rsmd, int col) throws SQLException {
+        String columnLabel = rsmd.getColumnLabel(col);
+        return (columnLabel == null || columnLabel.isEmpty()) ? rsmd.getColumnName(col) : columnLabel;
+    }
+
+    private String getPropertyName(String columnName) {
+        String propertyName = columnToPropertyOverrides.get(columnName);
+        return (propertyName != null) ? propertyName : columnName;
+    }
+
+    private String getPropertyColumnName(PropertyDescriptor prop) {
+        final Method reader = prop.getReadMethod();
+        if (reader != null) {
+            Column column = reader.getAnnotation(Column.class);
+            if (column != null) {
+                return column.name();
+            }
+        }
+        return prop.getName();
     }
 
     /**
