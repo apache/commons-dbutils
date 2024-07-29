@@ -399,7 +399,7 @@ public final class DbUtils {
     }
 
     /**
-     * Performs a rollback on the <code>Connection</code>, avoid
+     * Performs a rollback on the {@code Connection}, avoid
      * closing if null and hide any SQLExceptions that occur.
      *
      * @param conn Connection to rollback.  A null value is legal.
