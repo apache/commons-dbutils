@@ -53,7 +53,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java from 8 to 11.</action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump commons-parent from 62 to 71 #256, #277.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump commons-parent from 62 to 72 #256, #277.</action>
     </release>
     <release version="1.8.1" date="2023-09-09" description="New features and bug fixes.">
       <!-- FIX -->
