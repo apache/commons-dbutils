@@ -83,7 +83,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public boolean containsKey(final Object key) {
-            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
+            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ROOT));
             return super.containsKey(realKey);
             // Possible optimization here:
             // Since the lowerCaseMap contains a mapping for all the keys,
@@ -94,7 +94,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public Object get(final Object key) {
-            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ENGLISH));
+            final Object realKey = lowerCaseMap.get(key.toString().toLowerCase(Locale.ROOT));
             return super.get(realKey);
         }
 
@@ -108,7 +108,7 @@ public class BasicRowProcessor implements RowProcessor {
              * (That's why we call super.remove(oldKey) and not just
              * super.put(key, value))
              */
-            final Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ENGLISH), key);
+            final Object oldKey = lowerCaseMap.put(key.toLowerCase(Locale.ROOT), key);
             final Object oldValue = super.remove(oldKey);
             super.put(key, value);
             return oldValue;
@@ -123,7 +123,7 @@ public class BasicRowProcessor implements RowProcessor {
         /** {@inheritDoc} */
         @Override
         public Object remove(final Object key) {
-            final Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ENGLISH));
+            final Object realKey = lowerCaseMap.remove(key.toString().toLowerCase(Locale.ROOT));
             return super.remove(realKey);
         }
     }
