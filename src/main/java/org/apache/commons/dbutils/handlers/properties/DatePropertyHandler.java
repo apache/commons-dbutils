@@ -37,12 +37,18 @@ public class DatePropertyHandler implements PropertyHandler {
         final Date dateValue = (Date) value;
         final long time = dateValue.getTime();
 
-        if (JAVA_SQL_DATE.equals(targetType)) {
+        switch (targetType) {
+        case JAVA_SQL_DATE:
             value = new java.sql.Date(time);
-        } else if (JAVA_SQL_TIME.equals(targetType)) {
+            break;
+        case JAVA_SQL_TIME:
             value = new java.sql.Time(time);
-        } else if (JAVA_SQL_TIMESTAMP.equals(targetType)) {
+            break;
+        case JAVA_SQL_TIMESTAMP:
             value = new Timestamp(time);
+            break;
+        default:
+            break;
         }
 
         return value;
