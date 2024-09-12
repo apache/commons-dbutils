@@ -315,20 +315,22 @@ public class MockResultSet implements InvocationHandler {
         throws Throwable {
 
         final String methodName = method.getName();
-        if (methodName.equals("getMetaData")) {
+        switch (methodName) {
+        case "getMetaData":
             return getMetaData();
-        }
-        if (methodName.equals("next")) {
+        case "next":
             return next();
-        }
-        if (methodName.equals("previous")) {
-            // Handle previous method
-        } else if (methodName.equals("close")) {
-            // Handle close method
-        } else if (isColumnMethod(methodName)) {
-            return handleColumnMethod(methodName, args);
-        } else if (METHOD_NAMES.contains(methodName)) {
-            return handleNonColumnMethod(methodName, proxy, args);
+        case "previous":
+            break;
+        case "close":
+            break;
+        default:
+            if (isColumnMethod(methodName)) {
+                return handleColumnMethod(methodName, args);
+            } else if (METHOD_NAMES.contains(methodName)) {
+                return handleNonColumnMethod(methodName, proxy, args);
+            }
+            break;
         }
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
     }
