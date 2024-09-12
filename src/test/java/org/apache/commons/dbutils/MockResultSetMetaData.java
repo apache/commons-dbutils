@@ -56,36 +56,24 @@ public class MockResultSetMetaData implements InvocationHandler {
 
     @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-
         final String methodName = method.getName();
-
-        if (methodName.equals("getColumnCount")) {
+        switch (methodName) {
+        case "getColumnCount":
             return Integer.valueOf(this.columnNames.length);
-
-        }
-        if (methodName.equals("getColumnName")) {
-
-            final int col = ((Integer) args[0]).intValue() - 1;
-            return this.columnNames[col];
-
-        }
-        if (methodName.equals("getColumnLabel")) {
-
-            final int col = ((Integer) args[0]).intValue() - 1;
-            return this.columnLabels[col];
-
-        }
-        if (methodName.equals("hashCode")) {
+        case "getColumnName":
+            final int col1 = ((Integer) args[0]).intValue() - 1;
+            return this.columnNames[col1];
+        case "getColumnLabel":
+            final int col2 = ((Integer) args[0]).intValue() - 1;
+            return this.columnLabels[col2];
+        case "hashCode":
             return Integer.valueOf(System.identityHashCode(proxy));
-
-        }
-        if (methodName.equals("toString")) {
+        case "toString":
             return "MockResultSetMetaData " + System.identityHashCode(proxy);
-
-        }
-        if (methodName.equals("equals")) {
+        case "equals":
             return Boolean.valueOf(proxy == args[0]);
-
+        default:
+            break;
         }
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
     }
