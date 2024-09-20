@@ -409,7 +409,7 @@ public abstract class AbstractQueryRunner {
         try {
             descriptors = Introspector.getBeanInfo(bean.getClass()).getPropertyDescriptors();
         } catch (final IntrospectionException e) {
-            throw new RuntimeException("Couldn't introspect bean " + bean.getClass().toString(), e);
+            throw new IllegalArgumentException("Couldn't introspect bean " + bean.getClass().toString(), e);
         }
         final PropertyDescriptor[] sorted = new PropertyDescriptor[propertyNames.length];
         for (int i = 0; i < propertyNames.length; i++) {
