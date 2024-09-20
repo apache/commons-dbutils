@@ -45,11 +45,11 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
     <release version="1.9.0" date="YYYY-MM-DD" description="New features and bug fixes.">
       <!-- FIX -->
-      <action dev="ggregory" type="fix" due-to="sanjanarampurkottur01, Gary Gregory">Switch on String instead of cascading if-else in MockResultSet #220.</action>
-      <action dev="ggregory" type="fix" due-to="sanjanarampurkottur01, Gary Gregory">Encapsulate test fields #222.</action>
-      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix BeanProcessor SpotBugs CT: Be wary of letting constructors throw exceptions. (CT_CONSTRUCTOR_THROW).</action>
-      <action dev="ggregory" type="fix" due-to="Gary Gregory">Fix StatementConfiguration SpotBugs CT: Be wary of letting constructors throw exceptions. (CT_CONSTRUCTOR_THROW).</action>
-      <action dev="ggregory" type="fix" due-to="Gary Gregory">ResultSetIterator.next() does not check if it is already at the end of the result set (SpotBugs CheckResultSet).</action>
+      <action type="fix" dev="ggregory" due-to="sanjanarampurkottur01, Gary Gregory">Switch on String instead of cascading if-else in MockResultSet #220.</action>
+      <action type="fix" dev="ggregory" due-to="sanjanarampurkottur01, Gary Gregory">Encapsulate test fields #222.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix BeanProcessor SpotBugs CT: Be wary of letting constructors throw exceptions. (CT_CONSTRUCTOR_THROW).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">Fix StatementConfiguration SpotBugs CT: Be wary of letting constructors throw exceptions. (CT_CONSTRUCTOR_THROW).</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.next() does not check if it is already at the end of the result set (SpotBugs CheckResultSet).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace BasicRowProcessor use of Locale.ENGLISH with Locale.ROOT.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">AbstractQueryRunner.fillStatementWithBean(PreparedStatement, Object, String...) now throws IllegalArgumentException instead of RuntimeException.</action>
       <!-- ADD -->
@@ -61,7 +61,7 @@ The <action> type attribute can be add,update,fix,remove.
     </release>
     <release version="1.8.1" date="2023-09-09" description="New features and bug fixes.">
       <!-- FIX -->
-      <action dev="ggregory" type="fix" issue="DBUTILS-151" due-to="mark, Gary Gregory">
+      <action type="fix" dev="ggregory" issue="DBUTILS-151" due-to="mark, Gary Gregory">
         Module org.apache.commons.dbutils does not declare `uses`.
       </action>
       <!-- ADD -->
@@ -84,10 +84,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" issue="DBUTILS-137" due-to="Gary Gregory">
         Inefficient allocation of Maps in org.apache.commons.dbutils.BasicRowProcessor.toMap(ResultSet).
       </action>
-      <action dev="ggregory" type="fix" issue="DBUTILS-138" due-to="Stefano Lissa, Gary Gregory">
+      <action type="fix" dev="ggregory" issue="DBUTILS-138" due-to="Stefano Lissa, Gary Gregory">
         org.apache.commons.dbutils.QueryRunner.query(Connection, boolean, String, ResultSetHandler, Object...) Exception in closing statement leave connections open.
       </action>
-      <action dev="ggregory" type="fix" issue="DBUTILS-139" due-to="Gary Gregory">
+      <action type="fix" dev="ggregory" issue="DBUTILS-139" due-to="Gary Gregory">
         Update Java requirement from version 6 to 8.
       </action>
       <action due-to="thecarlhall" type="update">
@@ -118,7 +118,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="add">
         Add github/codeql-action #115.
       </action>
-      <action dev="ggregory" type="fix" due-to="step-security-bot, Gary Gregory">
+      <action type="fix" dev="ggregory" due-to="step-security-bot, Gary Gregory">
         [StepSecurity] ci: Harden GitHub Actions #191.
       </action>
       <action dev="ggregory" type="add" due-to="Gary Gregory">
