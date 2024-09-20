@@ -66,10 +66,10 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
         final ResultSetIterator resultSetIterator = new ResultSetIterator((ResultSet) null);
         final Throwable throwable = new Throwable();
-        final SQLException sQLException = new SQLException(throwable);
+        final SQLException sqlException = new SQLException(throwable);
 
         try {
-            resultSetIterator.rethrow(sQLException);
+            resultSetIterator.rethrow(sqlException);
             fail("Expecting exception: RuntimeException");
         } catch (final RuntimeException e) {
             assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
