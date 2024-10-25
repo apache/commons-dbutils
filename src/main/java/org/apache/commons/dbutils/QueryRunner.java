@@ -131,15 +131,15 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public int[] batch(final Connection conn, final String sql, final Object[][] params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         if (params == null) {
-            throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
+            throw new SQLException(ErrorMessage.NULL_PARAMETERS.toString());
         }
 
         PreparedStatement stmt = null;
@@ -206,11 +206,11 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public int execute(final Connection conn, final String sql, final Object... params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         CallableStatement stmt = null;
@@ -257,15 +257,15 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public <T> List<T> execute(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         if (rsh == null) {
-            throw new SQLException("Null ResultSetHandler");
+            throw new SQLException(ErrorMessage.NULL_RESULT_SET_HANDLER.toString());
         }
 
         CallableStatement stmt = null;
@@ -381,15 +381,15 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public <T> T insert(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         if (rsh == null) {
-            throw new SQLException("Null ResultSetHandler");
+            throw new SQLException(ErrorMessage.NULL_RESULT_SET_HANDLER.toString());
         }
 
         Statement stmt = null;
@@ -469,15 +469,15 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public <T> T insertBatch(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object[][] params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         if (params == null) {
-            throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
+            throw new SQLException(ErrorMessage.NULL_PARAMETERS.toString());
         }
 
         PreparedStatement stmt = null;
@@ -583,15 +583,15 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public <T> T query(final Connection conn, final String sql, final ResultSetHandler<T> rsh, final Object... params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         if (rsh == null) {
-            throw new SQLException("Null ResultSetHandler");
+            throw new SQLException(ErrorMessage.NULL_RESULT_SET_HANDLER.toString());
         }
 
         Statement stmt = null;
@@ -759,11 +759,11 @@ public class QueryRunner extends AbstractQueryRunner {
      */
     public int update(final Connection conn, final String sql, final Object... params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException(ErrorMessage.NULL_CONNECTION.toString());
         }
 
         if (sql == null) {
-            throw new SQLException("Null SQL statement");
+            throw new SQLException(ErrorMessage.NULL_SQL_STATEMENT.toString());
         }
 
         Statement stmt = null;
@@ -840,6 +840,28 @@ public class QueryRunner extends AbstractQueryRunner {
     public int update(final String sql, final Object... params) throws SQLException {
         try (Connection conn = prepareConnection()) {
             return this.update(conn, sql, params);
+        }
+    }
+
+    /**
+     * Represents the error messages used inside the {@code QueryRunner} class.
+     * A specific message text is assigned to each enum value as its string representation.
+     */
+    private enum ErrorMessage {
+        NULL_CONNECTION("Null connection"),
+        NULL_SQL_STATEMENT("Null SQL Statement"),
+        NULL_RESULT_SET_HANDLER("Null ResultSetHandler"),
+        NULL_PARAMETERS("Null parameters. If parameters aren't need, pass an empty array.");
+
+        final String messageText;
+
+        ErrorMessage(String messageText) {
+            this.messageText = messageText;
+        }
+
+        @Override
+        public String toString() {
+            return messageText;
         }
     }
 }
