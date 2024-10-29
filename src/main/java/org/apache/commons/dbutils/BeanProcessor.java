@@ -238,23 +238,7 @@ public class BeanProcessor {
             }
 
             for (int i = 0; i < props.length; i++) {
-                final PropertyDescriptor prop = props[i];
-                final Method reader = prop.getReadMethod();
-
-                // Check for @Column annotations as explicit marks
-                final Column column;
-                if (reader != null) {
-                    column = reader.getAnnotation(Column.class);
-                } else {
-                    column = null;
-                }
-
-                final String propertyColumnName;
-                if (column != null) {
-                    propertyColumnName = column.name();
-                } else {
-                    propertyColumnName = prop.getName();
-                }
+                final String propertyColumnName = getPropertyColumnName(props[i]);
                 if (propertyName.equalsIgnoreCase(propertyColumnName)) {
                     columnToProperty[col] = i;
                     break;
@@ -263,6 +247,33 @@ public class BeanProcessor {
         }
 
         return columnToProperty;
+    }
+
+    /**
+     * Retrieves the column name associated with the given property descriptor.
+     * If the property's read method has a {@code @Column} annotation, the name
+     * from this annotation is used as the column name. Otherwise, the property
+     * name itself is returned.
+     *
+     * @param prop The {@code PropertyDescriptor} representing a bean property.
+     *             This descriptor may or may not have an associated read method
+     *             with a {@code @Column} annotation specifying a column name.
+     * @return The column name associated with the property, derived from the
+     *         {@code @Column} annotation if present; otherwise, returns the
+     *         property's name.
+     */
+    private String getPropertyColumnName(final PropertyDescriptor prop) {
+        final Method reader = prop.getReadMethod();
+
+        if (reader != null) {
+            // Check for @Column annotations as explicit marks
+            final Column column = reader.getAnnotation(Column.class);
+
+            if (column != null) {
+                return column.name();
+            }
+        }
+        return prop.getName();
     }
 
     /**
