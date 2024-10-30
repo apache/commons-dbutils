@@ -55,15 +55,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <distributionManagement>
-    <!-- Cannot define in parent ATM, see COMMONSSITE-26 -->
-    <site>
-      <id>apache.website</id>
-      <name>Apache Commons Site</name>
-      <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/${commons.componentid}</url>
-    </site>
-  </distributionManagement>
+<distributionManagement>
+    <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/Erasmus-In-Salerno/commons-dbutils</url>
+    </repository>
+</distributionManagement>
+ 
 
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
