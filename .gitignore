@@ -5,3 +5,4 @@ target/
 /.settings/
 /.classpath
 tags
+.vscode
