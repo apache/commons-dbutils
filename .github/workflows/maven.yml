@@ -30,9 +30,9 @@ jobs:
         java: [ 17, 21, 23 ]
         # java: [ 11, 17, 21, 23 ]
         experimental: [false]
-        include:
-          - java: 24-ea
-            experimental: true
+        ## include:
+        #  - java: 24-ea
+        #    experimental: true
         
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
