@@ -853,7 +853,7 @@ public class QueryRunner extends AbstractQueryRunner {
         NULL_RESULT_SET_HANDLER("Null ResultSetHandler"),
         NULL_PARAMETERS("Null parameters. If parameters aren't need, pass an empty array.");
 
-        final String messageText;
+        private final String messageText;
 
         ErrorMessage(String messageText) {
             this.messageText = messageText;

@@ -16,7 +16,8 @@
 # under the License.
 
 name: 'Dependency Review'
-on: [pull_request]
+on: []
+# on: [pull_request]
 
 permissions:
   contents: read
