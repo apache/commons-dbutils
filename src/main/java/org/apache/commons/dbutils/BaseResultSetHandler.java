@@ -45,7 +45,7 @@ import java.util.Map;
  * over and over for each iteration can get a little tedious, {@code AbstractResultSetHandler} implicitly gives users access to {@code ResultSet}'s methods.
  * </p>
  * <p>
- * <b>NOTE</b> This class is <em>NOT</em> thread safe!
+ * <strong>NOTE</strong> This class is <em>NOT</em> thread safe!
  * </p>
  *
  * @param <T> the target type the input ResultSet will be converted to.
