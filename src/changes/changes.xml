@@ -52,6 +52,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.next() does not check if it is already at the end of the result set (SpotBugs CheckResultSet).</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace BasicRowProcessor use of Locale.ENGLISH with Locale.ROOT.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">AbstractQueryRunner.fillStatementWithBean(PreparedStatement, Object, String...) now throws IllegalArgumentException instead of RuntimeException.</action>
+      <action type="fix" dev="ggregory" due-to="strangelookingnerd, Gary Gregory">Migrate tests to JUnit5 #324.</action> 
       <!-- ADD -->
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java from 8 to 11.</action>
