@@ -16,6 +16,13 @@
  */
 package org.apache.commons.dbutils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -25,6 +32,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the BasicRowProcessor class.
@@ -38,6 +47,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
      */
     private static final DateFormat datef = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
+    @Test
     public void testPutAllContainsKeyAndRemove() throws Exception {
         final Map<String, Object> test = new HashMap<>(3);
         test.put("fiRst", "thing");
@@ -54,6 +64,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertFalse(brpMap.containsKey("first"));
     }
 
+    @Test
     public void testToArray() throws SQLException {
 
         Object[] a;
@@ -75,6 +86,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertFalse(getResultSet().next());
     }
 
+    @Test
     public void testToBean() throws SQLException, ParseException {
 
         assertTrue(getResultSet().next());
@@ -97,13 +109,14 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(0, row.getNullPrimitiveTest());
         // test date -> string handling
         assertNotNull(row.getNotDate());
-        assertTrue(!"not a date".equals(row.getNotDate()));
+        assertNotEquals("not a date", row.getNotDate());
         assertTrue(row.getNotDate().endsWith("789456123"));
 
         assertFalse(getResultSet().next());
 
     }
 
+    @Test
     public void testToBeanList() throws SQLException, ParseException {
 
         final List<TestBean> list = processor.toBeanList(getResultSet(), TestBean.class);
@@ -128,10 +141,11 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertEquals(0, b.getNullPrimitiveTest());
         // test date -> string handling
         assertNotNull(b.getNotDate());
-        assertTrue(!"not a date".equals(b.getNotDate()));
+        assertNotEquals("not a date", b.getNotDate());
         assertTrue(b.getNotDate().endsWith("789456123"));
     }
 
+    @Test
     public void testToMap() throws SQLException {
 
         assertTrue(getResultSet().next());
@@ -152,6 +166,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
         assertFalse(getResultSet().next());
     }
 
+    @Test
     public void testToMapOrdering() throws SQLException {
 
         assertTrue(getResultSet().next());

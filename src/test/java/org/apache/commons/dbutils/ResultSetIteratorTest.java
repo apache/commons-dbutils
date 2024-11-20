@@ -16,13 +16,17 @@
  */
 package org.apache.commons.dbutils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * ResultSetIteratorTest
@@ -38,6 +42,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
 
     }
 
+    @Test
     public void testNext() {
 
         final Iterator<Object[]> iter = new ResultSetIterator(getResultSet());
@@ -58,7 +63,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
         assertEquals("SIX", row[2]);
 
         assertFalse(iter.hasNext());
-        assertTrue(iter.next().length == 0);
+        assertEquals(0, iter.next().length);
     }
 
     @Test

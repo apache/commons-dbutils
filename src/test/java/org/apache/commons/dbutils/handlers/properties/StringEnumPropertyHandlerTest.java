@@ -16,16 +16,16 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StringEnumPropertyHandlerTest {
     private StringEnumPropertyHandler handler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.handler = new StringEnumPropertyHandler();
     }

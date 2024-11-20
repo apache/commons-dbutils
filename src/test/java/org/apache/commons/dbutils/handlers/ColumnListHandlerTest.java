@@ -16,17 +16,23 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.junit.jupiter.api.Test;
 
 /**
  * ColumnListHandlerTest
  */
 public class ColumnListHandlerTest extends BaseTestCase {
 
+    @Test
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>(2);
         final List<String> results = h.handle(getResultSet());
@@ -38,6 +44,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
         assertEquals("5", results.get(1));
     }
 
+    @Test
     public void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<List<Integer>> h = new ColumnListHandler<>("intTest");
         final List<Integer> results = h.handle(getResultSet());
@@ -49,6 +56,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
         assertEquals(Integer.valueOf(3), results.get(1));
     }
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
         final List<String> results = h.handle(getEmptyResultSet());
@@ -57,6 +65,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
         assertTrue(results.isEmpty());
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
         final List<String> results = h.handle(getResultSet());

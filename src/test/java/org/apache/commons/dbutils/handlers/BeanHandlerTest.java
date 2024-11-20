@@ -16,11 +16,16 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.TestBean;
+import org.junit.jupiter.api.Test;
 
 /**
  * BeanHandlerTest
@@ -40,6 +45,7 @@ public class BeanHandlerTest extends BaseTestCase {
         String getTwo();
     }
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
         final TestBean results = h.handle(getEmptyResultSet());
@@ -47,6 +53,7 @@ public class BeanHandlerTest extends BaseTestCase {
         assertNull(results);
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<TestBean> h = new BeanHandler<>(TestBean.class);
         final TestBean results = h.handle(getResultSet());
@@ -58,6 +65,7 @@ public class BeanHandlerTest extends BaseTestCase {
         assertEquals("not set", results.getDoNotSet());
     }
 
+    @Test
     public void testHandleToInterface() throws SQLException {
         final ResultSetHandler<SubTestBeanInterface> h = new BeanHandler<>(SubTestBean.class);
         final SubTestBeanInterface results = h.handle(getResultSet());
@@ -69,6 +77,7 @@ public class BeanHandlerTest extends BaseTestCase {
         assertEquals("not set", results.getDoNotSet());
     }
 
+    @Test
     public void testHandleToSuperClass() throws SQLException {
         final ResultSetHandler<TestBean> h = new BeanHandler<>(SubTestBean.class);
         final TestBean results = h.handle(getResultSet());

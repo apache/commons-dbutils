@@ -16,7 +16,11 @@
  */
 package org.apache.commons.dbutils;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.lang.reflect.InvocationHandler;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * ProxyFactoryTest performs simple type checking on proxy objects returned from a ProxyFactory.
@@ -25,30 +29,37 @@ public class ProxyFactoryTest extends BaseTestCase {
 
     private static final InvocationHandler stub = (proxy, method, args) -> null;
 
+    @Test
     public void testCreateCallableStatement() {
         assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
     }
 
+    @Test
     public void testCreateConnection() {
         assertNotNull(ProxyFactory.instance().createConnection(stub));
     }
 
+    @Test
     public void testCreateDriver() {
         assertNotNull(ProxyFactory.instance().createDriver(stub));
     }
 
+    @Test
     public void testCreatePreparedStatement() {
         assertNotNull(ProxyFactory.instance().createPreparedStatement(stub));
     }
 
+    @Test
     public void testCreateResultSet() {
         assertNotNull(ProxyFactory.instance().createResultSet(stub));
     }
 
+    @Test
     public void testCreateResultSetMetaData() {
         assertNotNull(ProxyFactory.instance().createResultSetMetaData(stub));
     }
 
+    @Test
     public void testCreateStatement() {
         assertNotNull(ProxyFactory.instance().createStatement(stub));
     }

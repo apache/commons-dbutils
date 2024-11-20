@@ -16,6 +16,12 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -23,6 +29,7 @@ import java.util.List;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.TestBean;
+import org.junit.jupiter.api.Test;
 
 /**
  * BeanListHandlerTest
@@ -42,6 +49,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         String getTwo();
     }
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
         final List<TestBean> results = h.handle(getEmptyResultSet());
@@ -50,6 +58,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertTrue(results.isEmpty());
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
         final List<TestBean> results = h.handle(getResultSet());
@@ -77,6 +86,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertFalse(iter.hasNext());
     }
 
+    @Test
     public void testHandleToInterface() throws SQLException {
         final ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<>(SubTestBean.class);
         final List<SubTestBeanInterface> results = h.handle(getResultSet());
@@ -107,6 +117,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         assertFalse(iter.hasNext());
     }
 
+    @Test
     public void testHandleToSuperClass() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(SubTestBean.class);
         final List<TestBean> results = h.handle(getResultSet());

@@ -16,8 +16,8 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -30,22 +30,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 public class DbUtilsTest {
 
-    public static class DriverProxyTest {
-        private static final Driver mockedDriver = mock(Driver.class);
+    @Nested
+    public class DriverProxyTest {
+        private final Driver mockedDriver = mock(Driver.class);
         private DbUtils.DriverProxy proxy;
 
-        @Before
+        @BeforeEach
         public void setUp() {
             proxy = new DbUtils.DriverProxy(mockedDriver);
         }
 
-        @After
+        @AfterEach
         public void tearDown() {
             reset(mockedDriver);
         }

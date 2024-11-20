@@ -16,29 +16,35 @@
  */
 package org.apache.commons.dbutils.wrappers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.MockResultSet;
 import org.apache.commons.dbutils.ProxyFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * StringTrimmedResultSetTest
  */
 public class StringTrimmedResultSetTest extends BaseTestCase {
 
-    @Override
+    @BeforeEach
     public void setUp() throws Exception {
         super.setUp();
         setResultSet(StringTrimmedResultSet.wrap(getResultSet()));
     }
 
+    @Test
     public void testGetObject() throws SQLException {
         getResultSet().next();
         assertEquals("notInBean", getResultSet().getObject(4));
     }
 
+    @Test
     public void testGetString() throws SQLException {
         getResultSet().next();
         assertEquals("notInBean", getResultSet().getString(4));
@@ -49,6 +55,7 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
      *
      * @throws SQLException if a database access error occurs
      */
+    @Test
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
         final Object[][] rows = { { null } };

@@ -16,8 +16,15 @@
  */
 package org.apache.commons.dbutils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * QueryLoaderTest
@@ -26,6 +33,7 @@ public class QueryLoaderTest extends BaseTestCase {
 
     private static final String QUERIES = "/org/apache/commons/dbutils/TestQueries.properties";
 
+    @Test
     public void testLoad() throws IOException {
         final QueryLoader loader = QueryLoader.instance();
         final Map<String, String> q = loader.load(QUERIES);
@@ -35,9 +43,10 @@ public class QueryLoaderTest extends BaseTestCase {
 
         loader.unload(QUERIES);
         final Map<String, String> q3 = loader.load(QUERIES);
-        assertTrue(q != q3); // pointer comparison should return false
+        assertNotSame(q, q3); // pointer comparison should return false
     }
 
+    @Test
     public void testLoadThrowsIllegalArgumentException() throws IOException {
 
         final QueryLoader queryLoader = QueryLoader.instance();

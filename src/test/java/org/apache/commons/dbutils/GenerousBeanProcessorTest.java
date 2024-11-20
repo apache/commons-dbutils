@@ -16,20 +16,20 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSetMetaData;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GenerousBeanProcessorTest {
 
     static class TestBean {
@@ -68,7 +68,7 @@ public class GenerousBeanProcessorTest {
 
     private PropertyDescriptor[] propDescriptors;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         propDescriptors = new PropertyDescriptor[3];
 

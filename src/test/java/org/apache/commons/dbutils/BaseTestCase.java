@@ -16,18 +16,22 @@
  */
 package org.apache.commons.dbutils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * BaseTestCase is the base class for all test cases as well as the "all tests" runner.
  */
-public class BaseTestCase extends TestCase {
+public class BaseTestCase {
 
     private static final String[] columnNames = { "one", "two", "three", "notInBean", "intTest", "integerTest", "nullObjectTest", "nullPrimitiveTest",
             "notDate", "columnProcessorDoubleTest", null };
@@ -94,25 +98,25 @@ public class BaseTestCase extends TestCase {
     /**
      * This is called before each test method so ResultSet will be fresh each time.
      *
-     * @see junit.framework.TestCase#setUp()
+     * @see org.junit.jupiter.api.BeforeEach
      */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
-
         rs = createMockResultSet();
         emptyResultSet = MockResultSet.create(metaData, null);
     }
 
     // Test which allows Eclipse to be run on full project (avoids no tests found)
     // check that the rows are valid for the column definition
+    @Test
     public void testCheckDataSizes() {
-        assertEquals("Row 1 must contain correct number of columns", columnNames.length, row1.length);
-        assertEquals("Row 1 must contain correct number of columns", columnNames.length, row2.length);
+        assertEquals(columnNames.length, row1.length, "Row 1 must contain correct number of columns");
+        assertEquals(columnNames.length, row2.length, "Row 1 must contain correct number of columns");
     }
 
+    @Test
     public void testResultSets() throws Exception {
-        assertFalse("emptyResultSet should be empty", emptyResultSet.next());
+        assertFalse(emptyResultSet.next(), "emptyResultSet should be empty");
         // fails in SqlNullCheckedResultSetTest assertTrue("rs should not be empty", rs.next());
     }
 }

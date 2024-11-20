@@ -16,6 +16,11 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -23,12 +28,14 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.junit.jupiter.api.Test;
 
 /**
  * MapListHandlerTest
  */
 public class MapListHandlerTest extends BaseTestCase {
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<Map<String, Object>>> h = new MapListHandler();
         final List<Map<String, Object>> results = h.handle(getEmptyResultSet());
@@ -37,6 +44,7 @@ public class MapListHandlerTest extends BaseTestCase {
         assertTrue(results.isEmpty());
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<List<Map<String, Object>>> h = new MapListHandler();
         final List<Map<String, Object>> results = h.handle(getResultSet());
