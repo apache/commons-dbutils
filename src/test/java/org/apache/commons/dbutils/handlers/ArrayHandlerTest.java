@@ -16,16 +16,21 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.junit.jupiter.api.Test;
 
 /**
  * ArrayHandlerTest
  */
 public class ArrayHandlerTest extends BaseTestCase {
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Object[]> h = new ArrayHandler();
         final Object[] results = h.handle(getEmptyResultSet());
@@ -33,6 +38,7 @@ public class ArrayHandlerTest extends BaseTestCase {
         assertEquals(0, results.length);
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<Object[]> h = new ArrayHandler();
         final Object[] results = h.handle(getResultSet());

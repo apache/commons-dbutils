@@ -16,17 +16,23 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.sql.SQLException;
 import java.util.Map;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.junit.jupiter.api.Test;
 
 /**
  * MapHandlerTest
  */
 public class MapHandlerTest extends BaseTestCase {
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Map<String, Object>> h = new MapHandler();
         final Map<String, Object> results = h.handle(getEmptyResultSet());
@@ -34,6 +40,7 @@ public class MapHandlerTest extends BaseTestCase {
         assertNull(results);
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<Map<String, Object>> h = new MapHandler();
         final Map<String, Object> results = h.handle(getResultSet());

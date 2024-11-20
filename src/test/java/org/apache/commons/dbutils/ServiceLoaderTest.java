@@ -16,20 +16,20 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ServiceLoader;
 
 import org.apache.commons.dbutils.handlers.columns.TestColumnHandler;
 import org.apache.commons.dbutils.handlers.properties.TestPropertyHandler;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ServiceLoaderTest {
     private ServiceLoader<ColumnHandler> columns;
     private ServiceLoader<PropertyHandler> properties;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         columns = ServiceLoader.load(ColumnHandler.class);
         properties = ServiceLoader.load(PropertyHandler.class);

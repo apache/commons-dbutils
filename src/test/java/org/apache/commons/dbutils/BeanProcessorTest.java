@@ -16,7 +16,11 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -27,6 +31,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 public class BeanProcessorTest extends BaseTestCase {
 
@@ -188,6 +194,7 @@ public class BeanProcessorTest extends BaseTestCase {
 
     private static final BeanProcessor beanProc = new BeanProcessor();
 
+    @Test
     public void testCheckAnnotationOnMissingReadMethod() throws Exception {
         final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
@@ -199,7 +206,7 @@ public class BeanProcessorTest extends BaseTestCase {
         assertTrue(rs.next());
         TestNoGetter testCls = new TestNoGetter();
         testCls = beanProc.populateBean(rs, testCls);
-        assertEquals(testCls.testField, "first");
+        assertEquals("first", testCls.testField);
     }
 
     /**
@@ -209,6 +216,7 @@ public class BeanProcessorTest extends BaseTestCase {
      * @throws Exception
      * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
      */
+    @Test
     public void testIndexedPropertyDescriptor() throws Exception {
         final String[] colNames = { "name", "things", "stuff" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
@@ -227,6 +235,7 @@ public class BeanProcessorTest extends BaseTestCase {
         assertArrayEquals(stuff.toArray(), testCls.getStuff().toArray());
     }
 
+    @Test
     public void testMapColumnToAnnotationField() throws Exception {
         final String[] columnNames = { "test", "test", "three_" };
         final String[] columnLabels = { "one", "two", null };
@@ -239,6 +248,7 @@ public class BeanProcessorTest extends BaseTestCase {
         }
     }
 
+    @Test
     public void testMapColumnToProperties() throws Exception {
         final String[] columnNames = { "test", "test", "three" };
         final String[] columnLabels = { "one", "two", null };
@@ -251,6 +261,7 @@ public class BeanProcessorTest extends BaseTestCase {
         }
     }
 
+    @Test
     public void testMapColumnToPropertiesWithOverrides() throws Exception {
         final Map<String, String> columnToPropertyOverrides = new HashMap<>();
         columnToPropertyOverrides.put("five", "four");
@@ -266,37 +277,40 @@ public class BeanProcessorTest extends BaseTestCase {
         }
     }
 
+    @Test
     public void testProcessWithPopulateBean() throws SQLException {
         TestBean b = new TestBean();
         final ResultSet rs = getResultSet();
         assertTrue(rs.next());
         b = beanProc.populateBean(rs, b);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
+        assertEquals(TestBean.Ordinal.THREE, b.getThree());
 
         assertTrue(rs.next());
         b = beanProc.populateBean(rs, b);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
+        assertEquals(TestBean.Ordinal.SIX, b.getThree());
 
         assertFalse(rs.next());
     }
 
+    @Test
     public void testProcessWithToBean() throws SQLException {
         final ResultSet rs = getResultSet();
         assertTrue(rs.next());
         TestBean b = beanProc.toBean(rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.THREE);
+        assertEquals(TestBean.Ordinal.THREE, b.getThree());
 
         assertTrue(rs.next());
         b = beanProc.toBean(rs, TestBean.class);
         assertEquals(13.0, b.getColumnProcessorDoubleTest(), 0);
-        assertEquals(b.getThree(), TestBean.Ordinal.SIX);
+        assertEquals(TestBean.Ordinal.SIX, b.getThree());
 
         assertFalse(rs.next());
     }
 
+    @Test
     public void testWrongSetterParamCount() throws Exception {
         final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);

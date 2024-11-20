@@ -16,7 +16,9 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
@@ -42,17 +44,16 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 @SuppressWarnings("boxing") // test code
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class QueryRunnerTest {
     //
     // Random tests
@@ -91,28 +92,28 @@ public class QueryRunnerTest {
 
     private ArrayHandler handler;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private DataSource dataSource;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private Connection conn;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private PreparedStatement prepStmt;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private Statement stmt;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private CallableStatement call;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ParameterMetaData meta;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ResultSet results;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ResultSetMetaData resultsMeta;
 
     //
@@ -212,7 +213,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         int result = runner.execute("{call my_proc(?, ?)}", "unit", "test");
 
-        Assert.assertEquals(3, result);
+        assertEquals(3, result);
 
         verify(call, times(1)).execute();
         verify(call, times(1)).close();    // make sure we closed the statement
@@ -222,7 +223,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(0);
         result = runner.execute("{call my_proc()}");
 
-        Assert.assertEquals(3, result);
+        assertEquals(3, result);
 
         verify(call, times(2)).execute();
         verify(call, times(2)).close();    // make sure we closed the statement
@@ -235,8 +236,8 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.INTEGER, Integer.class);
         result = runner.execute("{?= call my_proc()}", intParam);
 
-        Assert.assertEquals(42, intParam.getValue().intValue());
-        Assert.assertEquals(3, result);
+        assertEquals(42, intParam.getValue().intValue());
+        assertEquals(3, result);
 
         verify(call, times(3)).execute();
         verify(call, times(3)).close();    // make sure we closed the statement
@@ -248,8 +249,8 @@ public class QueryRunnerTest {
         intParam.setValue(null);
         result = runner.execute("{?= call my_proc(?, ?)}", intParam, "unit", "test");
 
-        Assert.assertEquals(4242, intParam.getValue().intValue());
-        Assert.assertEquals(3, result);
+        assertEquals(4242, intParam.getValue().intValue());
+        assertEquals(3, result);
 
         verify(call, times(4)).execute();
         verify(call, times(4)).close();    // make sure we closed the statement
@@ -264,9 +265,9 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         result = runner.execute("{?= call my_proc(?, ?)}", intParam, "test", stringParam);
 
-        Assert.assertEquals(24, intParam.getValue().intValue());
-        Assert.assertEquals("out", stringParam.getValue());
-        Assert.assertEquals(3, result);
+        assertEquals(24, intParam.getValue().intValue());
+        assertEquals("out", stringParam.getValue());
+        assertEquals(3, result);
 
         verify(call, times(5)).execute();
         verify(call, times(5)).close();    // make sure we closed the statement
@@ -283,7 +284,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(2);
         int result = runner.execute(conn, "{call my_proc(?, ?)}", "unit", "test");
 
-        Assert.assertEquals(3, result);
+        assertEquals(3, result);
 
         verify(call, times(1)).execute();
         verify(call, times(1)).close();    // make sure we closed the statement
@@ -293,7 +294,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(0);
         result = runner.execute(conn, "{call my_proc()}");
 
-        Assert.assertEquals(3, result);
+        assertEquals(3, result);
 
         verify(call, times(2)).execute();
         verify(call, times(2)).close();    // make sure we closed the statement
@@ -306,8 +307,8 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.INTEGER, Integer.class);
         result = runner.execute(conn, "{?= call my_proc()}", intParam);
 
-        Assert.assertEquals(42, intParam.getValue().intValue());
-        Assert.assertEquals(3, result);
+        assertEquals(42, intParam.getValue().intValue());
+        assertEquals(3, result);
 
         verify(call, times(3)).execute();
         verify(call, times(3)).close();    // make sure we closed the statement
@@ -319,8 +320,8 @@ public class QueryRunnerTest {
         intParam.setValue(null);
         result = runner.execute(conn, "{?= call my_proc(?, ?)}", intParam, "unit", "test");
 
-        Assert.assertEquals(4242, intParam.getValue().intValue());
-        Assert.assertEquals(3, result);
+        assertEquals(4242, intParam.getValue().intValue());
+        assertEquals(3, result);
 
         verify(call, times(4)).execute();
         verify(call, times(4)).close();    // make sure we closed the statement
@@ -335,9 +336,9 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         result = runner.execute(conn, "{?= call my_proc(?, ?)}", intParam, "test", stringParam);
 
-        Assert.assertEquals(24, intParam.getValue().intValue());
-        Assert.assertEquals("out", stringParam.getValue());
-        Assert.assertEquals(3, result);
+        assertEquals(24, intParam.getValue().intValue());
+        assertEquals("out", stringParam.getValue());
+        assertEquals(3, result);
 
         verify(call, times(5)).execute();
         verify(call, times(5)).close();    // make sure we closed the statement
@@ -371,7 +372,7 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.INTEGER, Integer.class);
         runner.execute("{?= call my_proc()}", handler, intParam);
 
-        Assert.assertEquals(42, intParam.getValue().intValue());
+        assertEquals(42, intParam.getValue().intValue());
 
         verify(call, times(3)).execute();
         verify(results, times(3)).close();
@@ -384,7 +385,7 @@ public class QueryRunnerTest {
         intParam.setValue(null);
         runner.execute("{?= call my_proc(?, ?)}", handler, intParam, "unit", "test");
 
-        Assert.assertEquals(4242, intParam.getValue().intValue());
+        assertEquals(4242, intParam.getValue().intValue());
 
         verify(call, times(4)).execute();
         verify(results, times(4)).close();
@@ -400,8 +401,8 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         runner.execute("{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
 
-        Assert.assertEquals(24, intParam.getValue().intValue());
-        Assert.assertEquals("out", stringParam.getValue());
+        assertEquals(24, intParam.getValue().intValue());
+        assertEquals("out", stringParam.getValue());
 
         verify(call, times(5)).execute();
         verify(results, times(5)).close();
@@ -436,7 +437,7 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.INTEGER, Integer.class);
         runner.execute(conn, "{?= call my_proc()}", handler, intParam);
 
-        Assert.assertEquals(42, intParam.getValue().intValue());
+        assertEquals(42, intParam.getValue().intValue());
 
         verify(call, times(3)).execute();
         verify(results, times(3)).close();
@@ -449,7 +450,7 @@ public class QueryRunnerTest {
         intParam.setValue(null);
         runner.execute(conn, "{?= call my_proc(?, ?)}", handler, intParam, "unit", "test");
 
-        Assert.assertEquals(4242, intParam.getValue().intValue());
+        assertEquals(4242, intParam.getValue().intValue());
 
         verify(call, times(4)).execute();
         verify(results, times(4)).close();
@@ -465,8 +466,8 @@ public class QueryRunnerTest {
             new OutParameter<>(Types.VARCHAR, String.class, "in");
         runner.execute(conn, "{?= call my_proc(?, ?)}", handler, intParam, "test", stringParam);
 
-        Assert.assertEquals(24, intParam.getValue().intValue());
-        Assert.assertEquals("out", stringParam.getValue());
+        assertEquals(24, intParam.getValue().intValue());
+        assertEquals("out", stringParam.getValue());
 
         verify(call, times(5)).execute();
         verify(results, times(5)).close();
@@ -618,7 +619,7 @@ public class QueryRunnerTest {
         }
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(dataSource.getConnection()).thenReturn(conn);
 
@@ -649,10 +650,12 @@ public class QueryRunnerTest {
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testBadPrepareConnection() throws Exception {
-        runner = new QueryRunner();
-        runner.update("update blah set unit = test");
+        assertThrows(SQLException.class, () -> {
+            runner = new QueryRunner();
+            runner.update("update blah set unit = test");
+        });
     }
 
     @Test
@@ -694,7 +697,7 @@ public class QueryRunnerTest {
         when(meta.getParameterCount()).thenReturn(0);
         final List<Object[]> objects = runner.execute("{call my_proc()}", handler);
 
-        Assert.assertEquals(3, objects.size());
+        assertEquals(3, objects.size());
         verify(call, times(1)).execute();
         verify(results, times(3)).close();
         verify(call, times(1)).close();    // make sure we closed the statement
@@ -714,10 +717,12 @@ public class QueryRunnerTest {
         runner.fillStatementWithBean(prepStmt, bean, "a", "b", "c");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testFillStatementWithBeanNullNames() throws Exception {
-        final MyBean bean = new MyBean();
-        runner.fillStatementWithBean(prepStmt, bean, "a", "b", null);
+        assertThrows(NullPointerException.class, () -> {
+            final MyBean bean = new MyBean();
+            runner.fillStatementWithBean(prepStmt, bean, "a", "b", null);
+        });
     }
 
     @Test
@@ -766,7 +771,7 @@ public class QueryRunnerTest {
         verify(prepStmt, times(1)).close(); // make sure we closed the statement
         verify(conn, times(1)).close(); // make sure we closed the connection
 
-        Assert.assertEquals(2, generatedKeys.size());
+        assertEquals(2, generatedKeys.size());
     }
 
     @Test
@@ -827,7 +832,7 @@ public class QueryRunnerTest {
         verify(prepStmt, times(1)).close(); // make sure we closed the statement
         verify(conn, times(1)).close(); // make sure we closed the connection
 
-        Assert.assertEquals(1L, generatedKey.longValue());
+        assertEquals(1L, generatedKey.longValue());
     }
 
     @Test
@@ -884,67 +889,82 @@ public class QueryRunnerTest {
         callGoodUpdate();
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullConnectionBatch() throws Exception {
-        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
+        assertThrows(SQLException.class, () -> {
+            final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
-        when(dataSource.getConnection()).thenReturn(null);
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.batch("select * from blah where ? = ?", params);
+            runner.batch("select * from blah where ? = ?", params);
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullConnectionExecute() throws Exception {
-        when(dataSource.getConnection()).thenReturn(null);
+        assertThrows(SQLException.class, () -> {
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.execute("{call my_proc(?, ?)}", "unit", "test");
+            runner.execute("{call my_proc(?, ?)}", "unit", "test");
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullConnectionExecuteWithResultSet() throws Exception {
-        when(dataSource.getConnection()).thenReturn(null);
+        assertThrows(SQLException.class, () -> {
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.execute("{call my_proc(?, ?)}", handler, "unit", "test");
+            runner.execute("{call my_proc(?, ?)}", handler, "unit", "test");
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullConnectionQuery() throws Exception {
-        when(dataSource.getConnection()).thenReturn(null);
+        assertThrows(SQLException.class, () -> {
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.query("select * from blah where ? = ?", handler, "unit", "test");
+            runner.query("select * from blah where ? = ?", handler, "unit", "test");
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullConnectionUpdate() throws Exception {
-        when(dataSource.getConnection()).thenReturn(null);
+        assertThrows(SQLException.class, () -> {
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.update("select * from blah where ? = ?", "unit", "test");
+            runner.update("select * from blah where ? = ?", "unit", "test");
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullHandlerExecute() throws Exception {
-        when(meta.getParameterCount()).thenReturn(2);
+        assertThrows(SQLException.class, () -> {
+            when(meta.getParameterCount()).thenReturn(2);
 
-        runner.execute("{call my_proc(?, ?)}");
+            runner.execute("{call my_proc(?, ?)}");
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullHandlerExecuteWithResultSet() throws Exception {
-        runner.execute("{call my_proc(?, ?)}", (ResultSetHandler) null);
+        assertThrows(SQLException.class, () ->
+            runner.execute("{call my_proc(?, ?)}", (ResultSetHandler) null));
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullHandlerQuery() throws Exception {
-        runner.query("select * from blah where ? = ?", null);
+        assertThrows(SQLException.class, () ->
+            runner.query("select * from blah where ? = ?", null));
     }
 
     //
     // Execute with ResultSetHandler
     //
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullParamsArgBatch() throws Exception {
-        runner.batch("select * from blah where ? = ?", null);
+        assertThrows(SQLException.class, () ->
+            runner.batch("select * from blah where ? = ?", null));
     }
 
     @Test
@@ -954,31 +974,37 @@ public class QueryRunnerTest {
         callGoodBatch(params);
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullSqlBatch() throws Exception {
-        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
+        assertThrows(SQLException.class, () -> {
+            final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
-        runner.batch(null, params);
+            runner.batch(null, params);
+        });
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullSqlExecute() throws Exception {
-        runner.execute(null);
+        assertThrows(SQLException.class, () ->
+            runner.execute(null));
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullSqlExecuteWithResultSet() throws Exception {
-        runner.execute(null, handler);
+        assertThrows(SQLException.class, () ->
+            runner.execute(null, handler));
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullSqlQuery() throws Exception {
-        runner.query(null, handler);
+        assertThrows(SQLException.class, () ->
+            runner.query(null, handler));
     }
 
-    @Test(expected = SQLException.class)
+    @Test
     public void testNullSqlUpdate() throws Exception {
-        runner.update(null);
+        assertThrows(SQLException.class, () ->
+            runner.update(null));
     }
 
     @Test

@@ -16,7 +16,8 @@
  */
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -38,29 +39,29 @@ import java.util.concurrent.TimeUnit;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.handlers.ArrayHandler;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @SuppressWarnings("boxing") // test code
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class AsyncQueryRunnerTest {
     private AsyncQueryRunner runner;
     private ArrayHandler handler;
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private DataSource dataSource;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private Connection conn;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private PreparedStatement prepStmt;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private Statement stmt;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ParameterMetaData meta;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ResultSet results;
 
     // helper method for calling batch when an exception is expected
@@ -255,7 +256,7 @@ public class AsyncQueryRunnerTest {
         }
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(dataSource.getConnection()).thenReturn(conn);
 
@@ -282,10 +283,12 @@ public class AsyncQueryRunnerTest {
     //
     // Random tests
     //
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testBadPrepareConnection() throws Exception {
-        runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
-        runner.update("update blah set unit = test").get();
+        assertThrows(ExecutionException.class, () -> {
+            runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
+            runner.update("update blah set unit = test").get();
+        });
     }
 
     @Test
@@ -397,37 +400,45 @@ public class AsyncQueryRunnerTest {
         callGoodUpdate();
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullConnectionBatch() throws Exception {
-        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
+        assertThrows(ExecutionException.class, () -> {
+            final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
-        when(dataSource.getConnection()).thenReturn(null);
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.batch("select * from blah where ? = ?", params).get();
+            runner.batch("select * from blah where ? = ?", params).get();
+        });
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullConnectionQuery() throws Exception {
-        when(dataSource.getConnection()).thenReturn(null);
+        assertThrows(ExecutionException.class, () -> {
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.query("select * from blah where ? = ?", handler, "unit", "test").get();
+            runner.query("select * from blah where ? = ?", handler, "unit", "test").get();
+        });
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullConnectionUpdate() throws Exception {
-        when(dataSource.getConnection()).thenReturn(null);
+        assertThrows(ExecutionException.class, () -> {
+            when(dataSource.getConnection()).thenReturn(null);
 
-        runner.update("select * from blah where ? = ?", "unit", "test").get();
+            runner.update("select * from blah where ? = ?", "unit", "test").get();
+        });
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullHandlerQuery() throws Exception {
-        runner.query("select * from blah where ? = ?", null).get();
+        assertThrows(ExecutionException.class, () ->
+            runner.query("select * from blah where ? = ?", null).get());
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullParamsArgBatch() throws Exception {
-        runner.batch("select * from blah where ? = ?", null).get();
+        assertThrows(ExecutionException.class, () ->
+            runner.batch("select * from blah where ? = ?", null).get());
     }
 
     @Test
@@ -437,21 +448,25 @@ public class AsyncQueryRunnerTest {
         callGoodBatch(params);
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullSqlBatch() throws Exception {
-        final String[][] params = { { "unit", "unit" }, { "test", "test" } };
+        assertThrows(ExecutionException.class, () -> {
+            final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
-        runner.batch(null, params).get();
+            runner.batch(null, params).get();
+        });
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullSqlQuery() throws Exception {
-        runner.query(null, handler).get();
+        assertThrows(ExecutionException.class, () ->
+            runner.query(null, handler).get());
     }
 
-    @Test(expected = ExecutionException.class)
+    @Test
     public void testNullSqlUpdate() throws Exception {
-        runner.update(null).get();
+        assertThrows(ExecutionException.class, () ->
+            runner.update(null).get());
     }
 
     @Test

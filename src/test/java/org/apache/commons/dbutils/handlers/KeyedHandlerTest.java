@@ -16,6 +16,9 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.sql.SQLException;
@@ -25,9 +28,11 @@ import java.util.Map.Entry;
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
+import org.junit.jupiter.api.Test;
 
 public class KeyedHandlerTest extends BaseTestCase {
 
+    @Test
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(2);
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());
@@ -49,6 +54,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertEquals("SIX", row.get("Three"));
     }
 
+    @Test
     public void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<Map<Integer, Map<String, Object>>> h = new KeyedHandler<>("intTest");
         final Map<Integer, Map<String, Object>> results = h.handle(getResultSet());
@@ -70,6 +76,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertEquals("SIX", row.get("Three"));
     }
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
         final Map<String, Map<String, Object>> results = h.handle(getEmptyResultSet());
@@ -77,6 +84,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertTrue(results.isEmpty());
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
 
@@ -99,6 +107,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         assertEquals("THREE", row.get("Three"));
     }
 
+    @Test
     public void testInjectedRowProcess() throws Exception {
         final RowProcessor mockProc = mock(RowProcessor.class);
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(mockProc);

@@ -17,7 +17,7 @@
 
 package org.apache.commons.dbutils;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
@@ -27,13 +27,13 @@ import static org.mockito.Mockito.when;
 import java.sql.CallableStatement;
 import java.sql.Types;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class OutParameterTest {
     private static final int INDEX = 2;
     private static final int VALUE = 42;
@@ -43,7 +43,7 @@ public class OutParameterTest {
 
     private OutParameter<Number> parameter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         parameter = new OutParameter<>(Types.INTEGER, Number.class);
     }

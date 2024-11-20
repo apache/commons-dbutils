@@ -16,8 +16,8 @@
  */
 package org.apache.commons.dbutils.handlers;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.sql.ResultSet;
@@ -26,22 +26,22 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.RowProcessor;
 import org.apache.commons.dbutils.TestBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class BeanMapHandlerTest {
 
     private BeanMapHandler<Long, TestBean> bmh;
     private Map<Long, TestBean> res;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ResultSet rs;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private ResultSetMetaData rsmd;
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private RowProcessor rp;
 
     private void handle() throws Exception {
@@ -49,7 +49,7 @@ public class BeanMapHandlerTest {
         assertNotNull(res.get(Long.valueOf(23L)));
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(Boolean.valueOf(rs.next())).thenReturn(Boolean.TRUE, Boolean.FALSE);
         when(rs.getObject(1)).thenReturn(Long.valueOf(23L));

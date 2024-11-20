@@ -16,13 +16,19 @@
  */
 package org.apache.commons.dbutils.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.junit.jupiter.api.Test;
 
 public class ScalarHandlerTest extends BaseTestCase {
 
+    @Test
     public void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>(2);
         final Object results = h.handle(getResultSet());
@@ -30,6 +36,7 @@ public class ScalarHandlerTest extends BaseTestCase {
         assertEquals("2", results);
     }
 
+    @Test
     public void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<Integer> h = new ScalarHandler<>("intTest");
         final Object results = h.handle(getResultSet());
@@ -37,12 +44,14 @@ public class ScalarHandlerTest extends BaseTestCase {
         assertEquals(Integer.valueOf(1), results);
     }
 
+    @Test
     public void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>();
         final Object results = h.handle(getEmptyResultSet());
         assertNull(results);
     }
 
+    @Test
     public void testHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>();
         final Object results = h.handle(getResultSet());

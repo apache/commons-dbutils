@@ -16,22 +16,22 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DatePropertyHandlerTest {
     private DatePropertyHandler handler;
     private Date testValue;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.handler = new DatePropertyHandler();
         this.testValue = new Date();

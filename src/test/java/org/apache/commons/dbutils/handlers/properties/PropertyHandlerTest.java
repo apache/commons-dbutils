@@ -16,18 +16,18 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ServiceLoader;
 
 import org.apache.commons.dbutils.PropertyHandler;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PropertyHandlerTest {
     private ServiceLoader<PropertyHandler> loader;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         loader = ServiceLoader.load(PropertyHandler.class);
     }
