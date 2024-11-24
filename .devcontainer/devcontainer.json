@@ -4,7 +4,7 @@
 	"name": "Java & PostgreSQL",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"workspaceFolder": "/workspaces/common-dbutils",
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {}
 	}
