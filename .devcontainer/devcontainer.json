@@ -4,7 +4,7 @@
 	"name": "Java",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/workspaces/common-dbutils",
+	"workspaceFolder": "/workspaces/commons-dbutils",
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {}
 	}
