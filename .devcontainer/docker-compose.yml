@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: commons-dbutils
+    build: 
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../..:/workspaces:cached
+      
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity

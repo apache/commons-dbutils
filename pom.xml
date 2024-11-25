@@ -152,6 +152,12 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <excludes>
+            <exclude>.devcontainer/Dockerfile</exclude>
+            <exclude>.devcontainer/docker-compose.yml</exclude>
+          </excludes>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
