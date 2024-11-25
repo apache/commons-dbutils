@@ -61,12 +61,6 @@ public class TestBean {
      */
     private double columnProcessorDoubleTest = -1;
 
-    /**
-     * Constructor for TestBean.
-     */
-    public TestBean() {
-    }
-
     public double getColumnProcessorDoubleTest() {
         return columnProcessorDoubleTest;
     }
