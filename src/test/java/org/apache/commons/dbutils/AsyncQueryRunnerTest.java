@@ -31,6 +31,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -39,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.handlers.ArrayHandler;
+import org.apache.commons.lang3.stream.Streams;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -372,18 +375,14 @@ public class AsyncQueryRunnerTest {
 
     @Test
     public void testInsertUsesGivenQueryRunner() throws Exception {
-        final QueryRunner mockQueryRunner = mock(QueryRunner.class, org.mockito.Mockito.withSettings().verboseLogging() // debug for Continuum
-        );
+        final QueryRunner mockQueryRunner = mock(QueryRunner.class, org.mockito.Mockito.withSettings().verboseLogging()); // debug for Continuum
         runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
-
-        runner.insert("1", handler);
-        runner.insert("2", handler, "param1");
-        runner.insert(conn, "3", handler);
-        runner.insert(conn, "4", handler, "param1");
-
-        // give the Executor time to submit all insert statements. Otherwise the following verify statements will fail from time to time.
-        TimeUnit.MILLISECONDS.sleep(50);
-
+        final List<Future<Object[]>> futures = new ArrayList<>();
+        futures.add(runner.insert("1", handler));
+        futures.add(runner.insert("2", handler, "param1"));
+        futures.add(runner.insert(conn, "3", handler));
+        futures.add(runner.insert(conn, "4", handler, "param1"));
+        Streams.failableStream(futures).forEach(f -> f.get(10, TimeUnit.SECONDS));
         verify(mockQueryRunner).insert("1", handler);
         verify(mockQueryRunner).insert("2", handler, "param1");
         verify(mockQueryRunner).insert(conn, "3", handler);
