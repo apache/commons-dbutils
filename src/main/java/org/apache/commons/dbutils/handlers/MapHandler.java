@@ -64,7 +64,6 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
      * {@code null} if there are no rows in the {@code ResultSet}.
      *
      * @throws SQLException if a database access error occurs
-     *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     @Override

@@ -128,7 +128,6 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * configured key column name or index.
      * @param rs ResultSet to create a key from
      * @return Object from the configured key column name/index
-     *
      * @throws SQLException if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type
      */

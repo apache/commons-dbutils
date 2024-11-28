@@ -46,7 +46,6 @@ import java.util.ServiceLoader;
  * </p>
  *
  * @see BasicRowProcessor
- *
  * @since 1.1
  */
 public class BeanProcessor {
@@ -211,9 +210,7 @@ public class BeanProcessor {
      * information.
      *
      * @param props The bean property descriptors.
-     *
      * @throws SQLException if a database access error occurs
-     *
      * @return An int[] with column index to property index mappings.  The 0th
      * element is meaningless because JDBC column indexing starts at 1.
      */
@@ -384,12 +381,10 @@ public class BeanProcessor {
      * positioned on a valid row before being passed into this method.
      *
      * @param index The current column index being processed.
-     *
      * @param propType The bean property type that this column needs to be
      * converted into.
      *
      * @throws SQLException if a database access error occurs
-     *
      * @return The object from the {@code ResultSet} at the given column
      * index after optional type processing or {@code null} if the column
      * value was SQL NULL.

@@ -84,10 +84,8 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
      * Returns one {@code ResultSet} column value as {@code Object}.
      * @param resultSet {@code ResultSet} to process.
      * @return {@code Object}, never {@code null}.
-     *
      * @throws SQLException if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type
-     *
      * @see org.apache.commons.dbutils.handlers.AbstractListHandler#handle(ResultSet)
      */
     // We assume that the user has picked the correct type to match the column

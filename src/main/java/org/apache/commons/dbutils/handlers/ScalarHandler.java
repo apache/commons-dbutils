@@ -90,7 +90,6 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      *
      * @throws SQLException if a database access error occurs
      * @throws ClassCastException if the class datatype does not match the column type
-     *
      * @see org.apache.commons.dbutils.ResultSetHandler#handle(java.sql.ResultSet)
      */
     // We assume that the user has picked the correct type to match the column
