@@ -79,10 +79,10 @@ public class BeanProcessor {
         PRIMITIVE_DEFAULTS.put(Character.TYPE, Character.valueOf((char) 0));
 
         // Use a ServiceLoader to find implementations
-        ServiceLoader.load(ColumnHandler.class).forEach(COLUMN_HANDLERS::add);
+        ServiceLoader.load(ColumnHandler.class, BeanProcessor.class.getClassLoader()).forEach(COLUMN_HANDLERS::add);
 
         // Use a ServiceLoader to find implementations
-        ServiceLoader.load(PropertyHandler.class).forEach(PROPERTY_HANDLERS::add);
+        ServiceLoader.load(PropertyHandler.class, BeanProcessor.class.getClassLoader()).forEach(PROPERTY_HANDLERS::add);
     }
 
     /**
