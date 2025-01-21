@@ -236,6 +236,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
             assertEquals(expectedItem, actualItem, "Array not equal at index " + i);
         }
     }
+
     private SqlNullCheckedResultSet rs2;
 
     /**
@@ -343,8 +344,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertTrue(rs.wasNull());
         // Set what gets returned to something other than the default
         rs2.setNullBoolean(true);
-        assertTrue( rs.getBoolean(1));
-        assertTrue( rs.getBoolean("column"));
+        assertTrue(rs.getBoolean(1));
+        assertTrue(rs.getBoolean("column"));
 
     }
 
@@ -736,8 +737,8 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
         assertFalse(rs2.getNullBoolean());
         // Set what gets returned to something other than the default
         rs2.setNullBoolean(true);
-        assertTrue( rs.getBoolean(1));
-        assertTrue( rs.getBoolean("column"));
+        assertTrue(rs.getBoolean(1));
+        assertTrue(rs.getBoolean("column"));
 
     }
 

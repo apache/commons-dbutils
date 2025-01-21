@@ -389,24 +389,18 @@ public class BeanProcessor {
      * index after optional type processing or {@code null} if the column
      * value was SQL NULL.
      */
-    protected Object processColumn(final ResultSet resultSet, final int index, final Class<?> propType)
-        throws SQLException {
-
+    protected Object processColumn(final ResultSet resultSet, final int index, final Class<?> propType) throws SQLException {
         Object retval = resultSet.getObject(index);
-
-        if ( !propType.isPrimitive() && retval == null ) {
+        if (!propType.isPrimitive() && retval == null) {
             return null;
         }
-
         for (final ColumnHandler<?> handler : COLUMN_HANDLERS) {
             if (handler.match(propType)) {
                 retval = handler.apply(resultSet, index);
                 break;
             }
         }
-
         return retval;
-
     }
 
     /**
