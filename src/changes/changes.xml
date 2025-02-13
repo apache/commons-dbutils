@@ -43,7 +43,7 @@ The <action> type attribute can be add,update,fix,remove.
     <title>Apache Commons DBUtils Release Notes</title>
   </properties>
   <body>
-    <release version="1.9.0" date="YYYY-MM-DD" description="New features and bug fixes.">
+    <release version="1.9.0" date="YYYY-MM-DD" description="This is a feature release and requires Java 11.">
       <!-- FIX -->
       <action type="fix" dev="ggregory" due-to="sanjanarampurkottur01, Gary Gregory">Switch on String instead of cascading if-else in MockResultSet #220.</action>
       <action type="fix" dev="ggregory" due-to="sanjanarampurkottur01, Gary Gregory">Encapsulate test fields #222.</action>
@@ -60,7 +60,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.mockito:mockito-core from 4.11.0 to 5.14.2 #325</action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">Bump org.mockito:mockito-junit-jupiter from 5.14.2 to 5.15.2 #336.</action>
     </release>
-    <release version="1.8.1" date="2023-09-09" description="New features and bug fixes.">
+    <release version="1.8.1" date="2023-09-09" description="This is a feature release and requires Java 8.">
       <!-- FIX -->
       <action type="fix" dev="ggregory" issue="DBUTILS-151" due-to="mark, Gary Gregory">
         Module org.apache.commons.dbutils does not declare `uses`.
@@ -71,7 +71,7 @@ The <action> type attribute can be add,update,fix,remove.
         Bump commons-parent from 61 to 62.
       </action>
     </release>
-    <release version="1.8.0" date="2023-08-01" description="New features and bug fixes.">
+    <release version="1.8.0" date="2023-08-01" description="This is a feature release and requires Java 8.">
       <!-- FIX -->
       <action dev="thecarlhall" type="fix" issue="DBUTILS-131" due-to="yairlenga">
         Speedup query calls without parameters; Use PreparedStatement only when parameters are present.
@@ -169,7 +169,7 @@ The <action> type attribute can be add,update,fix,remove.
         Bump commons.japicmp.version from 0.14.3 to 0.16.0.
       </action>
     </release>
-    <release version="1.7" date="2017-07-20" description="Bug fixes and separate column &amp; property handlers using SPI">
+    <release version="1.7" date="2017-07-20" description="This is a feature release and requires Java 6. Bug fixes and separate column &amp; property handlers using SPI">
       <action dev="sebb" type="update" issue="DBUTILS-117" due-to="Vadim Smirnov">
         Error handling possible getParameterMetaData() results
         - allow for null return
