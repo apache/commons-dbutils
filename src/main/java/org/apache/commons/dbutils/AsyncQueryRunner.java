@@ -223,7 +223,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
      * Constructor for AsyncQueryRunner that controls the use of {@code ParameterMetaData}.
      *
-     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
@@ -240,7 +240,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * {@code DataSource}.
      *
      * @param ds The {@code DataSource} to retrieve connections from.
-     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.

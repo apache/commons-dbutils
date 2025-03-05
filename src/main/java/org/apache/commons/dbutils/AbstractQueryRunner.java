@@ -71,7 +71,7 @@ public abstract class AbstractQueryRunner {
      *
      * @param pmdKnownBroken
      *            Some drivers don't support
-     *            {@link ParameterMetaData#getParameterType(int) }; if
+     *            {@link ParameterMetaData#getParameterType(int)}; if
      *            {@code pmdKnownBroken} is set to true, we won't even try
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
@@ -105,7 +105,7 @@ public abstract class AbstractQueryRunner {
      *            The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken
      *            Some drivers don't support
-     *            {@link ParameterMetaData#getParameterType(int) }; if
+     *            {@link ParameterMetaData#getParameterType(int)}; if
      *            {@code pmdKnownBroken} is set to true, we won't even try
      *            it; if false, we'll try it, and if it breaks, we'll remember
      *            not to use it again.
@@ -122,7 +122,7 @@ public abstract class AbstractQueryRunner {
      * will retrieve connections from this {@code DataSource}.
      *
      * @param ds The {@code DataSource} to retrieve connections from.
-     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
@@ -467,13 +467,13 @@ public abstract class AbstractQueryRunner {
 
     /**
      * Some drivers don't support
-     * {@link ParameterMetaData#getParameterType(int) }; if
+     * {@link ParameterMetaData#getParameterType(int)}; if
      * {@code pmdKnownBroken} is set to true, we won't even try it; if
      * false, we'll try it, and if it breaks, we'll remember not to use it
      * again.
      *
      * @return the flag to skip (or not)
-     *         {@link ParameterMetaData#getParameterType(int) }
+     *         {@link ParameterMetaData#getParameterType(int)}
      * @since 1.4
      */
     public boolean isPmdKnownBroken() {

@@ -25,7 +25,7 @@ import java.sql.SQLException;
  * procedure with {@link QueryRunner}, pass an instance of
  * {@code OutParameter} to indicate that the parameter at that index is an
  * OUT parameter.  The value of the parameter may be obtained from the
- * {@code OutParameter} instance via {@link #getValue() }.
+ * {@code OutParameter} instance via {@link #getValue()}.
  * <p>
  * INOUT parameters are also supported by setting the {@code value} of
  * the {@code OutParameter} instance before invoking the stored procedure.

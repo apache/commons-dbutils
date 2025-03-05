@@ -45,7 +45,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Constructor for QueryRunner that controls the use of {@code ParameterMetaData}.
      *
-     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
@@ -71,7 +71,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * {@code DataSource}.
      *
      * @param ds The {@code DataSource} to retrieve connections from.
-     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      */
@@ -85,7 +85,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * will retrieve connections from this {@code DataSource}.
      *
      * @param ds The {@code DataSource} to retrieve connections from.
-     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int) };
+     * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param stmtConfig The configuration to apply to statements when they are prepared.
@@ -194,9 +194,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * Use this method when invoking a stored procedure with OUT parameters
      * that does not return any result sets.  If you are not invoking a stored
      * procedure, or the stored procedure has no OUT parameters, consider using
-     * {@link #update(java.sql.Connection, String, Object...) }.
+     * {@link #update(java.sql.Connection, String, Object...)}.
      * If the stored procedure returns result sets, use
-     * {@link #execute(java.sql.Connection, String, org.apache.commons.dbutils.ResultSetHandler, Object...) }.
+     * {@link #execute(java.sql.Connection, String, org.apache.commons.dbutils.ResultSetHandler, Object...)}.
      *
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
@@ -242,9 +242,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * Use this method when: a) running SQL statements that return multiple
      * result sets; b) invoking a stored procedure that return result
      * sets and OUT parameters.  Otherwise you may wish to use
-     * {@link #query(java.sql.Connection, String, org.apache.commons.dbutils.ResultSetHandler, Object...) }
+     * {@link #query(java.sql.Connection, String, org.apache.commons.dbutils.ResultSetHandler, Object...)}
      * (if there are no OUT parameters) or
-     * {@link #execute(java.sql.Connection, String, Object...) }
+     * {@link #execute(java.sql.Connection, String, Object...)}
      * (if there are no result sets).
      *
      * @param <T> The type of object that the handler returns
@@ -306,9 +306,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * Use this method when invoking a stored procedure with OUT parameters
      * that does not return any result sets.  If you are not invoking a stored
      * procedure, or the stored procedure has no OUT parameters, consider using
-     * {@link #update(String, Object...) }.
+     * {@link #update(String, Object...)}.
      * If the stored procedure returns result sets, use
-     * {@link #execute(String, org.apache.commons.dbutils.ResultSetHandler, Object...) }.
+     * {@link #execute(String, org.apache.commons.dbutils.ResultSetHandler, Object...)}.
      * <p>
      * The {@code Connection} is retrieved from the {@code DataSource}
      * set in the constructor.  This {@code Connection} must be in
@@ -334,9 +334,9 @@ public class QueryRunner extends AbstractQueryRunner {
      * Use this method when: a) running SQL statements that return multiple
      * result sets; b) invoking a stored procedure that return result
      * sets and OUT parameters.  Otherwise you may wish to use
-     * {@link #query(String, org.apache.commons.dbutils.ResultSetHandler, Object...) }
+     * {@link #query(String, org.apache.commons.dbutils.ResultSetHandler, Object...)}
      * (if there are no OUT parameters) or
-     * {@link #execute(String, Object...) }
+     * {@link #execute(String, Object...)}
      * (if there are no result sets).
      *
      * @param <T> The type of object that the handler returns
