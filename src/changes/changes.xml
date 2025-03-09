@@ -57,7 +57,7 @@ The <action> type attribute can be add,update,fix,remove.
       <!-- UPDATE -->
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java from 8 to 11.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump commons-parent from 62 to 78 #256, #277, #295, #301, #305, #308, #314.</action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.mockito:mockito-core from 4.11.0 to 5.14.2 #325</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.mockito:mockito-core from 4.11.0 to 5.16.0 #325</action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">Bump org.mockito:mockito-junit-jupiter from 5.14.2 to 5.15.2 #336.</action>
     </release>
     <release version="1.8.1" date="2023-09-09" description="This is a feature release and requires Java 8.">
