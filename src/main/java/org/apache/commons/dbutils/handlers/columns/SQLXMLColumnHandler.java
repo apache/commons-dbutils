@@ -22,7 +22,17 @@ import java.sql.SQLXML;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link SQLXML} column handler.
+ */
 public class SQLXMLColumnHandler implements ColumnHandler<SQLXML> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public SQLXMLColumnHandler() {
+        // empty
+    }
 
     @Override
     public SQLXML apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

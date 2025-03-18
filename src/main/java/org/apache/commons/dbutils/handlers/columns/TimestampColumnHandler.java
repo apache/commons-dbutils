@@ -22,7 +22,17 @@ import java.sql.Timestamp;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Timestamp} column handler.
+ */
 public class TimestampColumnHandler implements ColumnHandler<Timestamp> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public TimestampColumnHandler() {
+        // empty
+    }
 
     @Override
     public Timestamp apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

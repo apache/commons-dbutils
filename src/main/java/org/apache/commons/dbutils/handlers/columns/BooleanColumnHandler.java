@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Boolean} column handler.
+ */
 public class BooleanColumnHandler implements ColumnHandler<Boolean> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public BooleanColumnHandler() {
+        // empty
+    }
 
     @Override
     public Boolean apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

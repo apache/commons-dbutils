@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Double} column handler.
+ */
 public class DoubleColumnHandler implements ColumnHandler<Double> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public DoubleColumnHandler() {
+        // empty
+    }
 
     @Override
     public Double apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

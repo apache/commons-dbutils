@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Short} column handler.
+ */
 public class ShortColumnHandler implements ColumnHandler<Short> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public ShortColumnHandler() {
+        // empty
+    }
 
     @Override
     public Short apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Long} column handler.
+ */
 public class LongColumnHandler implements ColumnHandler<Long> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public LongColumnHandler() {
+        // empty
+    }
 
     @Override
     public Long apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

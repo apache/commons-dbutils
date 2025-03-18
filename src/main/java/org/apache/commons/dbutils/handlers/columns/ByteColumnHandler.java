@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Byte} column handler.
+ */
 public class ByteColumnHandler implements ColumnHandler<Byte> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public ByteColumnHandler() {
+        // empty
+    }
 
     @Override
     public Byte apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

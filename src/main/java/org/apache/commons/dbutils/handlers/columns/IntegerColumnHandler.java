@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Integer} column handler.
+ */
 public class IntegerColumnHandler implements ColumnHandler<Integer> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public IntegerColumnHandler() {
+        // empty
+    }
 
     @Override
     public Integer apply(final ResultSet resultSet, final int columnIndex) throws SQLException {

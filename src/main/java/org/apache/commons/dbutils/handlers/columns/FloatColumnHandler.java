@@ -21,7 +21,17 @@ import java.sql.SQLException;
 
 import org.apache.commons.dbutils.ColumnHandler;
 
+/**
+ * A {@link Float} column handler.
+ */
 public class FloatColumnHandler implements ColumnHandler<Float> {
+
+    /**
+     * Constructs a new instance.
+     */
+    public FloatColumnHandler() {
+        // empty
+    }
 
     @Override
     public Float apply(final ResultSet resultSet, final int columnIndex) throws SQLException {
