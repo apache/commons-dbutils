@@ -17,12 +17,15 @@
 package org.apache.commons.dbutils;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.ResultSet;
@@ -260,10 +263,36 @@ public class DbUtilsTest {
     }
 
     @Test
+    public void testConstructor() throws Exception {
+        // For compatibility only
+        new DbUtils();
+    }
+
+    @Test
+    public void testLoadDriverClassLoaderH2() throws Exception {
+        assertTrue(DbUtils.loadDriver(DbUtils.class.getClassLoader(), "org.h2.Driver"));
+    }
+
+    @Test
+    public void testLoadDriverH2() throws Exception {
+        assertTrue(DbUtils.loadDriver("org.h2.Driver"));
+    }
+
+    @Test
     public void testLoadDriverReturnsFalse() {
-
         assertFalse(DbUtils.loadDriver(""));
+    }
 
+    @Test
+    public void testPrintStackTraceSQLException() {
+        DbUtils.printStackTrace(new SQLException());
+    }
+
+    @Test
+    public void testPrintStackTraceSQLExceptionPrintWriter() {
+        final PrintWriter pw = new PrintWriter(new StringWriter());
+        DbUtils.printStackTrace(new SQLException(), pw);
+        assertFalse(pw.toString().isEmpty());
     }
 
     @Test
