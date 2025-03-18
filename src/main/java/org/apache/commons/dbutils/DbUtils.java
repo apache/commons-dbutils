@@ -420,7 +420,9 @@ public final class DbUtils {
      * but this one preserves retro-compatibility.
      *
      * @since 1.4
+     * @deprecated Will be private in the next major release.
      */
+    @Deprecated
     public DbUtils() {
         // do nothing
     }
