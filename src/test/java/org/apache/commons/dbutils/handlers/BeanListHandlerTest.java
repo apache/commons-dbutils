@@ -64,7 +64,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         final List<TestBean> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         final Iterator<TestBean> iter = results.iterator();
         TestBean row;
@@ -92,7 +92,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         final List<SubTestBeanInterface> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         final Iterator<SubTestBeanInterface> iter = results.iterator();
         SubTestBeanInterface row;
@@ -123,7 +123,7 @@ public class BeanListHandlerTest extends BaseTestCase {
         final List<TestBean> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         final Iterator<TestBean> iter = results.iterator();
         assertTrue(iter.hasNext());

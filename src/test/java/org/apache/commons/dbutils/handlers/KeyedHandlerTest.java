@@ -38,7 +38,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         Map<String, Object> row = null;
         for (final Entry<String, Map<String, Object>> entry : results.entrySet()) {
@@ -46,7 +46,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
-            assertEquals(COLS, row.size());
+            assertEquals(COLUMN_COUNT, row.size());
         }
         row = results.get("5");
         assertEquals("4", row.get("one"));
@@ -60,7 +60,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         final Map<Integer, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         Map<String, Object> row = null;
         for (final Entry<Integer, Map<String, Object>> entry : results.entrySet()) {
@@ -68,7 +68,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
-            assertEquals(COLS, row.size());
+            assertEquals(COLUMN_COUNT, row.size());
         }
         row = results.get(Integer.valueOf(3));
         assertEquals("4", row.get("one"));
@@ -91,7 +91,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         Map<String, Object> row = null;
         for (final Entry<String, Map<String, Object>> entry : results.entrySet()) {
@@ -99,7 +99,7 @@ public class KeyedHandlerTest extends BaseTestCase {
             assertNotNull(key);
             row = entry.getValue();
             assertNotNull(row);
-            assertEquals(COLS, row.size());
+            assertEquals(COLUMN_COUNT, row.size());
         }
         row = results.get("1");
         assertEquals("1", row.get("one"));
@@ -114,7 +114,7 @@ public class KeyedHandlerTest extends BaseTestCase {
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         Map<String, Object> row = null;
         for (final Entry<String, Map<String, Object>> entry : results.entrySet()) {

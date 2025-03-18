@@ -38,7 +38,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
         final List<String> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         assertEquals("2", results.get(0));
         assertEquals("5", results.get(1));
@@ -50,7 +50,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
         final List<Integer> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         assertEquals(Integer.valueOf(1), results.get(0));
         assertEquals(Integer.valueOf(3), results.get(1));
@@ -71,7 +71,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
         final List<String> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         assertEquals("1", results.get(0));
         assertEquals("4", results.get(1));

@@ -33,66 +33,72 @@ import org.junit.jupiter.api.Test;
  */
 public class BaseTestCase {
 
-    private static final String[] columnNames = { "one", "two", "three", "notInBean", "intTest", "integerTest", "nullObjectTest", "nullPrimitiveTest",
+    protected static final String[] COLUMN_NAMES = { "one", "two", "three", "notInBean", "intTest", "integerTest", "nullObjectTest", "nullPrimitiveTest",
             "notDate", "columnProcessorDoubleTest", null };
 
     /**
      * The number of columns in the MockResultSet.
      */
-    protected static final int COLS = columnNames.length;
+    protected static final int COLUMN_COUNT = COLUMN_NAMES.length;
 
-    protected static final ResultSetMetaData metaData = MockResultSetMetaData.create(columnNames);
+    protected static final ResultSetMetaData META_DATA = MockResultSetMetaData.create(COLUMN_NAMES);
 
     /**
      * A Timestamp for test purposes having 9 decimals
      */
-    static final Timestamp ts789456123;
+    static final Timestamp TS_789456123;
 
     static {
-        ts789456123 = new Timestamp(new Date().getTime());
-        ts789456123.setNanos(789456123);
+        TS_789456123 = new Timestamp(new Date().getTime());
+        TS_789456123.setNanos(789456123);
     }
 
     private static final Object[] row1 = { "1", "2", "THREE", "  notInBean  ", Integer.valueOf(1), Integer.valueOf(2), null, null, new Date(),
             BigInteger.valueOf(13), null };
 
-    private static final Object[] row2 = { "4", "5", "SIX", "  notInBean  ", Integer.valueOf(3), Integer.valueOf(4), null, null, ts789456123,
+    private static final Object[] row2 = { "4", "5", "SIX", "  notInBean  ", Integer.valueOf(3), Integer.valueOf(4), null, null, TS_789456123,
             BigInteger.valueOf(13), null };
 
-    private static final Object[][] rows = { row1, row2 };
+    protected static final Object[][] ROW_ARRAY = { row1, row2 };
 
     /**
      * The number of rows in the MockResultSet.
      */
-    protected static final int ROWS = rows.length;
+    protected static final int ROW_COUNT = ROW_ARRAY.length;
 
     /**
      * The ResultSet all test methods will use.
      */
-    private ResultSet rs;
+    private ResultSet resultSet;
 
     /**
      * A ResultSet with 0 rows.
      */
     private ResultSet emptyResultSet;
 
+    protected ResultSet createEmptyMockResultSet() {
+        return MockResultSet.create(META_DATA, null, false);
+    }
+
     /**
      * Creates a freshly initialized ResultSet.
+     *
+     * @return a freshly initialized ResultSet.
      */
     protected ResultSet createMockResultSet() {
-        return MockResultSet.create(metaData, rows);
+        return MockResultSet.create(META_DATA, ROW_ARRAY, false);
     }
 
     public ResultSet getEmptyResultSet() {
-        return this.emptyResultSet;
+        return emptyResultSet;
     }
 
     public ResultSet getResultSet() {
-        return this.rs;
+        return resultSet;
     }
 
     public void setResultSet(final ResultSet resultSet) {
-        this.rs = resultSet;
+        this.resultSet = resultSet;
     }
 
     /**
@@ -102,16 +108,16 @@ public class BaseTestCase {
      */
     @BeforeEach
     protected void setUp() throws Exception {
-        rs = createMockResultSet();
-        emptyResultSet = MockResultSet.create(metaData, null);
+        resultSet = createMockResultSet();
+        emptyResultSet = createEmptyMockResultSet();
     }
 
     // Test which allows Eclipse to be run on full project (avoids no tests found)
     // check that the rows are valid for the column definition
     @Test
     public void testCheckDataSizes() {
-        assertEquals(columnNames.length, row1.length, "Row 1 must contain correct number of columns");
-        assertEquals(columnNames.length, row2.length, "Row 1 must contain correct number of columns");
+        assertEquals(COLUMN_NAMES.length, row1.length, "Row 1 must contain correct number of columns");
+        assertEquals(COLUMN_NAMES.length, row2.length, "Row 1 must contain correct number of columns");
     }
 
     @Test

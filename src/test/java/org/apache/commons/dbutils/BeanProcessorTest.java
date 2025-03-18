@@ -202,7 +202,7 @@ public class BeanProcessorTest extends BaseTestCase {
         final String testField = "first";
         final Object[][] rows = { new Object[] { testField } };
 
-        final ResultSet rs = MockResultSet.create(metaData, rows);
+        final ResultSet rs = MockResultSet.create(metaData, rows, false);
         assertTrue(rs.next());
         TestNoGetter testCls = new TestNoGetter();
         testCls = beanProc.populateBean(rs, testCls);
@@ -226,7 +226,7 @@ public class BeanProcessorTest extends BaseTestCase {
         final List<String> stuff = things;
         final Object[][] rows = { new Object[] { name, things, stuff } };
 
-        final ResultSet rs = MockResultSet.create(metaData, rows);
+        final ResultSet rs = MockResultSet.create(metaData, rows, false);
         assertTrue(rs.next());
         IndexedPropertyTestClass testCls = new IndexedPropertyTestClass();
         testCls = beanProc.populateBean(rs, testCls);
@@ -318,7 +318,7 @@ public class BeanProcessorTest extends BaseTestCase {
         final Integer testField = 1;
         final Object[][] rows = { new Object[] { testField } };
 
-        final ResultSet rs = MockResultSet.create(metaData, rows);
+        final ResultSet rs = MockResultSet.create(metaData, rows, false);
         assertTrue(rs.next());
         TestWrongSetter testCls = new TestWrongSetter();
         testCls = beanProc.populateBean(rs, testCls);

@@ -60,6 +60,18 @@
       <version>3.17.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.3.232</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-jxpath</groupId>
+      <artifactId>commons-jxpath</artifactId>
+      <version>1.3</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <distributionManagement>
@@ -200,8 +212,8 @@
           <configLocation>${checkstyle.config.file}</configLocation>
           <enableRulesSummary>false</enableRulesSummary>
           <headerLocation>${checkstyle.header.file}</headerLocation>
-          <suppressionsLocation>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-          <suppressionsFileExpression>${basedir}/src/site/resources/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
+          <suppressionsLocation>${basedir}/src/conf/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+          <suppressionsFileExpression>${basedir}/src/conf/checkstyle/checkstyle-suppressions.xml</suppressionsFileExpression>
         </configuration>
       </plugin>
       <plugin>
@@ -217,12 +229,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
         <version>${commons.pmd.version}</version>
-        <configuration>
-          <targetJdk>${maven.compiler.source}</targetJdk>
-          <rulesets>
-            <ruleset>${basedir}/src/site/resources/pmd/pmd-ruleset.xml</ruleset>
-          </rulesets>
-        </configuration>
       </plugin>
     </plugins>
   </reporting>

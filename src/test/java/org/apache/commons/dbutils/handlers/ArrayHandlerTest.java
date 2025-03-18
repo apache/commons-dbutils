@@ -44,7 +44,7 @@ public class ArrayHandlerTest extends BaseTestCase {
         final Object[] results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(COLS, results.length);
+        assertEquals(COLUMN_COUNT, results.length);
         assertEquals("1", results[0]);
         assertEquals("2", results[1]);
         assertEquals("THREE", results[2]);

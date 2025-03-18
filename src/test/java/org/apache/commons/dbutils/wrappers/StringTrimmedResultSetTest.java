@@ -59,7 +59,7 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
     public void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
         final Object[][] rows = { { null } };
-        ResultSet rs = MockResultSet.create(metaData, rows);
+        ResultSet rs = MockResultSet.create(META_DATA, rows, false);
 
         // Wrap the ResultSet with a null checked version
         final SqlNullCheckedResultSet ncrs = new SqlNullCheckedResultSet(rs);

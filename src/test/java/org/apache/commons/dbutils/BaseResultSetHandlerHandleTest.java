@@ -14,9 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.dbutils;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
@@ -27,35 +29,32 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public final class BaseResultSetHandlerTest extends BaseTestCase {
+/**
+ * Tests {@link BaseResultSetHandler}.
+ */
+public final class BaseResultSetHandlerHandleTest extends BaseTestCase {
 
-    private static final class ToMapCollectionHandler extends BaseResultSetHandler<Collection<Map<String, Object>>> {
+    static final class ToMapCollectionHandler extends BaseResultSetHandler<Collection<Map<String, Object>>> {
 
         @Override
         protected Collection<Map<String, Object>> handle() throws SQLException {
+            assertNotNull(getAdaptedResultSet());
             final Collection<Map<String, Object>> result = new LinkedList<>();
-
             while (next()) {
                 final Map<String, Object> current = new HashMap<>();
-
                 for (int i = 1; i <= getMetaData().getColumnCount(); i++) {
                     current.put(getMetaData().getColumnName(i), getObject(i));
                 }
-
                 result.add(current);
             }
-
             return result;
         }
-
     }
 
     @Test
     public void testHandleWithoutExplicitResultSetInvocation() throws Exception {
         final Collection<Map<String, Object>> result = new ToMapCollectionHandler().handle(createMockResultSet());
-
         assertFalse(result.isEmpty());
-
         for (final Map<String, Object> current : result) {
             assertTrue(current.containsKey("one"));
             assertTrue(current.containsKey("two"));
@@ -69,5 +68,4 @@ public final class BaseResultSetHandlerTest extends BaseTestCase {
             assertTrue(current.containsKey("columnProcessorDoubleTest"));
         }
     }
-
 }

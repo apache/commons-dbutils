@@ -70,14 +70,14 @@ public class BasicRowProcessorTest extends BaseTestCase {
         Object[] a;
         assertTrue(getResultSet().next());
         a = processor.toArray(getResultSet());
-        assertEquals(COLS, a.length);
+        assertEquals(COLUMN_COUNT, a.length);
         assertEquals("1", a[0]);
         assertEquals("2", a[1]);
         assertEquals("THREE", a[2]);
 
         assertTrue(getResultSet().next());
         a = processor.toArray(getResultSet());
-        assertEquals(COLS, a.length);
+        assertEquals(COLUMN_COUNT, a.length);
 
         assertEquals("4", a[0]);
         assertEquals("5", a[1]);
@@ -121,7 +121,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         final List<TestBean> list = processor.toBeanList(getResultSet(), TestBean.class);
         assertNotNull(list);
-        assertEquals(ROWS, list.size());
+        assertEquals(ROW_COUNT, list.size());
 
         TestBean b = list.get(0);
         assertEquals("1", b.getOne());
@@ -150,14 +150,14 @@ public class BasicRowProcessorTest extends BaseTestCase {
 
         assertTrue(getResultSet().next());
         Map<String, Object> m = processor.toMap(getResultSet());
-        assertEquals(COLS, m.size());
+        assertEquals(COLUMN_COUNT, m.size());
         assertEquals("1", m.get("one"));
         assertEquals("2", m.get("TWO"));
         assertEquals("THREE", m.get("Three"));
 
         assertTrue(getResultSet().next());
         m = processor.toMap(getResultSet());
-        assertEquals(COLS, m.size());
+        assertEquals(COLUMN_COUNT, m.size());
 
         assertEquals("4", m.get("One")); // case shouldn't matter
         assertEquals("5", m.get("two"));

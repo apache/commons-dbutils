@@ -49,19 +49,19 @@ public class ArrayListHandlerTest extends BaseTestCase {
         final List<Object[]> results = h.handle(getResultSet());
 
         assertNotNull(results);
-        assertEquals(ROWS, results.size());
+        assertEquals(ROW_COUNT, results.size());
 
         final Iterator<Object[]> iter = results.iterator();
         assertTrue(iter.hasNext());
         Object[] row = iter.next();
-        assertEquals(COLS, row.length);
+        assertEquals(COLUMN_COUNT, row.length);
         assertEquals("1", row[0]);
         assertEquals("2", row[1]);
         assertEquals("THREE", row[2]);
 
         assertTrue(iter.hasNext());
         row = iter.next();
-        assertEquals(COLS, row.length);
+        assertEquals(COLUMN_COUNT, row.length);
 
         assertEquals("4", row[0]);
         assertEquals("5", row[1]);

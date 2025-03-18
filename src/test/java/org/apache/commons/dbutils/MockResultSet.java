@@ -24,9 +24,10 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import org.apache.commons.jxpath.util.TypeUtils;
 
 /**
  * MockResultSet dynamically implements the ResultSet interface.
@@ -42,34 +43,38 @@ public class MockResultSet implements InvocationHandler {
      * ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
      * </pre>
      *
-     * @param metaData
+     * @param metaData Result set metadata.
      * @param rows     A null value indicates an empty {@code ResultSet}.
+     * @param unsupportedToDefault Whether to throw an exception or return null when an operation is unsupported.
      */
-    public static ResultSet create(final ResultSetMetaData metaData, final Object[][] rows) {
-        return ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows));
+    public static ResultSet create(final ResultSetMetaData metaData, final Object[][] rows, final boolean unsupportedToDefault) {
+        return ProxyFactory.instance().createResultSet(new MockResultSet(metaData, rows, unsupportedToDefault));
     }
 
     private Object[] currentRow;
 
-    private Iterator<Object[]> iter;
+    private Iterator<Object[]> iterator;
 
     private final ResultSetMetaData metaData;
 
     private Boolean wasNull = Boolean.FALSE;
 
+    private final boolean unsupportedToDefault;
+
     /**
      * MockResultSet constructor.
      *
-     * @param metaData
+     * @param metaData Result set metadata.
      * @param rows     A null value indicates an empty {@code ResultSet}.
+     * @param unsupportedToDefault Whether to throw an exception or return null when an operation is unsupported.
      */
-    public MockResultSet(final ResultSetMetaData metaData, final Object[][] rows) {
+    public MockResultSet(final ResultSetMetaData metaData, final Object[][] rows, final boolean unsupportedToDefault) {
         this.metaData = metaData;
+        this.unsupportedToDefault = unsupportedToDefault;
         if (rows == null) {
-            final List<Object[]> empty = Collections.emptyList();
-            this.iter = empty.iterator();
+            this.iterator = Collections.<Object[]>emptyList().iterator();
         } else {
-            this.iter = Arrays.asList(rows).iterator();
+            this.iterator = Arrays.asList(rows).iterator();
         }
     }
 
@@ -82,14 +87,11 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     private int columnIndex(final Object[] args) throws SQLException {
-
         if (args[0] instanceof Integer) {
             return ((Integer) args[0]).intValue();
-
         }
         if (args[0] instanceof String) {
             return columnNameToIndex((String) args[0]);
-
         }
         throw new SQLException(args[0] + " must be Integer or String");
     }
@@ -101,13 +103,15 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if the column name is invalid
      */
     private int columnNameToIndex(final String columnName) throws SQLException {
+        if (currentRow == null) {
+            throw new SQLException("No current row.");
+        }
         for (int i = 0; i < this.currentRow.length; i++) {
             final int c = i + 1;
             if (this.metaData.getColumnName(c).equalsIgnoreCase(columnName)) {
                 return c;
             }
         }
-
         throw new SQLException(columnName + " is not a valid column name.");
     }
 
@@ -118,12 +122,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getBoolean(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Boolean.FALSE : Boolean.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -136,12 +138,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getByte(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Byte.valueOf((byte) 0) : Byte.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -154,12 +154,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getDouble(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Double.valueOf(0) : Double.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -172,12 +170,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getFloat(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Float.valueOf(0) : Float.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -190,12 +186,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getInt(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Integer.valueOf(0) : Integer.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -208,12 +202,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getLong(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Long.valueOf(0) : Long.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -233,7 +225,7 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getObject(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
         return obj;
     }
@@ -245,12 +237,10 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException if a database access error occurs
      */
     protected Object getShort(final int columnIndex) throws SQLException {
-        final Object obj = this.currentRow[columnIndex - 1];
+        final Object obj = getValueAt(columnIndex);
         setWasNull(obj);
-
         try {
             return obj == null ? Short.valueOf((short) 0) : Short.valueOf(obj.toString());
-
         } catch (final NumberFormatException e) {
             throw new SQLException(e.getMessage());
         }
@@ -268,34 +258,43 @@ public class MockResultSet implements InvocationHandler {
         return Objects.toString(obj, null);
     }
 
-    private Object handleColumnMethod(final String methodName, final Object[] args) throws SQLException {
+    private Object getValueAt(final int columnIndex) {
+        return currentRow != null ? currentRow[columnIndex - 1] : null;
+    }
+
+    private Object handleColumnMethod(final Method method, final Object[] args) throws SQLException {
+        final String methodName = method.getName();
         switch (methodName) {
-            case "getBoolean":
-                return getBoolean(columnIndex(args));
-            case "getByte":
-                return getByte(columnIndex(args));
-            case "getDouble":
-                return getDouble(columnIndex(args));
-            case "getFloat":
-                return getFloat(columnIndex(args));
-            case "getInt":
-                return getInt(columnIndex(args));
-            case "getLong":
-                return getLong(columnIndex(args));
-            case "getObject":
-                return getObject(columnIndex(args));
-            case "getShort":
-                return getShort(columnIndex(args));
-            case "getString":
-                return getString(columnIndex(args));
-            case "wasNull":
-                return wasNull();
-            default:
-                throw new UnsupportedOperationException("Unsupported column method: " + methodName);
+        case "getBoolean":
+            return getBoolean(columnIndex(args));
+        case "getByte":
+            return getByte(columnIndex(args));
+        case "getDouble":
+            return getDouble(columnIndex(args));
+        case "getFloat":
+            return getFloat(columnIndex(args));
+        case "getInt":
+            return getInt(columnIndex(args));
+        case "getLong":
+            return getLong(columnIndex(args));
+        case "getObject":
+            return getObject(columnIndex(args));
+        case "getShort":
+            return getShort(columnIndex(args));
+        case "getString":
+            return getString(columnIndex(args));
+        case "wasNull":
+            return wasNull();
+        default:
+            if (unsupportedToDefault) {
+                return unsupportedToDefault(method);
+            }
+            throw new UnsupportedOperationException("Unsupported column method: " + methodName);
         }
     }
 
-    private Object handleNonColumnMethod(final String methodName, final Object proxy, final Object[] args) throws SQLException {
+    private Object handleNonColumnMethod(final Method method, final Object proxy, final Object[] args) throws SQLException {
+        final String methodName = method.getName();
         switch (methodName) {
             case "isLast":
                 return isLast();
@@ -306,14 +305,15 @@ public class MockResultSet implements InvocationHandler {
             case "equals":
                 return Boolean.valueOf(proxy == args[0]);
             default:
+                if (unsupportedToDefault) {
+                    return unsupportedToDefault(method);
+                }
                 throw new UnsupportedOperationException("Unsupported non-column method: " + methodName);
         }
     }
 
     @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args)
-        throws Throwable {
-
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         final String methodName = method.getName();
         switch (methodName) {
         case "getMetaData":
@@ -326,13 +326,25 @@ public class MockResultSet implements InvocationHandler {
             break;
         default:
             if (isColumnMethod(methodName)) {
-                return handleColumnMethod(methodName, args);
-            } else if (METHOD_NAMES.contains(methodName)) {
-                return handleNonColumnMethod(methodName, proxy, args);
+                return handleColumnMethod(method, args);
+            }
+            if (METHOD_NAMES.contains(methodName)) {
+                return handleNonColumnMethod(method, proxy, args);
             }
             break;
         }
+        if (unsupportedToDefault) {
+            return unsupportedToDefault(method);
+        }
         throw new UnsupportedOperationException("Unsupported method: " + methodName);
+    }
+
+    private Object unsupportedToDefault(final Method method) {
+        final Class<?> returnType = method.getReturnType();
+        if (returnType.isPrimitive()) {
+            return TypeUtils.convert(null, returnType);
+        }
+        return null;
     }
 
     private boolean isColumnMethod(final String methodName) {
@@ -343,17 +355,21 @@ public class MockResultSet implements InvocationHandler {
      * @throws SQLException
      */
     protected Boolean isLast() throws SQLException {
-        return this.iter.hasNext() ? Boolean.FALSE : Boolean.TRUE;
+        return hasNext() ? Boolean.FALSE : Boolean.TRUE;
+    }
+
+    private boolean hasNext() {
+        return iterator.hasNext();
     }
 
     /**
      * @throws SQLException
      */
     protected Boolean next() throws SQLException {
-        if (!this.iter.hasNext()) {
+        if (!hasNext()) {
             return Boolean.FALSE;
         }
-        this.currentRow = iter.next();
+        this.currentRow = iterator.next();
         return Boolean.TRUE;
     }
 
