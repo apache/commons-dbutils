@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.dbutils;
 
 import java.sql.ResultSet;
@@ -27,17 +28,12 @@ import java.sql.SQLException;
 public interface ResultSetHandler<T> {
 
     /**
-     * Turn the {@code ResultSet} into an Object.
+     * Handles a {@link ResultSet}, usually by converting it into an Object.
      *
-     * @param resultSet The {@code ResultSet} to handle.  It has not been touched
-     * before being passed to this method.
-     *
-     * @return An Object initialized with {@code ResultSet} data. It is
-     * legal for implementations to return {@code null} if the
-     * {@code ResultSet} contained 0 rows.
-     *
+     * @param resultSet The {@link ResultSet} to handle. It has not been touched before being passed to this method.
+     * @return An Object initialized with {@code ResultSet} data. It is legal for implementations to return {@code null} if the {@link ResultSet} contained 0
+     *         rows.
      * @throws SQLException if a database access error occurs
      */
     T handle(ResultSet resultSet) throws SQLException;
-
 }
