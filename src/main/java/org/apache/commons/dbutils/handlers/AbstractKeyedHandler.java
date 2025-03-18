@@ -38,6 +38,13 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map<K, V>> {
 
     /**
+     * Constructs a new instance for subclasses.
+     */
+    public AbstractKeyedHandler() {
+        // empty
+    }
+
+    /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.
      * @param resultSet ResultSet to create a key from

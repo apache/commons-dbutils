@@ -31,6 +31,13 @@ public class DatePropertyHandler implements PropertyHandler {
     private static final String JAVA_SQL_TIME = "java.sql.Time";
     private static final String JAVA_SQL_DATE = "java.sql.Date";
 
+    /**
+     * Constructs a new instance.
+     */
+    public DatePropertyHandler() {
+        // empty
+    }
+
     @Override
     public Object apply(final Class<?> parameter, Object value) {
         final String targetType = parameter.getName();

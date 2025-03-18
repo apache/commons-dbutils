@@ -139,6 +139,12 @@ public class BasicRowProcessor implements RowProcessor {
      */
     private static final BasicRowProcessor INSTANCE = new BasicRowProcessor();
 
+    /**
+     * Creates a new case-insensitive map.
+     *
+     * @param cols The initial capacity for the map.
+     * @return The new map.
+     */
     protected static Map<String, Object> createCaseInsensitiveHashMap(final int cols) {
         return new CaseInsensitiveHashMap(cols);
     }

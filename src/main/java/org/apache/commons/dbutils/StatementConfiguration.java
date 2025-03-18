@@ -22,10 +22,12 @@ import java.time.Duration;
  * Configuration options for a {@link java.sql.Statement} when preparing statements in {@code QueryRunner}.
  */
 public class StatementConfiguration {
+
     /**
      * Builder class for {@code StatementConfiguration} for more flexible construction.
      */
     public static final class Builder {
+
         private Integer fetchDirection;
         private Integer fetchSize;
         private Integer maxRows;
@@ -33,6 +35,15 @@ public class StatementConfiguration {
         private Integer maxFieldSize;
 
         /**
+         * Constructs a new instance.
+         */
+        public Builder() {
+            // empty
+        }
+
+        /**
+         * Builds a new {@link StatementConfiguration}.
+         *
          * @return A new and configured {@link StatementConfiguration}.
          */
         public StatementConfiguration build() {
@@ -40,6 +51,8 @@ public class StatementConfiguration {
         }
 
         /**
+         * Sets direction for fetching rows from database tables.
+         *
          * @param fetchDirection The direction for fetching rows from database tables.
          * @return This builder for chaining.
          * @see StatementConfiguration#getFetchDirection()
@@ -50,6 +63,8 @@ public class StatementConfiguration {
         }
 
         /**
+         * Sets the number of rows that should be fetched from the database when more rows are needed.
+         *
          * @param fetchSize The number of rows that should be fetched from the database when more rows are needed.
          * @return This builder for chaining.
          * @see StatementConfiguration#getFetchSize()
@@ -60,6 +75,8 @@ public class StatementConfiguration {
         }
 
         /**
+         * Sets the maximum number of bytes that can be returned for character and binary column values.
+         *
          * @param maxFieldSize The maximum number of bytes that can be returned for character and binary column values.
          * @return This builder for chaining.
          * @see StatementConfiguration#getMaxFieldSize()
@@ -70,6 +87,8 @@ public class StatementConfiguration {
         }
 
         /**
+         * Sets the maximum number of rows that a {@code ResultSet} can produce.
+         *
          * @param maxRows The maximum number of rows that a {@code ResultSet} can produce.
          * @return This builder for chaining.
          * @see StatementConfiguration#getMaxRows()
@@ -80,6 +99,8 @@ public class StatementConfiguration {
         }
 
         /**
+         * Sets the number of seconds the driver will wait for execution.
+         *
          * @param queryTimeout The number of seconds the driver will wait for execution.
          * @return This builder for chaining.
          * @see StatementConfiguration#getQueryTimeoutDuration()
@@ -91,6 +112,8 @@ public class StatementConfiguration {
         }
 
         /**
+         * Sets the number of seconds the driver will wait for execution.
+         *
          * @param queryTimeout The number of seconds the driver will wait for execution.
          * @return This builder for chaining.
          * @see StatementConfiguration#getQueryTimeout()
@@ -102,7 +125,7 @@ public class StatementConfiguration {
             return this;
         }
     }
-
+    
     private final Integer fetchDirection;
     private final Integer fetchSize;
     private final Integer maxFieldSize;

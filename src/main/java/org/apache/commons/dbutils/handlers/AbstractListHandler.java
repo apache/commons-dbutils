@@ -33,6 +33,13 @@ import org.apache.commons.dbutils.ResultSetHandler;
 public abstract class AbstractListHandler<T> implements ResultSetHandler<List<T>> {
 
     /**
+     * Constructs a new instance for subclasses.
+     */
+    public AbstractListHandler() {
+        // empty
+    }
+
+    /**
      * Whole {@code ResultSet} handler. It produce {@code List} as
      * result. To convert individual rows into Java objects it uses
      * {@code handleRow(ResultSet)} method.

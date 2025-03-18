@@ -23,6 +23,13 @@ import org.apache.commons.dbutils.PropertyHandler;
  */
 public class StringEnumPropertyHandler implements PropertyHandler {
 
+    /**
+     * Constructs a new instance.
+     */
+    public StringEnumPropertyHandler() {
+        // empty
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Object apply(final Class<?> parameter, final Object value) {
