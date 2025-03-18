@@ -125,7 +125,7 @@ public class StatementConfiguration {
             return this;
         }
     }
-    
+
     private final Integer fetchDirection;
     private final Integer fetchSize;
     private final Integer maxFieldSize;
