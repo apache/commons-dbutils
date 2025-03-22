@@ -96,16 +96,16 @@ public class QueryLoader {
      * reads a properties file at the given path.  The properties file can be
      * in either line-oriented or XML format.  XML formatted properties files
      * must use a {@code .xml} file extension.
-
+     *
      * @param path The path that the ClassLoader will use to find the file.
      * @throws IOException if a file access error occurs
      * @throws IllegalArgumentException if the ClassLoader can't find a file at
+     * @return Map of query names to SQL values
      * the given path.
      * @throws java.util.InvalidPropertiesFormatException if the XML properties file is
      * invalid
-     * @since 1.1
-     * @return Map of query names to SQL values
      * @see java.util.Properties
+     * @since 1.1
      */
     protected Map<String, String> loadQueries(final String path) throws IOException {
         // Findbugs flags getClass().getResource as a bad practice; maybe we should change the API?
