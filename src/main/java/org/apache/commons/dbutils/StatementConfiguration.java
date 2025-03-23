@@ -236,7 +236,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Whether fetch direction is set.
+     * Tests whether fetch direction is set.
      *
      * @return true if set, false otherwise.
      */
@@ -245,7 +245,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Whether fetch size is set.
+     * Tests whether fetch size is set.
      *
      * @return true if set, false otherwise.
      */
@@ -254,7 +254,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Whether max field size is set.
+     * Tests whether max field size is set.
      *
      * @return true if set, false otherwise.
      */
@@ -263,7 +263,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Whether max rows is set.
+     * Tests whether max rows is set.
      *
      * @return true if set, false otherwise.
      */
@@ -272,7 +272,7 @@ public class StatementConfiguration {
     }
 
     /**
-     * Whether query timeout is set.
+     * Tests whether query timeout is set.
      *
      * @return true if set, false otherwise.
      */
