@@ -121,13 +121,13 @@ public class ResultSetIterator implements Iterator<Object[]> {
     }
 
     /**
-     * Rethrow the SQLException as a RuntimeException.  This implementation
+     * Rethrows the SQLException as a RuntimeException.  This implementation
      * creates a new RuntimeException with the SQLException's error message.
      * @param e SQLException to rethrow
      * @since 1.1
      */
     protected void rethrow(final SQLException e) {
-        throw new RuntimeException(e.getMessage());
+        throw new IllegalStateException(e.getMessage());
     }
 
 }
