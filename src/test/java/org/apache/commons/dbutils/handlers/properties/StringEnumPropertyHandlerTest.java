@@ -31,12 +31,12 @@ public class StringEnumPropertyHandlerTest {
     }
 
     @Test
-    public void testMatch() {
+    void testMatch() {
         assertTrue(handler.match(TestEnum.class, "test"));
     }
 
     @Test
-    public void testMatchNegative() {
+    void testMatchNegative() {
         assertFalse(handler.match(TestEnum.class, Double.valueOf(1)));
 
         assertFalse(handler.match(Integer.class, ""));

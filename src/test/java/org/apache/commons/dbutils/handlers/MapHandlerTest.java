@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class MapHandlerTest extends BaseTestCase {
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Map<String, Object>> h = new MapHandler();
         final Map<String, Object> results = h.handle(getEmptyResultSet());
 
@@ -41,7 +41,7 @@ public class MapHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<Map<String, Object>> h = new MapHandler();
         final Map<String, Object> results = h.handle(getResultSet());
 

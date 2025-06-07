@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 public class ScalarHandlerTest extends BaseTestCase {
 
     @Test
-    public void testColumnIndexHandle() throws SQLException {
+    void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>(2);
         final Object results = h.handle(getResultSet());
         assertNotNull(results);
@@ -37,7 +37,7 @@ public class ScalarHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testColumnNameHandle() throws SQLException {
+    void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<Integer> h = new ScalarHandler<>("intTest");
         final Object results = h.handle(getResultSet());
         assertNotNull(results);
@@ -45,14 +45,14 @@ public class ScalarHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>();
         final Object results = h.handle(getEmptyResultSet());
         assertNull(results);
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<String> h = new ScalarHandler<>();
         final Object results = h.handle(getResultSet());
         assertNotNull(results);

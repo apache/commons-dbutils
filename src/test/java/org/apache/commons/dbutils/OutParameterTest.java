@@ -49,7 +49,7 @@ public class OutParameterTest {
     }
 
     @Test
-    public void testRegister() throws Exception {
+    void testRegister() throws Exception {
         parameter.register(stmt, INDEX);
         verify(stmt, times(1)).registerOutParameter(INDEX, Types.INTEGER);
         verify(stmt, times(0)).setObject(eq(INDEX), any(Number.class));
@@ -61,7 +61,7 @@ public class OutParameterTest {
     }
 
     @Test
-    public void testRegisterAlternateConstructor() throws Exception {
+    void testRegisterAlternateConstructor() throws Exception {
         parameter = new OutParameter<>(Types.INTEGER, Number.class, VALUE);
         parameter.register(stmt, INDEX);
         verify(stmt, times(1)).registerOutParameter(INDEX, Types.INTEGER);
@@ -69,7 +69,7 @@ public class OutParameterTest {
     }
 
     @Test
-    public void testSetValue() throws Exception {
+    void testSetValue() throws Exception {
         when(stmt.getObject(INDEX)).thenReturn(VALUE);
 
         parameter.setValue(stmt, INDEX);

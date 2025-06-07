@@ -195,7 +195,7 @@ public class BeanProcessorTest extends BaseTestCase {
     private static final BeanProcessor beanProc = new BeanProcessor();
 
     @Test
-    public void testCheckAnnotationOnMissingReadMethod() throws Exception {
+    void testCheckAnnotationOnMissingReadMethod() throws Exception {
         final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
@@ -217,7 +217,7 @@ public class BeanProcessorTest extends BaseTestCase {
      * @see <a href="https://issues.apache.org/jira/browse/DBUTILS-150">DBUTILS-150</a>
      */
     @Test
-    public void testIndexedPropertyDescriptor() throws Exception {
+    void testIndexedPropertyDescriptor() throws Exception {
         final String[] colNames = { "name", "things", "stuff" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 
@@ -236,7 +236,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testMapColumnToAnnotationField() throws Exception {
+    void testMapColumnToAnnotationField() throws Exception {
         final String[] columnNames = { "test", "test", "three_" };
         final String[] columnLabels = { "one", "two", null };
         final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames, columnLabels));
@@ -249,7 +249,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testMapColumnToProperties() throws Exception {
+    void testMapColumnToProperties() throws Exception {
         final String[] columnNames = { "test", "test", "three" };
         final String[] columnLabels = { "one", "two", null };
         final ResultSetMetaData rsmd = ProxyFactory.instance().createResultSetMetaData(new MockResultSetMetaData(columnNames, columnLabels));
@@ -262,7 +262,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testMapColumnToPropertiesWithOverrides() throws Exception {
+    void testMapColumnToPropertiesWithOverrides() throws Exception {
         final Map<String, String> columnToPropertyOverrides = new HashMap<>();
         columnToPropertyOverrides.put("five", "four");
         final BeanProcessor beanProc = new BeanProcessor(columnToPropertyOverrides);
@@ -278,7 +278,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testProcessWithPopulateBean() throws SQLException {
+    void testProcessWithPopulateBean() throws SQLException {
         TestBean b = new TestBean();
         final ResultSet rs = getResultSet();
         assertTrue(rs.next());
@@ -295,7 +295,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testProcessWithToBean() throws SQLException {
+    void testProcessWithToBean() throws SQLException {
         final ResultSet rs = getResultSet();
         assertTrue(rs.next());
         TestBean b = beanProc.toBean(rs, TestBean.class);
@@ -311,7 +311,7 @@ public class BeanProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testWrongSetterParamCount() throws Exception {
+    void testWrongSetterParamCount() throws Exception {
         final String[] colNames = { "testField" };
         final ResultSetMetaData metaData = MockResultSetMetaData.create(colNames);
 

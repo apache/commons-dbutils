@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class ColumnListHandlerTest extends BaseTestCase {
 
     @Test
-    public void testColumnIndexHandle() throws SQLException {
+    void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>(2);
         final List<String> results = h.handle(getResultSet());
 
@@ -45,7 +45,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testColumnNameHandle() throws SQLException {
+    void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<List<Integer>> h = new ColumnListHandler<>("intTest");
         final List<Integer> results = h.handle(getResultSet());
 
@@ -57,7 +57,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
         final List<String> results = h.handle(getEmptyResultSet());
 
@@ -66,7 +66,7 @@ public class ColumnListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<List<String>> h = new ColumnListHandler<>();
         final List<String> results = h.handle(getResultSet());
 

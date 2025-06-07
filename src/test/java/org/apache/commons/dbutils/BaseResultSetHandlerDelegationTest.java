@@ -108,7 +108,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testAbsolute() throws SQLException {
+    void testAbsolute() throws SQLException {
         getResultSet().absolute(row);
     }
 
@@ -116,7 +116,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testAfterLast() throws SQLException {
+    void testAfterLast() throws SQLException {
         getResultSet().afterLast();
     }
 
@@ -124,7 +124,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testBeforeFirst() throws SQLException {
+    void testBeforeFirst() throws SQLException {
         getResultSet().beforeFirst();
     }
 
@@ -132,7 +132,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testCancelRowUpdates() throws SQLException {
+    void testCancelRowUpdates() throws SQLException {
         getResultSet().cancelRowUpdates();
     }
 
@@ -140,7 +140,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testClearWarnings() throws SQLException {
+    void testClearWarnings() throws SQLException {
         getResultSet().clearWarnings();
     }
 
@@ -148,7 +148,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testClose() throws SQLException {
+    void testClose() throws SQLException {
         getResultSet().close();
     }
 
@@ -156,7 +156,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testDeleteRow() throws SQLException {
+    void testDeleteRow() throws SQLException {
         getResultSet().deleteRow();
     }
 
@@ -164,7 +164,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testFindColumn() throws SQLException {
+    void testFindColumn() throws SQLException {
         getResultSet().findColumn(columnLabel);
     }
 
@@ -172,7 +172,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testFirst() throws SQLException {
+    void testFirst() throws SQLException {
         getResultSet().first();
     }
 
@@ -180,7 +180,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetArrayInt() throws SQLException {
+    void testGetArrayInt() throws SQLException {
         getResultSet().getArray(columnIndex);
     }
 
@@ -188,7 +188,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetArrayString() throws SQLException {
+    void testGetArrayString() throws SQLException {
         getResultSet().getArray(columnLabel);
     }
 
@@ -196,7 +196,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetAsciiStream() throws SQLException {
+    void testGetAsciiStream() throws SQLException {
         getResultSet().getAsciiStream(columnLabel);
     }
 
@@ -204,7 +204,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetAsciiStreamInt() throws SQLException {
+    void testGetAsciiStreamInt() throws SQLException {
         getResultSet().getAsciiStream(columnIndex);
     }
 
@@ -212,7 +212,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBigDecimalInt() throws SQLException {
+    void testGetBigDecimalInt() throws SQLException {
         getResultSet().getBigDecimal(columnIndex);
     }
 
@@ -220,7 +220,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBigDecimalIntInt() throws SQLException {
+    void testGetBigDecimalIntInt() throws SQLException {
         getResultSet().getBigDecimal(columnIndex, scale);
     }
 
@@ -228,7 +228,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBigDecimalString() throws SQLException {
+    void testGetBigDecimalString() throws SQLException {
         getResultSet().getBigDecimal(columnLabel);
     }
 
@@ -236,7 +236,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBigDecimalStringInt() throws SQLException {
+    void testGetBigDecimalStringInt() throws SQLException {
         getResultSet().getBigDecimal(columnLabel, scale);
     }
 
@@ -244,7 +244,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBinaryStreamInt() throws SQLException {
+    void testGetBinaryStreamInt() throws SQLException {
         getResultSet().getBinaryStream(columnIndex);
     }
 
@@ -252,7 +252,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBinaryStreamString() throws SQLException {
+    void testGetBinaryStreamString() throws SQLException {
         getResultSet().getBinaryStream(columnLabel);
     }
 
@@ -260,7 +260,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBlobInt() throws SQLException {
+    void testGetBlobInt() throws SQLException {
         getResultSet().getBlob(columnIndex);
     }
 
@@ -268,7 +268,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBlobString() throws SQLException {
+    void testGetBlobString() throws SQLException {
         getResultSet().getBlob(columnLabel);
     }
 
@@ -276,7 +276,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBoolean() throws SQLException {
+    void testGetBoolean() throws SQLException {
         assertNextRow();
         getResultSet().getBoolean(columnLabel);
     }
@@ -285,7 +285,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBooleanInt() throws SQLException {
+    void testGetBooleanInt() throws SQLException {
         getResultSet().getBoolean(columnIndex);
     }
 
@@ -293,7 +293,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetByteInt() throws SQLException {
+    void testGetByteInt() throws SQLException {
         getResultSet().getByte(columnIndex);
     }
 
@@ -301,7 +301,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBytesInt() throws SQLException {
+    void testGetBytesInt() throws SQLException {
         getResultSet().getBytes(columnIndex);
     }
 
@@ -309,7 +309,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetBytesString() throws SQLException {
+    void testGetBytesString() throws SQLException {
         getResultSet().getBytes(columnLabel);
     }
 
@@ -317,7 +317,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetByteString() throws SQLException {
+    void testGetByteString() throws SQLException {
         assertNextRow();
         getResultSet().getByte(columnLabel);
     }
@@ -326,7 +326,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetCharacterStream() throws SQLException {
+    void testGetCharacterStream() throws SQLException {
         getResultSet().getCharacterStream(columnLabel);
     }
 
@@ -334,7 +334,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetCharacterStreamInt() throws SQLException {
+    void testGetCharacterStreamInt() throws SQLException {
         getResultSet().getCharacterStream(columnIndex);
     }
 
@@ -342,7 +342,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetClob() throws SQLException {
+    void testGetClob() throws SQLException {
         getResultSet().getClob(columnLabel);
     }
 
@@ -350,7 +350,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetClobInt() throws SQLException {
+    void testGetClobInt() throws SQLException {
         getResultSet().getClob(columnIndex);
     }
 
@@ -358,7 +358,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetConcurrency() throws SQLException {
+    void testGetConcurrency() throws SQLException {
         getResultSet().getConcurrency();
     }
 
@@ -366,7 +366,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetCursorName() throws SQLException {
+    void testGetCursorName() throws SQLException {
         getResultSet().getCursorName();
     }
 
@@ -374,7 +374,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetDate() throws SQLException {
+    void testGetDate() throws SQLException {
         getResultSet().getDate(columnLabel);
     }
 
@@ -382,7 +382,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetDateInt() throws SQLException {
+    void testGetDateInt() throws SQLException {
         getResultSet().getDate(columnIndex);
     }
 
@@ -390,7 +390,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetDateIntCalendar() throws SQLException {
+    void testGetDateIntCalendar() throws SQLException {
         getResultSet().getDate(columnIndex, cal);
     }
 
@@ -398,7 +398,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetDateStringCalendar() throws SQLException {
+    void testGetDateStringCalendar() throws SQLException {
         getResultSet().getDate(columnLabel, cal);
     }
 
@@ -406,7 +406,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetDouble() throws SQLException {
+    void testGetDouble() throws SQLException {
         assertNextRow();
         getResultSet().getDouble(columnLabel);
     }
@@ -415,7 +415,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetDoubleInt() throws SQLException {
+    void testGetDoubleInt() throws SQLException {
         getResultSet().getDouble(columnIndex);
     }
 
@@ -423,7 +423,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetFetchDirection() throws SQLException {
+    void testGetFetchDirection() throws SQLException {
         getResultSet().getFetchDirection();
     }
 
@@ -431,7 +431,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetFetchSize() throws SQLException {
+    void testGetFetchSize() throws SQLException {
         getResultSet().getFetchSize();
     }
 
@@ -439,7 +439,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetFloat() throws SQLException {
+    void testGetFloat() throws SQLException {
         assertNextRow();
         getResultSet().getFloat(columnLabel);
     }
@@ -448,7 +448,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetFloatInt() throws SQLException {
+    void testGetFloatInt() throws SQLException {
         getResultSet().getFloat(columnIndex);
     }
 
@@ -456,7 +456,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetHoldability() throws SQLException {
+    void testGetHoldability() throws SQLException {
         getResultSet().getHoldability();
     }
 
@@ -464,7 +464,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetInt() throws SQLException {
+    void testGetInt() throws SQLException {
         assertNextRow();
         getResultSet().getInt(columnLabel);
     }
@@ -473,7 +473,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetIntInt() throws SQLException {
+    void testGetIntInt() throws SQLException {
         getResultSet().getInt(columnIndex);
     }
 
@@ -481,7 +481,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetLong() throws SQLException {
+    void testGetLong() throws SQLException {
         assertNextRow();
         getResultSet().getLong(columnLabel);
     }
@@ -490,7 +490,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetLongInt() throws SQLException {
+    void testGetLongInt() throws SQLException {
         getResultSet().getLong(columnIndex);
     }
 
@@ -498,7 +498,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetMetaData() throws SQLException {
+    void testGetMetaData() throws SQLException {
         getResultSet().getMetaData();
     }
 
@@ -506,7 +506,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetNCharacterStream() throws SQLException {
+    void testGetNCharacterStream() throws SQLException {
         getResultSet().getNCharacterStream(columnLabel);
     }
 
@@ -514,7 +514,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetNCharacterStreamInt() throws SQLException {
+    void testGetNCharacterStreamInt() throws SQLException {
         getResultSet().getNCharacterStream(columnIndex);
     }
 
@@ -522,7 +522,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetNClob() throws SQLException {
+    void testGetNClob() throws SQLException {
         getResultSet().getNClob(columnLabel);
     }
 
@@ -530,7 +530,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetNClobInt() throws SQLException {
+    void testGetNClobInt() throws SQLException {
         getResultSet().getNClob(columnIndex);
     }
 
@@ -538,7 +538,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetNString() throws SQLException {
+    void testGetNString() throws SQLException {
         getResultSet().getNString(columnLabel);
     }
 
@@ -546,7 +546,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetNStringInt() throws SQLException {
+    void testGetNStringInt() throws SQLException {
         getResultSet().getNString(columnIndex);
     }
 
@@ -554,7 +554,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetObject() throws SQLException {
+    void testGetObject() throws SQLException {
         assertNextRow();
         getResultSet().getObject(columnLabel);
     }
@@ -563,7 +563,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetObjectInt() throws SQLException {
+    void testGetObjectInt() throws SQLException {
         getResultSet().getObject(columnIndex);
     }
 
@@ -571,7 +571,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetObjectIntClass() throws SQLException {
+    void testGetObjectIntClass() throws SQLException {
         getResultSet().getObject(columnIndex, type);
     }
 
@@ -579,7 +579,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetObjectIntMap() throws SQLException {
+    void testGetObjectIntMap() throws SQLException {
         getResultSet().getObject(columnIndex, map);
     }
 
@@ -587,7 +587,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetObjectStringClass() throws SQLException {
+    void testGetObjectStringClass() throws SQLException {
         assertNextRow();
         getResultSet().getObject(columnLabel, type);
     }
@@ -596,7 +596,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetObjectStringMap() throws SQLException {
+    void testGetObjectStringMap() throws SQLException {
         assertNextRow();
         getResultSet().getObject(columnLabel, map);
     }
@@ -605,7 +605,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetRef() throws SQLException {
+    void testGetRef() throws SQLException {
         getResultSet().getRef(columnLabel);
     }
 
@@ -613,7 +613,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetRefInt() throws SQLException {
+    void testGetRefInt() throws SQLException {
         getResultSet().getRef(columnIndex);
     }
 
@@ -621,7 +621,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetRow() throws SQLException {
+    void testGetRow() throws SQLException {
         getResultSet().getRow();
     }
 
@@ -629,7 +629,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetRowId() throws SQLException {
+    void testGetRowId() throws SQLException {
         getResultSet().getRowId(columnLabel);
     }
 
@@ -637,7 +637,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetRowIdInt() throws SQLException {
+    void testGetRowIdInt() throws SQLException {
         getResultSet().getRowId(columnIndex);
     }
 
@@ -645,7 +645,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetShort() throws SQLException {
+    void testGetShort() throws SQLException {
         assertNextRow();
         getResultSet().getShort(columnLabel);
     }
@@ -654,7 +654,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetShortInt() throws SQLException {
+    void testGetShortInt() throws SQLException {
         getResultSet().getShort(columnIndex);
     }
 
@@ -662,7 +662,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetSQLXML() throws SQLException {
+    void testGetSQLXML() throws SQLException {
         getResultSet().getSQLXML(columnLabel);
     }
 
@@ -670,7 +670,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetSQLXMLInt() throws SQLException {
+    void testGetSQLXMLInt() throws SQLException {
         getResultSet().getSQLXML(columnIndex);
     }
 
@@ -678,7 +678,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetStatement() throws SQLException {
+    void testGetStatement() throws SQLException {
         getResultSet().getStatement();
     }
 
@@ -686,7 +686,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetString() throws SQLException {
+    void testGetString() throws SQLException {
         assertNextRow();
         getResultSet().getString(columnLabel);
     }
@@ -695,7 +695,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetStringInt() throws SQLException {
+    void testGetStringInt() throws SQLException {
         getResultSet().getString(columnIndex);
     }
 
@@ -703,7 +703,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTime() throws SQLException {
+    void testGetTime() throws SQLException {
         getResultSet().getTime(columnLabel);
     }
 
@@ -711,7 +711,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimeInt() throws SQLException {
+    void testGetTimeInt() throws SQLException {
         getResultSet().getTime(columnIndex);
     }
 
@@ -719,7 +719,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimeIntCalendar() throws SQLException {
+    void testGetTimeIntCalendar() throws SQLException {
         getResultSet().getTime(columnIndex, cal);
     }
 
@@ -727,7 +727,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimestamp() throws SQLException {
+    void testGetTimestamp() throws SQLException {
         getResultSet().getTimestamp(columnLabel);
     }
 
@@ -735,7 +735,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimestampInt() throws SQLException {
+    void testGetTimestampInt() throws SQLException {
         getResultSet().getTimestamp(columnIndex);
     }
 
@@ -743,7 +743,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimestampIntCalendar() throws SQLException {
+    void testGetTimestampIntCalendar() throws SQLException {
         getResultSet().getTimestamp(columnIndex, cal);
     }
 
@@ -751,7 +751,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimestampStringCalendar() throws SQLException {
+    void testGetTimestampStringCalendar() throws SQLException {
         getResultSet().getTimestamp(columnLabel, cal);
     }
 
@@ -759,7 +759,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetTimeStringCalendar() throws SQLException {
+    void testGetTimeStringCalendar() throws SQLException {
         getResultSet().getTime(columnLabel, cal);
     }
 
@@ -767,7 +767,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetType() throws SQLException {
+    void testGetType() throws SQLException {
         getResultSet().getType();
     }
 
@@ -775,7 +775,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetUnicodeStream() throws SQLException {
+    void testGetUnicodeStream() throws SQLException {
         getResultSet().getUnicodeStream(columnLabel);
     }
 
@@ -783,7 +783,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetUnicodeStreamInt() throws SQLException {
+    void testGetUnicodeStreamInt() throws SQLException {
         getResultSet().getUnicodeStream(columnIndex);
     }
 
@@ -791,7 +791,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetURL() throws SQLException {
+    void testGetURL() throws SQLException {
         getResultSet().getURL(columnLabel);
     }
 
@@ -799,7 +799,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetURLInt() throws SQLException {
+    void testGetURLInt() throws SQLException {
         getResultSet().getURL(columnIndex);
     }
 
@@ -807,7 +807,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testGetWarnings() throws SQLException {
+    void testGetWarnings() throws SQLException {
         getResultSet().getWarnings();
     }
 
@@ -815,7 +815,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testInsertRow() throws SQLException {
+    void testInsertRow() throws SQLException {
         getResultSet().insertRow();
     }
 
@@ -823,7 +823,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testIsAfterLast() throws SQLException {
+    void testIsAfterLast() throws SQLException {
         getResultSet().isAfterLast();
     }
 
@@ -831,7 +831,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testIsBeforeFirst() throws SQLException {
+    void testIsBeforeFirst() throws SQLException {
         getResultSet().isBeforeFirst();
     }
 
@@ -839,7 +839,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testIsClosed() throws SQLException {
+    void testIsClosed() throws SQLException {
         getResultSet().isClosed();
     }
 
@@ -847,7 +847,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testIsFirst() throws SQLException {
+    void testIsFirst() throws SQLException {
         getResultSet().isFirst();
     }
 
@@ -855,7 +855,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testIsLast() throws SQLException {
+    void testIsLast() throws SQLException {
         getResultSet().isLast();
     }
 
@@ -863,7 +863,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testIsWrapperFor() throws SQLException {
+    void testIsWrapperFor() throws SQLException {
         getResultSet().isWrapperFor(iface);
     }
 
@@ -871,7 +871,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testLast() throws SQLException {
+    void testLast() throws SQLException {
         getResultSet().last();
     }
 
@@ -879,7 +879,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testMoveToInsertRow() throws SQLException {
+    void testMoveToInsertRow() throws SQLException {
         getResultSet().moveToInsertRow();
     }
 
@@ -887,7 +887,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testNext() throws SQLException {
+    void testNext() throws SQLException {
         assertNextRow();
     }
 
@@ -895,7 +895,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testPrevious() throws SQLException {
+    void testPrevious() throws SQLException {
         getResultSet().previous();
     }
 
@@ -903,7 +903,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testRefreshRow() throws SQLException {
+    void testRefreshRow() throws SQLException {
         getResultSet().refreshRow();
     }
 
@@ -911,7 +911,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testRelativeInt() throws SQLException {
+    void testRelativeInt() throws SQLException {
         getResultSet().relative(rows);
     }
 
@@ -919,7 +919,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testRowDeleted() throws SQLException {
+    void testRowDeleted() throws SQLException {
         getResultSet().rowDeleted();
     }
 
@@ -927,7 +927,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testRowInserted() throws SQLException {
+    void testRowInserted() throws SQLException {
         getResultSet().rowInserted();
     }
 
@@ -935,7 +935,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testRowUpdated() throws SQLException {
+    void testRowUpdated() throws SQLException {
         getResultSet().rowUpdated();
     }
 
@@ -943,7 +943,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testSetFetchDirectionInt() throws SQLException {
+    void testSetFetchDirectionInt() throws SQLException {
         getResultSet().setFetchDirection(direction);
     }
 
@@ -951,7 +951,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testSetFetchSizeInt() throws SQLException {
+    void testSetFetchSizeInt() throws SQLException {
         getResultSet().setFetchSize(rows);
     }
 
@@ -959,7 +959,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testTest_moveToCurrentRow() throws SQLException {
+    void testTest_moveToCurrentRow() throws SQLException {
         getResultSet().moveToCurrentRow();
     }
 
@@ -967,7 +967,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUnwrapClass() throws SQLException {
+    void testUnwrapClass() throws SQLException {
         getResultSet().unwrap(iface);
     }
 
@@ -975,7 +975,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateArrayIntArray() throws SQLException {
+    void testUpdateArrayIntArray() throws SQLException {
         getResultSet().updateArray(columnIndex, array);
     }
 
@@ -983,7 +983,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateArrayStringArray() throws SQLException {
+    void testUpdateArrayStringArray() throws SQLException {
         getResultSet().updateArray(columnLabel, array);
     }
 
@@ -991,7 +991,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateAsciiStreamIntInputStream() throws SQLException {
+    void testUpdateAsciiStreamIntInputStream() throws SQLException {
         getResultSet().updateAsciiStream(columnIndex, inputStream);
     }
 
@@ -999,7 +999,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateAsciiStreamIntInputStreamInt() throws SQLException {
+    void testUpdateAsciiStreamIntInputStreamInt() throws SQLException {
         getResultSet().updateAsciiStream(columnIndex, inputStream, lengthInt);
     }
 
@@ -1007,7 +1007,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateAsciiStreamIntInputStreamLong() throws SQLException {
+    void testUpdateAsciiStreamIntInputStreamLong() throws SQLException {
         getResultSet().updateAsciiStream(columnIndex, inputStream, lengthLong);
     }
 
@@ -1015,7 +1015,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateAsciiStreamStringInputStream() throws SQLException {
+    void testUpdateAsciiStreamStringInputStream() throws SQLException {
         getResultSet().updateAsciiStream(columnLabel, inputStream);
     }
 
@@ -1023,7 +1023,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateAsciiStreamStringInputStreamInt() throws SQLException {
+    void testUpdateAsciiStreamStringInputStreamInt() throws SQLException {
         getResultSet().updateAsciiStream(columnLabel, inputStream, lengthInt);
     }
 
@@ -1031,7 +1031,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateAsciiStreamStringInputStreamLong() throws SQLException {
+    void testUpdateAsciiStreamStringInputStreamLong() throws SQLException {
         getResultSet().updateAsciiStream(columnLabel, inputStream, lengthLong);
     }
 
@@ -1039,7 +1039,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBigDecimalIntBigDecimal() throws SQLException {
+    void testUpdateBigDecimalIntBigDecimal() throws SQLException {
         getResultSet().updateBigDecimal(columnIndex, bigDecimal);
     }
 
@@ -1047,7 +1047,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBigDecimalStringBigDecimal() throws SQLException {
+    void testUpdateBigDecimalStringBigDecimal() throws SQLException {
         getResultSet().updateBigDecimal(columnLabel, bigDecimal);
     }
 
@@ -1055,7 +1055,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBinaryStreamIntInputStream() throws SQLException {
+    void testUpdateBinaryStreamIntInputStream() throws SQLException {
         getResultSet().updateBinaryStream(columnIndex, inputStream);
     }
 
@@ -1063,7 +1063,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBinaryStreamIntInputStreamInt() throws SQLException {
+    void testUpdateBinaryStreamIntInputStreamInt() throws SQLException {
         getResultSet().updateBinaryStream(columnIndex, inputStream, lengthInt);
     }
 
@@ -1071,7 +1071,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBinaryStreamIntInputStreamLong() throws SQLException {
+    void testUpdateBinaryStreamIntInputStreamLong() throws SQLException {
         getResultSet().updateBinaryStream(columnIndex, inputStream, lengthLong);
     }
 
@@ -1079,7 +1079,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBinaryStreamStringInputStream() throws SQLException {
+    void testUpdateBinaryStreamStringInputStream() throws SQLException {
         getResultSet().updateBinaryStream(columnLabel, inputStream);
     }
 
@@ -1087,7 +1087,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBinaryStreamStringInputStreamInt() throws SQLException {
+    void testUpdateBinaryStreamStringInputStreamInt() throws SQLException {
         getResultSet().updateBinaryStream(columnLabel, inputStream, lengthInt);
     }
 
@@ -1095,7 +1095,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBinaryStreamStringInputStreamLong() throws SQLException {
+    void testUpdateBinaryStreamStringInputStreamLong() throws SQLException {
         getResultSet().updateBinaryStream(columnLabel, inputStream, lengthLong);
     }
 
@@ -1103,7 +1103,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBlobIntBlob() throws SQLException {
+    void testUpdateBlobIntBlob() throws SQLException {
         getResultSet().updateBlob(columnIndex, blob);
     }
 
@@ -1111,7 +1111,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBlobIntInputStream() throws SQLException {
+    void testUpdateBlobIntInputStream() throws SQLException {
         getResultSet().updateBlob(columnIndex, inputStream);
     }
 
@@ -1119,7 +1119,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBlobIntInputStreamLong() throws SQLException {
+    void testUpdateBlobIntInputStreamLong() throws SQLException {
         getResultSet().updateBlob(columnIndex, inputStream, lengthLong);
     }
 
@@ -1127,7 +1127,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBlobStringBlob() throws SQLException {
+    void testUpdateBlobStringBlob() throws SQLException {
         getResultSet().updateBlob(columnLabel, blob);
     }
 
@@ -1135,7 +1135,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBlobStringInputStream() throws SQLException {
+    void testUpdateBlobStringInputStream() throws SQLException {
         getResultSet().updateBlob(columnLabel, inputStream);
     }
 
@@ -1143,7 +1143,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBlobStringInputStreamLong() throws SQLException {
+    void testUpdateBlobStringInputStreamLong() throws SQLException {
         getResultSet().updateBlob(columnLabel, inputStream, lengthLong);
     }
 
@@ -1151,7 +1151,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBooleanIntBoolean() throws SQLException {
+    void testUpdateBooleanIntBoolean() throws SQLException {
         getResultSet().updateBoolean(columnIndex, booleanValue);
     }
 
@@ -1159,7 +1159,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBooleanStringBoolean() throws SQLException {
+    void testUpdateBooleanStringBoolean() throws SQLException {
         getResultSet().updateBoolean(columnLabel, booleanValue);
     }
 
@@ -1167,7 +1167,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateByteIntByte() throws SQLException {
+    void testUpdateByteIntByte() throws SQLException {
         getResultSet().updateByte(columnIndex, byteValue);
     }
 
@@ -1175,7 +1175,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBytesIntByteArray() throws SQLException {
+    void testUpdateBytesIntByteArray() throws SQLException {
         getResultSet().updateBytes(columnIndex, byteArray);
     }
 
@@ -1183,7 +1183,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateBytesStringByteArray() throws SQLException {
+    void testUpdateBytesStringByteArray() throws SQLException {
         getResultSet().updateBytes(columnLabel, byteArray);
     }
 
@@ -1191,7 +1191,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateByteStringByte() throws SQLException {
+    void testUpdateByteStringByte() throws SQLException {
         getResultSet().updateByte(columnLabel, byteValue);
     }
 
@@ -1199,7 +1199,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateCharacterStreamIntReader() throws SQLException {
+    void testUpdateCharacterStreamIntReader() throws SQLException {
         getResultSet().updateCharacterStream(columnIndex, reader);
     }
 
@@ -1207,7 +1207,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateCharacterStreamIntReaderInt() throws SQLException {
+    void testUpdateCharacterStreamIntReaderInt() throws SQLException {
         getResultSet().updateCharacterStream(columnIndex, reader, lengthInt);
     }
 
@@ -1215,7 +1215,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateCharacterStreamIntReaderLong() throws SQLException {
+    void testUpdateCharacterStreamIntReaderLong() throws SQLException {
         getResultSet().updateCharacterStream(columnIndex, reader, lengthLong);
     }
 
@@ -1223,7 +1223,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateCharacterStreamStringReader() throws SQLException {
+    void testUpdateCharacterStreamStringReader() throws SQLException {
         getResultSet().updateCharacterStream(columnLabel, reader);
     }
 
@@ -1231,7 +1231,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateCharacterStreamStringReaderInt() throws SQLException {
+    void testUpdateCharacterStreamStringReaderInt() throws SQLException {
         getResultSet().updateCharacterStream(columnLabel, reader, lengthInt);
     }
 
@@ -1239,7 +1239,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateCharacterStreamStringReaderLong() throws SQLException {
+    void testUpdateCharacterStreamStringReaderLong() throws SQLException {
         getResultSet().updateCharacterStream(columnLabel, reader, lengthLong);
     }
 
@@ -1247,7 +1247,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateClobIntClob() throws SQLException {
+    void testUpdateClobIntClob() throws SQLException {
         getResultSet().updateClob(columnIndex, clob);
     }
 
@@ -1255,7 +1255,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateClobIntReader() throws SQLException {
+    void testUpdateClobIntReader() throws SQLException {
         getResultSet().updateClob(columnIndex, reader);
     }
 
@@ -1263,7 +1263,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateClobIntReaderLong() throws SQLException {
+    void testUpdateClobIntReaderLong() throws SQLException {
         getResultSet().updateClob(columnIndex, reader, lengthLong);
     }
 
@@ -1271,7 +1271,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateClobStringClob() throws SQLException {
+    void testUpdateClobStringClob() throws SQLException {
         getResultSet().updateClob(columnLabel, clob);
     }
 
@@ -1279,7 +1279,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateClobStringReader() throws SQLException {
+    void testUpdateClobStringReader() throws SQLException {
         getResultSet().updateClob(columnLabel, reader);
     }
 
@@ -1287,7 +1287,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateClobStringReaderLong() throws SQLException {
+    void testUpdateClobStringReaderLong() throws SQLException {
         getResultSet().updateClob(columnLabel, reader, lengthLong);
     }
 
@@ -1295,7 +1295,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateDateIntDate() throws SQLException {
+    void testUpdateDateIntDate() throws SQLException {
         getResultSet().updateDate(columnIndex, date);
     }
 
@@ -1303,7 +1303,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateDateStringDate() throws SQLException {
+    void testUpdateDateStringDate() throws SQLException {
         getResultSet().updateDate(columnLabel, date);
     }
 
@@ -1311,7 +1311,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateDoubleIntDouble() throws SQLException {
+    void testUpdateDoubleIntDouble() throws SQLException {
         getResultSet().updateDouble(columnIndex, doubleValue);
     }
 
@@ -1319,7 +1319,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateDoubleStringDouble() throws SQLException {
+    void testUpdateDoubleStringDouble() throws SQLException {
         getResultSet().updateDouble(columnLabel, doubleValue);
     }
 
@@ -1327,7 +1327,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateFloatIntFloat() throws SQLException {
+    void testUpdateFloatIntFloat() throws SQLException {
         getResultSet().updateFloat(columnIndex, floatValue);
     }
 
@@ -1335,7 +1335,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateFloatStringFloat() throws SQLException {
+    void testUpdateFloatStringFloat() throws SQLException {
         getResultSet().updateFloat(columnLabel, floatValue);
     }
 
@@ -1343,7 +1343,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateIntIntInt() throws SQLException {
+    void testUpdateIntIntInt() throws SQLException {
         getResultSet().updateInt(columnIndex, intValue);
     }
 
@@ -1351,7 +1351,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateIntStringInt() throws SQLException {
+    void testUpdateIntStringInt() throws SQLException {
         getResultSet().updateInt(columnLabel, intValue);
     }
 
@@ -1359,7 +1359,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateLongIntLong() throws SQLException {
+    void testUpdateLongIntLong() throws SQLException {
         getResultSet().updateLong(columnIndex, longValue);
     }
 
@@ -1367,7 +1367,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateLongStringLong() throws SQLException {
+    void testUpdateLongStringLong() throws SQLException {
         getResultSet().updateLong(columnLabel, longValue);
     }
 
@@ -1375,7 +1375,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNCharacterStreamIntReader() throws SQLException {
+    void testUpdateNCharacterStreamIntReader() throws SQLException {
         getResultSet().updateNCharacterStream(columnIndex, reader);
     }
 
@@ -1383,7 +1383,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNCharacterStreamIntReaderLong() throws SQLException {
+    void testUpdateNCharacterStreamIntReaderLong() throws SQLException {
         getResultSet().updateNCharacterStream(columnIndex, reader, lengthLong);
     }
 
@@ -1391,7 +1391,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNCharacterStreamStringReader() throws SQLException {
+    void testUpdateNCharacterStreamStringReader() throws SQLException {
         getResultSet().updateNCharacterStream(columnLabel, reader);
     }
 
@@ -1399,7 +1399,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNCharacterStreamStringReaderLong() throws SQLException {
+    void testUpdateNCharacterStreamStringReaderLong() throws SQLException {
         getResultSet().updateNCharacterStream(columnLabel, reader, lengthLong);
     }
 
@@ -1407,7 +1407,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNClobIntNClob() throws SQLException {
+    void testUpdateNClobIntNClob() throws SQLException {
         getResultSet().updateNClob(columnIndex, nClob);
     }
 
@@ -1415,7 +1415,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNClobIntReader() throws SQLException {
+    void testUpdateNClobIntReader() throws SQLException {
         getResultSet().updateNClob(columnIndex, reader);
     }
 
@@ -1423,7 +1423,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNClobIntReaderLong() throws SQLException {
+    void testUpdateNClobIntReaderLong() throws SQLException {
         getResultSet().updateNClob(columnIndex, reader, lengthLong);
     }
 
@@ -1431,7 +1431,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNClobStringNClob() throws SQLException {
+    void testUpdateNClobStringNClob() throws SQLException {
         getResultSet().updateNClob(columnLabel, nClob);
     }
 
@@ -1439,7 +1439,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNClobStringReader() throws SQLException {
+    void testUpdateNClobStringReader() throws SQLException {
         getResultSet().updateNClob(columnLabel, reader);
     }
 
@@ -1447,7 +1447,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNClobStringReaderLong() throws SQLException {
+    void testUpdateNClobStringReaderLong() throws SQLException {
         getResultSet().updateNClob(columnLabel, reader, lengthLong);
     }
 
@@ -1455,7 +1455,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNStringIntString() throws SQLException {
+    void testUpdateNStringIntString() throws SQLException {
         getResultSet().updateNString(columnIndex, nString);
     }
 
@@ -1463,7 +1463,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNStringStringString() throws SQLException {
+    void testUpdateNStringStringString() throws SQLException {
         getResultSet().updateNString(columnLabel, nString);
     }
 
@@ -1471,7 +1471,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNull() throws SQLException {
+    void testUpdateNull() throws SQLException {
         getResultSet().updateNull(columnLabel);
     }
 
@@ -1479,7 +1479,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateNullInt() throws SQLException {
+    void testUpdateNullInt() throws SQLException {
         getResultSet().updateNull(columnIndex);
     }
 
@@ -1487,7 +1487,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectInObjectInt() throws SQLException {
+    void testUpdateObjectInObjectInt() throws SQLException {
         getResultSet().updateObject(columnIndex, object, scaleOrLength);
     }
 
@@ -1495,7 +1495,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectIntObject() throws SQLException {
+    void testUpdateObjectIntObject() throws SQLException {
         getResultSet().updateObject(columnIndex, object);
     }
 
@@ -1503,7 +1503,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectIntObjectSQLType() throws SQLException {
+    void testUpdateObjectIntObjectSQLType() throws SQLException {
         getResultSet().updateObject(columnIndex, object, targetSqlType);
     }
 
@@ -1511,7 +1511,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectIntObjectSQLTypeInt() throws SQLException {
+    void testUpdateObjectIntObjectSQLTypeInt() throws SQLException {
         getResultSet().updateObject(columnIndex, object, targetSqlType, scaleOrLength);
     }
 
@@ -1519,7 +1519,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectStringObject() throws SQLException {
+    void testUpdateObjectStringObject() throws SQLException {
         getResultSet().updateObject(columnLabel, object);
     }
 
@@ -1527,7 +1527,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectStringObjectInt() throws SQLException {
+    void testUpdateObjectStringObjectInt() throws SQLException {
         getResultSet().updateObject(columnLabel, object, scaleOrLength);
     }
 
@@ -1535,7 +1535,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectStringObjectSQLType() throws SQLException {
+    void testUpdateObjectStringObjectSQLType() throws SQLException {
         getResultSet().updateObject(columnLabel, object, targetSqlType);
     }
 
@@ -1543,7 +1543,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateObjectStringObjectSQLTypeInt() throws SQLException {
+    void testUpdateObjectStringObjectSQLTypeInt() throws SQLException {
         getResultSet().updateObject(columnLabel, object, targetSqlType, scaleOrLength);
     }
 
@@ -1551,7 +1551,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateRefIntRef() throws SQLException {
+    void testUpdateRefIntRef() throws SQLException {
         getResultSet().updateRef(columnIndex, ref);
     }
 
@@ -1559,7 +1559,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateRefStringRef() throws SQLException {
+    void testUpdateRefStringRef() throws SQLException {
         getResultSet().updateRef(columnLabel, ref);
     }
 
@@ -1567,7 +1567,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateRow() throws SQLException {
+    void testUpdateRow() throws SQLException {
         getResultSet().updateRow();
     }
 
@@ -1575,7 +1575,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateRowIdIntRowId() throws SQLException {
+    void testUpdateRowIdIntRowId() throws SQLException {
         getResultSet().updateRowId(columnIndex, rowId);
     }
 
@@ -1583,7 +1583,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateRowIdStringRowId() throws SQLException {
+    void testUpdateRowIdStringRowId() throws SQLException {
         getResultSet().updateRowId(columnLabel, rowId);
     }
 
@@ -1591,7 +1591,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateShortIntShort() throws SQLException {
+    void testUpdateShortIntShort() throws SQLException {
         getResultSet().updateShort(columnIndex, shortValue);
     }
 
@@ -1599,7 +1599,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateShortStringShort() throws SQLException {
+    void testUpdateShortStringShort() throws SQLException {
         getResultSet().updateShort(columnLabel, shortValue);
     }
 
@@ -1607,7 +1607,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateSQLXMLIntSQLXML() throws SQLException {
+    void testUpdateSQLXMLIntSQLXML() throws SQLException {
         getResultSet().updateSQLXML(columnIndex, xmlObject);
     }
 
@@ -1615,7 +1615,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateSQLXMLStringSQLXML() throws SQLException {
+    void testUpdateSQLXMLStringSQLXML() throws SQLException {
         getResultSet().updateSQLXML(columnLabel, xmlObject);
     }
 
@@ -1623,7 +1623,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateStringIntString() throws SQLException {
+    void testUpdateStringIntString() throws SQLException {
         getResultSet().updateString(columnIndex, string);
     }
 
@@ -1631,7 +1631,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateStringStringString() throws SQLException {
+    void testUpdateStringStringString() throws SQLException {
         getResultSet().updateString(columnLabel, string);
     }
 
@@ -1639,7 +1639,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateTimeIntTime() throws SQLException {
+    void testUpdateTimeIntTime() throws SQLException {
         getResultSet().updateTime(columnIndex, time);
     }
 
@@ -1647,7 +1647,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateTimestampIntTimestamp() throws SQLException {
+    void testUpdateTimestampIntTimestamp() throws SQLException {
         getResultSet().updateTimestamp(columnIndex, timestamp);
     }
 
@@ -1655,7 +1655,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateTimestampStringTimestamp() throws SQLException {
+    void testUpdateTimestampStringTimestamp() throws SQLException {
         getResultSet().updateTimestamp(columnLabel, timestamp);
     }
 
@@ -1663,7 +1663,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testUpdateTimeStringTime() throws SQLException {
+    void testUpdateTimeStringTime() throws SQLException {
         getResultSet().updateTime(columnLabel, time);
     }
 
@@ -1671,7 +1671,7 @@ public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
      * Tests delegation.
      */
     @Test
-    public void testWasNull() throws SQLException {
+    void testWasNull() throws SQLException {
         getResultSet().wasNull();
     }
 }

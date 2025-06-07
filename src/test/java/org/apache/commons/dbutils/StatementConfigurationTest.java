@@ -29,7 +29,7 @@ public class StatementConfigurationTest {
      * Test that a builder with all values set yields like values in the constructed configuration.
      */
     @Test
-    public void testBuilder() {
+    void testBuilder() {
         final StatementConfiguration.Builder builder = new StatementConfiguration.Builder().fetchDirection(1).fetchSize(2).maxFieldSize(3).maxRows(4)
                 .queryTimeout(5);
         final StatementConfiguration config = builder.build();
@@ -65,7 +65,7 @@ public class StatementConfigurationTest {
      * Test that the constructor of {@code StatementConfiguration} correctly sets all values.
      */
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         final StatementConfiguration config = new StatementConfiguration(1, 2, 3, 4, 5);
 
         assertEquals(Integer.valueOf(1), config.getFetchDirection());
@@ -79,7 +79,7 @@ public class StatementConfigurationTest {
      * Test that an empty builder yields null values for all configuration settings.
      */
     @Test
-    public void testEmptyBuilder() {
+    void testEmptyBuilder() {
         final StatementConfiguration config = new StatementConfiguration.Builder().build();
 
         assertFalse(config.isFetchDirectionSet());

@@ -39,13 +39,13 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
     }
 
     @Test
-    public void testGetObject() throws SQLException {
+    void testGetObject() throws SQLException {
         getResultSet().next();
         assertEquals("notInBean", getResultSet().getObject(4));
     }
 
     @Test
-    public void testGetString() throws SQLException {
+    void testGetString() throws SQLException {
         getResultSet().next();
         assertEquals("notInBean", getResultSet().getString(4));
     }
@@ -56,7 +56,7 @@ public class StringTrimmedResultSetTest extends BaseTestCase {
      * @throws SQLException if a database access error occurs
      */
     @Test
-    public void testMultipleWrappers() throws Exception {
+    void testMultipleWrappers() throws Exception {
         // Create a ResultSet with data
         final Object[][] rows = { { null } };
         ResultSet rs = MockResultSet.create(META_DATA, rows, false);

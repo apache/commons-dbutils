@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 public class ResultSetIteratorTest extends BaseTestCase {
 
     @Test
-    public void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
+    void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {
 
         final ResultSet resultSet = mock(ResultSet.class);
         final ResultSetIterator resultSetIterator = new ResultSetIterator(resultSet, null);
@@ -43,7 +43,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
     }
 
     @Test
-    public void testNext() {
+    void testNext() {
 
         final Iterator<Object[]> iter = new ResultSetIterator(getResultSet());
 
@@ -67,7 +67,7 @@ public class ResultSetIteratorTest extends BaseTestCase {
     }
 
     @Test
-    public void testRethrowThrowsRuntimeException() {
+    void testRethrowThrowsRuntimeException() {
 
         final ResultSetIterator resultSetIterator = new ResultSetIterator((ResultSet) null);
         final Throwable throwable = new Throwable();

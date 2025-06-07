@@ -30,37 +30,37 @@ public class ProxyFactoryTest extends BaseTestCase {
     private static final InvocationHandler stub = (proxy, method, args) -> null;
 
     @Test
-    public void testCreateCallableStatement() {
+    void testCreateCallableStatement() {
         assertNotNull(ProxyFactory.instance().createCallableStatement(stub));
     }
 
     @Test
-    public void testCreateConnection() {
+    void testCreateConnection() {
         assertNotNull(ProxyFactory.instance().createConnection(stub));
     }
 
     @Test
-    public void testCreateDriver() {
+    void testCreateDriver() {
         assertNotNull(ProxyFactory.instance().createDriver(stub));
     }
 
     @Test
-    public void testCreatePreparedStatement() {
+    void testCreatePreparedStatement() {
         assertNotNull(ProxyFactory.instance().createPreparedStatement(stub));
     }
 
     @Test
-    public void testCreateResultSet() {
+    void testCreateResultSet() {
         assertNotNull(ProxyFactory.instance().createResultSet(stub));
     }
 
     @Test
-    public void testCreateResultSetMetaData() {
+    void testCreateResultSetMetaData() {
         assertNotNull(ProxyFactory.instance().createResultSetMetaData(stub));
     }
 
     @Test
-    public void testCreateStatement() {
+    void testCreateStatement() {
         assertNotNull(ProxyFactory.instance().createStatement(stub));
     }
 

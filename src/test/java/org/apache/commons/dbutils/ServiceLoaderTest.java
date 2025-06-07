@@ -39,7 +39,7 @@ public class ServiceLoaderTest {
      * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers were loaded, too.
      */
     @Test
-    public void testFindMoreThanLocalColumns() {
+    void testFindMoreThanLocalColumns() {
         int count = 0;
         for (final ColumnHandler<?> handler : columns) {
             count++;
@@ -52,7 +52,7 @@ public class ServiceLoaderTest {
      * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers were loaded, too.
      */
     @Test
-    public void testFindMoreThanLocalProperties() {
+    void testFindMoreThanLocalProperties() {
         int count = 0;
         for (final PropertyHandler handler : properties) {
             count++;
@@ -62,7 +62,7 @@ public class ServiceLoaderTest {
     }
 
     @Test
-    public void testFindsLocalColumnHandler() {
+    void testFindsLocalColumnHandler() {
         boolean found = false;
         for (final ColumnHandler<?> handler : columns) {
             // this class is defined outside of the main classes in dbutils
@@ -75,7 +75,7 @@ public class ServiceLoaderTest {
     }
 
     @Test
-    public void testFindsLocalPropertyHandler() {
+    void testFindsLocalPropertyHandler() {
         boolean found = false;
         for (final PropertyHandler handler : properties) {
             // this class is defined outside of the main classes in dbutils

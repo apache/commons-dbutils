@@ -50,7 +50,7 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
         final List<TestBean> results = h.handle(getEmptyResultSet());
 
@@ -59,7 +59,7 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(TestBean.class);
         final List<TestBean> results = h.handle(getResultSet());
 
@@ -87,7 +87,7 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandleToInterface() throws SQLException {
+    void testHandleToInterface() throws SQLException {
         final ResultSetHandler<List<SubTestBeanInterface>> h = new BeanListHandler<>(SubTestBean.class);
         final List<SubTestBeanInterface> results = h.handle(getResultSet());
 
@@ -118,7 +118,7 @@ public class BeanListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandleToSuperClass() throws SQLException {
+    void testHandleToSuperClass() throws SQLException {
         final ResultSetHandler<List<TestBean>> h = new BeanListHandler<>(SubTestBean.class);
         final List<TestBean> results = h.handle(getResultSet());
 

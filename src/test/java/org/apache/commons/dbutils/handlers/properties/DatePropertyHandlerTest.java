@@ -38,35 +38,35 @@ public class DatePropertyHandlerTest {
     }
 
     @Test
-    public void testApplyTypeOfDate() throws Exception {
+    void testApplyTypeOfDate() throws Exception {
         assertEquals(java.sql.Date.class, handler.apply(java.sql.Date.class, testValue).getClass());
     }
 
     @Test
-    public void testApplyTypeOfTime() throws Exception {
+    void testApplyTypeOfTime() throws Exception {
         assertEquals(Time.class, handler.apply(java.sql.Time.class, testValue).getClass());
     }
 
     @Test
-    public void testApplyTypeOfTimestamp() throws Exception {
+    void testApplyTypeOfTimestamp() throws Exception {
         assertEquals(Timestamp.class, handler.apply(java.sql.Timestamp.class, testValue).getClass());
     }
 
     @Test
-    public void testMatch() {
+    void testMatch() {
         assertTrue(handler.match(java.sql.Date.class, testValue));
         assertTrue(handler.match(java.sql.Time.class, testValue));
         assertTrue(handler.match(java.sql.Timestamp.class, testValue));
     }
 
     @Test
-    public void testMatchNegative() {
+    void testMatchNegative() {
         assertFalse(handler.match(Float.class, null));
         assertFalse(handler.match(Float.class, testValue));
     }
 
     @Test
-    public void testNotMatch() {
+    void testNotMatch() {
         final Timestamp ts = new Timestamp(testValue.getTime());
         assertFalse(handler.match(java.sql.Timestamp.class, ts));
     }

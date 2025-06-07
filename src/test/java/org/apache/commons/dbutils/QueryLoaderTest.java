@@ -34,7 +34,7 @@ public class QueryLoaderTest extends BaseTestCase {
     private static final String QUERIES = "/org/apache/commons/dbutils/TestQueries.properties";
 
     @Test
-    public void testLoad() throws IOException {
+    void testLoad() throws IOException {
         final QueryLoader loader = QueryLoader.instance();
         final Map<String, String> q = loader.load(QUERIES);
         final Map<String, String> q2 = loader.load(QUERIES);
@@ -47,7 +47,7 @@ public class QueryLoaderTest extends BaseTestCase {
     }
 
     @Test
-    public void testLoadThrowsIllegalArgumentException() throws IOException {
+    void testLoadThrowsIllegalArgumentException() throws IOException {
 
         final QueryLoader queryLoader = QueryLoader.instance();
 

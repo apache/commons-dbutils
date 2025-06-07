@@ -79,7 +79,7 @@ public class GenerousBeanProcessorTest {
 
     @SuppressWarnings("boxing") // test code
     @Test
-    public void testMapColumnsToPropertiesColumnLabelIsNull() throws Exception {
+    void testMapColumnsToPropertiesColumnLabelIsNull() throws Exception {
         when(metaData.getColumnCount()).thenReturn(1);
         when(metaData.getColumnName(1)).thenReturn("juhu");
         when(metaData.getColumnLabel(1)).thenReturn(null);
@@ -94,7 +94,7 @@ public class GenerousBeanProcessorTest {
 
     @SuppressWarnings("boxing") // test code
     @Test
-    public void testMapColumnsToPropertiesMixedCase() throws Exception {
+    void testMapColumnsToPropertiesMixedCase() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
 
         when(metaData.getColumnLabel(1)).thenReturn("tHree");
@@ -113,7 +113,7 @@ public class GenerousBeanProcessorTest {
 
     @SuppressWarnings("boxing") // test code
     @Test
-    public void testMapColumnsToPropertiesWithOutUnderscores() throws Exception {
+    void testMapColumnsToPropertiesWithOutUnderscores() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
 
         when(metaData.getColumnLabel(1)).thenReturn("three");
@@ -132,7 +132,7 @@ public class GenerousBeanProcessorTest {
 
     @SuppressWarnings("boxing") // test code
     @Test
-    public void testMapColumnsToPropertiesWithSpaces() throws Exception {
+    void testMapColumnsToPropertiesWithSpaces() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
 
         when(metaData.getColumnLabel(1)).thenReturn("th ree");
@@ -151,7 +151,7 @@ public class GenerousBeanProcessorTest {
 
     @SuppressWarnings("boxing") // test code
     @Test
-    public void testMapColumnsToPropertiesWithUnderscores() throws Exception {
+    void testMapColumnsToPropertiesWithUnderscores() throws Exception {
         when(metaData.getColumnCount()).thenReturn(3);
 
         when(metaData.getColumnLabel(1)).thenReturn("t_h_r_e_e");

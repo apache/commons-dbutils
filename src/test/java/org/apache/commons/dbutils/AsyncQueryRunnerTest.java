@@ -277,7 +277,7 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testAddBatchException() throws Exception {
+    void testAddBatchException() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
@@ -287,7 +287,7 @@ public class AsyncQueryRunnerTest {
     // Random tests
     //
     @Test
-    public void testBadPrepareConnection() throws Exception {
+    void testBadPrepareConnection() throws Exception {
         assertThrows(ExecutionException.class, () -> {
             runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
             runner.update("update blah set unit = test").get();
@@ -295,33 +295,33 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testExecuteBatchException() throws Exception {
+    void testExecuteBatchException() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
-    public void testExecuteQueryException() throws Exception {
+    void testExecuteQueryException() throws Exception {
         callQueryWithException(handler, "unit", "test");
     }
 
     @Test
-    public void testExecuteUpdateException() throws Exception {
+    void testExecuteUpdateException() throws Exception {
         doThrow(new SQLException()).when(prepStmt).executeUpdate();
 
         callUpdateWithException("unit", "test");
     }
 
     @Test
-    public void testGoodBatch() throws Exception {
+    void testGoodBatch() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
 
     @Test
-    public void testGoodBatchDefaultConstructor() throws Exception {
+    void testGoodBatchDefaultConstructor() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
@@ -330,7 +330,7 @@ public class AsyncQueryRunnerTest {
 
     @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
-    public void testGoodBatchPmdTrue() throws Exception {
+    void testGoodBatchPmdTrue() throws Exception {
         runner = new AsyncQueryRunner(dataSource, true, Executors.newFixedThreadPool(1));
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
@@ -338,43 +338,43 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testGoodQuery() throws Exception {
+    void testGoodQuery() throws Exception {
         callGoodQuery();
     }
 
     @Test
-    public void testGoodQueryDefaultConstructor() throws Exception {
+    void testGoodQueryDefaultConstructor() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         callGoodQuery(conn);
     }
 
     @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
-    public void testGoodQueryPmdTrue() throws Exception {
+    void testGoodQueryPmdTrue() throws Exception {
         runner = new AsyncQueryRunner(true, Executors.newFixedThreadPool(1));
         callGoodQuery(conn);
     }
 
     @Test
-    public void testGoodUpdate() throws Exception {
+    void testGoodUpdate() throws Exception {
         callGoodUpdate();
     }
 
     @Test
-    public void testGoodUpdateDefaultConstructor() throws Exception {
+    void testGoodUpdateDefaultConstructor() throws Exception {
         runner = new AsyncQueryRunner(Executors.newFixedThreadPool(1));
         callGoodUpdate(conn);
     }
 
     @SuppressWarnings("deprecation") // deliberate test of deprecated code
     @Test
-    public void testGoodUpdatePmdTrue() throws Exception {
+    void testGoodUpdatePmdTrue() throws Exception {
         runner = new AsyncQueryRunner(true, Executors.newFixedThreadPool(1));
         callGoodUpdate(conn);
     }
 
     @Test
-    public void testInsertUsesGivenQueryRunner() throws Exception {
+    void testInsertUsesGivenQueryRunner() throws Exception {
         final QueryRunner mockQueryRunner = mock(QueryRunner.class, org.mockito.Mockito.withSettings().verboseLogging()); // debug for Continuum
         runner = new AsyncQueryRunner(Executors.newSingleThreadExecutor(), mockQueryRunner);
         final List<Future<Object[]>> futures = new ArrayList<>();
@@ -390,17 +390,17 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testNoParamsQuery() throws Exception {
+    void testNoParamsQuery() throws Exception {
         callGoodQuery();
     }
 
     @Test
-    public void testNoParamsUpdate() throws Exception {
+    void testNoParamsUpdate() throws Exception {
         callGoodUpdate();
     }
 
     @Test
-    public void testNullConnectionBatch() throws Exception {
+    void testNullConnectionBatch() throws Exception {
         assertThrows(ExecutionException.class, () -> {
             final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
@@ -411,7 +411,7 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testNullConnectionQuery() throws Exception {
+    void testNullConnectionQuery() throws Exception {
         assertThrows(ExecutionException.class, () -> {
             when(dataSource.getConnection()).thenReturn(null);
 
@@ -420,7 +420,7 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testNullConnectionUpdate() throws Exception {
+    void testNullConnectionUpdate() throws Exception {
         assertThrows(ExecutionException.class, () -> {
             when(dataSource.getConnection()).thenReturn(null);
 
@@ -429,26 +429,26 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testNullHandlerQuery() throws Exception {
+    void testNullHandlerQuery() throws Exception {
         assertThrows(ExecutionException.class, () ->
             runner.query("select * from blah where ? = ?", null).get());
     }
 
     @Test
-    public void testNullParamsArgBatch() throws Exception {
+    void testNullParamsArgBatch() throws Exception {
         assertThrows(ExecutionException.class, () ->
             runner.batch("select * from blah where ? = ?", null).get());
     }
 
     @Test
-    public void testNullParamsBatch() throws Exception {
+    void testNullParamsBatch() throws Exception {
         final String[][] params = { { null, "unit" }, { "test", null } };
 
         callGoodBatch(params);
     }
 
     @Test
-    public void testNullSqlBatch() throws Exception {
+    void testNullSqlBatch() throws Exception {
         assertThrows(ExecutionException.class, () -> {
             final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
@@ -457,48 +457,48 @@ public class AsyncQueryRunnerTest {
     }
 
     @Test
-    public void testNullSqlQuery() throws Exception {
+    void testNullSqlQuery() throws Exception {
         assertThrows(ExecutionException.class, () ->
             runner.query(null, handler).get());
     }
 
     @Test
-    public void testNullSqlUpdate() throws Exception {
+    void testNullSqlUpdate() throws Exception {
         assertThrows(ExecutionException.class, () ->
             runner.update(null).get());
     }
 
     @Test
-    public void testTooFewParamsBatch() throws Exception {
+    void testTooFewParamsBatch() throws Exception {
         final String[][] params = { { "unit" }, { "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
-    public void testTooFewParamsQuery() throws Exception {
+    void testTooFewParamsQuery() throws Exception {
         callQueryWithException("unit");
     }
 
     @Test
-    public void testTooFewParamsUpdate() throws Exception {
+    void testTooFewParamsUpdate() throws Exception {
         callUpdateWithException("unit");
     }
 
     @Test
-    public void testTooManyParamsBatch() throws Exception {
+    void testTooManyParamsBatch() throws Exception {
         final String[][] params = { { "unit", "unit", "unit" }, { "test", "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
-    public void testTooManyParamsQuery() throws Exception {
+    void testTooManyParamsQuery() throws Exception {
         callQueryWithException("unit", "test", "fail");
     }
 
     @Test
-    public void testTooManyParamsUpdate() throws Exception {
+    void testTooManyParamsUpdate() throws Exception {
         callUpdateWithException("unit", "test", "fail");
     }
 }

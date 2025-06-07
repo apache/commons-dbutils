@@ -36,7 +36,7 @@ public class PropertyHandlerTest {
      * Verifying 'more than 1' shows that we found more than we loaded locally which assumes the core handlers were loaded, too.
      */
     @Test
-    public void testFoundMoreThanLocal() {
+    void testFoundMoreThanLocal() {
         int count = 0;
         for (final PropertyHandler handler : loader) {
             count++;
@@ -46,7 +46,7 @@ public class PropertyHandlerTest {
     }
 
     @Test
-    public void testServiceLoaderFindsMultipleRegistries() {
+    void testServiceLoaderFindsMultipleRegistries() {
         boolean found = false;
         for (final PropertyHandler handler : loader) {
             // this class is defined outside of the main classes of dbutils

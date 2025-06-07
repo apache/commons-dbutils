@@ -48,7 +48,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     private static final DateFormat datef = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 
     @Test
-    public void testPutAllContainsKeyAndRemove() throws Exception {
+    void testPutAllContainsKeyAndRemove() throws Exception {
         final Map<String, Object> test = new HashMap<>(3);
         test.put("fiRst", "thing");
         test.put("seCond", "another");
@@ -65,7 +65,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testToArray() throws SQLException {
+    void testToArray() throws SQLException {
 
         Object[] a;
         assertTrue(getResultSet().next());
@@ -87,7 +87,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testToBean() throws SQLException, ParseException {
+    void testToBean() throws SQLException, ParseException {
 
         assertTrue(getResultSet().next());
         TestBean row = processor.toBean(getResultSet(), TestBean.class);
@@ -117,7 +117,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testToBeanList() throws SQLException, ParseException {
+    void testToBeanList() throws SQLException, ParseException {
 
         final List<TestBean> list = processor.toBeanList(getResultSet(), TestBean.class);
         assertNotNull(list);
@@ -146,7 +146,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testToMap() throws SQLException {
+    void testToMap() throws SQLException {
 
         assertTrue(getResultSet().next());
         Map<String, Object> m = processor.toMap(getResultSet());
@@ -167,7 +167,7 @@ public class BasicRowProcessorTest extends BaseTestCase {
     }
 
     @Test
-    public void testToMapOrdering() throws SQLException {
+    void testToMapOrdering() throws SQLException {
 
         assertTrue(getResultSet().next());
         final Map<String, Object> m = processor.toMap(getResultSet());

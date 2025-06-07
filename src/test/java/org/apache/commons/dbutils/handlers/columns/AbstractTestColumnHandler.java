@@ -53,12 +53,12 @@ public abstract class AbstractTestColumnHandler<T> {
     public abstract void testApplyType() throws Exception;
 
     @Test
-    public void testMatch() {
+    void testMatch() {
         assertTrue(handler.match(matchingType));
     }
 
     @Test
-    public void testMatchNegative() {
+    void testMatchNegative() {
         assertFalse(handler.match(Integer.class));
     }
 }

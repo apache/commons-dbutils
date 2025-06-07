@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 public class ArrayListHandlerTest extends BaseTestCase {
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
         final List<Object[]> results = h.handle(getEmptyResultSet());
 
@@ -44,7 +44,7 @@ public class ArrayListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
         final List<Object[]> results = h.handle(getResultSet());
 

@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 public class ArrayHandlerTest extends BaseTestCase {
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Object[]> h = new ArrayHandler();
         final Object[] results = h.handle(getEmptyResultSet());
 
@@ -39,7 +39,7 @@ public class ArrayHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<Object[]> h = new ArrayHandler();
         final Object[] results = h.handle(getResultSet());
 

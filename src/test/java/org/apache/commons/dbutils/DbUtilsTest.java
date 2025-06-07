@@ -56,7 +56,7 @@ public class DbUtilsTest {
         }
 
         @Test
-        public void testProxiedMethods() throws Exception {
+        void testProxiedMethods() throws Exception {
             proxy.getMajorVersion();
             verify(mockedDriver).getMajorVersion();
             proxy.getMinorVersion();
@@ -78,36 +78,36 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCloseConnection() throws Exception {
+    void testCloseConnection() throws Exception {
         final Connection mockCon = mock(Connection.class);
         DbUtils.close(mockCon);
         verify(mockCon).close();
     }
 
     @Test
-    public void testCloseNullConnection() throws Exception {
+    void testCloseNullConnection() throws Exception {
         DbUtils.close((Connection) null);
     }
 
     @Test
-    public void testCloseNullResultSet() throws Exception {
+    void testCloseNullResultSet() throws Exception {
         DbUtils.close((ResultSet) null);
     }
 
     @Test
-    public void testCloseNullStatement() throws Exception {
+    void testCloseNullStatement() throws Exception {
         DbUtils.close((Statement) null);
     }
 
     @Test
-    public void testCloseQuietlyConnection() throws Exception {
+    void testCloseQuietlyConnection() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.closeQuietly(mockConnection);
         verify(mockConnection).close();
     }
 
     @Test
-    public void testCloseQuietlyConnectionResultSetStatement() throws Exception {
+    void testCloseQuietlyConnectionResultSetStatement() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         final ResultSet mockResultSet = mock(ResultSet.class);
         final Statement mockStatement = mock(Statement.class);
@@ -118,7 +118,7 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCloseQuietlyConnectionResultSetStatementThrowingException() throws Exception {
+    void testCloseQuietlyConnectionResultSetStatementThrowingException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         final ResultSet mockResultSet = mock(ResultSet.class);
         final Statement mockStatement = mock(Statement.class);
@@ -130,7 +130,7 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCloseQuietlyConnectionResultSetThrowingExceptionStatement() throws Exception {
+    void testCloseQuietlyConnectionResultSetThrowingExceptionStatement() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         final ResultSet mockResultSet = mock(ResultSet.class);
         doThrow(SQLException.class).when(mockResultSet).close();
@@ -142,14 +142,14 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCloseQuietlyConnectionThrowingException() throws Exception {
+    void testCloseQuietlyConnectionThrowingException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).close();
         DbUtils.closeQuietly(mockConnection);
     }
 
     @Test
-    public void testCloseQuietlyConnectionThrowingExceptionResultSetStatement() throws Exception {
+    void testCloseQuietlyConnectionThrowingExceptionResultSetStatement() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).close();
         final ResultSet mockResultSet = mock(ResultSet.class);
@@ -161,64 +161,64 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCloseQuietlyNullConnection() throws Exception {
+    void testCloseQuietlyNullConnection() throws Exception {
         DbUtils.closeQuietly((Connection) null);
     }
 
     @Test
-    public void testCloseQuietlyNullResultSet() throws Exception {
+    void testCloseQuietlyNullResultSet() throws Exception {
         DbUtils.closeQuietly((ResultSet) null);
     }
 
     @Test
-    public void testCloseQuietlyNullStatement() throws Exception {
+    void testCloseQuietlyNullStatement() throws Exception {
         DbUtils.closeQuietly((Statement) null);
     }
 
     @Test
-    public void testCloseQuietlyResultSet() throws Exception {
+    void testCloseQuietlyResultSet() throws Exception {
         final ResultSet mockResultSet = mock(ResultSet.class);
         DbUtils.closeQuietly(mockResultSet);
         verify(mockResultSet).close();
     }
 
     @Test
-    public void testCloseQuietlyResultSetThrowingException() throws Exception {
+    void testCloseQuietlyResultSetThrowingException() throws Exception {
         final ResultSet mockResultSet = mock(ResultSet.class);
         doThrow(SQLException.class).when(mockResultSet).close();
         DbUtils.closeQuietly(mockResultSet);
     }
 
     @Test
-    public void testCloseQuietlyStatement() throws Exception {
+    void testCloseQuietlyStatement() throws Exception {
         final Statement mockStatement = mock(Statement.class);
         DbUtils.closeQuietly(mockStatement);
         verify(mockStatement).close();
     }
 
     @Test
-    public void testCloseQuietlyStatementThrowingException() throws Exception {
+    void testCloseQuietlyStatementThrowingException() throws Exception {
         final Statement mockStatement = mock(Statement.class);
         doThrow(SQLException.class).when(mockStatement).close();
         DbUtils.closeQuietly(mockStatement);
     }
 
     @Test
-    public void testCloseResultSet() throws Exception {
+    void testCloseResultSet() throws Exception {
         final ResultSet mockResultSet = mock(ResultSet.class);
         DbUtils.close(mockResultSet);
         verify(mockResultSet).close();
     }
 
     @Test
-    public void testCloseStatement() throws Exception {
+    void testCloseStatement() throws Exception {
         final Statement mockStatement = mock(Statement.class);
         DbUtils.close(mockStatement);
         verify(mockStatement).close();
     }
 
     @Test
-    public void testCommitAndClose() throws Exception {
+    void testCommitAndClose() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.commitAndClose(mockConnection);
         verify(mockConnection).commit();
@@ -226,7 +226,7 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCommitAndCloseQuietly() throws Exception {
+    void testCommitAndCloseQuietly() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.commitAndClose(mockConnection);
         verify(mockConnection).commit();
@@ -234,7 +234,7 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCommitAndCloseQuietlyWithException() throws Exception {
+    void testCommitAndCloseQuietlyWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).close();
         DbUtils.commitAndCloseQuietly(mockConnection);
@@ -243,14 +243,14 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testCommitAndCloseQuietlyWithNullDoesNotThrowAnSQLException() {
+    void testCommitAndCloseQuietlyWithNullDoesNotThrowAnSQLException() {
 
         DbUtils.commitAndCloseQuietly(null);
 
     }
 
     @Test
-    public void testCommitAndCloseWithException() throws Exception {
+    void testCommitAndCloseWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).commit();
         try {
@@ -263,47 +263,47 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testConstructor() throws Exception {
+    void testConstructor() throws Exception {
         // For compatibility only
         new DbUtils();
     }
 
     @Test
-    public void testLoadDriverClassLoaderH2() throws Exception {
+    void testLoadDriverClassLoaderH2() throws Exception {
         assertTrue(DbUtils.loadDriver(DbUtils.class.getClassLoader(), "org.h2.Driver"));
     }
 
     @Test
-    public void testLoadDriverH2() throws Exception {
+    void testLoadDriverH2() throws Exception {
         assertTrue(DbUtils.loadDriver("org.h2.Driver"));
     }
 
     @Test
-    public void testLoadDriverReturnsFalse() {
+    void testLoadDriverReturnsFalse() {
         assertFalse(DbUtils.loadDriver(""));
     }
 
     @Test
-    public void testPrintStackTraceSQLException() {
+    void testPrintStackTraceSQLException() {
         DbUtils.printStackTrace(new SQLException());
     }
 
     @Test
-    public void testPrintStackTraceSQLExceptionPrintWriter() {
+    void testPrintStackTraceSQLExceptionPrintWriter() {
         final PrintWriter pw = new PrintWriter(new StringWriter());
         DbUtils.printStackTrace(new SQLException(), pw);
         assertFalse(pw.toString().isEmpty());
     }
 
     @Test
-    public void testRollback() throws Exception {
+    void testRollback() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.rollback(mockConnection);
         verify(mockConnection).rollback();
     }
 
     @Test
-    public void testRollbackAndClose() throws Exception {
+    void testRollbackAndClose() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.rollbackAndClose(mockConnection);
         verify(mockConnection).rollback();
@@ -311,12 +311,12 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testRollbackAndCloseNull() throws Exception {
+    void testRollbackAndCloseNull() throws Exception {
         DbUtils.rollbackAndClose(null);
     }
 
     @Test
-    public void testRollbackAndCloseQuietly() throws Exception {
+    void testRollbackAndCloseQuietly() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.rollbackAndCloseQuietly(mockConnection);
         verify(mockConnection).rollback();
@@ -324,12 +324,12 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testRollbackAndCloseQuietlyNull() throws Exception {
+    void testRollbackAndCloseQuietlyNull() throws Exception {
         DbUtils.rollbackAndCloseQuietly(null);
     }
 
     @Test
-    public void testRollbackAndCloseQuietlyWithException() throws Exception {
+    void testRollbackAndCloseQuietlyWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).rollback();
         DbUtils.rollbackAndCloseQuietly(mockConnection);
@@ -338,7 +338,7 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testRollbackAndCloseWithException() throws Exception {
+    void testRollbackAndCloseWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).rollback();
         try {
@@ -352,24 +352,24 @@ public class DbUtilsTest {
     }
 
     @Test
-    public void testRollbackNull() throws Exception {
+    void testRollbackNull() throws Exception {
         DbUtils.rollback(null);
     }
 
     @Test
-    public void testRollbackQuietly() throws Exception {
+    void testRollbackQuietly() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         DbUtils.rollbackQuietly(mockConnection);
         verify(mockConnection).rollback();
     }
 
     @Test
-    public void testRollbackQuietlyNull() throws Exception {
+    void testRollbackQuietlyNull() throws Exception {
         DbUtils.rollbackQuietly(null);
     }
 
     @Test
-    public void testRollbackQuietlyWithException() throws Exception {
+    void testRollbackQuietlyWithException() throws Exception {
         final Connection mockConnection = mock(Connection.class);
         doThrow(SQLException.class).when(mockConnection).rollback();
         DbUtils.rollbackQuietly(mockConnection);

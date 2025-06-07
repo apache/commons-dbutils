@@ -256,7 +256,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getAsciiStream implementation.
      */
     @Test
-    public void testGetAsciiStream() throws SQLException {
+    void testGetAsciiStream() throws SQLException {
 
         assertNull(rs.getAsciiStream(1));
         assertTrue(rs.wasNull());
@@ -276,7 +276,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getBigDecimal implementation.
      */
     @Test
-    public void testGetBigDecimal() throws SQLException {
+    void testGetBigDecimal() throws SQLException {
 
         assertNull(rs.getBigDecimal(1));
         assertTrue(rs.wasNull());
@@ -296,7 +296,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getBinaryStream implementation.
      */
     @Test
-    public void testGetBinaryStream() throws SQLException {
+    void testGetBinaryStream() throws SQLException {
 
         assertNull(rs.getBinaryStream(1));
         assertTrue(rs.wasNull());
@@ -316,7 +316,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getBlob implementation.
      */
     @Test
-    public void testGetBlob() throws SQLException {
+    void testGetBlob() throws SQLException {
 
         assertNull(rs.getBlob(1));
         assertTrue(rs.wasNull());
@@ -336,7 +336,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getBoolean implementation.
      */
     @Test
-    public void testGetBoolean() throws SQLException {
+    void testGetBoolean() throws SQLException {
 
         assertFalse(rs.getBoolean(1));
         assertTrue(rs.wasNull());
@@ -353,7 +353,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getByte implementation.
      */
     @Test
-    public void testGetByte() throws SQLException {
+    void testGetByte() throws SQLException {
 
         assertEquals((byte) 0, rs.getByte(1));
         assertTrue(rs.wasNull());
@@ -371,7 +371,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getByte implementation.
      */
     @Test
-    public void testGetBytes() throws SQLException {
+    void testGetBytes() throws SQLException {
 
         assertNull(rs.getBytes(1));
         assertTrue(rs.wasNull());
@@ -394,7 +394,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getCharacterStream implementation.
      */
     @Test
-    public void testGetCharacterStream() throws SQLException {
+    void testGetCharacterStream() throws SQLException {
 
         assertNull(rs.getCharacterStream(1));
         assertTrue(rs.wasNull());
@@ -414,7 +414,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getClob implementation.
      */
     @Test
-    public void testGetClob() throws SQLException {
+    void testGetClob() throws SQLException {
 
         assertNull(rs.getClob(1));
         assertTrue(rs.wasNull());
@@ -434,7 +434,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getDate implementation.
      */
     @Test
-    public void testGetDate() throws SQLException {
+    void testGetDate() throws SQLException {
 
         assertNull(rs.getDate(1));
         assertTrue(rs.wasNull());
@@ -462,7 +462,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getDouble implementation.
      */
     @Test
-    public void testGetDouble() throws SQLException {
+    void testGetDouble() throws SQLException {
 
         assertEquals(0.0, rs.getDouble(1), 0.0);
         assertTrue(rs.wasNull());
@@ -480,7 +480,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getFloat implementation.
      */
     @Test
-    public void testGetFloat() throws SQLException {
+    void testGetFloat() throws SQLException {
         assertEquals(0, rs.getFloat(1), 0.0);
         assertTrue(rs.wasNull());
         assertEquals(0, rs.getFloat("column"), 0.0);
@@ -496,7 +496,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getInt implementation.
      */
     @Test
-    public void testGetInt() throws SQLException {
+    void testGetInt() throws SQLException {
         assertEquals(0, rs.getInt(1));
         assertTrue(rs.wasNull());
         assertEquals(0, rs.getInt("column"));
@@ -512,7 +512,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getLong implementation.
      */
     @Test
-    public void testGetLong() throws SQLException {
+    void testGetLong() throws SQLException {
         assertEquals(0, rs.getLong(1));
         assertTrue(rs.wasNull());
         assertEquals(0, rs.getLong("column"));
@@ -528,7 +528,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getObject implementation.
      */
     @Test
-    public void testGetObject() throws SQLException {
+    void testGetObject() throws SQLException {
 
         assertNull(rs.getObject(1));
         assertTrue(rs.wasNull());
@@ -556,7 +556,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getRef implementation.
      */
     @Test
-    public void testGetRef() throws SQLException {
+    void testGetRef() throws SQLException {
 
         assertNull(rs.getRef(1));
         assertTrue(rs.wasNull());
@@ -576,7 +576,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getShort implementation.
      */
     @Test
-    public void testGetShort() throws SQLException {
+    void testGetShort() throws SQLException {
 
         assertEquals((short) 0, rs.getShort(1));
         assertTrue(rs.wasNull());
@@ -593,7 +593,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getString implementation.
      */
     @Test
-    public void testGetString() throws SQLException {
+    void testGetString() throws SQLException {
         assertNull(rs.getString(1));
         assertTrue(rs.wasNull());
         assertNull(rs.getString("column"));
@@ -609,7 +609,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getTime implementation.
      */
     @Test
-    public void testGetTime() throws SQLException {
+    void testGetTime() throws SQLException {
 
         assertNull(rs.getTime(1));
         assertTrue(rs.wasNull());
@@ -637,7 +637,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getTimestamp implementation.
      */
     @Test
-    public void testGetTimestamp() throws SQLException {
+    void testGetTimestamp() throws SQLException {
 
         assertNull(rs.getTimestamp(1));
         assertTrue(rs.wasNull());
@@ -664,7 +664,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullAsciiStream implementation.
      */
     @Test
-    public void testSetNullAsciiStream() throws SQLException {
+    void testSetNullAsciiStream() throws SQLException {
 
         assertNull(rs2.getNullAsciiStream());
         // Set what gets returned to something other than the default
@@ -681,7 +681,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullBigDecimal implementation.
      */
     @Test
-    public void testSetNullBigDecimal() throws SQLException {
+    void testSetNullBigDecimal() throws SQLException {
 
         assertNull(rs2.getNullBigDecimal());
         // Set what gets returned to something other than the default
@@ -698,7 +698,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullBinaryStream implementation.
      */
     @Test
-    public void testSetNullBinaryStream() throws SQLException {
+    void testSetNullBinaryStream() throws SQLException {
 
         assertNull(rs2.getNullBinaryStream());
         // Set what gets returned to something other than the default
@@ -715,7 +715,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullBlob implementation.
      */
     @Test
-    public void testSetNullBlob() throws SQLException {
+    void testSetNullBlob() throws SQLException {
 
         assertNull(rs2.getNullBlob());
         // Set what gets returned to something other than the default
@@ -732,7 +732,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullBoolean implementation.
      */
     @Test
-    public void testSetNullBoolean() throws SQLException {
+    void testSetNullBoolean() throws SQLException {
 
         assertFalse(rs2.getNullBoolean());
         // Set what gets returned to something other than the default
@@ -746,7 +746,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullByte implementation.
      */
     @Test
-    public void testSetNullByte() throws SQLException {
+    void testSetNullByte() throws SQLException {
 
         assertEquals((byte) 0, rs2.getNullByte());
         // Set what gets returned to something other than the default
@@ -761,7 +761,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullByte implementation.
      */
     @Test
-    public void testSetNullBytes() throws SQLException {
+    void testSetNullBytes() throws SQLException {
         // test the default, unset value
         assertNull(rs2.getNullBytes());
 
@@ -786,7 +786,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullCharacterStream implementation.
      */
     @Test
-    public void testSetNullCharacterStream() throws SQLException {
+    void testSetNullCharacterStream() throws SQLException {
 
         assertNull(rs2.getNullCharacterStream());
         // Set what gets returned to something other than the default
@@ -803,7 +803,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullClob implementation.
      */
     @Test
-    public void testSetNullClob() throws SQLException {
+    void testSetNullClob() throws SQLException {
 
         assertNull(rs2.getNullClob());
         // Set what gets returned to something other than the default
@@ -820,7 +820,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullDate implementation.
      */
     @Test
-    public void testSetNullDate() throws SQLException {
+    void testSetNullDate() throws SQLException {
         // test the default, unset value
         assertNull(rs2.getNullDate());
 
@@ -846,7 +846,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullDouble implementation.
      */
     @Test
-    public void testSetNullDouble() throws SQLException {
+    void testSetNullDouble() throws SQLException {
         assertEquals(0.0, rs2.getNullDouble(), 0.0);
         // Set what gets returned to something other than the default
         final double d = 10.0;
@@ -859,7 +859,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullFloat implementation.
      */
     @Test
-    public void testSetNullFloat() throws SQLException {
+    void testSetNullFloat() throws SQLException {
         assertEquals((float) 0.0, rs2.getNullFloat(), 0.0);
         // Set what gets returned to something other than the default
         final float f = (float) 10.0;
@@ -872,7 +872,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullInt implementation.
      */
     @Test
-    public void testSetNullInt() throws SQLException {
+    void testSetNullInt() throws SQLException {
         assertEquals(0, rs2.getNullInt());
         assertEquals(0, rs.getInt(1));
         assertTrue(rs.wasNull());
@@ -889,7 +889,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullLong implementation.
      */
     @Test
-    public void testSetNullLong() throws SQLException {
+    void testSetNullLong() throws SQLException {
         assertEquals(0, rs2.getNullLong());
         // Set what gets returned to something other than the default
         final long l = 10;
@@ -902,7 +902,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullObject implementation.
      */
     @Test
-    public void testSetNullObject() throws SQLException {
+    void testSetNullObject() throws SQLException {
         assertNull(rs2.getNullObject());
         // Set what gets returned to something other than the default
         final Object o = new Object();
@@ -921,7 +921,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullRef implementation.
      */
     @Test
-    public void testSetNullRef() throws SQLException {
+    void testSetNullRef() throws SQLException {
         assertNull(rs2.getNullRef());
         // Set what gets returned to something other than the default
         final Ref ref = new SqlNullCheckedResultSetMockRef();
@@ -936,7 +936,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullShort implementation.
      */
     @Test
-    public void testSetNullShort() throws SQLException {
+    void testSetNullShort() throws SQLException {
 
         assertEquals((short) 0, rs2.getNullShort());
         // Set what gets returned to something other than the default
@@ -951,7 +951,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullString implementation.
      */
     @Test
-    public void testSetNullString() throws SQLException {
+    void testSetNullString() throws SQLException {
         assertNull(rs2.getNullString());
         // Set what gets returned to something other than the default
         final String s = "hello, world";
@@ -964,7 +964,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullTime implementation.
      */
     @Test
-    public void testSetNullTime() throws SQLException {
+    void testSetNullTime() throws SQLException {
         // test the default, unset value
         assertNull(rs2.getNullTime());
 
@@ -989,7 +989,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the setNullTimestamp implementation.
      */
     @Test
-    public void testSetNullTimestamp() throws SQLException {
+    void testSetNullTimestamp() throws SQLException {
         // test the default, unset value
         assertNull(rs2.getNullTimestamp());
 
@@ -1014,7 +1014,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
      * Tests the getURL and setNullURL implementations.
      */
     @Test
-    public void testURL() throws SQLException, MalformedURLException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    void testURL() throws SQLException, MalformedURLException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         assertNull(rs.getURL(1));
         assertTrue(rs.wasNull());
         assertNull(rs.getURL("column"));
@@ -1027,7 +1027,7 @@ public class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     @Test
-    public void testWrapResultSet() throws SQLException {
+    void testWrapResultSet() throws SQLException {
         final ResultSet wrappedRs = mock(ResultSet.class);
         final ResultSet rs = SqlNullCheckedResultSet.wrap(wrappedRs);
         rs.beforeFirst();

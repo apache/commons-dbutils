@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
 public class MapListHandlerTest extends BaseTestCase {
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<List<Map<String, Object>>> h = new MapListHandler();
         final List<Map<String, Object>> results = h.handle(getEmptyResultSet());
 
@@ -45,7 +45,7 @@ public class MapListHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<List<Map<String, Object>>> h = new MapListHandler();
         final List<Map<String, Object>> results = h.handle(getResultSet());
 

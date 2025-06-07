@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 public class KeyedHandlerTest extends BaseTestCase {
 
     @Test
-    public void testColumnIndexHandle() throws SQLException {
+    void testColumnIndexHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(2);
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());
 
@@ -55,7 +55,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testColumnNameHandle() throws SQLException {
+    void testColumnNameHandle() throws SQLException {
         final ResultSetHandler<Map<Integer, Map<String, Object>>> h = new KeyedHandler<>("intTest");
         final Map<Integer, Map<String, Object>> results = h.handle(getResultSet());
 
@@ -77,7 +77,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testEmptyResultSetHandle() throws SQLException {
+    void testEmptyResultSetHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
         final Map<String, Map<String, Object>> results = h.handle(getEmptyResultSet());
         assertNotNull(results);
@@ -85,7 +85,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testHandle() throws SQLException {
+    void testHandle() throws SQLException {
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>();
 
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());
@@ -108,7 +108,7 @@ public class KeyedHandlerTest extends BaseTestCase {
     }
 
     @Test
-    public void testInjectedRowProcess() throws Exception {
+    void testInjectedRowProcess() throws Exception {
         final RowProcessor mockProc = mock(RowProcessor.class);
         final ResultSetHandler<Map<String, Map<String, Object>>> h = new KeyedHandler<>(mockProc);
         final Map<String, Map<String, Object>> results = h.handle(getResultSet());

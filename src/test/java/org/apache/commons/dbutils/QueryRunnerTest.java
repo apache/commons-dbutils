@@ -642,7 +642,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testAddBatchExceptionOnAdd() throws Exception {
+    void testAddBatchExceptionOnAdd() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(prepStmt).addBatch();
@@ -651,7 +651,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testBadPrepareConnection() throws Exception {
+    void testBadPrepareConnection() throws Exception {
         assertThrows(SQLException.class, () -> {
             runner = new QueryRunner();
             runner.update("update blah set unit = test");
@@ -659,7 +659,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testExecuteBatchExceptionOnExec() throws Exception {
+    void testExecuteBatchExceptionOnExec() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         doThrow(new SQLException()).when(prepStmt).executeBatch();
@@ -668,24 +668,24 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testExecuteException() throws Exception {
+    void testExecuteException() throws Exception {
         callExecuteWithException(handler, "unit", "test");
     }
 
     @Test
-    public void testExecuteQueryException() throws Exception {
+    void testExecuteQueryException() throws Exception {
         callQueryWithException(handler, "unit", "test");
     }
 
     @Test
-    public void testExecuteUpdateException() throws Exception {
+    void testExecuteUpdateException() throws Exception {
         doThrow(new SQLException()).when(prepStmt).executeUpdate();
 
         callUpdateWithException("unit", "test");
     }
 
     @Test
-    public void testExecuteWithMultipleResultSets() throws Exception {
+    void testExecuteWithMultipleResultSets() throws Exception {
         when(call.execute()).thenReturn(true);
         when(call.getMoreResults()).thenAnswer(new Answer<Boolean>() {
             private int count = 1;
@@ -706,19 +706,19 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testExecuteWithResultSetException() throws Exception {
+    void testExecuteWithResultSetException() throws Exception {
         callExecuteWithResultSetWithException(handler, "unit", "test");
     }
 
     @Test
-    public void testFillStatementWithBean() throws Exception {
+    void testFillStatementWithBean() throws Exception {
         final MyBean bean = new MyBean();
         when(meta.getParameterCount()).thenReturn(3);
         runner.fillStatementWithBean(prepStmt, bean, "a", "b", "c");
     }
 
     @Test
-    public void testFillStatementWithBeanNullNames() throws Exception {
+    void testFillStatementWithBeanNullNames() throws Exception {
         assertThrows(NullPointerException.class, () -> {
             final MyBean bean = new MyBean();
             runner.fillStatementWithBean(prepStmt, bean, "a", "b", null);
@@ -726,14 +726,14 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testGoodBatch() throws Exception {
+    void testGoodBatch() throws Exception {
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
         callGoodBatch(params);
     }
 
     @Test
-    public void testGoodBatchDefaultConstructor() throws Exception {
+    void testGoodBatchDefaultConstructor() throws Exception {
         runner = new QueryRunner();
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
@@ -741,7 +741,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testGoodBatchInsert() throws Exception {
+    void testGoodBatchInsert() throws Exception {
         results = mock(ResultSet.class);
         resultsMeta = mock(ResultSetMetaData.class);
 
@@ -775,7 +775,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testGoodBatchPmdTrue() throws Exception {
+    void testGoodBatchPmdTrue() throws Exception {
         runner = new QueryRunner(dataSource, true);
         final String[][] params = { { "unit", "unit" }, { "test", "test" } };
 
@@ -783,41 +783,41 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testGoodExecute() throws Exception {
+    void testGoodExecute() throws Exception {
         callGoodExecute();
     }
 
     @Test
-    public void testGoodExecuteDefaultConstructor() throws Exception {
+    void testGoodExecuteDefaultConstructor() throws Exception {
         runner = new QueryRunner();
         callGoodExecute(conn);
     }
 
     @Test
-    public void testGoodExecutePmdTrue() throws Exception {
+    void testGoodExecutePmdTrue() throws Exception {
         runner = new QueryRunner(true);
         callGoodExecute(conn);
     }
 
     @Test
-    public void testGoodExecuteWithResultSet() throws Exception {
+    void testGoodExecuteWithResultSet() throws Exception {
         callGoodExecuteWithResultSet();
     }
 
     @Test
-    public void testGoodExecuteWithResultSetDefaultConstructor() throws Exception {
+    void testGoodExecuteWithResultSetDefaultConstructor() throws Exception {
         runner = new QueryRunner();
         callGoodExecuteWithResultSet(conn);
     }
 
     @Test
-    public void testGoodExecuteWithResultSetPmdTrue() throws Exception {
+    void testGoodExecuteWithResultSetPmdTrue() throws Exception {
         runner = new QueryRunner(true);
         callGoodExecuteWithResultSet(conn);
     }
 
     @Test
-    public void testGoodInsert() throws Exception {
+    void testGoodInsert() throws Exception {
         results = mock(ResultSet.class);
 
         when(meta.getParameterCount()).thenReturn(2);
@@ -836,61 +836,61 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testGoodQuery() throws Exception {
+    void testGoodQuery() throws Exception {
         callGoodQuery();
     }
 
     @Test
-    public void testGoodQueryDefaultConstructor() throws Exception {
+    void testGoodQueryDefaultConstructor() throws Exception {
         runner = new QueryRunner();
         callGoodQuery(conn);
     }
 
     @Test
-    public void testGoodQueryPmdTrue() throws Exception {
+    void testGoodQueryPmdTrue() throws Exception {
         runner = new QueryRunner(true);
         callGoodQuery(conn);
     }
 
     @Test
-    public void testGoodUpdate() throws Exception {
+    void testGoodUpdate() throws Exception {
         callGoodUpdate();
     }
 
     @Test
-    public void testGoodUpdateDefaultConstructor() throws Exception {
+    void testGoodUpdateDefaultConstructor() throws Exception {
         runner = new QueryRunner();
         callGoodUpdate(conn);
     }
 
     @Test
-    public void testGoodUpdatePmdTrue() throws Exception {
+    void testGoodUpdatePmdTrue() throws Exception {
         runner = new QueryRunner(true);
         callGoodUpdate(conn);
     }
 
     @Test
-    public void testNoParamsExecute() throws Exception {
+    void testNoParamsExecute() throws Exception {
         callGoodExecute();
     }
 
     @Test
-    public void testNoParamsExecuteWithResultSet() throws Exception {
+    void testNoParamsExecuteWithResultSet() throws Exception {
         callExecuteWithResultSetWithException();
     }
 
     @Test
-    public void testNoParamsQuery() throws Exception {
+    void testNoParamsQuery() throws Exception {
         callGoodQuery();
     }
 
     @Test
-    public void testNoParamsUpdate() throws Exception {
+    void testNoParamsUpdate() throws Exception {
         callGoodUpdate();
     }
 
     @Test
-    public void testNullConnectionBatch() throws Exception {
+    void testNullConnectionBatch() throws Exception {
         assertThrows(SQLException.class, () -> {
             final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
@@ -901,7 +901,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullConnectionExecute() throws Exception {
+    void testNullConnectionExecute() throws Exception {
         assertThrows(SQLException.class, () -> {
             when(dataSource.getConnection()).thenReturn(null);
 
@@ -910,7 +910,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullConnectionExecuteWithResultSet() throws Exception {
+    void testNullConnectionExecuteWithResultSet() throws Exception {
         assertThrows(SQLException.class, () -> {
             when(dataSource.getConnection()).thenReturn(null);
 
@@ -919,7 +919,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullConnectionQuery() throws Exception {
+    void testNullConnectionQuery() throws Exception {
         assertThrows(SQLException.class, () -> {
             when(dataSource.getConnection()).thenReturn(null);
 
@@ -928,7 +928,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullConnectionUpdate() throws Exception {
+    void testNullConnectionUpdate() throws Exception {
         assertThrows(SQLException.class, () -> {
             when(dataSource.getConnection()).thenReturn(null);
 
@@ -937,7 +937,7 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullHandlerExecute() throws Exception {
+    void testNullHandlerExecute() throws Exception {
         assertThrows(SQLException.class, () -> {
             when(meta.getParameterCount()).thenReturn(2);
 
@@ -946,13 +946,13 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullHandlerExecuteWithResultSet() throws Exception {
+    void testNullHandlerExecuteWithResultSet() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.execute("{call my_proc(?, ?)}", (ResultSetHandler) null));
     }
 
     @Test
-    public void testNullHandlerQuery() throws Exception {
+    void testNullHandlerQuery() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.query("select * from blah where ? = ?", null));
     }
@@ -962,20 +962,20 @@ public class QueryRunnerTest {
     //
 
     @Test
-    public void testNullParamsArgBatch() throws Exception {
+    void testNullParamsArgBatch() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.batch("select * from blah where ? = ?", null));
     }
 
     @Test
-    public void testNullParamsBatch() throws Exception {
+    void testNullParamsBatch() throws Exception {
         final String[][] params = { { null, "unit" }, { "test", null } };
 
         callGoodBatch(params);
     }
 
     @Test
-    public void testNullSqlBatch() throws Exception {
+    void testNullSqlBatch() throws Exception {
         assertThrows(SQLException.class, () -> {
             final String[][] params = {{"unit", "unit"}, {"test", "test"}};
 
@@ -984,31 +984,31 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testNullSqlExecute() throws Exception {
+    void testNullSqlExecute() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.execute(null));
     }
 
     @Test
-    public void testNullSqlExecuteWithResultSet() throws Exception {
+    void testNullSqlExecuteWithResultSet() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.execute(null, handler));
     }
 
     @Test
-    public void testNullSqlQuery() throws Exception {
+    void testNullSqlQuery() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.query(null, handler));
     }
 
     @Test
-    public void testNullSqlUpdate() throws Exception {
+    void testNullSqlUpdate() throws Exception {
         assertThrows(SQLException.class, () ->
             runner.update(null));
     }
 
     @Test
-    public void testStatementConfiguration() throws Exception {
+    void testStatementConfiguration() throws Exception {
         final StatementConfiguration stmtConfig = new StatementConfiguration(1, 2, 3, 4, 5);
         final QueryRunner queryRunner = new QueryRunner(stmtConfig);
         queryRunner.prepareStatement(conn, "select 1");
@@ -1021,56 +1021,56 @@ public class QueryRunnerTest {
     }
 
     @Test
-    public void testTooFewParamsBatch() throws Exception {
+    void testTooFewParamsBatch() throws Exception {
         final String[][] params = { { "unit" }, { "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
-    public void testTooFewParamsExecute() throws Exception {
+    void testTooFewParamsExecute() throws Exception {
         callExecuteWithException("unit");
     }
 
     @Test
-    public void testTooFewParamsExecuteWithResultSet() throws Exception {
+    void testTooFewParamsExecuteWithResultSet() throws Exception {
         callExecuteWithResultSetWithException("unit");
     }
 
     @Test
-    public void testTooFewParamsQuery() throws Exception {
+    void testTooFewParamsQuery() throws Exception {
         callQueryWithException("unit");
     }
 
     @Test
-    public void testTooFewParamsUpdate() throws Exception {
+    void testTooFewParamsUpdate() throws Exception {
         callUpdateWithException("unit");
     }
 
     @Test
-    public void testTooManyParamsBatch() throws Exception {
+    void testTooManyParamsBatch() throws Exception {
         final String[][] params = { { "unit", "unit", "unit" }, { "test", "test", "test" } };
 
         callBatchWithException("select * from blah where ? = ?", params);
     }
 
     @Test
-    public void testTooManyParamsExecute() throws Exception {
+    void testTooManyParamsExecute() throws Exception {
         callExecuteWithException("unit", "test", "fail");
     }
 
     @Test
-    public void testTooManyParamsExecuteWithResultSet() throws Exception {
+    void testTooManyParamsExecuteWithResultSet() throws Exception {
         callExecuteWithResultSetWithException("unit", "test", "fail");
     }
 
     @Test
-    public void testTooManyParamsQuery() throws Exception {
+    void testTooManyParamsQuery() throws Exception {
         callQueryWithException("unit", "test", "fail");
     }
 
     @Test
-    public void testTooManyParamsUpdate() throws Exception {
+    void testTooManyParamsUpdate() throws Exception {
         callUpdateWithException("unit", "test", "fail");
     }
 }

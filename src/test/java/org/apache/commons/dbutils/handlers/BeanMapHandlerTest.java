@@ -60,31 +60,31 @@ public class BeanMapHandlerTest {
     }
 
     @Test
-    public void testBeanMapHandlerClassOfV() throws Exception {
+    void testBeanMapHandlerClassOfV() throws Exception {
         bmh = new BeanMapHandler<>(TestBean.class);
         handle();
     }
 
     @Test
-    public void testBeanMapHandlerClassOfVInt() throws Exception {
+    void testBeanMapHandlerClassOfVInt() throws Exception {
         bmh = new BeanMapHandler<>(TestBean.class, 2);
         handle();
     }
 
     @Test
-    public void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
+    void testBeanMapHandlerClassOfVRowProcessor() throws Exception {
         bmh = new BeanMapHandler<>(TestBean.class, rp);
         handle();
     }
 
     @Test
-    public void testBeanMapHandlerClassOfVString() throws Exception {
+    void testBeanMapHandlerClassOfVString() throws Exception {
         bmh = new BeanMapHandler<>(TestBean.class, "id");
         handle();
     }
 
     @Test
-    public void testEmptyResultSet() throws Exception {
+    void testEmptyResultSet() throws Exception {
         when(Boolean.valueOf(rs.next())).thenReturn(Boolean.FALSE);
         bmh = new BeanMapHandler<>(TestBean.class);
         res = bmh.handle(rs);

@@ -115,13 +115,13 @@ public class BaseTestCase {
     // Test which allows Eclipse to be run on full project (avoids no tests found)
     // check that the rows are valid for the column definition
     @Test
-    public void testCheckDataSizes() {
+    void testCheckDataSizes() {
         assertEquals(COLUMN_NAMES.length, row1.length, "Row 1 must contain correct number of columns");
         assertEquals(COLUMN_NAMES.length, row2.length, "Row 1 must contain correct number of columns");
     }
 
     @Test
-    public void testResultSets() throws Exception {
+    void testResultSets() throws Exception {
         assertFalse(emptyResultSet.next(), "emptyResultSet should be empty");
         // fails in SqlNullCheckedResultSetTest assertTrue("rs should not be empty", rs.next());
     }
