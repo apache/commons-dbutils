@@ -219,7 +219,7 @@ final class SqlNullCheckedResultSetMockRef implements Ref {
 /**
  * Test cases for {@code SqlNullCheckedResultSet} class.
  */
-public class SqlNullCheckedResultSetTest extends BaseTestCase {
+class SqlNullCheckedResultSetTest extends BaseTestCase {
 
     private static ResultSet rs;
 

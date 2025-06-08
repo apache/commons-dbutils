@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 /**
  * QueryLoaderTest
  */
-public class QueryLoaderTest extends BaseTestCase {
+class QueryLoaderTest extends BaseTestCase {
 
     private static final String QUERIES = "/org/apache/commons/dbutils/TestQueries.properties";
 

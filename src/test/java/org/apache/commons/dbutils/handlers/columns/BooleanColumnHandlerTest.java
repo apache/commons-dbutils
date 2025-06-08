@@ -26,7 +26,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean> {
+class BooleanColumnHandlerTest extends AbstractTestColumnHandler<Boolean> {
 
     public BooleanColumnHandlerTest() {
         super(new BooleanColumnHandler(), Boolean.class);

@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * ArrayListHandlerTest
  */
-public class ArrayListHandlerTest extends BaseTestCase {
+class ArrayListHandlerTest extends BaseTestCase {
 
     @Test
     void testEmptyResultSetHandle() throws SQLException {

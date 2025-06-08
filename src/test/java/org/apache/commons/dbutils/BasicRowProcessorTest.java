@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the BasicRowProcessor class.
  */
-public class BasicRowProcessorTest extends BaseTestCase {
+class BasicRowProcessorTest extends BaseTestCase {
 
     private static final RowProcessor processor = new BasicRowProcessor();
 

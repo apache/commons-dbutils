@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * MapHandlerTest
  */
-public class MapHandlerTest extends BaseTestCase {
+class MapHandlerTest extends BaseTestCase {
 
     @Test
     void testEmptyResultSetHandle() throws SQLException {

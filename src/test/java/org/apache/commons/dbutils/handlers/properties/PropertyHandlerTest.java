@@ -24,7 +24,7 @@ import org.apache.commons.dbutils.PropertyHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PropertyHandlerTest {
+class PropertyHandlerTest {
     private ServiceLoader<PropertyHandler> loader;
 
     @BeforeEach

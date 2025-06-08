@@ -27,7 +27,7 @@ import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class DatePropertyHandlerTest {
+class DatePropertyHandlerTest {
     private DatePropertyHandler handler;
     private Date testValue;
 

@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
 /**
  * BeanListHandlerTest
  */
-public class BeanListHandlerTest extends BaseTestCase {
+class BeanListHandlerTest extends BaseTestCase {
 
     public static class SubTestBean extends TestBean implements SubTestBeanInterface {
     }

@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 /**
  * ArrayHandlerTest
  */
-public class ArrayHandlerTest extends BaseTestCase {
+class ArrayHandlerTest extends BaseTestCase {
 
     @Test
     void testEmptyResultSetHandle() throws SQLException {

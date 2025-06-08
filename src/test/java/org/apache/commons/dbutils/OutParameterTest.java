@@ -34,7 +34,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class OutParameterTest {
+class OutParameterTest {
     private static final int INDEX = 2;
     private static final int VALUE = 42;
 

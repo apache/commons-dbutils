@@ -26,7 +26,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FloatColumnHandlerTest extends AbstractTestColumnHandler<Float> {
+class FloatColumnHandlerTest extends AbstractTestColumnHandler<Float> {
 
     public FloatColumnHandlerTest() {
         super(new FloatColumnHandler(), Float.class);

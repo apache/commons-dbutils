@@ -54,7 +54,7 @@ import org.mockito.stubbing.Answer;
 
 @SuppressWarnings("boxing") // test code
 @ExtendWith(MockitoExtension.class)
-public class QueryRunnerTest {
+class QueryRunnerTest {
     //
     // Random tests
     //

@@ -27,7 +27,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class SQLXMLColumnHandlerTest extends AbstractTestColumnHandler<SQLXML> {
+class SQLXMLColumnHandlerTest extends AbstractTestColumnHandler<SQLXML> {
 
     @Mock
     private SQLXML sqlxml;

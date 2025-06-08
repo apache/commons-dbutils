@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  * MapListHandlerTest
  */
-public class MapListHandlerTest extends BaseTestCase {
+class MapListHandlerTest extends BaseTestCase {
 
     @Test
     void testEmptyResultSetHandle() throws SQLException {

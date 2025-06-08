@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * StringTrimmedResultSetTest
  */
-public class StringTrimmedResultSetTest extends BaseTestCase {
+class StringTrimmedResultSetTest extends BaseTestCase {
 
     @BeforeEach
     public void setUp() throws Exception {

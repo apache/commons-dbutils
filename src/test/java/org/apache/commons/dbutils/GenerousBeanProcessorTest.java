@@ -30,7 +30,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class GenerousBeanProcessorTest {
+class GenerousBeanProcessorTest {
 
     static class TestBean {
         private String one;

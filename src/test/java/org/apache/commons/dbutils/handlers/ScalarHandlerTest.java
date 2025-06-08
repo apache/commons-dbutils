@@ -26,7 +26,7 @@ import org.apache.commons.dbutils.BaseTestCase;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.junit.jupiter.api.Test;
 
-public class ScalarHandlerTest extends BaseTestCase {
+class ScalarHandlerTest extends BaseTestCase {
 
     @Test
     void testColumnIndexHandle() throws SQLException {

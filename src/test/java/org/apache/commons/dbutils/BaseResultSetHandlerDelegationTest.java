@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests {@link BaseResultSetHandler} delegation.
  */
-public class BaseResultSetHandlerDelegationTest extends BaseTestCase {
+class BaseResultSetHandlerDelegationTest extends BaseTestCase {
 
     private Array array;
     private final BigDecimal bigDecimal = BigDecimal.ONE;

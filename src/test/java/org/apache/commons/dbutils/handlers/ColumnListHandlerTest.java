@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * ColumnListHandlerTest
  */
-public class ColumnListHandlerTest extends BaseTestCase {
+class ColumnListHandlerTest extends BaseTestCase {
 
     @Test
     void testColumnIndexHandle() throws SQLException {

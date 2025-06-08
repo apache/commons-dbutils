@@ -30,7 +30,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.RowProcessor;
 import org.junit.jupiter.api.Test;
 
-public class KeyedHandlerTest extends BaseTestCase {
+class KeyedHandlerTest extends BaseTestCase {
 
     @Test
     void testColumnIndexHandle() throws SQLException {

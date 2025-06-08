@@ -25,7 +25,7 @@ import org.apache.commons.dbutils.handlers.properties.TestPropertyHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ServiceLoaderTest {
+class ServiceLoaderTest {
     private ServiceLoader<ColumnHandler> columns;
     private ServiceLoader<PropertyHandler> properties;
 

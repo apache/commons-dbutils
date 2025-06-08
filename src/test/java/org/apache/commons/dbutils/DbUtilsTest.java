@@ -38,10 +38,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class DbUtilsTest {
+class DbUtilsTest {
 
     @Nested
-    public class DriverProxyTest {
+    class DriverProxyTest {
         private final Driver mockedDriver = mock(Driver.class);
         private DbUtils.DriverProxy proxy;
 

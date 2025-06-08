@@ -34,7 +34,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class BeanProcessorTest extends BaseTestCase {
+class BeanProcessorTest extends BaseTestCase {
 
     private static final class IndexedPropertyTestClass {
         private String name;

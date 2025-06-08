@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 /**
  * ProxyFactoryTest performs simple type checking on proxy objects returned from a ProxyFactory.
  */
-public class ProxyFactoryTest extends BaseTestCase {
+class ProxyFactoryTest extends BaseTestCase {
 
     private static final InvocationHandler stub = (proxy, method, args) -> null;
 

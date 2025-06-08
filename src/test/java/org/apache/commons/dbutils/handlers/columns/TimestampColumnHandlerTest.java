@@ -27,7 +27,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class TimestampColumnHandlerTest extends AbstractTestColumnHandler<Timestamp> {
+class TimestampColumnHandlerTest extends AbstractTestColumnHandler<Timestamp> {
 
     public TimestampColumnHandlerTest() {
         super(new TimestampColumnHandler(), Timestamp.class);

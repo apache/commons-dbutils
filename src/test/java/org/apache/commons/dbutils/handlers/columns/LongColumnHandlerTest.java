@@ -24,7 +24,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class LongColumnHandlerTest extends AbstractTestColumnHandler<Long> {
+class LongColumnHandlerTest extends AbstractTestColumnHandler<Long> {
 
     public LongColumnHandlerTest() {
         super(new LongColumnHandler(), Long.class);

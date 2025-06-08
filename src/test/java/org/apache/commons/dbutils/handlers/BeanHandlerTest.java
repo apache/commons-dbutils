@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 /**
  * BeanHandlerTest
  */
-public class BeanHandlerTest extends BaseTestCase {
+class BeanHandlerTest extends BaseTestCase {
 
     public static class SubTestBean extends TestBean implements SubTestBeanInterface {
     }

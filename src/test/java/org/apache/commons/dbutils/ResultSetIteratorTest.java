@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 /**
  * ResultSetIteratorTest
  */
-public class ResultSetIteratorTest extends BaseTestCase {
+class ResultSetIteratorTest extends BaseTestCase {
 
     @Test
     void testCreatesResultSetIteratorTakingThreeArgumentsAndCallsRemove() {

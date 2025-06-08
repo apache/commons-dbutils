@@ -50,7 +50,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @SuppressWarnings("boxing") // test code
 @ExtendWith(MockitoExtension.class)
-public class AsyncQueryRunnerTest {
+class AsyncQueryRunnerTest {
     private AsyncQueryRunner runner;
     private ArrayHandler handler;
 
