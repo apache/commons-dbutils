@@ -82,7 +82,10 @@
       <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/${commons.componentid}</url>
     </site>
   </distributionManagement>
-
+  <ciManagement>
+    <system>GitHub</system>
+    <url>https://github.com/apache/commons-dbutils/actions</url>
+  </ciManagement>
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
