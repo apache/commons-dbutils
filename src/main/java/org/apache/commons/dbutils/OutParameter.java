@@ -135,7 +135,6 @@ public class OutParameter<T> {
 
     @Override
     public String toString() {
-        return "OutParameter{" + "sqlType=" + sqlType + ", javaType="
-            + javaType + ", value=" + value + '}';
+        return "OutParameter{sqlType=" + sqlType + ", javaType=" + javaType + ", value=" + value + '}';
     }
 }
