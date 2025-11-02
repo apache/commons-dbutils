@@ -26,8 +26,8 @@
 <!-- ================================================== -->
 <section name="Overview">
 <p>
-  Commons DBUtils uses <a href="http://maven.apache.org">Maven</a> or
-  <a href="http://ant.apache.org">Ant</a> as a build system.
+  Commons DBUtils uses <a href="https://maven.apache.org">Maven</a> or
+  <a href="https://ant.apache.org">Ant</a> as a build system.
 </p>
 </section>
 <!-- ================================================== -->
