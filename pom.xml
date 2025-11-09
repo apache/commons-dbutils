@@ -32,10 +32,6 @@
 
   <url>https://commons.apache.org/proper/commons-dbutils/</url>
 
-  <issueManagement>
-    <url>https://issues.apache.org/jira/browse/DBUTILS</url>
-  </issueManagement>
-
   <scm>
     <connection>scm:git:git://git.apache.org/commons-dbutils.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-dbutils.git</developerConnection>
