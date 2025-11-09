@@ -193,22 +193,6 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${commons.changes.version}</version>
-        <configuration>
-          <xmlPath>${basedir}/src/changes/changes.xml</xmlPath>
-          <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-               <report>changes-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
           <configLocation>${checkstyle.config.file}</configLocation>
