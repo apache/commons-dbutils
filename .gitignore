@@ -5,3 +5,7 @@ target/
 /.settings/
 /.classpath
 tags
+
+# NetBeans files
+nb-configuration.xml
+nbactions.xml
