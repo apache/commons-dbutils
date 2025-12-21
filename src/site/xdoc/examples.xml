@@ -114,7 +114,7 @@ try
 {
     // Execute the SQL update statement and return the number of
     // inserts that were made
-    int inserts = run.update( "INSERT INTO Person (name,height) VALUES (?,?)",
+    int inserts = run.update( "INSERT INTO Person (name, height) VALUES (?, ?)",
                               "John Doe", 1.82 );
     // The line before uses varargs and autoboxing to simplify the code
 
