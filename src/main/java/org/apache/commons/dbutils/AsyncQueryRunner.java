@@ -221,13 +221,13 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     private final QueryRunner queryRunner;
 
     /**
-     * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
-     * Constructor for AsyncQueryRunner that controls the use of {@code ParameterMetaData}.
-     *
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
+     * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
+     * Constructor for AsyncQueryRunner that controls the use of {@code ParameterMetaData}.
+     *
      */
     @Deprecated
     public AsyncQueryRunner(final boolean pmdKnownBroken, final ExecutorService executorService) {
@@ -235,16 +235,16 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
 
     /**
-     * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
-     * Constructor for AsyncQueryRunner that take a {@code DataSource} and controls the use of {@code ParameterMetaData}.
-     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
-     * {@code DataSource}.
-     *
      * @param ds The {@code DataSource} to retrieve connections from.
      * @param pmdKnownBroken Some drivers don't support {@link java.sql.ParameterMetaData#getParameterType(int)};
      * if {@code pmdKnownBroken} is set to true, we won't even try it; if false, we'll try it,
      * and if it breaks, we'll remember not to use it again.
      * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
+     * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
+     * Constructor for AsyncQueryRunner that take a {@code DataSource} and controls the use of {@code ParameterMetaData}.
+     * Methods that do not take a {@code Connection} parameter will retrieve connections from this
+     * {@code DataSource}.
+     *
      */
     @Deprecated
     public AsyncQueryRunner(final DataSource ds, final boolean pmdKnownBroken, final ExecutorService executorService) {
@@ -254,14 +254,14 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
 
     /**
+     * @param ds The {@code DataSource} to retrieve connections from.
+     * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      * @deprecated Use {@link #AsyncQueryRunner(ExecutorService, QueryRunner)} instead.
      * Constructor for AsyncQueryRunner that takes a {@code DataSource}.
      *
      * Methods that do not take a {@code Connection} parameter will retrieve connections from this
      * {@code DataSource}.
      *
-     * @param ds The {@code DataSource} to retrieve connections from.
-     * @param executorService the {@code ExecutorService} instance used to run JDBC invocations concurrently.
      */
     @Deprecated
     public AsyncQueryRunner(final DataSource ds, final ExecutorService executorService) {
