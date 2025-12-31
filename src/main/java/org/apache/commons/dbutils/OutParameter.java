@@ -41,6 +41,7 @@ public class OutParameter<T> {
     /**
      * Constructs an {@code OutParameter} for the given JDBC SQL type and
      * Java type.
+     *
      * @param sqlType the JDBC SQL type of the parameter as in
      * {@link java.sql.Types}.
      * @param javaType the Java class of the parameter value, cast compatible
@@ -56,6 +57,7 @@ public class OutParameter<T> {
      * Constructs an {@code OutParameter} for the given JDBC SQL type and
      * Java type and with the given value.  The parameter will be treated as an
      * INOUT parameter if the value is null.
+     *
      * @param sqlType the JDBC SQL type of the parameter as in
      * {@link java.sql.Types}.
      * @param javaType the Java class of the parameter value, cast compatible
@@ -71,6 +73,7 @@ public class OutParameter<T> {
 
     /**
      * Gets the Java class for this OUT parameter.
+     *
      * @return the Java class for this OUT parameter.
      */
     public Class<T> getJavaType() {
@@ -79,6 +82,7 @@ public class OutParameter<T> {
 
     /**
      * Gets the JDBC SQL type for this OUT parameter.
+     *
      * @return the JDBC SQL type for this OUT parameter.
      */
     public int getSqlType() {
@@ -88,6 +92,7 @@ public class OutParameter<T> {
     /**
      * Gets the value of the OUT parameter.  After the stored procedure has
      * been executed, the value is the value returned via this parameter.
+     *
      * @return the value of the OUT parameter.
      */
     public T getValue() {
@@ -99,6 +104,7 @@ public class OutParameter<T> {
      * index using the {@code sqlType} and {@code value} of this
      * {@code OutParameter}.  If the value is not null, the parameter is
      * treated like an INOUT parameter and the value is set on the statement.
+     *
      * @param stmt the statement the parameter should register on.
      * @param index the (1-based) index of the parameter.
      * @throws SQLException if the parameter could not be registered, or if the
@@ -114,6 +120,7 @@ public class OutParameter<T> {
     /**
      * Set the value using the return value of the parameter an the given index
      * from the given {@code CallableStatement}.
+     *
      * @param stmt the already executed statement
      * @param index the (1-based) index of the parameter
      * @throws SQLException when the value could not be retrieved from the
@@ -127,6 +134,7 @@ public class OutParameter<T> {
      * Set the value of the OUT parameter.  If the value is not null when the
      * stored procedure is executed, then the parameter will be treated like an
      * INOUT parameter.
+     *
      * @param value the new value for the parameter.
      */
     public void setValue(final T value) {

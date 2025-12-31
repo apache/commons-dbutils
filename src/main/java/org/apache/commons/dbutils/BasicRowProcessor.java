@@ -176,6 +176,7 @@ public class BasicRowProcessor implements RowProcessor {
 
     /**
      * BasicRowProcessor constructor.
+     *
      * @param convert The BeanProcessor to use when converting columns to
      * bean properties.
      * @since 1.1
@@ -211,6 +212,7 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a {@code ResultSet} row into a JavaBean.  This
      * implementation delegates to a BeanProcessor instance.
+     *
      * @see org.apache.commons.dbutils.RowProcessor#toBean(java.sql.ResultSet, Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBean(java.sql.ResultSet, Class)
      * @param <T> The type of bean to create
@@ -227,6 +229,7 @@ public class BasicRowProcessor implements RowProcessor {
     /**
      * Convert a {@code ResultSet} into a {@code List} of JavaBeans.
      * This implementation delegates to a BeanProcessor instance.
+     *
      * @see org.apache.commons.dbutils.RowProcessor#toBeanList(java.sql.ResultSet, Class)
      * @see org.apache.commons.dbutils.BeanProcessor#toBeanList(java.sql.ResultSet, Class)
      * @param <T> The type of bean to create

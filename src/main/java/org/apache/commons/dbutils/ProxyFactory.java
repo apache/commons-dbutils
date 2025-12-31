@@ -58,6 +58,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code CallableStatement} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied CallableStatement
      */
@@ -67,6 +68,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code Connection} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied Connection
      */
@@ -76,6 +78,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code Driver} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied Driver
      */
@@ -85,6 +88,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code PreparedStatement} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied PreparedStatement
      */
@@ -94,6 +98,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code ResultSet} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied ResultSet
      */
@@ -103,6 +108,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code ResultSetMetaData} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied ResultSetMetaData
      */
@@ -112,6 +118,7 @@ public class ProxyFactory {
 
     /**
      * Creates a new proxy {@code Statement} object.
+     *
      * @param handler The handler that intercepts/overrides method calls.
      * @return proxied Statement
      */

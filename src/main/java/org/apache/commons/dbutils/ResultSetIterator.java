@@ -56,6 +56,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
+     *
      * @param resultSet Wrap this {@code ResultSet} in an {@code Iterator}.
      */
     public ResultSetIterator(final ResultSet resultSet) {
@@ -64,6 +65,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Constructor for ResultSetIterator.
+     *
      * @param resultSet Wrap this {@code ResultSet} in an {@code Iterator}.
      * @param convert The processor to use when converting a row into an
      * {@code Object[]}.  Defaults to a
@@ -76,6 +78,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Returns true if there are more rows in the ResultSet.
+     *
      * @return boolean {@code true} if there are more rows
      * @throws RuntimeException if an SQLException occurs.
      */
@@ -91,6 +94,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Returns the next row as an {@code Object[]}.
+     *
      * @return An {@code Object[]} with the same number of elements as
      * columns in the {@code ResultSet}.
      * @see java.util.Iterator#next()
@@ -108,6 +112,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
 
     /**
      * Deletes the current row from the {@code ResultSet}.
+     *
      * @see java.util.Iterator#remove()
      * @throws RuntimeException if an SQLException occurs.
      */
@@ -123,6 +128,7 @@ public class ResultSetIterator implements Iterator<Object[]> {
     /**
      * Rethrows the SQLException as a RuntimeException.  This implementation
      * creates a new RuntimeException with the SQLException's error message.
+     *
      * @param e SQLException to rethrow
      * @since 1.1
      */

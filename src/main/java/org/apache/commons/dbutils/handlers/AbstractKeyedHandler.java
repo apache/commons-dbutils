@@ -47,6 +47,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.
+     *
      * @param resultSet ResultSet to create a key from
      * @return K from the configured key column name/index
      * @throws SQLException if a database access error occurs
@@ -67,6 +68,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * This factory method is called by {@code handle()} to store the
      * current {@code ResultSet} row in some object.
+     *
      * @param resultSet ResultSet to create a row from
      * @return V object created from the current row
      * @throws SQLException if a database access error occurs
@@ -76,6 +78,7 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map
     /**
      * Convert each row's columns into a Map and store then
      * in a {@code Map} under {@code ResultSet.getObject(key)} key.
+     *
      * @param resultSet {@code ResultSet} to process.
      * @return A {@code Map}, never {@code null}.
      * @throws SQLException if a database access error occurs

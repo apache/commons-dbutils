@@ -82,6 +82,7 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
 
     /**
      * Returns one {@code ResultSet} column value as {@code Object}.
+     *
      * @param resultSet {@code ResultSet} to process.
      * @return {@code Object}, never {@code null}.
      * @throws SQLException if a database access error occurs

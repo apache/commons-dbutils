@@ -354,6 +354,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Execute an SQL INSERT query without replacement parameters.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
@@ -369,6 +370,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Execute an SQL INSERT query.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
@@ -421,6 +423,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * Executes the given INSERT SQL without any replacement parameters.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
@@ -440,6 +443,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * {@code Connection} is retrieved from the {@code DataSource}
      * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the insert will not be saved.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
@@ -457,6 +461,7 @@ public class QueryRunner extends AbstractQueryRunner {
 
     /**
      * Executes the given batch of INSERT SQL statements.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to use to run the query.
      * @param sql The SQL to execute.
@@ -507,6 +512,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * {@code Connection} is retrieved from the {@code DataSource}
      * set in the constructor.  This {@code Connection} must be in
      * auto-commit mode or the insert will not be saved.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
@@ -525,6 +531,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL SELECT query with a single replacement parameter. The
      * caller is responsible for closing the connection.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -542,6 +549,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
      * caller is responsible for closing the connection.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -559,6 +567,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL SELECT query without any replacement parameters.  The
      * caller is responsible for closing the connection.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -573,6 +582,7 @@ public class QueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
      * caller is responsible for closing the connection.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -625,6 +635,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * Executes the given SELECT SQL with a single replacement parameter.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param param The replacement parameter.
@@ -646,6 +657,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * Executes the given SELECT SQL query and returns a result object.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param params Initialize the PreparedStatement's IN parameters with
@@ -669,6 +681,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * Executes the given SELECT SQL without any replacement parameters.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
@@ -687,6 +700,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * Executes the given SELECT SQL query and returns a result object.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
@@ -706,6 +720,7 @@ public class QueryRunner extends AbstractQueryRunner {
      * Set the value on all the {@link OutParameter} instances in the
      * {@code params} array using the OUT parameter values from the
      * {@code stmt}.
+     *
      * @param stmt the statement from which to retrieve OUT parameter values
      * @param params the parameter array for the statement invocation
      * @throws SQLException when the value could not be retrieved from the

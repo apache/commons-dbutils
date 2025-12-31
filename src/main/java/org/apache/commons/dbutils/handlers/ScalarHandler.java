@@ -84,6 +84,7 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
      * Returns one {@code ResultSet} column as an object via the
      * {@code ResultSet.getObject()} method that performs type
      * conversions.
+     *
      * @param resultSet {@code ResultSet} to process.
      * @return The column or {@code null} if there are no rows in
      * the {@code ResultSet}.

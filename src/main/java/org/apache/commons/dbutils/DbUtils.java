@@ -356,6 +356,7 @@ public final class DbUtils {
 
     /**
      * Rollback any changes made on the given connection.
+     *
      * @param conn Connection to rollback.  A null value is legal.
      * @throws SQLException if a database access error occurs
      */

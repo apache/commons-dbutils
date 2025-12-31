@@ -157,6 +157,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.
+     *
      * @param resultSet ResultSet to create a key from
      * @return K from the configured key column name/index
      * @throws SQLException if a database access error occurs

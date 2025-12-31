@@ -78,6 +78,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     /**
      * The {@code getNull} string prefix.
+     *
      * @since 1.4
      */
     private static final String GET_NULL_PREFIX = "getNull";
@@ -144,6 +145,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
      * Constructs a new instance of
      * {@code SqlNullCheckedResultSet}
      * to wrap the specified {@code ResultSet}.
+     *
      * @param resultSet ResultSet to wrap
      */
     public SqlNullCheckedResultSet(final ResultSet resultSet) {

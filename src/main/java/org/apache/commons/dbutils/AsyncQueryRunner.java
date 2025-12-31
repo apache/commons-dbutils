@@ -92,6 +92,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     }
     /**
      * Class that encapsulates the continuation for query calls.
+     *
      * @param <T> The type of the result from the call to handle.
      */
     protected class QueryCallableStatement<T> implements Callable<T> {
@@ -421,6 +422,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL SELECT query without any replacement parameters.  The
      * caller is responsible for closing the connection.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -435,6 +437,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
     /**
      * Execute an SQL SELECT query with replacement parameters.  The
      * caller is responsible for closing the connection.
+     *
      * @param <T> The type of object that the handler returns
      * @param conn The connection to execute the query in.
      * @param sql The query to execute.
@@ -452,6 +455,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * Executes the given SELECT SQL without any replacement parameters.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from
@@ -468,6 +472,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
      * Executes the given SELECT SQL query and returns a result object.
      * The {@code Connection} is retrieved from the
      * {@code DataSource} set in the constructor.
+     *
      * @param <T> The type of object that the handler returns
      * @param sql The SQL statement to execute.
      * @param rsh The handler used to create the result object from

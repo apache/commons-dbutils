@@ -57,6 +57,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
 
     /**
      * Converts the {@code ResultSet} row into a {@code Map} object.
+     *
      * @param resultSet {@code ResultSet} to process.
      * @return A {@code Map}, never null.
      * @throws SQLException if a database access error occurs

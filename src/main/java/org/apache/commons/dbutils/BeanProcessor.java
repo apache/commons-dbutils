@@ -113,6 +113,7 @@ public class BeanProcessor {
     /**
      * Calls the setter method on the target object for the given property.
      * If no setter method exists for the property, this method does nothing.
+     *
      * @param target The object to set the property on.
      * @param prop The property to set.
      * @param value The value to pass into the setter.
@@ -151,6 +152,7 @@ public class BeanProcessor {
 
     /**
      * Creates a new object and initializes its fields from the ResultSet.
+     *
      * @param <T> The type of bean to create
      * @param resultSet The result set.
      * @param type The bean type (the return type of the object).
@@ -294,6 +296,7 @@ public class BeanProcessor {
      * is called at the start of the bean creation process and may be
      * overridden to provide custom behavior like returning a cached bean
      * instance.
+     *
      * @param <T> The type of object to create
      * @param c The Class to create an object from.
      * @return A newly created object of the Class.
@@ -311,6 +314,7 @@ public class BeanProcessor {
 
     /**
      * Initializes the fields of the provided bean from the ResultSet.
+     *
      * @param <T> The type of bean
      * @param resultSet The result set.
      * @param bean The bean to be populated.
@@ -452,6 +456,7 @@ public class BeanProcessor {
      * {@code null} when SQL NULL is returned.  This is the same behavior
      * as the {@code ResultSet} get* methods.
      * &lt;/p&gt;
+     *
      * @param <T> The type of bean to create
      * @param rs ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance
@@ -490,6 +495,7 @@ public class BeanProcessor {
      * {@code null} when SQL NULL is returned.  This is the same behavior
      * as the {@code ResultSet} get* methods.
      * &lt;/p&gt;
+     *
      * @param <T> The type of bean to create
      * @param resultSet ResultSet that supplies the bean data
      * @param type Class from which to create the bean instance

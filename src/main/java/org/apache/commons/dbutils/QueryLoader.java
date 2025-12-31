@@ -43,6 +43,7 @@ public class QueryLoader {
 
     /**
      * Return an INSTANCE of this class.
+     *
      * @return The Singleton INSTANCE.
      */
     public static QueryLoader instance() {
@@ -132,6 +133,7 @@ public class QueryLoader {
 
     /**
      * Removes the queries for the given path from the cache.
+     *
      * @param path The path that the queries were loaded from.
      */
     public synchronized void unload(final String path) {

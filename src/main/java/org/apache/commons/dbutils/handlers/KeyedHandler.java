@@ -126,6 +126,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * key value from the current {@code ResultSet} row.  This
      * implementation returns {@code ResultSet.getObject()} for the
      * configured key column name or index.
+     *
      * @param rs ResultSet to create a key from
      * @return Object from the configured key column name/index
      * @throws SQLException if a database access error occurs
@@ -147,6 +148,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
      * implementation returns a {@code Map} with case insensitive column
      * names as keys.  Calls to {@code map.get("COL")} and
      * {@code map.get("col")} return the same value.
+     *
      * @param resultSet ResultSet to create a row from
      * @return Object typed Map containing column names to values
      * @throws SQLException if a database access error occurs

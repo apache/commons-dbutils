@@ -70,6 +70,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
 
     /**
      * Places the column values from the first row in an {@code Object[]}.
+     *
      * @param resultSet {@code ResultSet} to process.
      * @return An Object[]. If there are no rows in the {@code ResultSet}
      * an empty array will be returned.
