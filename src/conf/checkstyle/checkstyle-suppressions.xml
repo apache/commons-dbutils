@@ -29,6 +29,6 @@
   <suppress checks="LineLength" files="QueryRunner.java" />
   <suppress checks="MagicNumber" files=".*[/\\]test[/\\].*" />
   <suppress checks="MethodName" files=".*[/\\]test[/\\].*" />
-  <suppress checks="VisibilityModifier" files="AbstractQueryRunner" lines="54"/>
+  <suppress checks="VisibilityModifier" files="AbstractQueryRunner" lines="55"/>
   <suppress checks="VisibilityModifier" files="KeyedHandler" lines="58, 63, 69"/>
 </suppressions>
