@@ -40,6 +40,7 @@ import javax.sql.DataSource;
  * @since 1.4 (mostly extracted from QueryRunner)
  */
 public abstract class AbstractQueryRunner {
+
     /**
      * Is {@link ParameterMetaData#getParameterType(int)} broken (have we tried
      * it yet)?

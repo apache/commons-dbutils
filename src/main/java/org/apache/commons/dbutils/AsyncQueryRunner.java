@@ -90,6 +90,7 @@ public class AsyncQueryRunner extends AbstractQueryRunner {
             return ret;
         }
     }
+
     /**
      * Class that encapsulates the continuation for query calls.
      *

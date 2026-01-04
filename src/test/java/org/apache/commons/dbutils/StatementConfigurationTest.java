@@ -25,6 +25,7 @@ import java.time.Duration;
 import org.junit.jupiter.api.Test;
 
 class StatementConfigurationTest {
+
     /**
      * Test that a builder with all values set yields like values in the constructed configuration.
      */

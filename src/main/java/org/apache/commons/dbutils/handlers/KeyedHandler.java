@@ -121,6 +121,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     public KeyedHandler(final String columnName) {
         this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
+
     /**
      * This factory method is called by {@code handle()} to retrieve the
      * key value from the current {@code ResultSet} row.  This
