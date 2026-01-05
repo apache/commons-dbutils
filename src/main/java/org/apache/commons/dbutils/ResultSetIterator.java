@@ -106,8 +106,10 @@ public class ResultSetIterator implements Iterator<Object[]> {
     public Object[] next() {
         if (hasNext()) {
             try {
-                resultSet.next();
-                return this.convert.toArray(resultSet);
+                if (resultSet.next()) {
+                    return convert.toArray(resultSet);
+                }
+                throw new NoSuchElementException("No more rows in the ResultSet");
             } catch (final SQLException e) {
                 rethrow(e);
                 return null;
