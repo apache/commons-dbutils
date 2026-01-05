@@ -57,6 +57,7 @@ The <action> type attribute can be add,update,fix,remove.
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.hasNext() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.next() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">ResultSetIterator.remove() now throws IllegalStateException instead of RuntimeException to wrap cases of SQLException.</action>
+      <action type="fix" dev="ggregory" due-to="Gary Gregory, Matheus_Maas">org.apache.commons.dbutils.ResultSetIterator.next() now throws NoSuchElementException as defined in java.util.Iterator.next() #283.</action>
       <!-- ADD -->
       <action type="add" dev="ggregory" due-to="strangelookingnerd, Gary Gregory">BaseResultSetHandler implements ResultSet.</action>
       <!-- UPDATE -->

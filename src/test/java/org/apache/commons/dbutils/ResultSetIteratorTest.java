@@ -18,6 +18,7 @@ package org.apache.commons.dbutils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +65,7 @@ class ResultSetIteratorTest extends BaseTestCase {
         assertEquals("SIX", row[2]);
 
         assertFalse(iter.hasNext());
-        assertEquals(0, iter.next().length);
+        assertThrows(NoSuchElementException.class, iter::next);
     }
 
     @Test

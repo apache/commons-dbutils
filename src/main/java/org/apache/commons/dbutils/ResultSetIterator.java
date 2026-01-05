@@ -19,6 +19,7 @@ package org.apache.commons.dbutils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * <p>
@@ -97,17 +98,22 @@ public class ResultSetIterator implements Iterator<Object[]> {
      *
      * @return An {@code Object[]} with the same number of elements as
      * columns in the {@code ResultSet}.
-     * @see java.util.Iterator#next()
      * @throws RuntimeException if an SQLException occurs.
+     * @throws NoSuchElementException if the iteration has no more elements.
+     * @see java.util.Iterator#next()
      */
     @Override
     public Object[] next() {
-        try {
-            return resultSet.next() ? this.convert.toArray(resultSet) : new Object[0];
-        } catch (final SQLException e) {
-            rethrow(e);
-            return null;
+        if (hasNext()) {
+            try {
+                resultSet.next();
+                return this.convert.toArray(resultSet);
+            } catch (final SQLException e) {
+                rethrow(e);
+                return null;
+            }
         }
+        throw new NoSuchElementException("No more rows in the ResultSet");
     }
 
     /**
