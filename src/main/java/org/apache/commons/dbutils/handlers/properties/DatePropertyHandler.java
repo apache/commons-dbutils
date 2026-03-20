@@ -16,6 +16,7 @@
  */
 package org.apache.commons.dbutils.handlers.properties;
 
+import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -39,7 +40,7 @@ public class DatePropertyHandler implements PropertyHandler {
     }
 
     @Override
-    public Object apply(final Class<?> parameter, Object value) {
+    public Object apply(final Class<?> parameter, Type genericParameterType, Object value) {
         final String targetType = parameter.getName();
         final Date dateValue = (Date) value;
         final long time = dateValue.getTime();
@@ -62,7 +63,7 @@ public class DatePropertyHandler implements PropertyHandler {
     }
 
     @Override
-    public boolean match(final Class<?> parameter, final Object value) {
+    public boolean match(final Class<?> parameter, final Type genericParameterType, final Object value) {
         if (value instanceof Date) {
             final String targetType = parameter.getName();
             if (JAVA_SQL_DATE.equals(targetType)) {

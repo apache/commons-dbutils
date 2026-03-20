@@ -39,35 +39,35 @@ class DatePropertyHandlerTest {
 
     @Test
     void testApplyTypeOfDate() throws Exception {
-        assertEquals(java.sql.Date.class, handler.apply(java.sql.Date.class, testValue).getClass());
+        assertEquals(java.sql.Date.class, handler.apply(java.sql.Date.class, null, testValue).getClass());
     }
 
     @Test
     void testApplyTypeOfTime() throws Exception {
-        assertEquals(Time.class, handler.apply(java.sql.Time.class, testValue).getClass());
+        assertEquals(Time.class, handler.apply(java.sql.Time.class, null, testValue).getClass());
     }
 
     @Test
     void testApplyTypeOfTimestamp() throws Exception {
-        assertEquals(Timestamp.class, handler.apply(java.sql.Timestamp.class, testValue).getClass());
+        assertEquals(Timestamp.class, handler.apply(java.sql.Timestamp.class, null, testValue).getClass());
     }
 
     @Test
     void testMatch() {
-        assertTrue(handler.match(java.sql.Date.class, testValue));
-        assertTrue(handler.match(java.sql.Time.class, testValue));
-        assertTrue(handler.match(java.sql.Timestamp.class, testValue));
+        assertTrue(handler.match(java.sql.Date.class, null, testValue));
+        assertTrue(handler.match(java.sql.Time.class, null, testValue));
+        assertTrue(handler.match(java.sql.Timestamp.class, null, testValue));
     }
 
     @Test
     void testMatchNegative() {
-        assertFalse(handler.match(Float.class, null));
-        assertFalse(handler.match(Float.class, testValue));
+        assertFalse(handler.match(Float.class, null, null));
+        assertFalse(handler.match(Float.class, null, testValue));
     }
 
     @Test
     void testNotMatch() {
         final Timestamp ts = new Timestamp(testValue.getTime());
-        assertFalse(handler.match(java.sql.Timestamp.class, ts));
+        assertFalse(handler.match(java.sql.Timestamp.class, null, ts));
     }
 }

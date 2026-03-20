@@ -40,80 +40,24 @@
  |                                                                      |
  +======================================================================+
 --->
-Apache Commons DbUtils
+Fork of Apache Commons DbUtils
 ===================
-
-[![Java CI](https://github.com/apache/commons-dbutils/actions/workflows/maven.yml/badge.svg)](https://github.com/apache/commons-dbutils/actions/workflows/maven.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/commons-dbutils/commons-dbutils?label=Maven%20Central)](https://search.maven.org/artifact/commons-dbutils/commons-dbutils)
-[![Javadocs](https://javadoc.io/badge/commons-dbutils/commons-dbutils/1.9.0.svg)](https://javadoc.io/doc/commons-dbutils/commons-dbutils/1.9.0)
-[![CodeQL](https://github.com/apache/commons-dbutils/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/apache/commons-dbutils/actions/workflows/codeql-analysis.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/apache/commons-dbutils/badge)](https://api.securityscorecards.dev/projects/github.com/apache/commons-dbutils)
-
-The Apache Commons DbUtils package is a set of Java utility classes for easing JDBC development.
-
-Documentation
--------------
-
-More information can be found on the [Apache Commons DbUtils homepage](https://commons.apache.org/proper/commons-dbutils).
-The [Javadoc](https://commons.apache.org/proper/commons-dbutils/apidocs) can be browsed.
-Questions related to the usage of Apache Commons DbUtils should be posted to the [user mailing list](https://commons.apache.org/mail-lists.html).
+![Maven Central](https://img.shields.io/maven-central/v/io.github.jiangood/commons-dbutils)
 
 Getting the latest release
 --------------------------
-You can download source and binaries from our [download page](https://commons.apache.org/proper/commons-dbutils/download_dbutils.cgi).
-
-Alternatively, you can pull it from the central Maven repositories:
+Maven repositories:
 
 ```xml
 <dependency>
-  <groupId>commons-dbutils</groupId>
+  <groupId>io.github.jiangood</groupId>
   <artifactId>commons-dbutils</artifactId>
   <version>1.9.0</version>
 </dependency>
 ```
 
-Building
---------
-
-Building requires a Java JDK and [Apache Maven](https://maven.apache.org/).
-The required Java version is found in the `pom.xml` as the `maven.compiler.source` property.
-
-From a command shell, run `mvn` without arguments to invoke the default Maven goal to run all tests and checks.
-
-Contributing
-------------
-
-We accept Pull Requests via GitHub. The [developer mailing list](https://commons.apache.org/mail-lists.html) is the main channel of communication for contributors.
-There are some guidelines which will make applying PRs easier for us:
-+ No tabs! Please use spaces for indentation.
-+ Respect the existing code style for each file.
-+ Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-+ Provide JUnit tests for your changes and make sure your changes don't break any existing tests by running `mvn`.
-+ Before you pushing a PR, run `mvn` (by itself), this runs the default goal, which contains all build checks.
-+ To see the code coverage report, regardless of coverage failures, run `mvn clean site -Dcommons.jacoco.haltOnFailure=false`
-
-If you plan to contribute on a regular basis, please consider filing a [contributor license agreement](https://www.apache.org/licenses/#clas).
-You can learn more about contributing via GitHub in our [contribution guidelines](CONTRIBUTING.md).
-
-License
--------
-This code is licensed under the [Apache License v2](https://www.apache.org/licenses/LICENSE-2.0).
-
-See the `NOTICE.txt` file for required notices and attributions.
-
-Donating
---------
-You like Apache Commons DbUtils? Then [donate back to the ASF](https://www.apache.org/foundation/contributing.html) to support development.
-
-Additional Resources
---------------------
-
-+ [Apache Commons Homepage](https://commons.apache.org/)
-+ [Apache Issue Tracker (JIRA)](https://issues.apache.org/jira/browse/DBUTILS)
-+ [Apache Commons Slack Channel](https://the-asf.slack.com/archives/C60NVB8AD)
-+ [Apache Commons Twitter Account](https://twitter.com/ApacheCommons)
-
-Apache Commons Components
--------------------------
-
-Please see the [list of components](https://commons.apache.org/components.html)
+Additional features
+-------------------
+* Support for Naming Improve. if the database column is underline, will convert to camelCase. such as `user_name` to `userName`
+* Support for Enum Property.  if the database column is a number, such as `0` to first enum value, `1` to second enum value.
+* Support for List Property. split by ",", such as `List<String>`, `List<Integer>`, `List<Long>`, `List<Float>`, `List<Double>`, `List<BigDecimal>`

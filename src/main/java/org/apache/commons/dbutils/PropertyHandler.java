@@ -16,26 +16,31 @@
  */
 package org.apache.commons.dbutils;
 
+import java.lang.reflect.Type;
+
 /**
  * Defines how to handle properties when constructing a bean from a {@link java.sql.ResultSet}. Instances coerce values into a target types.
  */
 public interface PropertyHandler {
 
     /**
-     * Stores the given {@code value} into an instance of type {@code parameter}. This method is only called if {@link #match(Class, Object)} return true.
+     * Stores the given {@code value} into an instance of type {@code parameter}. This method is only called if {@link #match(Class, Type, Object)} return true.
      *
-     * @param parameter The type of the target parameter.
-     * @param value     The value to set.
+     * @param parameter            The type of the target parameter.
+     * @param genericParameterType the generic type of the target parameter.
+ }
+     * @param value                The value to set.
      * @return The converted value or the original value if something doesn't work out.
      */
-    Object apply(Class<?> parameter, Object value);
+    Object apply(Class<?> parameter, Type genericParameterType, Object value);
 
     /**
      * Tests whether to handle setting {@code value} into an instance of {@code parameter}.
      *
-     * @param parameter The type of the target parameter.
-     * @param value     The value to be set.
+     * @param parameter            The type of the target parameter.
+     * @param genericParameterType the generic type of the target parameter.
+     * @param value                The value to be set.
      * @return true is this property handler can/wants to handle this value; false otherwise.
      */
-    boolean match(Class<?> parameter, Object value);
+    boolean match(Class<?> parameter, Type genericParameterType, Object value);
 }

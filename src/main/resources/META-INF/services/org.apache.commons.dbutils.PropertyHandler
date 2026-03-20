@@ -16,3 +16,5 @@
 #
 org.apache.commons.dbutils.handlers.properties.DatePropertyHandler
 org.apache.commons.dbutils.handlers.properties.StringEnumPropertyHandler
+org.apache.commons.dbutils.handlers.properties.NumberEnumPropertyHandler
+org.apache.commons.dbutils.handlers.properties.ListPropertyHandler
