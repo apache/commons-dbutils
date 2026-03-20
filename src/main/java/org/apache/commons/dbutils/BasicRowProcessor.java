@@ -274,6 +274,7 @@ public class BasicRowProcessor implements RowProcessor {
               // The column index can't be null
               propKey = Integer.toString(i);
             }
+            propKey = NamingImprovedUtils.toCamelCase(propKey);
             result.put(propKey, resultSet.getObject(i));
         }
 

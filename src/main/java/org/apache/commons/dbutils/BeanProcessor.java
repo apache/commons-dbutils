@@ -258,6 +258,12 @@ public class BeanProcessor {
                     columnToProperty[col] = i;
                     break;
                 }
+                // improved naming, except  @Column annotations
+                if(column == null && NamingImprovedUtils.toCamelCase(propertyName).equalsIgnoreCase(propertyColumnName)){
+                    columnToProperty[col] = i;
+                    break;
+                }
+
             }
         }
 
