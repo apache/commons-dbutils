@@ -27,7 +27,8 @@ public interface PropertyHandler {
      * Stores the given {@code value} into an instance of type {@code parameter}. This method is only called if {@link #match(Class, Type, Object)} return true.
      *
      * @param parameter            The type of the target parameter.
-     * @param genericParameterType
+     * @param genericParameterType the generic type of the target parameter.
+ }
      * @param value                The value to set.
      * @return The converted value or the original value if something doesn't work out.
      */
@@ -37,7 +38,7 @@ public interface PropertyHandler {
      * Tests whether to handle setting {@code value} into an instance of {@code parameter}.
      *
      * @param parameter            The type of the target parameter.
-     * @param genericParameterType
+     * @param genericParameterType the generic type of the target parameter.
      * @param value                The value to be set.
      * @return true is this property handler can/wants to handle this value; false otherwise.
      */
