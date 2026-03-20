@@ -20,15 +20,29 @@ import org.apache.commons.dbutils.PropertyHandler;
 
 import java.lang.reflect.Type;
 
-public class TestPropertyHandler implements PropertyHandler {
+/**
+ * {@link PropertyHandler} for enums. Will convert integers to enums.
+ */
+public class NumberEnumPropertyHandler implements PropertyHandler {
+
+    /**
+     * Constructs a new instance.
+     */
+    public NumberEnumPropertyHandler() {
+        // empty
+    }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object apply(final Class<?> parameter, Type genericParameterType, final Object value) {
-        return null;
+        Class<? extends Enum> subclass = parameter.asSubclass(Enum.class);
+        Enum[] enumConstants = subclass.getEnumConstants();
+        Number ordinal = (Number) value;
+        return enumConstants[ordinal.intValue()];
     }
 
     @Override
     public boolean match(final Class<?> parameter, Type genericParameterType, final Object value) {
-        return false;
+        return value instanceof Number && parameter.isEnum();
     }
 }

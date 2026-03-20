@@ -18,6 +18,8 @@ package org.apache.commons.dbutils.handlers.properties;
 
 import org.apache.commons.dbutils.PropertyHandler;
 
+import java.lang.reflect.Type;
+
 /**
  * {@link PropertyHandler} for enums. Will convert strings to enums.
  */
@@ -32,12 +34,12 @@ public class StringEnumPropertyHandler implements PropertyHandler {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Object apply(final Class<?> parameter, final Object value) {
+    public Object apply(final Class<?> parameter, Type genericParameterType, final Object value) {
         return Enum.valueOf(parameter.asSubclass(Enum.class), (String) value);
     }
 
     @Override
-    public boolean match(final Class<?> parameter, final Object value) {
+    public boolean match(final Class<?> parameter, Type genericParameterType, final Object value) {
         return value instanceof String && parameter.isEnum();
     }
 }

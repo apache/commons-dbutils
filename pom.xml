@@ -22,7 +22,7 @@
     <version>97</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>commons-dbutils</groupId>
+  <groupId>io.github.jiangood</groupId>
   <artifactId>commons-dbutils</artifactId>
   <version>1.9.0-SNAPSHOT</version>
   <name>Apache Commons DbUtils</name>

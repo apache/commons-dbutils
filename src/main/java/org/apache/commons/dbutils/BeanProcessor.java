@@ -23,6 +23,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -128,11 +129,13 @@ public class BeanProcessor {
             return;
         }
 
+
         try {
             final Class<?> firstParam = setter.getParameterTypes()[0];
+            final Type firstParamGenericParameterType = setter.getGenericParameterTypes()[0];
             for (final PropertyHandler handler : PROPERTY_HANDLERS) {
-                if (handler.match(firstParam, value)) {
-                    value = handler.apply(firstParam, value);
+                if (handler.match(firstParam,firstParamGenericParameterType, value)) {
+                    value = handler.apply(firstParam, firstParamGenericParameterType,value);
                     break;
                 }
             }
