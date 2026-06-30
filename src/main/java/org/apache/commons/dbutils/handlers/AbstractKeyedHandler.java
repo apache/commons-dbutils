@@ -30,8 +30,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
  * in a Map under the given keys (Ks).
  * </p>
  *
- * @param <K> the type of keys maintained by the returned map
- * @param <V> the type of mapped values
+ * @param <K> The type of keys maintained by the returned map
+ * @param <V> The type of mapped values
  * @see org.apache.commons.dbutils.ResultSetHandler
  * @since 1.3
  */

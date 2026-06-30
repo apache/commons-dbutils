@@ -23,7 +23,7 @@ import java.sql.SQLException;
 /**
  * Implementations of this interface convert ResultSets into other objects.
  *
- * @param <T> the target type the input ResultSet will be converted to.
+ * @param <T> The target type the input ResultSet will be converted to.
  */
 public interface ResultSetHandler<T> {
 

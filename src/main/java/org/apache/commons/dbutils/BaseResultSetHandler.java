@@ -49,7 +49,7 @@ import java.util.Map;
  * <strong>NOTE</strong> This class is <em>NOT</em> thread safe!
  * </p>
  *
- * @param <T> the target type the input ResultSet will be converted to.
+ * @param <T> The target type the input ResultSet will be converted to.
  * @since 1.6
  * @since 1.9.0 implements {@link ResultSet}.
  */

@@ -30,7 +30,7 @@ import java.sql.SQLException;
  * INOUT parameters are also supported by setting the {@code value} of
  * the {@code OutParameter} instance before invoking the stored procedure.
  *
- * @param <T> the class of the parameter; should be compatible via cast with the
+ * @param <T> The class of the parameter; should be compatible via cast with the
  * class returned by the {@code CallableStatement.getObject(int)} method.
  */
 public class OutParameter<T> {
