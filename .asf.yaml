@@ -16,6 +16,8 @@
 github:
   description: "Apache Commons DbUtils"
   homepage: https://commons.apache.org/dbutils/
+  autolink_jira:
+    - DBUTILS
   
   pull_requests:
     # allow auto-merge
