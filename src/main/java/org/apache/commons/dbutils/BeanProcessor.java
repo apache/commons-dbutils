@@ -238,23 +238,7 @@ public class BeanProcessor {
 
             for (int i = 0; i < props.length; i++) {
                 final PropertyDescriptor prop = props[i];
-                final Method reader = prop.getReadMethod();
-
-                // Check for @Column annotations as explicit marks
-                final Column column;
-                if (reader != null) {
-                    column = reader.getAnnotation(Column.class);
-                } else {
-                    column = null;
-                }
-
-                final String propertyColumnName;
-                if (column != null) {
-                    propertyColumnName = column.name();
-                } else {
-                    propertyColumnName = prop.getName();
-                }
-                if (propertyName.equalsIgnoreCase(propertyColumnName)) {
+                if (propertyName.equalsIgnoreCase(getPropertyColumnName(prop))) {
                     columnToProperty[col] = i;
                     break;
                 }
@@ -262,6 +246,28 @@ public class BeanProcessor {
         }
 
         return columnToProperty;
+    }
+
+    /**
+     * Gets the column name a property is mapped from, which is the name of its {@link Column} annotation, or its
+     * property name.
+     *
+     * <p>
+     * A {@link Column} annotation without a name does not map the property to a column, so the property name is
+     * used as for an unannotated property. Subclasses mapping columns to properties should use this method so
+     * that an annotation is honored.
+     * </p>
+     *
+     * @param prop The property to inspect.
+     * @return The column name the property is mapped from.
+     * @since 1.9.0
+     */
+    protected String getPropertyColumnName(final PropertyDescriptor prop) {
+        final Method reader = prop.getReadMethod();
+        // Check for @Column annotations as explicit marks
+        final Column column = reader != null ? reader.getAnnotation(Column.class) : null;
+        final String annotationName = column == null ? "" : column.name();
+        return annotationName.isEmpty() ? prop.getName() : annotationName;
     }
 
     /**

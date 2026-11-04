@@ -54,19 +54,32 @@ public class GenerousBeanProcessor extends BeanProcessor {
                     .replace("_", "")   // more idiomatic to Java
                     .replace(" ", "");  // can't have spaces in property names
 
-            for (int i = 0; i < props.length; i++) {
-                final String propName = props[i].getName();
-
-                // see if either the column name, or the generous one matches
-                if (columnName.equalsIgnoreCase(propName) ||
-                        generousColumnName.equalsIgnoreCase(propName)) {
-                    columnToProperty[col] = i;
-                    break;
-                }
+            // a @Column annotation is an explicit mark, so it is tried before the generous name
+            columnToProperty[col] = findProperty(props, columnName, true);
+            if (columnToProperty[col] == PROPERTY_NOT_FOUND) {
+                columnToProperty[col] = findProperty(props, generousColumnName, false);
             }
         }
 
         return columnToProperty;
     }
 
+    /**
+     * Finds the property matching a column name.
+     *
+     * @param props The properties of the bean.
+     * @param columnName The column name to match.
+     * @param exact Whether the annotated column name rather than the generous one is compared.
+     * @return The index of the matching property, or {@link #PROPERTY_NOT_FOUND}.
+     */
+    private int findProperty(final PropertyDescriptor[] props, final String columnName, final boolean exact) {
+        for (int i = 0; i < props.length; i++) {
+            final PropertyDescriptor prop = props[i];
+            final String name = exact ? getPropertyColumnName(prop) : prop.getName();
+            if (columnName.equalsIgnoreCase(name)) {
+                return i;
+            }
+        }
+        return PROPERTY_NOT_FOUND;
+    }
 }
