@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 
 import java.sql.ResultSet;
@@ -75,12 +74,8 @@ class ResultSetIteratorTest extends BaseTestCase {
         final Throwable throwable = new Throwable();
         final SQLException sqlException = new SQLException(throwable);
 
-        try {
-            resultSetIterator.rethrow(sqlException);
-            fail("Expecting exception: RuntimeException");
-        } catch (final RuntimeException e) {
-            assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
-        }
+        final RuntimeException e = assertThrows(RuntimeException.class, () -> resultSetIterator.rethrow(sqlException));
+        assertEquals(ResultSetIterator.class.getName(), e.getStackTrace()[0].getClassName());
 
     }
 

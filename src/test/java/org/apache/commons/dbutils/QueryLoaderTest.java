@@ -19,7 +19,7 @@ package org.apache.commons.dbutils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.Map;
@@ -51,13 +51,9 @@ class QueryLoaderTest extends BaseTestCase {
 
         final QueryLoader queryLoader = QueryLoader.instance();
 
-        try {
-            queryLoader.load("e");
-            fail("Expecting exception: IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            assertEquals("e not found.", e.getMessage());
-            assertEquals(QueryLoader.class.getName(), e.getStackTrace()[0].getClassName());
-        }
+        final IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> queryLoader.load("e"));
+        assertEquals("e not found.", e.getMessage());
+        assertEquals(QueryLoader.class.getName(), e.getStackTrace()[0].getClassName());
 
     }
 
