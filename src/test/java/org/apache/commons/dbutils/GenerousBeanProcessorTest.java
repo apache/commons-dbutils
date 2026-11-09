@@ -168,4 +168,81 @@ class GenerousBeanProcessorTest {
         assertEquals(1, ret[3]);
     }
 
+    static class AnnotatedBean {
+
+        private String recordId;
+
+        @Column(name = "inv_stock")
+        public String getRecordId() {
+            return recordId;
+        }
+
+        public void setRecordId(final String recordId) {
+            this.recordId = recordId;
+        }
+    }
+
+    static class UnnamedAnnotationBean {
+
+        private String recordId;
+
+        @Column
+        public String getRecordId() {
+            return recordId;
+        }
+
+        public void setRecordId(final String recordId) {
+            this.recordId = recordId;
+        }
+    }
+
+    @SuppressWarnings("boxing") // test code
+    @Test
+    void testMapColumnsToPropertiesHonorsColumnAnnotation() throws Exception {
+        final PropertyDescriptor[] descriptors = { new PropertyDescriptor("recordId", AnnotatedBean.class) };
+        when(metaData.getColumnCount()).thenReturn(1);
+        when(metaData.getColumnLabel(1)).thenReturn("inv_stock");
+
+        final int[] ret = processor.mapColumnsToProperties(metaData, descriptors);
+
+        assertNotNull(ret);
+        assertEquals(2, ret.length);
+        assertEquals(-1, ret[0]);
+        assertEquals(0, ret[1]);
+    }
+
+    @SuppressWarnings("boxing") // test code
+    @Test
+    void testMapColumnsToPropertiesPrefersTheColumnAnnotation() throws Exception {
+        // both columns can be matched, the annotated one and the generous one
+        final PropertyDescriptor[] descriptors = { new PropertyDescriptor("recordId", AnnotatedBean.class) };
+        when(metaData.getColumnCount()).thenReturn(2);
+        when(metaData.getColumnLabel(1)).thenReturn("record_id");
+        when(metaData.getColumnLabel(2)).thenReturn("inv_stock");
+
+        final int[] ret = processor.mapColumnsToProperties(metaData, descriptors);
+
+        assertNotNull(ret);
+        assertEquals(3, ret.length);
+        assertEquals(-1, ret[0]);
+        assertEquals(0, ret[1]);
+        assertEquals(0, ret[2]);
+    }
+
+    @SuppressWarnings("boxing") // test code
+    @Test
+    void testMapColumnsToPropertiesUnnamedColumnAnnotation() throws Exception {
+        // an annotation without a name does not map the property to a column
+        final PropertyDescriptor[] descriptors = { new PropertyDescriptor("recordId", UnnamedAnnotationBean.class) };
+        when(metaData.getColumnCount()).thenReturn(1);
+        when(metaData.getColumnLabel(1)).thenReturn("record_id");
+
+        final int[] ret = processor.mapColumnsToProperties(metaData, descriptors);
+
+        assertNotNull(ret);
+        assertEquals(2, ret.length);
+        assertEquals(-1, ret[0]);
+        assertEquals(0, ret[1]);
+    }
+
 }
