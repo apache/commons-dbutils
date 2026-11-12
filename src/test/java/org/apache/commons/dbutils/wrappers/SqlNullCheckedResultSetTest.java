@@ -708,11 +708,17 @@ class SqlNullCheckedResultSetTest extends BaseTestCase {
         final ResultSet wrapped = ProxyFactory.instance().createResultSet(handler);
         assertTrue(wrapped.next());
         assertEquals(0, wrapped.getInt(1));
+        assertFalse(wrapped.wasNull());
         assertEquals(0, wrapped.getInt("zero"));
+        assertFalse(wrapped.wasNull());
         assertFalse(wrapped.getBoolean(2));
+        assertFalse(wrapped.wasNull());
         assertFalse(wrapped.getBoolean("falseValue"));
+        assertFalse(wrapped.wasNull());
         assertEquals("", wrapped.getString(3));
+        assertFalse(wrapped.wasNull());
         assertEquals("", wrapped.getString("emptyString"));
+        assertFalse(wrapped.wasNull());
         assertEquals(99, wrapped.getInt(4));
         assertTrue(wrapped.wasNull());
         assertEquals("REPLACED", wrapped.getString(5));
