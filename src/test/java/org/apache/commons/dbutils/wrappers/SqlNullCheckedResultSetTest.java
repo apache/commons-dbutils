@@ -40,6 +40,7 @@ import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Ref;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -48,6 +49,8 @@ import java.util.Calendar;
 import java.util.Map;
 
 import org.apache.commons.dbutils.BaseTestCase;
+import org.apache.commons.dbutils.MockResultSet;
+import org.apache.commons.dbutils.MockResultSetMetaData;
 import org.apache.commons.dbutils.ProxyFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -250,6 +253,33 @@ class SqlNullCheckedResultSetTest extends BaseTestCase {
 
         setResultSet(ProxyFactory.instance().createResultSet(rs2)); // Override superclass field
         rs = getResultSet();
+    }
+
+    /**
+     * Verifies non-null fixture values pass through the wrapper unchanged by index and label for both rows.
+     */
+    @Test
+    void testFixtureNonNullValuesByIndexAndLabel() throws SQLException {
+        final ResultSet wrapped = SqlNullCheckedResultSet.wrap(createMockResultSet());
+        assertTrue(wrapped.next());
+        assertEquals("1", wrapped.getString(1));
+        assertEquals("1", wrapped.getString("one"));
+        assertEquals("THREE", wrapped.getString(3));
+        assertEquals("THREE", wrapped.getString("three"));
+        assertEquals(1, wrapped.getInt(5));
+        assertEquals(1, wrapped.getInt("intTest"));
+        assertEquals(2, wrapped.getInt("integerTest"));
+        assertFalse(wrapped.wasNull());
+        assertTrue(wrapped.next());
+        assertEquals("4", wrapped.getString(1));
+        assertEquals("4", wrapped.getString("one"));
+        assertEquals("SIX", wrapped.getString(3));
+        assertEquals("SIX", wrapped.getString("three"));
+        assertEquals(3, wrapped.getInt(5));
+        assertEquals(3, wrapped.getInt("intTest"));
+        assertEquals(4, wrapped.getInt("integerTest"));
+        assertFalse(wrapped.wasNull());
+        assertFalse(wrapped.next());
     }
 
     /**
@@ -661,6 +691,56 @@ class SqlNullCheckedResultSetTest extends BaseTestCase {
     }
 
     /**
+     * Verifies configured replacements preserve non-null values across row transitions.
+     */
+    @Test
+    void testNullReplacementsDoNotOverrideGenuineValues() throws SQLException {
+        final ResultSetMetaData metaData = MockResultSetMetaData.create(new String[] { "zero", "falseValue", "emptyString", "nullInt", "nullString" });
+        final Object[][] rows = {
+            { Integer.valueOf(0), Boolean.FALSE, "", null, null },
+            { null, null, null, null, null },
+            { Integer.valueOf(5), Boolean.TRUE, "y", Integer.valueOf(3), "real" }
+        };
+        final SqlNullCheckedResultSet handler = new SqlNullCheckedResultSet(MockResultSet.create(metaData, rows, false));
+        handler.setNullInt(99);
+        handler.setNullBoolean(true);
+        handler.setNullString("REPLACED");
+        final ResultSet wrapped = ProxyFactory.instance().createResultSet(handler);
+        assertTrue(wrapped.next());
+        assertEquals(0, wrapped.getInt(1));
+        assertEquals(0, wrapped.getInt("zero"));
+        assertFalse(wrapped.getBoolean(2));
+        assertFalse(wrapped.getBoolean("falseValue"));
+        assertEquals("", wrapped.getString(3));
+        assertEquals("", wrapped.getString("emptyString"));
+        assertEquals(99, wrapped.getInt(4));
+        assertTrue(wrapped.wasNull());
+        assertEquals("REPLACED", wrapped.getString(5));
+        assertTrue(wrapped.wasNull());
+        assertTrue(wrapped.next());
+        assertTrue(wrapped.getBoolean(2));
+        assertTrue(wrapped.wasNull());
+        assertEquals("REPLACED", wrapped.getString(3));
+        assertTrue(wrapped.wasNull());
+        assertEquals(99, wrapped.getInt(4));
+        assertTrue(wrapped.wasNull());
+        assertEquals("REPLACED", wrapped.getString(5));
+        assertTrue(wrapped.wasNull());
+        assertTrue(wrapped.next());
+        assertEquals(5, wrapped.getInt("zero"));
+        assertFalse(wrapped.wasNull());
+        assertTrue(wrapped.getBoolean("falseValue"));
+        assertFalse(wrapped.wasNull());
+        assertEquals("y", wrapped.getString("emptyString"));
+        assertFalse(wrapped.wasNull());
+        assertEquals(3, wrapped.getInt("nullInt"));
+        assertFalse(wrapped.wasNull());
+        assertEquals("real", wrapped.getString("nullString"));
+        assertFalse(wrapped.wasNull());
+        assertFalse(wrapped.next());
+    }
+
+    /**
      * Tests the setNullAsciiStream implementation.
      */
     @Test
@@ -1024,6 +1104,32 @@ class SqlNullCheckedResultSetTest extends BaseTestCase {
         rs2.setNullURL(u);
         assertEquals(u, rs.getURL(1));
         assertEquals(u, rs.getURL("column"));
+    }
+
+    /**
+     * Verifies wasNull flips true for a null column then false for a non-null column in both fixture rows.
+     */
+    @Test
+    void testWasNullTransitionsBetweenNullAndNonNull() throws SQLException {
+        final ResultSet wrapped = SqlNullCheckedResultSet.wrap(createMockResultSet());
+        assertTrue(wrapped.next());
+        assertNull(wrapped.getObject(7));
+        assertTrue(wrapped.wasNull());
+        assertEquals("1", wrapped.getString("one"));
+        assertFalse(wrapped.wasNull());
+        assertNull(wrapped.getString("nullObjectTest"));
+        assertTrue(wrapped.wasNull());
+        assertEquals(1, wrapped.getInt("intTest"));
+        assertFalse(wrapped.wasNull());
+        assertTrue(wrapped.next());
+        assertNull(wrapped.getObject(7));
+        assertTrue(wrapped.wasNull());
+        assertEquals("4", wrapped.getString("one"));
+        assertFalse(wrapped.wasNull());
+        assertNull(wrapped.getString("nullObjectTest"));
+        assertTrue(wrapped.wasNull());
+        assertEquals(3, wrapped.getInt("intTest"));
+        assertFalse(wrapped.wasNull());
     }
 
     @Test
