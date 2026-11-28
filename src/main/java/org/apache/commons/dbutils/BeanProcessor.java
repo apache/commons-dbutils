@@ -394,17 +394,16 @@ public class BeanProcessor {
      * value was SQL NULL.
      */
     protected Object processColumn(final ResultSet resultSet, final int index, final Class<?> propType) throws SQLException {
-        Object retval = resultSet.getObject(index);
-        if (!propType.isPrimitive() && retval == null) {
-            return null;
-        }
         for (final ColumnHandler<?> handler : COLUMN_HANDLERS) {
             if (handler.match(propType)) {
-                retval = handler.apply(resultSet, index);
-                break;
+                final Object retval = handler.apply(resultSet, index);
+                if (!propType.isPrimitive() && resultSet.wasNull()) {
+                    return null;
+                }
+                return retval;
             }
         }
-        return retval;
+        return resultSet.getObject(index);
     }
 
     /**
